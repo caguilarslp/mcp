@@ -1,7 +1,7 @@
 /**
  * @fileoverview Advanced Request Logger
  * @description Comprehensive logging for API requests/responses and JSON error detection
- * @version 1.3.1
+ * @version 1.3.4
  */
 
 import { FileLogger } from './fileLogger.js';

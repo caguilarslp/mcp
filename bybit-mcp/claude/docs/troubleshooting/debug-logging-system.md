@@ -345,4 +345,4 @@ El sistema de logging implementado en **TASK-005** proporciona:
 
 ---
 
-*Troubleshooting Guide v1.3.1 | Última actualización: 08/06/2025*
+*Troubleshooting Guide v1.3.4 | Última actualización: 08/06/2025*

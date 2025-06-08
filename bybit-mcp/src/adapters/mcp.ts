@@ -1,7 +1,7 @@
 /**
  * @fileoverview MCP Adapter - Model Context Protocol Integration
  * @description Adapter layer between MCP Server and Core Engine
- * @version 1.3.1
+ * @version 1.3.4
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -33,7 +33,7 @@ export class MCPAdapter {
     this.server = new Server(
       {
         name: 'bybit-mcp',
-        version: '1.3.1',
+        version: '1.3.4',
       },
       {
         capabilities: {

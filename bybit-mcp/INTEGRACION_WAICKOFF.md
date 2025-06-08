@@ -2,7 +2,7 @@
 
 ## 📋 Resumen Ejecutivo
 
-Este documento describe la estrategia de integración entre el **Bybit MCP Server v1.3.1** y el ecosistema **Waickoff AI**, manteniendo la independencia de ambos sistemas mientras se maximiza el valor de los datos de trading.
+Este documento describe la estrategia de integración entre el **Bybit MCP Server v1.3.4** y el ecosistema **Waickoff AI**, manteniendo la independencia de ambos sistemas mientras se maximiza el valor de los datos de trading.
 
 ---
 
@@ -53,7 +53,7 @@ Este documento describe la estrategia de integración entre el **Bybit MCP Serve
 │                                  ▼                            │
 │  ┌─────────────────┐    ┌─────────────────┐                 │
 │  │   Bybit MCP     │    │   Future MCPs   │                 │
-│  │   v1.3.1        │    │                 │                 │
+│  │   v1.3.4        │    │                 │                 │
 │  │                 │    │ • Coinbase MCP  │                 │
 │  │ • 12 Tools      │    │ • Kraken MCP    │                 │
 │  │ • Debug System  │    │ • OnChain Data  │                 │

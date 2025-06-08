@@ -1,4 +1,4 @@
-# 📘 Manual de Instalación - Bybit MCP Server v1.3.1
+# 📘 Manual de Instalación - Bybit MCP Server v1.3.4
 
 ## 🎯 Guía Completa para Windows 11 + Claude Desktop
 
@@ -260,7 +260,7 @@ Una vez instalado, tendrás acceso a **12 herramientas** de análisis de mercado
 
 ### **🔧 Sistema**
 - `get_system_health` - Estado del sistema
-- `get_debug_logs` - **NUEVO v1.3.1** - Debugging avanzado
+- `get_debug_logs` - **NUEVO v1.3.4** - Debugging avanzado
 
 ---
 
@@ -350,10 +350,10 @@ get_debug_logs({
 
 ## 🎆 ¡Instalación Completada!
 
-Tu **Bybit MCP Server v1.3.1** está listo para usar. Ahora tienes acceso a análisis técnico avanzado, sistema de debugging profesional, y herramientas de grid trading directamente desde Claude Desktop.
+Tu **Bybit MCP Server v1.3.4** está listo para usar. Ahora tienes acceso a análisis técnico avanzado, sistema de debugging profesional, y herramientas de grid trading directamente desde Claude Desktop.
 
 **¡Disfruta del trading inteligente!** 🚀
 
 ---
 
-*Manual de Instalación v1.3.1 | Creado: 08/06/2025 | Compatible con Windows 11 + Claude Desktop*
+*Manual de Instalación v1.3.4 | Creado: 08/06/2025 | Compatible con Windows 11 + Claude Desktop*

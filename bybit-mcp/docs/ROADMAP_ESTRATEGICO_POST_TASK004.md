@@ -106,7 +106,7 @@ analyze_oversold_overbought     // Zonas extremas con context Wyckoff
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Bybit MCP     │    │  Wyckoff MCP    │    │ SmartMoney MCP  │
-│   v1.3.1        │◄──►│  v1.4.0+        │◄──►│  v1.5.0+        │
+│   v1.3.4        │◄──►│  v1.4.0+        │◄──►│  v1.5.0+        │
 │                 │    │                 │    │                 │
 │ • Price Data    │    │ • Phase Detection│    │ • Footprint     │
 │ • Volume        │    │ • Event ID      │    │ • Absorption    │
@@ -210,7 +210,7 @@ Ultimate Trading Intelligence System
 ## ✅ Próximos Pasos Inmediatos
 
 ### **1. Completar TASK-004 (Tests Unitarios)**
-- Asegurar estabilidad de base MCP v1.3.1
+- Asegurar estabilidad de base MCP v1.3.4
 - Prevenir regresiones en desarrollo futuro
 - Base sólida para construcción de nuevas herramientas
 

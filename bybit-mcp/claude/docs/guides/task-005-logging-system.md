@@ -7,7 +7,7 @@
 **SOLUCIÓN IMPLEMENTADA:** Sistema completo de logging avanzado con análisis detallado de errores JSON, logging automático de requests/responses y nueva herramienta de debugging integrada en el MCP.
 
 **FECHA COMPLETADO:** 08/06/2025  
-**VERSIÓN:** v1.3.1  
+**VERSIÓN:** v1.3.4  
 **TIEMPO INVERTIDO:** 1.5h
 
 ---

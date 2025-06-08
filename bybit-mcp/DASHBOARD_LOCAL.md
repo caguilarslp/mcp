@@ -2,7 +2,7 @@
 
 ## 🎯 Resumen Ejecutivo
 
-Este documento describe cómo crear un **dashboard local independiente** para visualizar datos del **Bybit MCP v1.3.1** sin depender de la integración con Waickoff. Una solución rápida para empezar a usar gráficos y análisis visual **inmediatamente**.
+Este documento describe cómo crear un **dashboard local independiente** para visualizar datos del **Bybit MCP v1.3.4** sin depender de la integración con Waickoff. Una solución rápida para empezar a usar gráficos y análisis visual **inmediatamente**.
 
 ---
 
@@ -64,7 +64,7 @@ D:\projects\mcp\bybit-mcp\dashboard\
 **Layout propuesto:**
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  MCP Dashboard v1.3.1           [Debug] [Refresh] [Config] │
+│  MCP Dashboard v1.3.4           [Debug] [Refresh] [Config] │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌─────────────────┐    ┌─────────────────┐                │
@@ -145,7 +145,7 @@ D:\projects\mcp\bybit-mcp\dashboard\
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Dashboard     │    │  Claude Desktop │    │   Bybit MCP     │
-│   (Browser)     │    │   (Proxy)       │    │   v1.3.1        │
+│   (Browser)     │    │   (Proxy)       │    │   v1.3.4        │
 │                 │    │                 │    │                 │
 │ 1. User clicks  │───►│ 2. Process      │───►│ 3. Execute      │
 │    "Analyze"    │    │    request      │    │    tools        │

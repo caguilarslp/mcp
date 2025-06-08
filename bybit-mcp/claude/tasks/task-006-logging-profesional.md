@@ -137,7 +137,7 @@ logger.getLogFileInfo()
 
 ## 🔄 Estado del Proyecto
 
-### **Antes (v1.3.1):**
+### **Antes (v1.3.4):**
 - ❌ Error JSON molesto en startup
 - ❌ Logging básico sin persistencia
 - ❌ Debugging limitado

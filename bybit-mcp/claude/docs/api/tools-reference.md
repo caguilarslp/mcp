@@ -248,7 +248,7 @@ await get_system_health();
 ```json
 {
   "system_status": "HEALTHY",
-  "version": "1.3.1",
+  "version": "1.3.4",
   "uptime": "2 hours",
   "services": {
     "market_data": "ONLINE",
@@ -265,7 +265,7 @@ await get_system_health();
 
 ---
 
-#### `get_debug_logs` 🔍 **NEW in v1.3.1**
+#### `get_debug_logs` 🔍 **NEW in v1.3.4**
 Get debug logs for troubleshooting JSON errors and request issues.
 
 **Parameters:**
@@ -364,4 +364,4 @@ await get_debug_logs({
 ---
 
 *API Reference maintained as part of the project documentation system*
-*Last updated: 08/06/2025 | Version: v1.3.1*
+*Last updated: 08/06/2025 | Version: v1.3.4*
