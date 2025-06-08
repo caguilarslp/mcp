@@ -334,78 +334,14 @@ export class MCPAdapter {
             },
           },
           {
-            name: 'get_debug_logs',
-            description: 'Get debug logs for troubleshooting JSON errors and request issues',
+            name: 'get_api_stats',
+            description: 'Get API connection statistics and error logs',
             inputSchema: {
               type: 'object',
-              properties: {
-                logType: {
-                  type: 'string',
-                  description: 'Type of logs to retrieve',
-                  enum: ['all', 'errors', 'json_errors', 'requests'],
-                  default: 'all',
-                },
-                limit: {
-                  type: 'number',
-                  description: 'Number of log entries to return',
-                  default: 50,
-                },
-              },
+              properties: {},
             },
           },
-        ],
-      };
-    });
-
-    // Handle tool calls
-    this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
-      const { name, arguments: args } = request.params;
-
-      this.logger.debug(`Handling tool call: ${name}`, args);
-
-      try {
-        let result: MCPServerResponse;
-        
-        switch (name) {
-          case 'get_ticker':
-            result = await this.handleGetTicker(args);
-            break;
-          case 'get_orderbook':
-            result = await this.handleGetOrderbook(args);
-            break;
-          case 'get_market_data':
-            result = await this.handleGetMarketData(args);
-            break;
-          case 'analyze_volatility':
-            result = await this.handleAnalyzeVolatility(args);
-            break;
-          case 'analyze_volume':
-            result = await this.handleAnalyzeVolume(args);
-            break;
-          case 'analyze_volume_delta':
-            result = await this.handleAnalyzeVolumeDelta(args);
-            break;
-          case 'identify_support_resistance':
-            result = await this.handleIdentifySupportResistance(args);
-            break;
-          case 'suggest_grid_levels':
-            result = await this.handleSuggestGridLevels(args);
-            break;
-          case 'perform_technical_analysis':
-            result = await this.handlePerformTechnicalAnalysis(args);
-            break;
-          case 'get_complete_analysis':
-            result = await this.handleGetCompleteAnalysis(args);
-            break;
-          case 'get_system_health':
-            result = await this.handleGetSystemHealth(args);
-            break;
-          case 'get_debug_logs':
-            result = await this.handleGetDebugLogs(args);
-            break;
-          default:
-            throw new Error(`Unknown tool: ${name}`);
-        }
+          {
         
         return result;
       } catch (error) {
@@ -435,18 +371,19 @@ export class MCPAdapter {
 
     const ticker = response.data!.ticker;
     
-    const formattedTicker = {
-      symbol: ticker.symbol,
-      precio_actual: `$${ticker.lastPrice.toFixed(4)}`,
-      cambio_24h: `${ticker.price24hPcnt.toFixed(2)}%`,
-      maximo_24h: `$${ticker.highPrice24h.toFixed(4)}`,
-      minimo_24h: `$${ticker.lowPrice24h.toFixed(4)}`,
-      volumen_24h: ticker.volume24h.toString(),
-      bid: `$${ticker.bid1Price.toFixed(4)}`,
-      ask: `$${ticker.ask1Price.toFixed(4)}`,
-      spread: `$${(ticker.ask1Price - ticker.bid1Price).toFixed(4)}`,
-      timestamp: ticker.timestamp
-    };
+      // Create simple response without complex logging objects
+      const formattedTicker = {
+        symbol: ticker.symbol,
+        precio_actual: `${ticker.lastPrice.toFixed(4)}`,
+        cambio_24h: `${ticker.price24hPcnt.toFixed(2)}%`,
+        maximo_24h: `${ticker.highPrice24h.toFixed(4)}`,
+        minimo_24h: `${ticker.lowPrice24h.toFixed(4)}`,
+        volumen_24h: ticker.volume24h.toString(),
+        bid: `${ticker.bid1Price.toFixed(4)}`,
+        ask: `${ticker.ask1Price.toFixed(4)}`,
+        spread: `${(ticker.ask1Price - ticker.bid1Price).toFixed(4)}`,
+        timestamp: ticker.timestamp
+      };
 
     return this.createSuccessResponse(formattedTicker);
   }
@@ -1132,10 +1069,35 @@ export class MCPAdapter {
   // ====================
 
   private createSuccessResponse(data: any): MCPServerResponse {
+    // Ensure clean JSON serialization without complex objects
+    let cleanData: any;
+    
+    try {
+      // Convert to JSON and back to ensure clean serialization
+      const jsonString = JSON.stringify(data, (key, value) => {
+        // Filter out potentially problematic values
+        if (typeof value === 'function' || value === undefined) {
+          return '[FILTERED]';
+        }
+        if (typeof value === 'object' && value !== null) {
+          // Ensure objects are plain and serializable
+          if (value.constructor !== Object && value.constructor !== Array) {
+            return '[COMPLEX_OBJECT]';
+          }
+        }
+        return value;
+      });
+      
+      cleanData = JSON.parse(jsonString);
+    } catch (error) {
+      // Fallback to simple string representation
+      cleanData = { result: 'Data serialization error', data: String(data) };
+    }
+    
     return {
       content: [{
         type: 'text',
-        text: JSON.stringify(data, null, 2)
+        text: JSON.stringify(cleanData, null, 2)
       }]
     };
   }

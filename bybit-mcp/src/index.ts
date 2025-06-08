@@ -9,6 +9,11 @@
 
 // Suppress known MCP SDK JSON parsing errors during startup
 const originalConsoleError = console.error;
+const originalConsoleInfo = console.info;
+const originalConsoleLog = console.log;
+const originalConsoleDebug = console.debug;
+const originalConsoleWarn = console.warn;
+
 console.error = (...args: any[]) => {
   const message = args[0]?.toString() || '';
   
@@ -22,6 +27,34 @@ console.error = (...args: any[]) => {
   // Log all other errors normally
   originalConsoleError.apply(console, args);
 };
+
+// Suppress all console output during MCP initialization to avoid JSON parsing issues
+let mcpInitializationComplete = false;
+
+const suppressDuringInit = (originalFn: Function) => {
+  return (...args: any[]) => {
+    if (mcpInitializationComplete) {
+      originalFn.apply(console, args);
+    }
+    // During initialization, suppress all output to avoid MCP SDK JSON parsing issues
+  };
+};
+
+// Temporarily suppress console output during initialization
+console.info = suppressDuringInit(originalConsoleInfo);
+console.log = suppressDuringInit(originalConsoleLog);
+console.debug = suppressDuringInit(originalConsoleDebug);
+console.warn = suppressDuringInit(originalConsoleWarn);
+
+// Restore console output after MCP is running
+setTimeout(() => {
+  mcpInitializationComplete = true;
+  console.info = originalConsoleInfo;
+  console.log = originalConsoleLog;
+  console.debug = originalConsoleDebug;
+  console.warn = originalConsoleWarn;
+  console.info('[MCP] Console output restored after initialization');
+}, 2000); // Give 2 seconds for MCP initialization
 
 import { MarketAnalysisEngine } from './core/engine.js';
 import { MCPAdapter } from './adapters/mcp.js';
@@ -46,17 +79,14 @@ class BybitMCPServer {
       maxFiles: 10
     });
     
-    // Log system startup info
-    this.logger.info('='.repeat(80));
+    // Log system startup info with simple strings
+    this.logger.info('================================================================================');
     this.logger.info('🚀 BYBIT MCP SERVER v1.3.2 - SISTEMA DE LOGGING AVANZADO');
-    this.logger.info('='.repeat(80));
-    this.logger.info('Sistema iniciando con FileLogger profesional', {
-      nodeVersion: process.version,
-      platform: process.platform,
-      arch: process.arch,
-      pid: process.pid,
-      workingDirectory: process.cwd()
-    });
+    this.logger.info('================================================================================');
+    this.logger.info(`Sistema iniciando: Node ${process.version} on ${process.platform}`);
+    this.logger.info(`Working directory: ${process.cwd()}`);
+    this.logger.info(`Process ID: ${process.pid}`);
+    this.logger.info(`Architecture: ${process.arch}`);
     
     // Initialize system configuration
     const config: Partial<SystemConfig> = {

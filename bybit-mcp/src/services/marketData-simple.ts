@@ -1,11 +1,10 @@
 /**
- * @fileoverview Market Data Service - Bybit API Integration
- * @description Modular service for fetching market data from Bybit API
- * @version 1.3.1
+ * @fileoverview Market Data Service - Simplified for MCP
+ * @description Minimal logging to avoid Claude Desktop JSON errors
+ * @version 1.3.4
  */
 
 import fetch from 'node-fetch';
-import * as path from 'path';
 import { 
   IMarketDataService, 
   MarketTicker, 
@@ -17,7 +16,6 @@ import {
 } from '../types/index.js';
 import { PerformanceMonitor } from '../utils/performance.js';
 import { simpleApiLogger } from '../utils/simpleApiLogger.js';
-// Removed complex logging to avoid MCP JSON errors
 
 export class BybitMarketDataService implements IMarketDataService {
   private readonly baseUrl: string;
@@ -41,8 +39,6 @@ export class BybitMarketDataService implements IMarketDataService {
    */
   async getTicker(symbol: string, category: MarketCategoryType = 'spot'): Promise<MarketTicker> {
     return this.performanceMonitor.measure('getTicker', async () => {
-      this.logger.info(`Fetching ticker for ${symbol} in ${category} market`);
-      
       try {
         const endpoint = `/v5/market/tickers?category=${category}&symbol=${symbol}`;
         const result = await this.makeRequest(endpoint);
@@ -69,11 +65,9 @@ export class BybitMarketDataService implements IMarketDataService {
           timestamp: new Date().toISOString()
         };
 
-        this.logger.info(`Successfully fetched ticker for ${symbol}: $${ticker.lastPrice}`);
         return ticker;
 
       } catch (error) {
-        this.logger.error(`Failed to fetch ticker for ${symbol}:`, error);
         throw new MarketDataError(
           `Failed to fetch ticker data for ${symbol}`,
           'API_ERROR',
@@ -93,8 +87,6 @@ export class BybitMarketDataService implements IMarketDataService {
     limit: number = 25
   ): Promise<Orderbook> {
     return this.performanceMonitor.measure('getOrderbook', async () => {
-      this.logger.info(`Fetching orderbook for ${symbol} with limit ${limit}`);
-      
       try {
         const endpoint = `/v5/market/orderbook?category=${category}&symbol=${symbol}&limit=${limit}`;
         const result = await this.makeRequest(endpoint);
@@ -113,11 +105,9 @@ export class BybitMarketDataService implements IMarketDataService {
           spread: parseFloat(result.a[0][0]) - parseFloat(result.b[0][0])
         };
 
-        this.logger.info(`Successfully fetched orderbook for ${symbol}: ${orderbook.bids.length} bids, ${orderbook.asks.length} asks`);
         return orderbook;
 
       } catch (error) {
-        this.logger.error(`Failed to fetch orderbook for ${symbol}:`, error);
         throw new MarketDataError(
           `Failed to fetch orderbook data for ${symbol}`,
           'API_ERROR',
@@ -138,8 +128,6 @@ export class BybitMarketDataService implements IMarketDataService {
     category: MarketCategoryType = 'spot'
   ): Promise<OHLCV[]> {
     return this.performanceMonitor.measure('getKlines', async () => {
-      this.logger.info(`Fetching ${limit} klines for ${symbol} with ${interval} interval`);
-      
       try {
         const endpoint = `/v5/market/kline?category=${category}&symbol=${symbol}&interval=${interval}&limit=${limit}`;
         const result = await this.makeRequest(endpoint);
@@ -156,11 +144,9 @@ export class BybitMarketDataService implements IMarketDataService {
         // Sort chronologically (oldest first)
         klines.reverse();
 
-        this.logger.info(`Successfully fetched ${klines.length} klines for ${symbol}`);
         return klines;
 
       } catch (error) {
-        this.logger.error(`Failed to fetch klines for ${symbol}:`, error);
         throw new MarketDataError(
           `Failed to fetch klines data for ${symbol}`,
           'API_ERROR',
@@ -172,78 +158,67 @@ export class BybitMarketDataService implements IMarketDataService {
   }
 
   /**
-   * Make HTTP request to Bybit API with error handling and retries
+   * Make HTTP request to Bybit API with simplified logging
    */
   private async makeRequest(endpoint: string, attempt: number = 1): Promise<any> {
     const url = `${this.baseUrl}${endpoint}`;
+    const startTime = Date.now();
     
     try {
-      this.logger.debug(`Making request to: ${url} (attempt ${attempt})`);
+      // Simple API logging - no complex objects
+      simpleApiLogger.logApiRequest(endpoint, 'GET');
       
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
-      // Make regular fetch request without double-logging to avoid response conflicts
       const response = await fetch(url, {
         signal: controller.signal,
         headers: {
-          'User-Agent': 'Bybit-MCP-Server/1.3.1',
+          'User-Agent': 'Bybit-MCP-Server/1.3.4',
           'Accept': 'application/json'
         }
       });
 
       clearTimeout(timeoutId);
+      const duration = Date.now() - startTime;
 
       if (!response.ok) {
+        simpleApiLogger.logApiResponse(endpoint, false, duration, response.status, `HTTP ${response.status}`);
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
-      // Capture raw response text for debugging
       const rawText = await response.text();
       
-      // Simplified logging - no complex objects to avoid MCP JSON parsing issues
-      // this.logger.info(`API Response for ${endpoint}`, { ... }); // DISABLED
+      // Log successful response with basic info only
+      simpleApiLogger.logApiResponse(endpoint, true, duration, response.status, undefined, rawText.length);
 
       let data: any;
       try {
-        this.logger.jsonDebug(endpoint, rawText, 'parse');
         data = JSON.parse(rawText);
       } catch (parseError) {
-        this.logger.jsonDebug(endpoint, rawText, 'error');
-        this.logger.error(`🚨 CRITICAL JSON Parse Error for ${endpoint}:`, {
-          parseError,
-          rawText: rawText.substring(0, 200),
-          rawLength: rawText.length,
-          position5: rawText.charAt(5),
-          characterAt5: rawText.charCodeAt(5),
-          startsWithBrace: rawText.startsWith('{'),
-          startsWithBracket: rawText.startsWith('['),
-          endpoint
-        });
+        simpleApiLogger.logApiResponse(endpoint, false, duration, response.status, `JSON Parse Error`);
         throw new Error(`JSON Parse Error: ${parseError}`);
       }
 
-      // Validate JSON structure before processing
       if (!data || typeof data !== 'object') {
-        this.logger.error(`Invalid JSON response structure from ${endpoint}:`, {
-          dataType: typeof data,
-          data: data
-        });
+        simpleApiLogger.logApiResponse(endpoint, false, duration, response.status, 'Invalid JSON structure');
         throw new Error('Invalid JSON response from API');
       }
 
       if (data.retCode !== 0) {
-        throw new Error(`Bybit API Error ${data.retCode}: ${data.retMsg}`);
+        const errorMsg = `Bybit API Error ${data.retCode}: ${data.retMsg}`;
+        simpleApiLogger.logApiResponse(endpoint, false, duration, response.status, errorMsg);
+        throw new Error(errorMsg);
       }
 
       return data.result;
 
     } catch (error) {
-      this.logger.error(`Request failed (attempt ${attempt}):`, error);
+      const duration = Date.now() - startTime;
+      simpleApiLogger.logApiResponse(endpoint, false, duration, undefined, (error as Error).message);
       
       // Retry logic
       if (attempt < this.retryAttempts && this.isRetryableError(error as Error)) {
-        this.logger.info(`Retrying request in ${attempt * 1000}ms...`);
         await this.delay(attempt * 1000);
         return this.makeRequest(endpoint, attempt + 1);
       }
@@ -287,14 +262,13 @@ export class BybitMarketDataService implements IMarketDataService {
    */
   async healthCheck(): Promise<boolean> {
     try {
-      // Use a simple time endpoint for health check with enhanced logging
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
       
       const response = await fetch(`${this.baseUrl}/v5/market/time`, {
         signal: controller.signal,
         headers: {
-          'User-Agent': 'Bybit-MCP-Server/1.3.1',
+          'User-Agent': 'Bybit-MCP-Server/1.3.4',
           'Accept': 'application/json'
         }
       });
@@ -302,16 +276,12 @@ export class BybitMarketDataService implements IMarketDataService {
       clearTimeout(timeoutId);
       
       if (!response.ok) {
-        this.logger.warn(`Health check HTTP error: ${response.status}`);
         return false;
       }
       
       const data: any = await response.json();
-      
-      // Just check if we got a valid response
       return data && typeof data === 'object';
     } catch (error) {
-      this.logger.error('Health check failed:', error);
       return false;
     }
   }
@@ -321,12 +291,13 @@ export class BybitMarketDataService implements IMarketDataService {
    */
   getServiceInfo() {
     return {
-    name: 'BybitMarketDataService',
-    version: '1.3.1',
-    baseUrl: this.baseUrl,
+      name: 'BybitMarketDataService',
+      version: '1.3.4',
+      baseUrl: this.baseUrl,
       timeout: this.timeout,
       retryAttempts: this.retryAttempts,
-      uptime: process.uptime()
+      uptime: process.uptime(),
+      stats: simpleApiLogger.getStats()
     };
   }
 }

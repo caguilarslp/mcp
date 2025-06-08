@@ -68,15 +68,12 @@ export class FileLogger extends Logger {
       }
 
       this.isInitialized = true;
+      
+      // Only log basic initialization without complex objects during MCP startup
       this.info('FileLogger initialized successfully');
       
-      // Log system info
-      this.info('FileLogger configuration', {
-        logDir: this.config.logDir,
-        maxFileSize: `${Math.round(this.config.maxFileSize / 1024 / 1024)}MB`,
-        maxFiles: this.config.maxFiles,
-        rotationEnabled: this.config.enableRotation
-      });
+      // Log configuration as simple string to avoid JSON serialization issues during MCP startup
+      this.info(`FileLogger config: dir=${this.config.logDir}, size=${Math.round(this.config.maxFileSize / 1024 / 1024)}MB, files=${this.config.maxFiles}, rotation=${this.config.enableRotation}`);
 
     } catch (error) {
       console.error('Failed to initialize FileLogger:', error);
