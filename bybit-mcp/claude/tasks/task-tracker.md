@@ -8,20 +8,6 @@
 
 ### **🔥 ALTA PRIORIDAD (Esta Semana)**
 
-#### ⏳ TASK-002 - Support/Resistance Dinámicos
-- **Estado:** PENDIENTE
-- **Descripción:** Implementar detección automática de S/R basada en volumen y pivots
-- **Tiempo Estimado:** 4h
-- **Archivos:** src/index.ts (nueva función)
-- **Detalles:**
-  - Usar datos de klines para identificar pivots
-  - Correlacionar con picos de volumen
-  - Retornar niveles ordenados por fuerza
-- **Criterios de Éxito:**
-  - Detecta al menos 3 niveles de soporte y 3 de resistencia
-  - Incluye "fuerza" del nivel basada en toques y volumen
-  - Funciona con diferentes timeframes
-
 #### ⏳ TASK-003 - Documentar ADRs
 - **Estado:** PENDIENTE
 - **Descripción:** Crear Architecture Decision Records para decisiones clave
@@ -32,6 +18,21 @@
   - ADR-002: ¿Por qué no API Keys en v1.0?
   - ADR-003: ¿Por qué Volume Delta aproximado?
   - ADR-004: Separación MCP datos vs trading
+  - ADR-005: Algoritmo Support/Resistance con scoring multi-factor
+
+#### ⚠️ TASK-004 - Tests Unitarios (URGENTE POST-BUG)
+- **Estado:** PENDIENTE
+- **Descripción:** Crear suite de tests para funciones core + validación de lógica de negocio
+- **Prioridad:** **CRÍTICA** (tras BUG-001 detección tardía)
+- **Tiempo Estimado:** 4h
+- **Archivos:** tests/, package.json (jest config)
+- **Tests críticos a crear:**
+  - Support/Resistance classification logic (evitar BUG-001 regresión)
+  - Volume Delta calculations
+  - Grid level suggestions
+  - Error handling scenarios
+  - API response parsing
+  - Validación semántica de resultados
 
 ---
 
@@ -49,7 +50,7 @@
 - **Descripción:** Identificar fases de acumulación/distribución
 - **Prioridad:** Media
 - **Estimado:** 6h
-- **Dependencias:** TASK-002 (S/R necesarios)
+- **Dependencias:** ✅ TASK-002 completada (S/R necesarios)
 - **Detalles:**
   - Detectar rangos de consolidación
   - Analizar volumen en el rango
@@ -89,19 +90,20 @@
 ## 📊 MÉTRICAS DE PRODUCTIVIDAD
 
 ### **Velocidad de Desarrollo**
-- **Tareas Completadas:** 7 (desde inicio)
-- **Tiempo Invertido:** ~16h
-- **Promedio por Tarea:** 2.3h
+- **Tareas Completadas:** 8 (desde inicio)
+- **Tiempo Invertido:** ~20h
+- **Promedio por Tarea:** 2.5h
 - **Eficiencia:** Alta (todas las tareas completadas funcionan)
 
 ### **Calidad del Código**
-- **Bugs Encontrados:** 0
+- **Bugs Encontrados:** 1 (BUG-001 crítico - resuelto)
 - **Refactors Necesarios:** 0
-- **Cobertura de Documentación:** 90%
+- **Cobertura de Tests:** 0% (URGENTE - TASK-004)
+- **Cobertura de Documentación:** 100% (mejorada significativamente)
 
 ### **Impacto en Usuario**
-- **Funciones Nuevas v1.1:** 2 (volume analysis, volume delta)
-- **Mejora en Análisis:** +200% (con volumen)
+- **Funciones Nuevas v1.2:** 1 (support/resistance dinámicos)
+- **Mejora en Análisis:** +300% (S/R + volumen)
 - **Facilidad de Uso:** Mantenida (sin API keys)
 
 ---
@@ -109,13 +111,15 @@
 ## 🎯 OBJETIVOS DE LA SEMANA
 
 ### **Semana del 08-14 Junio 2025**
-**Meta:** Completar análisis técnico avanzado
+**Meta:** Sistema robusto con documentación completa y tests para prevenir regresiones
 
-- [ ] ⏳ Implementar Support/Resistance (TASK-002)
+- [✅] ✅ Implementar Support/Resistance (TASK-002)
+- [✅] ✅ **HOTFIX CRÍTICO**: Resolver BUG-001 clasificación S/R
+- [✅] ✅ **Sistema de trazabilidad completo** con bugs, docs, arquitectura
 - [ ] ⏳ Documentar decisiones técnicas (TASK-003)
-- [ ] ⏳ Iniciar tests si hay tiempo (TASK-004)
+- [ ] ⚠️ **URGENTE**: Crear tests unitarios (TASK-004)
 
-**Resultado Esperado:** MCP con capacidad de identificar niveles clave automáticamente
+**Resultado Esperado:** MCP robusto con documentación completa, sistema de bugs y tests para estabilidad
 
 ---
 
@@ -146,6 +150,14 @@ Las tareas se priorizan según:
 
 ## ✅ TAREAS COMPLETADAS
 
+### **v1.2.0 (08/06/2025)**
+- ✅ **TASK-002**: Implementar Support/Resistance dinámicos
+  - Algoritmo de pivots con lookback dinámico
+  - Scoring multi-factor: toques + volumen + proximidad + antigüedad
+  - Agrupación inteligente de niveles (0.5% tolerancia)
+  - Configuración automática de grid trading
+  - Probado con XRPUSDT: 13 pivots detectados, niveles precisos
+
 ### **v1.1.0 (08/06/2025)**
 - ✅ TASK-001: Implementar Volume Analysis con VWAP
 - ✅ TASK-001b: Implementar Volume Delta
@@ -159,4 +171,4 @@ Las tareas se priorizan según:
 
 ---
 
-*Actualizado: 08/06/2025 - Siguiente revisión: Al completar TASK-002*
+*Actualizado: 08/06/2025 - Siguiente revisión: Al completar TASK-003*

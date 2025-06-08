@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "segudigital": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "D:\\projects"
+      ]
+    },
+    "bybit": {
+      "command": "node",
+      "args": [
+        "D:\\projects\\mcp\\bybit-mcp\\build\\index.js"
+      ]
+    }
+  }
+}
