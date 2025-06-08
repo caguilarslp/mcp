@@ -1,0 +1,100 @@
+# 🤖 Contexto para Claude/Cursor - Bybit MCP Server
+
+## IMPORTANTE: Leer ANTES de dar cualquier sugerencia
+
+### 📊 SISTEMA DE TRAZABILIDAD (OBLIGATORIO)
+**SIEMPRE** revisar y actualizar estos archivos:
+- `claude/master-log.md` - Estado actual del MCP (LEER PRIMERO)
+- `claude/tasks/task-tracker.md` - Próximas funciones a implementar
+- `ROADMAP_AVANZADO.md` - Visión general de funcionalidades futuras
+- `claude/logs/YYYY-MM-DD.md` - Log diario (ACTUALIZAR al final)
+
+### Arquitectura del MCP
+- **Tipo**: Model Context Protocol Server
+- **Lenguaje**: TypeScript
+- **Runtime**: Node.js
+- **Dependencias**: @modelcontextprotocol/sdk, node-fetch
+- **API**: Bybit v5 (endpoints públicos)
+
+### ESTADO ACTUAL (v1.1.0 - 08/06/2025)
+- **Fase:** Funcional con análisis de volumen
+- **Última Actualización:** Volume Delta y análisis tradicional agregados
+- **Próxima Tarea:** Support/Resistance dinámicos (TASK-002)
+- **Bloqueadores:** Ninguno
+
+### Funcionalidades EXISTENTES
+- ✅ Precios en tiempo real (get_ticker)
+- ✅ Orderbook depth (get_orderbook)
+- ✅ Datos OHLCV históricos (get_klines)
+- ✅ Análisis de volatilidad (analyze_volatility)
+- ✅ Sugerencias de grid trading (suggest_grid_levels)
+- ✅ Análisis de volumen con VWAP (get_volume_analysis)
+- ✅ Volume Delta y divergencias (get_volume_delta)
+
+### En DESARROLLO
+- 🚧 Support/Resistance automáticos
+- 🚧 Detección de patrones Wyckoff básicos
+
+### NO EXISTE (no sugerir aún)
+- ❌ Funciones que requieren API Key
+- ❌ Trading automatizado
+- ❌ Gestión de órdenes
+- ❌ Portfolio tracking
+
+### Integración con Waickoff AI
+- Este MCP servirá como capa de datos para Waickoff
+- Mantener separación: MCP = datos, Waickoff = inteligencia
+- Futuro: múltiples MCPs (Binance, etc.) alimentando Waickoff
+
+### WORKFLOW OBLIGATORIO:
+1. Leer ROADMAP_AVANZADO.md para entender visión
+2. Revisar claude/tasks/task-tracker.md para próxima tarea
+3. Implementar siguiendo arquitectura actual
+4. ACTUALIZAR logs con cambios realizados
+5. Compilar y probar antes de declarar completado
+
+### Reglas al dar código:
+1. **TypeScript estricto** - Tipos definidos siempre
+2. **Manejo de errores** - Try/catch en todas las funciones
+3. **Datos públicos** - NO usar endpoints que requieran API key (por ahora)
+4. **Documentación** - Comentarios claros en funciones nuevas
+5. **Retrocompatibilidad** - No romper funciones existentes
+
+### Comandos de desarrollo:
+```bash
+npm run build   # Compilar TypeScript
+npm run dev     # Modo desarrollo con watch
+npm start       # Ejecutar MCP compilado
+npm run clean   # Limpiar build
+```
+
+### Configuración Claude Desktop:
+```json
+{
+  "mcpServers": {
+    "bybit-mcp": {
+      "command": "node",
+      "args": ["D:\\projects\\mcp\\bybit-mcp\\build\\index.js"],
+      "env": {}
+    }
+  }
+}
+```
+
+### Filosofía del proyecto:
+- **"Datos limpios y precisos sobre features complejas"**
+- **"Separación clara: análisis aquí, trading en otro MCP"**
+- **"Base sólida para Waickoff AI"**
+- **"Modular y extensible"**
+
+## 🎯 ENFOQUE ACTUAL: Mejorar análisis técnico
+**PRÓXIMA TAREA CRÍTICA**: Support/Resistance dinámicos basados en volumen
+**REFERENCIA**: Ver ROADMAP_AVANZADO.md sección "FASE 1"
+
+## 📋 OBLIGATORIO AL TERMINAR CUALQUIER TRABAJO:
+1. Actualizar versión en package.json si hay cambios significativos
+2. Actualizar README.md si se agregan nuevas funciones
+3. Crear/actualizar guías de uso para funciones nuevas
+4. Documentar en logs cualquier decisión técnica importante
+
+**ESTE MCP ES LA BASE DE DATOS PARA WAICKOFF AI - MANTENER CALIDAD**

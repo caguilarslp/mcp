@@ -1,0 +1,126 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+*.log
+
+# Build output
+build/
+dist/
+out/
+*.js
+*.js.map
+*.d.ts
+!tsconfig.json
+
+# TypeScript
+*.tsbuildinfo
+.tscache/
+
+# IDE - VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# IDE - IntelliJ/WebStorm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# IDE - Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# OS - Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# OS - macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# OS - Linux
+.directory
+.Trash-*
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# API Keys y configuración sensible
+config/secrets.json
+config/api-keys.json
+*-apikeys.json
+*.key
+*.pem
+
+# Logs de trading (si los generas)
+logs/
+trading-logs/
+*.csv
+!example-*.csv
+
+# Backups
+*.backup
+*.bak
+*.tmp
+*.temp
+backup/
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+
+# Test coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Debugging
+.vscode/launch.json
+debug/
+*.map
+
+# Package files
+*.tgz
+package-lock.json.backup
+
+# MCP specific
+mcp-state/
+mcp-cache/
+*.mcp-session
+
+# Trading data (si almacenas localmente)
+data/
+market-data/
+historical/
+!data/example/
+
+# Documentation build
+docs/_build/
+docs/.docusaurus/
+
+# Temporary files
+~$*
+*.swp
+*.swo
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Optional: mantener estructura pero ignorar contenido
+!.gitkeep
