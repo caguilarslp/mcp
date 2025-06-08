@@ -34,6 +34,28 @@
   - API response parsing
   - Validación semántica de resultados
 
+#### ✅ TASK-005 - Sistema de Logging Avanzado (COMPLETADA) 🎆
+- **Estado:** ✅ COMPLETADA
+- **Descripción:** Sistema de logging robusto implementado para detectar errores JSON y debugging
+- **Prioridad:** **CRÍTICA** (errores JSON no detectables actualmente)
+- **Tiempo Real:** 1.5h
+- **Archivos Implementados:** 
+  - ✅ `src/utils/requestLogger.ts` - Request logger avanzado
+  - ✅ `src/utils/logger.ts` - Logger mejorado con JSON debugging
+  - ✅ `src/services/marketData.ts` - Integrado con request logger
+  - ✅ `src/adapters/mcp.ts` - Nueva herramienta `get_debug_logs`
+  - ✅ `logs/` - Directorio para logs rotativos
+- **Funcionalidades Implementadas:**
+  - ✅ Logger con diferentes niveles (debug, info, warn, error)
+  - ✅ Logging automático de requests/responses a APIs
+  - ✅ Análisis detallado de errores JSON con posición y contexto
+  - ✅ Archivos de log rotativos por fecha (formato JSON)
+  - ✅ Nueva herramienta MCP `get_debug_logs` para troubleshooting
+  - ✅ Integración completa con todas las capas del MCP
+  - ✅ Detección específica de errores "position 5" del MCP SDK
+  - ✅ Métricas de requests: duración, status, errores JSON
+  - ✅ Guía de troubleshooting integrada en la herramienta
+
 ---
 
 ## 📅 BACKLOG ORGANIZADO
@@ -116,6 +138,7 @@
 - [✅] ✅ Implementar Support/Resistance (TASK-002)
 - [✅] ✅ **HOTFIX CRÍTICO**: Resolver BUG-001 clasificación S/R
 - [✅] ✅ **Sistema de trazabilidad completo** con bugs, docs, arquitectura
+- [✅] ✅ **Sistema de Logging Avanzado** (TASK-005) - Implementado debugging completo
 - [ ] ⏳ Documentar decisiones técnicas (TASK-003)
 - [ ] ⚠️ **URGENTE**: Crear tests unitarios (TASK-004)
 

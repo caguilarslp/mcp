@@ -72,45 +72,18 @@ await get_orderbook({
 
 ---
 
-#### `get_klines`
-Get OHLCV candlestick data for technical analysis.
+#### `get_market_data`
+Get comprehensive market data (ticker + orderbook + recent klines).
 
 **Parameters:**
 - `symbol` (required): Trading pair
-- `interval` (optional): Timeframe ("1", "5", "15", "30", "60", "240", "D"). Default: "60"
-- `limit` (optional): Number of candles. Default: 200
 - `category` (optional): Market category. Default: "spot"
 
 **Example:**
 ```javascript
-await get_klines({
-  symbol: "XRPUSDT",
-  interval: "60",
-  limit: 100
+await get_market_data({
+  symbol: "XRPUSDT"
 });
-```
-
-**Response:**
-```json
-{
-  "symbol": "XRPUSDT",
-  "interval": "60",
-  "datos_recientes": [
-    {
-      "timestamp": "2025-06-08T17:00:00.000Z",
-      "open": 2.2850,
-      "high": 2.2890,
-      "low": 2.2830,
-      "close": 2.2866,
-      "volume": 125430.5
-    }
-  ],
-  "total_velas": 100,
-  "rango_precio": {
-    "maximo": 2.3420,
-    "minimo": 2.1890
-  }
-}
 ```
 
 ---
@@ -132,26 +105,9 @@ await analyze_volatility({
 });
 ```
 
-**Response:**
-```json
-{
-  "symbol": "XRPUSDT",
-  "periodo_analisis": "1d",
-  "precio_actual": "$2.2866",
-  "precio_maximo": "$2.3420",
-  "precio_minimo": "$2.1890",
-  "volatilidad": "6.68%",
-  "evaluacion": {
-    "bueno_para_grid": true,
-    "razon": "Volatilidad óptima para grid trading",
-    "recomendacion": "Proceder con grid trading"
-  }
-}
-```
-
 ---
 
-#### `get_volume_analysis`
+#### `analyze_volume`
 Analyze volume patterns with VWAP and anomaly detection.
 
 **Parameters:**
@@ -161,41 +117,16 @@ Analyze volume patterns with VWAP and anomaly detection.
 
 **Example:**
 ```javascript
-await get_volume_analysis({
+await analyze_volume({
   symbol: "XRPUSDT",
   interval: "60",
   periods: 24
 });
 ```
 
-**Response:**
-```json
-{
-  "symbol": "XRPUSDT",
-  "analisis_volumen": {
-    "volumen_promedio": "125430.50",
-    "volumen_actual": "142850.30",
-    "comparacion_promedio": "114%"
-  },
-  "picos_volumen": [
-    {
-      "tiempo": "2025-06-08T15:00:00.000Z",
-      "volumen": "188145.20",
-      "multiplicador": "1.5x promedio",
-      "precio": "2.2890"
-    }
-  ],
-  "vwap": {
-    "actual": "2.2855",
-    "precio_vs_vwap": "Por encima",
-    "diferencia": "0.048%"
-  }
-}
-```
-
 ---
 
-#### `get_volume_delta`
+#### `analyze_volume_delta`
 Calculate Volume Delta (buying vs selling pressure).
 
 **Parameters:**
@@ -205,29 +136,11 @@ Calculate Volume Delta (buying vs selling pressure).
 
 **Example:**
 ```javascript
-await get_volume_delta({
+await analyze_volume_delta({
   symbol: "XRPUSDT",
   interval: "5",
   periods: 60
 });
-```
-
-**Response:**
-```json
-{
-  "symbol": "XRPUSDT",
-  "volume_delta_reciente": {
-    "delta_actual": "15230.40",
-    "delta_promedio_10": "8450.20",
-    "sesgo": "Comprador",
-    "fuerza_sesgo": "12.1%"
-  },
-  "divergencias": {
-    "detectada": false,
-    "tipo": "Sin divergencia",
-    "señal": "Tendencia confirmada"
-  }
-}
 ```
 
 ---
@@ -252,49 +165,27 @@ await identify_support_resistance({
 });
 ```
 
-**Response:**
-```json
-{
-  "symbol": "XRPUSDT",
-  "precio_actual": "$2.2866",
-  "analisis_niveles": {
-    "resistencias": [
-      {
-        "nivel": "$2.3250",
-        "fuerza": "84.6",
-        "toques": 3,
-        "distancia_precio": "1.68%",
-        "confirmacion_volumen": "1.4x promedio",
-        "ultimo_toque": "2025-06-08T14:00:00.000Z",
-        "evaluacion": "Muy fuerte"
-      }
-    ],
-    "soportes": [
-      {
-        "nivel": "$2.2267",
-        "fuerza": "78.2",
-        "toques": 2,
-        "distancia_precio": "2.62%",
-        "confirmacion_volumen": "1.2x promedio",
-        "ultimo_toque": "2025-06-08T12:00:00.000Z",
-        "evaluacion": "Fuerte"
-      }
-    ]
-  },
-  "nivel_critico": {
-    "tipo": "resistance",
-    "precio": "$2.3250",
-    "distancia": "1.68%",
-    "fuerza": "84.6",
-    "accion_sugerida": "Posible zona de toma de ganancias"
-  },
-  "configuracion_grid": {
-    "zona_optima_inferior": "$2.2267",
-    "zona_optima_superior": "$2.3250",
-    "niveles_clave_grid": ["$2.3250", "$2.2890", "$2.2580", "$2.2267"],
-    "recomendacion": "Niveles identificados - Grid recomendado"
-  }
-}
+---
+
+#### `perform_technical_analysis`
+Comprehensive technical analysis including all indicators.
+
+**Parameters:**
+- `symbol` (required): Trading pair
+- `includeVolatility` (optional): Include volatility analysis. Default: true
+- `includeVolume` (optional): Include volume analysis. Default: true
+- `includeVolumeDelta` (optional): Include volume delta analysis. Default: true
+- `includeSupportResistance` (optional): Include support/resistance analysis. Default: true
+- `timeframe` (optional): Analysis timeframe. Default: "60"
+- `periods` (optional): Number of periods to analyze. Default: 100
+
+**Example:**
+```javascript
+await perform_technical_analysis({
+  symbol: "XRPUSDT",
+  timeframe: "60",
+  periods: 100
+});
 ```
 
 ---
@@ -309,6 +200,8 @@ Generate intelligent grid trading suggestions based on volatility analysis.
 - `investment` (required): Amount to invest in USD
 - `gridCount` (optional): Number of grid levels. Default: 10
 - `category` (optional): Market category. Default: "spot"
+- `riskTolerance` (optional): Risk tolerance level ("low", "medium", "high"). Default: "medium"
+- `optimize` (optional): Use advanced optimization. Default: false
 
 **Example:**
 ```javascript
@@ -319,99 +212,139 @@ await suggest_grid_levels({
 });
 ```
 
+---
+
+#### `get_complete_analysis`
+Complete market analysis with summary and recommendations.
+
+**Parameters:**
+- `symbol` (required): Trading pair
+- `investment` (optional): Investment amount for grid suggestions
+
+**Example:**
+```javascript
+await get_complete_analysis({
+  symbol: "XRPUSDT",
+  investment: 2000
+});
+```
+
+---
+
+### **🔧 System Tools**
+
+#### `get_system_health`
+Get system health status and performance metrics.
+
+**Parameters:**
+- No parameters required
+
+**Example:**
+```javascript
+await get_system_health();
+```
+
 **Response:**
 ```json
 {
-  "symbol": "XRPUSDT",
-  "currentPrice": 2.2866,
-  "suggestedRange": {
-    "lower": 2.1723,
-    "upper": 2.4009
+  "system_status": "HEALTHY",
+  "version": "1.3.1",
+  "uptime": "2 hours",
+  "services": {
+    "market_data": "ONLINE",
+    "analysis": "ONLINE",
+    "trading": "ONLINE"
   },
-  "gridLevels": [2.1723, 2.2009, 2.2295, 2.2581, 2.2866, 2.3152, 2.3438, 2.3724, 2.4009],
-  "investment": 1000,
-  "pricePerGrid": 125.00,
-  "potentialProfit": "$3.45/día estimado",
-  "volatilidad_24h": "6.68%",
-  "recomendacion": "Alta volatilidad - Grid recomendado"
+  "performance": {
+    "total_requests": 145,
+    "avg_response_time": "120ms",
+    "success_rate": "98.5%"
+  }
 }
 ```
 
 ---
 
-## 🔧 Common Usage Patterns
+#### `get_debug_logs` 🔍 **NEW in v1.3.1**
+Get debug logs for troubleshooting JSON errors and request issues.
 
-### **Complete Market Analysis Workflow**
+**Parameters:**
+- `logType` (optional): Type of logs ("all", "errors", "json_errors", "requests"). Default: "all"
+- `limit` (optional): Number of log entries to return. Default: 50
+
+**Example:**
 ```javascript
-// 1. Get current market data
-const ticker = await get_ticker({symbol: "XRPUSDT"});
-
-// 2. Analyze volatility for grid suitability
-const volatility = await analyze_volatility({symbol: "XRPUSDT", period: "1d"});
-
-// 3. Get support/resistance levels
-const sr = await identify_support_resistance({symbol: "XRPUSDT", periods: 100});
-
-// 4. Analyze volume patterns
-const volume = await get_volume_analysis({symbol: "XRPUSDT", periods: 24});
-
-// 5. Check volume delta for bias
-const delta = await get_volume_delta({symbol: "XRPUSDT", periods: 60});
-
-// 6. Generate grid suggestions
-const grid = await suggest_grid_levels({symbol: "XRPUSDT", investment: 1000});
-```
-
-### **Quick Support/Resistance Check**
-```javascript
-const levels = await identify_support_resistance({
-  symbol: "XRPUSDT",
-  sensitivity: 3  // More sensitive detection
+// Get all recent logs
+await get_debug_logs({
+  logType: "all",
+  limit: 30
 });
 
-// Check critical level
-console.log(`Critical level: ${levels.nivel_critico.precio}`);
-console.log(`Distance: ${levels.nivel_critico.distancia}`);
-```
-
-### **Volume Divergence Detection**
-```javascript
-const delta = await get_volume_delta({
-  symbol: "XRPUSDT",
-  interval: "15",  // 15-minute timeframe
-  periods: 40
+// Get only JSON parsing errors
+await get_debug_logs({
+  logType: "json_errors",
+  limit: 10
 });
 
-if (delta.divergencias.detectada) {
-  console.log(`Divergence detected: ${delta.divergencias.señal}`);
-}
+// Get only HTTP/API errors
+await get_debug_logs({
+  logType: "errors",
+  limit: 20
+});
 ```
 
----
-
-## ⚠️ Error Handling
-
-### **Common Error Responses**
+**Response:**
 ```json
 {
-  "content": [{
-    "type": "text",
-    "text": "Error ejecutando get_ticker: Invalid symbol format"
-  }]
+  "summary": {
+    "logType": "json_errors",
+    "timestamp": "2025-06-08T20:45:00.000Z",
+    "totalEntries": 3,
+    "description": "JSON parsing error logs"
+  },
+  "api_requests": [
+    {
+      "requestId": "REQ-1717876515000-0002",
+      "timestamp": "2025-06-08T20:45:15.000Z",
+      "method": "GET",
+      "url": "/v5/market/time",
+      "status": 200,
+      "error": null,
+      "duration": "89ms",
+      "jsonErrors": 1,
+      "jsonErrorDetails": [
+        {
+          "attempt": 1,
+          "error": "Expected ',' or ']' after array element in JSON at position 5",
+          "errorPosition": 5,
+          "context": "Direct parse failed",
+          "dataPreview": "[{\"ti"
+        }
+      ]
+    }
+  ],
+  "troubleshooting_info": {
+    "common_json_errors": [
+      {
+        "error": "Expected ',' or ']' after array element in JSON at position 5",
+        "likely_cause": "MCP SDK startup issue (known issue)",
+        "resolution": "Error is suppressed in logger, doesn't affect functionality"
+      }
+    ],
+    "next_steps": [
+      "Check if errors are repeating",
+      "Verify network connectivity to api.bybit.com",
+      "Review raw response data in jsonErrorDetails"
+    ]
+  }
 }
 ```
 
-### **Error Types**
-- **Invalid Symbol**: Symbol not found or wrong format
-- **API Limit**: Rate limiting by Bybit API
-- **Network Error**: Connection issues
-- **Invalid Parameters**: Missing required parameters or wrong types
-
-### **Best Practices**
-- Always validate symbol format before calling
-- Handle rate limiting gracefully
-- Check for error responses in tool output
-- Use appropriate timeframes for analysis
+**Use Cases:**
+- **Debugging JSON parsing errors**: Identify malformed API responses
+- **Performance monitoring**: Track request durations and success rates
+- **Error analysis**: Find patterns in HTTP and parsing errors
+- **Troubleshooting**: Get guided help for common issues
 
 ---
 
@@ -431,4 +364,4 @@ if (delta.divergencias.detectada) {
 ---
 
 *API Reference maintained as part of the project documentation system*
-*Last updated: 08/06/2025 | Version: v1.2.1*
+*Last updated: 08/06/2025 | Version: v1.3.1*

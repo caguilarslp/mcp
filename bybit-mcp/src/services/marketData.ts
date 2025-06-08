@@ -16,6 +16,7 @@ import {
 } from '../types/index.js';
 import { Logger } from '../utils/logger.js';
 import { PerformanceMonitor } from '../utils/performance.js';
+import { requestLogger } from '../utils/requestLogger.js';
 
 export class BybitMarketDataService implements IMarketDataService {
   private readonly baseUrl: string;
@@ -183,7 +184,8 @@ export class BybitMarketDataService implements IMarketDataService {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
-      const response = await fetch(url, {
+      // Use the enhanced request logger
+      const response = await requestLogger.loggedFetch(url, {
         signal: controller.signal,
         headers: {
           'User-Agent': 'Bybit-MCP-Server/1.3.0',
@@ -207,11 +209,15 @@ export class BybitMarketDataService implements IMarketDataService {
         data = JSON.parse(rawText);
       } catch (parseError) {
         this.logger.jsonDebug(endpoint, rawText, 'error');
-        this.logger.error(`JSON Parse Error for ${endpoint}:`, {
+        this.logger.error(`🚨 CRITICAL JSON Parse Error for ${endpoint}:`, {
           parseError,
-          rawText: rawText.substring(0, 100),
+          rawText: rawText.substring(0, 200),
           rawLength: rawText.length,
-          position5: rawText.charAt(5)
+          position5: rawText.charAt(5),
+          characterAt5: rawText.charCodeAt(5),
+          startsWithBrace: rawText.startsWith('{'),
+          startsWithBracket: rawText.startsWith('['),
+          endpoint
         });
         throw new Error(`JSON Parse Error: ${parseError}`);
       }
@@ -280,11 +286,11 @@ export class BybitMarketDataService implements IMarketDataService {
    */
   async healthCheck(): Promise<boolean> {
     try {
-      // Use a simple time endpoint for health check
+      // Use a simple time endpoint for health check with enhanced logging
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
       
-      const response = await fetch(`${this.baseUrl}/v5/market/time`, {
+      const response = await requestLogger.loggedFetch(`${this.baseUrl}/v5/market/time`, {
         signal: controller.signal,
         headers: {
           'User-Agent': 'Bybit-MCP-Server/1.3.0',

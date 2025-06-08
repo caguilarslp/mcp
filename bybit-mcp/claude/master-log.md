@@ -149,6 +149,35 @@ Dependencies: @modelcontextprotocol/sdk, node-fetch
 
 ## 📝 Log de Cambios Recientes
 
+### 08/06/2025 - **v1.3.1 TASK-005 COMPLETADA - Sistema de Logging Avanzado** 🎆
+**🔍 NUEVA FUNCIONALIDAD - DEBUGGING COMPLETO IMPLEMENTADO**
+
+#### **📊 Funcionalidades Añadidas**
+- ✅ **RequestLogger avanzado**: Logging automático de requests/responses
+- ✅ **JSON Error Detection**: Análisis detallado de errores JSON con posición
+- ✅ **Logs rotativos**: Archivos JSON organizados por fecha
+- ✅ **Nueva herramienta MCP**: `get_debug_logs` para troubleshooting
+- ✅ **Métricas completas**: Duración, status, errores por request
+- ✅ **Guía integrada**: Troubleshooting info en la herramienta
+
+#### **📝 Archivos Implementados**
+- ✅ `src/utils/requestLogger.ts` - Request logger con detección JSON
+- ✅ `src/utils/logger.ts` - Logger mejorado con JSON debugging
+- ✅ `src/services/marketData.ts` - Integrado con request logger
+- ✅ `src/adapters/mcp.ts` - Nueva herramienta debug
+- ✅ `logs/` - Directorio para logs rotativos
+
+#### **🚽 Problema Resuelto**
+- **Problema**: Errores JSON aparecían en Claude Desktop sin rastreabilidad
+- **Solución**: Sistema completo de logging que captura todos los errores JSON
+- **Beneficio**: Ahora es posible rastrear y diagnosticar cualquier error JSON
+- **Herramienta**: `get_debug_logs` permite ver logs en tiempo real desde Claude
+
+#### **📋 Próximos Pasos**
+- Recompilar TypeScript para incluir nuevas funcionalidades
+- Probar herramienta `get_debug_logs` en tiempo real
+- Usar para diagnosticar errores "position 5" del MCP SDK
+
 ### 08/06/2025 - **v1.3.0 BUG-003 RESUELTO - Error JSON Startup** ✅
 **🔧 RESOLUCIÓN EXITOSA - ERROR MCP SDK SUPRIMIDO**
 

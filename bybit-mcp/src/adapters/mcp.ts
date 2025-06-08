@@ -14,6 +14,7 @@ import {
 import { MarketAnalysisEngine } from '../core/engine.js';
 import { MCPServerResponse, MarketCategoryType } from '../types/index.js';
 import { Logger } from '../utils/logger.js';
+import { JsonParseAttempt } from '../utils/requestLogger.js';
 
 export class MCPAdapter {
   private server: Server;
@@ -327,6 +328,26 @@ export class MCPAdapter {
               properties: {},
             },
           },
+          {
+            name: 'get_debug_logs',
+            description: 'Get debug logs for troubleshooting JSON errors and request issues',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                logType: {
+                  type: 'string',
+                  description: 'Type of logs to retrieve',
+                  enum: ['all', 'errors', 'json_errors', 'requests'],
+                  default: 'all',
+                },
+                limit: {
+                  type: 'number',
+                  description: 'Number of log entries to return',
+                  default: 50,
+                },
+              },
+            },
+          },
         ],
       };
     });
@@ -373,6 +394,9 @@ export class MCPAdapter {
             break;
           case 'get_system_health':
             result = await this.handleGetSystemHealth(args);
+            break;
+          case 'get_debug_logs':
+            result = await this.handleGetDebugLogs(args);
             break;
           default:
             throw new Error(`Unknown tool: ${name}`);
@@ -938,6 +962,116 @@ export class MCPAdapter {
     };
 
     return this.createSuccessResponse(formattedHealth);
+  }
+
+  private async handleGetDebugLogs(args: any): Promise<MCPServerResponse> {
+    const logType = (args?.logType as string) || 'all';
+    const limit = (args?.limit as number) || 50;
+    
+    try {
+      // Import the request logger dynamically to avoid circular imports
+      const { requestLogger } = await import('../utils/requestLogger.js');
+      
+      let logs: any[] = [];
+      let logSummary: any = {
+        logType,
+        timestamp: new Date().toISOString(),
+        totalEntries: 0
+      };
+
+      switch (logType) {
+        case 'json_errors':
+          logs = await requestLogger.getJsonErrorLogs();
+          logSummary.description = 'JSON parsing error logs';
+          logSummary.totalEntries = logs.length;
+          break;
+          
+        case 'requests':
+          logs = await requestLogger.getRecentLogs(limit);
+          logSummary.description = 'Recent API request logs';
+          logSummary.totalEntries = logs.length;
+          break;
+          
+        case 'errors':
+          const allLogs = await requestLogger.getRecentLogs(200);
+          logs = allLogs.filter((log: any) => log.error || 
+            (log.jsonParseAttempts && log.jsonParseAttempts.some((attempt: JsonParseAttempt) => attempt.error)));
+          logSummary.description = 'Error logs (HTTP errors and JSON parse errors)';
+          logSummary.totalEntries = logs.length;
+          break;
+          
+        case 'all':
+        default:
+          logs = await requestLogger.getRecentLogs(limit);
+          logSummary.description = 'All recent logs';
+          logSummary.totalEntries = logs.length;
+          break;
+      }
+
+      // Get application logs from the engine's logger
+      const engineLogs = this.logger.getLogs(undefined, 20);
+      
+      const formattedLogs = {
+        summary: logSummary,
+        api_requests: logs.slice(-Math.min(limit, 25)).map(log => ({
+          requestId: log.requestId,
+          timestamp: log.timestamp,
+          method: log.method,
+          url: log.url ? log.url.replace('https://api.bybit.com', '') : 'Unknown',
+          status: log.responseStatus || 'Pending',
+          error: log.error || null,
+          duration: log.duration ? `${log.duration}ms` : null,
+          jsonErrors: log.jsonParseAttempts ? 
+            log.jsonParseAttempts.filter((attempt: JsonParseAttempt) => attempt.error).length : 0,
+          jsonErrorDetails: log.jsonParseAttempts ? 
+            log.jsonParseAttempts.filter((attempt: JsonParseAttempt) => attempt.error).map((attempt: JsonParseAttempt) => ({
+              attempt: attempt.attempt,
+              error: attempt.error,
+              errorPosition: attempt.errorPosition,
+              context: attempt.context,
+              dataPreview: attempt.rawData.substring(0, 50)
+            })) : []
+        })),
+        application_logs: engineLogs.map(log => ({
+          timestamp: log.timestamp,
+          level: log.level.toUpperCase(),
+          service: log.service,
+          message: log.message,
+          data: log.data,
+          error: log.error ? log.error.message : null
+        })),
+        troubleshooting_info: {
+          common_json_errors: [
+            {
+              error: "Expected ',' or ']' after array element in JSON at position 5",
+              likely_cause: "MCP SDK startup issue (known issue)",
+              resolution: "Error is suppressed in logger, doesn't affect functionality"
+            },
+            {
+              error: "Unexpected end of JSON input",
+              likely_cause: "Truncated API response",
+              resolution: "Check network connection and API rate limits"
+            },
+            {
+              error: "Unexpected token in JSON",
+              likely_cause: "Malformed response from API",
+              resolution: "Check API endpoint and request format"
+            }
+          ],
+          next_steps: [
+            "Check if errors are repeating",
+            "Verify network connectivity to api.bybit.com",
+            "Check if specific endpoints are causing issues",
+            "Review raw response data in jsonErrorDetails"
+          ]
+        }
+      };
+
+      return this.createSuccessResponse(formattedLogs);
+    } catch (error) {
+      this.logger.error('Failed to retrieve debug logs:', error);
+      return this.createErrorResponse('get_debug_logs', error as Error);
+    }
   }
 
   // ====================
