@@ -10,7 +10,7 @@ yarn-error.log*
 build/
 dist/
 out/
-*.js
+#*.js
 *.js.map
 *.d.ts
 !tsconfig.json
