@@ -13,17 +13,22 @@ import {
 
 import { MarketAnalysisEngine } from '../core/engine.js';
 import { MCPServerResponse, MarketCategoryType } from '../types/index.js';
-import { Logger } from '../utils/logger.js';
+import { FileLogger } from '../utils/fileLogger.js';
+import * as path from 'path';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 
 export class MCPAdapter {
   private server: Server;
   private engine: MarketAnalysisEngine;
-  private logger: Logger;
+  private logger: FileLogger;
 
   constructor(engine: MarketAnalysisEngine) {
     this.engine = engine;
-    this.logger = new Logger('MCPAdapter');
+    this.logger = new FileLogger('MCPAdapter', 'info', {
+      logDir: path.join(process.cwd(), 'logs'),
+      enableStackTrace: true,
+      enableRotation: true
+    });
     
     this.server = new Server(
       {
@@ -1011,8 +1016,30 @@ export class MCPAdapter {
       // Get application logs from the engine's logger
       const engineLogs = this.logger.getLogs(undefined, 20);
       
+      // Get comprehensive system info with proper JSON serialization
+      const systemInfo = {
+        nodeVersion: process.version,
+        platform: process.platform,
+        uptime: Math.round(process.uptime()),
+        memoryUsage: {
+          rss: process.memoryUsage().rss,
+          heapTotal: process.memoryUsage().heapTotal,
+          heapUsed: process.memoryUsage().heapUsed,
+          external: process.memoryUsage().external,
+          arrayBuffers: process.memoryUsage().arrayBuffers
+        },
+        timestamp: new Date().toISOString()
+      };
+      
+      // Get file logger info
+      const fileLoggerInfo = (this.logger as any).getLogFileInfo ? 
+        (this.logger as any).getLogFileInfo() : 
+        { info: 'FileLogger info not available' };
+
       const formattedLogs = {
         summary: logSummary,
+        system_info: systemInfo,
+        file_logger_info: fileLoggerInfo,
         api_requests: logs.slice(-Math.min(limit, 25)).map(log => ({
           requestId: log.requestId,
           timestamp: log.timestamp,
@@ -1044,26 +1071,52 @@ export class MCPAdapter {
           common_json_errors: [
             {
               error: "Expected ',' or ']' after array element in JSON at position 5",
-              likely_cause: "MCP SDK startup issue (known issue)",
-              resolution: "Error is suppressed in logger, doesn't affect functionality"
+              likely_cause: "MCP SDK startup issue (known issue) - happens during handshake",
+              resolution: "Error is suppressed in logger, doesn't affect functionality. This is a timing issue during MCP initialization.",
+              frequency: "High during startup, then stops",
+              impact: "None - purely cosmetic"
             },
             {
               error: "Unexpected end of JSON input",
-              likely_cause: "Truncated API response",
-              resolution: "Check network connection and API rate limits"
+              likely_cause: "Truncated API response from Bybit or network timeout",
+              resolution: "Check network connection, API rate limits, and response size",
+              frequency: "Occasional",
+              impact: "Medium - affects specific API calls"
             },
             {
               error: "Unexpected token in JSON",
-              likely_cause: "Malformed response from API",
-              resolution: "Check API endpoint and request format"
+              likely_cause: "Malformed response from API or encoding issues",
+              resolution: "Check API endpoint format and response headers",
+              frequency: "Rare",
+              impact: "Medium - affects specific API calls"
+            },
+            {
+              error: "Response truncated at position X",
+              likely_cause: "Network interruption or server-side truncation",
+              resolution: "Implement retry logic or check server status",
+              frequency: "Rare",
+              impact: "High - data loss"
             }
           ],
+          diagnostic_commands: [
+            "Use 'get_debug_logs' with logType='json_errors' to see only JSON issues",
+            "Use 'get_debug_logs' with logType='errors' to see all errors",
+            "Check /logs directory for detailed file logs with stack traces",
+            "Run health check to verify API connectivity"
+          ],
           next_steps: [
-            "Check if errors are repeating",
-            "Verify network connectivity to api.bybit.com",
-            "Check if specific endpoints are causing issues",
-            "Review raw response data in jsonErrorDetails"
-          ]
+            "1. Check if errors are repeating (pattern analysis)",
+            "2. Verify network connectivity to api.bybit.com",
+            "3. Check if specific endpoints are causing issues",
+            "4. Review raw response data in jsonErrorDetails",
+            "5. Check memory usage and system resources",
+            "6. Review file logs for detailed stack traces"
+          ],
+          file_locations: {
+            json_logs: `${process.cwd()}/logs/mcp-requests-YYYY-MM-DD.json`,
+            application_logs: `${process.cwd()}/logs/mcp-YYYY-MM-DD.log`,
+            rotated_logs: `${process.cwd()}/logs/mcp-YYYY-MM-DD.N.log`
+          }
         }
       };
 

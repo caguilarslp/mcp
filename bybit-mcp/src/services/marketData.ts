@@ -5,6 +5,7 @@
  */
 
 import fetch from 'node-fetch';
+import * as path from 'path';
 import { 
   IMarketDataService, 
   MarketTicker, 
@@ -14,15 +15,15 @@ import {
   MarketDataError,
   PerformanceMetrics
 } from '../types/index.js';
-import { Logger } from '../utils/logger.js';
+import { FileLogger } from '../utils/fileLogger.js';
 import { PerformanceMonitor } from '../utils/performance.js';
-import { requestLogger } from '../utils/requestLogger.js';
+// Removed requestLogger import to avoid response conflicts
 
 export class BybitMarketDataService implements IMarketDataService {
   private readonly baseUrl: string;
   private readonly timeout: number;
   private readonly retryAttempts: number;
-  private readonly logger: Logger;
+  private readonly logger: FileLogger;
   private readonly performanceMonitor: PerformanceMonitor;
 
   constructor(
@@ -33,7 +34,11 @@ export class BybitMarketDataService implements IMarketDataService {
     this.baseUrl = baseUrl;
     this.timeout = timeout;
     this.retryAttempts = retryAttempts;
-    this.logger = new Logger('BybitMarketDataService');
+    this.logger = new FileLogger('BybitMarketDataService', 'info', {
+      logDir: path.join(process.cwd(), 'logs'),
+      enableStackTrace: true,
+      enableRotation: true
+    });
     this.performanceMonitor = new PerformanceMonitor();
   }
 
@@ -184,8 +189,8 @@ export class BybitMarketDataService implements IMarketDataService {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
-      // Use the enhanced request logger
-      const response = await requestLogger.loggedFetch(url, {
+      // Make regular fetch request without double-logging to avoid response conflicts
+      const response = await fetch(url, {
         signal: controller.signal,
         headers: {
           'User-Agent': 'Bybit-MCP-Server/1.3.1',
@@ -201,7 +206,16 @@ export class BybitMarketDataService implements IMarketDataService {
 
       // Capture raw response text for debugging
       const rawText = await response.text();
-      this.logger.jsonDebug(endpoint, rawText, 'response');
+      
+      // Log the request manually for better control
+      this.logger.info(`API Response for ${endpoint}`, {
+        status: response.status,
+        contentLength: rawText.length,
+        contentType: response.headers.get('content-type'),
+        startsWithBrace: rawText.startsWith('{'),
+        startsWithBracket: rawText.startsWith('['),
+        first50chars: rawText.substring(0, 50)
+      });
 
       let data: any;
       try {
@@ -290,7 +304,7 @@ export class BybitMarketDataService implements IMarketDataService {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
       
-      const response = await requestLogger.loggedFetch(`${this.baseUrl}/v5/market/time`, {
+      const response = await fetch(`${this.baseUrl}/v5/market/time`, {
         signal: controller.signal,
         headers: {
           'User-Agent': 'Bybit-MCP-Server/1.3.1',

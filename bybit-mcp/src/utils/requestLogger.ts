@@ -4,7 +4,7 @@
  * @version 1.3.1
  */
 
-import { Logger } from './logger.js';
+import { FileLogger } from './fileLogger.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -31,16 +31,23 @@ export interface JsonParseAttempt {
 }
 
 export class RequestLogger {
-  private logger: Logger;
+  private logger: FileLogger;
   private logsDir: string;
   private currentLogFile: string;
   private requestCounter: number = 0;
 
   constructor() {
-    this.logger = new Logger('RequestLogger', 'debug');
+    this.logger = new FileLogger('RequestLogger', 'debug', {
+      logDir: path.join(process.cwd(), 'logs'),
+      enableStackTrace: true,
+      enableRotation: true
+    });
     this.logsDir = path.join(process.cwd(), 'logs');
     this.currentLogFile = this.getLogFileName();
     this.ensureLogDirectory();
+    
+    // Log initialization
+    this.logger.info('RequestLogger initialized with file logging');
   }
 
   private ensureLogDirectory(): void {
@@ -76,7 +83,7 @@ export class RequestLogger {
       requestBody
     };
 
-    this.logger.info(`🌐 API Request [${requestId}]`, {
+    this.logger.logRequest(requestId, 'api_request', `🌐 API Request`, {
       method: method.toUpperCase(),
       url,
       hasBody: !!requestBody
@@ -123,25 +130,29 @@ export class RequestLogger {
 
     // Log success or error
     if (response.error || (response.status && response.status >= 400)) {
-      this.logger.error(`❌ API Response Error [${requestId}]`, {
+      this.logger.logError(requestId, 'api_response', `❌ API Response Error`, 
+        new Error(response.error || `HTTP ${response.status}`))
+      this.logger.logPerformance(requestId, 'api_response', duration || 0, {
         status: response.status,
-        error: response.error,
-        duration: duration ? `${duration}ms` : undefined,
         jsonErrors: jsonParseAttempts.filter(a => a.error).length
       });
     } else {
-      this.logger.info(`✅ API Response Success [${requestId}]`, {
+      this.logger.logRequest(requestId, 'api_response', `✅ API Response Success`, {
         status: response.status,
-        duration: duration ? `${duration}ms` : undefined,
         bodySize: response.body?.length || 0,
         jsonParseSuccessful: !!parsedBody
       });
+      if (duration) {
+        this.logger.logPerformance(requestId, 'api_response', duration);
+      }
     }
 
     // Log JSON parsing issues specifically
     jsonParseAttempts.forEach((attempt, index) => {
       if (attempt.error) {
-        this.logger.error(`🔍 JSON Parse Error [${requestId}] Attempt ${attempt.attempt}`, {
+        this.logger.logError(requestId, 'json_parse', `🔍 JSON Parse Error Attempt ${attempt.attempt}`, 
+          new Error(`${attempt.error} - Context: ${attempt.context}`));
+        this.logger.info(`JSON Parse Debug [${requestId}]`, {
           error: attempt.error,
           errorPosition: attempt.errorPosition,
           rawDataPreview: attempt.rawData.substring(0, 100),
@@ -268,6 +279,37 @@ export class RequestLogger {
 
   async getRecentLogs(limit: number = 50): Promise<RequestLogEntry[]> {
     try {
+      // Get logs from both JSON file and new file logger
+      const jsonLogs = await this.getJsonLogs(limit);
+      const fileLogs = this.logger.getRecentLogsFromFile(limit);
+      
+      // Convert file logs to RequestLogEntry format
+      const convertedFileLogs = fileLogs
+        .filter(log => log.operation?.includes('api_'))
+        .map(log => ({
+          timestamp: log.timestamp,
+          requestId: (log.data as any)?.requestId || 'unknown',
+          method: (log.data as any)?.method || 'GET',
+          url: (log.data as any)?.url || 'unknown',
+          responseStatus: (log.data as any)?.status,
+          error: log.error?.message,
+          duration: log.duration
+        } as RequestLogEntry));
+      
+      // Combine and sort by timestamp
+      const allLogs = [...jsonLogs, ...convertedFileLogs]
+        .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())
+        .slice(-limit);
+      
+      return allLogs;
+    } catch (error) {
+      this.logger.error('Failed to read logs', error as Error);
+      return [];
+    }
+  }
+
+  private async getJsonLogs(limit: number): Promise<RequestLogEntry[]> {
+    try {
       const logFile = this.getLogFileName();
       if (!fs.existsSync(logFile)) {
         return [];
@@ -281,17 +323,40 @@ export class RequestLogger {
       const logs: RequestLogEntry[] = JSON.parse(existingData);
       return logs.slice(-limit);
     } catch (error) {
-      this.logger.error('Failed to read logs from file', error as Error);
+      this.logger.error('Failed to read JSON logs from file', error as Error);
       return [];
     }
   }
 
   async getJsonErrorLogs(): Promise<RequestLogEntry[]> {
     const logs = await this.getRecentLogs(200);
-    return logs.filter(log => 
+    const errorLogs = this.logger.getErrorLogsFromFile(24);
+    
+    // Filter JSON logs for JSON parse errors
+    const jsonParseErrors = logs.filter(log => 
       log.jsonParseAttempts && 
       log.jsonParseAttempts.some(attempt => attempt.error)
     );
+    
+    // Filter file logs for JSON parse errors
+    const fileJsonErrors = errorLogs
+      .filter(log => log.operation === 'json_parse')
+      .map(log => ({
+        timestamp: log.timestamp,
+        requestId: (log.data as any)?.requestId || 'unknown',
+        method: 'GET',
+        url: 'unknown',
+        error: log.error?.message || 'JSON Parse Error',
+        jsonParseAttempts: [{
+          attempt: 1,
+          rawData: (log.data as any)?.rawDataPreview || '',
+          error: log.error?.message || 'Unknown JSON error',
+          context: 'File log'
+        }]
+      } as RequestLogEntry));
+    
+    return [...jsonParseErrors, ...fileJsonErrors]
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
   }
 
   // Wrapper for fetch with automatic logging

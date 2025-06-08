@@ -23,11 +23,12 @@ import { BybitMarketDataService } from '../services/marketData.js';
 import { TechnicalAnalysisService } from '../services/analysis.js';
 import { TradingService } from '../services/trading.js';
 
-import { Logger } from '../utils/logger.js';
+import { FileLogger } from '../utils/fileLogger.js';
+import * as path from 'path';
 import { PerformanceMonitor } from '../utils/performance.js';
 
 export class MarketAnalysisEngine {
-  private readonly logger: Logger;
+  private readonly logger: FileLogger;
   private readonly performanceMonitor: PerformanceMonitor;
   
   // Core services
@@ -39,7 +40,11 @@ export class MarketAnalysisEngine {
   private config: SystemConfig;
 
   constructor(config?: Partial<SystemConfig>) {
-    this.logger = new Logger('MarketAnalysisEngine');
+    this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
+      logDir: path.join(process.cwd(), 'logs'),
+      enableStackTrace: true,
+      enableRotation: true
+    });
     this.performanceMonitor = new PerformanceMonitor();
     
     // Initialize configuration with defaults

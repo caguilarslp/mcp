@@ -26,18 +26,37 @@ console.error = (...args: any[]) => {
 import { MarketAnalysisEngine } from './core/engine.js';
 import { MCPAdapter } from './adapters/mcp.js';
 import { SystemConfig } from './types/index.js';
-import { Logger } from './utils/logger.js';
+import { FileLogger } from './utils/fileLogger.js';
+import * as path from 'path';
 
 /**
  * Main application class
  */
 class BybitMCPServer {
-  private logger: Logger;
+  private logger: FileLogger;
   private engine: MarketAnalysisEngine;
   private mcpAdapter: MCPAdapter;
 
   constructor() {
-    this.logger = new Logger('BybitMCPServer');
+    this.logger = new FileLogger('BybitMCPServer', 'info', {
+      logDir: path.join(process.cwd(), 'logs'),
+      enableStackTrace: true,
+      enableRotation: true,
+      maxFileSize: 50 * 1024 * 1024, // 50MB
+      maxFiles: 10
+    });
+    
+    // Log system startup info
+    this.logger.info('='.repeat(80));
+    this.logger.info('🚀 BYBIT MCP SERVER v1.3.2 - SISTEMA DE LOGGING AVANZADO');
+    this.logger.info('='.repeat(80));
+    this.logger.info('Sistema iniciando con FileLogger profesional', {
+      nodeVersion: process.version,
+      platform: process.platform,
+      arch: process.arch,
+      pid: process.pid,
+      workingDirectory: process.cwd()
+    });
     
     // Initialize system configuration
     const config: Partial<SystemConfig> = {

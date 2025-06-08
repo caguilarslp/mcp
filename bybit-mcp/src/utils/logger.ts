@@ -16,7 +16,7 @@ export interface LogEntry {
 }
 
 export class Logger {
-  private serviceName: string;
+  protected serviceName: string;
   private logLevel: LogLevel;
   private logs: LogEntry[] = [];
   private maxLogs: number = 1000;
@@ -59,7 +59,7 @@ export class Logger {
     });
   }
 
-  private log(level: LogLevel, message: string, data?: any, error?: Error): void {
+  protected log(level: LogLevel, message: string, data?: any, error?: Error): void {
     const levels: Record<LogLevel, number> = {
       debug: 0,
       info: 1,
