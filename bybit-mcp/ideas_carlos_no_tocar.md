@@ -1,0 +1,3 @@
+datos onchain limitados de bybit debemos usar, también podemos acceder a coinbase u otros que no sean de pago. por ahora no suscripciones.
+
+recordar a api investing, calendario económico, fundamentales, noticias, locuras trump, ....
