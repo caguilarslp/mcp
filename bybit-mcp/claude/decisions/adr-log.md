@@ -1,4 +1,4 @@
-# 📐 Architecture Decision Records - Bybit MCP
+# 📐 Architecture Decision Records - Bybit MCP v1.3.4
 
 ## 🎯 Log de Decisiones Arquitectónicas
 
@@ -13,6 +13,9 @@ Este documento registra las decisiones técnicas importantes tomadas durante el 
 3. [ADR-003: Volume Delta aproximado sin trades reales](#adr-003)
 4. [ADR-004: Separación MCP datos vs trading](#adr-004)
 5. [ADR-005: Integración con Claude Desktop](#adr-005)
+6. [ADR-006: Algoritmo Support/Resistance con scoring multi-factor](#adr-006)
+7. [ADR-007: Arquitectura modular con dependency injection](#adr-007)
+8. [ADR-008: Sistema de logging minimalista production-ready](#adr-008)
 
 ---
 
@@ -199,6 +202,119 @@ Documentar configuración para Claude Desktop que auto-carga el MCP.
 
 **Resultado:** [Evaluación posterior]
 ```
+
+---
+
+## ADR-006: Algoritmo Support/Resistance con Scoring Multi-factor {#adr-006}
+
+**Fecha:** 08/06/2025
+**Estado:** Aceptado
+
+### Contexto
+Los niveles de soporte y resistencia simples basados solo en toques no eran suficientemente precisos para grid trading efectivo.
+
+### Decisión
+Implementar algoritmo multi-factor que combina 4 variables con pesos optimizados:
+
+```typescript
+// Scoring multi-factor
+touch_score = Math.min(touches * 25, 50);      // Máx 50 puntos
+volume_score = Math.min(volume_ratio * 30, 30); // Máx 30 puntos  
+proximity_score = (1 - distance_ratio) * 15;   // Máx 15 puntos
+age_score = Math.max(5 - age_days, 0);         // Máx 5 puntos
+total_strength = touch_score + volume_score + proximity_score + age_score;
+```
+
+### Consecuencias
+**Positivas:**
+- Niveles mucho más precisos y confiables
+- Excelente para configuración automática de grids
+- Identifica correctamente niveles críticos
+- Funciona bien en diferentes timeframes
+
+**Negativas:**
+- Más complejo de calcular
+- Requiere afinación de pesos
+
+**Resultado:** ✅ Mejora dramática en precisión de S/R, validado con múltiples pares
+
+---
+
+## ADR-007: Arquitectura Modular con Dependency Injection {#adr-007}
+
+**Fecha:** 08/06/2025  
+**Estado:** Aceptado
+
+### Contexto
+El código monolítico en un solo archivo se volvió imposible de mantener y testear.
+
+### Decisión
+Refactorización completa a arquitectura modular con 4 capas y dependency injection:
+
+```
+Presentation Layer (Adapters):
+- MCP Adapter, REST API (futuro), WebSocket (futuro)
+
+Core Layer (Business Logic):
+- MarketAnalysisEngine (protocol-agnostic)
+
+Service Layer (Specialized Services):  
+- MarketDataService, AnalysisService, TradingService
+
+Utility Layer (Common Tools):
+- Logger, PerformanceMonitor, MathUtils
+```
+
+### Consecuencias
+**Positivas:**
+- 100% testeable (cada servicio mockeable)
+- Reutilizable desde cualquier protocolo
+- Fácil agregar nuevas funcionalidades
+- Separación clara de responsabilidades
+- Preparado para Waickoff AI integration
+
+**Negativas:**
+- Mayor complejidad inicial
+- Más archivos para mantener
+
+**Resultado:** ✅ Transformación exitosa, de 1 archivo a 15+ módulos especializados
+
+---
+
+## ADR-008: Sistema de Logging Minimalista Production-Ready {#adr-008}
+
+**Fecha:** 08/06/2025
+**Estado:** Aceptado
+
+### Contexto
+Errores JSON molestos aparecían en Claude Desktop causando mala experiencia de usuario.
+
+### Decisión
+Implementar sistema de logging minimalista que elimina objetos complejos:
+
+```typescript
+// Solo strings y números básicos
+const apiStats = {
+  totalRequests: number,
+  successfulRequests: number, 
+  errorCount: number,
+  successRate: string,
+  lastErrors: string[] // Solo mensajes, no objetos
+};
+```
+
+### Consecuencias
+**Positivas:**
+- Claude Desktop 100% limpio sin errores JSON
+- Sistema estable para producción
+- Debugging efectivo con herramientas integradas
+- Performance optimizado sin overhead
+
+**Negativas:**
+- Menos detalle en logs complejos
+- Requirió rediseño de sistema de logging
+
+**Resultado:** ✅ Problema completamente resuelto, UX perfecta
 
 ---
 
