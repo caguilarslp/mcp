@@ -1,7 +1,7 @@
 /**
  * @fileoverview Advanced Request Logger
  * @description Comprehensive logging for API requests/responses and JSON error detection
- * @version 1.3.0
+ * @version 1.3.1
  */
 
 import { Logger } from './logger.js';

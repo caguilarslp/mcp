@@ -1,7 +1,7 @@
 /**
  * @fileoverview Market Data Service - Bybit API Integration
  * @description Modular service for fetching market data from Bybit API
- * @version 1.3.0
+ * @version 1.3.1
  */
 
 import fetch from 'node-fetch';
@@ -188,7 +188,7 @@ export class BybitMarketDataService implements IMarketDataService {
       const response = await requestLogger.loggedFetch(url, {
         signal: controller.signal,
         headers: {
-          'User-Agent': 'Bybit-MCP-Server/1.3.0',
+          'User-Agent': 'Bybit-MCP-Server/1.3.1',
           'Accept': 'application/json'
         }
       });
@@ -293,7 +293,7 @@ export class BybitMarketDataService implements IMarketDataService {
       const response = await requestLogger.loggedFetch(`${this.baseUrl}/v5/market/time`, {
         signal: controller.signal,
         headers: {
-          'User-Agent': 'Bybit-MCP-Server/1.3.0',
+          'User-Agent': 'Bybit-MCP-Server/1.3.1',
           'Accept': 'application/json'
         }
       });
@@ -320,9 +320,9 @@ export class BybitMarketDataService implements IMarketDataService {
    */
   getServiceInfo() {
     return {
-      name: 'BybitMarketDataService',
-      version: '1.3.0',
-      baseUrl: this.baseUrl,
+    name: 'BybitMarketDataService',
+    version: '1.3.1',
+    baseUrl: this.baseUrl,
       timeout: this.timeout,
       retryAttempts: this.retryAttempts,
       uptime: process.uptime()

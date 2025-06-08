@@ -1,4 +1,4 @@
-# 🤖 Bybit MCP Server - Development Master Log
+- **🔍 Sistema de Logging Avanzado** - RequestLogger, JSON debugging, herramienta `get_debug_logs`# 🤖 Bybit MCP Server - Development Master Log
 
 ## 📋 Registro Central de Desarrollo
 
@@ -9,9 +9,9 @@ Este archivo sirve como **punto de entrada único** para entender el estado actu
 ## 🎯 Estado Actual del Proyecto
 
 **Fecha:** 08/06/2025
-**Versión:** v1.3.0
-**Fase:** REFACTORIZADA - Arquitectura Modular + Sistema de Trazabilidad Completo
-**Completado:** 80% (respecto al roadmap completo)
+**Versión:** v1.3.1
+**Fase:** SISTEMA DE LOGGING COMPLETADO - Debugging Avanzado Implementado
+**Completado:** 85% (respecto al roadmap completo)
 
 ### ✅ Completado (Funcionalidades Core)
 - **Datos de mercado en tiempo real** - Ticker, orderbook, klines
@@ -24,6 +24,7 @@ Este archivo sirve como **punto de entrada único** para entender el estado actu
 - **Sistema de gestión de bugs** - Carpeta `claude/bugs/` con documentación completa
 - **Documentación técnica completa** - Arquitectura, API, troubleshooting
 - **🎆 ARQUITECTURA MODULAR v1.3.0** - Refactorización completa del sistema
+- **🔍 SISTEMA DE LOGGING AVANZADO v1.3.1** - RequestLogger, JSON debugging, herramienta `get_debug_logs`
 - **Separación en capas** - Presentation, Core, Service, Utility layers
 - **Dependency Injection** - Servicios inyectables y testeables
 - **Interface-based design** - Abstracciones para múltiples implementaciones

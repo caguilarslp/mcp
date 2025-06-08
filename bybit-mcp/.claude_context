@@ -1,14 +1,14 @@
-# 🤖 Contexto para Claude/Cursor - Bybit MCP Server v1.3.0 (ARQUITECTURA MODULAR)
+# 🤖 Contexto para Claude/Cursor - Bybit MCP Server v1.3.1 (SISTEMA DE LOGGING AVANZADO)
 
-## 🎆 ESTADO CRÍTICO v1.3.0 - REFACTORIZACIÓN COMPLETA
-**⚡ TRANSFORMACIÓN MAYOR**: Sistema monolítico → Arquitectura modular de 4 capas
-**🎯 RESULTADO**: Base sólida para Waickoff AI y ecosistema cripto completo
-**🚀 PRÓXIMA FASE**: Tests unitarios (TASK-004) y integración con FastAPI/Python
+## 🎆 ESTADO CRÍTICO v1.3.1 - SISTEMA DE LOGGING AVANZADO COMPLETADO
+**⚡ NUEVA FUNCIONALIDAD MAYOR**: Sistema de debugging profesional + herramienta MCP integrada
+**🎯 RESULTADO**: Capacidades de troubleshooting de nivel empresarial + visibilidad completa de errores JSON
+**🚀 PRÓXIMA FASE**: TASK-004 Tests unitarios para validación completa
 
 ## IMPORTANTE: Leer ANTES de dar cualquier sugerencia
 
-### 📊 SISTEMA DE TRAZABILIDAD COMPLETA v1.3.0 (OBLIGATORIO)
-**⚠️ CAMBIO CRÍTICO**: Arquitectura completamente refactorizada - revisar documentación actualizada
+### 📊 SISTEMA DE TRAZABILIDAD COMPLETA v1.3.1 (OBLIGATORIO)
+**⚠️ CAMBIO CRÍTICO**: Sistema de logging avanzado implementado - revisar documentación de debugging
 **SIEMPRE** revisar y actualizar estos archivos en orden de prioridad:
 
 #### **📋 Archivos Críticos de Estado:**
@@ -30,13 +30,13 @@
 - **Registro**: `claude/bugs/README.md` con índice y métricas
 - **Ejemplos**: BUG-001 (S/R classification), BUG-002 (Architecture refactor)
 
-### 🎆 ESTADO ACTUAL (v1.3.0 - 08/06/2025) - BUG-003 RESUELTO
-- **Fase:** ✅ COMPLETADO - Error JSON startup resuelto exitosamente
-- **Última Actualización:** BUG-003 resuelto con supresión elegante del error MCP SDK
-- **Próxima Tarea:** TASK-004 (Tests unitarios) - Arquitectura estable
-- **Bloqueadores:** Ninguno - Sistema 100% operativo
-- **UX Status:** ✅ ERROR ELIMINADO - Claude Desktop startup limpio
-- **Funcionalidad:** ✅ PERFECTA - Todas las herramientas MCP funcionan
+### 🎆 ESTADO ACTUAL (v1.3.1 - 08/06/2025) - TASK-005 COMPLETADA
+- **Fase:** ✅ COMPLETADO - Sistema de logging avanzado implementado exitosamente
+- **Última Actualización:** TASK-005 completada con herramienta `get_debug_logs` y RequestLogger
+- **Próxima Tarea:** TASK-004 (Tests unitarios) - Validación de arquitectura
+- **Bloqueadores:** Ninguno - Sistema 100% operativo con debugging profesional
+- **UX Status:** ✅ DEBUGGING COMPLETO - Troubleshooting en tiempo real disponible
+- **Funcionalidad:** ✅ PERFECTA - Todas las herramientas MCP funcionan + nueva herramienta debug
 
 ### 🎆 ARQUITECTURA MODULAR v1.3.0 - TRANSFORMACIÓN COMPLETA
 **✅ REFACTORIZACIÓN EXITOSA**: De 1 archivo monolítico a 15+ módulos especializados
