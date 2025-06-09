@@ -306,17 +306,17 @@ export class TechnicalAnalysisService implements IAnalysisService {
         const resistancePivots = this.findResistancePivots(klines, lookbackPeriod);
         const supportPivots = this.findSupportPivots(klines, lookbackPeriod);
 
-        // Group and score levels
-        const resistances = this.groupAndScoreLevels(
-          resistancePivots, 
+        // Group and score levels - FIXED: Process all pivots together to avoid classification confusion
+        const allPivots = [...resistancePivots, ...supportPivots];
+        const processedLevels = this.groupAndScoreLevels(
+          allPivots, 
           currentPrice, 
           volumeThreshold
         );
-        const supports = this.groupAndScoreLevels(
-          supportPivots, 
-          currentPrice, 
-          volumeThreshold
-        );
+        
+        // Separate into resistances and supports based on final classification
+        const resistances = processedLevels.filter(level => level.type === 'resistance');
+        const supports = processedLevels.filter(level => level.type === 'support');
 
         // Sort by strength and take top levels
         const topResistances = resistances
@@ -328,8 +328,8 @@ export class TechnicalAnalysisService implements IAnalysisService {
           .slice(0, 3);
 
         // Find critical level (closest to current price)
-        const allLevels = [...topResistances, ...topSupports];
-        const criticalLevel = allLevels.reduce((nearest, level) => 
+        const combinedLevels = [...topResistances, ...topSupports];
+        const criticalLevel = combinedLevels.reduce((nearest, level) => 
           level.priceDistance < nearest.priceDistance ? level : nearest
         );
 
@@ -567,6 +567,16 @@ export class TechnicalAnalysisService implements IAnalysisService {
       if (!addedToExisting) {
         // Create new level with correct type classification
         const actualType = pivot.price > currentPrice ? 'resistance' : 'support';
+        
+        // DEBUGGING LOG for BUG-004 - Fixed unified classification
+        this.logger.info(`S/R FIXED: Price=${pivot.price.toFixed(4)}, Current=${currentPrice.toFixed(4)}, FinalType=${actualType}`);
+        
+        // Validate logic
+        const expectedType = pivot.price > currentPrice ? 'resistance' : 'support';
+        if (actualType !== expectedType) {
+          this.logger.error(`S/R LOGIC ERROR: Expected=${expectedType}, Got=${actualType}`);
+        }
+        
         levels.push({
           level: pivot.price,
           type: actualType,

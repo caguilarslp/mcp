@@ -16,7 +16,7 @@ import {
   PerformanceMetrics
 } from '../types/index.js';
 import { PerformanceMonitor } from '../utils/performance.js';
-import { simpleApiLogger } from '../utils/simpleApiLogger.js';
+import { Logger } from '../utils/logger.js';
 // Removed complex logging to avoid MCP JSON errors
 
 export class BybitMarketDataService implements IMarketDataService {
@@ -24,6 +24,7 @@ export class BybitMarketDataService implements IMarketDataService {
   private readonly timeout: number;
   private readonly retryAttempts: number;
   private readonly performanceMonitor: PerformanceMonitor;
+  private readonly logger: Logger;
 
   constructor(
     baseUrl: string = 'https://api.bybit.com',
@@ -34,6 +35,7 @@ export class BybitMarketDataService implements IMarketDataService {
     this.timeout = timeout;
     this.retryAttempts = retryAttempts;
     this.performanceMonitor = new PerformanceMonitor();
+    this.logger = new Logger('BybitMarketDataService');
   }
 
   /**
@@ -206,18 +208,14 @@ export class BybitMarketDataService implements IMarketDataService {
 
       let data: any;
       try {
-        this.logger.jsonDebug(endpoint, rawText, 'parse');
+        this.logger.debug(`Parsing JSON response for ${endpoint}`);
         data = JSON.parse(rawText);
       } catch (parseError) {
-        this.logger.jsonDebug(endpoint, rawText, 'error');
+        this.logger.error(`JSON Parse Error for ${endpoint}:`, parseError);
         this.logger.error(`🚨 CRITICAL JSON Parse Error for ${endpoint}:`, {
           parseError,
           rawText: rawText.substring(0, 200),
           rawLength: rawText.length,
-          position5: rawText.charAt(5),
-          characterAt5: rawText.charCodeAt(5),
-          startsWithBrace: rawText.startsWith('{'),
-          startsWithBracket: rawText.startsWith('['),
           endpoint
         });
         throw new Error(`JSON Parse Error: ${parseError}`);

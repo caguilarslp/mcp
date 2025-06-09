@@ -342,6 +342,78 @@ export class MCPAdapter {
             },
           },
           {
+            name: 'get_debug_logs',
+            description: 'Get debug logs for troubleshooting JSON errors and request issues',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                logType: {
+                  type: 'string',
+                  description: 'Type of logs to retrieve',
+                  enum: ['all', 'errors', 'json_errors', 'requests'],
+                  default: 'all',
+                },
+                limit: {
+                  type: 'number',
+                  description: 'Number of log entries to return',
+                  default: 50,
+                },
+              },
+            },
+          },
+        ],
+      };
+    });
+
+    // Handle tool execution
+    this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
+      const { name, arguments: args } = request.params;
+      
+      this.logger.info(`Executing tool: ${name}`);
+      
+      try {
+        let result: MCPServerResponse;
+        
+        switch (name) {
+          case 'get_ticker':
+            result = await this.handleGetTicker(args);
+            break;
+          case 'get_orderbook':
+            result = await this.handleGetOrderbook(args);
+            break;
+          case 'get_market_data':
+            result = await this.handleGetMarketData(args);
+            break;
+          case 'analyze_volatility':
+            result = await this.handleAnalyzeVolatility(args);
+            break;
+          case 'analyze_volume':
+            result = await this.handleAnalyzeVolume(args);
+            break;
+          case 'analyze_volume_delta':
+            result = await this.handleAnalyzeVolumeDelta(args);
+            break;
+          case 'identify_support_resistance':
+            result = await this.handleIdentifySupportResistance(args);
+            break;
+          case 'suggest_grid_levels':
+            result = await this.handleSuggestGridLevels(args);
+            break;
+          case 'perform_technical_analysis':
+            result = await this.handlePerformTechnicalAnalysis(args);
+            break;
+          case 'get_complete_analysis':
+            result = await this.handleGetCompleteAnalysis(args);
+            break;
+          case 'get_system_health':
+            result = await this.handleGetSystemHealth(args);
+            break;
+          case 'get_debug_logs':
+            result = await this.handleGetDebugLogs(args);
+            break;
+          default:
+            throw new Error(`Unknown tool: ${name}`);
+        }
         
         return result;
       } catch (error) {
@@ -634,6 +706,19 @@ export class MCPAdapter {
     }
 
     const srAnalysis = response.data!.supportResistance!;
+    
+    // DEBUGGING LOG for BUG-004 - Log what we receive from analysis service
+    this.logger.info(`MCP Adapter S/R Debug: CurrentPrice=${srAnalysis.currentPrice.toFixed(4)}`);
+    this.logger.info(`MCP Adapter Resistances count: ${srAnalysis.resistances.length}`);
+    this.logger.info(`MCP Adapter Supports count: ${srAnalysis.supports.length}`);
+    
+    srAnalysis.resistances.forEach((r, i) => {
+      this.logger.info(`Resistance ${i}: ${r.level.toFixed(4)} (type: ${r.type})`);
+    });
+    
+    srAnalysis.supports.forEach((s, i) => {
+      this.logger.info(`Support ${i}: ${s.level.toFixed(4)} (type: ${s.type})`);
+    });
     
     const formattedAnalysis = {
       symbol: srAnalysis.symbol,
