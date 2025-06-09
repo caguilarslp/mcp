@@ -368,8 +368,14 @@ export interface PerformanceMetrics {
 }
 
 // ====================
+// STORAGE TYPES
+// ====================
+
+export * from './storage';
+
+// ====================
 // EXPORT ALL TYPES
 // ====================
 
 // Note: All types are already exported individually above
-// No re-exports needed to avoid conflicts
+// Storage types are exported from their own module

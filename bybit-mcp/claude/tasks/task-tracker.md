@@ -38,6 +38,24 @@
   - API response parsing
   - Validación semántica de resultados
 
+#### 🆕 TASK-009 - Sistema de Almacenamiento Local (NUEVA)
+- **Estado:** PENDIENTE
+- **Descripción:** Sistema de storage persistente para análisis históricos
+- **Prioridad:** **ALTA** (Fundacional para Waickoff AI)
+- **Tiempo Estimado:** 8-10h (dividido en 5 fases)
+- **Archivos:** `claude/tasks/task-009-storage-system.md`
+- **Fases de implementación:**
+  - FASE 1: Infraestructura Base (2h) - StorageService CRUD
+  - FASE 2: Cache Manager (2h) - Sistema de cache con TTL
+  - FASE 3: Analysis Repository (3h) - Guardado/consulta de análisis
+  - FASE 4: Report Generator (2h) - Generación de reportes MD
+  - FASE 5: Integración MCP (1h) - Nuevas herramientas MCP
+- **Beneficios clave:**
+  - Contexto histórico instantáneo
+  - Base de conocimiento creciente
+  - Compatibilidad total con Waickoff AI
+  - Reducción de llamadas API redundantes
+
 #### ✅ TASK-005 - Sistema de Logging Avanzado (COMPLETADA) 🎆
 - **Estado:** ✅ COMPLETADA
 - **Descripción:** Sistema de logging robusto implementado para detectar errores JSON y debugging
