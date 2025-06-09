@@ -1,4 +1,4 @@
-# 🤖 Contexto para Claude/Cursor - Bybit MCP Server v1.3.4 (PRODUCTION READY)
+# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.3.5 (PRODUCTION READY)
 
 ## 🎆 ESTADO CRÍTICO v1.3.5 - STORAGE SYSTEM FASE 1 COMPLETADA
 **⚡ TASK-009 FASE 1**: Sistema de almacenamiento local implementado y funcional
@@ -178,9 +178,9 @@ npm run docs       # Generar documewaickoff_mcpypeDoc
 ```json
 {
   "mcpServers": {
-    "bybit-mcp": {
+    "waickoff-mcp": {
       "command": "node",
-      "args": ["D:\\projects\\mcp\\bybit-mcp\\build\\index.js"],
+      "args": ["D:\\projects\\mcp\\waickoff_mcp\\build\\index.js"],
       "env": {}
     }
   }

@@ -1,8 +1,8 @@
-# 📊 Guía de Uso MCP Bybit - Trading Analysis
+# 📊 Guía de Uso wAIckoff MCP - Trading Analysis
 
 ## 🎯 Para qué sirve este MCP
 
-El **MCP Bybit** es tu herramienta de análisis técnico integrada en Claude Desktop que te proporciona:
+El **wAIckoff MCP** es tu herramienta de análisis técnico integrada en Claude Desktop que te proporciona:
 
 - **Análisis técnico completo** en segundos
 - **Sugerencias de grid trading** basadas en volatilidad
@@ -10,6 +10,7 @@ El **MCP Bybit** es tu herramienta de análisis técnico integrada en Claude Des
 - **Niveles de soporte/resistencia dinámicos**
 - **Volume Delta** para presión compradora/vendedora
 - **Datos de mercado en tiempo real** de Bybit
+- **Sistema de almacenamiento local** para análisis históricos
 
 ## 🚀 Setup Rápido
 
@@ -193,9 +194,10 @@ Ve los últimos errores y status del sistema
 ## 🎯 Próximas Features
 
 - **Detección de patrones Wyckoff** (próximamente)
-- **Alertas automáticas** (en desarrollo)
-- **Backtesting de estrategias** (roadmap)
-- **Integración con Waickoff AI** (futuro)
+- **Consultas históricas** con storage local (en desarrollo)
+- **Cache inteligente** para rapidez de respuesta (FASE 2)
+- **Reportes automáticos** diarios/semanales (FASE 4)
+- **Integración completa con wAIckoff AI** (futuro próximo)
 
 ---
 

@@ -1,4 +1,4 @@
-- **🔍 Sistema de Logging Avanzado** - RequestLogger, JSON debugging, herramienta `get_debug_logs`# 🤖 Bybit MCP Server - Development Master Log
+- **🔍 Sistema de Logging Avanzado** - RequestLogger, JSON debugging, herramienta `get_debug_logs`# 🤖 wAIckoff MCP Server - Development Master Log
 
 ## 📋 Registro Central de Desarrollo
 
@@ -62,9 +62,10 @@ Dependencies: @modelcontextprotocol/sdk, node-fetch
 - **Error handling robusto** - Manejo de errores en todas las funciones
 
 ### **Integración con Waickoff AI**
-- Este MCP es la capa de datos
-- Waickoff usará estos datos para análisis con LLMs
+- Este MCP es la capa de datos para wAIckoff AI
+- wAIckoff AI usará estos datos para análisis con LLMs
 - Arquitectura preparada para múltiples exchanges
+- Storage system para contexto histórico compartido
 
 ---
 
@@ -150,6 +151,16 @@ Dependencies: @modelcontextprotocol/sdk, node-fetch
 ---
 
 ## 📝 Log de Cambios Recientes
+
+### 09/06/2025 - **v1.3.5 CAMBIO DE NOMBRE + TASK-009 FASE 1 COMPLETADA** 🎆
+**🔄 RENOMBRADO: bybit-mcp → waickoff_mcp**
+
+#### **✅ Cambio de Nombre del Proyecto**
+- ✅ **Carpeta renombrada**: De `bybit-mcp` a `waickoff_mcp`
+- ✅ **package.json actualizado**: Nombre, descripción, versión 1.3.5
+- ✅ **Tipo ES modules**: Añadido `"type": "module"`
+- ✅ **Imports corregidos**: `.js` extensions para ES modules
+- ✅ **Claude Desktop config**: Actualizada con nueva ruta
 
 ### 09/06/2025 - **v1.3.5 TASK-009 FASE 1 COMPLETADA - Storage System Infrastructure** 🎆
 **🎯 NUEVA FUNCIONALIDAD - SISTEMA DE ALMACENAMIENTO LOCAL IMPLEMENTADO**
