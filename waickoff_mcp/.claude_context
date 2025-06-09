@@ -1,0 +1,226 @@
+# 🤖 Contexto para Claude/Cursor - Bybit MCP Server v1.3.4 (PRODUCTION READY)
+
+## 🎆 ESTADO CRÍTICO v1.3.5 - STORAGE SYSTEM FASE 1 COMPLETADA
+**⚡ TASK-009 FASE 1**: Sistema de almacenamiento local implementado y funcional
+**🎯 COMPILACIÓN**: Sin errores - StorageService + Tests + Ejemplos listos
+**🚀 SIGUIENTE FASE**: Decidir entre TASK-004 (tests) o continuar TASK-009 FASE 2 (cache)
+
+## IMPORTANTE: Leer ANTES de dar cualquier sugerencia
+
+### 📊 SISTEMA DE TRAZABILIDAD COMPLETA v1.3.4 (OBLIGATORIO)
+**⚠️ CAMBIO CRÍTICO**: Sistema de logging avanzado implementado - revisar documentación de debugging
+**SIEMPRE** revisar y actualizar estos archivos en orden de prioridad:
+
+#### **📋 Archivos Críticos de Estado:**
+- `claude/master-log.md` - **Estado actual del MCP (LEER PRIMERO)**
+- `claude/tasks/task-tracker.md` - Próximas funciones a implementar
+- `claude/bugs/` - **NUEVA** carpeta con bugs documentados y soluciones
+- `claude/logs/YYYY-MM-DD.md` - Log diario (ACTUALIZAR al final)
+
+#### **📚 Documentación Técnica:**
+- `claude/docs/architecture/system-overview.md` - **NUEVA** arquitectura completa
+- `claude/docs/api/tools-reference.md` - **NUEVA** referencia de API
+- `claude/docs/troubleshooting/common-issues.md` - **NUEVA** guía de resolución
+- `claude/decisions/adr-log.md` - Decisiones arquitectónicas
+- `ROADMAP_AVANZADO.md` - Visión general de funcionalidades futuras
+
+#### **🐛 Gestión de Bugs:**
+- **SISTEMA COMPLETO**: Todos los bugs críticos se documentan en `claude/bugs/`
+- **Formato**: `bug-XXX-description.md` con análisis completo
+- **Registro**: `claude/bugs/README.md` con índice y métricas
+- **Ejemplos**: BUG-001 (S/R classification), BUG-002 (Architecture refactor)
+
+### 🎆 ESTADO ACTUAL (v1.3.5 - 09/06/2025) - TASK-009 FASE 1 COMPLETADA
+- **Fase:** ✅ STORAGE SYSTEM FASE 1 - Infraestructura base implementada
+- **Última Actualización:** v1.3.5 con StorageService completo y funcional
+- **Próxima Decisión:** TASK-004 Tests o TASK-009 FASE 2 Cache Manager
+- **Bloqueadores:** NINGUNO - Compilación limpia, sin errores TypeScript
+- **Storage Status:** ✅ OPERATIVO - CRUD + Query + Stats + Vacuum
+- **Funcionalidad:** ✅ Sistema MCP estable + Storage listo para integración
+
+### 🎆 ARQUITECTURA MODULAR v1.3.0 - TRANSFORMACIÓN COMPLETA
+**✅ REFACTORIZACIÓN EXITOSA**: De 1 archivo monolítico a 15+ módulos especializados
+**🏗️ CLEAN ARCHITECTURE**: 4 capas bien separadas con dependency injection
+**🧪 100% TESTEABLE**: Cada servicio mockeable individualmente
+**🔄 PROTOCOL-AGNOSTIC**: Core reutilizable desde MCP, FastAPI, CLI, etc.
+
+#### **🎯 CAPAS Y SERVICIOS IMPLEMENTADOS**
+
+#### **🏢 Presentation Layer (Adapters)**
+- ✅ **MCP Adapter** (`src/adapters/mcp.ts`) - Protocolo MCP integrado
+- 🔮 **REST API Adapter** (Futuro) - FastAPI integration ready
+- 🔮 **WebSocket Adapter** (Futuro) - Real-time streams
+- 🔮 **CLI Adapter** (Futuro) - Command line interface
+
+#### **🧠 Core Layer (Business Logic)**
+- ✅ **Market Analysis Engine** (`src/core/engine.ts`) - Orquestador principal
+- ✅ **System Configuration** - Configuración centralizada
+- ✅ **Health Monitoring** - Estado del sistema
+- ✅ **Performance Tracking** - Métricas automticas
+
+#### **⚙️ Service Layer (Specialized Services)**
+- ✅ **Market Data Service** (`src/services/marketData.ts`) - Bybit API integration
+- ✅ **Technical Analysis Service** (`src/services/analysis.ts`) - Análisis técnico
+- ✅ **Trading Service** (`src/services/trading.ts`) - Grid trading & strategies
+- 🔮 **Multi-Exchange Services** (Futuro) - Binance, Coinbase, etc.
+
+#### **🛠️ Utility Layer (Common Tools)**
+- ✅ **Logger** (`src/utils/logger.ts`) - Sistema de logs estructurado
+- ✅ **Performance Monitor** (`src/utils/performance.ts`) - Métricas de rendimiento
+- ✅ **Math Utils** (`src/utils/math.ts`) - Utilidades matemáticas
+- ✅ **Type Definitions** (`src/types/index.ts`) - Tipos centralizados
+
+### Funcionalidades IMPLEMENTADAS v1.3.4 (SISTEMA DE LOGGING MINIMALISTA)
+
+#### **🏗️ ARQUITECTURA & INFRAESTRUCTURA**
+- ✅ **Arquitectura modular completa** - 4 capas: Presentation/Core/Service/Utility
+- ✅ **Dependency injection** - Servicios inyectables y 100% testeables
+- ✅ **Interface-based design** - Abstracciones para múltiples implementaciones
+- ✅ **Performance monitoring** - Métricas automáticas en todas las capas
+- ✅ **Protocol-agnostic core** - MarketAnalysisEngine reutilizable universalmente
+- ✅ **Backward compatibility** - API MCP mantiene 100% compatibilidad
+- ✅ **TypeScript estricto** - Tipos centralizados en `src/types/index.ts`
+- ✅ **Clean Code** - Principios SOLID aplicados consistentemente
+- ✅ **🎆 SISTEMA DE LOGGING MINIMALISTA** - Zero errores JSON + API stats esenciales
+
+#### **🔍 SISTEMA DE LOGGING Y DEBUGGING OPTIMIZADO**
+- ✅ **API Statistics básicos** - Total requests, errors, success rate en memoria
+- ✅ **Error tracking simple** - Últimos 5 errores con timestamp
+- ✅ **Connection monitoring** - Status HTTP, timeouts, parsing errors
+- ✅ **Zero complex objects** - Eliminados objetos que causaban errores JSON
+- ✅ **Claude Desktop compatible** - Sin errores molestos en UI
+- ✅ **Performance básico** - Duración de requests sin overhead
+- ✅ **Essential debugging** - Solo lo necesario para troubleshooting
+- ✅ **Production ready** - Sistema estable sin logs verbosos
+
+#### **📊 FUNCIONALIDADES DE ANÁLISIS**
+- ✅ **Market Data Service** - Ticker, orderbook, klines con error handling
+- ✅ **Technical Analysis Service** - Volatilidad, volumen, Volume Delta, S/R
+- ✅ **Trading Service** - Grid trading inteligente basado en volatilidad
+- ✅ **Support/Resistance avanzado** - Algoritmo multi-factor con scoring
+- ✅ **Volume Delta aproximado** - Presión compradora/vendedora sin API key
+- ✅ **Divergence detection** - Detección temprana de reversiones
+- ✅ **VWAP integration** - Análisis de valor promedio ponderado
+
+#### **🔧 SISTEMA DE DESARROLLO**
+- ✅ **Sistema de logs estructurado** - Logger con diferentes niveles
+- ✅ **Performance tracking** - Métricas de ejecución automáticas
+- ✅ **Error handling robusto** - Try/catch en todas las capas
+- ✅ **Build system** - TypeScript compilation sin errores
+- ✅ **Development tools** - ESLint, TypeDoc, Jest configurados
+
+### En DESARROLLO ACTIVO
+- 🚧 **TASK-004** - Tests unitarios completos (CRÍTICO post-refactor)
+- 🚧 **Documentación ADR** - Architectural Decision Records
+- 🚧 **Detección de patrones Wyckoff básicos** - Próxima funcionalidad
+- 🚧 **FastAPI integration** - REST endpoints usando core engine
+
+### NO EXISTE (no sugerir aún)
+- ❌ Funciones que requieren API Key
+- ❌ Trading automatizado
+- ❌ Gestión de órdenes
+- ❌ Portfolio tracking
+
+### Integración con Waickoff AI
+- Este MCP servirá como capa de datos para Waickoff
+- Mantener separación: MCP = datos, Waickoff = inteligencia
+- Futuro: múltiples MCPs (Binance, etc.) alimentando Waickoff
+
+### WORKFLOW v1.3.0 para BUGS CRÍTICOS:
+1. **Detectar y documentar** en `claude/bugs/bug-XXX-description.md`
+2. **Analizar root cause** con detalles técnicos
+3. **Implementar fix** siguiendo arquitectura actual
+4. **Actualizar logs** con cambios realizados
+5. **Crear tests** para evitar regresión (TASK-004 urgente)
+6. **Compilar y validar** antes de declarar resuelto
+
+### WORKFLOW v1.3.0 para DESARROLLO MODULAR (OBLIGATORIO):
+1. **Leer arquitectura**: `claude/docs/architecture/system-overview.md` primero
+2. **Identificar capa**: Presentation/Core/Service/Utility
+3. **Seguir interfaces**: Implementar `I*Service` existentes
+4. **Dependency injection**: Servicios como parámetros del constructor
+5. **Performance monitoring**: Usar `performanceMonitor.measure()`
+6. **Testing individual**: Cada servicio debe ser mockeable
+7. **Actualizar documentación**: Tipos, APIs, arquitectura
+8. **Compilar y validar**: Tests + build antes de declarar completado
+
+### REGLAS CÓDIGO v1.3.0 (ARQUITECTURA MODULAR - OBLIGATORIO):
+
+### ⚠️ REGLAS CRÍTICAS DE DOCUMENTACIÓN:
+1. **NO CREAR DOCUMENTACIÓN** sin visto bueno explícito del usuario
+2. **NO INVENTAR FUNCIONALIDAD** - Siempre analizar código existente primero
+3. **VERIFICAR COMPILACIÓN** antes de declarar algo como completado
+4. **PREGUNTAR ANTES DE ASUMIR** - Si algo no está claro, preguntar
+5. **CÓDIGO PRIMERO** - La implementación es la prioridad, no la documentación
+
+### REGLAS CÓDIGO v1.3.0 (ARQUITECTURA MODULAR - OBLIGATORIO):
+1. **TypeScript estricto** - Tipos definidos, interfaces implementadas
+2. **Dependency injection** - Servicios inyectados por constructor
+3. **Interface segregation** - Implementar `I*Service` interfaces
+4. **Performance monitoring** - Wrapper automático en servicios
+5. **Error handling** - Try/catch en todas las funciones
+6. **Separation of concerns** - Cada clase una responsabilidad
+7. **Backward compatibility** - No romper APIs MCP existentes
+8. **Documentation** - JSDoc en interfaces y métodos públicos
+
+### Comandos de desarrollo (v1.3.0):
+```bash
+npm run build      # Compilar TypeScript modular
+npm run dev        # Modo desarrollo con watch
+npm start          # Ejecutar MCP compilado
+npm run clean      # Limpiar build
+npm rwaickoff_mcp     # Ejecutar tests unitarios (TASK-004)
+npm run lint       # Verificar código con ESLint
+npm run docs       # Generar documewaickoff_mcpypeDoc
+```
+
+### Configuración Claude Desktop:
+```json
+{
+  "mcpServers": {
+    "bybit-mcp": {
+      "command": "node",
+      "args": ["D:\\projects\\mcp\\bybit-mcp\\build\\index.js"],
+      "env": {}
+    }
+  }
+}
+```
+
+### FILOSOFÍA v1.3.4 (LOGGING MINIMALISTA - PRODUCTION READY):
+- **"De Logging Complejo a Simplicidad Efectiva"** - Solo lo esencial para debugging
+- **"Zero Errors UX - Production Quality"** - Claude Desktop completamente limpio
+- **"Minimal Overhead - Maximum Stability"** - Performance optimizado sin logs verbosos
+- **"Essential Debugging - No Complex Objects"** - API stats básicos + Error tracking simple
+- **"Ready for Integration"** - Base sólida para Waickoff AI sin interferencias
+- **"Separation of Concerns"** - Logging interno vs protocolo externo separados
+- **"User Experience First"** - Técnicos contentos, usuarios sin errores molestos
+
+## 🎯 ENFOQUE ACTUAL v1.3.4: SISTEMA DE LOGGING MINIMALISTA COMPLETADO
+**✅ PROBLEMA RESUELTO**: Errores JSON eliminados 100% - Claude Desktop completamente limpio
+**⚡ SISTEMA OPERATIVO**: Logging minimalista + API stats esenciales + Zero errores molestos
+**🚀 READY FOR PRODUCTION**: Sistema estable para integración Waickoff AI y uso real
+
+**REFERENCIAS CRÍTICAS v1.3.0**: 
+- **Arquitectura completa**: `claude/docs/architecture/system-overview.md`
+- **Refactorización**: `claude/bugs/bug-002-modular-architecture.md`
+- **APIs actualizadas**: `claude/docs/api/tools-reference.md`
+- **Tipos centralizados**: `src/types/index.ts`
+- **Core engine**: `src/core/engine.ts`
+
+## 📋 OBLIGATORIO AL TERMINAR CUALQUIER TRABAJO (v1.3.0):
+1. **Actualizar tipos centralizados** en `src/types/index.ts` si es necesario
+2. **Verificar interfaces** implementadas correctamente
+3. **Actualizar documentación** de arquitectura si hay cambios estructurales
+4. **Performance metrics** verificar que estén funcionando
+5. **Tests unitarios** crear/actualizar para nuevos servicios
+6. **Backward compatibility** verificar que MCP siga funcionando
+7. **Build limpio** sin errores TypeScript
+8. **Documentar decisiones** técnicas importantes en logs
+
+**🎆 SISTEMA v1.3.4 - LOGGING MINIMALISTA PRODUCTION-READY**
+
+**✅ PROBLEMA DEFINITIVAMENTE RESUELTO**: Errores JSON eliminados 100% de Claude Desktop
+**🚀 SISTEMA OPTIMIZADO**: Logging minimalista + API stats esenciales + Zero errores molestos
+**💪 QUALITY PRODUCTION**: Clean UX, debugging efectivo, base sólida para Waickoff AI
+**🔮 FUTURO**: Ready para integración, FastAPI, WebSocket, CLI con sistema estable
