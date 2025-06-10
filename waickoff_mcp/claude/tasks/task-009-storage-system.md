@@ -126,11 +126,12 @@ interface IReportGenerator {
 - [ ] Estadísticas y métricas
 - [ ] Exportación a diferentes formatos
 
-### FASE 5: Integración MCP (1h)
-- [ ] Nuevas herramientas MCP para storage
-- [ ] Auto-guardado de análisis
-- [ ] Comandos de consulta histórica
-- [ ] Limpieza y mantenimiento
+### FASE 5: Optimización y Mantenimiento Avanzado (1h)
+- [ ] Comandos de mantenimiento y limpieza automatizada
+- [ ] Estadísticas avanzadas y métricas de storage
+- [ ] Herramientas de debugging y diagnóstico
+- [ ] Optimizaciones de performance y compresión
+- [ ] Sistema de backup y recuperación
 
 ## 🛠️ Herramientas MCP Nuevas
 

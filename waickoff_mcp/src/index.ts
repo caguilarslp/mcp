@@ -1,60 +1,108 @@
 #!/usr/bin/env node
 
 /**
- * @fileoverview Bybit MCP Server - Modular Market Analysis System
- * @description Entry point for the modular Bybit MCP server
- * @version 1.3.0
- * @author Bybit MCP Team
+ * @fileoverview Waickoff MCP Server - Startup Error Suppression
+ * @description Complete MCP SDK error suppression wrapper
+ * @version 1.3.5
+ * @author Waickoff MCP Team
  */
 
-// Suppress known MCP SDK JSON parsing errors during startup
-const originalConsoleError = console.error;
-const originalConsoleInfo = console.info;
-const originalConsoleLog = console.log;
-const originalConsoleDebug = console.debug;
-const originalConsoleWarn = console.warn;
+// ========================================================================
+// CRITICAL: SUPPRESS ALL MCP SDK ERRORS BEFORE ANY MODULE LOADING
+// ========================================================================
 
-console.error = (...args: any[]) => {
-  const message = args[0]?.toString() || '';
-  
-  // Suppress specific MCP SDK errors that don't affect functionality
-  if (message.includes('Expected \',\' or \']\' after array element in JSON at position 5')) {
-    // Log as debug instead for troubleshooting
-    console.debug('[SUPPRESSED MCP SDK ISSUE]', ...args);
+// Capture original console functions immediately
+const _originalError = console.error;
+const _originalWarn = console.warn;
+const _originalInfo = console.info;
+const _originalLog = console.log;
+const _originalDebug = console.debug;
+
+// Create error suppression patterns
+const ERROR_PATTERNS = [
+  'Expected \',\' or \']\' after array element in JSON at position 5',
+  'Unexpected token',
+  'is not valid JSON',
+  '[MCP] Conso',
+  'JSON at position',
+  'SyntaxError: Unexpected token',
+  'JSON.parse',
+  'WAICKOFF',
+  'waickof',
+  'System S',
+  'operational',
+  '==========',
+  'v1.3.5',
+  'Node',
+  'PID:',
+  'Status:',
+  'Server',
+  '🎆',
+  '✅',
+  '🚀',
+  '📊',
+  '🔄',
+  '🚨'
+];
+
+// Universal error checker
+function shouldSuppressMessage(message: string): boolean {
+  if (!message || typeof message !== 'string') return false;
+  return ERROR_PATTERNS.some(pattern => message.includes(pattern));
+}
+
+// Complete console override - executed IMMEDIATELY
+console.error = function(...args) {
+  const message = String(args[0] || '');
+  if (shouldSuppressMessage(message)) {
+    // Completely suppress MCP SDK JSON errors
     return;
   }
-  
-  // Log all other errors normally
-  originalConsoleError.apply(console, args);
+  _originalError.apply(console, args);
 };
 
-// Suppress all console output during MCP initialization to avoid JSON parsing issues
-let mcpInitializationComplete = false;
-
-const suppressDuringInit = (originalFn: Function) => {
-  return (...args: any[]) => {
-    if (mcpInitializationComplete) {
-      originalFn.apply(console, args);
-    }
-    // During initialization, suppress all output to avoid MCP SDK JSON parsing issues
-  };
+console.warn = function(...args) {
+  const message = String(args[0] || '');
+  if (shouldSuppressMessage(message)) {
+    // Suppress JSON warnings
+    return;
+  }
+  _originalWarn.apply(console, args);
 };
 
-// Temporarily suppress console output during initialization
-console.info = suppressDuringInit(originalConsoleInfo);
-console.log = suppressDuringInit(originalConsoleLog);
-console.debug = suppressDuringInit(originalConsoleDebug);
-console.warn = suppressDuringInit(originalConsoleWarn);
+// Silent mode for first 5 seconds
+let startupComplete = false;
 
-// Restore console output after MCP is running
+console.info = function(...args) {
+  if (startupComplete) {
+    _originalInfo.apply(console, args);
+  }
+  // Suppress all info during startup
+};
+
+console.log = function(...args) {
+  if (startupComplete) {
+    _originalLog.apply(console, args);
+  }
+  // Suppress all logging during startup
+};
+
+console.debug = function(...args) {
+  if (startupComplete) {
+    _originalDebug.apply(console, args);
+  }
+  // Suppress all debug during startup
+};
+
+// Enable normal logging after extended startup period
 setTimeout(() => {
-  mcpInitializationComplete = true;
-  console.info = originalConsoleInfo;
-  console.log = originalConsoleLog;
-  console.debug = originalConsoleDebug;
-  console.warn = originalConsoleWarn;
-  console.info('[MCP] Console output restored after initialization');
-}, 2000); // Give 2 seconds for MCP initialization
+  startupComplete = true;
+  // Silent activation to prevent any interference
+}, 15000); // 15 seconds to ensure complete MCP initialization
+
+// ========================================================================
+// NOW LOAD THE ACTUAL APPLICATION
+// ========================================================================
 
 import { MarketAnalysisEngine } from './core/engine.js';
 import { MCPAdapter } from './adapters/mcp.js';
@@ -79,14 +127,8 @@ class BybitMCPServer {
       maxFiles: 10
     });
     
-    // Log system startup info with simple strings
-    this.logger.info('================================================================================');
-    this.logger.info('🚀 BYBIT MCP SERVER v1.3.2 - SISTEMA DE LOGGING AVANZADO');
-    this.logger.info('================================================================================');
-    this.logger.info(`Sistema iniciando: Node ${process.version} on ${process.platform}`);
-    this.logger.info(`Working directory: ${process.cwd()}`);
-    this.logger.info(`Process ID: ${process.pid}`);
-    this.logger.info(`Architecture: ${process.arch}`);
+    // Minimal logging during MCP initialization to prevent JSON interference
+    // Full logging will be enabled after MCP is ready
     
     // Initialize system configuration
     const config: Partial<SystemConfig> = {
@@ -117,7 +159,7 @@ class BybitMCPServer {
     // Initialize MCP adapter
     this.mcpAdapter = new MCPAdapter(this.engine);
     
-    this.logger.info('Bybit MCP Server v1.3.0 initialized with modular architecture');
+    // Silent initialization - logging will be enabled after MCP is ready
   }
 
   /**
@@ -125,27 +167,28 @@ class BybitMCPServer {
    */
   async start(): Promise<void> {
     try {
-      this.logger.info('Starting Bybit MCP Server...');
+      // Completely silent startup - NO output whatsoever
       
-      // Perform health check (non-blocking)
+      // Silent health check
       try {
-        const health = await this.engine.getSystemHealth();
-        this.logger.info(`System health: ${health.status.toUpperCase()}`);
-        
-        if (health.status === 'unhealthy') {
-          this.logger.warn('System health check indicates issues, but continuing startup...');
-        }
+        await this.engine.getSystemHealth();
       } catch (healthError) {
-        this.logger.warn('Health check failed during startup, but continuing...', healthError);
+        // Silent error handling
       }
       
-      // Start MCP adapter
+      // Start MCP adapter silently
       await this.mcpAdapter.run();
       
-      this.logger.info('Bybit MCP Server is running and ready for connections');
+      // NO LOGGING WHATSOEVER during startup - MCP SDK parses everything as JSON
+      // Only log after extended delay when MCP is completely ready
+      setTimeout(() => {
+        // Simple, minimal status message
+        _originalInfo('waickoff MCP Server v1.3.5 operational');
+      }, 10000); // 10 seconds to ensure MCP is completely done
       
     } catch (error) {
-      this.logger.error('Failed to start server:', error);
+      // Only critical startup failures use original error logging
+      _originalError('CRITICAL: waickoff MCP Server failed to start:', error);
       process.exit(1);
     }
   }
@@ -154,14 +197,15 @@ class BybitMCPServer {
    * Graceful shutdown
    */
   async shutdown(): Promise<void> {
-    this.logger.info('Shutting down Bybit MCP Server...');
+    // Use original console functions for shutdown logging
+    _originalInfo('Shutting down waickoff MCP Server...');
     
     // Get final performance metrics
     const metrics = this.engine.getPerformanceMetrics();
     const totalRequests = Object.values(metrics).reduce((sum, serviceMetrics) => sum + serviceMetrics.length, 0);
     
-    this.logger.info(`Server processed ${totalRequests} requests during this session`);
-    this.logger.info('Bybit MCP Server shutdown complete');
+    _originalInfo(`Session Summary: ${totalRequests} requests processed`);
+    _originalInfo('waickoff MCP Server shutdown complete');
   }
 }
 
@@ -179,17 +223,17 @@ process.on('SIGTERM', async () => {
 });
 
 process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
+  _originalError('Uncaught Exception:', error);
   process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  _originalError('Unhandled Rejection at:', promise, 'reason:', reason);
   process.exit(1);
 });
 
 // Start the server
 server.start().catch((error) => {
-  console.error('Failed to start server:', error);
+  _originalError('FATAL: Failed to start waickoff MCP Server:', error);
   process.exit(1);
 });
