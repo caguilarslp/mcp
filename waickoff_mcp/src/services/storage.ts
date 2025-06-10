@@ -13,36 +13,66 @@ import {
   StorageStats,
   StorageError,
   StorageCategory 
-} from '../types/storage';
-import { Logger } from '../utils/logger';
-import { PerformanceMonitor } from '../utils/performance';
+} from '../types/storage.js';
+import { FileLogger } from '../utils/fileLogger.js';
+import { PerformanceMonitor } from '../utils/performance.js';
+import * as path_import from 'path';
 
 // Create singleton instances
-const logger = new Logger('StorageService');
+const logger = new FileLogger('StorageService', 'info', {
+  logDir: path_import.join(process.cwd(), 'logs'),
+  enableStackTrace: true,
+  enableRotation: true
+});
 const performanceMonitor = new PerformanceMonitor();
 
 export class StorageService implements IStorageService {
   private config: StorageConfig;
   private basePath: string;
+  private initializationPromise: Promise<void>;
 
   constructor(configPath: string = './storage/config/storage.config.json') {
+    // Initialize with default config first
+    this.config = {
+      basePath: './storage',
+      maxFileSize: 10 * 1024 * 1024, // 10MB
+      maxTotalSize: 1024 * 1024 * 1024, // 1GB
+      compressionEnabled: false,
+      autoCleanupDays: 30
+    };
+    this.basePath = path.resolve(this.config.basePath);
+    
+    // Try to load custom config asynchronously
+    this.initializationPromise = this.initializeStorageSystem(configPath);
+  }
+
+  /**
+   * Initialize storage system: load config + create directories
+   */
+  private async initializeStorageSystem(configPath: string): Promise<void> {
     try {
-      const configData = require(path.resolve(configPath));
-      this.config = configData;
-      this.basePath = path.resolve(this.config.basePath);
-      this.initializeDirectories();
+      // Try to load custom config using fs.readFile
+      const configContent = await fs.readFile(path.resolve(configPath), 'utf8');
+      const configData = JSON.parse(configContent);
+      if (configData && typeof configData === 'object') {
+        this.config = { ...this.config, ...configData };
+        this.basePath = path.resolve(this.config.basePath);
+        logger.info(`Loaded custom storage config from ${configPath}`);
+      }
     } catch (error) {
-      logger.error('Failed to load storage config', error);
-      // Use default config
-      this.config = {
-        basePath: './storage',
-        maxFileSize: 10 * 1024 * 1024, // 10MB
-        maxTotalSize: 1024 * 1024 * 1024, // 1GB
-        compressionEnabled: false,
-        autoCleanupDays: 30
-      };
-      this.basePath = path.resolve(this.config.basePath);
+      logger.info(`Using default storage config (config file not found or invalid)`);
+      // Continue with default config
     }
+    
+    // Initialize directories
+    await this.initializeDirectories();
+  }
+
+  /**
+   * Ensure initialization is complete before storage operations
+   */
+  private async ensureInitialized(): Promise<void> {
+    await this.initializationPromise;
   }
 
   /**
@@ -75,6 +105,9 @@ export class StorageService implements IStorageService {
   async save(relativePath: string, data: any): Promise<void> {
     return performanceMonitor.measure('storage.save', async () => {
       try {
+        // Ensure initialization is complete
+        await this.ensureInitialized();
+        
         // Validate path
         if (!this.isValidPath(relativePath)) {
           throw this.createError('INVALID_PATH', `Invalid path: ${relativePath}`);
@@ -185,6 +218,9 @@ export class StorageService implements IStorageService {
   async query(pattern: string): Promise<string[]> {
     return performanceMonitor.measure('storage.query', async () => {
       try {
+        // Ensure initialization is complete
+        await this.ensureInitialized();
+        
         const results: string[] = [];
         
         // Convert simple glob to regex

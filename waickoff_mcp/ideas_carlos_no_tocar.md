@@ -4,9 +4,8 @@ recordar a api investing, calendario económico, fundamentales, noticias, locura
 
 indicadores a usar: ema, vwap, bollinger, fibo, elliott
 
-necesitamos un sistema de almacenamiento de analsis tipo .md o de información ya en local para tener más contexto, historial, rapidez, retroalimentación, ... un tipo cache, analiza la estrategia, los usos, la implementación y crea las tareas. antes dame un resumen de la estrategia.
+trampa alcista y trampa bajista
 
-quiero cambiar el nombre tanto de la carpeta como el resto de achivos de bybit-mcp a waickoff_mcp afectará en algo? yo lo puedo cambiar directamente en vscode.
-
-
-
+revisar minteos de binance, tether, etc ... significativo de próximas compras/subida
+revisar envios de exchanges de hot wallet a cold wallet, significativo de subida y binance sigue comprando para sus hot wallet
+revisar movimientos grandes ballenas

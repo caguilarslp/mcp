@@ -15,6 +15,7 @@
 - `claude/master-log.md` - **Estado actual del MCP (LEER PRIMERO)**
 - `claude/tasks/task-tracker.md` - Próximas funciones a implementar
 - `claude/bugs/` - **NUEVA** carpeta con bugs documentados y soluciones
+- `claude/lessons-learned/` - **NUEVA** carpeta con lecciones aprendidas críticas
 - `claude/logs/YYYY-MM-DD.md` - Log diario (ACTUALIZAR al final)
 
 #### **📚 Documentación Técnica:**
@@ -22,6 +23,7 @@
 - `claude/docs/api/tools-reference.md` - **NUEVA** referencia de API
 - `claude/docs/troubleshooting/common-issues.md` - **NUEVA** guía de resolución
 - `claude/decisions/adr-log.md` - Decisiones arquitectónicas
+- `claude/lessons-learned/README.md` - **NUEVA** índice de lecciones aprendidas
 - `ROADMAP_AVANZADO.md` - Visión general de funcionalidades futuras
 
 #### **🐛 Gestión de Bugs:**
@@ -29,6 +31,12 @@
 - **Formato**: `bug-XXX-description.md` con análisis completo
 - **Registro**: `claude/bugs/README.md` con índice y métricas
 - **Ejemplos**: BUG-001 (S/R classification), BUG-002 (Architecture refactor)
+
+#### **📚 Gestión de Lecciones Aprendidas:**
+- **SISTEMA NUEVO**: Todas las lecciones críticas en `claude/lessons-learned/`
+- **Formato**: `lesson-XXX-description.md` con análisis y patterns
+- **Registro**: `claude/lessons-learned/README.md` con índice y templates
+- **Ejemplos**: LESSON-001 (Auto-save implementation failure)
 
 ### 🎆 ESTADO ACTUAL (v1.3.5 - 09/06/2025) - TASK-009 FASE 1 COMPLETADA
 - **Fase:** ✅ STORAGE SYSTEM FASE 1 - Infraestructura base implementada

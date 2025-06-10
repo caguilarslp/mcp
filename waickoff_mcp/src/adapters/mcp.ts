@@ -73,6 +73,21 @@ export class MCPAdapter {
             },
           },
           {
+            name: 'test_storage',
+            description: 'Test storage system functionality',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                operation: {
+                  type: 'string',
+                  description: 'Test operation to perform',
+                  enum: ['save_test', 'load_test', 'query_test', 'stats'],
+                  default: 'save_test',
+                },
+              },
+            },
+          },
+          {
             name: 'get_orderbook',
             description: 'Get order book depth for market analysis',
             inputSchema: {
@@ -361,6 +376,30 @@ export class MCPAdapter {
               },
             },
           },
+          {
+            name: 'get_analysis_history',
+            description: 'Get saved analysis history for a symbol',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair to get history for',
+                },
+                limit: {
+                  type: 'number',
+                  description: 'Number of historical analyses to return',
+                  default: 10,
+                },
+                analysisType: {
+                  type: 'string',
+                  description: 'Filter by analysis type',
+                  enum: ['technical_analysis', 'complete_analysis'],
+                },
+              },
+              required: ['symbol'],
+            },
+          },
         ],
       };
     });
@@ -410,6 +449,12 @@ export class MCPAdapter {
             break;
           case 'get_debug_logs':
             result = await this.handleGetDebugLogs(args);
+            break;
+          case 'get_analysis_history':
+            result = await this.handleGetAnalysisHistory(args);
+            break;
+          case 'test_storage':
+            result = await this.handleTestStorage(args);
             break;
           default:
             throw new Error(`Unknown tool: ${name}`);
@@ -1146,6 +1191,94 @@ export class MCPAdapter {
     } catch (error) {
       this.logger.error('Failed to retrieve debug logs:', error);
       return this.createErrorResponse('get_debug_logs', error as Error);
+    }
+  }
+
+  private async handleGetAnalysisHistory(args: any): Promise<MCPServerResponse> {
+    const symbol = args?.symbol as string;
+    const limit = (args?.limit as number) || 10;
+    const analysisType = args?.analysisType as string;
+
+    if (!symbol) {
+      throw new Error('Symbol is required');
+    }
+
+    const response = await this.engine.getAnalysisHistory(symbol, limit, analysisType);
+
+    if (!response.success) {
+      throw new Error(response.error || 'Failed to get analysis history');
+    }
+
+    const history = response.data!;
+    
+    const formattedHistory = {
+      symbol,
+      total_analyses: history.length,
+      filter: analysisType || 'all',
+      analyses: history.map(analysis => ({
+        created: analysis.created,
+        type: analysis.analysisType,
+        file: analysis.file,
+        version: analysis.metadata?.version || 'unknown'
+      }))
+    };
+
+    return this.createSuccessResponse(formattedHistory);
+  }
+
+  private async handleTestStorage(args: any): Promise<MCPServerResponse> {
+    const operation = (args?.operation as string) || 'save_test';
+
+    try {
+      const storageService = new (await import('../services/storage.js')).StorageService();
+      const testResults: any = {
+        operation,
+        timestamp: new Date().toISOString(),
+        success: false,
+        details: {}
+      };
+
+      switch (operation) {
+        case 'save_test':
+          const testData = {
+            test: true,
+            timestamp: Date.now(),
+            message: 'Storage test successful'
+          };
+          await storageService.save('test/storage_test.json', testData);
+          testResults.success = true;
+          testResults.details.message = 'Test data saved successfully';
+          testResults.details.path = 'test/storage_test.json';
+          break;
+
+        case 'load_test':
+          const loadedData = await storageService.load('test/storage_test.json');
+          testResults.success = loadedData !== null;
+          testResults.details.loaded = loadedData;
+          break;
+
+        case 'query_test':
+          const files = await storageService.query('test/*');
+          testResults.success = true;
+          testResults.details.files_found = files;
+          testResults.details.count = files.length;
+          break;
+
+        case 'stats':
+          const stats = await storageService.getStorageStats();
+          testResults.success = true;
+          testResults.details.stats = stats;
+          break;
+
+        default:
+          throw new Error(`Unknown test operation: ${operation}`);
+      }
+
+      return this.createSuccessResponse(testResults);
+
+    } catch (error) {
+      this.logger.error('Storage test failed:', error);
+      return this.createErrorResponse('test_storage', error as Error);
     }
   }
 

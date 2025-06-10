@@ -1,0 +1,171 @@
+{
+  "timestamp": 1749523696692,
+  "symbol": "BTCUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "BTCUSDT",
+      "period": "1d",
+      "currentPrice": 109609.9,
+      "highestPrice": 110665.8,
+      "lowestPrice": 105316.2,
+      "volatilityPercent": 4.880581042405847,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    },
+    "volume": {
+      "symbol": "BTCUSDT",
+      "interval": "60",
+      "avgVolume": 287.77560831249997,
+      "currentVolume": 291.309551,
+      "maxVolume": 940.103835,
+      "minVolume": 70.174965,
+      "volumeSpikes": [
+        {
+          "timestamp": "2025-06-09T09:00:00.000Z",
+          "volume": 752.703042,
+          "multiplier": 2.6155901343196124,
+          "price": 106628.2
+        },
+        {
+          "timestamp": "2025-06-09T10:00:00.000Z",
+          "volume": 940.103835,
+          "multiplier": 3.2667947103394765,
+          "price": 107198.2
+        },
+        {
+          "timestamp": "2025-06-09T11:00:00.000Z",
+          "volume": 624.450765,
+          "multiplier": 2.1699224915612003,
+          "price": 107765.8
+        },
+        {
+          "timestamp": "2025-06-09T13:00:00.000Z",
+          "volume": 564.793542,
+          "multiplier": 1.9626178372514531,
+          "price": 107023.6
+        },
+        {
+          "timestamp": "2025-06-09T14:00:00.000Z",
+          "volume": 622.522697,
+          "multiplier": 2.1632225908597262,
+          "price": 107617.4
+        }
+      ],
+      "vwap": {
+        "current": 107390.61918644847,
+        "priceVsVwap": "above",
+        "difference": 2.0665499746290426
+      },
+      "trend": "decreasing"
+    },
+    "volumeDelta": {
+      "symbol": "BTCUSDT",
+      "interval": "5",
+      "current": -6.628229646466782,
+      "average": -4.25276695065538,
+      "bias": "seller",
+      "strength": 22.68333397599392,
+      "cumulativeDelta": -35.873813526226414,
+      "divergence": {
+        "detected": true,
+        "type": "Price down but delta up",
+        "signal": "bullish_reversal"
+      },
+      "marketPressure": {
+        "bullishCandles": 5,
+        "bearishCandles": 5,
+        "bullishPercent": 50,
+        "trend": "balanced"
+      }
+    },
+    "supportResistance": {
+      "symbol": "BTCUSDT",
+      "interval": "60",
+      "currentPrice": 109609.9,
+      "resistances": [
+        {
+          "level": 110665.8,
+          "type": "resistance",
+          "strength": 78.79481702592847,
+          "touches": 1,
+          "volumeConfirmation": 2.4728347176304535,
+          "lastTouchTime": "2025-06-09T21:00:00.000Z",
+          "priceDistance": 0.9633253930530078,
+          "confidence": "very_strong"
+        }
+      ],
+      "supports": [
+        {
+          "level": 105336.2,
+          "type": "support",
+          "strength": 73.42864819499023,
+          "touches": 6,
+          "volumeConfirmation": 0.554634326557329,
+          "lastTouchTime": "2025-06-09T03:00:00.000Z",
+          "priceDistance": 3.8990091223511723,
+          "confidence": "strong"
+        },
+        {
+          "level": 104064.3,
+          "type": "support",
+          "strength": 71.96576478908497,
+          "touches": 2,
+          "volumeConfirmation": 0.6761346251417107,
+          "lastTouchTime": "2025-06-07T00:00:00.000Z",
+          "priceDistance": 5.059397007022168,
+          "confidence": "strong"
+        },
+        {
+          "level": 106493.5,
+          "type": "support",
+          "strength": 49.490491398786205,
+          "touches": 1,
+          "volumeConfirmation": 0.2383681878136297,
+          "lastTouchTime": "2025-06-08T21:00:00.000Z",
+          "priceDistance": 2.843173837399719,
+          "confidence": "moderate"
+        }
+      ],
+      "criticalLevel": {
+        "level": 110665.8,
+        "type": "resistance",
+        "strength": 78.79481702592847,
+        "touches": 1,
+        "volumeConfirmation": 2.4728347176304535,
+        "lastTouchTime": "2025-06-09T21:00:00.000Z",
+        "priceDistance": 0.9633253930530078,
+        "confidence": "very_strong"
+      },
+      "gridConfig": {
+        "optimalLowerBound": 105336.2,
+        "optimalUpperBound": 110665.8,
+        "keyLevels": [
+          110665.8,
+          105336.2,
+          104064.3,
+          106493.5
+        ],
+        "recommendedGridCount": 5,
+        "recommendation": "Strong S/R levels identified - Grid trading recommended"
+      },
+      "statistics": {
+        "totalPivotsFound": 11,
+        "priceRangeAnalyzed": {
+          "high": 110665.8,
+          "low": 101089.8
+        },
+        "avgVolume": 262.94942472,
+        "periodsAnalyzed": 100,
+        "sensitivityUsed": 2
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.3.5",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-10T02:48:16.692Z"
+  }
+}

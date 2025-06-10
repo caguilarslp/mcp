@@ -26,6 +26,24 @@ import { TradingService } from '../services/trading.js';
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
 import { PerformanceMonitor } from '../utils/performance.js';
+import { StorageService } from '../services/storage.js';
+
+// ====================
+// STORAGE TYPES FOR AUTO-SAVE
+// ====================
+
+interface SavedAnalysisRecord {
+  timestamp: number;
+  symbol: string;
+  analysisType: string;
+  data: any;
+  metadata: {
+    version: string;
+    source: string;
+    engine: string;
+    savedAt: string;
+  };
+}
 
 export class MarketAnalysisEngine {
   private readonly logger: FileLogger;
@@ -35,6 +53,7 @@ export class MarketAnalysisEngine {
   private readonly marketDataService: BybitMarketDataService;
   private readonly analysisService: TechnicalAnalysisService;
   private readonly tradingService: TradingService;
+  private readonly storageService: StorageService;
   
   // Configuration
   private config: SystemConfig;
@@ -59,6 +78,7 @@ export class MarketAnalysisEngine {
     
     this.analysisService = new TechnicalAnalysisService(this.marketDataService);
     this.tradingService = new TradingService(this.marketDataService, this.analysisService);
+    this.storageService = new StorageService();
     
     this.logger.info('Market Analysis Engine initialized');
   }
@@ -122,7 +142,7 @@ export class MarketAnalysisEngine {
   }>> {
     return this.performanceMonitor.measure('performTechnicalAnalysis', async () => {
       try {
-        this.logger.info(`Performing technical analysis for ${symbol}`);
+        this.logger.info(`🔥 INCOMING REQUEST: performTechnicalAnalysis for ${symbol}`);
 
         const {
           includeVolatility = true,
@@ -163,10 +183,14 @@ export class MarketAnalysisEngine {
           analysis[analysisKeys[index]] = result;
         });
 
+        // AUTO-SAVE: Simple and direct implementation
+        await this.autoSaveAnalysis(symbol, 'technical_analysis', analysis);
+
+        this.logger.info(`✅ COMPLETED: performTechnicalAnalysis for ${symbol}`);
         return this.createSuccessResponse(analysis);
 
       } catch (error) {
-        this.logger.error(`Technical analysis failed for ${symbol}:`, error);
+        this.logger.error(`❌ FAILED: Technical analysis for ${symbol}:`, error);
         return this.createErrorResponse(`Technical analysis failed: ${error}`);
       }
     });
@@ -244,7 +268,7 @@ export class MarketAnalysisEngine {
   }>> {
     return this.performanceMonitor.measure('getCompleteAnalysis', async () => {
       try {
-        this.logger.info(`Performing complete analysis for ${symbol}`);
+        this.logger.info(`🔥 INCOMING REQUEST: getCompleteAnalysis for ${symbol}`);
 
         // Get all data in parallel
         const [marketDataResponse, technicalAnalysisResponse] = await Promise.all([
@@ -275,15 +299,21 @@ export class MarketAnalysisEngine {
           gridSuggestion
         );
 
-        return this.createSuccessResponse({
+        const completeAnalysis = {
           marketData,
           technicalAnalysis,
           gridSuggestion,
           summary
-        });
+        };
+
+        // AUTO-SAVE: Simple and direct implementation
+        await this.autoSaveAnalysis(symbol, 'complete_analysis', completeAnalysis);
+
+        this.logger.info(`✅ COMPLETED: getCompleteAnalysis for ${symbol}`);
+        return this.createSuccessResponse(completeAnalysis);
 
       } catch (error) {
-        this.logger.error(`Complete analysis failed for ${symbol}:`, error);
+        this.logger.error(`❌ FAILED: Complete analysis for ${symbol}:`, error);
         return this.createErrorResponse(`Complete analysis failed: ${error}`);
       }
     });
@@ -520,6 +550,140 @@ export class MarketAnalysisEngine {
    */
   getConfig(): SystemConfig {
     return { ...this.config };
+  }
+
+  // ====================
+  // AUTO-SAVE METHODS
+  // ====================
+
+  /**
+   * Auto-save analysis using simple fs.writeFile - LESSON-001 pattern
+   */
+  private async autoSaveAnalysis(
+    symbol: string,
+    analysisType: string,
+    data: any
+  ): Promise<void> {
+    try {
+      this.logger.info(`🔥 Starting auto-save for ${symbol} (${analysisType})`);
+      
+      // Simple, direct file operations
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      
+      // Create simple timestamp-based filename
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      // Use project directory instead of process.cwd()
+      const projectRoot = 'D:\\projects\\mcp\\waickoff_mcp';
+      const storageDir = path.join(projectRoot, 'storage', 'analysis', symbol);
+      const filename = `${analysisType}_${timestamp}.json`;
+      const fullPath = path.join(storageDir, filename);
+      
+      // Ensure directory exists
+      await fs.mkdir(storageDir, { recursive: true });
+      this.logger.info(`📁 Created directory: ${storageDir}`);
+      
+      // Create analysis record
+      const analysisRecord = {
+        timestamp: Date.now(),
+        symbol,
+        analysisType,
+        data,
+        metadata: {
+          version: '1.3.5',
+          source: 'waickoff_mcp',
+          engine: 'MarketAnalysisEngine',
+          savedAt: new Date().toISOString()
+        }
+      };
+      
+      // Direct fs.writeFile - simple and reliable
+      await fs.writeFile(fullPath, JSON.stringify(analysisRecord, null, 2), 'utf8');
+      
+      this.logger.info(`✅ Auto-saved successfully: ${fullPath}`);
+      
+    } catch (error) {
+      this.logger.error(`❌ Auto-save FAILED for ${symbol} (${analysisType}):`, error);
+      // Don't re-throw - auto-save failure shouldn't break analysis
+    }
+  }
+
+  /**
+   * Get analysis history using simple fs operations
+   */
+  async getAnalysisHistory(
+    symbol: string,
+    limit: number = 10,
+    analysisType?: string
+  ): Promise<ApiResponse<any[]>> {
+    return this.performanceMonitor.measure('getAnalysisHistory', async () => {
+      try {
+        this.logger.info(`🔥 INCOMING REQUEST: getAnalysisHistory for ${symbol}`);
+
+        // Simple, direct file operations
+        const fs = await import('fs/promises');
+        const path = await import('path');
+        const { existsSync } = await import('fs');
+        
+        // Build directory path
+        // Use project directory instead of process.cwd()
+        const projectRoot = 'D:\\projects\\mcp\\waickoff_mcp';
+        const storageDir = path.join(projectRoot, 'storage', 'analysis', symbol);
+        
+        // Check if directory exists
+        if (!existsSync(storageDir)) {
+          this.logger.info(`✅ COMPLETED: getAnalysisHistory for ${symbol} (0 files - directory doesn't exist)`);
+          return this.createSuccessResponse([]);
+        }
+
+        // Read directory contents
+        const files = await fs.readdir(storageDir);
+        this.logger.info(`📁 Found ${files.length} files in ${storageDir}`);
+        
+        // Filter by analysis type if specified
+        const filteredFiles = analysisType ? 
+          files.filter(file => file.startsWith(`${analysisType}_`)) : 
+          files;
+        
+        this.logger.info(`🔎 After filtering: ${filteredFiles.length} files`);
+        
+        // Load and sort by timestamp
+        const analyses: any[] = [];
+        for (const file of filteredFiles.slice(0, Math.min(limit * 2, 50))) {
+          try {
+            const filePath = path.join(storageDir, file);
+            const content = await fs.readFile(filePath, 'utf8');
+            const data = JSON.parse(content);
+            
+            if (data && data.timestamp) {
+              analyses.push({
+                file: `analysis/${symbol}/${file}`,
+                timestamp: data.timestamp,
+                symbol: data.symbol,
+                analysisType: data.analysisType,
+                created: new Date(data.timestamp).toISOString(),
+                metadata: data.metadata
+              });
+            }
+          } catch (fileError) {
+            this.logger.error(`Failed to read file ${file}:`, fileError);
+            // Continue with other files
+          }
+        }
+
+        // Sort by timestamp (newest first) and limit
+        const sortedAnalyses = analyses
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .slice(0, limit);
+
+        this.logger.info(`✅ COMPLETED: getAnalysisHistory for ${symbol} (${sortedAnalyses.length} files)`);
+        return this.createSuccessResponse(sortedAnalyses);
+
+      } catch (error) {
+        this.logger.error(`❌ FAILED: getAnalysisHistory for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to get analysis history: ${error}`);
+      }
+    });
   }
 
   // ====================

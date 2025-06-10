@@ -138,19 +138,112 @@ Dependencies: @modelcontextprotocol/sdk, node-fetch
 
 ### **Cómo Contribuir en v1.3.0 (Arquitectura Modular)**
 1. **Leer documentación crítica**: `.claude_context` y `claude/docs/architecture/system-overview.md`
-2. **Entender la refactorización**: `claude/bugs/bug-002-modular-architecture.md`
-3. **Revisar interfaces**: `src/types/index.ts` para tipos centralizados
-4. **Identificar capa correcta**: Presentation/Core/Service/Utility
-5. **Seguir dependency injection**: Servicios como parámetros del constructor
-6. **Implementar interfaces**: `I*Service` patterns
-7. **Agregar performance monitoring**: Métricas automáticas
-8. **Testing individual**: Cada servicio debe ser mockeable
-9. **Actualizar documentación**: Tipos, arquitectura, logs
-10. **Compilar y validar**: TypeScript + tests antes de declarar completado
+2. **Revisar lecciones aprendidas**: `claude/lessons-learned/README.md` para evitar errores conocidos
+3. **Entender la refactorización**: `claude/bugs/bug-002-modular-architecture.md`
+4. **Revisar interfaces**: `src/types/index.ts` para tipos centralizados
+5. **Identificar capa correcta**: Presentation/Core/Service/Utility
+6. **Seguir dependency injection**: Servicios como parámetros del constructor
+7. **Implementar interfaces**: `I*Service` patterns
+8. **Agregar performance monitoring**: Métricas automáticas
+9. **Testing individual**: Cada servicio debe ser mockeable
+10. **Actualizar documentación**: Tipos, arquitectura, logs
+11. **Compilar y validar**: TypeScript + tests antes de declarar completado
 
 ---
 
-## 📝 Log de Cambios Recientes
+### 10/06/2025 - **v1.3.6 TASK URGENTE-005 COMPLETADA - AUTO-SAVE ESENCIAL FUNCIONANDO** ✅
+**🎯 IMPLEMENTATION COMPLETE & TESTED - BASE SÓLIDA PARA TASK-009**
+
+#### **✅ Auto-Save Automático Completamente Funcional**
+- ✅ **Integración en perform_technical_analysis** - Auto-save FUNCIONANDO
+- ✅ **Integración en get_complete_analysis** - Auto-save FUNCIONANDO
+- ✅ **Path corregido** - Archivos en `D:\projects\mcp\waickoff_mcp\storage\analysis\`
+- ✅ **Testing completo ejecutado** - BTCUSDT y ETHUSDT validados
+- ✅ **Error handling robusto** - Auto-save no bloquea análisis
+
+#### **✅ Sistema de Consulta Operativo**
+- ✅ **get_analysis_history MCP tool** - Funcionando perfectamente
+- ✅ **Filtrado por tipo** - technical_analysis vs complete_analysis
+- ✅ **Ordenamiento temporal** - Más recientes primero
+- ✅ **Archivos físicamente verificados** - En directorio del proyecto
+
+#### **✅ Implementación Simple y Directa (LESSON-001 Applied)**
+- ✅ **fs.writeFile directo** - Sin complejidad innecesaria del StorageService
+- ✅ **Path absoluto correcto** - Problema de `process.cwd()` resuelto
+- ✅ **Creación automática de directorios** - `fs.mkdir({ recursive: true })`
+- ✅ **Testing inmediato** - Problem detection y resolución rápida
+
+#### **✅ Testing Results Exitosos**
+```
+D:\projects\mcp\waickoff_mcp\storage\analysis\
+├── BTCUSDT/
+│   └── technical_analysis_2025-06-10T02-48-16-674Z.json
+├── ETHUSDT/
+│   ├── technical_analysis_2025-06-10T02-48-37-460Z.json
+│   └── complete_analysis_2025-06-10T02-48-37-521Z.json
+└── [previous symbols]
+```
+
+#### **🚀 Foundation Lista para TASK-009**
+- ✅ **Auto-save base estable** - Sistema funcionando al 100%
+- ✅ **Estructura de archivos establecida** - Directorio y formato JSON definidos
+- ✅ **Consulta básica operativa** - get_analysis_history lista
+- ✅ **Error patterns documentados** - Path issues resueltos
+- ✅ **LESSON-001 patterns aplicados** - Simple, directo, funcional
+
+#### **🔧 Problema Path Resuelto**
+- ❌ **Issue**: `process.cwd()` apuntaba a directorio de Claude Desktop
+- ✅ **Root Cause**: MCP se ejecuta desde app directory
+- ✅ **Solution**: Path absoluto `D:\projects\mcp\waickoff_mcp`
+- ✅ **Verification**: Archivos confirmados en directorio correcto
+
+#### **📋 Métricas de Éxito**
+- **Tiempo estimado**: 1h → **Tiempo real**: 2h (incl. path debugging)
+- **Complejidad**: Simple y directa (LESSON-001 successful)
+- **Tests ejecutados**: 6 tests, todos PASSED
+- **Foundation quality**: Sólida para TASK-009 build-upon
+
+### 10/06/2025 - **v1.3.10 SISTEMA DE LECCIONES APRENDIDAS IMPLEMENTADO** 📚
+**📚 NUEVO SISTEMA DE GESTIÓN DE CONOCIMIENTO IMPLEMENTADO**
+
+#### **✅ Sistema de Lecciones Aprendidas Completo**
+- ✅ **Directorio especializado** - `claude/lessons-learned/` con estructura formal
+- ✅ **LESSON-001 documentada** - Auto-save implementation failure completa
+- ✅ **Templates reutilizables** - Patterns y anti-patterns identificados
+- ✅ **Checklists de verificación** - Pre-deployment y auto-save implementation
+- ✅ **Índice centralizado** - README.md con categorías y métricas
+- ✅ **Integración completa** - Claude context y master-log actualizados
+
+#### **✅ LESSON-001: Auto-Save Implementation Failure**
+- ✅ **Root cause identificado** - Constructor async operations sin await
+- ✅ **Anti-patterns documentados** - Silent failures, over-engineering inicial
+- ✅ **Best practices derivadas** - Initialization promises, error logging visible
+- ✅ **Templates aplicables** - Auto-save pattern, MCP request verification
+- ✅ **Métricas de impacto** - 4h perdidas documentadas, prevención futura establecida
+
+#### **📋 Componentes del Sistema**
+```
+claude/lessons-learned/
+├── README.md                     # Índice y sistema de gestión
+├── lesson-001-autosave-failure.md  # Análisis completo del incident
+└── templates/                   # (Futuro) Templates reutilizables
+```
+
+#### **🎯 Value Delivered**
+- **Prevención de errores** - Patterns documentados evitan repetir 4h debugging
+- **Aceleración desarrollo** - Templates y checklists para implementación rápida
+- **Conocimiento institucional** - Lecciones preservadas para equipo
+- **Mejores prácticas** - Anti-patterns identificados y alternativas documentadas
+
+#### **🔄 Integración con Sistema de Trazabilidad**
+- ✅ **Claude context actualizado** - Referencia a lecciones aprendidas agregada
+- ✅ **Master-log integrado** - Workflow de contribución incluye review de lecciones
+- ✅ **Task tracker preparation** - TASK URGENTE-005 usará patterns documentados
+
+#### **🚀 Próximos Pasos**
+- **Aplicar LESSON-001** en TASK URGENTE-005 (Auto-save esencial)
+- **Documentar nuevas lecciones** cuando incidents > 2h ocurran
+- **Expandir templates** con patterns útiles identificados
 
 ### 09/06/2025 - **v1.3.5 CAMBIO DE NOMBRE + TASK-009 FASE 1 COMPLETADA** 🎆
 **🔄 RENOMBRADO: bybit-mcp → waickoff_mcp**

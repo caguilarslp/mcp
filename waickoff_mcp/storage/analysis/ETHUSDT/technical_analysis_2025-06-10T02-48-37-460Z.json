@@ -1,0 +1,159 @@
+{
+  "timestamp": 1749523717475,
+  "symbol": "ETHUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "ETHUSDT",
+      "period": "1d",
+      "currentPrice": 2696.12,
+      "highestPrice": 2726.95,
+      "lowestPrice": 2476.99,
+      "volatilityPercent": 9.271100692847503,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    },
+    "volume": {
+      "symbol": "ETHUSDT",
+      "interval": "60",
+      "avgVolume": 4725.795688333333,
+      "currentVolume": 5902.95422,
+      "maxVolume": 16175.41895,
+      "minVolume": 904.17345,
+      "volumeSpikes": [
+        {
+          "timestamp": "2025-06-08T22:00:00.000Z",
+          "volume": 8935.01932,
+          "multiplier": 1.8906909881986778,
+          "price": 2507.83
+        },
+        {
+          "timestamp": "2025-06-09T10:00:00.000Z",
+          "volume": 7341.97672,
+          "multiplier": 1.5535958818798041,
+          "price": 2535
+        },
+        {
+          "timestamp": "2025-06-09T16:00:00.000Z",
+          "volume": 10834.00372,
+          "multiplier": 2.292524779847365,
+          "price": 2557.92
+        },
+        {
+          "timestamp": "2025-06-09T20:00:00.000Z",
+          "volume": 10437.12311,
+          "multiplier": 2.208543026048785,
+          "price": 2588.86
+        },
+        {
+          "timestamp": "2025-06-09T21:00:00.000Z",
+          "volume": 15370.35835,
+          "multiplier": 3.2524381847368296,
+          "price": 2643.59
+        }
+      ],
+      "vwap": {
+        "current": 2571.249092185192,
+        "priceVsVwap": "above",
+        "difference": 4.85642982604559
+      },
+      "trend": "increasing"
+    },
+    "volumeDelta": {
+      "symbol": "ETHUSDT",
+      "interval": "5",
+      "current": 5.714999241000157,
+      "average": -148.56841942143132,
+      "bias": "seller",
+      "strength": 34.53009321886351,
+      "cumulativeDelta": 5509.103006592532,
+      "divergence": {
+        "detected": true,
+        "type": "Price down but delta up",
+        "signal": "bullish_reversal"
+      },
+      "marketPressure": {
+        "bullishCandles": 6,
+        "bearishCandles": 4,
+        "bullishPercent": 60,
+        "trend": "balanced"
+      }
+    },
+    "supportResistance": {
+      "symbol": "ETHUSDT",
+      "interval": "60",
+      "currentPrice": 2696.12,
+      "resistances": [],
+      "supports": [
+        {
+          "level": 2544.85,
+          "type": "support",
+          "strength": 72.51171483284799,
+          "touches": 2,
+          "volumeConfirmation": 0.6242976956185294,
+          "lastTouchTime": "2025-06-08T21:00:00.000Z",
+          "priceDistance": 5.610655312078097,
+          "confidence": "strong"
+        },
+        {
+          "level": 2501.81,
+          "type": "support",
+          "strength": 70.15134515055851,
+          "touches": 3,
+          "volumeConfirmation": 0.6066975910778232,
+          "lastTouchTime": "2025-06-08T09:00:00.000Z",
+          "priceDistance": 7.207023426256989,
+          "confidence": "strong"
+        },
+        {
+          "level": 2530.89,
+          "type": "support",
+          "strength": 68.99521275674809,
+          "touches": 3,
+          "volumeConfirmation": 0.4604940755007024,
+          "lastTouchTime": "2025-06-08T08:00:00.000Z",
+          "priceDistance": 6.128436419743929,
+          "confidence": "strong"
+        }
+      ],
+      "criticalLevel": {
+        "level": 2544.85,
+        "type": "support",
+        "strength": 72.51171483284799,
+        "touches": 2,
+        "volumeConfirmation": 0.6242976956185294,
+        "lastTouchTime": "2025-06-08T21:00:00.000Z",
+        "priceDistance": 5.610655312078097,
+        "confidence": "strong"
+      },
+      "gridConfig": {
+        "optimalLowerBound": 2544.85,
+        "optimalUpperBound": 2830.926,
+        "keyLevels": [
+          2544.85,
+          2501.81,
+          2530.89
+        ],
+        "recommendedGridCount": 11,
+        "recommendation": "Strong S/R levels identified - Grid trading recommended"
+      },
+      "statistics": {
+        "totalPivotsFound": 10,
+        "priceRangeAnalyzed": {
+          "high": 2726.95,
+          "low": 2382.82
+        },
+        "avgVolume": 4087.6759025999986,
+        "periodsAnalyzed": 100,
+        "sensitivityUsed": 2
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.3.5",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-10T02:48:37.475Z"
+  }
+}

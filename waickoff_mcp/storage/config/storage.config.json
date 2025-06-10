@@ -3,27 +3,5 @@
   "maxFileSize": 10485760,
   "maxTotalSize": 1073741824,
   "compressionEnabled": false,
-  "autoCleanupDays": 30,
-  "categories": {
-    "market-data": {
-      "ttl": 7,
-      "maxSize": 209715200
-    },
-    "analysis": {
-      "ttl": 90,
-      "maxSize": 524288000
-    },
-    "patterns": {
-      "ttl": 365,
-      "maxSize": 104857600
-    },
-    "decisions": {
-      "ttl": 365,
-      "maxSize": 104857600
-    },
-    "reports": {
-      "ttl": 90,
-      "maxSize": 104857600
-    }
-  }
+  "autoCleanupDays": 30
 }

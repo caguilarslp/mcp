@@ -8,6 +8,21 @@
 
 ### **🔥 ALTA PRIORIDAD (Esta Semana)**
 
+#### 🚨 TASK URGENTE-005 - Auto-Save Esencial (NUEVA POST-RESET)
+- **Estado:** 🔄 INICIANDO - IMPLEMENTACIÓN LIMPIA
+- **Descripción:** Auto-save mínimo y funcional para análisis técnicos
+- **Prioridad:** **CRÍTICA** (Fundacional para base de conocimiento)
+- **Tiempo Estimado:** 1h (implementación simple y directa)
+- **Objetivo:** Auto-save básico funcionando al 100% sin complejidad
+- **Implementación:**
+  - ✅ **Directorio simple** - `/storage/analyses/`
+  - ✅ **Naming básico** - `SYMBOL_YYYY-MM-DD_HH-mm-ss.json`
+  - ✅ **Solo 2 herramientas** - `perform_technical_analysis` y `get_complete_analysis`
+  - ✅ **Sin cache/complejidad** - Solo `fs.writeFile` directo
+  - ✅ **Herramienta de consulta** - `get_analysis_history` básica
+- **Criterio de éxito:** Análisis se guardan automáticamente y son consultables
+- **Dependencias:** Ninguna - implementación independiente
+
 #### ⏳ TASK-003 - Documentar ADRs (COMPLETADA) 🎆
 - **Estado:** ✅ COMPLETADA
 - **Descripción:** Crear Architecture Decision Records para decisiones clave
@@ -38,23 +53,28 @@
   - API response parsing
   - Validación semántica de resultados
 
-#### 🆕 TASK-009 - Sistema de Almacenamiento Local (NUEVA)
-- **Estado:** PENDIENTE
+#### 🆕 TASK-009 - Sistema de Almacenamiento Local (REINICIADA POST-RESET)
+- **Estado:** 🔄 REINICIADA - POST GIT RESET
 - **Descripción:** Sistema de storage persistente para análisis históricos
-- **Prioridad:** **ALTA** (Fundacional para Waickoff AI)
+- **Prioridad:** **CRÍTICA** (Fundacional para Waickoff AI + Auto-save esencial)
 - **Tiempo Estimado:** 8-10h (dividido en 5 fases)
 - **Archivos:** `claude/tasks/task-009-storage-system.md`
+- **Situación Actual:**
+  - ✅ **DISEÑO COMPLETO** - Arquitectura y fases definidas
+  - ❌ **IMPLEMENTACIÓN PREVIA** - Reset por problemas de auto-save
+  - 🎯 **ENFOQUE ACTUAL** - Implementación limpia y progresiva
 - **Fases de implementación:**
-  - FASE 1: Infraestructura Base (2h) - StorageService CRUD
-  - FASE 2: Cache Manager (2h) - Sistema de cache con TTL
-  - FASE 3: Analysis Repository (3h) - Guardado/consulta de análisis
-  - FASE 4: Report Generator (2h) - Generación de reportes MD
-  - FASE 5: Integración MCP (1h) - Nuevas herramientas MCP
+  - 🔄 FASE 1: Infraestructura Base (2h) - StorageService CRUD
+  - ⏳ FASE 2: Cache Manager (2h) - Sistema de cache con TTL
+  - ⏳ FASE 3: Analysis Repository (3h) - Guardado/consulta de análisis
+  - ⏳ FASE 4: Report Generator (2h) - Generación de reportes MD
+  - ⏳ FASE 5: Integración MCP (1h) - Nuevas herramientas MCP
 - **Beneficios clave:**
   - Contexto histórico instantáneo
   - Base de conocimiento creciente
   - Compatibilidad total con Waickoff AI
   - Reducción de llamadas API redundantes
+  - **Auto-save esencial** para TASK URGENTE-005
 
 #### ✅ TASK-005 - Sistema de Logging Avanzado (COMPLETADA) 🎆
 - **Estado:** ✅ COMPLETADA
@@ -194,6 +214,15 @@ Las tareas se priorizan según:
 ---
 
 ## ✅ TAREAS COMPLETADAS
+
+### **v1.3.6 (10/06/2025)** 🎆
+- ✅ **TASK URGENTE-005**: Auto-Save Esencial COMPLETADA Y FUNCIONANDO
+  - ✅ Auto-save automático en `perform_technical_analysis` y `get_complete_analysis`
+  - ✅ Herramienta MCP `get_analysis_history` operativa
+  - ✅ Path corregido: archivos en `D:\\projects\\mcp\\waickoff_mcp\\storage\\analysis\\`
+  - ✅ Testing completo: BTCUSDT y ETHUSDT validados físicamente
+  - ✅ LESSON-001 patterns aplicados: simple, directo, funcional
+  - ✅ Foundation sólida establecida para TASK-009
 
 ### **v1.2.0 (08/06/2025)**
 - ✅ **TASK-002**: Implementar Support/Resistance dinámicos
