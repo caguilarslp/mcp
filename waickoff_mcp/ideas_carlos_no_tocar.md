@@ -18,6 +18,8 @@ trampa alcista y trampa bajista
 revisar minteos de binance, tether, etc ... significativo de próximas compras/subida
 revisar envios de exchanges de hot wallet a cold wallet, significativo de subida y binance sigue comprando para sus hot wallet
 revisar movimientos grandes ballenas
+necesitamos un historial completo de todas las monedas que tradeemos, historial desde el primer día
+necesitamos un método de análisis fundamental y estado economía usa, empleos, fed, tasas de interés, ...
 
 
 que hacemos con las zonas horarias para no tener problemas? yo estoy en ciudad de méxico gmt-6 pero trabajamos esa hora o mejor gmt, utc ... como lo manejamos? ... revisar zona_horaria_provisional.md

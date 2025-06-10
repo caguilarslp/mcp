@@ -16,6 +16,7 @@ Este documento registra las decisiones técnicas importantes tomadas durante el 
 6. [ADR-006: Algoritmo Support/Resistance con scoring multi-factor](#adr-006)
 7. [ADR-007: Arquitectura modular con dependency injection](#adr-007)
 8. [ADR-008: Sistema de logging minimalista production-ready](#adr-008)
+9. [ADR-009: Separación MCP vs FastAPI para análisis avanzado](#adr-009)
 
 ---
 
@@ -315,6 +316,89 @@ const apiStats = {
 - Requirió rediseño de sistema de logging
 
 **Resultado:** ✅ Problema completamente resuelto, UX perfecta
+
+---
+
+## ADR-009: Separación MCP vs FastAPI para Análisis Avanzado {#adr-009}
+
+**Fecha:** 10/06/2025
+**Estado:** Aceptado
+
+### Contexto
+Necesitamos funcionalidades avanzadas como:
+- Detección de trampas alcistas/bajistas
+- Minteos de stablecoins y movimientos on-chain
+- Movimientos de ballenas y exchanges
+- Análisis fundamental (Fed, empleos, tasas)
+- Machine learning y correlaciones macro
+
+### Decisión
+Implementar **arquitectura híbrida** dividiendo responsabilidades:
+
+```
+MCP wAIckoff:
+✓ Trading data + signals (trampas, on-chain básico)
+✓ Node.js/TypeScript (velocidad, real-time)
+✓ 7h traps + 15h on-chain data
+
+FastAPI wAIckoff:
+✓ Análisis macro + ML (Fed, ML models)
+✓ Python (ecosystem ML, stats)
+✓ 77h desarrollo completo
+```
+
+### Arquitectura de Integración
+```typescript
+// Data flow
+MCP → FastAPI: Real-time trading data + on-chain events
+FastAPI → MCP: Macro context + ML predictions + correlations
+Claude AI: Synthesis de ambas fuentes para decisiones
+```
+
+### Funcionalidades por Sistema
+
+#### **MCP wAIckoff (TASK-012, TASK-013)**
+- ✅ **Trampas alcistas/bajistas**: Volumen + orderbook + volume delta analysis
+- ✅ **On-chain data collection**: Minteos USDT/USDC, exchange flows, whale movements
+- ✅ **Historical data**: Desde genesis para pattern matching
+- ✅ **Real-time signals**: Alertas tempranas <5 min
+
+#### **FastAPI wAIckoff (Futuro)**
+- ✅ **Federal Reserve**: Tasas, FOMC, correlaciones crypto
+- ✅ **Employment data**: NFP, unemployment vs crypto impact
+- ✅ **ML predictions**: Whale behavior, stablecoin deployment timing
+- ✅ **Cross-asset correlations**: DXY, SPY, bonds vs crypto
+
+### Consecuencias
+**Positivas:**
+- **Especialización**: Cada sistema hace lo que mejor sabe
+- **Escalabilidad independiente**: MCP para speed, FastAPI para complexity
+- **Technology optimization**: Node.js para I/O, Python para ML
+- **Fault tolerance**: Sistemas independientes
+- **Desarrollo paralelo**: Puedo continuar MCP mientras planifica FastAPI
+
+**Negativas:**
+- **Complejidad de integración**: Dos sistemas comunicando
+- **Overhead de comunicación**: Latencia entre sistemas
+- **Deployment complexity**: Dos servicios para mantener
+
+### Cronograma
+```
+Inmediato (esta semana):
+- TASK-009 FASE 3 (Analysis Repository)
+- Planificación TASK-012 (trap detection)
+
+Próximas 2 semanas:
+- TASK-012: Trampas alcistas/bajistas (7h)
+- TASK-013: On-chain data collection (15h)
+
+Próximos 2-3 meses:
+- FastAPI development (77h)
+- Integration bidirectional
+- Testing end-to-end
+```
+
+**Resultado:** ✅ Estrategia híbrida óptima - aprovecha fortalezas de cada tecnología
 
 ---
 

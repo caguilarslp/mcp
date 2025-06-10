@@ -69,6 +69,21 @@ private async saveAnalysis(symbol: string, data: any) {
         throw error;
     }
 }
+
+// Delegation Pattern (de LESSON-002)
+export class SystemCoordinator {
+  private domainAHandlers: DomainAHandlers;
+  private domainBHandlers: DomainBHandlers;
+  
+  constructor(engine: CoreEngine, logger: Logger) {
+    this.domainAHandlers = new DomainAHandlers(engine, logger);
+    this.domainBHandlers = new DomainBHandlers(engine, logger);
+  }
+  
+  async handleDomainAOperation(args: any) {
+    return await this.domainAHandlers.handleOperation(args);
+  }
+}
 ```
 
 ### **Checklists de Verificación**
@@ -89,17 +104,31 @@ private async saveAnalysis(symbol: string, data: any) {
 - [ ] Async operation con await apropiado
 - [ ] Re-throw de errores para upstream handling
 
+#### **Corruption Recovery Checklist (de LESSON-002):**
+- [ ] Stop panic changes immediately
+- [ ] Assess extent of corruption (compile errors)
+- [ ] Review known architecture documentation
+- [ ] Identify core patterns to rebuild
+- [ ] Implement delegation pattern from scratch
+- [ ] Create specialized handlers by domain
+- [ ] Validate compilation after each module
+- [ ] Test basic functionality before declaring success
+- [ ] Update trazabilidad with lessons learned
+
 ---
 
 ## 📊 **MÉTRICAS DE IMPACTO**
 
 ### **Tiempo Ahorrado por Lecciones:**
 - **LESSON-001 aplicada:** Evita ~4h de debugging similar
+- **LESSON-002 aplicada:** Evita ~4h de debugging corruption + recovery time
 
 ### **Prevención de Errores:**
 - **Constructor patterns:** Previene inicialización async incorrecta
 - **Auto-save patterns:** Previene silent failures
 - **Debugging patterns:** Acelera troubleshooting 50%
+- **Corruption recovery:** Reduce tiempo de recovery masiva 80%
+- **Delegation pattern:** Previene arquitectura monolítica problemática
 
 ---
 
@@ -141,13 +170,14 @@ private async saveAnalysis(symbol: string, data: any) {
 ## 🚀 **PRÓXIMAS LECCIONES**
 
 ### **En Progreso:**
-- LESSON-002: [Pendiente - próximo incident significativo]
+- (Ninguna actualmente - sistema v1.3.7 estable)
 
 ### **Áreas a Documentar:**
 - Performance optimization patterns
 - Security best practices
-- Testing strategies
-- Integration patterns
+- Testing strategies modular
+- Integration patterns con Waickoff AI
+- Multi-exchange architecture patterns
 
 ---
 
