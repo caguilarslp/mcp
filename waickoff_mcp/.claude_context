@@ -1,11 +1,12 @@
-# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.3.7 (PRODUCTION READY)
+# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.3.9 (PRODUCTION READY)
 
-## 🎆 ESTADO CRÍTICO v1.3.7 - ARQUITECTURA MODULAR COMPLETAMENTE REPARADA Y VALIDADA
-**✅ REPARACIÓN CRÍTICA COMPLETADA**: Archivo corrupto `mcp-handlers.ts` completamente reconstruido
-**✅ ARQUITECTURA MODULAR**: Sistema de handlers especializados 100% implementado
-**🎯 COMPILACIÓN**: 200+ errores TypeScript corregidos → 0 errores
-**✅ COMPILACIÓN EXITOSA**: `npm run build` ejecutado con éxito - sistema 100% operativo
-**🚀 PRODUCTION READY**: Base sólida para TASK-009 FASE 3 + desarrollo continuo
+## 🎆 ESTADO CRÍTICO v1.3.9 - TASK-014 COMPLETADA + SISTEMA DE GUARDADO UNIFICADO
+**✅ AUTO-SAVE LEGACY ELIMINADO**: Un solo sistema de guardado con AnalysisRepository
+**✅ BUG-004 RESUELTO**: Pattern matching cross-platform funcionando perfectamente
+**✅ STORAGE MODULARIZADO**: FileSystemService + PatternMatcher + StorageConfigService
+**🎯 FASE 3 COMPLETA**: 7 herramientas Analysis Repository 100% operativas
+**✅ COMPILACIÓN EXITOSA**: `npm run build` sin errores - sistema robusto
+**🚀 PRODUCTION READY**: TASK-009 al 85% (solo falta Report Generator)
 
 ## IMPORTANTE: Leer ANTES de dar cualquier sugerencia
 
@@ -31,13 +32,14 @@
 - `claude/docs/timezone-future-recommendations.md` - **NUEVA** recomendaciones timezone
 - `claude/decisions/adr-log.md` - Decisiones arquitectónicas
 - `claude/lessons-learned/README.md` - **NUEVA** índice de lecciones aprendidas
+- `claude/bugs/bug-004-storage-query-pattern.md` - **NUEVA** solución pattern matching
 - `ROADMAP_AVANZADO.md` - Visión general de funcionalidades futuras
 
 #### **🐛 Gestión de Bugs:**
 - **SISTEMA COMPLETO**: Todos los bugs críticos se documentan en `claude/bugs/`
 - **Formato**: `bug-XXX-description.md` con análisis completo
 - **Registro**: `claude/bugs/README.md` con índice y métricas
-- **Ejemplos**: BUG-001 (S/R classification), BUG-002 (Architecture refactor)
+- **Ejemplos**: BUG-001 (S/R classification), BUG-002 (Architecture refactor), BUG-004 (Storage pattern)
 
 #### **📚 Gestión de Lecciones Aprendidas:**
 - **SISTEMA NUEVO**: Todas las lecciones críticas en `claude/lessons-learned/`
@@ -45,20 +47,46 @@
 - **Registro**: `claude/lessons-learned/README.md` con índice y templates
 - **Ejemplos**: LESSON-001 (Auto-save implementation failure)
 
-### 🎆 ESTADO ACTUAL (v1.3.7 - 10/06/2025) - ARQUITECTURA MODULAR COMPLETAMENTE REPARADA Y OPERATIVA
-- **Fase:** ✅ ARQUITECTURA MODULAR TOTALMENTE REPARADA + COMPILACIÓN EXITOSA
-- **Última Actualización:** v1.3.7 con sistema de handlers especializados funcionando perfectamente
-- **Próxima Decisión:** Continuar TASK-009 FASE 3 con base sólida reparada
-- **Bloqueadores:** NINGUNO - Compilación 100% limpia, 0 errores TypeScript
-- **UX Status:** 🎆 OPTIMIZADO - Sistema modular + Performance boost con cache
-- **Funcionalidad:** ✅ Sistema MCP + Storage + Cache + Modularidad 100% operativo y validado
+### 🎆 ESTADO ACTUAL (v1.3.9 - 10/06/2025) - SISTEMA DE GUARDADO UNIFICADO
+- **Fase:** ✅ TASK-014 COMPLETADA + TASK-009 FASE 3 COMPLETADA 
+- **Última Actualización:** v1.3.9 con auto-save legacy eliminado (un solo sistema de guardado)
+- **Próxima Decisión:** Continuar con TASK-009 FASE 4 (Report Generator) o iniciar TASK-012
+- **Bloqueadores:** NINGUNO - Sistema limpio y unificado
+- **UX Status:** 🎆 OPTIMIZADO - Sistema modular + Performance boost con cache + Código limpio
+- **Funcionalidad:** ✅ Sistema MCP + Storage + Cache + Analysis Repository 100% operativo
 
-### 🎆 ARQUITECTURA MODULAR v1.3.7 - COMPLETAMENTE REPARADA Y OPERATIVA
-**✅ REPARACIÓN EXITOSA**: Archivo corrupto `mcp-handlers.ts` reconstruido desde cero
-**🏗️ DELEGATION PATTERN**: Sistema de handlers especializados implementado correctamente
-**🧪 100% TESTEABLE**: Cada handler independiente con dependency injection
-**🔄 BACKWARD COMPATIBLE**: Todas las herramientas MCP mantienen funcionalidad
-**✅ CLEAN COMPILATION**: 200+ errores TypeScript → 0 errores
+### 🏗️ NUEVA ARQUITECTURA STORAGE SERVICE v1.3.8
+**✅ REFACTORIZACIÓN MODULAR COMPLETA**: StorageService dividido en servicios especializados
+**🔧 BUG-004 RESUELTO**: Pattern matching cross-platform robusto
+**📁 SEPARACIÓN DE CONCERNS**: Cada servicio con responsabilidad única
+
+#### **📂 Storage Service Architecture**
+- ✅ **FileSystemService** (`src/services/storage/fileSystemService.ts`)
+  - Operaciones de bajo nivel: read, write, delete, walk
+  - Manejo atómico con archivos temporales
+  - Error handling especializado
+  
+- ✅ **PatternMatcher** (`src/services/storage/patternMatcher.ts`)
+  - Conversión glob → regex mejorada
+  - Soporte `*` (single dir) y `**` (recursive)
+  - Normalización consistente de paths
+  
+- ✅ **StorageConfigService** (`src/services/storage/storageConfig.ts`)
+  - Gestión centralizada de configuración
+  - Validación de límites y constraints
+  - Estructura de directorios predefinida
+  
+- ✅ **StorageService** (`src/services/storage.ts`)
+  - Orquestador de alto nivel
+  - Delega a servicios especializados
+  - API pública simplificada
+
+### 🎆 ARQUITECTURA MODULAR v1.3.8 - COMPLETAMENTE OPERATIVA
+**✅ SISTEMA DE HANDLERS**: MCPHandlers + delegation pattern funcionando
+**🏗️ STORAGE MODULARIZADO**: Nueva arquitectura para servicios de storage
+**🧪 100% TESTEABLE**: Cada servicio independiente y mockeable
+**🔄 BACKWARD COMPATIBLE**: APIs MCP sin cambios
+**✅ CLEAN COMPILATION**: 0 errores TypeScript
 
 #### **🎯 CAPAS Y SERVICIOS IMPLEMENTADOS**
 
@@ -76,12 +104,16 @@
 - ✅ **Market Analysis Engine** (`src/core/engine.ts`) - Orquestador principal
 - ✅ **System Configuration** - Configuración centralizada
 - ✅ **Health Monitoring** - Estado del sistema
-- ✅ **Performance Tracking** - Métricas automticas
+- ✅ **Performance Tracking** - Métricas automáticas
+- ✅ **Analysis Repository Integration** - FASE 3 completa
 
 #### **⚙️ Service Layer (Specialized Services)**
 - ✅ **Market Data Service** (`src/services/marketData.ts`) - Bybit API integration
 - ✅ **Technical Analysis Service** (`src/services/analysis.ts`) - Análisis técnico
 - ✅ **Trading Service** (`src/services/trading.ts`) - Grid trading & strategies
+- ✅ **Storage Service** (`src/services/storage/`) - Sistema modularizado nuevo
+- ✅ **Cache Manager** (`src/services/cacheManager.ts`) - Cache con TTL
+- ✅ **Analysis Repository** (`src/repositories/analysisRepository.ts`) - Gestión de análisis
 - 🔮 **Multi-Exchange Services** (Futuro) - Binance, Coinbase, etc.
 
 #### **🛠️ Utility Layer (Common Tools)**
@@ -114,20 +146,34 @@ export class MCPHandlers {
 
 ##### **✅ Handlers Especializados por Dominio**
 - **MarketDataHandlers**: `handleGetTicker`, `handleGetOrderbook`, `handleGetMarketData`
-- **AnalysisRepositoryHandlers**: TASK-009 FASE 3 handlers completos
+- **AnalysisRepositoryHandlers**: TASK-009 FASE 3 handlers completos (7 herramientas)
 - **CacheHandlers**: `handleGetCacheStats`, `handleClearCache`, `handleInvalidateCache`
 
-### Funcionalidades IMPLEMENTADAS v1.3.7 (SISTEMA MODULAR REPARADO)
+### Funcionalidades IMPLEMENTADAS v1.3.9 (SISTEMA COMPLETO)
 
 #### **🏗️ ARQUITECTURA & INFRAESTRUCTURA**
 - ✅ **🎆 ARQUITECTURA MODULAR REPARADA** - Sistema de handlers completamente funcional
 - ✅ **Delegation pattern** - MCPHandlers coordina handlers especializados
 - ✅ **Handlers por dominio** - MarketData, AnalysisRepository, Cache separados
-- ✅ **Compilación limpia** - 200+ errores TypeScript corregidos
+- ✅ **Compilación limpia** - 0 errores TypeScript
 - ✅ **Separation of concerns** - Cada handler con responsabilidad específica
-- ✅ **TASK-009 FASE 3 ready** - AnalysisRepositoryHandlers implementados
-- ✅ **100% Testeable** - Cada handler mockeable independientemente
+- ✅ **TASK-009 FASE 3 COMPLETA** - AnalysisRepository con 7 herramientas operativas
+- ✅ **Storage Service Modularizado** - FileSystem + PatternMatcher + Config
+- ✅ **100% Testeable** - Cada servicio mockeable independientemente
 - ✅ **Performance optimizado** - Eliminado código duplicado masivo
+
+#### **📦 TASK-009 STORAGE SYSTEM (85% COMPLETO)**
+- ✅ **FASE 1: StorageService Base** - Operaciones CRUD funcionando
+- ✅ **FASE 2: Cache Manager** - In-memory cache con TTL y LRU
+- ✅ **FASE 3: Analysis Repository** - 7 herramientas MCP operativas:
+  - `get_analysis_by_id` - Buscar por UUID
+  - `get_latest_analysis` - Último análisis por tipo
+  - `search_analyses` - Búsqueda compleja
+  - `get_analysis_summary` - Resumen agregado
+  - `get_aggregated_metrics` - Métricas estadísticas
+  - `find_patterns` - Buscar patrones
+  - `get_repository_stats` - Estadísticas del repo
+- ⏳ **FASE 4: Report Generator** - Pendiente (15% restante)
 
 #### **🔍 SISTEMA DE LOGGING Y DEBUGGING OPTIMIZADO**
 - ✅ **API Statistics básicos** - Total requests, errors, success rate en memoria
@@ -155,10 +201,11 @@ export class MCPHandlers {
 - ✅ **Build system** - TypeScript compilation sin errores
 - ✅ **Development tools** - ESLint, TypeDoc, Jest configurados
 
-### En DESARROLLO ACTIVO v1.3.7
-- 🚧 **TASK-009 FASE 3** - Analysis Repository (handlers implementados, listo para Core)
-- 🚧 **Tests unitarios** - Para handlers modularizados (CRÍTICO post-reparación)
-- 🚧 **Documentación handlers** - Guías de uso para sistema modular
+### En DESARROLLO ACTIVO v1.3.9
+- ✅ **TASK-009 FASE 3** - Analysis Repository COMPLETADA + StorageService refactorizado
+- 🚧 **TASK-009 FASE 4** - Report Generator (15% restante para completar TASK-009)
+- 🚧 **Tests unitarios** - Para servicios de storage modularizados (CRÍTICO)
+- 🚧 **Documentación** - Actualizar guías con nueva arquitectura de storage
 
 ### NUEVAS FUNCIONALIDADES PLANIFICADAS v1.4.0
 - 🎯 **TASK-012** - Detección Trampas Alcistas/Bajistas (7h) - Bull/bear trap detection
@@ -177,7 +224,7 @@ export class MCPHandlers {
 - Mantener separación: MCP = datos, Waickoff = inteligencia
 - Futuro: múltiples MCPs (Binance, etc.) alimentando Waickoff
 
-### WORKFLOW v1.3.0 para BUGS CRÍTICOS:
+### WORKFLOW v1.3.9 para BUGS CRÍTICOS:
 1. **Detectar y documentar** en `claude/bugs/bug-XXX-description.md`
 2. **Analizar root cause** con detalles técnicos
 3. **Implementar fix** siguiendo arquitectura actual
@@ -185,16 +232,16 @@ export class MCPHandlers {
 5. **Crear tests** para evitar regresión (TASK-004 urgente)
 6. **Compilar y validar** antes de declarar resuelto
 
-### WORKFLOW v1.3.7 para DESARROLLO MODULAR (ACTUALIZADO):
+### WORKFLOW v1.3.9 para DESARROLLO MODULAR (ACTUALIZADO):
 1. **Leer arquitectura**: Este archivo + `claude/master-log.md` para estado actual
-2. **Identificar handler**: MarketData, AnalysisRepository, Cache, o nuevo dominio
-3. **Seguir delegation pattern**: MCPHandlers → Handler especializado → Engine
-4. **Crear handler especializado**: Si es nuevo dominio, seguir pattern existente
-5. **Actualizar MCPAdapter**: Agregar routing en switch statement
-6. **Testing modular**: Cada handler debe ser mockeable independientemente
+2. **Identificar capa/servicio**: Presentation/Core/Service/Utility
+3. **Para nuevos servicios**: Crear interfaces primero (`I*Service`)
+4. **Modularizar si es complejo**: Dividir en servicios especializados (como Storage)
+5. **Seguir delegation pattern**: Para handlers MCP
+6. **Testing modular**: Cada servicio debe ser mockeable
 7. **Compilar y validar**: TypeScript + tests antes de declarar completado
 
-### REGLAS CÓDIGO v1.3.0 (ARQUITECTURA MODULAR - OBLIGATORIO):
+### REGLAS CÓDIGO v1.3.9 (ARQUITECTURA MODULAR - OBLIGATORIO):
 
 ### ⚠️ REGLAS CRÍTICAS DE DOCUMENTACIÓN:
 1. **NO CREAR DOCUMENTACIÓN** sin visto bueno explícito del usuario
@@ -203,7 +250,7 @@ export class MCPHandlers {
 4. **PREGUNTAR ANTES DE ASUMIR** - Si algo no está claro, preguntar
 5. **CÓDIGO PRIMERO** - La implementación es la prioridad, no la documentación
 
-### REGLAS CÓDIGO v1.3.0 (ARQUITECTURA MODULAR - OBLIGATORIO):
+### REGLAS CÓDIGO v1.3.8 (ARQUITECTURA MODULAR - OBLIGATORIO):
 1. **TypeScript estricto** - Tipos definidos, interfaces implementadas
 2. **Dependency injection** - Servicios inyectados por constructor
 3. **Interface segregation** - Implementar `I*Service` interfaces
@@ -212,16 +259,18 @@ export class MCPHandlers {
 6. **Separation of concerns** - Cada clase una responsabilidad
 7. **Backward compatibility** - No romper APIs MCP existentes
 8. **Documentation** - JSDoc en interfaces y métodos públicos
+9. **Modularización** - Si un servicio > 300 líneas, considerar dividirlo
+10. **Path normalization** - Siempre normalizar a forward slashes para patterns
 
-### Comandos de desarrollo (v1.3.0):
+### Comandos de desarrollo (v1.3.9):
 ```bash
 npm run build      # Compilar TypeScript modular
 npm run dev        # Modo desarrollo con watch
 npm start          # Ejecutar MCP compilado
 npm run clean      # Limpiar build
-npm rwaickoff_mcp     # Ejecutar tests unitarios (TASK-004)
+npm run test       # Ejecutar tests unitarios (TASK-004)
 npm run lint       # Verificar código con ESLint
-npm run docs       # Generar documewaickoff_mcpypeDoc
+npm run docs       # Generar documentación con TypeDoc
 ```
 
 ### Configuración Claude Desktop:
@@ -237,41 +286,46 @@ npm run docs       # Generar documewaickoff_mcpypeDoc
 }
 ```
 
-### FILOSOFÍA v1.3.4 (LOGGING MINIMALISTA - PRODUCTION READY):
-- **"De Logging Complejo a Simplicidad Efectiva"** - Solo lo esencial para debugging
-- **"Zero Errors UX - Production Quality"** - Claude Desktop completamente limpio
-- **"Minimal Overhead - Maximum Stability"** - Performance optimizado sin logs verbosos
-- **"Essential Debugging - No Complex Objects"** - API stats básicos + Error tracking simple
-- **"Ready for Integration"** - Base sólida para Waickoff AI sin interferencias
-- **"Separation of Concerns"** - Logging interno vs protocolo externo separados
-- **"User Experience First"** - Técnicos contentos, usuarios sin errores molestos
+### FILOSOFÍA v1.3.9 (MODULARIDAD + PRODUCTION READY):
+- **"Divide y vencerás"** - Servicios especializados sobre monolitos
+- **"Pattern matching robusto"** - Cross-platform sin sorpresas
+- **"Zero Errors UX"** - Claude Desktop sin errores molestos
+- **"Testeable por diseño"** - Cada módulo independiente
+- **"Ready for Scale"** - Arquitectura que crece sin dolor
+- **"Separation of Concerns"** - Cada servicio una responsabilidad
+- **"User Experience First"** - Funcionalidad robusta sin fricción
 
-## 🎯 ENFOQUE ACTUAL v1.3.5: BUG-003 DEFINITIVAMENTE RESUELTO + SISTEMA PRODUCTION-READY
-**✅ PROBLEMA CRÍTICO RESUELTO**: Errores JSON startup eliminados 100% - Claude Desktop perfectamente limpio
-**⚡ SOLUCIÓN ROBUSTA**: Console override completo + Silent startup + Logging diferido
-**🚀 PRODUCTION QUALITY**: Base sólida sin interferencias para desarrollo continuo
+## 🎯 ENFOQUE ACTUAL v1.3.9: SISTEMA LIMPIO Y UNIFICADO
+**✅ TASK-014 COMPLETADA**: Auto-save legacy eliminado - un solo sistema de guardado
+**✅ BUG-004 RESUELTO**: Pattern matching funcionando perfectamente
+**✅ STORAGE MODULARIZADO**: FileSystem + PatternMatcher + Config services
+**🎯 7 HERRAMIENTAS OPERATIVAS**: Analysis Repository 100% funcional
+**🔮 PRÓXIMA DECISIÓN**: FASE 4 Report Generator vs TASK-012 Bull/Bear Traps
 
-**REFERENCIAS CRÍTICAS v1.3.0**: 
+**REFERENCIAS CRÍTICAS v1.3.9**: 
 - **Arquitectura completa**: `claude/docs/architecture/system-overview.md`
-- **Refactorización**: `claude/bugs/bug-002-modular-architecture.md`
+- **Storage refactorizado**: `src/services/storage/` (nueva estructura)
+- **Bug resuelto**: `claude/bugs/bug-004-storage-query-pattern.md`
 - **APIs actualizadas**: `claude/docs/api/tools-reference.md`
 - **Tipos centralizados**: `src/types/index.ts`
 - **Core engine**: `src/core/engine.ts`
 
-## 📋 OBLIGATORIO AL TERMINAR CUALQUIER TRABAJO (v1.3.0):
+## 📋 OBLIGATORIO AL TERMINAR CUALQUIER TRABAJO (v1.3.9):
 1. **Actualizar tipos centralizados** en `src/types/index.ts` si es necesario
 2. **Verificar interfaces** implementadas correctamente
 3. **Actualizar documentación** de arquitectura si hay cambios estructurales
-4. **Crear documentación en claude/docs/** para features completadas (TASK-005, TASK-009, etc)
+4. **Crear documentación en claude/docs/** para features completadas
 5. **Performance metrics** verificar que estén funcionando
 6. **Tests unitarios** crear/actualizar para nuevos servicios
 7. **Backward compatibility** verificar que MCP siga funcionando
 8. **Build limpio** sin errores TypeScript
 9. **Documentar decisiones** técnicas importantes en logs
+10. **Path normalization** verificar consistencia cross-platform
 
-**🎆 SISTEMA v1.3.7 - ARQUITECTURA MODULAR COMPLETAMENTE REPARADA**
+**🎆 SISTEMA v1.3.9 - CÓDIGO LIMPIO Y UNIFICADO**
 
-**✅ REPARACIÓN CRÍTICA COMPLETADA**: Archivo corrupto `mcp-handlers.ts` reconstruido desde cero
-**🏗️ DELEGATION PATTERN IMPLEMENTADO**: Sistema de handlers especializados 100% funcional  
-**💪 COMPILACIÓN LIMPIA**: 200+ errores TypeScript → 0 errores
-**🔮 BASE SÓLIDA**: Lista para TASK-009 FASE 3 + desarrollo continuo
+**✅ BUG-004 RESUELTO**: StorageService pattern matching arreglado
+**🏗️ STORAGE MODULARIZADO**: FileSystem + PatternMatcher + Config  
+**💪 7 HERRAMIENTAS NUEVAS**: Analysis Repository 100% operativo
+**🔮 85% COMPLETADO**: Solo falta Report Generator para cerrar TASK-009
+**🧹 CÓDIGO LIMPIO**: Auto-save legacy eliminado, un solo sistema de guardado

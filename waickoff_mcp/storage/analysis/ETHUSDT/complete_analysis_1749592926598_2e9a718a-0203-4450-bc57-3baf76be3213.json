@@ -1,0 +1,641 @@
+{
+  "id": "2e9a718a-0203-4450-bc57-3baf76be3213",
+  "timestamp": 1749592926598,
+  "symbol": "ETHUSDT",
+  "analysisType": "complete_analysis",
+  "data": {
+    "marketData": {
+      "ticker": {
+        "symbol": "ETHUSDT",
+        "lastPrice": 2777.52,
+        "price24hPcnt": 0.0484,
+        "highPrice24h": 2807.06,
+        "lowPrice24h": 2641.71,
+        "volume24h": 265060.10641,
+        "bid1Price": 2777.52,
+        "ask1Price": 2777.53,
+        "timestamp": "2025-06-10T22:02:05.634Z"
+      },
+      "orderbook": {
+        "symbol": "ETHUSDT",
+        "bids": [
+          {
+            "price": 2777.52,
+            "size": 2.80999
+          },
+          {
+            "price": 2777.51,
+            "size": 0.002
+          },
+          {
+            "price": 2777.5,
+            "size": 1.717
+          },
+          {
+            "price": 2777.48,
+            "size": 0.004
+          },
+          {
+            "price": 2777.44,
+            "size": 0.90794
+          },
+          {
+            "price": 2777.36,
+            "size": 0.016
+          },
+          {
+            "price": 2777.33,
+            "size": 0.3
+          },
+          {
+            "price": 2777.31,
+            "size": 0.45454
+          },
+          {
+            "price": 2777.27,
+            "size": 0.00256
+          },
+          {
+            "price": 2777.21,
+            "size": 0.00181
+          },
+          {
+            "price": 2777.2,
+            "size": 0.032
+          },
+          {
+            "price": 2777.18,
+            "size": 4.95739
+          },
+          {
+            "price": 2777.17,
+            "size": 0.42629
+          },
+          {
+            "price": 2777.12,
+            "size": 2.3
+          },
+          {
+            "price": 2777.11,
+            "size": 2.27768
+          },
+          {
+            "price": 2777.07,
+            "size": 1.35529
+          },
+          {
+            "price": 2777.06,
+            "size": 5.10277
+          },
+          {
+            "price": 2777.05,
+            "size": 6.07765
+          },
+          {
+            "price": 2777.03,
+            "size": 5.34238
+          },
+          {
+            "price": 2777.02,
+            "size": 9.28921
+          },
+          {
+            "price": 2777.01,
+            "size": 0.59351
+          },
+          {
+            "price": 2777,
+            "size": 1.5
+          },
+          {
+            "price": 2776.96,
+            "size": 1.15183
+          },
+          {
+            "price": 2776.94,
+            "size": 3.60109
+          },
+          {
+            "price": 2776.92,
+            "size": 1.76
+          }
+        ],
+        "asks": [
+          {
+            "price": 2777.53,
+            "size": 3.42101
+          },
+          {
+            "price": 2777.64,
+            "size": 0.002
+          },
+          {
+            "price": 2777.65,
+            "size": 0.002
+          },
+          {
+            "price": 2777.67,
+            "size": 0.004
+          },
+          {
+            "price": 2777.71,
+            "size": 0.18797
+          },
+          {
+            "price": 2777.74,
+            "size": 1.01787
+          },
+          {
+            "price": 2777.78,
+            "size": 0.00203
+          },
+          {
+            "price": 2777.79,
+            "size": 0.016
+          },
+          {
+            "price": 2777.84,
+            "size": 0.61868
+          },
+          {
+            "price": 2777.85,
+            "size": 1.57825
+          },
+          {
+            "price": 2777.88,
+            "size": 0.30407
+          },
+          {
+            "price": 2777.95,
+            "size": 0.63186
+          },
+          {
+            "price": 2778.02,
+            "size": 0.30405
+          },
+          {
+            "price": 2778.06,
+            "size": 0.78194
+          },
+          {
+            "price": 2778.07,
+            "size": 0.89974
+          },
+          {
+            "price": 2778.08,
+            "size": 0.0027
+          },
+          {
+            "price": 2778.14,
+            "size": 0.60927
+          },
+          {
+            "price": 2778.15,
+            "size": 1.10404
+          },
+          {
+            "price": 2778.19,
+            "size": 0.6
+          },
+          {
+            "price": 2778.2,
+            "size": 0.85002
+          },
+          {
+            "price": 2778.21,
+            "size": 0.3
+          },
+          {
+            "price": 2778.22,
+            "size": 0.72053
+          },
+          {
+            "price": 2778.25,
+            "size": 0.03373
+          },
+          {
+            "price": 2778.26,
+            "size": 1.4
+          },
+          {
+            "price": 2778.27,
+            "size": 0.064
+          }
+        ],
+        "timestamp": "2025-06-10T22:02:05.572Z",
+        "spread": 0.010000000000218279
+      },
+      "recentKlines": [
+        {
+          "timestamp": "2025-06-09T23:00:00.000Z",
+          "open": 2665.93,
+          "high": 2694.1,
+          "low": 2657.61,
+          "close": 2680.26,
+          "volume": 10452.05491
+        },
+        {
+          "timestamp": "2025-06-10T00:00:00.000Z",
+          "open": 2680.26,
+          "high": 2726.95,
+          "low": 2677.59,
+          "close": 2698.92,
+          "volume": 16175.41895
+        },
+        {
+          "timestamp": "2025-06-10T01:00:00.000Z",
+          "open": 2698.92,
+          "high": 2715.07,
+          "low": 2696.32,
+          "close": 2708.51,
+          "volume": 7310.68472
+        },
+        {
+          "timestamp": "2025-06-10T02:00:00.000Z",
+          "open": 2708.51,
+          "high": 2709.75,
+          "low": 2678.3,
+          "close": 2692.21,
+          "volume": 6285.77745
+        },
+        {
+          "timestamp": "2025-06-10T03:00:00.000Z",
+          "open": 2692.21,
+          "high": 2694.11,
+          "low": 2675.29,
+          "close": 2688.84,
+          "volume": 4728.83055
+        },
+        {
+          "timestamp": "2025-06-10T04:00:00.000Z",
+          "open": 2688.84,
+          "high": 2692.11,
+          "low": 2685.31,
+          "close": 2689.29,
+          "volume": 3712.23328
+        },
+        {
+          "timestamp": "2025-06-10T05:00:00.000Z",
+          "open": 2689.29,
+          "high": 2699.59,
+          "low": 2664.59,
+          "close": 2670.4,
+          "volume": 8901.20468
+        },
+        {
+          "timestamp": "2025-06-10T06:00:00.000Z",
+          "open": 2670.4,
+          "high": 2680.94,
+          "low": 2655,
+          "close": 2675.58,
+          "volume": 5361.34714
+        },
+        {
+          "timestamp": "2025-06-10T07:00:00.000Z",
+          "open": 2675.58,
+          "high": 2686.02,
+          "low": 2666.5,
+          "close": 2677,
+          "volume": 5985.42591
+        },
+        {
+          "timestamp": "2025-06-10T08:00:00.000Z",
+          "open": 2677,
+          "high": 2683.7,
+          "low": 2669.61,
+          "close": 2673.58,
+          "volume": 4289.49146
+        },
+        {
+          "timestamp": "2025-06-10T09:00:00.000Z",
+          "open": 2673.58,
+          "high": 2693.43,
+          "low": 2672.47,
+          "close": 2692.56,
+          "volume": 4766.50044
+        },
+        {
+          "timestamp": "2025-06-10T10:00:00.000Z",
+          "open": 2692.56,
+          "high": 2697.63,
+          "low": 2681.14,
+          "close": 2694.96,
+          "volume": 3814.44846
+        },
+        {
+          "timestamp": "2025-06-10T11:00:00.000Z",
+          "open": 2694.96,
+          "high": 2798.99,
+          "low": 2688.27,
+          "close": 2774.02,
+          "volume": 40305.96359
+        },
+        {
+          "timestamp": "2025-06-10T12:00:00.000Z",
+          "open": 2774.02,
+          "high": 2778.95,
+          "low": 2746.61,
+          "close": 2765.32,
+          "volume": 24950.16247
+        },
+        {
+          "timestamp": "2025-06-10T13:00:00.000Z",
+          "open": 2765.32,
+          "high": 2778.77,
+          "low": 2718.13,
+          "close": 2743.91,
+          "volume": 22982.84542
+        },
+        {
+          "timestamp": "2025-06-10T14:00:00.000Z",
+          "open": 2743.91,
+          "high": 2753.93,
+          "low": 2727.53,
+          "close": 2736.32,
+          "volume": 10194.70296
+        },
+        {
+          "timestamp": "2025-06-10T15:00:00.000Z",
+          "open": 2736.32,
+          "high": 2754.03,
+          "low": 2690.32,
+          "close": 2732.95,
+          "volume": 13410.35556
+        },
+        {
+          "timestamp": "2025-06-10T16:00:00.000Z",
+          "open": 2732.95,
+          "high": 2748.8,
+          "low": 2728.61,
+          "close": 2730.92,
+          "volume": 8289.09671
+        },
+        {
+          "timestamp": "2025-06-10T17:00:00.000Z",
+          "open": 2730.92,
+          "high": 2752.88,
+          "low": 2730.86,
+          "close": 2740.73,
+          "volume": 6355.97531
+        },
+        {
+          "timestamp": "2025-06-10T18:00:00.000Z",
+          "open": 2740.73,
+          "high": 2765.53,
+          "low": 2731.5,
+          "close": 2754.62,
+          "volume": 8906.38865
+        },
+        {
+          "timestamp": "2025-06-10T19:00:00.000Z",
+          "open": 2754.62,
+          "high": 2807.06,
+          "low": 2754.61,
+          "close": 2773.79,
+          "volume": 18356.8722
+        },
+        {
+          "timestamp": "2025-06-10T20:00:00.000Z",
+          "open": 2773.79,
+          "high": 2775.7,
+          "low": 2753.99,
+          "close": 2774.38,
+          "volume": 7650.98335
+        },
+        {
+          "timestamp": "2025-06-10T21:00:00.000Z",
+          "open": 2774.38,
+          "high": 2780,
+          "low": 2735.05,
+          "close": 2772.8,
+          "volume": 9827.64162
+        },
+        {
+          "timestamp": "2025-06-10T22:00:00.000Z",
+          "open": 2772.8,
+          "high": 2778.19,
+          "low": 2772.46,
+          "close": 2777.52,
+          "volume": 195.84837
+        }
+      ]
+    },
+    "technicalAnalysis": {
+      "volatility": {
+        "symbol": "ETHUSDT",
+        "period": "1d",
+        "currentPrice": 2777.52,
+        "highestPrice": 2807.06,
+        "lowestPrice": 2655,
+        "volatilityPercent": 5.474668049194963,
+        "isGoodForGrid": true,
+        "recommendation": "proceed",
+        "confidence": 100
+      },
+      "volume": {
+        "symbol": "ETHUSDT",
+        "interval": "60",
+        "avgVolume": 8177.0731810416655,
+        "currentVolume": 196.10536,
+        "maxVolume": 40305.96359,
+        "minVolume": 196.10536,
+        "volumeSpikes": [
+          {
+            "timestamp": "2025-06-09T21:00:00.000Z",
+            "volume": 15370.35835,
+            "multiplier": 1.8796894695324218,
+            "price": 2643.59
+          },
+          {
+            "timestamp": "2025-06-09T22:00:00.000Z",
+            "volume": 12734.99538,
+            "multiplier": 1.5574026424914187,
+            "price": 2665.93
+          },
+          {
+            "timestamp": "2025-06-10T00:00:00.000Z",
+            "volume": 16175.41895,
+            "multiplier": 1.9781428625956647,
+            "price": 2698.92
+          },
+          {
+            "timestamp": "2025-06-10T11:00:00.000Z",
+            "volume": 40305.96359,
+            "multiplier": 4.929143068383972,
+            "price": 2774.02
+          },
+          {
+            "timestamp": "2025-06-10T12:00:00.000Z",
+            "volume": 24950.16247,
+            "multiplier": 3.0512338482974948,
+            "price": 2765.32
+          }
+        ],
+        "vwap": {
+          "current": 2669.2922240904813,
+          "priceVsVwap": "above",
+          "difference": 4.04855545354691
+        },
+        "trend": "decreasing"
+      },
+      "volumeDelta": {
+        "symbol": "ETHUSDT",
+        "interval": "5",
+        "current": 150.04787858638258,
+        "average": 397.8981995115197,
+        "bias": "buyer",
+        "strength": 203.16645959908666,
+        "cumulativeDelta": 5011.937782994064,
+        "divergence": {
+          "detected": true,
+          "type": "Price up but delta down",
+          "signal": "bearish_reversal"
+        },
+        "marketPressure": {
+          "bullishCandles": 9,
+          "bearishCandles": 1,
+          "bullishPercent": 90,
+          "trend": "strong_buying"
+        }
+      },
+      "supportResistance": {
+        "symbol": "ETHUSDT",
+        "interval": "60",
+        "currentPrice": 2777.52,
+        "resistances": [
+          {
+            "level": 2798.99,
+            "type": "resistance",
+            "strength": 78.76722156497823,
+            "touches": 1,
+            "volumeConfirmation": 5.616559602825524,
+            "lastTouchTime": "2025-06-10T11:00:00.000Z",
+            "priceDistance": 0.772991733632874,
+            "confidence": "very_strong"
+          }
+        ],
+        "supports": [
+          {
+            "level": 2726.95,
+            "type": "support",
+            "strength": 77.26119100534228,
+            "touches": 1,
+            "volumeConfirmation": 2.2540139607501803,
+            "lastTouchTime": "2025-06-10T00:00:00.000Z",
+            "priceDistance": 1.8206889599354878,
+            "confidence": "very_strong"
+          },
+          {
+            "level": 2544.85,
+            "type": "support",
+            "strength": 67.0477115190333,
+            "touches": 2,
+            "volumeConfirmation": 0.4978485953221351,
+            "lastTouchTime": "2025-06-08T21:00:00.000Z",
+            "priceDistance": 8.376897376076503,
+            "confidence": "strong"
+          },
+          {
+            "level": 2501.81,
+            "type": "support",
+            "strength": 64.78759865312671,
+            "touches": 3,
+            "volumeConfirmation": 0.48381332435347946,
+            "lastTouchTime": "2025-06-08T09:00:00.000Z",
+            "priceDistance": 9.926481177453269,
+            "confidence": "strong"
+          }
+        ],
+        "criticalLevel": {
+          "level": 2798.99,
+          "type": "resistance",
+          "strength": 78.76722156497823,
+          "touches": 1,
+          "volumeConfirmation": 5.616559602825524,
+          "lastTouchTime": "2025-06-10T11:00:00.000Z",
+          "priceDistance": 0.772991733632874,
+          "confidence": "very_strong"
+        },
+        "gridConfig": {
+          "optimalLowerBound": 2726.95,
+          "optimalUpperBound": 2798.99,
+          "keyLevels": [
+            2798.99,
+            2726.95,
+            2544.85,
+            2501.81
+          ],
+          "recommendedGridCount": 5,
+          "recommendation": "Strong S/R levels identified - Grid trading recommended"
+        },
+        "statistics": {
+          "totalPivotsFound": 12,
+          "priceRangeAnalyzed": {
+            "high": 2807.06,
+            "low": 2456.96
+          },
+          "avgVolume": 5125.909102500001,
+          "periodsAnalyzed": 100,
+          "sensitivityUsed": 2
+        }
+      }
+    },
+    "gridSuggestion": {
+      "symbol": "ETHUSDT",
+      "currentPrice": 2777.52,
+      "suggestedRange": {
+        "lower": 2673.9664,
+        "upper": 2869.4336
+      },
+      "gridLevels": [
+        2673.9664,
+        2693.5131,
+        2713.0598,
+        2732.6066,
+        2752.1533,
+        2771.7,
+        2791.2467,
+        2810.7934,
+        2830.3402,
+        2849.8869,
+        2869.4336
+      ],
+      "investment": 1000,
+      "pricePerGrid": 100,
+      "potentialProfit": "$-0.18/day estimated",
+      "volatility24h": 5.474668049194963,
+      "recommendation": "recommended",
+      "confidence": 89
+    },
+    "summary": {
+      "recommendation": "wait",
+      "confidence": 50,
+      "keyPoints": [
+        "Volatility at 5.5% - Good for grid trading",
+        "Low volume activity (2% of average)",
+        "Price 4.0% above VWAP - Potential resistance",
+        "Strong buying pressure (203.2% bias)",
+        "Volume divergence detected - bearish reversal",
+        "Near strong resistance at $2798.9900 (0.8% away)",
+        "Grid trading recommended with 89% confidence"
+      ],
+      "riskLevel": "medium"
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-10T22:02:06.598Z",
+    "tags": [
+      "investment:1000"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

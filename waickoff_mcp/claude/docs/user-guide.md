@@ -10,7 +10,7 @@ El **wAIckoff MCP** es tu herramienta de análisis técnico integrada en Claude 
 - **Niveles de soporte/resistencia dinámicos**
 - **Volume Delta** para presión compradora/vendedora
 - **Datos de mercado en tiempo real** de Bybit
-- **Sistema de almacenamiento local** para análisis históricos
+- **Sistema de almacenamiento avanzado** con búsqueda histórica
 
 ## 🚀 Setup Rápido
 
@@ -104,6 +104,52 @@ Uso: analyze_volatility ALGOUSDT
 
 **Cuándo usarla:** Decidir si es momento de grid o swing trading
 
+### **🔍 Herramientas de Análisis Histórico**
+
+#### `get_analysis_history` - **Tu Historial de Trading**
+```
+Uso: get_analysis_history XRPUSDT 20
+```
+**Lo que obtienes:**
+- Últimos análisis guardados del símbolo
+- Filtrar por tipo (technical_analysis vs complete_analysis)
+- Ver evolución de indicadores en el tiempo
+
+**Cuándo usarla:** Revisar decisiones pasadas, ver tendencias históricas
+
+#### `get_latest_analysis` - **Último Análisis Guardado**
+```
+Uso: get_latest_analysis XRPUSDT technical_analysis
+```
+**Lo que obtienes:**
+- Análisis más reciente de un tipo específico
+- Datos completos del último estudio
+- Sin necesidad de recalcular
+
+**Cuándo usarla:** Recuperar tu último análisis sin repetir cálculos
+
+#### `search_analyses` - **Búsqueda Avanzada**
+```
+Uso: search_analyses con parámetros de fecha/tipo
+```
+**Lo que obtienes:**
+- Búsqueda por rangos de fecha
+- Filtros por tipo de análisis
+- Ordenamiento personalizado
+
+**Cuándo usarla:** Investigación profunda, backtest de estrategias
+
+#### `get_repository_stats` - **Estadísticas del Sistema**
+```
+Uso: get_repository_stats
+```
+**Lo que obtienes:**
+- Total de análisis guardados
+- Distribución por tipo y símbolo
+- Uso de almacenamiento
+
+**Cuándo usarla:** Mantenimiento, ver qué datos tienes disponibles
+
 ## 🎯 Workflows de Trading
 
 ### **📈 Workflow de Análisis Diario**
@@ -136,6 +182,14 @@ Uso: analyze_volatility ALGOUSDT
 2. analyze_volume_delta [TOKEN] (timing de entry)
 3. identify_support_resistance [TOKEN] (stop loss y target)
 4. Ejecutar posición con apalancamiento 2x-4x
+```
+
+### **📈 Workflow de Análisis Histórico**
+```
+1. get_analysis_history [TOKEN] 50 (revisar últimos 50 análisis)
+2. Identificar patrones recurrentes en los datos
+3. get_latest_analysis [TOKEN] technical_analysis (comparar con actual)
+4. Ajustar estrategia basado en tendencias históricas
 ```
 
 ## 💡 Tips de Uso Efectivo
@@ -193,10 +247,11 @@ Ve los últimos errores y status del sistema
 
 ## 🎯 Próximas Features
 
-- **Detección de patrones Wyckoff** (próximamente)
-- **Consultas históricas** con storage local (en desarrollo)
-- **Cache inteligente** para rapidez de respuesta (FASE 2)
-- **Reportes automáticos** diarios/semanales (FASE 4)
+- **Detección de trampas alcistas/bajistas** (Bull/Bear traps) - TASK-012
+- **Datos on-chain** - Flujos de stablecoins y ballenas - TASK-013
+- **Detección de patrones Wyckoff** - Acumulación/Distribución
+- **Reportes automáticos** diarios/semanales - TASK-009 FASE 4
+- **Configuración de timezone** persistente - TASK-010
 - **Integración completa con wAIckoff AI** (futuro próximo)
 
 ---

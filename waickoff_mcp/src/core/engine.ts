@@ -123,11 +123,10 @@ export class MarketAnalysisEngine {
     this.tradingService = tradingService || new TradingService(this.marketDataService, this.analysisService);
     this.storageService = new StorageService();
     
-    // Initialize analysis repository
-    const projectRoot = 'D:\\projects\\mcp\\waickoff_mcp';
+    // Initialize analysis repository with relative base path
     this.analysisRepository = new AnalysisRepository(
       this.storageService,
-      path.join(projectRoot, 'storage')
+      './storage' // Relative path that matches StorageService basePath
     );
     
     this.logger.info('Market Analysis Engine initialized with timezone support and Analysis Repository', {
@@ -246,9 +245,6 @@ export class MarketAnalysisEngine {
         );
 
         this.logger.info(`✅ Analysis saved with ID: ${analysisId}`);
-
-        // AUTO-SAVE: Legacy simple implementation (for backward compatibility)
-        await this.autoSaveAnalysis(symbol, 'technical_analysis', analysis);
 
         this.logger.info(`✅ COMPLETED: performTechnicalAnalysis for ${symbol}`);
         return this.createSuccessResponse(analysis);
@@ -379,9 +375,6 @@ export class MarketAnalysisEngine {
         );
 
         this.logger.info(`✅ Complete analysis saved with ID: ${analysisId}`);
-
-        // AUTO-SAVE: Legacy simple implementation (for backward compatibility)
-        await this.autoSaveAnalysis(symbol, 'complete_analysis', completeAnalysis);
 
         this.logger.info(`✅ COMPLETED: getCompleteAnalysis for ${symbol}`);
         return this.createSuccessResponse(completeAnalysis);
@@ -555,6 +548,35 @@ export class MarketAnalysisEngine {
    */
   async getRepositoryStatsHandler(): Promise<ApiResponse<RepositoryStats>> {
     return this.getRepositoryStats();
+  }
+
+  /**
+   * Get analysis history using Analysis Repository
+   */
+  async getAnalysisHistory(
+    symbol: string,
+    limit: number = 10,
+    analysisType?: string
+  ): Promise<ApiResponse<SavedAnalysis[]>> {
+    return this.performanceMonitor.measure('getAnalysisHistory', async () => {
+      try {
+        this.logger.info(`🔥 INCOMING REQUEST: getAnalysisHistory for ${symbol}`);
+
+        // Use Analysis Repository instead of direct file operations
+        const analyses = await this.analysisRepository.getAnalysisHistory(
+          symbol,
+          analysisType as AnalysisType,
+          limit
+        );
+
+        this.logger.info(`✅ COMPLETED: getAnalysisHistory for ${symbol} (${analyses.length} analyses)`);
+        return this.createSuccessResponse(analyses);
+
+      } catch (error) {
+        this.logger.error(`❌ FAILED: getAnalysisHistory for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to get analysis history: ${error}`);
+      }
+    });
   }
 
   // ====================
@@ -962,91 +984,6 @@ export class MarketAnalysisEngine {
       this.logger.error(`Failed to invalidate cache for ${symbol}:`, error);
       throw error;
     }
-  }
-
-  // ====================
-  // AUTO-SAVE METHODS
-  // ====================
-
-  /**
-   * Auto-save analysis using simple fs.writeFile - LESSON-001 pattern
-   */
-  private async autoSaveAnalysis(
-    symbol: string,
-    analysisType: string,
-    data: any
-  ): Promise<void> {
-    try {
-      this.logger.info(`🔥 Starting auto-save for ${symbol} (${analysisType})`);
-      
-      // Simple, direct file operations
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      
-      // Create simple timestamp-based filename
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      // Use project directory instead of process.cwd()
-      const projectRoot = 'D:\\projects\\mcp\\waickoff_mcp';
-      const storageDir = path.join(projectRoot, 'storage', 'analysis', symbol);
-      const filename = `${analysisType}_${timestamp}.json`;
-      const fullPath = path.join(storageDir, filename);
-      
-      // Ensure directory exists
-      await fs.mkdir(storageDir, { recursive: true });
-      this.logger.info(`📁 Created directory: ${storageDir}`);
-      
-      // Create analysis record
-      const analysisRecord = {
-        timestamp: Date.now(),
-        symbol,
-        analysisType,
-        data,
-        metadata: {
-          version: '1.3.5',
-          source: 'waickoff_mcp',
-          engine: 'MarketAnalysisEngine',
-          savedAt: new Date().toISOString()
-        }
-      };
-      
-      // Direct fs.writeFile - simple and reliable
-      await fs.writeFile(fullPath, JSON.stringify(analysisRecord, null, 2), 'utf8');
-      
-      this.logger.info(`✅ Auto-saved successfully: ${fullPath}`);
-      
-    } catch (error) {
-      this.logger.error(`❌ Auto-save FAILED for ${symbol} (${analysisType}):`, error);
-      // Don't re-throw - auto-save failure shouldn't break analysis
-    }
-  }
-
-  /**
-   * Get analysis history using Analysis Repository
-   */
-  async getAnalysisHistory(
-    symbol: string,
-    limit: number = 10,
-    analysisType?: string
-  ): Promise<ApiResponse<SavedAnalysis[]>> {
-    return this.performanceMonitor.measure('getAnalysisHistory', async () => {
-      try {
-        this.logger.info(`🔥 INCOMING REQUEST: getAnalysisHistory for ${symbol}`);
-
-        // Use Analysis Repository instead of direct file operations
-        const analyses = await this.analysisRepository.getAnalysisHistory(
-          symbol,
-          analysisType as AnalysisType,
-          limit
-        );
-
-        this.logger.info(`✅ COMPLETED: getAnalysisHistory for ${symbol} (${analyses.length} analyses)`);
-        return this.createSuccessResponse(analyses);
-
-      } catch (error) {
-        this.logger.error(`❌ FAILED: getAnalysisHistory for ${symbol}:`, error);
-        return this.createErrorResponse(`Failed to get analysis history: ${error}`);
-      }
-    });
   }
 
   // ====================

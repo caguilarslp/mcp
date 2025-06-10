@@ -1,101 +1,84 @@
 /**
- * Storage Service Implementation
- * Provides local file system storage for market analysis data
+ * @fileoverview Storage Service Implementation (Refactored)
+ * @description High-level storage orchestrator following modular architecture
+ * @module services/storage
+ * @version 2.0.0
  */
 
-import * as fs from 'fs/promises';
 import * as path from 'path';
-import { existsSync } from 'fs';
 import { 
   IStorageService, 
-  StorageConfig, 
   FileMetadata, 
   StorageStats,
-  StorageError,
-  StorageCategory 
+  StorageError
 } from '../types/storage.js';
-import { FileLogger } from '../utils/fileLogger.js';
+import { Logger } from '../utils/logger.js';
 import { PerformanceMonitor } from '../utils/performance.js';
-import * as path_import from 'path';
+import { FileSystemService } from './storage/fileSystemService.js';
+import { PatternMatcher } from './storage/patternMatcher.js';
+import { StorageConfigService } from './storage/storageConfig.js';
 
-// Create singleton instances
-const logger = new FileLogger('StorageService', 'info', {
-  logDir: path_import.join(process.cwd(), 'logs'),
-  enableStackTrace: true,
-  enableRotation: true
-});
-const performanceMonitor = new PerformanceMonitor();
-
+/**
+ * High-level Storage Service orchestrator
+ * Delegates low-level operations to specialized services
+ */
 export class StorageService implements IStorageService {
-  private config: StorageConfig;
-  private basePath: string;
+  private logger: Logger;
+  private performanceMonitor: PerformanceMonitor;
+  
+  // Specialized services
+  private fileSystem: FileSystemService;
+  private patternMatcher: PatternMatcher;
+  private configService: StorageConfigService;
+  
+  // State
+  private initialized: boolean = false;
   private initializationPromise: Promise<void>;
 
   constructor(configPath: string = './storage/config/storage.config.json') {
-    // Initialize with default config first
-    this.config = {
-      basePath: './storage',
-      maxFileSize: 10 * 1024 * 1024, // 10MB
-      maxTotalSize: 1024 * 1024 * 1024, // 1GB
-      compressionEnabled: false,
-      autoCleanupDays: 30
-    };
-    this.basePath = path.resolve(this.config.basePath);
+    this.logger = new Logger('StorageService');
+    this.performanceMonitor = new PerformanceMonitor();
     
-    // Try to load custom config asynchronously
-    this.initializationPromise = this.initializeStorageSystem(configPath);
+    // Initialize specialized services
+    this.fileSystem = new FileSystemService();
+    this.patternMatcher = new PatternMatcher();
+    this.configService = new StorageConfigService(this.fileSystem);
+    
+    // Initialize storage system
+    this.initializationPromise = this.initialize(configPath);
   }
 
   /**
-   * Initialize storage system: load config + create directories
+   * Initialize storage system
    */
-  private async initializeStorageSystem(configPath: string): Promise<void> {
+  private async initialize(configPath: string): Promise<void> {
     try {
-      // Try to load custom config using fs.readFile
-      const configContent = await fs.readFile(path.resolve(configPath), 'utf8');
-      const configData = JSON.parse(configContent);
-      if (configData && typeof configData === 'object') {
-        this.config = { ...this.config, ...configData };
-        this.basePath = path.resolve(this.config.basePath);
-        logger.info(`Loaded custom storage config from ${configPath}`);
+      // Load configuration
+      await this.configService.loadConfig(configPath);
+      
+      // Create directory structure
+      const basePath = this.configService.getBasePath();
+      const directories = this.configService.getStorageDirectories();
+      
+      for (const dir of directories) {
+        const fullPath = path.join(basePath, dir);
+        await this.fileSystem.ensureDirectory(fullPath);
       }
+      
+      this.initialized = true;
+      this.logger.info('Storage service initialized successfully');
     } catch (error) {
-      logger.info(`Using default storage config (config file not found or invalid)`);
-      // Continue with default config
+      this.logger.error('Failed to initialize storage service:', error);
+      throw error;
     }
-    
-    // Initialize directories
-    await this.initializeDirectories();
   }
 
   /**
-   * Ensure initialization is complete before storage operations
+   * Ensure initialization is complete
    */
   private async ensureInitialized(): Promise<void> {
-    await this.initializationPromise;
-  }
-
-  /**
-   * Initialize storage directory structure
-   */
-  private async initializeDirectories(): Promise<void> {
-    const dirs = [
-      'market-data',
-      'analysis', 
-      'patterns',
-      'decisions',
-      'reports',
-      'reports/daily',
-      'reports/weekly',
-      'reports/performance'
-    ];
-
-    for (const dir of dirs) {
-      const fullPath = path.join(this.basePath, dir);
-      if (!existsSync(fullPath)) {
-        await fs.mkdir(fullPath, { recursive: true });
-        logger.info(`Created storage directory: ${dir}`);
-      }
+    if (!this.initialized) {
+      await this.initializationPromise;
     }
   }
 
@@ -103,9 +86,8 @@ export class StorageService implements IStorageService {
    * Save data to storage
    */
   async save(relativePath: string, data: any): Promise<void> {
-    return performanceMonitor.measure('storage.save', async () => {
+    return this.performanceMonitor.measure('storage.save', async () => {
       try {
-        // Ensure initialization is complete
         await this.ensureInitialized();
         
         // Validate path
@@ -113,27 +95,28 @@ export class StorageService implements IStorageService {
           throw this.createError('INVALID_PATH', `Invalid path: ${relativePath}`);
         }
 
-        const fullPath = path.join(this.basePath, relativePath);
-        const dir = path.dirname(fullPath);
-
-        // Ensure directory exists
-        await fs.mkdir(dir, { recursive: true });
-
-        // Convert data to JSON string
+        // Convert data to JSON
         const jsonData = JSON.stringify(data, null, 2);
+        const size = Buffer.byteLength(jsonData, 'utf8');
         
         // Check file size
-        const size = Buffer.byteLength(jsonData, 'utf8');
-        if (size > this.config.maxFileSize) {
-          throw this.createError('QUOTA_EXCEEDED', `File size ${size} exceeds limit ${this.config.maxFileSize}`);
+        if (!this.configService.isFileSizeValid(size)) {
+          const config = this.configService.getConfig();
+          throw this.createError(
+            'QUOTA_EXCEEDED', 
+            `File size ${size} exceeds limit ${config.maxFileSize}`
+          );
         }
 
-        // Write file
-        await fs.writeFile(fullPath, jsonData, 'utf8');
-        logger.debug(`Saved file: ${relativePath} (${size} bytes)`);
+        // Save file
+        const basePath = this.configService.getBasePath();
+        const fullPath = path.join(basePath, relativePath);
+        await this.fileSystem.writeFile(fullPath, jsonData);
+        
+        this.logger.debug(`Saved file: ${relativePath} (${size} bytes)`);
 
       } catch (error) {
-        logger.error(`Failed to save file: ${relativePath}`, error);
+        this.logger.error(`Failed to save file: ${relativePath}`, error);
         throw error;
       }
     });
@@ -143,21 +126,22 @@ export class StorageService implements IStorageService {
    * Load data from storage
    */
   async load<T>(relativePath: string): Promise<T | null> {
-    return performanceMonitor.measure('storage.load', async () => {
+    return this.performanceMonitor.measure('storage.load', async () => {
       try {
-        const fullPath = path.join(this.basePath, relativePath);
+        await this.ensureInitialized();
         
-        // Check if file exists
-        if (!existsSync(fullPath)) {
+        const basePath = this.configService.getBasePath();
+        const fullPath = path.join(basePath, relativePath);
+        
+        const content = await this.fileSystem.readFile(fullPath);
+        if (!content) {
           return null;
         }
-
-        // Read file
-        const data = await fs.readFile(fullPath, 'utf8');
-        return JSON.parse(data) as T;
+        
+        return JSON.parse(content) as T;
 
       } catch (error) {
-        logger.error(`Failed to load file: ${relativePath}`, error);
+        this.logger.error(`Failed to load file: ${relativePath}`, error);
         return null;
       }
     });
@@ -168,9 +152,12 @@ export class StorageService implements IStorageService {
    */
   async exists(relativePath: string): Promise<boolean> {
     try {
-      const fullPath = path.join(this.basePath, relativePath);
-      await fs.access(fullPath);
-      return true;
+      await this.ensureInitialized();
+      
+      const basePath = this.configService.getBasePath();
+      const fullPath = path.join(basePath, relativePath);
+      
+      return await this.fileSystem.exists(fullPath);
     } catch {
       return false;
     }
@@ -181,11 +168,15 @@ export class StorageService implements IStorageService {
    */
   async delete(relativePath: string): Promise<void> {
     try {
-      const fullPath = path.join(this.basePath, relativePath);
-      await fs.unlink(fullPath);
-      logger.debug(`Deleted file: ${relativePath}`);
+      await this.ensureInitialized();
+      
+      const basePath = this.configService.getBasePath();
+      const fullPath = path.join(basePath, relativePath);
+      
+      await this.fileSystem.deleteFile(fullPath);
+      this.logger.debug(`Deleted file: ${relativePath}`);
     } catch (error) {
-      logger.error(`Failed to delete file: ${relativePath}`, error);
+      this.logger.error(`Failed to delete file: ${relativePath}`, error);
       throw error;
     }
   }
@@ -195,63 +186,49 @@ export class StorageService implements IStorageService {
    */
   async list(directory: string): Promise<string[]> {
     try {
-      const fullPath = path.join(this.basePath, directory);
+      await this.ensureInitialized();
       
-      if (!existsSync(fullPath)) {
-        return [];
-      }
-
-      const entries = await fs.readdir(fullPath, { withFileTypes: true });
-      return entries
-        .filter(entry => entry.isFile())
-        .map(entry => path.join(directory, entry.name));
+      const basePath = this.configService.getBasePath();
+      const fullPath = path.join(basePath, directory);
+      
+      const files = await this.fileSystem.listFiles(fullPath);
+      
+      // Return relative paths
+      return files.map(file => path.relative(basePath, file).replace(/\\/g, '/'));
 
     } catch (error) {
-      logger.error(`Failed to list directory: ${directory}`, error);
+      this.logger.error(`Failed to list directory: ${directory}`, error);
       return [];
     }
   }
 
   /**
-   * Query files by pattern (simple glob-like matching)
+   * Query files by pattern (FIXED implementation)
    */
   async query(pattern: string): Promise<string[]> {
-    return performanceMonitor.measure('storage.query', async () => {
+    return this.performanceMonitor.measure('storage.query', async () => {
       try {
-        // Ensure initialization is complete
         await this.ensureInitialized();
         
+        this.logger.debug(`Query pattern: ${pattern}`);
         const results: string[] = [];
+        const basePath = this.configService.getBasePath();
         
-        // Convert simple glob to regex
-        const regex = new RegExp(
-          pattern
-            .replace(/\*/g, '.*')
-            .replace(/\?/g, '.')
-            .replace(/\[([^\]]+)\]/g, '[$1]')
-        );
-
-        // Recursive directory walk
-        const walk = async (dir: string): Promise<void> => {
-          const entries = await fs.readdir(dir, { withFileTypes: true });
+        // Walk directory and collect matching files
+        await this.fileSystem.walkDirectory(basePath, (fullPath, relativePath) => {
+          // Normalize to forward slashes for consistent matching
+          const normalizedPath = relativePath.replace(/\\/g, '/');
           
-          for (const entry of entries) {
-            const fullPath = path.join(dir, entry.name);
-            const relativePath = path.relative(this.basePath, fullPath);
-            
-            if (entry.isDirectory()) {
-              await walk(fullPath);
-            } else if (entry.isFile() && regex.test(relativePath)) {
-              results.push(relativePath.replace(/\\/g, '/'));
-            }
+          if (this.patternMatcher.matches(normalizedPath, pattern)) {
+            results.push(normalizedPath);
           }
-        };
-
-        await walk(this.basePath);
+        });
+        
+        this.logger.debug(`Query results: ${results.length} files found`);
         return results;
 
       } catch (error) {
-        logger.error(`Failed to query files: ${pattern}`, error);
+        this.logger.error(`Failed to query files: ${pattern}`, error);
         return [];
       }
     });
@@ -262,16 +239,12 @@ export class StorageService implements IStorageService {
    */
   async getMetadata(relativePath: string): Promise<FileMetadata | null> {
     try {
-      const fullPath = path.join(this.basePath, relativePath);
-      const stats = await fs.stat(fullPath);
+      await this.ensureInitialized();
       
-      return {
-        path: relativePath,
-        size: stats.size,
-        created: stats.birthtime,
-        modified: stats.mtime,
-        accessed: stats.atime
-      };
+      const basePath = this.configService.getBasePath();
+      const fullPath = path.join(basePath, relativePath);
+      
+      return await this.fileSystem.getFileStats(fullPath);
 
     } catch (error) {
       return null;
@@ -283,9 +256,8 @@ export class StorageService implements IStorageService {
    */
   async getSize(relativePath: string): Promise<number> {
     try {
-      const fullPath = path.join(this.basePath, relativePath);
-      const stats = await fs.stat(fullPath);
-      return stats.size;
+      const metadata = await this.getMetadata(relativePath);
+      return metadata?.size || 0;
     } catch {
       return 0;
     }
@@ -294,14 +266,18 @@ export class StorageService implements IStorageService {
   /**
    * Clean up old files
    */
-  async vacuum(daysOld: number = 30): Promise<number> {
-    return performanceMonitor.measure('storage.vacuum', async () => {
-      let deletedCount = 0;
-      const cutoffDate = new Date();
-      cutoffDate.setDate(cutoffDate.getDate() - daysOld);
-
+  async vacuum(daysOld?: number): Promise<number> {
+    return this.performanceMonitor.measure('storage.vacuum', async () => {
       try {
-        const files = await this.query('*');
+        await this.ensureInitialized();
+        
+        const config = this.configService.getConfig();
+        const days = daysOld || config.autoCleanupDays;
+        const cutoffDate = new Date();
+        cutoffDate.setDate(cutoffDate.getDate() - days);
+        
+        let deletedCount = 0;
+        const files = await this.query('**/*');
         
         for (const file of files) {
           const metadata = await this.getMetadata(file);
@@ -311,12 +287,12 @@ export class StorageService implements IStorageService {
           }
         }
 
-        logger.info(`Vacuum completed: deleted ${deletedCount} files older than ${daysOld} days`);
+        this.logger.info(`Vacuum completed: deleted ${deletedCount} files older than ${days} days`);
         return deletedCount;
 
       } catch (error) {
-        logger.error('Vacuum failed', error);
-        return deletedCount;
+        this.logger.error('Vacuum failed', error);
+        return 0;
       }
     });
   }
@@ -325,23 +301,25 @@ export class StorageService implements IStorageService {
    * Get storage statistics
    */
   async getStorageStats(): Promise<StorageStats> {
-    return performanceMonitor.measure('storage.stats', async () => {
-      const stats: StorageStats = {
-        totalFiles: 0,
-        totalSize: 0,
-        oldestFile: new Date(),
-        newestFile: new Date(0),
-        sizeByCategory: {
-          marketData: 0,
-          analysis: 0,
-          patterns: 0,
-          decisions: 0,
-          reports: 0
-        }
-      };
-
+    return this.performanceMonitor.measure('storage.stats', async () => {
       try {
-        const files = await this.query('*');
+        await this.ensureInitialized();
+        
+        const stats: StorageStats = {
+          totalFiles: 0,
+          totalSize: 0,
+          oldestFile: new Date(),
+          newestFile: new Date(0),
+          sizeByCategory: {
+            marketData: 0,
+            analysis: 0,
+            patterns: 0,
+            decisions: 0,
+            reports: 0
+          }
+        };
+
+        const files = await this.query('**/*');
         
         for (const file of files) {
           const metadata = await this.getMetadata(file);
@@ -367,8 +345,8 @@ export class StorageService implements IStorageService {
         return stats;
 
       } catch (error) {
-        logger.error('Failed to get storage stats', error);
-        return stats;
+        this.logger.error('Failed to get storage stats', error);
+        throw error;
       }
     });
   }

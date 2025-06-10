@@ -38,22 +38,21 @@ export class AnalysisRepository implements IAnalysisRepository {
   constructor(storageService: IStorageService, basePath: string) {
     this.storageService = storageService;
     this.basePath = basePath;
-    this.analysisPath = path.join(basePath, 'analysis');
-    this.patternsPath = path.join(basePath, 'patterns');
+    // Use relative paths for consistency with StorageService
+    this.analysisPath = 'analysis';
+    this.patternsPath = 'patterns';
     this.logger = new Logger('AnalysisRepository');
     this.performanceMonitor = new PerformanceMonitor();
     
-    // Ensure directories exist
+    // Ensure directories exist using StorageService
     this.initializeDirectories();
   }
   
   private async initializeDirectories(): Promise<void> {
     try {
-      await fs.mkdir(this.analysisPath, { recursive: true });
-      await fs.mkdir(this.patternsPath, { recursive: true });
-      await fs.mkdir(path.join(this.patternsPath, 'wyckoff'), { recursive: true });
-      await fs.mkdir(path.join(this.patternsPath, 'divergences'), { recursive: true });
-      await fs.mkdir(path.join(this.patternsPath, 'volume-anomalies'), { recursive: true });
+      // The StorageService already handles directory creation
+      // We just need to log that initialization is complete
+      this.logger.info('AnalysisRepository directories initialized via StorageService');
     } catch (error) {
       this.logger.error('Failed to initialize repository directories:', error);
     }
@@ -93,12 +92,12 @@ export class AnalysisRepository implements IAnalysisRepository {
           summary
         };
         
-        // Determine file path
+        // Determine file path (relative to storage service base path)
         const fileName = `${type}_${timestamp}_${id}.json`;
-        const filePath = path.join(this.analysisPath, symbol, fileName);
+        const relativePath = path.join('analysis', symbol, fileName);
         
-        // Save using storage service
-        await this.storageService.save(filePath, savedAnalysis);
+        // Save using storage service with relative path
+        await this.storageService.save(relativePath, savedAnalysis);
         
         // Create index entry for fast lookups
         await this.updateIndex(symbol, type, id, timestamp);
@@ -122,16 +121,12 @@ export class AnalysisRepository implements IAnalysisRepository {
         const id = pattern.id || randomUUID();
         const patternWithId = { ...pattern, id };
         
-        // Determine file path based on pattern type
+        // Determine file path based on pattern type (relative to storage service)
         const fileName = `${pattern.symbol}_${pattern.timestamp}_${id}.json`;
-        const filePath = path.join(
-          this.patternsPath, 
-          pattern.type, 
-          fileName
-        );
+        const relativePath = path.join('patterns', pattern.type, fileName);
         
         // Save pattern
-        await this.storageService.save(filePath, patternWithId);
+        await this.storageService.save(relativePath, patternWithId);
         
         this.logger.info(`Pattern saved: ${pattern.type}/${pattern.symbol} with ID ${id}`);
         return id;
@@ -193,34 +188,71 @@ export class AnalysisRepository implements IAnalysisRepository {
   ): Promise<SavedAnalysis[]> {
     return this.performanceMonitor.measure('AnalysisRepository.getAnalysisHistory', async () => {
       try {
-        const symbolPath = path.join(this.analysisPath, symbol);
+        this.logger.info(`Getting analysis history for ${symbol}/${type} (limit: ${limit})`);
         
-        // Check if directory exists
-        try {
-          await fs.access(symbolPath);
-        } catch {
+        // Query files using StorageService
+        const pattern = `analysis/${symbol}/${type}_*.json`;
+        const files = await this.storageService.query(pattern);
+        
+        this.logger.debug(`Found ${files.length} files matching pattern ${pattern}`);
+        
+        if (files.length === 0) {
+          this.logger.info(`No analyses found for ${symbol}/${type}`);
           return [];
         }
         
-        // Get all files for this type
-        const files = await this.listFiles(symbolPath, `${type}_*.json`);
-        
-        // Sort by timestamp (newest first)
+        // Sort by timestamp (newest first) - extract from filename
         const sortedFiles = files.sort((a, b) => {
           const timestampA = this.extractTimestampFromFileName(a);
           const timestampB = this.extractTimestampFromFileName(b);
           return timestampB - timestampA;
         });
         
+        this.logger.debug(`Sorted files:`, sortedFiles.map(f => path.basename(f)));
+        
         // Load requested number of analyses
         const analyses: SavedAnalysis[] = [];
         for (let i = 0; i < Math.min(limit, sortedFiles.length); i++) {
-          const analysis = await this.storageService.load<SavedAnalysis>(sortedFiles[i]);
-          if (analysis) {
+          try {
+            const fileData = await this.storageService.load<any>(sortedFiles[i]);
+            
+            if (!fileData) {
+              this.logger.warn(`Could not load analysis file ${sortedFiles[i]}`);
+              continue;
+            }
+            
+            // Convert legacy format to SavedAnalysis format if needed
+            let analysis: SavedAnalysis;
+            
+            if (fileData.id && fileData.analysisType && fileData.timestamp) {
+              // Already in new format
+              analysis = fileData as SavedAnalysis;
+            } else {
+              // Legacy format - convert
+              analysis = {
+                id: `legacy-${Date.now()}-${i}`,
+                timestamp: fileData.timestamp || Date.now(),
+                symbol: fileData.symbol || symbol,
+                analysisType: fileData.analysisType || type,
+                data: fileData.data || fileData,
+                metadata: fileData.metadata || {
+                  version: fileData.metadata?.version || '1.3.5',
+                  source: 'waickoff_mcp',
+                  engine: 'MarketAnalysisEngine',
+                  savedAt: fileData.metadata?.savedAt || new Date(fileData.timestamp || Date.now()).toISOString()
+                },
+                summary: this.extractSummary(type, fileData.data || fileData)
+              };
+            }
+            
             analyses.push(analysis);
+            
+          } catch (fileError) {
+            this.logger.warn(`Failed to load analysis file ${sortedFiles[i]}:`, fileError);
           }
         }
         
+        this.logger.info(`Loaded ${analyses.length} analyses for ${symbol}/${type}`);
         return analyses;
         
       } catch (error) {
@@ -555,9 +587,13 @@ export class AnalysisRepository implements IAnalysisRepository {
   async getRepositoryStats(): Promise<RepositoryStats> {
     return this.performanceMonitor.measure('AnalysisRepository.getRepositoryStats', async () => {
       try {
-        // Get all analysis files
-        const analysisFiles = await this.findFiles(this.analysisPath, '*.json');
-        const patternFiles = await this.findFiles(this.patternsPath, '*.json');
+        this.logger.info('Getting repository stats using StorageService...');
+        
+        // Get all analysis and pattern files using StorageService query
+        const analysisFiles = await this.storageService.query('analysis/**/*.json');
+        const patternFiles = await this.storageService.query('patterns/**/*.json');
+        
+        this.logger.info(`Found ${analysisFiles.length} analysis files and ${patternFiles.length} pattern files`);
         
         // Count by type
         const analysesByType: Record<AnalysisType, number> = {} as any;
@@ -569,42 +605,97 @@ export class AnalysisRepository implements IAnalysisRepository {
         
         // Process analysis files
         for (const file of analysisFiles) {
-          const fileName = path.basename(file);
-          const type = fileName.split('_')[0] as AnalysisType;
-          analysesByType[type] = (analysesByType[type] || 0) + 1;
-          
-          const symbol = path.basename(path.dirname(file));
-          symbols.add(symbol);
-          
-          const timestamp = this.extractTimestampFromFileName(file);
-          earliestDate = Math.min(earliestDate, timestamp);
-          latestDate = Math.max(latestDate, timestamp);
-          
-          const size = await this.storageService.getSize(file);
-          totalSize += size;
+          try {
+            const fileName = path.basename(file);
+            
+            // Handle both legacy format and new UUID format
+            let type: AnalysisType;
+            let timestamp: number;
+            
+            if (fileName.includes('_') && fileName.split('_').length >= 2) {
+              // Legacy format: technical_analysis_2025-06-10T14-29-23-469Z.json
+              // New format: technical_analysis_1749565763477_uuid.json
+              const parts = fileName.split('_');
+              type = parts[0] as AnalysisType;
+              
+              // Extract timestamp - try parsing the second part
+              const timestampPart = parts[1];
+              if (timestampPart.includes('-') && timestampPart.includes('T')) {
+                // Legacy ISO format
+                const isoString = timestampPart.replace(/\.json$/, '').replace(/-/g, ':').replace('T', 'T').replace(/-(\d{3})Z$/, '.$1Z');
+                timestamp = new Date(isoString).getTime();
+              } else {
+                // New numeric timestamp format
+                timestamp = parseInt(timestampPart) || Date.now();
+              }
+            } else {
+              // Fallback
+              type = 'technical_analysis';
+              timestamp = Date.now();
+            }
+            
+            analysesByType[type] = (analysesByType[type] || 0) + 1;
+            
+            // Extract symbol from path: analysis/SYMBOL/filename.json
+            const pathParts = file.split('/');
+            if (pathParts.length >= 2) {
+              const symbol = pathParts[1];
+              symbols.add(symbol);
+            }
+            
+            earliestDate = Math.min(earliestDate, timestamp);
+            latestDate = Math.max(latestDate, timestamp);
+            
+            try {
+              const size = await this.storageService.getSize(file);
+              totalSize += size;
+            } catch (statError) {
+              this.logger.debug(`Could not get file size for ${file}:`, statError);
+            }
+            
+          } catch (fileError) {
+            this.logger.warn(`Error processing analysis file ${file}:`, fileError);
+          }
         }
         
         // Process pattern files
         for (const file of patternFiles) {
-          const type = path.basename(path.dirname(file));
-          patternsByType[type] = (patternsByType[type] || 0) + 1;
-          
-          const size = await this.storageService.getSize(file);
-          totalSize += size;
+          try {
+            // Extract type from path: patterns/TYPE/filename.json
+            const pathParts = file.split('/');
+            if (pathParts.length >= 2) {
+              const type = pathParts[1];
+              patternsByType[type] = (patternsByType[type] || 0) + 1;
+            }
+            
+            const size = await this.storageService.getSize(file);
+            totalSize += size;
+          } catch (fileError) {
+            this.logger.warn(`Error processing pattern file ${file}:`, fileError);
+          }
         }
         
-        return {
+        const stats = {
           totalAnalyses: analysisFiles.length,
           analysesByType,
           totalPatterns: patternFiles.length,
           patternsByType,
           symbols: Array.from(symbols),
           dateRange: {
-            earliest: new Date(earliestDate),
-            latest: new Date(latestDate)
+            earliest: earliestDate < Date.now() ? new Date(earliestDate) : new Date(),
+            latest: latestDate > 0 ? new Date(latestDate) : new Date()
           },
           storageUsed: totalSize
         };
+        
+        this.logger.info('Repository stats generated:', {
+          totalAnalyses: stats.totalAnalyses,
+          totalPatterns: stats.totalPatterns,
+          symbols: stats.symbols.length,
+          totalSizeMB: (totalSize / (1024 * 1024)).toFixed(2)
+        });
+        
+        return stats;
         
       } catch (error) {
         this.logger.error('Failed to get repository stats:', error);
@@ -679,7 +770,53 @@ export class AnalysisRepository implements IAnalysisRepository {
   private extractTimestampFromFileName(fileName: string): number {
     const baseName = path.basename(fileName);
     const parts = baseName.split('_');
-    return parseInt(parts[1]) || 0;
+    
+    if (parts.length >= 2) {
+      const timestampPart = parts[1];
+      
+      // Check if it's legacy ISO format: 2025-06-10T14-29-23-469Z.json
+      if (timestampPart.includes('-') && timestampPart.includes('T')) {
+        try {
+          // Convert back to proper ISO format
+          let isoString = timestampPart.replace(/\.json$/, '');
+          
+          // Find the last dash before Z and replace with dot
+          const zIndex = isoString.lastIndexOf('Z');
+          if (zIndex > 0) {
+            const beforeZ = isoString.substring(0, zIndex);
+            const lastDashIndex = beforeZ.lastIndexOf('-');
+            if (lastDashIndex > 0) {
+              isoString = beforeZ.substring(0, lastDashIndex) + '.' + beforeZ.substring(lastDashIndex + 1) + 'Z';
+            }
+          }
+          
+          // Replace remaining dashes with colons for time parts
+          const tIndex = isoString.indexOf('T');
+          if (tIndex > 0) {
+            const datePart = isoString.substring(0, tIndex);
+            const timePart = isoString.substring(tIndex + 1);
+            const timeFixed = timePart.replace(/-/g, ':');
+            isoString = datePart + 'T' + timeFixed;
+          }
+          
+          const timestamp = new Date(isoString).getTime();
+          if (!isNaN(timestamp)) {
+            return timestamp;
+          }
+        } catch (error) {
+          this.logger.debug(`Failed to parse legacy timestamp ${timestampPart}:`, error);
+        }
+      }
+      
+      // Try numeric timestamp
+      const numericTimestamp = parseInt(timestampPart);
+      if (!isNaN(numericTimestamp)) {
+        return numericTimestamp;
+      }
+    }
+    
+    // Fallback to current time
+    return Date.now();
   }
   
   private matchesPatternCriteria(pattern: Pattern, criteria: PatternCriteria): boolean {
@@ -909,11 +1046,18 @@ export class AnalysisRepository implements IAnalysisRepository {
           }
         }
       } catch (error) {
+        self.logger.debug(`Cannot read directory ${currentDir}:`, error);
         // Skip directories we can't read
       }
     }
     
-    await walk(dir);
+    try {
+      await fs.access(dir);
+      await walk(dir);
+    } catch (error) {
+      this.logger.debug(`Directory ${dir} does not exist or is not accessible`);
+    }
+    
     return results;
   }
   

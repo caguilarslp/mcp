@@ -1,0 +1,36 @@
+{
+  "id": "c59e037c-33e7-4424-9b49-601af995af55",
+  "timestamp": 1749593416592,
+  "symbol": "XDCUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "XDCUSDT",
+      "period": "1d",
+      "currentPrice": 0.06627,
+      "highestPrice": 0.06703,
+      "lowestPrice": 0.06046,
+      "volatilityPercent": 9.913988229968322,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-10T22:10:16.592Z",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

@@ -115,10 +115,11 @@ interface IReportGenerator {
 - [ ] Métricas de cache hit/miss
 
 ### FASE 3: Analysis Repository (3h)
-- [ ] Implementar guardado de análisis
-- [ ] Sistema de versionado
-- [ ] Queries por fecha/tipo/símbolo
-- [ ] Agregaciones y resúmenes
+- [x] Implementar guardado de análisis
+- [x] Sistema de versionado
+- [x] Queries por fecha/tipo/símbolo
+- [x] Agregaciones y resúmenes
+- [x] **BUG FIX**: Refactorización modular de StorageService (query pattern matching)
 
 ### FASE 4: Report Generator (2h)
 - [ ] Templates de reportes en Markdown
