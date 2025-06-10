@@ -1,0 +1,918 @@
+
+> waickoff_mcp@1.3.6 build
+> tsc
+
+src/adapters/mcp-handlers.ts(2,5): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(2,7): error TS1005: 'try' expected.
+src/adapters/mcp-handlers.ts(6,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(8,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(8,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(8,46): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(8,52): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(9,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(9,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(10,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(10,48): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(11,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(11,54): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(13,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(17,5): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(17,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(17,87): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(19,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(19,18): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(19,26): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(19,28): error TS1136: Property assignment expected.
+src/adapters/mcp-handlers.ts(38,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(40,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(40,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(40,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(40,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(41,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(41,65): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(43,9): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(44,13): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(44,91): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(45,13): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(45,24): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(50,8): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(53,9): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(53,14): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(53,25): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(54,17): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(58,12): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(59,17): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(59,31): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(59,72): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(60,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(60,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(61,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(61,71): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(62,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(62,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(63,16): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(65,14): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(65,25): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(66,17): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(66,81): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(67,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(67,52): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(68,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(68,50): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(69,16): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(71,14): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(71,26): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(72,17): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(72,61): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(73,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(73,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(74,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(74,50): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(75,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(75,51): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(76,16): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(78,14): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(78,21): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(79,17): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(79,63): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(80,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(80,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(81,22): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(81,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(82,16): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(85,11): error TS1109: Expression expected.
+src/adapters/mcp-handlers.ts(85,17): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(85,66): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(88,7): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(88,14): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(88,53): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(90,7): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(94,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(100,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(100,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(100,43): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(100,49): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(101,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(101,34): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(103,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(107,5): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(107,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(107,59): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(109,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(109,18): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(109,26): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(109,28): error TS1136: Property assignment expected.
+src/adapters/mcp-handlers.ts(134,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(136,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(136,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(136,45): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(136,51): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(137,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(137,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(138,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(138,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(140,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(140,17): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(140,25): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(174,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(176,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(176,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(176,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(176,48): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(177,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(185,6): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(187,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(187,61): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(189,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(189,18): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(189,26): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(189,28): error TS1136: Property assignment expected.
+src/adapters/mcp-handlers.ts(217,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(219,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(219,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(219,46): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(219,52): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(220,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(220,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(221,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(221,52): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(223,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(227,5): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(227,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(227,74): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(229,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(229,18): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(229,26): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(229,28): error TS1136: Property assignment expected.
+src/adapters/mcp-handlers.ts(252,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(254,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(254,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(254,48): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(254,54): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(255,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(255,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(256,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(256,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(257,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(257,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(259,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(259,17): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(259,38): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(291,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(293,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(293,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(293,40): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(293,46): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(294,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(300,6): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(302,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(302,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(304,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(304,18): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(304,26): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(304,28): error TS1136: Property assignment expected.
+src/adapters/mcp-handlers.ts(332,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(334,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(334,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(334,46): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(334,52): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(335,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(335,60): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(337,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(337,18): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(337,26): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(337,28): error TS1136: Property assignment expected.
+src/adapters/mcp-handlers.ts(368,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(374,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(374,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(374,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(374,45): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(408,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(408,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(408,54): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(408,62): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(408,64): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(418,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(418,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(418,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(418,52): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(435,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(435,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(435,43): error TS1011: An element access expression should take an argument.
+src/adapters/mcp-handlers.ts(435,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(435,47): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(452,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(452,14): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(452,28): error TS1109: Expression expected.
+src/adapters/mcp-handlers.ts(453,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(453,49): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(454,11): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(454,15): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(454,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(455,9): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(455,70): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(457,1): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(68,11): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(224,25): error TS1005: ',' expected.
+src/adapters/mcp.ts(230,15): error TS1137: Expression or comma expected.
+src/adapters/mcp.ts(231,23): error TS1005: ';' expected.
+src/adapters/mcp.ts(232,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(233,11): error TS1135: Argument expression expected.
+src/adapters/mcp.ts(233,12): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+src/adapters/mcp.ts(234,11): error TS1068: Unexpected token. A constructor, method, accessor, or property was expected.
+src/adapters/mcp.ts(236,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(237,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(239,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(242,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(243,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(243,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(244,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(244,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(245,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(245,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(246,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(247,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(248,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(251,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(252,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(254,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(257,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(258,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(258,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(261,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(262,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(262,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(263,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(263,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(264,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(264,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(267,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(268,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(268,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(269,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(269,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(270,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(272,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(272,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(273,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(276,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(277,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(279,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(282,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(283,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(283,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(286,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(287,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(287,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(288,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(288,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(289,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(289,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(290,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(292,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(292,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(293,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(296,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(297,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(299,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(302,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(303,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(303,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(306,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(307,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(307,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(308,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(308,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(309,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(309,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(310,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(312,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(312,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(313,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(316,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(317,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(319,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(322,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(323,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(323,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(326,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(327,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(327,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(328,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(328,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(329,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(329,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(332,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(333,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(333,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(334,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(334,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(335,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(337,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(337,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(338,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(341,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(342,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(344,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(347,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(348,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(348,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(351,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(352,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(352,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(353,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(353,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(354,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(354,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(357,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(358,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(358,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(359,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(359,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(360,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(362,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(362,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(363,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(366,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(367,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(369,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(372,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(373,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(373,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(376,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(377,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(377,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(378,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(378,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(379,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(379,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(382,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(383,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(383,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(384,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(384,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(387,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(388,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(388,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(389,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(389,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(390,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(390,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(393,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(394,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(394,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(395,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(395,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(396,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(398,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(398,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(399,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(402,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(403,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(405,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(408,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(409,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(409,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(412,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(413,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(413,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(416,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(417,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(417,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(418,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(418,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(421,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(422,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(422,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(423,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(423,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(424,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(424,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(427,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(428,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(428,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(429,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(429,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(430,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(430,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(433,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(434,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(434,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(435,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(435,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(436,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(438,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(438,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(439,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(442,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(443,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(445,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(448,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(449,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(449,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(452,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(453,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(453,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(454,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(454,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(457,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(458,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(458,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(459,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(459,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(462,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(463,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(463,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(464,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(464,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(467,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(468,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(468,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(469,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(469,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(472,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(473,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(473,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(474,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(474,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(477,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(478,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(478,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(479,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(479,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(480,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(482,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(482,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(483,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(486,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(487,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(489,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(492,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(493,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(493,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(496,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(497,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(497,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(498,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(500,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(500,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(501,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(504,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(505,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(507,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(507,29): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(508,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(509,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(512,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(513,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(515,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(515,29): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(516,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(517,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(520,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(521,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(523,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(526,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(527,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(527,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(528,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(528,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(529,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(529,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(532,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(533,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(533,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(534,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(534,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(535,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(536,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(537,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(540,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(541,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(543,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(546,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(547,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(547,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(550,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(551,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(551,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(552,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(552,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(555,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(556,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(556,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(557,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(557,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(558,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(560,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(560,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(561,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(564,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(565,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(567,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(567,29): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(568,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(569,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(572,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(573,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(575,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(578,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(579,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(579,26): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(580,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(580,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(581,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(582,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(583,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(586,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(587,24): error TS1005: ';' expected.
+src/adapters/mcp.ts(589,25): error TS1005: ';' expected.
+src/adapters/mcp.ts(592,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(593,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(593,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(596,30): error TS1005: ';' expected.
+src/adapters/mcp.ts(597,19): error TS1109: Expression expected.
+src/adapters/mcp.ts(597,23): error TS1003: Identifier expected.
+src/adapters/mcp.ts(598,17): error TS1109: Expression expected.
+src/adapters/mcp.ts(598,18): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(599,16): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(601,13): error TS1109: Expression expected.
+src/adapters/mcp.ts(601,14): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(602,12): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(603,9): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(603,10): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(604,7): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(605,5): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(605,6): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(678,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(684,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(684,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(684,37): error TS1005: ',' expected.
+src/adapters/mcp.ts(684,43): error TS1005: ';' expected.
+src/adapters/mcp.ts(685,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(685,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(686,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(686,70): error TS1005: ',' expected.
+src/adapters/mcp.ts(688,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(692,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(692,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(692,71): error TS1005: ',' expected.
+src/adapters/mcp.ts(694,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(694,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(694,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(694,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(715,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(717,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(717,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(717,40): error TS1005: ',' expected.
+src/adapters/mcp.ts(717,46): error TS1005: ';' expected.
+src/adapters/mcp.ts(718,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(718,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(719,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(719,70): error TS1005: ',' expected.
+src/adapters/mcp.ts(720,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(720,48): error TS1005: ',' expected.
+src/adapters/mcp.ts(722,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(726,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(726,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(726,71): error TS1005: ',' expected.
+src/adapters/mcp.ts(728,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(728,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(728,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(728,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(751,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(753,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(753,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(753,41): error TS1005: ',' expected.
+src/adapters/mcp.ts(753,47): error TS1005: ';' expected.
+src/adapters/mcp.ts(754,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(754,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(755,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(755,70): error TS1005: ',' expected.
+src/adapters/mcp.ts(757,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(761,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(761,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(761,71): error TS1005: ',' expected.
+src/adapters/mcp.ts(763,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(763,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(763,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(763,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(794,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(796,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(796,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(796,45): error TS1005: ',' expected.
+src/adapters/mcp.ts(796,51): error TS1005: ';' expected.
+src/adapters/mcp.ts(797,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(797,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(798,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(798,52): error TS1005: ',' expected.
+src/adapters/mcp.ts(800,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(804,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(804,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(809,7): error TS1005: ',' expected.
+src/adapters/mcp.ts(811,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(811,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(811,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(811,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(832,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(834,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(834,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(834,41): error TS1005: ',' expected.
+src/adapters/mcp.ts(834,47): error TS1005: ';' expected.
+src/adapters/mcp.ts(835,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(835,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(836,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(836,56): error TS1005: ',' expected.
+src/adapters/mcp.ts(837,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(837,52): error TS1005: ',' expected.
+src/adapters/mcp.ts(839,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(843,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(843,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(850,7): error TS1005: ',' expected.
+src/adapters/mcp.ts(852,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(852,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(852,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(852,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(883,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(885,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(885,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(885,46): error TS1005: ',' expected.
+src/adapters/mcp.ts(885,52): error TS1005: ';' expected.
+src/adapters/mcp.ts(886,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(886,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(887,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(887,55): error TS1005: ',' expected.
+src/adapters/mcp.ts(888,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(888,52): error TS1005: ',' expected.
+src/adapters/mcp.ts(890,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(894,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(894,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(901,7): error TS1005: ',' expected.
+src/adapters/mcp.ts(903,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(903,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(903,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(903,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(937,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(939,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(939,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(939,53): error TS1005: ',' expected.
+src/adapters/mcp.ts(939,59): error TS1005: ';' expected.
+src/adapters/mcp.ts(940,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(940,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(941,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(941,56): error TS1005: ',' expected.
+src/adapters/mcp.ts(942,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(942,53): error TS1005: ',' expected.
+src/adapters/mcp.ts(943,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(943,59): error TS1005: ',' expected.
+src/adapters/mcp.ts(945,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(949,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(949,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(956,7): error TS1005: ',' expected.
+src/adapters/mcp.ts(958,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(958,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(958,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(958,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(1031,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1033,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1033,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1033,45): error TS1005: ',' expected.
+src/adapters/mcp.ts(1033,51): error TS1005: ';' expected.
+src/adapters/mcp.ts(1034,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1034,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(1035,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1035,50): error TS1005: ',' expected.
+src/adapters/mcp.ts(1036,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1036,56): error TS1005: ',' expected.
+src/adapters/mcp.ts(1037,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1037,70): error TS1005: ',' expected.
+src/adapters/mcp.ts(1038,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1038,89): error TS1005: ',' expected.
+src/adapters/mcp.ts(1039,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1039,58): error TS1005: ',' expected.
+src/adapters/mcp.ts(1041,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(1041,17): error TS1005: ',' expected.
+src/adapters/mcp.ts(1041,31): error TS1005: ';' expected.
+src/adapters/mcp.ts(1096,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1098,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1098,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1098,52): error TS1005: ',' expected.
+src/adapters/mcp.ts(1098,58): error TS1005: ';' expected.
+src/adapters/mcp.ts(1099,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1099,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(1100,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1107,6): error TS1005: ',' expected.
+src/adapters/mcp.ts(1109,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(1113,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(1113,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1113,81): error TS1005: ',' expected.
+src/adapters/mcp.ts(1115,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(1115,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(1115,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(1115,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(1163,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1165,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1165,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1165,47): error TS1005: ',' expected.
+src/adapters/mcp.ts(1165,53): error TS1005: ';' expected.
+src/adapters/mcp.ts(1166,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1166,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(1167,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1167,50): error TS1005: ',' expected.
+src/adapters/mcp.ts(1169,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(1173,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(1173,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1173,79): error TS1005: ',' expected.
+src/adapters/mcp.ts(1175,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(1175,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(1175,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(1175,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(1221,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1223,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1223,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1223,43): error TS1005: ',' expected.
+src/adapters/mcp.ts(1223,49): error TS1005: ';' expected.
+src/adapters/mcp.ts(1224,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1224,55): error TS1005: ',' expected.
+src/adapters/mcp.ts(1225,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1225,56): error TS1005: ',' expected.
+src/adapters/mcp.ts(1227,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1243,6): error TS1005: ',' expected.
+src/adapters/mcp.ts(1245,12): error TS1005: ':' expected.
+src/adapters/mcp.ts(1245,55): error TS1005: ',' expected.
+src/adapters/mcp.ts(1248,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1248,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1248,40): error TS1005: ',' expected.
+src/adapters/mcp.ts(1248,46): error TS1005: ';' expected.
+src/adapters/mcp.ts(1249,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1249,55): error TS1005: ',' expected.
+src/adapters/mcp.ts(1250,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1250,48): error TS1005: ',' expected.
+src/adapters/mcp.ts(1252,9): error TS1005: ':' expected.
+src/adapters/mcp.ts(1254,13): error TS1005: ':' expected.
+src/adapters/mcp.ts(1254,74): error TS1005: ',' expected.
+src/adapters/mcp.ts(1256,11): error TS1005: ',' expected.
+src/adapters/mcp.ts(1256,21): error TS1011: An element access expression should take an argument.
+src/adapters/mcp.ts(1256,27): error TS1005: ',' expected.
+src/adapters/mcp.ts(1257,11): error TS1005: ',' expected.
+src/adapters/mcp.ts(1261,8): error TS1005: ',' expected.
+src/adapters/mcp.ts(1264,9): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1264,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1264,27): error TS1005: ',' expected.
+src/adapters/mcp.ts(1265,56): error TS1005: ',' expected.
+src/adapters/mcp.ts(1266,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1266,61): error TS1005: ',' expected.
+src/adapters/mcp.ts(1267,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1267,48): error TS1005: ',' expected.
+src/adapters/mcp.ts(1268,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1270,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1270,24): error TS1005: ',' expected.
+src/adapters/mcp.ts(1271,58): error TS1005: ',' expected.
+src/adapters/mcp.ts(1272,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1272,61): error TS1005: ',' expected.
+src/adapters/mcp.ts(1273,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1273,48): error TS1005: ',' expected.
+src/adapters/mcp.ts(1274,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1276,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1276,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1277,17): error TS1005: ':' expected.
+src/adapters/mcp.ts(1277,65): error TS1005: ',' expected.
+src/adapters/mcp.ts(1279,113): error TS1005: ',' expected.
+src/adapters/mcp.ts(1280,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1280,84): error TS1005: ',' expected.
+src/adapters/mcp.ts(1281,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1281,48): error TS1005: ',' expected.
+src/adapters/mcp.ts(1282,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1284,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1284,19): error TS1005: ',' expected.
+src/adapters/mcp.ts(1286,58): error TS1005: ',' expected.
+src/adapters/mcp.ts(1287,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1287,53): error TS1005: ',' expected.
+src/adapters/mcp.ts(1288,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1288,48): error TS1005: ',' expected.
+src/adapters/mcp.ts(1289,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1293,7): error TS1005: ',' expected.
+src/adapters/mcp.ts(1293,13): error TS1005: ':' expected.
+src/adapters/mcp.ts(1293,60): error TS1005: ',' expected.
+src/adapters/mcp.ts(1296,13): error TS1005: ':' expected.
+src/adapters/mcp.ts(1308,8): error TS1005: ',' expected.
+src/adapters/mcp.ts(1311,13): error TS1005: ':' expected.
+src/adapters/mcp.ts(1313,50): error TS1005: ',' expected.
+src/adapters/mcp.ts(1315,13): error TS1005: ':' expected.
+src/adapters/mcp.ts(1397,8): error TS1005: ',' expected.
+src/adapters/mcp.ts(1399,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1399,55): error TS1005: ',' expected.
+src/adapters/mcp.ts(1400,7): error TS1005: ';' expected.
+src/adapters/mcp.ts(1404,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1406,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1406,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1406,46): error TS1005: ',' expected.
+src/adapters/mcp.ts(1406,52): error TS1005: ';' expected.
+src/adapters/mcp.ts(1407,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1407,42): error TS1005: ',' expected.
+src/adapters/mcp.ts(1408,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1408,48): error TS1005: ',' expected.
+src/adapters/mcp.ts(1409,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1409,54): error TS1005: ',' expected.
+src/adapters/mcp.ts(1411,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(1415,5): error TS1005: ',' expected.
+src/adapters/mcp.ts(1415,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1415,87): error TS1005: ',' expected.
+src/adapters/mcp.ts(1417,9): error TS1003: Identifier expected.
+src/adapters/mcp.ts(1417,18): error TS1005: ',' expected.
+src/adapters/mcp.ts(1417,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(1417,28): error TS1136: Property assignment expected.
+src/adapters/mcp.ts(1436,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1438,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1438,11): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1438,39): error TS1005: ',' expected.
+src/adapters/mcp.ts(1438,45): error TS1005: ';' expected.
+src/adapters/mcp.ts(1439,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1439,65): error TS1005: ',' expected.
+src/adapters/mcp.ts(1441,9): error TS1005: ':' expected.
+src/adapters/mcp.ts(1442,13): error TS1005: ':' expected.
+src/adapters/mcp.ts(1442,91): error TS1005: ',' expected.
+src/adapters/mcp.ts(1443,13): error TS1005: ':' expected.
+src/adapters/mcp.ts(1443,24): error TS1005: ',' expected.
+src/adapters/mcp.ts(1448,8): error TS1005: ',' expected.
+src/adapters/mcp.ts(1451,9): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1451,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1451,25): error TS1005: ',' expected.
+src/adapters/mcp.ts(1452,17): error TS1005: ':' expected.
+src/adapters/mcp.ts(1456,12): error TS1005: ',' expected.
+src/adapters/mcp.ts(1457,17): error TS1005: ',' expected.
+src/adapters/mcp.ts(1457,31): error TS1005: ',' expected.
+src/adapters/mcp.ts(1457,72): error TS1005: ',' expected.
+src/adapters/mcp.ts(1458,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1458,37): error TS1005: ',' expected.
+src/adapters/mcp.ts(1459,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1459,71): error TS1005: ',' expected.
+src/adapters/mcp.ts(1460,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1460,62): error TS1005: ',' expected.
+src/adapters/mcp.ts(1461,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1463,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1463,25): error TS1005: ',' expected.
+src/adapters/mcp.ts(1464,17): error TS1005: ':' expected.
+src/adapters/mcp.ts(1464,81): error TS1005: ',' expected.
+src/adapters/mcp.ts(1465,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1465,52): error TS1005: ',' expected.
+src/adapters/mcp.ts(1466,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1466,50): error TS1005: ',' expected.
+src/adapters/mcp.ts(1467,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1469,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1469,26): error TS1005: ',' expected.
+src/adapters/mcp.ts(1470,17): error TS1005: ':' expected.
+src/adapters/mcp.ts(1470,61): error TS1005: ',' expected.
+src/adapters/mcp.ts(1471,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1471,37): error TS1005: ',' expected.
+src/adapters/mcp.ts(1472,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1472,50): error TS1005: ',' expected.
+src/adapters/mcp.ts(1473,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1473,51): error TS1005: ',' expected.
+src/adapters/mcp.ts(1474,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1476,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1476,21): error TS1005: ',' expected.
+src/adapters/mcp.ts(1477,17): error TS1005: ':' expected.
+src/adapters/mcp.ts(1477,63): error TS1005: ',' expected.
+src/adapters/mcp.ts(1478,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1478,37): error TS1005: ',' expected.
+src/adapters/mcp.ts(1479,22): error TS1005: ',' expected.
+src/adapters/mcp.ts(1479,44): error TS1005: ',' expected.
+src/adapters/mcp.ts(1480,16): error TS1005: ':' expected.
+src/adapters/mcp.ts(1483,11): error TS1109: Expression expected.
+src/adapters/mcp.ts(1483,17): error TS1005: ':' expected.
+src/adapters/mcp.ts(1483,66): error TS1005: ',' expected.
+src/adapters/mcp.ts(1486,7): error TS1005: ',' expected.
+src/adapters/mcp.ts(1486,14): error TS1005: ':' expected.
+src/adapters/mcp.ts(1486,53): error TS1005: ',' expected.
+src/adapters/mcp.ts(1488,7): error TS1005: ';' expected.
+src/adapters/mcp.ts(1492,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1498,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1498,37): error TS1005: ',' expected.
+src/adapters/mcp.ts(1498,43): error TS1005: ';' expected.
+src/adapters/mcp.ts(1498,45): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1532,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1532,39): error TS1005: ',' expected.
+src/adapters/mcp.ts(1532,54): error TS1005: ',' expected.
+src/adapters/mcp.ts(1532,62): error TS1005: ';' expected.
+src/adapters/mcp.ts(1532,64): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1542,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1542,44): error TS1005: ',' expected.
+src/adapters/mcp.ts(1542,50): error TS1005: ';' expected.
+src/adapters/mcp.ts(1542,52): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1559,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp.ts(1559,37): error TS1005: ',' expected.
+src/adapters/mcp.ts(1559,43): error TS1011: An element access expression should take an argument.
+src/adapters/mcp.ts(1559,45): error TS1005: ';' expected.
+src/adapters/mcp.ts(1559,47): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1576,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp.ts(1576,14): error TS1005: ';' expected.
+src/adapters/mcp.ts(1576,28): error TS1109: Expression expected.
+src/adapters/mcp.ts(1577,11): error TS1005: ':' expected.
+src/adapters/mcp.ts(1577,49): error TS1005: ',' expected.
+src/adapters/mcp.ts(1578,11): error TS1005: ',' expected.
+src/adapters/mcp.ts(1578,15): error TS1005: ':' expected.
+src/adapters/mcp.ts(1578,41): error TS1005: ',' expected.
+src/adapters/mcp.ts(1579,9): error TS1005: ':' expected.
+src/adapters/mcp.ts(1579,70): error TS1005: ',' expected.
+src/adapters/mcp.ts(1581,1): error TS1128: Declaration or statement expected.

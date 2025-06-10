@@ -330,6 +330,44 @@ export class AnalysisError extends Error {
 }
 
 // ====================
+// TEMPORAL CONTEXT TYPES
+// ====================
+
+export interface TimezoneConfig {
+  userTimezone: string;
+  tradingSession: '24h' | 'market_hours';
+  dateFormat: 'ISO' | 'local';
+}
+
+export interface TemporalContext {
+  userTimezone: string;
+  requestedTime: string; // En zona usuario
+  utcTime: string;       // Para APIs  
+  sessionContext: 'asia_session' | 'london_session' | 'ny_session' | 'london_ny_overlap' | 'off_hours';
+  daysAgo?: number;
+}
+
+export interface AnalysisRequest {
+  symbol: string;
+  timeframe?: string;
+  timezone?: string;
+  localTime?: string;
+  daysAgo?: number;
+  context?: TemporalContext;
+}
+
+// ====================
+// ENHANCED ANALYSIS TYPES WITH TIMEZONE
+// ====================
+
+export interface TimestampedAnalysis {
+  analysis: any;
+  temporalContext: TemporalContext;
+  userFriendlyTime: string;
+  tradingSession: string;
+}
+
+// ====================
 // UTILITY TYPES
 // ====================
 
@@ -402,8 +440,19 @@ export type {
   ICacheManager,
   CacheStats,
   CacheEntry,
-  CacheConfig
-};
+  CacheConfig,
+  // Analysis Repository types
+  IAnalysisRepository,
+  AnalysisType,
+  SavedAnalysis,
+  AnalysisSummary,
+  Pattern,
+  PatternCriteria,
+  Period,
+  AggregatedMetrics,
+  AnalysisQuery,
+  RepositoryStats
+} from './storage.js';
 
 // ====================
 // EXPORT ALL TYPES

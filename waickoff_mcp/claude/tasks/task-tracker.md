@@ -39,6 +39,23 @@
   - ✅ ADR-007: Arquitectura modular con dependency injection
   - ✅ ADR-008: Sistema de logging minimalista production-ready
 
+#### 🔥 TASK-010 - Sistema de Configuración de Zona Horaria
+- **Estado:** PENDIENTE
+- **Descripción:** Implementar configuración persistente de timezone para eliminar necesidad de especificar hora en cada request
+- **Prioridad:** **ALTA** (Crítico para análisis temporales precisos)
+- **Tiempo Estimado:** 3-4h
+- **Archivos:** `claude/tasks/task-010-timezone-config.md`
+- **Problema resuelto:**
+  - Elimina necesidad de especificar hora actual en cada request
+  - Configuración persistente por usuario
+  - Auto-detección inteligente de zona horaria
+  - Prevención de errores por timezone incorrecto
+- **Componentes a implementar:**
+  - ConfigurationManager para ~/.waickoff/config.json
+  - Auto-detección multi-método (sistema, env, Intl API)
+  - CLI tool para configuración inicial
+  - Herramientas MCP: get_user_config, set_user_timezone, detect_timezone
+
 #### ⚠️ TASK-004 - Tests Unitarios (URGENTE POST-BUG)
 - **Estado:** PENDIENTE
 - **Descripción:** Crear suite de tests para funciones core + validación de lógica de negocio

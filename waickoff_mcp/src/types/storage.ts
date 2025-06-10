@@ -142,3 +142,132 @@ export class CacheKeys {
     return `pattern:${patternName}:*`;
   }
 }
+
+// ====================
+// ANALYSIS REPOSITORY TYPES
+// ====================
+
+export type AnalysisType = 
+  | 'technical_analysis' 
+  | 'complete_analysis'
+  | 'support_resistance'
+  | 'volume_analysis'
+  | 'volume_delta'
+  | 'grid_suggestion'
+  | 'volatility'
+  | 'pattern_detection';
+
+export interface SavedAnalysis {
+  id: string;
+  timestamp: number;
+  symbol: string;
+  analysisType: AnalysisType;
+  data: any;
+  metadata: {
+    version: string;
+    source: string;
+    engine: string;
+    savedAt: string;
+    tags?: string[];
+  };
+  summary?: AnalysisSummary;
+}
+
+export interface AnalysisSummary {
+  price: number;
+  trend: 'bullish' | 'bearish' | 'neutral';
+  keyLevels: number[];
+  patterns?: string[];
+  signals?: string[];
+  confidence?: number;
+}
+
+export interface Pattern {
+  id: string;
+  type: string; // 'wyckoff', 'divergence', 'volume_anomaly', etc.
+  symbol: string;
+  timestamp: number;
+  confidence: number;
+  description: string;
+  data: any;
+  relatedAnalyses?: string[]; // IDs of related analyses
+}
+
+export interface PatternCriteria {
+  type?: string;
+  symbol?: string;
+  dateFrom?: Date;
+  dateTo?: Date;
+  minConfidence?: number;
+  tags?: string[];
+}
+
+export type Period = '1h' | '4h' | '1d' | '1w' | '1m';
+
+export interface AggregatedMetrics {
+  symbol: string;
+  metric: string;
+  period: Period;
+  data: {
+    average: number;
+    max: number;
+    min: number;
+    stdDev: number;
+    trend: number; // slope of linear regression
+    samples: number;
+  };
+}
+
+export interface AnalysisQuery {
+  symbol?: string;
+  type?: AnalysisType;
+  dateFrom?: Date;
+  dateTo?: Date;
+  limit?: number;
+  offset?: number;
+  orderBy?: 'timestamp' | 'confidence' | 'price';
+  orderDirection?: 'asc' | 'desc';
+  tags?: string[];
+}
+
+export interface IAnalysisRepository {
+  // Saving operations
+  saveAnalysis(symbol: string, type: AnalysisType, data: any, tags?: string[]): Promise<string>; // Returns analysis ID
+  savePattern(pattern: Pattern): Promise<string>; // Returns pattern ID
+  
+  // Retrieval operations
+  getAnalysisById(id: string): Promise<SavedAnalysis | null>;
+  getLatestAnalysis(symbol: string, type: AnalysisType): Promise<SavedAnalysis | null>;
+  getAnalysisHistory(symbol: string, type: AnalysisType, limit?: number): Promise<SavedAnalysis[]>;
+  getAnalysisInRange(symbol: string, from: Date, to: Date, type?: AnalysisType): Promise<SavedAnalysis[]>;
+  
+  // Pattern operations
+  findPatterns(criteria: PatternCriteria): Promise<Pattern[]>;
+  findSimilarPatterns(pattern: Pattern, threshold?: number): Promise<Pattern[]>;
+  getPatternById(id: string): Promise<Pattern | null>;
+  
+  // Aggregation operations
+  getAnalysisSummary(symbol: string, period?: Period): Promise<AnalysisSummary>;
+  getAggregatedMetrics(symbol: string, metric: string, period: Period): Promise<AggregatedMetrics>;
+  
+  // Search operations
+  searchAnalyses(query: AnalysisQuery): Promise<SavedAnalysis[]>;
+  countAnalyses(query: AnalysisQuery): Promise<number>;
+  
+  // Maintenance
+  deleteOldAnalyses(daysOld: number): Promise<number>; // Returns count of deleted analyses
+  getRepositoryStats(): Promise<RepositoryStats>;
+}
+
+export interface RepositoryStats {
+  totalAnalyses: number;
+  analysesByType: Record<AnalysisType, number>;
+  totalPatterns: number;
+  patternsByType: Record<string, number>;
+  symbols: string[];
+  dateRange: {
+    earliest: Date;
+    latest: Date;
+  };
+  storageUsed: number;
+}

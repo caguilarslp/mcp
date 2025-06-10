@@ -20,7 +20,19 @@ import {
   IMarketDataService,
   IAnalysisService,
   ITradingService,
-  CacheStats
+  CacheStats,
+  IAnalysisRepository,
+  SavedAnalysis,
+  Pattern,
+  PatternCriteria,
+  AnalysisQuery,
+  RepositoryStats,
+  AnalysisSummary as AnalysisSummaryType,
+  AggregatedMetrics,
+  Period,
+  AnalysisType,
+  TimezoneConfig,
+  TemporalContext
 } from '../types/index.js';
 
 import { BybitMarketDataService } from '../services/marketData.js';
@@ -29,6 +41,8 @@ import { TradingService } from '../services/trading.js';
 import { StorageService } from '../services/storage.js';
 import { CacheManager } from '../services/cacheManager.js';
 import { ICacheManager } from '../types/storage.js';
+import { AnalysisRepository } from '../repositories/analysisRepository.js';
+import { TimezoneManager, mexicoTimezone } from '../utils/timezone.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -60,9 +74,12 @@ export class MarketAnalysisEngine {
   private readonly analysisService: IAnalysisService;
   private readonly tradingService: ITradingService;
   private readonly storageService: StorageService;
+  private readonly analysisRepository: IAnalysisRepository;
+  private readonly timezoneManager: TimezoneManager;
   
   // Configuration
   private config: SystemConfig;
+  private timezoneConfig: TimezoneConfig;
 
   constructor(
     config?: Partial<SystemConfig>,
@@ -70,7 +87,8 @@ export class MarketAnalysisEngine {
     marketDataService?: IMarketDataService,
     analysisService?: IAnalysisService,
     tradingService?: ITradingService,
-    cacheManager?: ICacheManager
+    cacheManager?: ICacheManager,
+    timezoneConfig?: Partial<TimezoneConfig>
   ) {
     this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
@@ -81,6 +99,15 @@ export class MarketAnalysisEngine {
     
     // Initialize configuration with defaults
     this.config = this.mergeConfig(config);
+    this.timezoneConfig = {
+      userTimezone: 'America/Mexico_City',
+      tradingSession: '24h',
+      dateFormat: 'local',
+      ...timezoneConfig
+    };
+    
+    // Initialize timezone manager
+    this.timezoneManager = new TimezoneManager(this.timezoneConfig.userTimezone);
     
     // Initialize services with dependency injection
     const cache = cacheManager || new CacheManager();
@@ -96,7 +123,18 @@ export class MarketAnalysisEngine {
     this.tradingService = tradingService || new TradingService(this.marketDataService, this.analysisService);
     this.storageService = new StorageService();
     
-    this.logger.info('Market Analysis Engine initialized with dependency injection');
+    // Initialize analysis repository
+    const projectRoot = 'D:\\projects\\mcp\\waickoff_mcp';
+    this.analysisRepository = new AnalysisRepository(
+      this.storageService,
+      path.join(projectRoot, 'storage')
+    );
+    
+    this.logger.info('Market Analysis Engine initialized with timezone support and Analysis Repository', {
+      timezone: this.timezoneConfig.userTimezone,
+      currentTime: this.timezoneManager.getUserNow(),
+      repositoryEnabled: true
+    });
   }
 
   // ====================
@@ -199,7 +237,17 @@ export class MarketAnalysisEngine {
           analysis[analysisKeys[index]] = result;
         });
 
-        // AUTO-SAVE: Simple and direct implementation
+        // Save to Analysis Repository
+        const analysisId = await this.analysisRepository.saveAnalysis(
+          symbol,
+          'technical_analysis' as AnalysisType,
+          analysis,
+          [`timeframe:${timeframe}`, `periods:${periods}`]
+        );
+
+        this.logger.info(`✅ Analysis saved with ID: ${analysisId}`);
+
+        // AUTO-SAVE: Legacy simple implementation (for backward compatibility)
         await this.autoSaveAnalysis(symbol, 'technical_analysis', analysis);
 
         this.logger.info(`✅ COMPLETED: performTechnicalAnalysis for ${symbol}`);
@@ -322,7 +370,17 @@ export class MarketAnalysisEngine {
           summary
         };
 
-        // AUTO-SAVE: Simple and direct implementation
+        // Save complete analysis to repository
+        const analysisId = await this.analysisRepository.saveAnalysis(
+          symbol,
+          'complete_analysis' as AnalysisType,
+          completeAnalysis,
+          investment ? [`investment:${investment}`] : []
+        );
+
+        this.logger.info(`✅ Complete analysis saved with ID: ${analysisId}`);
+
+        // AUTO-SAVE: Legacy simple implementation (for backward compatibility)
         await this.autoSaveAnalysis(symbol, 'complete_analysis', completeAnalysis);
 
         this.logger.info(`✅ COMPLETED: getCompleteAnalysis for ${symbol}`);
@@ -333,6 +391,170 @@ export class MarketAnalysisEngine {
         return this.createErrorResponse(`Complete analysis failed: ${error}`);
       }
     });
+  }
+
+  // ====================
+  // ANALYSIS REPOSITORY METHODS
+  // ====================
+
+  /**
+   * Get analysis by ID
+   */
+  async getAnalysisById(id: string): Promise<ApiResponse<SavedAnalysis | null>> {
+    try {
+      const analysis = await this.analysisRepository.getAnalysisById(id);
+      return this.createSuccessResponse(analysis);
+    } catch (error) {
+      this.logger.error(`Failed to get analysis by ID ${id}:`, error);
+      return this.createErrorResponse(`Failed to get analysis: ${error}`);
+    }
+  }
+
+  /**
+   * Get latest analysis for a symbol
+   */
+  async getLatestAnalysis(
+    symbol: string,
+    type: AnalysisType
+  ): Promise<ApiResponse<SavedAnalysis | null>> {
+    try {
+      const analysis = await this.analysisRepository.getLatestAnalysis(symbol, type);
+      return this.createSuccessResponse(analysis);
+    } catch (error) {
+      this.logger.error(`Failed to get latest analysis for ${symbol}/${type}:`, error);
+      return this.createErrorResponse(`Failed to get latest analysis: ${error}`);
+    }
+  }
+
+  /**
+   * Search analyses with complex query
+   */
+  async searchAnalyses(query: AnalysisQuery): Promise<ApiResponse<SavedAnalysis[]>> {
+    try {
+      const analyses = await this.analysisRepository.searchAnalyses(query);
+      return this.createSuccessResponse(analyses);
+    } catch (error) {
+      this.logger.error('Failed to search analyses:', error);
+      return this.createErrorResponse(`Failed to search analyses: ${error}`);
+    }
+  }
+
+  /**
+   * Get analysis summary for a symbol
+   */
+  async getAnalysisSummary(
+    symbol: string,
+    period?: Period
+  ): Promise<ApiResponse<AnalysisSummaryType>> {
+    try {
+      const summary = await this.analysisRepository.getAnalysisSummary(symbol, period);
+      return this.createSuccessResponse(summary);
+    } catch (error) {
+      this.logger.error(`Failed to get analysis summary for ${symbol}:`, error);
+      return this.createErrorResponse(`Failed to get summary: ${error}`);
+    }
+  }
+
+  /**
+   * Get aggregated metrics
+   */
+  async getAggregatedMetrics(
+    symbol: string,
+    metric: string,
+    period: Period
+  ): Promise<ApiResponse<AggregatedMetrics>> {
+    try {
+      const metrics = await this.analysisRepository.getAggregatedMetrics(symbol, metric, period);
+      return this.createSuccessResponse(metrics);
+    } catch (error) {
+      this.logger.error(`Failed to get aggregated metrics for ${symbol}/${metric}:`, error);
+      return this.createErrorResponse(`Failed to get metrics: ${error}`);
+    }
+  }
+
+  /**
+   * Find patterns
+   */
+  async findPatterns(criteria: PatternCriteria): Promise<ApiResponse<Pattern[]>> {
+    try {
+      const patterns = await this.analysisRepository.findPatterns(criteria);
+      return this.createSuccessResponse(patterns);
+    } catch (error) {
+      this.logger.error('Failed to find patterns:', error);
+      return this.createErrorResponse(`Failed to find patterns: ${error}`);
+    }
+  }
+
+  /**
+   * Get repository statistics
+   */
+  async getRepositoryStats(): Promise<ApiResponse<RepositoryStats>> {
+    try {
+      const stats = await this.analysisRepository.getRepositoryStats();
+      return this.createSuccessResponse(stats);
+    } catch (error) {
+      this.logger.error('Failed to get repository stats:', error);
+      return this.createErrorResponse(`Failed to get stats: ${error}`);
+    }
+  }
+
+  /**
+   * Get analysis by ID (exposed for MCP handlers)
+   */
+  async getAnalysisByIdHandler(id: string): Promise<ApiResponse<SavedAnalysis | null>> {
+    return this.getAnalysisById(id);
+  }
+
+  /**
+   * Get latest analysis (exposed for MCP handlers)
+   */
+  async getLatestAnalysisHandler(
+    symbol: string,
+    type: AnalysisType
+  ): Promise<ApiResponse<SavedAnalysis | null>> {
+    return this.getLatestAnalysis(symbol, type);
+  }
+
+  /**
+   * Search analyses (exposed for MCP handlers)
+   */
+  async searchAnalysesHandler(query: AnalysisQuery): Promise<ApiResponse<SavedAnalysis[]>> {
+    return this.searchAnalyses(query);
+  }
+
+  /**
+   * Get analysis summary (exposed for MCP handlers)
+   */
+  async getAnalysisSummaryHandler(
+    symbol: string,
+    period?: Period
+  ): Promise<ApiResponse<AnalysisSummaryType>> {
+    return this.getAnalysisSummary(symbol, period);
+  }
+
+  /**
+   * Get aggregated metrics (exposed for MCP handlers)
+   */
+  async getAggregatedMetricsHandler(
+    symbol: string,
+    metric: string,
+    period: Period
+  ): Promise<ApiResponse<AggregatedMetrics>> {
+    return this.getAggregatedMetrics(symbol, metric, period);
+  }
+
+  /**
+   * Find patterns (exposed for MCP handlers)
+   */
+  async findPatternsHandler(criteria: PatternCriteria): Promise<ApiResponse<Pattern[]>> {
+    return this.findPatterns(criteria);
+  }
+
+  /**
+   * Get repository stats (exposed for MCP handlers)
+   */
+  async getRepositoryStatsHandler(): Promise<ApiResponse<RepositoryStats>> {
+    return this.getRepositoryStats();
   }
 
   // ====================
@@ -508,7 +730,8 @@ export class MarketAnalysisEngine {
       const services = {
         marketData: marketDataHealth,
         analysis: true, // Analysis service is always available
-        trading: true   // Trading service is always available
+        trading: true,  // Trading service is always available
+        repository: true // Repository is always available
       };
 
       const allHealthy = Object.values(services).every(status => status);
@@ -528,7 +751,8 @@ export class MarketAnalysisEngine {
         services: {
           marketData: false,
           analysis: false,
-          trading: false
+          trading: false,
+          repository: false
         },
         uptime: process.uptime(),
         version: '1.3.6'
@@ -566,6 +790,120 @@ export class MarketAnalysisEngine {
    */
   getConfig(): SystemConfig {
     return { ...this.config };
+  }
+
+  // ====================
+  // TIMEZONE-AWARE ANALYSIS METHODS  
+  // ====================
+
+  /**
+   * Get timezone information for debugging
+   */
+  getTimezoneInfo() {
+    return this.timezoneManager.getTimezoneInfo();
+  }
+
+  /**
+   * Perform analysis with temporal context (timezone-aware)
+   */
+  async performTemporalAnalysis(
+    symbol: string,
+    options: {
+      daysAgo?: number;
+      localTime?: string;
+      includeVolatility?: boolean;
+      includeVolume?: boolean;
+      includeVolumeDelta?: boolean;
+      includeSupportResistance?: boolean;
+      timeframe?: string;
+      periods?: number;
+    } = {}
+  ): Promise<ApiResponse<{
+    analysis: any;
+    temporalContext: TemporalContext;
+    userFriendlyTime: string;
+    tradingSession: string;
+  }>> {
+    return this.performanceMonitor.measure('performTemporalAnalysis', async () => {
+      try {
+        const {
+          daysAgo = 0,
+          localTime,
+          includeVolatility = true,
+          includeVolume = true,
+          includeVolumeDelta = true,
+          includeSupportResistance = true,
+          timeframe = '60',
+          periods = 100
+        } = options;
+
+        // Create temporal context
+        let temporalContext: TemporalContext;
+        
+        if (daysAgo > 0) {
+          const timeData = this.timezoneManager.getDaysAgo(daysAgo, 12); // Default 12:00 local
+          temporalContext = {
+            userTimezone: this.timezoneConfig.userTimezone,
+            requestedTime: timeData.userTime,
+            utcTime: timeData.utcTime.toISOString(),
+            sessionContext: timeData.context as any,
+            daysAgo
+          };
+        } else if (localTime) {
+          const utcTime = this.timezoneManager.userToUTC(localTime);
+          temporalContext = {
+            userTimezone: this.timezoneConfig.userTimezone,
+            requestedTime: localTime,
+            utcTime: utcTime.toISOString(),
+            sessionContext: 'current' as any
+          };
+        } else {
+          // Current time
+          const now = new Date();
+          temporalContext = {
+            userTimezone: this.timezoneConfig.userTimezone,
+            requestedTime: this.timezoneManager.getUserNow(),
+            utcTime: now.toISOString(),
+            sessionContext: 'current' as any
+          };
+        }
+
+        this.logger.info(`🕐 Temporal Analysis for ${symbol}`, {
+          userTime: temporalContext.requestedTime,
+          utcTime: temporalContext.utcTime,
+          session: temporalContext.sessionContext
+        });
+
+        // Perform standard analysis (data is always in UTC from API)
+        const analysisResponse = await this.performTechnicalAnalysis(symbol, {
+          includeVolatility,
+          includeVolume,
+          includeVolumeDelta,
+          includeSupportResistance,
+          timeframe,
+          periods
+        });
+
+        if (!analysisResponse.success) {
+          throw new Error(analysisResponse.error || 'Analysis failed');
+        }
+
+        // Enhance analysis with temporal context
+        const userFriendlyTime = this.timezoneManager.formatForDisplay(temporalContext.utcTime);
+        const tradingSession = temporalContext.sessionContext;
+
+        return this.createSuccessResponse({
+          analysis: analysisResponse.data,
+          temporalContext,
+          userFriendlyTime,
+          tradingSession
+        });
+
+      } catch (error) {
+        this.logger.error(`❌ Temporal analysis failed for ${symbol}:`, error);
+        return this.createErrorResponse(`Temporal analysis failed: ${error}`);
+      }
+    });
   }
 
   // ====================
@@ -683,75 +1021,26 @@ export class MarketAnalysisEngine {
   }
 
   /**
-   * Get analysis history using simple fs operations
+   * Get analysis history using Analysis Repository
    */
   async getAnalysisHistory(
     symbol: string,
     limit: number = 10,
     analysisType?: string
-  ): Promise<ApiResponse<any[]>> {
+  ): Promise<ApiResponse<SavedAnalysis[]>> {
     return this.performanceMonitor.measure('getAnalysisHistory', async () => {
       try {
         this.logger.info(`🔥 INCOMING REQUEST: getAnalysisHistory for ${symbol}`);
 
-        // Simple, direct file operations
-        const fs = await import('fs/promises');
-        const path = await import('path');
-        const { existsSync } = await import('fs');
-        
-        // Build directory path
-        // Use project directory instead of process.cwd()
-        const projectRoot = 'D:\\projects\\mcp\\waickoff_mcp';
-        const storageDir = path.join(projectRoot, 'storage', 'analysis', symbol);
-        
-        // Check if directory exists
-        if (!existsSync(storageDir)) {
-          this.logger.info(`✅ COMPLETED: getAnalysisHistory for ${symbol} (0 files - directory doesn't exist)`);
-          return this.createSuccessResponse([]);
-        }
+        // Use Analysis Repository instead of direct file operations
+        const analyses = await this.analysisRepository.getAnalysisHistory(
+          symbol,
+          analysisType as AnalysisType,
+          limit
+        );
 
-        // Read directory contents
-        const files = await fs.readdir(storageDir);
-        this.logger.info(`📁 Found ${files.length} files in ${storageDir}`);
-        
-        // Filter by analysis type if specified
-        const filteredFiles = analysisType ? 
-          files.filter(file => file.startsWith(`${analysisType}_`)) : 
-          files;
-        
-        this.logger.info(`🔎 After filtering: ${filteredFiles.length} files`);
-        
-        // Load and sort by timestamp
-        const analyses: any[] = [];
-        for (const file of filteredFiles.slice(0, Math.min(limit * 2, 50))) {
-          try {
-            const filePath = path.join(storageDir, file);
-            const content = await fs.readFile(filePath, 'utf8');
-            const data = JSON.parse(content);
-            
-            if (data && data.timestamp) {
-              analyses.push({
-                file: `analysis/${symbol}/${file}`,
-                timestamp: data.timestamp,
-                symbol: data.symbol,
-                analysisType: data.analysisType,
-                created: new Date(data.timestamp).toISOString(),
-                metadata: data.metadata
-              });
-            }
-          } catch (fileError) {
-            this.logger.error(`Failed to read file ${file}:`, fileError);
-            // Continue with other files
-          }
-        }
-
-        // Sort by timestamp (newest first) and limit
-        const sortedAnalyses = analyses
-          .sort((a, b) => b.timestamp - a.timestamp)
-          .slice(0, limit);
-
-        this.logger.info(`✅ COMPLETED: getAnalysisHistory for ${symbol} (${sortedAnalyses.length} files)`);
-        return this.createSuccessResponse(sortedAnalyses);
+        this.logger.info(`✅ COMPLETED: getAnalysisHistory for ${symbol} (${analyses.length} analyses)`);
+        return this.createSuccessResponse(analyses);
 
       } catch (error) {
         this.logger.error(`❌ FAILED: getAnalysisHistory for ${symbol}:`, error);
