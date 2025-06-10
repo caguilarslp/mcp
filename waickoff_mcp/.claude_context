@@ -1,9 +1,9 @@
-# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.3.5 (PRODUCTION READY)
+# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.3.6 (PRODUCTION READY)
 
-## 🎆 ESTADO CRÍTICO v1.3.6 - TASK-009 FASE 1 COMPLETADA Y VALIDADA
-**✅ TASK-009 FASE 1**: Sistema de almacenamiento VALIDADO con ADAUSDT - 100% operativo
-**🎯 COMPILACIÓN**: Sin errores - StorageService + Auto-save + Tests funcionando
-**🚀 LISTO PARA FASE 2**: Cache Manager para optimización de performance
+## 🎆 ESTADO CRÍTICO v1.3.6 - TASK-009 FASE 2 COMPLETADA + MODULARIDAD CORREGIDA
+**✅ TASK-009 FASE 2**: Cache Manager COMPLETAMENTE IMPLEMENTADO + Patrón modular aplicado correctamente
+**🎯 COMPILACIÓN**: Sin errores - CacheManager + TTL + LRU + Stats + Modularidad funcionando
+**🚀 LISTO PARA FASE 3**: Analysis Repository para patterns y decisions
 
 ## IMPORTANTE: Leer ANTES de dar cualquier sugerencia
 
@@ -38,19 +38,20 @@
 - **Registro**: `claude/lessons-learned/README.md` con índice y templates
 - **Ejemplos**: LESSON-001 (Auto-save implementation failure)
 
-### 🎆 ESTADO ACTUAL (v1.3.5 - 10/06/2025) - BUG-003 RESUELTO + TASK-009 FASE 1 COMPLETADA
-- **Fase:** ✅ STORAGE SYSTEM FASE 1 + BUG-003 DEFINITIVAMENTE RESUELTO
-- **Última Actualización:** v1.3.5 con errores JSON de startup ELIMINADOS 100%
-- **Próxima Decisión:** Continuar TASK-009 con sistema completamente estable
-- **Bloqueadores:** NINGUNO - Claude Desktop 100% limpio, MCP operativo
-- **UX Status:** 🎆 TRANSFORMADO - Zero errores molestos en startup
-- **Funcionalidad:** ✅ Sistema MCP perfectamente estable + Storage operativo
+### 🎆 ESTADO ACTUAL (v1.3.6 - 10/06/2025) - TASK-009 FASE 2 COMPLETADA + MODULARIDAD CORREGIDA
+- **Fase:** ✅ CACHE MANAGER FASE 2 + PATRÓN MODULAR CORREGIDO
+- **Última Actualización:** v1.3.6 con Cache Manager + Dependency Injection funcionando
+- **Próxima Decisión:** Continuar TASK-009 FASE 3 con sistema completamente modular
+- **Bloqueadores:** NINGUNO - Compilación limpia, cache operativo, modularidad aplicada
+- **UX Status:** 🎆 OPTIMIZADO - Performance boost con cache inteligente
+- **Funcionalidad:** ✅ Sistema MCP + Storage + Cache + Modularidad 100% operativo
 
-### 🎆 ARQUITECTURA MODULAR v1.3.0 - TRANSFORMACIÓN COMPLETA
+### 🎆 ARQUITECTURA MODULAR v1.3.6 - PATRÓN CORREGIDO Y APLICADO
 **✅ REFACTORIZACIÓN EXITOSA**: De 1 archivo monolítico a 15+ módulos especializados
-**🏗️ CLEAN ARCHITECTURE**: 4 capas bien separadas con dependency injection
-**🧪 100% TESTEABLE**: Cada servicio mockeable individualmente
+**🏗️ CLEAN ARCHITECTURE**: 4 capas bien separadas con dependency injection CORRECTO
+**🧪 100% TESTEABLE**: Cada servicio mockeable individualmente con interfaces completas
 **🔄 PROTOCOL-AGNOSTIC**: Core reutilizable desde MCP, FastAPI, CLI, etc.
+**✅ PATRÓN MODULAR APLICADO**: Dependency injection, interface segregation, single responsibility
 
 #### **🎯 CAPAS Y SERVICIOS IMPLEMENTADOS**
 
@@ -77,6 +78,32 @@
 - ✅ **Performance Monitor** (`src/utils/performance.ts`) - Métricas de rendimiento
 - ✅ **Math Utils** (`src/utils/math.ts`) - Utilidades matemáticas
 - ✅ **Type Definitions** (`src/types/index.ts`) - Tipos centralizados
+
+#### **🔥 PATRÓN DE MODULARIDAD v1.3.6 - APLICADO CORRECTAMENTE**
+
+##### **✅ Dependency Injection Implementado**
+- **Core Engine**: Constructor acepta servicios inyectables para testing
+- **MarketDataService**: CacheManager inyectado via constructor
+- **Interface-based**: Engine usa IMarketDataService, no implementación concreta
+- **Testeable**: Todos los servicios pueden ser mockeados independientemente
+
+##### **✅ Interface Segregation Completa**
+- **IMarketDataService**: Incluye métodos de cache (getCacheStats, invalidateCache, clearCache)
+- **IAnalysisService**: Métodos de análisis + performance metrics
+- **ITradingService**: Métodos de trading + optimization + performance metrics
+- **ICacheManager**: Interface completa para cache operations
+
+##### **✅ Single Responsibility Aplicado**
+- **CacheHandlers**: Módulo separado para gestión MCP de cache (`src/adapters/cacheHandlers.ts`)
+- **MCP Adapter**: Reducido de 55KB a 51KB mediante separación de concerns
+- **Cache Manager**: Responsabilidad única de gestión de cache en memoria
+- **Engine**: Orquestación sin lógica de cache específica
+
+##### **✅ Separation of Concerns**
+- **Cache logic**: Separado en CacheManager + CacheHandlers
+- **MCP protocol**: Separado de business logic
+- **Storage operations**: Separado de cache operations
+- **Performance monitoring**: Integrado transparentemente en todas las capas
 
 ### Funcionalidades IMPLEMENTADAS v1.3.4 (SISTEMA DE LOGGING MINIMALISTA)
 

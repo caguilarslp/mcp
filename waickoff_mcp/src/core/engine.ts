@@ -16,17 +16,23 @@ import {
   GridSuggestion,
   MarketCategoryType,
   PerformanceMetrics,
-  ApiResponse
+  ApiResponse,
+  IMarketDataService,
+  IAnalysisService,
+  ITradingService,
+  CacheStats
 } from '../types/index.js';
 
 import { BybitMarketDataService } from '../services/marketData.js';
 import { TechnicalAnalysisService } from '../services/analysis.js';
 import { TradingService } from '../services/trading.js';
+import { StorageService } from '../services/storage.js';
+import { CacheManager } from '../services/cacheManager.js';
+import { ICacheManager } from '../types/storage.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
 import { PerformanceMonitor } from '../utils/performance.js';
-import { StorageService } from '../services/storage.js';
 
 // ====================
 // STORAGE TYPES FOR AUTO-SAVE
@@ -49,16 +55,23 @@ export class MarketAnalysisEngine {
   private readonly logger: FileLogger;
   private readonly performanceMonitor: PerformanceMonitor;
   
-  // Core services
-  private readonly marketDataService: BybitMarketDataService;
-  private readonly analysisService: TechnicalAnalysisService;
-  private readonly tradingService: TradingService;
+  // Core services with dependency injection
+  private readonly marketDataService: IMarketDataService;
+  private readonly analysisService: IAnalysisService;
+  private readonly tradingService: ITradingService;
   private readonly storageService: StorageService;
   
   // Configuration
   private config: SystemConfig;
 
-  constructor(config?: Partial<SystemConfig>) {
+  constructor(
+    config?: Partial<SystemConfig>,
+    // Dependency injection - services can be injected for testing
+    marketDataService?: IMarketDataService,
+    analysisService?: IAnalysisService,
+    tradingService?: ITradingService,
+    cacheManager?: ICacheManager
+  ) {
     this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
       enableStackTrace: true,
@@ -69,18 +82,21 @@ export class MarketAnalysisEngine {
     // Initialize configuration with defaults
     this.config = this.mergeConfig(config);
     
-    // Initialize services
-    this.marketDataService = new BybitMarketDataService(
+    // Initialize services with dependency injection
+    const cache = cacheManager || new CacheManager();
+    
+    this.marketDataService = marketDataService || new BybitMarketDataService(
       this.config.api.baseUrl,
       this.config.api.timeout,
-      this.config.api.retryAttempts
+      this.config.api.retryAttempts,
+      cache  // Inject cache manager
     );
     
-    this.analysisService = new TechnicalAnalysisService(this.marketDataService);
-    this.tradingService = new TradingService(this.marketDataService, this.analysisService);
+    this.analysisService = analysisService || new TechnicalAnalysisService(this.marketDataService);
+    this.tradingService = tradingService || new TradingService(this.marketDataService, this.analysisService);
     this.storageService = new StorageService();
     
-    this.logger.info('Market Analysis Engine initialized');
+    this.logger.info('Market Analysis Engine initialized with dependency injection');
   }
 
   // ====================
@@ -502,7 +518,7 @@ export class MarketAnalysisEngine {
         status,
         services,
         uptime: process.uptime(),
-        version: '1.3.0'
+        version: '1.3.6'
       };
 
     } catch (error) {
@@ -515,7 +531,7 @@ export class MarketAnalysisEngine {
           trading: false
         },
         uptime: process.uptime(),
-        version: '1.3.0'
+        version: '1.3.6'
       };
     }
   }
@@ -550,6 +566,64 @@ export class MarketAnalysisEngine {
    */
   getConfig(): SystemConfig {
     return { ...this.config };
+  }
+
+  // ====================
+  // CACHE MANAGEMENT METHODS
+  // ====================
+
+  /**
+   * Get cache statistics
+   */
+  async getCacheStats(): Promise<CacheStats> {
+    try {
+      return await this.marketDataService.getCacheStats();
+    } catch (error) {
+      this.logger.error('Failed to get cache stats:', error);
+      // Return empty stats on error
+      return {
+        totalEntries: 0,
+        totalMemoryUsage: 0,
+        hitRate: 0,
+        missRate: 0,
+        oldestEntry: Date.now(),
+        newestEntry: Date.now(),
+        totalHits: 0,
+        totalMisses: 0,
+        entriesByTTL: {
+          expired: 0,
+          expiringSoon: 0,
+          fresh: 0
+        }
+      };
+    }
+  }
+
+  /**
+   * Clear all cache
+   */
+  async clearCache(): Promise<void> {
+    try {
+      await this.marketDataService.clearCache();
+      this.logger.info('All cache cleared successfully');
+    } catch (error) {
+      this.logger.error('Failed to clear cache:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Invalidate cache for a symbol
+   */
+  async invalidateCache(symbol: string, category?: MarketCategoryType): Promise<number> {
+    try {
+      const invalidatedCount = await this.marketDataService.invalidateCache(symbol, category);
+      this.logger.info(`Invalidated ${invalidatedCount} cache entries for ${symbol}`);
+      return invalidatedCount;
+    } catch (error) {
+      this.logger.error(`Failed to invalidate cache for ${symbol}:`, error);
+      throw error;
+    }
   }
 
   // ====================

@@ -5,6 +5,19 @@
  * @author Bybit MCP Team
  */
 
+// Import storage types
+import type {
+  IStorageService,
+  FileMetadata,
+  StorageConfig,
+  StorageStats,
+  StorageCategory,
+  ICacheManager,
+  CacheStats,
+  CacheEntry,
+  CacheConfig
+} from './storage.js';
+
 // ====================
 // CORE MARKET DATA TYPES
 // ====================
@@ -240,6 +253,12 @@ export interface IMarketDataService {
   getTicker(symbol: string, category?: MarketCategoryType): Promise<MarketTicker>;
   getOrderbook(symbol: string, category?: MarketCategoryType, limit?: number): Promise<Orderbook>;
   getKlines(symbol: string, interval?: string, limit?: number, category?: MarketCategoryType): Promise<OHLCV[]>;
+  healthCheck(): Promise<boolean>;
+  getPerformanceMetrics(): PerformanceMetrics[];
+  // Cache management methods
+  getCacheStats(): Promise<CacheStats>;
+  invalidateCache(symbol: string, category?: MarketCategoryType): Promise<number>;
+  clearCache(): Promise<void>;
 }
 
 export interface IAnalysisService {
@@ -247,10 +266,13 @@ export interface IAnalysisService {
   analyzeVolume(symbol: string, interval?: string, periods?: number): Promise<VolumeAnalysis>;
   analyzeVolumeDelta(symbol: string, interval?: string, periods?: number): Promise<VolumeDelta>;
   identifySupportResistance(symbol: string, interval?: string, periods?: number, sensitivity?: number): Promise<SupportResistanceAnalysis>;
+  getPerformanceMetrics(): PerformanceMetrics[];
 }
 
 export interface ITradingService {
   suggestGridLevels(symbol: string, investment: number, gridCount?: number, category?: MarketCategoryType): Promise<GridSuggestion>;
+  optimizeGridParameters(symbol: string, investment: number, targetReturn: number, riskTolerance: string): Promise<any>;
+  getPerformanceMetrics(): PerformanceMetrics[];
 }
 
 // ====================
@@ -368,14 +390,23 @@ export interface PerformanceMetrics {
 }
 
 // ====================
-// STORAGE TYPES
+// STORAGE TYPES RE-EXPORTS
 // ====================
 
-export * from './storage.js';
+export type {
+  IStorageService,
+  FileMetadata,
+  StorageConfig,
+  StorageStats,
+  StorageCategory,
+  ICacheManager,
+  CacheStats,
+  CacheEntry,
+  CacheConfig
+};
 
 // ====================
 // EXPORT ALL TYPES
 // ====================
 
 // Note: All types are already exported individually above
-// Storage types are exported from their own module

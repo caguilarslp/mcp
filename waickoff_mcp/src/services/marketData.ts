@@ -15,9 +15,11 @@ import {
   MarketDataError,
   PerformanceMetrics
 } from '../types/index.js';
+import { CacheKeys, ICacheManager } from '../types/storage.js';
 import { PerformanceMonitor } from '../utils/performance.js';
 import { Logger } from '../utils/logger.js';
-// Removed complex logging to avoid MCP JSON errors
+import { cacheManager } from './cacheManager.js';
+// Integrated with Cache Manager for performance optimization
 
 export class BybitMarketDataService implements IMarketDataService {
   private readonly baseUrl: string;
@@ -25,25 +27,51 @@ export class BybitMarketDataService implements IMarketDataService {
   private readonly retryAttempts: number;
   private readonly performanceMonitor: PerformanceMonitor;
   private readonly logger: Logger;
+  private readonly cache: ICacheManager;
+  private readonly cacheTTL: {
+    ticker: number;
+    orderbook: number;
+    klines: number;
+  };
 
   constructor(
     baseUrl: string = 'https://api.bybit.com',
     timeout: number = 10000,
-    retryAttempts: number = 3
+    retryAttempts: number = 3,
+    cache?: ICacheManager
   ) {
     this.baseUrl = baseUrl;
     this.timeout = timeout;
     this.retryAttempts = retryAttempts;
     this.performanceMonitor = new PerformanceMonitor();
     this.logger = new Logger('BybitMarketDataService');
+    this.cache = cache || cacheManager;
+    
+    // Configure cache TTL for different data types
+    this.cacheTTL = {
+      ticker: 30 * 1000,    // 30 seconds - ticker updates frequently
+      orderbook: 15 * 1000, // 15 seconds - orderbook updates very frequently
+      klines: 5 * 60 * 1000 // 5 minutes - historical data doesn't change much
+    };
+    
+    this.logger.info('BybitMarketDataService initialized with cache integration');
   }
 
   /**
-   * Fetch ticker data for a trading pair
+   * Fetch ticker data for a trading pair with caching
    */
   async getTicker(symbol: string, category: MarketCategoryType = 'spot'): Promise<MarketTicker> {
     return this.performanceMonitor.measure('getTicker', async () => {
-      this.logger.info(`Fetching ticker for ${symbol} in ${category} market`);
+      const cacheKey = CacheKeys.ticker(symbol, category);
+      
+      // Try cache first
+      const cachedTicker = await this.cache.get<MarketTicker>(cacheKey);
+      if (cachedTicker) {
+        this.logger.debug(`Cache HIT: Ticker for ${symbol}`);
+        return cachedTicker;
+      }
+      
+      this.logger.info(`Cache MISS: Fetching ticker for ${symbol} from API`);
       
       try {
         const endpoint = `/v5/market/tickers?category=${category}&symbol=${symbol}`;
@@ -71,7 +99,10 @@ export class BybitMarketDataService implements IMarketDataService {
           timestamp: new Date().toISOString()
         };
 
-        this.logger.info(`Successfully fetched ticker for ${symbol}: $${ticker.lastPrice}`);
+        // Cache the result
+        await this.cache.set(cacheKey, ticker, this.cacheTTL.ticker);
+        
+        this.logger.info(`Successfully fetched and cached ticker for ${symbol}: ${ticker.lastPrice}`);
         return ticker;
 
       } catch (error) {
@@ -87,7 +118,7 @@ export class BybitMarketDataService implements IMarketDataService {
   }
 
   /**
-   * Fetch orderbook data for a trading pair
+   * Fetch orderbook data for a trading pair with caching
    */
   async getOrderbook(
     symbol: string, 
@@ -95,7 +126,16 @@ export class BybitMarketDataService implements IMarketDataService {
     limit: number = 25
   ): Promise<Orderbook> {
     return this.performanceMonitor.measure('getOrderbook', async () => {
-      this.logger.info(`Fetching orderbook for ${symbol} with limit ${limit}`);
+      const cacheKey = CacheKeys.orderbook(symbol, category, limit);
+      
+      // Try cache first
+      const cachedOrderbook = await this.cache.get<Orderbook>(cacheKey);
+      if (cachedOrderbook) {
+        this.logger.debug(`Cache HIT: Orderbook for ${symbol}`);
+        return cachedOrderbook;
+      }
+      
+      this.logger.info(`Cache MISS: Fetching orderbook for ${symbol} from API`);
       
       try {
         const endpoint = `/v5/market/orderbook?category=${category}&symbol=${symbol}&limit=${limit}`;
@@ -115,7 +155,10 @@ export class BybitMarketDataService implements IMarketDataService {
           spread: parseFloat(result.a[0][0]) - parseFloat(result.b[0][0])
         };
 
-        this.logger.info(`Successfully fetched orderbook for ${symbol}: ${orderbook.bids.length} bids, ${orderbook.asks.length} asks`);
+        // Cache the result
+        await this.cache.set(cacheKey, orderbook, this.cacheTTL.orderbook);
+        
+        this.logger.info(`Successfully fetched and cached orderbook for ${symbol}: ${orderbook.bids.length} bids, ${orderbook.asks.length} asks`);
         return orderbook;
 
       } catch (error) {
@@ -131,7 +174,7 @@ export class BybitMarketDataService implements IMarketDataService {
   }
 
   /**
-   * Fetch OHLCV candlestick data
+   * Fetch OHLCV candlestick data with caching
    */
   async getKlines(
     symbol: string,
@@ -140,7 +183,16 @@ export class BybitMarketDataService implements IMarketDataService {
     category: MarketCategoryType = 'spot'
   ): Promise<OHLCV[]> {
     return this.performanceMonitor.measure('getKlines', async () => {
-      this.logger.info(`Fetching ${limit} klines for ${symbol} with ${interval} interval`);
+      const cacheKey = CacheKeys.klines(symbol, interval, limit, category);
+      
+      // Try cache first
+      const cachedKlines = await this.cache.get<OHLCV[]>(cacheKey);
+      if (cachedKlines) {
+        this.logger.debug(`Cache HIT: Klines for ${symbol}`);
+        return cachedKlines;
+      }
+      
+      this.logger.info(`Cache MISS: Fetching ${limit} klines for ${symbol} from API`);
       
       try {
         const endpoint = `/v5/market/kline?category=${category}&symbol=${symbol}&interval=${interval}&limit=${limit}`;
@@ -158,7 +210,10 @@ export class BybitMarketDataService implements IMarketDataService {
         // Sort chronologically (oldest first)
         klines.reverse();
 
-        this.logger.info(`Successfully fetched ${klines.length} klines for ${symbol}`);
+        // Cache the result
+        await this.cache.set(cacheKey, klines, this.cacheTTL.klines);
+        
+        this.logger.info(`Successfully fetched and cached ${klines.length} klines for ${symbol}`);
         return klines;
 
       } catch (error) {
@@ -315,16 +370,51 @@ export class BybitMarketDataService implements IMarketDataService {
   }
 
   /**
-   * Get service info
+   * Get cache statistics
    */
-  getServiceInfo() {
+  async getCacheStats() {
+    return await this.cache.getStats();
+  }
+
+  /**
+   * Invalidate cache for a symbol
+   */
+  async invalidateCache(symbol: string, category?: MarketCategoryType): Promise<number> {
+    const pattern = category ? `*:${symbol}:${category}*` : `*:${symbol}:*`;
+    const invalidatedCount = await this.cache.invalidate(pattern);
+    this.logger.info(`Invalidated ${invalidatedCount} cache entries for ${symbol}`);
+    return invalidatedCount;
+  }
+
+  /**
+   * Clear all market data cache
+   */
+  async clearCache(): Promise<void> {
+    await this.cache.clear();
+    this.logger.info('Cleared all market data cache');
+  }
+
+  /**
+   * Get service info with cache information
+   */
+  async getServiceInfo() {
+    const cacheStats = await this.cache.getStats();
     return {
-    name: 'BybitMarketDataService',
-    version: '1.3.4',
-    baseUrl: this.baseUrl,
+      name: 'BybitMarketDataService',
+      version: '1.3.6',
+      baseUrl: this.baseUrl,
       timeout: this.timeout,
       retryAttempts: this.retryAttempts,
-      uptime: process.uptime()
+      uptime: process.uptime(),
+      cache: {
+        enabled: true,
+        ttl: this.cacheTTL,
+        stats: {
+          entries: cacheStats.totalEntries,
+          hitRate: cacheStats.hitRate.toFixed(2) + '%',
+          memoryUsage: Math.round(cacheStats.totalMemoryUsage / 1024) + 'KB'
+        }
+      }
     };
   }
 }

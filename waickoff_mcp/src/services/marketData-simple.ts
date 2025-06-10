@@ -12,7 +12,8 @@ import {
   OHLCV, 
   MarketCategoryType,
   MarketDataError,
-  PerformanceMetrics
+  PerformanceMetrics,
+  CacheStats
 } from '../types/index.js';
 import { PerformanceMonitor } from '../utils/performance.js';
 import { simpleApiLogger } from '../utils/simpleApiLogger.js';
@@ -299,5 +300,47 @@ export class BybitMarketDataService implements IMarketDataService {
       uptime: process.uptime(),
       stats: simpleApiLogger.getStats()
     };
+  }
+
+  // ====================
+  // CACHE MANAGEMENT METHODS (No-op implementation for simple service)
+  // ====================
+
+  /**
+   * Get cache statistics - No-op for simple service
+   */
+  async getCacheStats(): Promise<CacheStats> {
+    // Return empty stats since this simple service doesn't use cache
+    return {
+      totalEntries: 0,
+      totalMemoryUsage: 0,
+      hitRate: 0,
+      missRate: 0,
+      oldestEntry: Date.now(),
+      newestEntry: Date.now(),
+      totalHits: 0,
+      totalMisses: 0,
+      entriesByTTL: {
+        expired: 0,
+        expiringSoon: 0,
+        fresh: 0
+      }
+    };
+  }
+
+  /**
+   * Invalidate cache - No-op for simple service
+   */
+  async invalidateCache(symbol: string, category?: MarketCategoryType): Promise<number> {
+    // No cache to invalidate
+    return 0;
+  }
+
+  /**
+   * Clear cache - No-op for simple service
+   */
+  async clearCache(): Promise<void> {
+    // No cache to clear
+    return;
   }
 }

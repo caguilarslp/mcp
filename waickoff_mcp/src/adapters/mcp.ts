@@ -14,6 +14,7 @@ import {
 import { MarketAnalysisEngine } from '../core/engine.js';
 import { MCPServerResponse, MarketCategoryType } from '../types/index.js';
 import { FileLogger } from '../utils/fileLogger.js';
+import { CacheHandlers } from './cacheHandlers.js';
 import * as path from 'path';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 
@@ -21,9 +22,11 @@ export class MCPAdapter {
   private server: Server;
   private engine: MarketAnalysisEngine;
   private logger: FileLogger;
+  private cacheHandlers: CacheHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
     this.engine = engine;
+    this.cacheHandlers = new CacheHandlers(engine);
     this.logger = new FileLogger('MCPAdapter', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
       enableStackTrace: true,
@@ -33,7 +36,7 @@ export class MCPAdapter {
     this.server = new Server(
       {
         name: 'waickoff_mcp',
-        version: '1.3.4',
+        version: '1.3.6',
       },
       {
         capabilities: {
@@ -44,7 +47,7 @@ export class MCPAdapter {
     );
 
     this.setupHandlers();
-    this.logger.info('MCP Adapter initialized');
+    this.logger.info('MCP Adapter initialized with modular cache handlers');
   }
 
   private setupHandlers() {
@@ -400,6 +403,47 @@ export class MCPAdapter {
               required: ['symbol'],
             },
           },
+          {
+            name: 'get_cache_stats',
+            description: 'Get cache performance statistics and metrics',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'clear_cache',
+            description: 'Clear all cached market data',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                confirm: {
+                  type: 'boolean',
+                  description: 'Confirm cache clearing operation',
+                  default: false,
+                },
+              },
+            },
+          },
+          {
+            name: 'invalidate_cache',
+            description: 'Invalidate cache entries for a specific symbol',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair to invalidate cache for',
+                },
+                category: {
+                  type: 'string',
+                  description: 'Optional market category filter',
+                  enum: ['spot', 'linear', 'inverse'],
+                },
+              },
+              required: ['symbol'],
+            },
+          },
         ],
       };
     });
@@ -455,6 +499,15 @@ export class MCPAdapter {
             break;
           case 'test_storage':
             result = await this.handleTestStorage(args);
+            break;
+          case 'get_cache_stats':
+            result = await this.cacheHandlers.handleGetCacheStats(args);
+            break;
+          case 'clear_cache':
+            result = await this.cacheHandlers.handleClearCache(args);
+            break;
+          case 'invalidate_cache':
+            result = await this.cacheHandlers.handleInvalidateCache(args);
             break;
           default:
             throw new Error(`Unknown tool: ${name}`);
