@@ -17,6 +17,7 @@ import { HistoricalAnalysisHandlers } from './handlers/historicalAnalysisHandler
 import { HybridStorageHandlers } from './handlers/hybridStorageHandlers.js';
 import { TrapDetectionHandlers } from './handlers/trapDetectionHandlers.js';
 import { WyckoffBasicHandlers } from './handlers/wyckoffBasicHandlers.js';
+import { WyckoffAdvancedHandlers } from './handlers/wyckoffAdvancedHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -32,6 +33,7 @@ export class MCPHandlers {
   private readonly historicalAnalysisHandlers: HistoricalAnalysisHandlers;
   private readonly trapDetectionHandlers: TrapDetectionHandlers;
   private readonly wyckoffBasicHandlers: WyckoffBasicHandlers;
+  private readonly wyckoffAdvancedHandlers: WyckoffAdvancedHandlers;
   private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
@@ -56,6 +58,7 @@ export class MCPHandlers {
     );
     this.trapDetectionHandlers = new TrapDetectionHandlers(engine.trapDetectionService);
     this.wyckoffBasicHandlers = new WyckoffBasicHandlers(engine);
+    this.wyckoffAdvancedHandlers = new WyckoffAdvancedHandlers(engine.wyckoffAdvancedService);
     
     // Initialize Hybrid Storage Handlers if available (TASK-015)
     if (engine.hybridStorageService) {
@@ -66,7 +69,8 @@ export class MCPHandlers {
     this.logger.info('MCP Handlers initialized with modular architecture', {
       hybridStorageEnabled: !!engine.hybridStorageService,
       trapDetectionEnabled: true,
-      wyckoffBasicEnabled: true
+      wyckoffBasicEnabled: true,
+      wyckoffAdvancedEnabled: true
     });
   }
 
@@ -1084,6 +1088,38 @@ export class MCPHandlers {
 
   async handleValidateWyckoffSetup(args: any): Promise<MCPServerResponse> {
     return await this.wyckoffBasicHandlers.handleValidateWyckoffSetup(args);
+  }
+
+  // ====================
+  // WYCKOFF ADVANCED HANDLERS (TASK-018) - DELEGATED
+  // ====================
+
+  async handleAnalyzeCompositeMan(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffAdvancedHandlers.handleAnalyzeCompositeMan(args);
+  }
+
+  async handleAnalyzeMultiTimeframeWyckoff(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffAdvancedHandlers.handleAnalyzeMultiTimeframe(args);
+  }
+
+  async handleCalculateCauseEffectTargets(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffAdvancedHandlers.handleCalculateCauseEffect(args);
+  }
+
+  async handleAnalyzeNestedWyckoffStructures(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffAdvancedHandlers.handleAnalyzeNestedStructures(args);
+  }
+
+  async handleValidateWyckoffSignal(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffAdvancedHandlers.handleValidateWyckoffSignal(args);
+  }
+
+  async handleTrackInstitutionalFlow(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffAdvancedHandlers.handleTrackInstitutionalFlow(args);
+  }
+
+  async handleGenerateWyckoffAdvancedInsights(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffAdvancedHandlers.handleGenerateAdvancedInsights(args);
   }
 
   // ====================

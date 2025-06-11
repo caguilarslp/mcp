@@ -70,6 +70,7 @@ import { HistoricalCacheService } from '../services/historicalCache.js';
 import { HybridStorageService } from '../services/storage/hybridStorageService.js';
 import { TrapDetectionService } from '../services/trapDetection.js';
 import { WyckoffBasicService, type IWyckoffBasicService } from '../services/wyckoffBasic.js';
+import { WyckoffAdvancedService, type IWyckoffAdvancedService } from '../services/wyckoffAdvanced.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -117,6 +118,9 @@ export class MarketAnalysisEngine {
   // Wyckoff Basic service (TASK-005)
   public readonly wyckoffBasicService: IWyckoffBasicService;
   
+  // Wyckoff Advanced service (TASK-018)
+  public readonly wyckoffAdvancedService: IWyckoffAdvancedService;
+  
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
   
@@ -135,7 +139,8 @@ export class MarketAnalysisEngine {
     configurationManager?: ConfigurationManager,
     hybridStorageService?: HybridStorageService,
     trapDetectionService?: ITrapDetectionService,
-    wyckoffBasicService?: IWyckoffBasicService
+    wyckoffBasicService?: IWyckoffBasicService,
+    wyckoffAdvancedService?: IWyckoffAdvancedService
   ) {
     this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
@@ -219,6 +224,14 @@ export class MarketAnalysisEngine {
       this.historicalAnalysisService
     );
     
+    // Initialize Wyckoff Advanced service (TASK-018)
+    this.wyckoffAdvancedService = wyckoffAdvancedService || new WyckoffAdvancedService(
+      this.marketDataService,
+      this.analysisService,
+      this.wyckoffBasicService,
+      this.historicalAnalysisService
+    );
+    
     this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator, Trap Detection and Wyckoff Basic', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
@@ -226,7 +239,8 @@ export class MarketAnalysisEngine {
       reportGeneratorEnabled: true,
       configurationManagerEnabled: true,
       trapDetectionEnabled: true,
-      wyckoffBasicEnabled: true
+      wyckoffBasicEnabled: true,
+      wyckoffAdvancedEnabled: true
     });
   }
 
@@ -715,6 +729,151 @@ export class MarketAnalysisEngine {
    */
   getWyckoffBasicPerformanceMetrics(): PerformanceMetrics[] {
     return this.wyckoffBasicService.getPerformanceMetrics();
+  }
+
+  // ====================
+  // WYCKOFF ADVANCED METHODS (TASK-018)
+  // ====================
+
+  /**
+   * Analyze Composite Man activity and institutional manipulation
+   */
+  async analyzeCompositeMan(
+    symbol: string,
+    timeframe: string = '60',
+    lookback: number = 200
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('analyzeCompositeMan', async () => {
+      try {
+        const result = await this.wyckoffAdvancedService.analyzeCompositeMan(symbol, timeframe, lookback);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to analyze Composite Man for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to analyze Composite Man: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Perform multi-timeframe Wyckoff analysis
+   */
+  async analyzeMultiTimeframeWyckoff(
+    symbol: string,
+    timeframes: string[] = ['15', '60', '240', 'D']
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('analyzeMultiTimeframeWyckoff', async () => {
+      try {
+        const result = await this.wyckoffAdvancedService.analyzeMultiTimeframe(symbol, timeframes);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to analyze multi-timeframe Wyckoff for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to analyze multi-timeframe Wyckoff: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Calculate Cause & Effect relationships and price targets
+   */
+  async calculateCauseEffectTargets(
+    symbol: string,
+    timeframe: string = '60',
+    lookback: number = 300
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('calculateCauseEffectTargets', async () => {
+      try {
+        const result = await this.wyckoffAdvancedService.calculateCauseEffect(symbol, timeframe, lookback);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to calculate cause & effect for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to calculate cause & effect: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Analyze nested Wyckoff structures
+   */
+  async analyzeNestedWyckoffStructures(
+    symbol: string,
+    primaryTimeframe: string = '240',
+    secondaryTimeframes: string[] = ['15', '60']
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('analyzeNestedWyckoffStructures', async () => {
+      try {
+        const result = await this.wyckoffAdvancedService.analyzeNestedStructures(
+          symbol,
+          primaryTimeframe,
+          secondaryTimeframes
+        );
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to analyze nested structures for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to analyze nested structures: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Validate Wyckoff signal with advanced analysis
+   */
+  async validateWyckoffSignal(
+    symbol: string,
+    signal: any
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('validateWyckoffSignal', async () => {
+      try {
+        const result = await this.wyckoffAdvancedService.validateWyckoffSignal(symbol, signal);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to validate Wyckoff signal for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to validate Wyckoff signal: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Track institutional flow and smart money activity
+   */
+  async trackInstitutionalFlow(
+    symbol: string,
+    timeframe: string = '60',
+    lookback: number = 100
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('trackInstitutionalFlow', async () => {
+      try {
+        const result = await this.wyckoffAdvancedService.trackInstitutionalFlow(symbol, timeframe, lookback);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to track institutional flow for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to track institutional flow: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Generate advanced Wyckoff insights
+   */
+  async generateWyckoffAdvancedInsights(
+    symbol: string,
+    analysisType: 'complete' | 'composite_man' | 'multi_timeframe' | 'cause_effect' | 'nested' = 'complete'
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('generateWyckoffAdvancedInsights', async () => {
+      try {
+        const result = await this.wyckoffAdvancedService.generateAdvancedInsights(symbol, analysisType);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to generate advanced insights for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to generate advanced insights: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get Wyckoff Advanced service performance metrics
+   */
+  getWyckoffAdvancedPerformanceMetrics(): PerformanceMetrics[] {
+    return this.wyckoffAdvancedService.getPerformanceMetrics();
   }
 
   // ====================

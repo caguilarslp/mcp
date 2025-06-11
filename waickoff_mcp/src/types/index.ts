@@ -19,6 +19,21 @@ import type {
 } from './storage.js';
 
 // ====================
+// MCP HANDLER TYPES
+// ====================
+
+export interface ToolHandler {
+  (
+    args: any
+  ): Promise<MCPServerResponse>;
+}
+
+export interface ToolValidationResult {
+  isValid: boolean;
+  errors: string[];
+}
+
+// ====================
 // CORE MARKET DATA TYPES
 // ====================
 

@@ -118,6 +118,15 @@ export class HandlerRegistry {
     this.register('get_wyckoff_interpretation', (args) => this.mcpHandlers.handleGetWyckoffInterpretation(args));
     this.register('track_phase_progression', (args) => this.mcpHandlers.handleTrackPhaseProgression(args));
     this.register('validate_wyckoff_setup', (args) => this.mcpHandlers.handleValidateWyckoffSetup(args));
+
+    // Wyckoff Advanced Analysis Tools (TASK-018)
+    this.register('analyze_composite_man', (args) => this.mcpHandlers.handleAnalyzeCompositeMan(args));
+    this.register('analyze_multi_timeframe_wyckoff', (args) => this.mcpHandlers.handleAnalyzeMultiTimeframeWyckoff(args));
+    this.register('calculate_cause_effect_targets', (args) => this.mcpHandlers.handleCalculateCauseEffectTargets(args));
+    this.register('analyze_nested_wyckoff_structures', (args) => this.mcpHandlers.handleAnalyzeNestedWyckoffStructures(args));
+    this.register('validate_wyckoff_signal', (args) => this.mcpHandlers.handleValidateWyckoffSignal(args));
+    this.register('track_institutional_flow', (args) => this.mcpHandlers.handleTrackInstitutionalFlow(args));
+    this.register('generate_wyckoff_advanced_insights', (args) => this.mcpHandlers.handleGenerateWyckoffAdvancedInsights(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

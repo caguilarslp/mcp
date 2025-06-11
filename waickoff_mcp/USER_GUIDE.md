@@ -2,7 +2,9 @@
 
 ## 🎯 Guía Completa de Herramientas MCP
 
-Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.6.2, organizadas por categorías.
+Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.6.4, organizadas por categorías.
+
+**🎆 NOVEDAD v1.6.4**: Sistema completamente modular con arquitectura escalable y 80+ herramientas organizadas.
 
 ---
 
@@ -711,4 +713,5 @@ Si encuentras problemas:
 ---
 
 *Versión: 1.6.4 - Actualizado: 11/06/2025*
-*Última actualización: Sistema Wyckoff Básico - 7 nuevas herramientas de análisis*
+*Última actualización: TASK-018 - Arquitectura Modular MCP Completada*
+*Sistema: 15 categorías de herramientas con 80+ funciones organizadas*

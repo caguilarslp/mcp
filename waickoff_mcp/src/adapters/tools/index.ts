@@ -20,6 +20,7 @@ import { historicalTools } from './historicalTools.js';
 import { hybridStorageTools } from './hybridStorageTools.js';
 import { trapDetectionTools } from './trapDetectionTools.js';
 import { wyckoffBasicTools } from './wyckoffBasicTools.js';
+import { wyckoffAdvancedTools } from './wyckoffAdvancedTools.js';
 
 // Tool Registry Map for O(1) lookup
 export const toolRegistry = new Map<string, ToolDefinition>();
@@ -35,6 +36,7 @@ const allToolCategories = [
   { name: 'Historical Analysis', tools: historicalTools },
   { name: 'Trap Detection', tools: trapDetectionTools },
   { name: 'Wyckoff Basic Analysis', tools: wyckoffBasicTools },
+  { name: 'Wyckoff Advanced Analysis', tools: wyckoffAdvancedTools },
   
   // Data Management
   { name: 'Analysis Repository', tools: repositoryTools },
@@ -53,14 +55,16 @@ let totalTools = 0;
 const duplicateTools: string[] = [];
 
 allToolCategories.forEach(category => {
-  category.tools.forEach(tool => {
-    if (toolRegistry.has(tool.name)) {
-      duplicateTools.push(tool.name);
-    } else {
-      toolRegistry.set(tool.name, tool);
-      totalTools++;
-    }
-  });
+  if (Array.isArray(category.tools)) {
+    category.tools.forEach(tool => {
+      if (toolRegistry.has(tool.name)) {
+        duplicateTools.push(tool.name);
+      } else {
+        toolRegistry.set(tool.name, tool as ToolDefinition);
+        totalTools++;
+      }
+    });
+  }
 });
 
 // Validation results
@@ -84,7 +88,7 @@ export const getToolCount = (): number => toolRegistry.size;
 
 export const getToolsByCategory = (categoryName: string): ToolDefinition[] => {
   const category = allToolCategories.find(cat => cat.name === categoryName);
-  return category ? category.tools : [];
+  return category && Array.isArray(category.tools) ? category.tools as ToolDefinition[] : [];
 };
 
 export const getAllCategories = () => allToolCategories.map(cat => ({
