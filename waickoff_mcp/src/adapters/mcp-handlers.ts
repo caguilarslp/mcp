@@ -11,6 +11,7 @@ import { MarketDataHandlers } from './handlers/marketDataHandlers.js';
 import { AnalysisRepositoryHandlers } from './handlers/analysisRepositoryHandlers.js';
 import { ReportGeneratorHandlers } from './handlers/reportGeneratorHandlers.js';
 import { CacheHandlers } from './cacheHandlers.js';
+import { ConfigurationHandlers } from './handlers/configurationHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -21,6 +22,7 @@ export class MCPHandlers {
   private readonly analysisRepositoryHandlers: AnalysisRepositoryHandlers;
   private readonly reportGeneratorHandlers: ReportGeneratorHandlers;
   private readonly cacheHandlers: CacheHandlers;
+  private readonly configurationHandlers: ConfigurationHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
     this.engine = engine;
@@ -35,6 +37,7 @@ export class MCPHandlers {
     this.analysisRepositoryHandlers = new AnalysisRepositoryHandlers(engine, this.logger);
     this.reportGeneratorHandlers = new ReportGeneratorHandlers(engine, this.logger);
     this.cacheHandlers = new CacheHandlers(engine);
+    this.configurationHandlers = new ConfigurationHandlers(engine.getConfigurationManager());
 
     this.logger.info('MCP Handlers initialized with modular architecture');
   }
@@ -843,6 +846,38 @@ export class MCPHandlers {
 
   async handleExportReport(args: any): Promise<MCPServerResponse> {
     return await this.reportGeneratorHandlers.handleExportReport(args);
+  }
+
+  // ====================
+  // CONFIGURATION HANDLERS (DELEGATED)
+  // ====================
+
+  async handleGetUserConfig(args: any): Promise<MCPServerResponse> {
+    return await this.configurationHandlers.handleGetUserConfig();
+  }
+
+  async handleSetUserTimezone(args: any): Promise<MCPServerResponse> {
+    return await this.configurationHandlers.handleSetUserTimezone(args);
+  }
+
+  async handleDetectTimezone(args: any): Promise<MCPServerResponse> {
+    return await this.configurationHandlers.handleDetectTimezone();
+  }
+
+  async handleUpdateConfig(args: any): Promise<MCPServerResponse> {
+    return await this.configurationHandlers.handleUpdateConfig(args);
+  }
+
+  async handleResetConfig(args: any): Promise<MCPServerResponse> {
+    return await this.configurationHandlers.handleResetConfig();
+  }
+
+  async handleValidateConfig(args: any): Promise<MCPServerResponse> {
+    return await this.configurationHandlers.handleValidateConfig();
+  }
+
+  async handleGetConfigInfo(args: any): Promise<MCPServerResponse> {
+    return await this.configurationHandlers.handleGetConfigInfo();
   }
 
   // ====================

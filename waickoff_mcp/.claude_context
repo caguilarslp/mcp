@@ -1,14 +1,14 @@
-# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.4.0 (PRODUCTION READY)
+# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.5.0 (PRODUCTION READY + CONFIGURATION SYSTEM)
 
-## 🎆 ESTADO CRÍTICO v1.4.0 - TASK-004 TESTS CONFIGURADOS + API EXPANDIDA
-**✅ SISTEMA TESTS UNITARIOS**: Configuración completa con 100+ test cases implementados
-**✅ ENGINE API EXPANDIDO**: Métodos individuales getTicker, getOrderbook, getKlines agregados
-**✅ REPORT GENERATOR IMPLEMENTADO**: Sistema completo de generación de reportes
-**✅ TASK-009 FINALIZADA**: 4 fases completadas (Storage + Cache + Repository + Reports)
-**✅ 23 NUEVAS HERRAMIENTAS MCP**: Repository (7) + Reports (8) + Engine API (8)
-**🎯 SISTEMA COMPLETO**: Análisis → Almacenamiento → Reportes → Tests funcionando
-**✅ COMPILACIÓN EXITOSA**: `npm run build` sin errores - sistema robusto
-**🚀 PRODUCTION READY**: Sistema listo para producción con todas las features
+## 🎆 ESTADO CRÍTICO v1.5.0 - TASK-010 CONFIGURACIÓN TIMEZONE COMPLETADA
+**✅ SISTEMA CONFIGURACIÓN PERSISTENTE**: Sistema completo de configuración de usuario implementado
+**✅ AUTO-DETECCIÓN TIMEZONE**: Múltiples métodos de detección inteligente cross-platform
+**✅ 7 NUEVAS HERRAMIENTAS MCP**: Sistema completo de gestión de configuración
+**✅ FRICTION-FREE UX**: Elimina necesidad de especificar timezone en cada request
+**✅ FASTAPI READY**: Base sólida para integración multi-usuario
+**🎯 SISTEMA COMPLETO**: Análisis → Almacenamiento → Reportes → Tests → Configuración funcionando
+**✅ COMPILACIÓN EXITOSA**: `npm run build` sin errores - sistema robusto y expandible
+**🚀 PRODUCTION READY**: Sistema listo para producción con todas las features + configuración
 
 ## IMPORTANTE: Leer ANTES de dar cualquier sugerencia
 
@@ -49,13 +49,13 @@
 - **Registro**: `claude/lessons-learned/README.md` con índice y templates
 - **Ejemplos**: LESSON-001 (Auto-save implementation failure)
 
-### 🎆 ESTADO ACTUAL (v1.4.0 - 10/06/2025) - TASK-009 100% COMPLETADA
-- **Fase:** ✅ TASK-009 COMPLETADA + 8 herramientas Report Generator implementadas
-- **Última Actualización:** v1.4.0 con sistema completo de reportes
+### 🎆 ESTADO ACTUAL (v1.5.0 - 11/06/2025) - TASK-010 COMPLETADA
+- **Fase:** ✅ TASK-010 COMPLETADA - Sistema configuración timezone persistente implementado
+- **Última Actualización:** v1.5.0 con sistema completo de configuración timezone
 - **Próxima Decisión:** Iniciar TASK-012 (Bull/Bear Traps) o TASK-013 (On-chain Data)
-- **Bloqueadores:** NINGUNO - Sistema completo y funcional
-- **UX Status:** 🎆 COMPLETO - Análisis + Storage + Cache + Repository + Reports
-- **Funcionalidad:** ✅ Sistema MCP completo 100% operativo con generación de reportes
+- **Bloqueadores:** NINGUNO - Sistema completo y funcional con configuración
+- **UX Status:** 🎆 COMPLETO - Análisis + Storage + Cache + Repository + Reports + Configuration
+- **Funcionalidad:** ✅ Sistema MCP completo 100% operativo + configuración timezone friction-free
 
 ### 🏗️ NUEVA ARQUITECTURA STORAGE SERVICE v1.3.8
 **✅ REFACTORIZACIÓN MODULAR COMPLETA**: StorageService dividido en servicios especializados
@@ -219,12 +219,17 @@ export class MCPHandlers {
 - 🚀 **PRÓXIMAS TAREAS**:
   - **TASK-012** - Detección Trampas Alcistas/Bajistas (7h)
   - **TASK-013** - On-chain Data Collection (15h)
+  - **TASK-015** - Dual Storage MongoDB Experimental (6h)
+  - **TASK-016** - Migración MongoDB Completa (8-12h, condicional)
   - **TASK-010** - Sistema Configuración Timezone (4h)
 - 📄 **Documentación** - Sistema completo documentado y listo
+- 🗃️ **MongoDB Evaluation** - Dual storage para evaluar beneficios vs complejidad
 
 ### NUEVAS FUNCIONALIDADES PLANIFICADAS v1.4.0
 - 🎯 **TASK-012** - Detección Trampas Alcistas/Bajistas (7h) - Bull/bear trap detection
 - 🔗 **TASK-013** - On-chain Data Collection (15h) - Stablecoins, ballenas, exchanges
+- 🗃️ **TASK-015** - Dual Storage MongoDB Experimental (6h) - Evaluar beneficios sin romper sistema
+- 🔄 **TASK-016** - Migración MongoDB Completa (8-12h) - Solo si TASK-015 exitoso
 - 📝 **TASK-010** - Sistema Configuración Timezone (4h) - Eliminar friction temporal
 - 🏢 **FastAPI Scope** - Análisis Macro + ML (77h) - Documentado para desarrollo futuro
 

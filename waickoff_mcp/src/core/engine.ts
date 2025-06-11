@@ -48,6 +48,7 @@ import { ICacheManager } from '../types/storage.js';
 import { AnalysisRepository } from '../repositories/analysisRepository.js';
 import { ReportGenerator } from '../services/reports/reportGenerator.js';
 import { TimezoneManager, mexicoTimezone } from '../utils/timezone.js';
+import { ConfigurationManager } from '../services/config/configurationManager.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -82,6 +83,7 @@ export class MarketAnalysisEngine {
   private readonly analysisRepository: IAnalysisRepository;
   private readonly reportGenerator: IReportGenerator;
   private readonly timezoneManager: TimezoneManager;
+  private readonly configurationManager: ConfigurationManager;
   
   // Configuration
   private config: SystemConfig;
@@ -94,7 +96,8 @@ export class MarketAnalysisEngine {
     analysisService?: IAnalysisService,
     tradingService?: ITradingService,
     cacheManager?: ICacheManager,
-    timezoneConfig?: Partial<TimezoneConfig>
+    timezoneConfig?: Partial<TimezoneConfig>,
+    configurationManager?: ConfigurationManager
   ) {
     this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
@@ -103,8 +106,13 @@ export class MarketAnalysisEngine {
     });
     this.performanceMonitor = new PerformanceMonitor();
     
+    // Initialize configuration manager
+    this.configurationManager = configurationManager || new ConfigurationManager();
+    
     // Initialize configuration with defaults
     this.config = this.mergeConfig(config);
+    
+    // Initialize timezone configuration (will be updated by user config)
     this.timezoneConfig = {
       userTimezone: 'America/Mexico_City',
       tradingSession: '24h',
@@ -112,8 +120,13 @@ export class MarketAnalysisEngine {
       ...timezoneConfig
     };
     
-    // Initialize timezone manager
+    // Initialize timezone manager (will be updated by loadUserConfiguration)
     this.timezoneManager = new TimezoneManager(this.timezoneConfig.userTimezone);
+    
+    // Load user configuration and update timezone asynchronously
+    this.loadUserConfiguration().catch(error => {
+      this.logger.warn('Failed to load user configuration on startup:', error);
+    });
     
     // Initialize services with dependency injection
     const cache = cacheManager || new CacheManager();
@@ -146,7 +159,8 @@ export class MarketAnalysisEngine {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
       repositoryEnabled: true,
-      reportGeneratorEnabled: true
+      reportGeneratorEnabled: true,
+      configurationManagerEnabled: true
     });
   }
 
@@ -1184,6 +1198,52 @@ export class MarketAnalysisEngine {
       this.logger.error(`Failed to invalidate cache for ${symbol}:`, error);
       throw error;
     }
+  }
+
+  // ====================
+  // CONFIGURATION METHODS
+  // ====================
+
+  /**
+   * Load user configuration and update timezone
+   */
+  private async loadUserConfiguration(): Promise<void> {
+    try {
+      const userConfig = await this.configurationManager.getUserConfig();
+      
+      // Update timezone configuration
+      this.timezoneConfig.userTimezone = userConfig.timezone.default;
+      
+      // Create new timezone manager with user's timezone
+      const newTimezoneManager = new TimezoneManager(userConfig.timezone.default);
+      
+      // Replace timezone manager (this is safe since TimezoneManager is stateless)
+      (this as any).timezoneManager = newTimezoneManager;
+      
+      this.logger.info('User configuration loaded successfully', {
+        timezone: userConfig.timezone.default,
+        autoDetect: userConfig.timezone.autoDetect,
+        version: userConfig.version
+      });
+      
+    } catch (error) {
+      this.logger.error('Failed to load user configuration:', error);
+      // Continue with default timezone
+    }
+  }
+
+  /**
+   * Reload user configuration (for when config changes)
+   */
+  async reloadUserConfiguration(): Promise<void> {
+    await this.loadUserConfiguration();
+  }
+
+  /**
+   * Get configuration manager (exposed for MCP handlers)
+   */
+  getConfigurationManager(): ConfigurationManager {
+    return this.configurationManager;
   }
 
   // ====================

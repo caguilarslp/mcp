@@ -464,6 +464,66 @@ export type {
 } from './storage.js';
 
 // ====================
+// CONFIGURATION TYPES
+// ====================
+
+export interface UserTimezoneConfig {
+  default: string;
+  autoDetect: boolean;
+  preferredSessions?: string[];
+}
+
+export interface UserTradingConfig {
+  defaultTimeframe: string;
+  alertTimes?: string[];
+}
+
+export interface UserDisplayConfig {
+  dateFormat: string;
+  use24Hour: boolean;
+  locale: string;
+}
+
+export interface UserConfig {
+  timezone: UserTimezoneConfig;
+  trading: UserTradingConfig;
+  display: UserDisplayConfig;
+  version: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TimezoneDetectionResult {
+  detected: string;
+  method: 'system' | 'env' | 'intl' | 'default';
+  confidence: number;
+  fallback: string;
+}
+
+// Configuration Manager interface
+export interface IConfigurationManager {
+  getUserConfig(): Promise<UserConfig>;
+  setUserTimezone(timezone: string, autoDetect?: boolean): Promise<UserConfig>;
+  detectTimezone(): Promise<TimezoneDetectionResult>;
+  updateConfig(updates: {
+    timezone?: Partial<UserTimezoneConfig>;
+    trading?: Partial<UserTradingConfig>;
+    display?: Partial<UserDisplayConfig>;
+  }): Promise<UserConfig>;
+  resetConfig(): Promise<UserConfig>;
+  validateConfig(): Promise<{
+    isValid: boolean;
+    errors: string[];
+    suggestions: string[];
+  }>;
+  getConfigPath(): string;
+  configExists(): Promise<boolean>;
+}
+
+// Re-export ConfigurationManager class
+export { ConfigurationManager } from '../services/config/configurationManager.js';
+
+// ====================
 // EXPORT ALL TYPES
 // ====================
 

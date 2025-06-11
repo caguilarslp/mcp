@@ -755,6 +755,107 @@ export class MCPAdapter {
               required: ['id', 'outputPath'],
             },
           },
+          // Configuration Tools (TASK-010)
+          {
+            name: 'get_user_config',
+            description: 'Get current user configuration including timezone settings',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'set_user_timezone',
+            description: 'Set user timezone preference',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                timezone: {
+                  type: 'string',
+                  description: 'Timezone identifier (e.g., America/New_York, Europe/London)',
+                },
+                autoDetect: {
+                  type: 'boolean',
+                  description: 'Enable automatic timezone detection',
+                  default: false,
+                },
+              },
+              required: ['timezone'],
+            },
+          },
+          {
+            name: 'detect_timezone',
+            description: 'Auto-detect system timezone using multiple detection methods',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'update_config',
+            description: 'Update multiple configuration sections',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                timezone: {
+                  type: 'object',
+                  description: 'Timezone configuration updates',
+                  properties: {
+                    default: { type: 'string' },
+                    autoDetect: { type: 'boolean' },
+                    preferredSessions: {
+                      type: 'array',
+                      items: { type: 'string' }
+                    }
+                  }
+                },
+                trading: {
+                  type: 'object',
+                  description: 'Trading configuration updates',
+                  properties: {
+                    defaultTimeframe: { type: 'string' },
+                    alertTimes: {
+                      type: 'array',
+                      items: { type: 'string' }
+                    }
+                  }
+                },
+                display: {
+                  type: 'object',
+                  description: 'Display configuration updates',
+                  properties: {
+                    dateFormat: { type: 'string' },
+                    use24Hour: { type: 'boolean' },
+                    locale: { type: 'string' }
+                  }
+                }
+              }
+            },
+          },
+          {
+            name: 'reset_config',
+            description: 'Reset configuration to defaults with auto-detection',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'validate_config',
+            description: 'Validate current configuration and get suggestions',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_config_info',
+            description: 'Get configuration file information and supported options',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
         ],
       };
     });
@@ -876,6 +977,29 @@ export class MCPAdapter {
             break;
           case 'export_report':
             result = await this.handlers.handleExportReport(args);
+            break;
+          
+          // Configuration Tools (TASK-010)
+          case 'get_user_config':
+            result = await this.handlers.handleGetUserConfig(args);
+            break;
+          case 'set_user_timezone':
+            result = await this.handlers.handleSetUserTimezone(args);
+            break;
+          case 'detect_timezone':
+            result = await this.handlers.handleDetectTimezone(args);
+            break;
+          case 'update_config':
+            result = await this.handlers.handleUpdateConfig(args);
+            break;
+          case 'reset_config':
+            result = await this.handlers.handleResetConfig(args);
+            break;
+          case 'validate_config':
+            result = await this.handlers.handleValidateConfig(args);
+            break;
+          case 'get_config_info':
+            result = await this.handlers.handleGetConfigInfo(args);
             break;
           
           default:

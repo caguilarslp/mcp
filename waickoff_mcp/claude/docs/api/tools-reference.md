@@ -1,6 +1,8 @@
-# 📡 Bybit MCP Server - API Reference
+# 📡 Bybit MCP Server - API Reference v1.5.0
 
-## 🔌 Available Tools
+## 🔌 Available Tools (30 Total)
+
+**Latest Update v1.5.0:** Added Configuration System with 7 new timezone management tools
 
 ### **📊 Market Data Tools**
 
@@ -33,6 +35,230 @@ await get_ticker({
   "spread": "$0.0004"
 }
 ```
+
+---
+
+### **🌍 Configuration Tools (NEW in v1.5.0)**
+
+#### `get_user_config`
+Get current user configuration including timezone settings.
+
+**Parameters:**
+- No parameters required
+
+**Example:**
+```javascript
+await get_user_config();
+```
+
+**Response:**
+```json
+{
+  "timezone": {
+    "default": "America/New_York",
+    "autoDetect": true,
+    "preferredSessions": ["ny_session", "london_ny_overlap"]
+  },
+  "trading": {
+    "defaultTimeframe": "60"
+  },
+  "display": {
+    "dateFormat": "DD/MM/YYYY",
+    "use24Hour": true,
+    "locale": "es-MX"
+  },
+  "version": "1.0.0",
+  "createdAt": "2025-06-11T...",
+  "updatedAt": "2025-06-11T..."
+}
+```
+
+---
+
+#### `set_user_timezone`
+Set user timezone preference with optional auto-detection.
+
+**Parameters:**
+- `timezone` (required): Timezone identifier (e.g., "America/New_York", "Europe/London")
+- `autoDetect` (optional): Enable automatic timezone detection. Default: false
+
+**Example:**
+```javascript
+await set_user_timezone({
+  timezone: "America/New_York",
+  autoDetect: true
+});
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "timezone_updated": "America/New_York",
+  "auto_detect_enabled": true,
+  "config_updated": "2025-06-11T...",
+  "message": "Timezone successfully updated to America/New_York"
+}
+```
+
+---
+
+#### `detect_timezone`
+Auto-detect system timezone using multiple detection methods.
+
+**Parameters:**
+- No parameters required
+
+**Example:**
+```javascript
+await detect_timezone();
+```
+
+**Response:**
+```json
+{
+  "detected_timezone": "America/New_York",
+  "detection_method": "intl",
+  "confidence_percent": "90%",
+  "fallback_timezone": "America/Mexico_City",
+  "recommendation": "High confidence detection. Recommend using America/New_York",
+  "supported_timezones": [
+    "UTC", "America/New_York", "Europe/London", "Asia/Tokyo"
+  ]
+}
+```
+
+---
+
+#### `update_config`
+Update multiple configuration sections simultaneously.
+
+**Parameters:**
+- `timezone` (optional): Timezone configuration updates
+  - `default` (string): New default timezone
+  - `autoDetect` (boolean): Enable/disable auto-detection
+  - `preferredSessions` (array): Preferred trading sessions
+- `trading` (optional): Trading configuration updates
+  - `defaultTimeframe` (string): Default analysis timeframe
+  - `alertTimes` (array): Alert times
+- `display` (optional): Display configuration updates
+  - `dateFormat` (string): Date format preference
+  - `use24Hour` (boolean): 24-hour time format
+  - `locale` (string): Locale preference
+
+**Example:**
+```javascript
+await update_config({
+  timezone: {
+    default: "Europe/London",
+    autoDetect: false
+  },
+  trading: {
+    defaultTimeframe: "240"
+  }
+});
+```
+
+---
+
+#### `reset_config`
+Reset configuration to defaults with automatic timezone detection.
+
+**Parameters:**
+- No parameters required
+
+**Example:**
+```javascript
+await reset_config();
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Configuration reset to defaults with auto-detection",
+  "new_timezone": "America/Mexico_City",
+  "auto_detect_enabled": true,
+  "default_timeframe": "60",
+  "reset_at": "2025-06-11T...",
+  "config_version": "1.0.0"
+}
+```
+
+---
+
+#### `validate_config`
+Validate current configuration and get suggestions for improvements.
+
+**Parameters:**
+- No parameters required
+
+**Example:**
+```javascript
+await validate_config();
+```
+
+**Response:**
+```json
+{
+  "validation_status": "VALID",
+  "config_file_exists": true,
+  "config_file_path": "/home/user/.waickoff/user.config.json",
+  "error_count": 0,
+  "errors": [],
+  "suggestions": [],
+  "overall_health": "HEALTHY",
+  "next_steps": ["Configuration is valid and ready to use"]
+}
+```
+
+---
+
+#### `get_config_info`
+Get configuration file information and supported options.
+
+**Parameters:**
+- No parameters required
+
+**Example:**
+```javascript
+await get_config_info();
+```
+
+**Response:**
+```json
+{
+  "configuration_system": {
+    "version": "1.0.0",
+    "status": "OPERATIONAL",
+    "auto_detection_available": true
+  },
+  "file_information": {
+    "config_file_path": "/home/user/.waickoff/user.config.json",
+    "config_directory": "/home/user/.waickoff",
+    "file_exists": true,
+    "cross_platform_location": "~/.waickoff/user.config.json"
+  },
+  "supported_options": {
+    "timezones": ["UTC", "America/New_York", "Europe/London", "Asia/Tokyo"],
+    "timeframes": ["1", "5", "15", "30", "60", "240", "D"],
+    "date_formats": ["DD/MM/YYYY", "MM/DD/YYYY", "YYYY-MM-DD", "ISO"],
+    "locales": ["en-US", "es-MX", "en-GB", "fr-FR", "de-DE"]
+  },
+  "usage_examples": {
+    "set_timezone": "set_user_timezone with timezone: 'America/New_York'",
+    "detect_timezone": "detect_timezone for automatic detection",
+    "update_multiple": "update_config with timezone and trading sections"
+  }
+}
+```
+
+**Use Cases:**
+- **Eliminate timezone friction**: No more specifying time in each temporal request
+- **Zero-config experience**: Auto-detection works out-of-the-box
+- **Persistent configuration**: Settings maintained between sessions
+- **Multi-timezone support**: Easy switching between timezones
+- **Cross-platform**: Works on Linux, macOS, and Windows
 
 ---
 
@@ -364,4 +590,4 @@ await get_debug_logs({
 ---
 
 *API Reference maintained as part of the project documentation system*
-*Last updated: 08/06/2025 | Version: v1.3.4*
+*Last updated: 11/06/2025 | Version: v1.5.0 | Configuration System Added*

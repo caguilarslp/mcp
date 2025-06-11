@@ -17,6 +17,7 @@ Este documento registra las decisiones técnicas importantes tomadas durante el 
 7. [ADR-007: Arquitectura modular con dependency injection](#adr-007)
 8. [ADR-008: Sistema de logging minimalista production-ready](#adr-008)
 9. [ADR-009: Separación MCP vs FastAPI para análisis avanzado](#adr-009)
+10. [ADR-010: Dual Storage Pattern (MongoDB Experimental)](#adr-010)
 
 ---
 
@@ -399,6 +400,84 @@ Próximos 2-3 meses:
 ```
 
 **Resultado:** ✅ Estrategia híbrida óptima - aprovecha fortalezas de cada tecnología
+
+---
+
+## ADR-010: Dual Storage Pattern (MongoDB Experimental) {#adr-010}
+
+**Fecha:** 11/06/2025
+**Estado:** Propuesto
+
+### Contexto
+El sistema actual de storage con archivos JSON funciona perfectamente pero puede tener limitaciones con datasets grandes y queries complejas. Necesitamos evaluar si MongoDB ofrece beneficios sustanciales sin agregar complejidad innecesaria.
+
+### Decisión
+Implementar **dual storage pattern experimental** (TASK-015) para evaluar MongoDB sin romper el sistema actual:
+
+```typescript
+[Application] → [HybridStorageService] → [FileStorageService + MongoStorageService]
+                                      ↓
+                                 Route by data type
+```
+
+### Implementación
+```typescript
+// Routing inteligente por tipo de datos
+class HybridStorageService implements IStorageService {
+  async save(path: string, data: any): Promise<void> {
+    if (this.shouldUseMongo(path, data)) {
+      return this.mongoStorage.save(path, data);
+    }
+    return this.fileStorage.save(path, data);
+  }
+  
+  private shouldUseMongo(path: string, data: any): boolean {
+    // Large datasets o analysis data → MongoDB
+    // Config y archivos pequeños → JSON files
+    return path.includes('analysis/') || this.isLargeDataset(data);
+  }
+}
+```
+
+### Criterios de Éxito (TASK-015)
+- **Performance**: MongoDB >30% más rápido en operaciones grandes
+- **Setup simplicity**: Environment setup <30 minutos
+- **Reliability**: <1% error rate adicional
+- **Developer Experience**: APIs igual de fáciles de usar
+
+### Criterios para Migración Completa (TASK-016)
+**SOLO activar si TASK-015 demuestra beneficios claros:**
+- ✅ Performance >30% mejor en queries complejas
+- ✅ Setup y maintenance no significativamente más complejo
+- ✅ Nuevas capacidades justifican el overhead
+
+### Consecuencias
+**Positivas:**
+- **Risk-free evaluation**: Experimentar sin romper sistema actual
+- **Data-driven decision**: Benchmarks reales vs teoría
+- **Future-ready**: Si MongoDB vale la pena, tenemos el camino
+- **Advanced capabilities**: Agregaciones y analytics no posibles con JSON
+
+**Negativas:**
+- **Development overhead**: Tiempo para experiment (6h)
+- **Complexity assessment**: Evaluar si vale la pena el setup adicional
+- **Potential over-engineering**: Sistema actual puede ser suficiente
+
+### Cronograma de Evaluación
+```
+TASK-015 (Experimental): 4-6h
+→ MongoStorageService + HybridStorageService
+→ Performance benchmarks
+→ A/B testing con datasets reales
+→ Decisión go/no-go para TASK-016
+
+TASK-016 (Migración): 8-12h (CONDICIONAL)
+→ Solo si TASK-015 muestra beneficios >30%
+→ Migración completa + advanced features
+→ Production deployment strategy
+```
+
+**Resultado:** Pendiente - evaluación experimental en progreso
 
 ---
 

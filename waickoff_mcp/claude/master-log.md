@@ -4,8 +4,56 @@
 
 Este archivo sirve como **punto de entrada único** para entender el estado actual del MCP, decisiones tomadas, y próximos pasos.
 
-### 11/06/2025 - **v1.4.0 TASK-004 COMPLETADA + ENGINE API EXPANDIDO** 🧪
-**🏆 TESTS UNITARIOS SISTEMA COMPLETO IMPLEMENTADO**
+### 11/06/2025 - **v1.5.0 TASK-010 COMPLETADA - SISTEMA CONFIGURACIÓN TIMEZONE** 🌍
+**🏆 SISTEMA DE CONFIGURACIÓN PERSISTENTE IMPLEMENTADO**
+
+#### **✅ Sistema de Configuración de Usuario Completo**
+- ✅ **ConfigurationManager service implementado** - Gestión completa de configuración persistente
+- ✅ **Auto-detección inteligente de timezone** - Múltiples métodos de detección con fallback
+- ✅ **Configuración persistente cross-platform** - ~/.waickoff/user.config.json
+- ✅ **7 nuevas herramientas MCP** - Sistema completo de gestión de configuración
+- ✅ **Integración Core Engine** - TimezoneManager dinámico basado en configuración
+- ✅ **Validation y error handling** - Sistema robusto con fallbacks graceful
+
+#### **🔧 Nuevas Herramientas MCP TASK-010**
+- ✅ **get_user_config** - Obtener configuración completa del usuario
+- ✅ **set_user_timezone** - Configurar zona horaria específica con auto-detect
+- ✅ **detect_timezone** - Auto-detectar zona horaria del sistema (TZ, Intl API, sistema)
+- ✅ **update_config** - Actualizar múltiples secciones (timezone, trading, display)
+- ✅ **reset_config** - Resetear a configuración por defecto con auto-detección
+- ✅ **validate_config** - Validar configuración actual y obtener sugerencias
+- ✅ **get_config_info** - Información del archivo y timezones soportadas
+
+#### **🌍 Características del Sistema Timezone**
+- **Auto-detección multi-método**: TZ env var (95%), Intl API (90%), sistema específico (85%)
+- **Detección por OS**: Linux (timedatectl), macOS (systemsetup), Windows (Intl API)
+- **Configuración persistente**: JSON estructurado con timezone, trading, display
+- **Cross-platform paths**: ~/.waickoff/ para todas las plataformas
+- **Validation robusta**: Intl API para validar timezones
+- **Fallback graceful**: Mexico City como fallback con 50% confianza
+
+#### **🎯 Beneficios Implementados**
+- **Elimina friction temporal**: No más especificar hora en cada request
+- **Zero-config UX**: Funciona automáticamente out-of-the-box
+- **Configuración persistente**: Se mantiene entre sesiones
+- **Base para multi-usuario**: Arquitectura escalable para FastAPI
+- **Improved DX**: Análisis temporales más intuitivos y precisos
+
+#### **📊 Métricas TASK-010**
+- **Tiempo de desarrollo**: 4h implementación completa
+- **Herramientas agregadas**: 7 nuevas herramientas MCP
+- **Archivos nuevos**: 3 (ConfigurationManager, ConfigurationHandlers, documentation)
+- **Archivos modificados**: 4 (types, engine, mcp-handlers, mcp adapter)
+- **Compatibilidad**: 100% backward compatible
+- **Integración**: Delegation pattern consistente con arquitectura modular
+
+#### **🚀 Preparación Futura**
+- **FastAPI ready**: Middleware de timezone y session management especificados
+- **Multi-user ready**: Estructura escalable para configuración por usuario
+- **Database migration paths**: Preparado para migración a storage centralizado
+- **Testing framework**: Base para validación de configuración automática
+
+---
 
 #### **✅ Sistema de Tests Unitarios Completo**
 - ✅ **100+ test cases implementados** - Cobertura completa de arquitectura modular
@@ -52,9 +100,10 @@ Este archivo sirve como **punto de entrada único** para entender el estado actu
 ## 🎯 Estado Actual del Proyecto
 
 **Fecha:** 11/06/2025
-**Versión:** v1.4.0
-**Fase:** TASK-004 COMPLETADA + Engine API Expandido
-**Completado:** 100% Core + 100% Storage System + 100% Tests + API Expandido
+**Versión:** v1.5.0
+**Fase:** TASK-010 COMPLETADA - Sistema Configuración Timezone Implementado
+**Completado:** 100% Core + 100% Storage System + 100% Tests + 100% Configuration System
+**Nuevo:** Sistema de configuración persistente con auto-detección de timezone
 
 ### ✅ Completado (Funcionalidades Core)
 - **Datos de mercado en tiempo real** - Ticker, orderbook, klines
@@ -75,13 +124,19 @@ Este archivo sirve como **punto de entrada único** para entender el estado actu
 - **Performance monitoring** - Métricas automáticas en todas las capas
 - **Protocol-agnostic core** - Lógica de negocio independiente del protocolo
 - **Integración con Claude Desktop** - Configuración documentada y mantenida
+- **🎆 TASK-009 COMPLETADA** - Sistema Storage completo (Storage + Cache + Repository + Reports)
+- **🧪 TASK-004 COMPLETADA** - Tests unitarios 100+ test cases implementados
+- **🌍 TASK-010 COMPLETADA** - Sistema configuración timezone persistente con auto-detección
 
 ### 🚧 En Progreso
 
-- **TASK-009 FASE 3** - Analysis Repository (handlers implementados, listo para Core)
-- **Tests unitarios** - Para handlers modularizados (CRÍTICO post-reparación)
+**Ninguna tarea en progreso** - Sistema completo y estable
 
 ### ⏳ Pendiente (Corto Plazo)
+- **TASK-012**: Detección trampas alcistas/bajistas (7h)
+- **TASK-013**: On-chain data collection (15h)
+- **TASK-015**: Dual Storage MongoDB experimental (6h)
+- **TASK-016**: Migración completa MongoDB (8-12h, condicional)
 - **Detección de patrones Wyckoff básicos** - Acumulación/Distribución
 - **Order Flow Imbalance** - Desequilibrios en orderbook
 - **Market Profile básico** - Distribución de volumen por precio
@@ -142,9 +197,12 @@ Dependencies: @modelcontextprotocol/sdk, node-fetch
 | Volume Delta | ✅ | 100% | Con detección de divergencias |
 | Support/Resistance | ✅ | 100% | Niveles dinámicos con scoring |
 | Modular Architecture | ✅ | 100% | Sistema de handlers reparado |
+| Storage System | ✅ | 100% | Storage + Cache + Repository + Reports |
+| Tests System | ✅ | 100% | 100+ test cases implementados |
+| Configuration System | ✅ | 100% | Timezone persistente con auto-detección |
 | Wyckoff Patterns | ⏳ | 0% | Próxima fase |
-| API Key Functions | ⏳ | 0% | v1.3 planificada |
-| Documentation | 🚧 | 90% | ADRs completados v1.3.4 |
+| API Key Functions | ⏳ | 0% | v1.6 planificada |
+| Documentation | ✅ | 100% | ADRs completados + sistema completo |
 
 ---
 
@@ -152,13 +210,18 @@ Dependencies: @modelcontextprotocol/sdk, node-fetch
 
 ### **Inmediato (Esta semana)**
 1. ✅ **TASK-003**: Documentar ADRs de decisiones tomadas - COMPLETADO v1.3.4
-2. **TASK-004**: Crear tests básicos para funciones core (URGENTE)
-3. **TASK-009 FASE 3**: Analysis Repository para patrones y decisiones
+2. ✅ **TASK-004**: Crear tests básicos para funciones core - COMPLETADO v1.4.0
+3. ✅ **TASK-009**: Analysis Repository + Report Generator - COMPLETADO v1.4.0
+4. ✅ **TASK-010**: Sistema configuración timezone - COMPLETADO v1.5.0
+5. **TASK-012**: Detección trampas alcistas/bajistas (7h)
 
 ### **Corto Plazo (2 semanas)**
-1. **TASK-006**: Order Flow Imbalance con orderbook
-2. **TASK-007**: Integración inicial con Waickoff
-3. **TASK-008**: Market Profile básico
+1. **TASK-012**: Detección trampas alcistas/bajistas (7h)
+2. **TASK-013**: On-chain data collection (15h)
+3. **TASK-016**: Migración MongoDB (solo si TASK-015 exitoso)
+4. **TASK-006**: Order Flow Imbalance con orderbook
+5. **TASK-007**: Integración inicial con Waickoff
+6. **TASK-008**: Market Profile básico
 
 ### **Medio Plazo (1 mes)**
 1. Implementar funciones con API Key
@@ -632,6 +695,7 @@ const normalizedPath = relativePath.replace(/\\/g, '/');
 9. **Delegation pattern es superior a handlers monolíticos** - Especialización por dominio mejora mantenibilidad exponencialmente
 10. **Pattern matching requiere normalización de paths** - Siempre convertir a forward slashes para consistencia cross-platform
 11. **Modularización facilita debugging** - Bug de StorageService resuelto creando servicios especializados (FileSystem, PatternMatcher, Config)
+12. **Evaluar antes de migrar** - Dual storage pattern permite evaluar MongoDB sin romper sistema actual
 
 ---
 
