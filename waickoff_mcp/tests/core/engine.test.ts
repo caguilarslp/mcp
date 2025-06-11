@@ -38,8 +38,9 @@ describe('MarketAnalysisEngine', () => {
   let engine: MarketAnalysisEngine;
 
   beforeEach(() => {
-    // Create engine with mocked services
+    // Create engine with mocked services - config is first, then services
     engine = new MarketAnalysisEngine(
+      undefined, // config
       mockMarketDataService,
       mockAnalysisService,
       mockTradingService

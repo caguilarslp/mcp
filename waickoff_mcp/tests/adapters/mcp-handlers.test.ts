@@ -11,6 +11,7 @@ import { AnalysisRepositoryHandlers } from '../../src/adapters/handlers/analysis
 import { ReportGeneratorHandlers } from '../../src/adapters/handlers/reportGeneratorHandlers';
 import { CacheHandlers } from '../../src/adapters/cacheHandlers';
 import { MCPServerResponse } from '../../src/types/index';
+import { createMockEngine } from '../test-utils';
 
 // Mock all dependencies
 jest.mock('../../src/core/engine');
@@ -22,15 +23,15 @@ jest.mock('../../src/utils/fileLogger');
 
 describe('MCPHandlers - Delegation Pattern', () => {
   let mcpHandlers: MCPHandlers;
-  let mockEngine: jest.Mocked<MarketAnalysisEngine>;
+  let mockEngine: ReturnType<typeof createMockEngine>;
   let mockMarketDataHandlers: jest.Mocked<MarketDataHandlers>;
   let mockAnalysisRepositoryHandlers: jest.Mocked<AnalysisRepositoryHandlers>;
   let mockReportGeneratorHandlers: jest.Mocked<ReportGeneratorHandlers>;
   let mockCacheHandlers: jest.Mocked<CacheHandlers>;
 
   beforeEach(() => {
-    // Mock engine
-    mockEngine = new MarketAnalysisEngine() as jest.Mocked<MarketAnalysisEngine>;
+    // Mock engine using test utils
+    mockEngine = createMockEngine();
 
     // Mock specialized handlers
     mockMarketDataHandlers = {

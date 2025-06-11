@@ -26,292 +26,292 @@ Priority: [31m[CRITICAL][0m
   Invalid testPattern tests\\core\\**\\*.test.ts supplied. Running all tests instead.
   Invalid testPattern tests\\core\\**\\*.test.ts supplied. Running all tests instead.
   console.info
-    [2025-06-11T01:18:52.491Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.715Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.532Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
+    [2025-06-11T01:25:35.751Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.533Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.752Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.534Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.753Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.538Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.757Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.543Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.761Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.544Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.762Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.554Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.769Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.584Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.792Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.587Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.795Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.588Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.795Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.595Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.801Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.607Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.811Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.610Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.813Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.610Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.814Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.617Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.820Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.640Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.841Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.647Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.846Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.647Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.847Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.654Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.854Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.677Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.871Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.679Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.873Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.680Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.874Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.688Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.880Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.707Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.898Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.710Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.900Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.711Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.901Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.718Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.907Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.749Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.933Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.752Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.935Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.753Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.935Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.759Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.941Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.774Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.953Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.776Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:35.956Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.777Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:35.956Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.784Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:35.962Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.828Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:35.999Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.831Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:36.001Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.831Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:36.001Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.839Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:36.007Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.870Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:36.038Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.872Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:36.040Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.872Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:36.041Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.878Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:36.047Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.898Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:36.065Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.900Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:36.067Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.901Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:36.067Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.906Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:36.073Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.920Z] [INFO] [StorageService] Vacuum completed: deleted 0 files older than 5 days
+    [2025-06-11T01:25:36.086Z] [INFO] [StorageService] Vacuum completed: deleted 0 files older than 5 days
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.933Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:36.096Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.935Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:36.098Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.936Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:36.098Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.942Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:36.104Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.969Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:36.130Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.971Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:36.132Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.972Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:36.132Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:52.978Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:36.138Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.error
-    [2025-06-11T01:18:52.978Z] [ERROR] [StorageService] Failed to save file: ../outside/path.json Error: Invalid path: ../outside/path.json
+    [2025-06-11T01:25:36.138Z] [ERROR] [StorageService] Failed to save file: ../outside/path.json Error: Invalid path: ../outside/path.json
         at StorageService.createError (D:\projects\mcp\waickoff_mcp\src\services\storage.ts:367:19)
         at D:\projects\mcp\waickoff_mcp\src\services\storage.ts:95:22
         at PerformanceMonitor.measure (D:\projects\mcp\waickoff_mcp\src\utils\performance.ts:25:16)
@@ -334,7 +334,7 @@ Priority: [31m[CRITICAL][0m
       at Object.<anonymous> (tests/storage.test.ts:189:7)
 
   console.error
-    [2025-06-11T01:18:52.994Z] [ERROR] [StorageService] Failed to save file: /absolute/path.json Error: Invalid path: /absolute/path.json
+    [2025-06-11T01:25:36.150Z] [ERROR] [StorageService] Failed to save file: /absolute/path.json Error: Invalid path: /absolute/path.json
         at StorageService.createError (D:\projects\mcp\waickoff_mcp\src\services\storage.ts:367:19)
         at D:\projects\mcp\waickoff_mcp\src\services\storage.ts:95:22
         at PerformanceMonitor.measure (D:\projects\mcp\waickoff_mcp\src\utils\performance.ts:25:16) {
@@ -355,27 +355,27 @@ Priority: [31m[CRITICAL][0m
       at PerformanceMonitor.measure (src/utils/performance.ts:25:16)
 
   console.info
-    [2025-06-11T01:18:53.007Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:36.161Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.010Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
+    [2025-06-11T01:25:36.163Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\test-storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.010Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
+    [2025-06-11T01:25:36.164Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\test-storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.017Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:36.169Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.error
-    [2025-06-11T01:18:53.024Z] [ERROR] [StorageService] Failed to save file: test/large.json Error: File size 2097168 exceeds limit 1048576
+    [2025-06-11T01:25:36.176Z] [ERROR] [StorageService] Failed to save file: test/large.json Error: File size 2097168 exceeds limit 1048576
         at StorageService.createError (D:\projects\mcp\waickoff_mcp\src\services\storage.ts:367:19)
         at D:\projects\mcp\waickoff_mcp\src\services\storage.ts:105:22
         at PerformanceMonitor.measure (D:\projects\mcp\waickoff_mcp\src\utils\performance.ts:25:16)
@@ -398,337 +398,302 @@ Priority: [31m[CRITICAL][0m
       at Object.<anonymous> (tests/storage.test.ts:199:7)
 
   console.info
-    [2025-06-11T01:18:53.197Z] [INFO] [CacheManager] FileLogger initialized successfully
+    [2025-06-11T01:25:36.328Z] [INFO] [CacheManager] FileLogger initialized successfully
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.210Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
+    [2025-06-11T01:25:36.340Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.220Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
+    [2025-06-11T01:25:36.356Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.236Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:36.383Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.265Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:36.423Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.275Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:36.436Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.293Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
+    [2025-06-11T01:25:36.457Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.302Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:36.469Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.320Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:36.490Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.330Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:36.503Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.354Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
+    [2025-06-11T01:25:36.534Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.364Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:36.546Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.555Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
+    [2025-06-11T01:25:36.749Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:53.565Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:36.760Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.107Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:37.317Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.116Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.327Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.169Z] [INFO] [CacheManager] Cache CLEAR: removed 3 entries
+    [2025-06-11T01:25:37.392Z] [INFO] [CacheManager] Cache CLEAR: removed 3 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.178Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.402Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.228Z] [INFO] [CacheManager] Cache CLEAR: removed 2 entries
+    [2025-06-11T01:25:37.460Z] [INFO] [CacheManager] Cache CLEAR: removed 2 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.238Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.470Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.270Z] [INFO] [CacheManager] Cache INVALIDATE: 2 entries matching pattern "ticker:*"
+    [2025-06-11T01:25:37.503Z] [INFO] [CacheManager] Cache INVALIDATE: 2 entries matching pattern "ticker:*"
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.301Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:37.537Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.310Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.547Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.344Z] [INFO] [CacheManager] Cache CLEAR: removed 3 entries
+    [2025-06-11T01:25:37.582Z] [INFO] [CacheManager] Cache CLEAR: removed 3 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.354Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.593Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.409Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:37.650Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.419Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.660Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.436Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:37.679Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.446Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.689Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.619Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:37.878Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.629Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.888Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.653Z] [INFO] [CacheManager] Cache CLEAR: removed 2 entries
+    [2025-06-11T01:25:37.916Z] [INFO] [CacheManager] Cache CLEAR: removed 2 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.681Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
+    [2025-06-11T01:25:37.944Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.691Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.954Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.700Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
+    [2025-06-11T01:25:37.965Z] [INFO] [CacheManager] Cache CLEAR: removed 0 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.710Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
+    [2025-06-11T01:25:37.975Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 10, defaultTTL: 1000, cleanupInterval: 500 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.854Z] [INFO] [CacheManager] Cache CLEAR: removed 10 entries
+    [2025-06-11T01:25:38.134Z] [INFO] [CacheManager] Cache CLEAR: removed 10 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.864Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
+    [2025-06-11T01:25:38.146Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:54.891Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
+    [2025-06-11T01:25:38.174Z] [INFO] [CacheManager] Cache CLEAR: removed 1 entries
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.393Z] [INFO] [CacheManager] FileLogger initialized successfully
+    [2025-06-11T01:25:38.638Z] [INFO] [CacheManager] FileLogger initialized successfully
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.407Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
+    [2025-06-11T01:25:38.650Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.417Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
+    [2025-06-11T01:25:38.660Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.426Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:38.670Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.892Z] [INFO] [CacheManager] FileLogger initialized successfully
+    [2025-06-11T01:25:39.071Z] [INFO] [CacheManager] FileLogger initialized successfully
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.901Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
+    [2025-06-11T01:25:39.083Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.911Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
+    [2025-06-11T01:25:39.095Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:55.921Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:39.105Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.114Z] [INFO] [CacheManager] FileLogger initialized successfully
+    [2025-06-11T01:25:39.410Z] [INFO] [CacheManager] FileLogger initialized successfully
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.124Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
+    [2025-06-11T01:25:39.422Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.134Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
+    [2025-06-11T01:25:39.433Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
 
       at FileLogger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.144Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:39.443Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.318Z] [INFO] [CacheManager] FileLogger initialized successfully
-
-      at FileLogger.log (src/utils/logger.ts:105:17)
-
-  console.info
-    [2025-06-11T01:18:56.328Z] [INFO] [CacheManager] FileLogger config: dir=D:\projects\mcp\waickoff_mcp\logs, size=10MB, files=5, rotation=true
-
-      at FileLogger.log (src/utils/logger.ts:105:17)
-
-  console.info
-    [2025-06-11T01:18:56.338Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
-
-      at FileLogger.log (src/utils/logger.ts:105:17)
-
-  console.info
-    [2025-06-11T01:18:56.347Z] [INFO] [StorageConfigService] Storage base path: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:39.470Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.379Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
+    [2025-06-11T01:25:39.471Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.380Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:39.471Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.381Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:39.472Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.382Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
+    [2025-06-11T01:25:39.472Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.382Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
+    [2025-06-11T01:25:39.473Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.383Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:39.473Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.383Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
+    [2025-06-11T01:25:39.474Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
 
       at Logger.log (src/utils/logger.ts:105:17)
 
   console.info
-    [2025-06-11T01:18:56.384Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
-
-      at Logger.log (src/utils/logger.ts:105:17)
-
-  console.info
-    [2025-06-11T01:18:56.384Z] [INFO] [StorageService] Storage service initialized successfully
-
-      at Logger.log (src/utils/logger.ts:105:17)
-
-  console.info
-    [2025-06-11T01:18:56.385Z] [INFO] [StorageConfigService] Loaded custom storage config from D:\projects\mcp\waickoff_mcp\storage\config\storage.config.json
-
-      at Logger.log (src/utils/logger.ts:105:17)
-
-  console.info
-    [2025-06-11T01:18:56.385Z] [INFO] [StorageConfigService] Storage base path updated to: D:\projects\mcp\waickoff_mcp\storage
-
-      at Logger.log (src/utils/logger.ts:105:17)
-
-  console.info
-    [2025-06-11T01:18:56.386Z] [INFO] [StorageService] Storage service initialized successfully
+    [2025-06-11T01:25:39.474Z] [INFO] [StorageService] Storage service initialized successfully
 
       at Logger.log (src/utils/logger.ts:105:17)
 

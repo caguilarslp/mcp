@@ -10,7 +10,7 @@ export type MockedMarketAnalysisEngine = jest.Mocked<MarketAnalysisEngine> & {
   getTicker: jest.Mock;
   getOrderbook: jest.Mock;
   getKlines: jest.Mock;
-  getComprehensiveMarketData: jest.Mock;
+  getMarketData: jest.Mock;
   performTechnicalAnalysis: jest.Mock;
   getGridTradingSuggestions: jest.Mock;
   getCompleteAnalysis: jest.Mock;
@@ -42,7 +42,7 @@ export function createMockEngine(): MockedMarketAnalysisEngine {
     getTicker: jest.fn(),
     getOrderbook: jest.fn(),
     getKlines: jest.fn(),
-    getComprehensiveMarketData: jest.fn(),
+    getMarketData: jest.fn(),
     performTechnicalAnalysis: jest.fn(),
     getGridTradingSuggestions: jest.fn(),
     getCompleteAnalysis: jest.fn(),

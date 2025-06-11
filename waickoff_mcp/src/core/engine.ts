@@ -155,6 +155,78 @@ export class MarketAnalysisEngine {
   // ====================
 
   /**
+   * Get ticker data for a symbol
+   */
+  async getTicker(
+    symbol: string,
+    category: MarketCategoryType = 'spot'
+  ): Promise<ApiResponse<MarketTicker>> {
+    return this.performanceMonitor.measure('getTicker', async () => {
+      try {
+        if (!symbol) {
+          throw new Error('Symbol is required');
+        }
+        
+        this.logger.info(`Fetching ticker for ${symbol}`);
+        const ticker = await this.marketDataService.getTicker(symbol, category);
+        return this.createSuccessResponse(ticker);
+      } catch (error) {
+        this.logger.error(`Failed to get ticker for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to fetch ticker: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get orderbook data for a symbol
+   */
+  async getOrderbook(
+    symbol: string,
+    category: MarketCategoryType = 'spot',
+    limit: number = 25
+  ): Promise<ApiResponse<Orderbook>> {
+    return this.performanceMonitor.measure('getOrderbook', async () => {
+      try {
+        if (!symbol) {
+          throw new Error('Symbol is required');
+        }
+        
+        this.logger.info(`Fetching orderbook for ${symbol}`);
+        const orderbook = await this.marketDataService.getOrderbook(symbol, category, limit);
+        return this.createSuccessResponse(orderbook);
+      } catch (error) {
+        this.logger.error(`Failed to get orderbook for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to fetch orderbook: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get klines data for a symbol
+   */
+  async getKlines(
+    symbol: string,
+    interval: string = '60',
+    limit: number = 24,
+    category: MarketCategoryType = 'spot'
+  ): Promise<ApiResponse<OHLCV[]>> {
+    return this.performanceMonitor.measure('getKlines', async () => {
+      try {
+        if (!symbol) {
+          throw new Error('Symbol is required');
+        }
+        
+        this.logger.info(`Fetching klines for ${symbol}`);
+        const klines = await this.marketDataService.getKlines(symbol, interval, limit, category);
+        return this.createSuccessResponse(klines);
+      } catch (error) {
+        this.logger.error(`Failed to get klines for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to fetch klines: ${error}`);
+      }
+    });
+  }
+
+  /**
    * Get comprehensive market data for a symbol
    */
   async getMarketData(

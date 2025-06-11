@@ -13,53 +13,56 @@ import { join } from 'path';
 console.log('🧪 TASK-004 Test Suite - Modular Architecture Validation');
 console.log('======================================================\n');
 
-// Test categories and their priorities
+// Test categories with specific file paths to avoid pattern issues
 const testCategories = [
   {
     name: 'Core Engine Tests',
-    pattern: 'tests/core/**/*.test.ts',
+    files: ['tests/core/engine.test.ts'],
     description: 'Business logic and service integration',
     critical: true
   },
   {
     name: 'Handler Delegation Tests', 
-    pattern: 'tests/adapters/mcp-handlers.test.ts',
+    files: ['tests/adapters/mcp-handlers.test.ts'],
     description: 'Main orchestrator delegation pattern',
     critical: true
   },
   {
     name: 'Specialized Handler Tests',
-    pattern: 'tests/adapters/handlers/**/*.test.ts',
+    files: [
+      'tests/adapters/handlers/marketDataHandlers.test.ts',
+      'tests/adapters/handlers/analysisRepositoryHandlers.test.ts'
+    ],
     description: 'MarketData, AnalysisRepository, ReportGenerator handlers',
     critical: true
   },
   {
     name: 'Cache Handler Tests',
-    pattern: 'tests/adapters/cacheHandlers.test.ts',
+    files: ['tests/adapters/cacheHandlers.test.ts'],
     description: 'Cache management and invalidation',
     critical: false
   },
   {
     name: 'Support/Resistance Logic Tests',
-    pattern: 'tests/services/supportResistance.test.ts',
+    files: ['tests/services/supportResistance.test.ts'],
     description: 'BUG-001 regression prevention',
     critical: true
   },
   {
     name: 'Volume Delta Tests',
-    pattern: 'tests/services/volumeDelta.test.ts',
+    files: ['tests/services/volumeDelta.test.ts'],
     description: 'Mathematical calculations and divergence detection',
     critical: false
   },
   {
     name: 'Storage Service Tests',
-    pattern: 'tests/storage.test.ts',
+    files: ['tests/storage.test.ts'],
     description: 'Existing storage functionality',
     critical: false
   },
   {
     name: 'Cache Manager Tests',
-    pattern: 'tests/cacheManager.test.ts',
+    files: ['tests/cacheManager.test.ts'],
     description: 'Existing cache functionality',
     critical: false
   }
@@ -168,7 +171,9 @@ function runTestCategory(category) {
   console.log(`Priority: ${criticalLabel}\n`);
 
   try {
-    const result = execSync(`node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs "${category.pattern}" --verbose --detectOpenHandles`, {
+    // Use specific file paths instead of patterns to avoid Jest pattern issues
+    const fileList = category.files.join(' ');
+    const result = execSync(`node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs ${fileList} --verbose --detectOpenHandles`, {
       stdio: 'inherit',
       encoding: 'utf8'
     });
@@ -295,7 +300,7 @@ async function main() {
           `${colors.yellow}[OPTIONAL]${colors.reset}`;
         console.log(`${index + 1}. ${colors.bold}${category.name}${colors.reset} ${criticalLabel}`);
         console.log(`   ${category.description}`);
-        console.log(`   Pattern: ${colors.cyan}${category.pattern}${colors.reset}\n`);
+        console.log(`   Files: ${colors.cyan}${category.files.join(', ')}${colors.reset}\n`);
       });
       process.exit(0);
 

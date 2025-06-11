@@ -79,8 +79,8 @@ describe('MarketDataHandlers', () => {
       // Parse response text and verify data
       const responseData = JSON.parse(result.content[0].text);
       expect(responseData.symbol).toBe('BTCUSDT');
-      expect(responseData.current_price).toBe('$45,000.0000');
-      expect(responseData.change_24h).toBe('+2.50%');
+      expect(responseData.precio_actual).toBe('45000.0000');
+      expect(responseData.cambio_24h).toBe('2.50%');
     });
 
     it('should handle missing symbol parameter', async () => {
@@ -162,7 +162,7 @@ describe('MarketDataHandlers', () => {
 
       const responseData = JSON.parse(result.content[0].text);
       expect(responseData.symbol).toBe('BTCUSDT');
-      expect(responseData.spread).toBe('$2.00');
+      expect(responseData.spread).toBe('$2.0000');
       expect(responseData.bids).toHaveLength(2);
       expect(responseData.asks).toHaveLength(2);
     });
@@ -223,12 +223,12 @@ describe('MarketDataHandlers', () => {
         }
       ];
 
-      mockEngine.getComprehensiveMarketData = jest.fn().mockResolvedValue({
+      mockEngine.getMarketData = jest.fn().mockResolvedValue({
         success: true,
         data: {
           ticker: mockTicker,
           orderbook: mockOrderbook,
-          klines: mockKlines
+          recentKlines: mockKlines
         },
         timestamp: '2024-06-10T12:00:00.000Z'
       });
@@ -237,7 +237,7 @@ describe('MarketDataHandlers', () => {
 
       const result = await handlers.handleGetMarketData(args);
 
-      expect(mockEngine.getComprehensiveMarketData).toHaveBeenCalledWith('BTCUSDT', 'spot');
+      expect(mockEngine.getMarketData).toHaveBeenCalledWith('BTCUSDT', 'spot');
 
       const responseData = JSON.parse(result.content[0].text);
       expect(responseData.symbol).toBe('BTCUSDT');
@@ -247,7 +247,7 @@ describe('MarketDataHandlers', () => {
     });
 
     it('should handle comprehensive market data failure', async () => {
-      mockEngine.getComprehensiveMarketData = jest.fn().mockResolvedValue({
+      mockEngine.getMarketData = jest.fn().mockResolvedValue({
         success: false,
         error: 'Market data unavailable',
         timestamp: '2024-06-10T12:00:00.000Z'

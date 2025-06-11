@@ -22,13 +22,13 @@ export class MarketDataHandlers {
       throw new Error('Symbol is required');
     }
 
-    const response = await this.engine.getMarketData(symbol, category);
+    const response = await this.engine.getTicker(symbol, category);
     
     if (!response.success) {
       throw new Error(response.error || 'Failed to fetch ticker data');
     }
 
-    const ticker = response.data!.ticker;
+    const ticker = response.data!;
     
     const formattedTicker = {
       symbol: ticker.symbol,
@@ -55,13 +55,13 @@ export class MarketDataHandlers {
       throw new Error('Symbol is required');
     }
 
-    const response = await this.engine.getMarketData(symbol, category);
+    const response = await this.engine.getOrderbook(symbol, category, limit);
     
     if (!response.success) {
       throw new Error(response.error || 'Failed to fetch orderbook data');
     }
 
-    const orderbook = response.data!.orderbook;
+    const orderbook = response.data!;
     
     const formattedOrderbook = {
       symbol: orderbook.symbol,

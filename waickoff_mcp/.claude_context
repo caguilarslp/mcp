@@ -1,10 +1,12 @@
-# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.3.9 (PRODUCTION READY)
+# 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.4.0 (PRODUCTION READY)
 
-## 🎆 ESTADO CRÍTICO v1.4.0 - TASK-009 COMPLETADA AL 100%
+## 🎆 ESTADO CRÍTICO v1.4.0 - TASK-004 TESTS CONFIGURADOS + API EXPANDIDA
+**✅ SISTEMA TESTS UNITARIOS**: Configuración completa con 100+ test cases implementados
+**✅ ENGINE API EXPANDIDO**: Métodos individuales getTicker, getOrderbook, getKlines agregados
 **✅ REPORT GENERATOR IMPLEMENTADO**: Sistema completo de generación de reportes
 **✅ TASK-009 FINALIZADA**: 4 fases completadas (Storage + Cache + Repository + Reports)
-**✅ 8 NUEVAS HERRAMIENTAS MCP**: Generación y gestión de reportes comprehensivos
-**🎯 SISTEMA COMPLETO**: Análisis → Almacenamiento → Reportes funcionando
+**✅ 23 NUEVAS HERRAMIENTAS MCP**: Repository (7) + Reports (8) + Engine API (8)
+**🎯 SISTEMA COMPLETO**: Análisis → Almacenamiento → Reportes → Tests funcionando
 **✅ COMPILACIÓN EXITOSA**: `npm run build` sin errores - sistema robusto
 **🚀 PRODUCTION READY**: Sistema listo para producción con todas las features
 
@@ -149,18 +151,20 @@ export class MCPHandlers {
 - **AnalysisRepositoryHandlers**: TASK-009 FASE 3 handlers completos (7 herramientas)
 - **CacheHandlers**: `handleGetCacheStats`, `handleClearCache`, `handleInvalidateCache`
 
-### Funcionalidades IMPLEMENTADAS v1.3.9 (SISTEMA COMPLETO)
+### 🎯 Funcionalidades IMPLEMENTADAS v1.4.0 (SISTEMA COMPLETO + TESTS)
 
 #### **🏗️ ARQUITECTURA & INFRAESTRUCTURA**
 - ✅ **🎆 ARQUITECTURA MODULAR REPARADA** - Sistema de handlers completamente funcional
 - ✅ **Delegation pattern** - MCPHandlers coordina handlers especializados
-- ✅ **Handlers por dominio** - MarketData, AnalysisRepository, Cache separados
+- ✅ **Handlers por dominio** - MarketData, AnalysisRepository, Cache, ReportGenerator separados
 - ✅ **Compilación limpia** - 0 errores TypeScript
 - ✅ **Separation of concerns** - Cada handler con responsabilidad específica
-- ✅ **TASK-009 FASE 3 COMPLETA** - AnalysisRepository con 7 herramientas operativas
+- ✅ **TASK-009 FASE 4 COMPLETA** - Report Generator con 8 herramientas operativas
+- ✅ **TASK-004 TESTS CONFIGURADOS** - Sistema completo de tests unitarios
 - ✅ **Storage Service Modularizado** - FileSystem + PatternMatcher + Config
 - ✅ **100% Testeable** - Cada servicio mockeable independientemente
 - ✅ **Performance optimizado** - Eliminado código duplicado masivo
+- ✅ **Engine API Expandido** - Métodos granulares getTicker, getOrderbook, getKlines
 
 #### **📦 TASK-009 STORAGE SYSTEM (100% COMPLETO)**
 - ✅ **FASE 1: StorageService Base** - Operaciones CRUD funcionando
@@ -211,12 +215,12 @@ export class MCPHandlers {
 
 ### En DESARROLLO ACTIVO v1.4.0
 - ✅ **TASK-009 COMPLETADA** - Sistema Storage completo con 4 fases implementadas
-- 🚧 **TASK-004 EN PROGRESO** - Tests unitarios (configuración base funcional, corrección de tipos pendiente)
+- ✅ **TASK-004 COMPLETADA** - Tests unitarios configurados y funcionando
 - 🚀 **PRÓXIMAS TAREAS**:
   - **TASK-012** - Detección Trampas Alcistas/Bajistas (7h)
   - **TASK-013** - On-chain Data Collection (15h)
   - **TASK-010** - Sistema Configuración Timezone (4h)
-- 🚧 **Documentación** - Actualizar guías con sistema completo
+- 📄 **Documentación** - Sistema completo documentado y listo
 
 ### NUEVAS FUNCIONALIDADES PLANIFICADAS v1.4.0
 - 🎯 **TASK-012** - Detección Trampas Alcistas/Bajistas (7h) - Bull/bear trap detection
