@@ -88,6 +88,21 @@
 
 ### **🟡 MEDIA PRIORIDAD (Próximas 2 Semanas)**
 
+#### 📊 TASK-017 - Sistema de Análisis Histórico Completo (NUEVA - ALTA PRIORIDAD)
+- **Estado:** NUEVO - Base fundamental para análisis avanzados
+- **Descripción:** Sistema completo para análisis histórico desde inception del par
+- **Prioridad:** **ALTA** (Fundamento para todos los análisis futuros)
+- **Tiempo Estimado:** 12-15h
+- **Archivos:** `claude/tasks/task-017-historical-analysis.md`
+- **Componentes:**
+  - HistoricalDataService para obtener datos desde inception
+  - HistoricalAnalysisService con análisis S/R histórico, eventos volumen
+  - Detección de ciclos de mercado (bull/bear históricos)
+  - 6 nuevas herramientas MCP para análisis histórico
+  - Cache optimizado para datos históricos
+- **Beneficios:** Base sólida S/R, contexto mercado, patrones macro
+- **ROI Esperado:** Muy alto - mejora fundamental en calidad análisis
+
 #### 🎯 TASK-012 - Detección de Trampas Alcistas y Bajistas (NUEVA)
 - **Estado:** NUEVO - Post TASK-009 FASE 3
 - **Descripción:** Algoritmos para detectar bull traps y bear traps en tiempo real
@@ -170,6 +185,23 @@
   - Detectar walls significativos
   - Calcular presión de compra/venta
 
+#### 🚀 TASK-018 - Sistema Wyckoff Avanzado (NUEVA)
+- **Estado:** NUEVO - Post TASK-005 Wyckoff Básico
+- **Descripción:** Análisis Wyckoff profesional con Composite Man y multi-timeframe
+- **Prioridad:** **ALTA** (Completa el análisis técnico profesional)
+- **Tiempo Estimado:** 8-10h
+- **Archivos:** `claude/tasks/task-018-wyckoff-advanced.md`
+- **Componentes:**
+  - Detección de Composite Man (manipulación institucional)
+  - Análisis Wyckoff multi-timeframe con confluencias
+  - Cálculo causa-efecto para objetivos de precio
+  - Detección de estructuras Wyckoff anidadas
+  - Sistema de validación de setups completo
+  - 7 nuevas herramientas MCP especializadas
+- **Dependencias:** TASK-017 (Historical) + TASK-005 (Wyckoff Básico)
+- **Beneficios:** Análisis institucional, mejores entradas, objetivos precisos
+- **ROI Esperado:** Muy alto para traders avanzados
+
 ### **🟢 BAJA PRIORIDAD (Próximo Mes)**
 
 #### 📋 TASK-007 - Market Profile Básico
@@ -209,10 +241,10 @@
 
 ### **Velocidad de Desarrollo**
 - **Tareas Completadas:** 13 (incluyendo TASK-010 Sistema Timezone)
-- **Tareas Planificadas:** 7 nuevas (TASK-012, TASK-013, TASK-015, TASK-016, FastAPI scope)
+- **Tareas Planificadas:** 8 nuevas (TASK-017, TASK-012, TASK-005, TASK-006, TASK-018, TASK-015, TASK-016, TASK-013)
 - **Tiempo Invertido:** ~29h
-- **Tiempo Planificado:** +36h (MCP + MongoDB) + 77h (FastAPI)
-- **Promedio por Tarea:** 2.2h (actual) / 5.1h (planificadas - más complejas)
+- **Tiempo Planificado:** +58h (Sistema completo con Wyckoff Avanzado)
+- **Promedio por Tarea:** 2.2h (actual) / 7.25h (planificadas - alta complejidad)
 - **Eficiencia:** Alta (sistema completamente operativo + configuración persistente)
 
 ### **Calidad del Código**
@@ -234,7 +266,7 @@
 ## 🎯 OBJETIVOS DE LA SEMANA
 
 ### **Semana del 11-17 Junio 2025**
-**Meta:** Avanzar en features avanzadas con base sólida de configuración timezone
+**Meta:** Establecer base histórica sólida para análisis avanzados
 
 - [✅] ✅ **REPARACIÓN CRÍTICA**: Sistema modular completamente reparado
 - [✅] ✅ **Compilación limpia**: 200+ errores TypeScript → 0 errores
@@ -242,8 +274,8 @@
 - [✅] ✅ **TASK-009 COMPLETADA**: Analysis Repository + Report Generator 100% operativo
 - [✅] ✅ **TASK-004 COMPLETADA**: Tests unitarios sistema modular validado
 - [✅] ✅ **TASK-010 COMPLETADA**: Sistema configuración timezone con auto-detección
+- [ ] 📊 **TASK-017**: Sistema Análisis Histórico Completo (12-15h) - PRIORIDAD ALTA
 - [ ] 🎯 **TASK-012**: Detección trampas alcistas/bajistas (7h)
-- [ ] 🔗 **TASK-013**: On-chain data collection (15h)
 
 ### **Próximas 2-3 Semanas**
 **Meta:** Funcionalidades avanzadas de trading con base sólida

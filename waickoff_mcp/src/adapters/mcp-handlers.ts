@@ -12,6 +12,7 @@ import { AnalysisRepositoryHandlers } from './handlers/analysisRepositoryHandler
 import { ReportGeneratorHandlers } from './handlers/reportGeneratorHandlers.js';
 import { CacheHandlers } from './cacheHandlers.js';
 import { ConfigurationHandlers } from './handlers/configurationHandlers.js';
+import { HistoricalAnalysisHandlers } from './handlers/historicalAnalysisHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -23,6 +24,7 @@ export class MCPHandlers {
   private readonly reportGeneratorHandlers: ReportGeneratorHandlers;
   private readonly cacheHandlers: CacheHandlers;
   private readonly configurationHandlers: ConfigurationHandlers;
+  private readonly historicalAnalysisHandlers: HistoricalAnalysisHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
     this.engine = engine;
@@ -38,6 +40,11 @@ export class MCPHandlers {
     this.reportGeneratorHandlers = new ReportGeneratorHandlers(engine, this.logger);
     this.cacheHandlers = new CacheHandlers(engine);
     this.configurationHandlers = new ConfigurationHandlers(engine.getConfigurationManager());
+    this.historicalAnalysisHandlers = new HistoricalAnalysisHandlers(
+      engine.historicalDataService,
+      engine.historicalAnalysisService,
+      engine.historicalCacheService
+    );
 
     this.logger.info('MCP Handlers initialized with modular architecture');
   }
@@ -878,6 +885,34 @@ export class MCPHandlers {
 
   async handleGetConfigInfo(args: any): Promise<MCPServerResponse> {
     return await this.configurationHandlers.handleGetConfigInfo();
+  }
+
+  // ====================
+  // HISTORICAL ANALYSIS HANDLERS (TASK-017) - NOW ENABLED
+  // ====================
+
+  async handleGetHistoricalKlines(args: any): Promise<MCPServerResponse> {
+    return await this.historicalAnalysisHandlers.handleGetHistoricalKlines(args);
+  }
+
+  async handleAnalyzeHistoricalSR(args: any): Promise<MCPServerResponse> {
+    return await this.historicalAnalysisHandlers.handleAnalyzeHistoricalSR(args);
+  }
+
+  async handleIdentifyVolumeAnomalies(args: any): Promise<MCPServerResponse> {
+    return await this.historicalAnalysisHandlers.handleIdentifyVolumeAnomalies(args);
+  }
+
+  async handleGetPriceDistribution(args: any): Promise<MCPServerResponse> {
+    return await this.historicalAnalysisHandlers.handleGetPriceDistribution(args);
+  }
+
+  async handleIdentifyMarketCycles(args: any): Promise<MCPServerResponse> {
+    return await this.historicalAnalysisHandlers.handleIdentifyMarketCycles(args);
+  }
+
+  async handleGetHistoricalSummary(args: any): Promise<MCPServerResponse> {
+    return await this.historicalAnalysisHandlers.handleGetHistoricalSummary(args);
   }
 
   // ====================

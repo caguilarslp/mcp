@@ -1,7 +1,7 @@
 /**
- * @fileoverview MCP Adapter - Model Context Protocol Integration (MODULAR v1.3.7)
+ * @fileoverview MCP Adapter - Model Context Protocol Integration (MODULAR v1.5.0)
  * @description Adapter layer between MCP Server and Core Engine with complete modular handlers
- * @version 1.3.7
+ * @version 1.5.0
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -37,7 +37,7 @@ export class MCPAdapter {
     this.server = new Server(
       {
         name: 'waickoff_mcp',
-        version: '1.3.7',
+        version: '1.5.0',
       },
       {
         capabilities: {
@@ -48,7 +48,7 @@ export class MCPAdapter {
     );
 
     this.setupHandlers();
-    this.logger.info('MCP Adapter initialized with modular handler architecture v1.3.7');
+    this.logger.info('MCP Adapter initialized with modular handler architecture v1.5.0');
   }
 
   private setupHandlers() {
@@ -56,6 +56,7 @@ export class MCPAdapter {
     this.server.setRequestHandler(ListToolsRequestSchema, async () => {
       return {
         tools: [
+          // Market Data Tools
           {
             name: 'get_ticker',
             description: 'Get current price and 24h statistics for a trading pair',
@@ -121,6 +122,8 @@ export class MCPAdapter {
               required: ['symbol'],
             },
           },
+
+          // Analysis Tools
           {
             name: 'analyze_volatility',
             description: 'Analyze price volatility for grid trading timing',
@@ -329,6 +332,8 @@ export class MCPAdapter {
               required: ['symbol'],
             },
           },
+
+          // System Tools
           {
             name: 'get_system_health',
             description: 'Get system health status and performance metrics',
@@ -396,6 +401,8 @@ export class MCPAdapter {
               },
             },
           },
+
+          // Cache Tools
           {
             name: 'get_cache_stats',
             description: 'Get cache performance statistics and metrics',
@@ -437,6 +444,7 @@ export class MCPAdapter {
               required: ['symbol'],
             },
           },
+
           // Analysis Repository Tools (TASK-009 FASE 3)
           {
             name: 'get_analysis_by_id',
@@ -594,6 +602,7 @@ export class MCPAdapter {
               properties: {},
             },
           },
+
           // Report Generator Tools (TASK-009 FASE 4)
           {
             name: 'generate_report',
@@ -755,6 +764,7 @@ export class MCPAdapter {
               required: ['id', 'outputPath'],
             },
           },
+
           // Configuration Tools (TASK-010)
           {
             name: 'get_user_config',
@@ -856,6 +866,185 @@ export class MCPAdapter {
               properties: {},
             },
           },
+
+          // Historical Analysis Tools (TASK-017)
+          {
+            name: 'get_historical_klines',
+            description: 'Get comprehensive historical klines data with metadata',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair (e.g., BTCUSDT)',
+                },
+                interval: {
+                  type: 'string',
+                  description: 'Time interval',
+                  enum: ['D', 'W', 'M'],
+                  default: 'D',
+                },
+                startTime: {
+                  type: 'number',
+                  description: 'Start timestamp (optional)',
+                },
+                endTime: {
+                  type: 'number',
+                  description: 'End timestamp (optional)',
+                },
+                useCache: {
+                  type: 'boolean',
+                  description: 'Use cached data if available',
+                  default: true,
+                },
+              },
+              required: ['symbol'],
+            },
+          },
+          {
+            name: 'analyze_historical_sr',
+            description: 'Analyze historical support and resistance levels with advanced scoring',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair',
+                },
+                timeframe: {
+                  type: 'string',
+                  description: 'Analysis timeframe',
+                  enum: ['D', 'W', 'M'],
+                  default: 'D',
+                },
+                minTouches: {
+                  type: 'number',
+                  description: 'Minimum touches for level validation',
+                  default: 3,
+                },
+                tolerance: {
+                  type: 'number',
+                  description: 'Price tolerance percentage',
+                  default: 0.5,
+                },
+                volumeWeight: {
+                  type: 'boolean',
+                  description: 'Weight levels by volume',
+                  default: true,
+                },
+                recencyBias: {
+                  type: 'number',
+                  description: 'Bias toward recent levels (0-1)',
+                  default: 0.1,
+                },
+                useCache: {
+                  type: 'boolean',
+                  description: 'Use cached analysis if available',
+                  default: true,
+                },
+              },
+              required: ['symbol'],
+            },
+          },
+          {
+            name: 'identify_volume_anomalies',
+            description: 'Identify volume anomalies and significant events',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair',
+                },
+                timeframe: {
+                  type: 'string',
+                  description: 'Analysis timeframe',
+                  enum: ['D', 'W'],
+                  default: 'D',
+                },
+                threshold: {
+                  type: 'number',
+                  description: 'Anomaly detection threshold multiplier',
+                  default: 2.5,
+                },
+                useCache: {
+                  type: 'boolean',
+                  description: 'Use cached analysis if available',
+                  default: true,
+                },
+              },
+              required: ['symbol'],
+            },
+          },
+          {
+            name: 'get_price_distribution',
+            description: 'Analyze price distribution and value areas',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair',
+                },
+                timeframe: {
+                  type: 'string',
+                  description: 'Analysis timeframe',
+                  enum: ['D', 'W'],
+                  default: 'D',
+                },
+                useCache: {
+                  type: 'boolean',
+                  description: 'Use cached analysis if available',
+                  default: true,
+                },
+              },
+              required: ['symbol'],
+            },
+          },
+          {
+            name: 'identify_market_cycles',
+            description: 'Identify market cycles and trends',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair',
+                },
+                useCache: {
+                  type: 'boolean',
+                  description: 'Use cached analysis if available',
+                  default: true,
+                },
+              },
+              required: ['symbol'],
+            },
+          },
+          {
+            name: 'get_historical_summary',
+            description: 'Get comprehensive historical analysis summary',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                symbol: {
+                  type: 'string',
+                  description: 'Trading pair',
+                },
+                timeframe: {
+                  type: 'string',
+                  description: 'Analysis timeframe',
+                  enum: ['D', 'W', 'M'],
+                  default: 'D',
+                },
+                useCache: {
+                  type: 'boolean',
+                  description: 'Use cached analysis if available',
+                  default: true,
+                },
+              },
+              required: ['symbol'],
+            },
+          },
         ],
       };
     });
@@ -864,7 +1053,7 @@ export class MCPAdapter {
     this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
       const { name, arguments: args } = request.params;
       
-      this.logger.info(`Executing tool: ${name} (via modular handlers v1.3.7)`);
+      this.logger.info(`Executing tool: ${name} (via modular handlers v1.5.0)`);
       
       try {
         let result: MCPServerResponse;
@@ -1002,6 +1191,26 @@ export class MCPAdapter {
             result = await this.handlers.handleGetConfigInfo(args);
             break;
           
+          // Historical Analysis Tools (TASK-017)
+          case 'get_historical_klines':
+            result = await this.handlers.handleGetHistoricalKlines(args);
+            break;
+          case 'analyze_historical_sr':
+            result = await this.handlers.handleAnalyzeHistoricalSR(args);
+            break;
+          case 'identify_volume_anomalies':
+            result = await this.handlers.handleIdentifyVolumeAnomalies(args);
+            break;
+          case 'get_price_distribution':
+            result = await this.handlers.handleGetPriceDistribution(args);
+            break;
+          case 'identify_market_cycles':
+            result = await this.handlers.handleIdentifyMarketCycles(args);
+            break;
+          case 'get_historical_summary':
+            result = await this.handlers.handleGetHistoricalSummary(args);
+            break;
+          
           default:
             throw new Error(`Unknown tool: ${name}`);
         }
@@ -1034,6 +1243,6 @@ export class MCPAdapter {
   async run(): Promise<void> {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    this.logger.info('MCP Adapter running with modular handler architecture v1.3.7');
+    this.logger.info('MCP Adapter running with modular handler architecture v1.5.0');
   }
 }

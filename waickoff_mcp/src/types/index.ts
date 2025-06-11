@@ -368,12 +368,183 @@ export interface TimestampedAnalysis {
 }
 
 // ====================
+// HISTORICAL ANALYSIS TYPES (TASK-017)
+// ====================
+
+export interface DateRange {
+  start: Date;
+  end: Date;
+}
+
+export interface HistoricalKlines {
+  symbol: string;
+  interval: string;
+  startTime: Date;
+  endTime: Date;
+  dataPoints: number;
+  klines: OHLCV[];
+  metadata: {
+    inceptionDate: Date;
+    totalDays: number;
+    missingData: DateRange[];
+  };
+}
+
+export interface HistoricalLevel {
+  price: number;
+  type: 'support' | 'resistance' | 'both';
+  touches: number;
+  firstSeen: Date;
+  lastSeen: Date;
+  timesTested: number;
+  timesHeld: number;
+  timesBroken: number;
+  averageVolume: number;
+  significance: number;  // 0-100 score
+  currentDistance: number; // % from current price
+}
+
+export interface HistoricalSupportResistance {
+  symbol: string;
+  timeframe: string;
+  analysisDate: Date;
+  levels: HistoricalLevel[];
+  majorLevels: HistoricalLevel[];  // Top 10 most significant
+  statistics: {
+    totalLevelsFound: number;
+    averageTouches: number;
+    strongestLevel: HistoricalLevel;
+    priceRange: { min: number; max: number };
+  };
+}
+
+export interface VolumeEvent {
+  date: Date;
+  type: 'spike' | 'drought' | 'accumulation' | 'distribution';
+  volume: number;
+  volumeRatio: number;  // vs average
+  priceChange: number;
+  significance: number;
+  context?: string;     // e.g., "Listing announcement", "Major news"
+}
+
+export interface MarketCycle {
+  type: 'bull' | 'bear' | 'accumulation' | 'distribution';
+  startDate: Date;
+  endDate?: Date;
+  duration: number;     // days
+  priceChange: number;  // percentage
+  volumeProfile: 'increasing' | 'decreasing' | 'stable';
+  keyLevels: number[]; // Important S/R during cycle
+}
+
+export interface PriceDistribution {
+  symbol: string;
+  timeframe: string;
+  analysisDate: Date;
+  totalVolume: number;
+  priceRanges: {
+    price: number;
+    volume: number;
+    percentage: number;
+    frequency: number;
+  }[];
+  valueArea: {
+    high: number;
+    low: number;
+    pointOfControl: number;
+  };
+  statistics: {
+    mean: number;
+    median: number;
+    standardDeviation: number;
+    skewness: number;
+  };
+}
+
+// Historical Data Service Interface
+export interface IHistoricalDataService {
+  getHistoricalKlines(
+    symbol: string,
+    interval: 'D' | 'W' | 'M',
+    startTime?: number,
+    endTime?: number
+  ): Promise<HistoricalKlines>;
+  
+  getSymbolInceptionDate(symbol: string): Promise<Date>;
+  
+  getHistoricalKlinesBatched(
+    symbol: string,
+    interval: string,
+    batchSize: number
+  ): AsyncGenerator<OHLCV[], void, unknown>;
+}
+
+// Historical Analysis Service Interface
+export interface IHistoricalAnalysisService {
+  analyzeHistoricalSupportResistance(
+    symbol: string,
+    timeframe: 'D' | 'W' | 'M',
+    options: {
+      minTouches?: number;
+      tolerance?: number;
+      volumeWeight?: boolean;
+      recencyBias?: number;
+    }
+  ): Promise<HistoricalSupportResistance>;
+  
+  identifyVolumeEvents(
+    symbol: string,
+    timeframe: 'D' | 'W',
+    threshold: number
+  ): Promise<VolumeEvent[]>;
+  
+  analyzePriceDistribution(
+    symbol: string,
+    timeframe: 'D' | 'W'
+  ): Promise<PriceDistribution>;
+  
+  identifyMarketCycles(
+    symbol: string
+  ): Promise<MarketCycle[]>;
+}
+
+// Historical Cache Service Interface
+export interface IHistoricalCacheService {
+cacheHistoricalAnalysis(
+symbol: string,
+type: 'support_resistance' | 'volume_events' | 'price_distribution' | 'market_cycles' | 'historical_klines',
+data: any,
+ttl?: number
+): Promise<void>;
+
+getCachedAnalysis(
+symbol: string,
+type: string
+): Promise<any | null>;
+
+invalidateHistoricalCache(symbol: string): Promise<void>;
+  
+    getCacheStats(): {
+      totalEntries: number;
+      totalMemoryUsage: number;
+      hitRate: number;
+      entriesByType: Record<string, number>;
+      oldestEntry: number;
+      newestEntry: number;
+    };
+    
+    clearCache(): Promise<void>;
+  }
+
+// ====================
 // UTILITY TYPES
 // ====================
 
 export type TimeInterval = '1' | '3' | '5' | '15' | '30' | '60' | '120' | '240' | '360' | '720' | 'D' | 'M' | 'W';
 export type AnalysisPeriod = '1h' | '4h' | '1d' | '7d';
 export type VolumeInterval = '1' | '5' | '15' | '30' | '60' | '240' | 'D';
+export type HistoricalTimeframe = 'D' | 'W' | 'M';
 
 // ====================
 // FUTURE INTEGRATION TYPES (Waickoff AI)

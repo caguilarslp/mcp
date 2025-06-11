@@ -36,7 +36,16 @@ import {
   TemporalContext,
   ReportOptions,
   GeneratedReport,
-  ReportType
+  ReportType,
+  IHistoricalDataService,
+  IHistoricalAnalysisService,
+  IHistoricalCacheService,
+  HistoricalKlines,
+  HistoricalSupportResistance,
+  VolumeEvent,
+  MarketCycle,
+  PriceDistribution,
+  HistoricalTimeframe
 } from '../types/index.js';
 
 import { BybitMarketDataService } from '../services/marketData.js';
@@ -49,6 +58,9 @@ import { AnalysisRepository } from '../repositories/analysisRepository.js';
 import { ReportGenerator } from '../services/reports/reportGenerator.js';
 import { TimezoneManager, mexicoTimezone } from '../utils/timezone.js';
 import { ConfigurationManager } from '../services/config/configurationManager.js';
+import { HistoricalDataService } from '../services/historicalData.js';
+import { HistoricalAnalysisService } from '../services/historicalAnalysis.js';
+import { HistoricalCacheService } from '../services/historicalCache.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -84,6 +96,11 @@ export class MarketAnalysisEngine {
   private readonly reportGenerator: IReportGenerator;
   private readonly timezoneManager: TimezoneManager;
   private readonly configurationManager: ConfigurationManager;
+  
+  // Historical analysis services (TASK-017)
+  public readonly historicalDataService: IHistoricalDataService;
+  public readonly historicalAnalysisService: IHistoricalAnalysisService;
+  public readonly historicalCacheService: IHistoricalCacheService;
   
   // Configuration
   private config: SystemConfig;
@@ -153,6 +170,16 @@ export class MarketAnalysisEngine {
       this.analysisRepository,
       this.storageService,
       './storage'
+    );
+    
+    // Initialize historical analysis services (TASK-017)
+    this.historicalCacheService = new HistoricalCacheService();
+    this.historicalDataService = new HistoricalDataService(
+      this.config.api.baseUrl,
+      this.config.api.timeout
+    );
+    this.historicalAnalysisService = new HistoricalAnalysisService(
+      this.historicalDataService
     );
     
     this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository and Report Generator', {
@@ -1244,6 +1271,150 @@ export class MarketAnalysisEngine {
    */
   getConfigurationManager(): ConfigurationManager {
     return this.configurationManager;
+  }
+
+  // ====================
+  // HISTORICAL ANALYSIS METHODS (TASK-017)
+  // ====================
+
+  /**
+   * Get historical klines data
+   */
+  async getHistoricalKlines(
+    symbol: string,
+    interval: HistoricalTimeframe,
+    startTime?: number,
+    endTime?: number
+  ): Promise<ApiResponse<HistoricalKlines>> {
+    return this.performanceMonitor.measure('getHistoricalKlines', async () => {
+      try {
+        const result = await this.historicalDataService.getHistoricalKlines(
+          symbol,
+          interval,
+          startTime,
+          endTime
+        );
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to get historical klines for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to get historical klines: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Analyze historical support/resistance levels
+   */
+  async analyzeHistoricalSupportResistance(
+    symbol: string,
+    timeframe: HistoricalTimeframe,
+    options: {
+      minTouches?: number;
+      tolerance?: number;
+      volumeWeight?: boolean;
+      recencyBias?: number;
+    } = {}
+  ): Promise<ApiResponse<HistoricalSupportResistance>> {
+    return this.performanceMonitor.measure('analyzeHistoricalSupportResistance', async () => {
+      try {
+        const result = await this.historicalAnalysisService.analyzeHistoricalSupportResistance(
+          symbol,
+          timeframe,
+          options
+        );
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to analyze historical S/R for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to analyze historical S/R: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Identify volume events in historical data
+   */
+  async identifyVolumeEvents(
+    symbol: string,
+    timeframe: 'D' | 'W',
+    threshold: number = 2.5
+  ): Promise<ApiResponse<VolumeEvent[]>> {
+    return this.performanceMonitor.measure('identifyVolumeEvents', async () => {
+      try {
+        const result = await this.historicalAnalysisService.identifyVolumeEvents(
+          symbol,
+          timeframe,
+          threshold
+        );
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to identify volume events for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to identify volume events: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Analyze price distribution
+   */
+  async analyzePriceDistribution(
+    symbol: string,
+    timeframe: 'D' | 'W'
+  ): Promise<ApiResponse<PriceDistribution>> {
+    return this.performanceMonitor.measure('analyzePriceDistribution', async () => {
+      try {
+        const result = await this.historicalAnalysisService.analyzePriceDistribution(
+          symbol,
+          timeframe
+        );
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to analyze price distribution for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to analyze price distribution: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Identify market cycles
+   */
+  async identifyMarketCycles(symbol: string): Promise<ApiResponse<MarketCycle[]>> {
+    return this.performanceMonitor.measure('identifyMarketCycles', async () => {
+      try {
+        const result = await this.historicalAnalysisService.identifyMarketCycles(symbol);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to identify market cycles for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to identify market cycles: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get historical cache statistics
+   */
+  getHistoricalCacheStats(): {
+    totalEntries: number;
+    totalMemoryUsage: number;
+    hitRate: number;
+    entriesByType: Record<string, number>;
+    oldestEntry: number;
+    newestEntry: number;
+  } {
+    return this.historicalCacheService.getCacheStats();
+  }
+
+  /**
+   * Clear historical cache
+   */
+  async clearHistoricalCache(): Promise<void> {
+    await this.historicalCacheService.clearCache();
+  }
+
+  /**
+   * Invalidate historical cache for a symbol
+   */
+  async invalidateHistoricalCache(symbol: string): Promise<void> {
+    await this.historicalCacheService.invalidateHistoricalCache(symbol);
   }
 
   // ====================

@@ -52,7 +52,7 @@
 ### 🎆 ESTADO ACTUAL (v1.5.0 - 11/06/2025) - TASK-010 COMPLETADA
 - **Fase:** ✅ TASK-010 COMPLETADA - Sistema configuración timezone persistente implementado
 - **Última Actualización:** v1.5.0 con sistema completo de configuración timezone
-- **Próxima Decisión:** Iniciar TASK-012 (Bull/Bear Traps) o TASK-013 (On-chain Data)
+- **Próxima Decisión:** Iniciar TASK-017 (Sistema Análisis Histórico) - Base fundamental para análisis
 - **Bloqueadores:** NINGUNO - Sistema completo y funcional con configuración
 - **UX Status:** 🎆 COMPLETO - Análisis + Storage + Cache + Repository + Reports + Configuration
 - **Funcionalidad:** ✅ Sistema MCP completo 100% operativo + configuración timezone friction-free
