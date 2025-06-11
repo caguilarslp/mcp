@@ -765,7 +765,81 @@ export class MCPAdapter {
             },
           },
 
-          // Configuration Tools (TASK-010)
+          // System Configuration Tools (Environment)
+          {
+            name: 'get_system_config',
+            description: 'Get complete system configuration from environment variables',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_mongo_config',
+            description: 'Get MongoDB connection configuration status',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_api_config',
+            description: 'Get API configuration for external services',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_analysis_config',
+            description: 'Get technical analysis configuration parameters',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_grid_config',
+            description: 'Get grid trading configuration parameters',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_logging_config',
+            description: 'Get logging and monitoring configuration',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'validate_env_config',
+            description: 'Validate environment configuration and get recommendations',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'reload_env_config',
+            description: 'Reload environment configuration from .env file',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_env_file_info',
+            description: 'Get environment file information and configuration status',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+
+          // User Configuration Tools (TASK-010)
           {
             name: 'get_user_config',
             description: 'Get current user configuration including timezone settings',
@@ -1257,7 +1331,36 @@ export class MCPAdapter {
             result = await this.handlers.handleExportReport(args);
             break;
           
-          // Configuration Tools (TASK-010)
+          // System Configuration Tools
+          case 'get_system_config':
+            result = await this.handlers.handleGetSystemConfig(args);
+            break;
+          case 'get_mongo_config':
+            result = await this.handlers.handleGetMongoConfig(args);
+            break;
+          case 'get_api_config':
+            result = await this.handlers.handleGetApiConfig(args);
+            break;
+          case 'get_analysis_config':
+            result = await this.handlers.handleGetAnalysisConfig(args);
+            break;
+          case 'get_grid_config':
+            result = await this.handlers.handleGetGridConfig(args);
+            break;
+          case 'get_logging_config':
+            result = await this.handlers.handleGetLoggingConfig(args);
+            break;
+          case 'validate_env_config':
+            result = await this.handlers.handleValidateEnvConfig(args);
+            break;
+          case 'reload_env_config':
+            result = await this.handlers.handleReloadEnvConfig(args);
+            break;
+          case 'get_env_file_info':
+            result = await this.handlers.handleGetEnvFileInfo(args);
+            break;
+          
+          // User Configuration Tools (TASK-010)
           case 'get_user_config':
             result = await this.handlers.handleGetUserConfig(args);
             break;

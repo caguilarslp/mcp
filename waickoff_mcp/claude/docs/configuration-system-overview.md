@@ -1,10 +1,22 @@
-# 🌍 Sistema de Configuración - Overview Técnico
+# 🌍 Sistema de Configuración Completo - Overview Técnico
 
 ## 📋 Resumen del Sistema
 
-El sistema de configuración de wAIckoff MCP Server v1.5.0 elimina la fricción en análisis temporales mediante configuración persistente de timezone con auto-detección inteligente.
+El sistema de configuración de wAIckoff MCP Server v1.6.1 proporciona configuración completa tanto a nivel de usuario (timezone) como de sistema (.env), eliminando fricción en desarrollo y despliegue cross-platform.
 
-## 🏗️ Arquitectura del Sistema
+## 🏗️ Arquitectura Dual del Sistema
+
+### **Configuración de Usuario (TASK-010)**
+- **ConfigurationManager Service**: Configuración persistente timezone
+- **Ubicación:** `~/.waickoff/user.config.json`
+- **Scope:** Preferencias temporales y de usuario
+
+### **Configuración de Sistema (TASK-015b)**
+- **EnvironmentConfig Service**: Variables de entorno desde .env
+- **Ubicación:** Project root `.env` file
+- **Scope:** Configuraciones técnicas y de deployment
+
+## 🌐 Sistema de Configuración de Usuario
 
 ### **ConfigurationManager Service**
 - **Ubicación:** `src/services/config/configurationManager.ts`
@@ -12,21 +24,9 @@ El sistema de configuración de wAIckoff MCP Server v1.5.0 elimina la fricción 
 - **Patrón:** Singleton con cache en memoria
 - **Persistencia:** `~/.waickoff/user.config.json`
 
-### **ConfigurationHandlers**
-- **Ubicación:** `src/adapters/handlers/configurationHandlers.ts`
-- **Responsabilidad:** Handlers especializados MCP
-- **Patrón:** Delegation pattern consistente
-- **Formato:** MCPServerResponse compatible
+### **Auto-Detección de Timezone**
 
-### **Core Engine Integration**
-- **Dependency Injection:** ConfigurationManager inyectable
-- **TimezoneManager dinámico:** Basado en configuración usuario
-- **Startup loading:** Carga automática de configuración
-- **Runtime reload:** Método `reloadUserConfiguration()`
-
-## 🌐 Auto-Detección de Timezone
-
-### **Métodos de Detección (Orden de Prioridad)**
+#### **Métodos de Detección (Orden de Prioridad)**
 
 1. **Variable de Entorno TZ** (95% confianza)
    ```bash
@@ -46,21 +46,7 @@ El sistema de configuración de wAIckoff MCP Server v1.5.0 elimina la fricción 
 4. **Fallback** (50% confianza)
    - Mexico City como default seguro
 
-### **Validation Robusta**
-```javascript
-private isValidTimezone(timezone: string): boolean {
-  try {
-    Intl.DateTimeFormat(undefined, { timeZone: timezone });
-    return true;
-  } catch {
-    return false;
-  }
-}
-```
-
-## 📁 Estructura de Configuración
-
-### **Archivo: ~/.waickoff/user.config.json**
+### **Estructura de Configuración de Usuario**
 ```json
 {
   "timezone": {
@@ -83,120 +69,210 @@ private isValidTimezone(timezone: string): boolean {
 }
 ```
 
-### **Cross-Platform Paths**
-- **Linux/macOS:** `/home/user/.waickoff/user.config.json`
-- **Windows:** `C:\Users\user\.waickoff\user.config.json`
-- **Node.js:** `os.homedir() + '/.waickoff/user.config.json'`
+## 🔧 Sistema de Configuración .env (NUEVO)
+
+### **EnvironmentConfig Service**
+- **Ubicación:** `src/services/config/environmentConfig.ts`
+- **Responsabilidad:** Parser y validación de variables de entorno
+- **Patrón:** Singleton con auto-discovery
+- **Source:** Project `.env` file + system environment variables
+
+### **Auto-Discovery de .env**
+```javascript
+// Busca .env desde directorio actual hasta project root
+private findEnvFile(): string {
+  let currentDir = process.cwd();
+  const maxDepth = 10;
+  
+  for (let i = 0; i < maxDepth; i++) {
+    const envPath = path.join(currentDir, '.env');
+    if (fs.existsSync(envPath)) {
+      return envPath;
+    }
+    const parentDir = path.dirname(currentDir);
+    if (parentDir === currentDir) break;
+    currentDir = parentDir;
+  }
+  
+  return path.join(process.cwd(), '.env');
+}
+```
+
+### **Variables de Entorno Soportadas**
+
+#### **MongoDB Configuration**
+```bash
+MONGODB_CONNECTION_STRING=mongodb://localhost:27017
+```
+
+#### **API Configuration**
+```bash
+BYBIT_API_URL=https://api.bybit.com
+API_TIMEOUT=10000
+API_RETRY_ATTEMPTS=3
+```
+
+#### **Analysis Configuration**
+```bash
+ANALYSIS_SENSITIVITY=2
+ANALYSIS_PERIODS=100
+VOLUME_THRESHOLD=1.5
+```
+
+#### **Grid Configuration**
+```bash
+GRID_COUNT=10
+MIN_VOLATILITY=3
+MAX_VOLATILITY=20
+```
+
+#### **Logging Configuration**
+```bash
+LOG_LEVEL=info
+ENABLE_PERFORMANCE_TRACKING=true
+```
+
+### **Validación de Variables**
+```javascript
+validateConfig(): {
+  isValid: boolean;
+  errors: string[];
+  warnings: string[];
+} {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+
+  // Validate MongoDB connection string format
+  if (process.env.MONGODB_CONNECTION_STRING) {
+    const mongoUrl = process.env.MONGODB_CONNECTION_STRING;
+    if (!mongoUrl.startsWith('mongodb://') && !mongoUrl.startsWith('mongodb+srv://')) {
+      errors.push('MONGODB_CONNECTION_STRING must start with mongodb:// or mongodb+srv://');
+    }
+  }
+
+  // Validate numeric values
+  const numericVars = {
+    API_TIMEOUT: process.env.API_TIMEOUT,
+    API_RETRY_ATTEMPTS: process.env.API_RETRY_ATTEMPTS,
+    // ... more validations
+  };
+
+  return { isValid: errors.length === 0, errors, warnings };
+}
+```
 
 ## 🛠️ Herramientas MCP
 
-### **Core Management**
-- `get_user_config` - Configuración completa
+### **User Configuration Tools (TASK-010)**
+- `get_user_config` - Configuración completa usuario
 - `set_user_timezone` - Configurar timezone específica
 - `detect_timezone` - Auto-detectar con confianza
-
-### **Advanced Management**
 - `update_config` - Actualizar múltiples secciones
 - `reset_config` - Reset con auto-detección
 - `validate_config` - Validación con sugerencias
 - `get_config_info` - Info y opciones soportadas
 
-## 🔄 Flujo de Trabajo del Usuario
+### **System Configuration Tools (TASK-015b)**
+- `get_system_config` - Configuración completa del sistema
+- `get_mongo_config` - Estado configuración MongoDB
+- `get_api_config` - Configuración APIs externas
+- `get_analysis_config` - Parámetros análisis técnico
+- `get_grid_config` - Configuración grid trading
+- `get_logging_config` - Configuración logging y monitoreo
+- `validate_env_config` - Validación con errores y warnings
+- `reload_env_config` - Recarga en caliente
+- `get_env_file_info` - Información con template
 
-### **Primera Vez (Zero-Config)**
-1. Usuario ejecuta cualquier análisis temporal
-2. ConfigurationManager detecta ausencia de configuración
-3. Auto-detección de timezone sistema
-4. Crear configuración default con timezone detectada
-5. Guardar en `~/.waickoff/user.config.json`
-6. Análisis continúa sin fricción
+## 🔄 Flujos de Trabajo
 
-### **Cambio Manual de Timezone**
-1. Usuario ejecuta `set_user_timezone`
-2. Validación de timezone con Intl API
-3. Actualizar configuración en memoria y disco
-4. Reload TimezoneManager en Core Engine
-5. Nuevos análisis usan timezone actualizada
+### **Setup Inicial Zero-Config**
+1. Usuario ejecuta análisis por primera vez
+2. EnvironmentConfig auto-descubre .env file
+3. ConfigurationManager detecta ausencia config usuario
+4. Auto-detección timezone sistema
+5. Sistema configurado y listo para usar
 
-### **Detección Manual**
-1. Usuario ejecuta `detect_timezone`
-2. Múltiples métodos de detección
-3. Presentar resultado con confianza
-4. Usuario decide si aplicar o no
+### **Deployment Cross-Platform**
+1. Desarrollador crea .env con variables específicas
+2. EnvironmentConfig valida configuración
+3. Sistema usa variables para configuración técnica
+4. Same .env works en Windows, Linux, macOS, Docker
 
-## 🎯 Beneficios Implementados
+### **Configuration Management**
+1. `validate_env_config` verifica todas las variables
+2. `get_env_file_info` genera template si no existe
+3. `reload_env_config` aplica cambios sin restart
+4. Hot reload capability para desarrollo iterativo
 
-### **Para Usuarios**
-- **Zero-config UX:** Funciona inmediatamente
-- **Elimina friction:** No especificar timezone en requests
-- **Persistente:** Configuración entre sesiones
-- **Flexible:** Fácil cambio cuando necesario
+## 🎯 Beneficios Cross-Platform
 
 ### **Para Desarrolladores**
-- **Testeable:** Dependency injection completa
-- **Mantenible:** Arquitectura modular clara
-- **Extensible:** Fácil agregar nuevas configuraciones
-- **Cross-platform:** Soporte universal
+- **Zero-config**: Funciona out-of-the-box con defaults
+- **Cross-platform**: Mismo .env en todos los OS
+- **Template generation**: Auto-genera configuración completa
+- **Hot reload**: Cambios sin reiniciar
+- **Validation feedback**: Errores específicos con soluciones
 
 ### **Para el Sistema**
-- **Performance:** Cache en memoria con disk persistence
-- **Robusto:** Fallbacks graceful en caso de error
-- **Escalable:** Base para multi-usuario
-- **Compatible:** 100% backward compatibility
+- **Environment precedence**: System vars > .env vars
+- **Error resilience**: Funciona sin .env file
+- **Production ready**: Configuración segura por defecto
+- **No dependencies**: Parser manual sin librerías externas
+
+### **Para Deployment**
+- **Docker compatible**: Variables via -e flags o .env
+- **CI/CD ready**: Funciona con environment variables
+- **Kubernetes ready**: ConfigMaps y Secrets support
+- **Development friendly**: Diferentes .env por entorno
 
 ## 🔧 Error Handling
 
-### **Estrategia de Fallbacks**
-1. **Config Loading Error:** Crear configuración default
-2. **Timezone Detection Error:** Usar Mexico City fallback
-3. **File Write Error:** Continuar con configuración en memoria
-4. **Validation Error:** Revertir a último estado válido
-
-### **Logging Estructurado**
+### **Environment Config Errors**
 ```javascript
-this.logger.info('User configuration loaded successfully', {
-  timezone: userConfig.timezone.default,
-  autoDetect: userConfig.timezone.autoDetect,
-  version: userConfig.version
-});
+if (!this.hasEnvFile()) {
+  this.logger.warn('.env file not found:', this.envFilePath);
+  // Continue with system environment variables
+  return;
+}
 ```
 
-## 🚀 Preparación Futura
-
-### **FastAPI Integration Ready**
-- Middleware de timezone especificado
-- Session management patterns definidos
-- Multi-user architecture preparada
-
-### **Database Migration Path**
-- Estructura JSON compatible con NoSQL
-- User ID patterns preparados
-- Configuration versioning implementado
+### **Validation Errors**
+```javascript
+validateConfig(): ValidationResult {
+  try {
+    // Comprehensive validation logic
+    return { isValid: true, errors: [], warnings: [] };
+  } catch (error) {
+    return {
+      isValid: false,
+      errors: [`Configuration validation failed: ${error}`],
+      warnings: []
+    };
+  }
+}
+```
 
 ## 📊 Métricas de Implementación
 
+### **TASK-010 (User Configuration)**
 - **Tiempo de desarrollo:** 4h
+- **Herramientas MCP:** 7
 - **Archivos creados:** 3
-- **Archivos modificados:** 4
-- **Herramientas MCP agregadas:** 7
-- **Líneas de código:** ~800 líneas
-- **Cobertura de tests:** Preparada para implementar
+- **Funcionalidad:** Timezone persistente con auto-detección
 
-## 🔍 Testing Strategy
+### **TASK-015b (System Configuration)**
+- **Tiempo de desarrollo:** 2h
+- **Herramientas MCP:** 9
+- **Archivos creados:** 2
+- **Funcionalidad:** .env cross-platform con validación
 
-### **Unit Tests Preparados**
-- ConfigurationManager methods
-- Auto-detection algorithms
-- Validation logic
-- Error handling scenarios
-
-### **Integration Tests**
-- MCP handlers responses
-- Core Engine integration
-- Cross-platform compatibility
-- File system operations
+### **Total Sistema Configuración**
+- **Herramientas MCP totales:** 16
+- **Variables soportadas:** 11
+- **Validation rules:** 15+
+- **Cross-platform support:** Windows, Linux, macOS, Docker
 
 ---
 
-**Sistema de Configuración v1.5.0**  
-*Eliminando friction temporal desde el primer uso*
+**Sistema de Configuración Completo v1.6.1**  
+*Zero-config UX + Cross-platform deployment ready*

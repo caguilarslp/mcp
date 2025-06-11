@@ -694,6 +694,9 @@ export interface IConfigurationManager {
 // Re-export ConfigurationManager class
 export { ConfigurationManager } from '../services/config/configurationManager.js';
 
+// Re-export EnvironmentConfig class
+export { EnvironmentConfig, environmentConfig } from '../services/config/environmentConfig.js';
+
 // ====================
 // EXPORT ALL TYPES
 // ====================

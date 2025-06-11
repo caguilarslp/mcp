@@ -12,6 +12,7 @@ import { AnalysisRepositoryHandlers } from './handlers/analysisRepositoryHandler
 import { ReportGeneratorHandlers } from './handlers/reportGeneratorHandlers.js';
 import { CacheHandlers } from './cacheHandlers.js';
 import { ConfigurationHandlers } from './handlers/configurationHandlers.js';
+import { SystemConfigurationHandlers } from './handlers/systemConfigurationHandlers.js';
 import { HistoricalAnalysisHandlers } from './handlers/historicalAnalysisHandlers.js';
 import { HybridStorageHandlers } from './handlers/hybridStorageHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
@@ -25,6 +26,7 @@ export class MCPHandlers {
   private readonly reportGeneratorHandlers: ReportGeneratorHandlers;
   private readonly cacheHandlers: CacheHandlers;
   private readonly configurationHandlers: ConfigurationHandlers;
+  private readonly systemConfigurationHandlers: SystemConfigurationHandlers;
   private readonly historicalAnalysisHandlers: HistoricalAnalysisHandlers;
   private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
@@ -42,6 +44,7 @@ export class MCPHandlers {
     this.reportGeneratorHandlers = new ReportGeneratorHandlers(engine, this.logger);
     this.cacheHandlers = new CacheHandlers(engine);
     this.configurationHandlers = new ConfigurationHandlers(engine.getConfigurationManager());
+    this.systemConfigurationHandlers = new SystemConfigurationHandlers();
     this.historicalAnalysisHandlers = new HistoricalAnalysisHandlers(
       engine.historicalDataService,
       engine.historicalAnalysisService,
@@ -969,6 +972,46 @@ export class MCPHandlers {
       return this.createErrorResponse('hybrid_storage_disabled', new Error('Hybrid storage not enabled'));
     }
     return await this.hybridStorageHandlers.handleGetEvaluationReport();
+  }
+
+  // ====================
+  // SYSTEM CONFIGURATION HANDLERS (DELEGATED)
+  // ====================
+
+  async handleGetSystemConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleGetSystemConfig();
+  }
+
+  async handleGetMongoConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleGetMongoConfig();
+  }
+
+  async handleGetApiConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleGetApiConfig();
+  }
+
+  async handleGetAnalysisConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleGetAnalysisConfig();
+  }
+
+  async handleGetGridConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleGetGridConfig();
+  }
+
+  async handleGetLoggingConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleGetLoggingConfig();
+  }
+
+  async handleValidateEnvConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleValidateEnvConfig();
+  }
+
+  async handleReloadEnvConfig(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleReloadEnvConfig();
+  }
+
+  async handleGetEnvFileInfo(args: any): Promise<MCPServerResponse> {
+    return await this.systemConfigurationHandlers.handleGetEnvFileInfo();
   }
 
   // ====================

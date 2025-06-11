@@ -118,7 +118,45 @@
 - **Beneficios:** Evitar pérdidas por movimientos falsos, mejorar timing
 - **ROI Esperado:** 15-25% mejora en trading performance
 
-#### 🗃️ TASK-015 - Dual Storage Pattern (MongoDB Experimental)
+#### ✅ TASK-015b - Soporte .env Cross-Platform (COMPLETADA)
+- **Estado:** ✅ COMPLETADA
+- **Fecha completada:** 11/06/2025
+- **Descripción:** Sistema completo de soporte para archivos .env cross-platform
+- **Prioridad:** **ALTA** (Crítico para configuración multi-entorno)
+- **Tiempo Real:** 2h (implementación completa con 9 herramientas MCP)
+- **Componentes implementados:**
+  - ✅ **EnvironmentConfig service**: Parser manual de .env sin dependencias externas
+  - ✅ **Auto-discovery**: Búsqueda automática de .env desde directorio actual hasta project root
+  - ✅ **SystemConfigurationHandlers**: 9 nuevas herramientas MCP especializadas
+  - ✅ **Cross-platform support**: Funciona en Windows, Linux, macOS, Docker, CI/CD
+  - ✅ **Validación completa**: 15+ reglas de validación con feedback específico
+  - ✅ **Hot reload capability**: Recarga de configuración sin reiniciar
+  - ✅ **Template generation**: Genera template completo con documentación inline
+- **Herramientas MCP agregadas:**
+  - `get_system_config` - Configuración completa del sistema desde variables de entorno
+  - `get_mongo_config` - Estado de configuración MongoDB con recomendaciones
+  - `get_api_config` - Configuración de APIs externas (Bybit, timeouts, reintentos)
+  - `get_analysis_config` - Parámetros de análisis técnico configurables
+  - `get_grid_config` - Configuración de grid trading personalizable
+  - `get_logging_config` - Configuración de logging y monitoreo
+  - `validate_env_config` - Validación completa con errores y warnings
+  - `reload_env_config` - Recarga de configuración en caliente
+  - `get_env_file_info` - Información detallada del archivo .env con template
+- **Variables de entorno soportadas:**
+  - MongoDB: MONGODB_CONNECTION_STRING
+  - API Config: BYBIT_API_URL, API_TIMEOUT, API_RETRY_ATTEMPTS
+  - Analysis Config: ANALYSIS_SENSITIVITY, ANALYSIS_PERIODS, VOLUME_THRESHOLD
+  - Grid Config: GRID_COUNT, MIN_VOLATILITY, MAX_VOLATILITY
+  - Logging Config: LOG_LEVEL, ENABLE_PERFORMANCE_TRACKING
+- **Beneficios logrados:**
+  - Zero-config experience: Funciona out-of-the-box con valores por defecto
+  - Cross-platform deployment: Mismo .env funciona en todos los entornos
+  - Template generation: Auto-genera configuración completa documentada
+  - Hot reload: Cambios sin reiniciar el sistema
+  - Environment precedence: Variables del sistema toman precedencia
+- **Resultado:** Sistema configuración cross-platform 100% operativo sin dependencias externas
+
+#### ✅ TASK-015 - Dual Storage MongoDB experimental (COMPLETADA)
 - **Estado:** NUEVO - Experimental en paralelo
 - **Descripción:** Implementar dual storage (JSON + MongoDB) como experimento
 - **Prioridad:** **BAJA** (Experimental, no crítico)

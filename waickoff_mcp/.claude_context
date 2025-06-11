@@ -1,14 +1,14 @@
 # 🤖 Contexto para Claude/Cursor - wAIckoff MCP Server v1.5.0 (PRODUCTION READY + CONFIGURATION SYSTEM)
 
-## 🎆 ESTADO CRÍTICO v1.5.0 - TASK-010 CONFIGURACIÓN TIMEZONE COMPLETADA
-**✅ SISTEMA CONFIGURACIÓN PERSISTENTE**: Sistema completo de configuración de usuario implementado
-**✅ AUTO-DETECCIÓN TIMEZONE**: Múltiples métodos de detección inteligente cross-platform
-**✅ 7 NUEVAS HERRAMIENTAS MCP**: Sistema completo de gestión de configuración
-**✅ FRICTION-FREE UX**: Elimina necesidad de especificar timezone en cada request
-**✅ FASTAPI READY**: Base sólida para integración multi-usuario
-**🎯 SISTEMA COMPLETO**: Análisis → Almacenamiento → Reportes → Tests → Configuración funcionando
+## 🎆 ESTADO CRÍTICO v1.6.1 - TASK-015b SOPORTE .ENV CROSS-PLATFORM COMPLETADA
+**✅ SISTEMA CONFIGURACIÓN .ENV**: Sistema completo de configuración desde .env implementado
+**✅ CROSS-PLATFORM SUPPORT**: Funciona en Windows, Linux, macOS, Docker, CI/CD
+**✅ 9 NUEVAS HERRAMIENTAS MCP**: Sistema completo de gestión de configuración del sistema
+**✅ ZERO-CONFIG UX**: Funciona out-of-the-box con auto-discovery y valores por defecto
+**✅ HOT RELOAD**: Recarga de configuración sin reiniciar el sistema
+**🎯 SISTEMA COMPLETO**: Análisis → Almacenamiento → Reportes → Tests → Configuración → Histórico → Sistema Config funcionando
 **✅ COMPILACIÓN EXITOSA**: `npm run build` sin errores - sistema robusto y expandible
-**🚀 PRODUCTION READY**: Sistema listo para producción con todas las features + configuración
+**🚀 PRODUCTION READY**: Sistema listo para producción con configuración cross-platform completa
 
 ## IMPORTANTE: Leer ANTES de dar cualquier sugerencia
 
