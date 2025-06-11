@@ -132,7 +132,110 @@ get_complete_analysis BTCUSDT investment=1000
 
 ---
 
-## 🎯 Herramientas de Detección de Trampas (NUEVO!)
+## 🎯 Herramientas de Análisis Wyckoff Básico (NUEVO!)
+
+### `analyze_wyckoff_phase`
+Analiza la fase actual de Wyckoff para análisis de estructura de mercado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal de análisis ('15', '30', '60', '240', 'D'). Default: '60'
+- `lookback` (opcional): Número de períodos a analizar (50-200). Default: 100
+
+**Ejemplo:**
+```
+analyze_wyckoff_phase BTCUSDT timeframe=240 lookback=150
+```
+
+**Respuesta incluye:**
+- Fase actual de Wyckoff (acumulación/distribución A-E, markup/markdown)
+- Confianza en la identificación de fase
+- Progreso dentro de la fase actual
+- Rango de trading detectado
+- Eventos clave identificados
+- Características de volumen
+- Interpretación y bias del mercado
+
+### `detect_trading_range`
+Detecta rangos de trading para análisis de acumulación/distribución.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('15', '30', '60', '240', 'D'). Default: '60'
+- `minPeriods` (opcional): Períodos mínimos para rango válido (10-50). Default: 20
+
+**Ejemplo:**
+```
+detect_trading_range ETHUSDT minPeriods=30
+```
+
+### `find_wyckoff_events`
+Busca eventos Wyckoff (springs, upthrusts, tests) en datos de mercado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `eventTypes` (opcional): Tipos de eventos a detectar. Default: ['spring', 'upthrust', 'test']
+- `lookback` (opcional): Períodos a analizar. Default: 100
+
+**Ejemplo:**
+```
+find_wyckoff_events BTCUSDT eventTypes=["spring","test"] lookback=200
+```
+
+### `analyze_wyckoff_volume`
+Analiza características de volumen en contexto Wyckoff.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `lookback` (opcional): Períodos a analizar. Default: 100
+
+**Ejemplo:**
+```
+analyze_wyckoff_volume BTCUSDT timeframe=240
+```
+
+### `get_wyckoff_interpretation`
+Obtiene interpretación comprehensiva del análisis Wyckoff y bias.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+get_wyckoff_interpretation ETHUSDT timeframe=240
+```
+
+### `track_phase_progression`
+Realiza seguimiento de progresión y timeline de desarrollo de fases Wyckoff.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+track_phase_progression BTCUSDT
+```
+
+### `validate_wyckoff_setup`
+Valida setup de trading Wyckoff con evaluación de riesgo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `tradingDirection` (opcional): Dirección de trading ('long', 'short')
+
+**Ejemplo:**
+```
+validate_wyckoff_setup BTCUSDT tradingDirection=long
+```
+
+---
+
+## 🎯 Herramientas de Detección de Trampas
 
 ### `detect_bull_trap`
 Detecta trampas alcistas (falsas rupturas sobre resistencia).
@@ -559,21 +662,28 @@ invalidate_cache BTCUSDT
 
 ### Para Trading
 1. Usa `get_complete_analysis` para obtener una visión general rápida
-2. Combina `detect_bull_trap` y `detect_bear_trap` para evitar falsas señales
-3. Utiliza `analyze_volume_delta` para confirmar movimientos de precio
-4. Revisa `identify_support_resistance` antes de establecer niveles de grid
+2. **NUEVO:** Comienza con `analyze_wyckoff_phase` para entender la estructura de mercado
+3. Combina `detect_bull_trap` y `detect_bear_trap` para evitar falsas señales
+4. **NUEVO:** Usa `find_wyckoff_events` para identificar springs y upthrusts como puntos de entrada
+5. Utiliza `analyze_volume_delta` para confirmar movimientos de precio
+6. **NUEVO:** Valida setups con `validate_wyckoff_setup` antes de entrar en posición
+7. Revisa `identify_support_resistance` antes de establecer niveles de grid
 
 ### Para Análisis
 1. Comienza con `perform_technical_analysis` para análisis completo
-2. Usa `get_historical_summary` para contexto de largo plazo
-3. Identifica patrones con `identify_volume_anomalies`
-4. Valida breakouts con `validate_breakout` antes de tomar decisiones
+2. **NUEVO:** Complementa con `analyze_wyckoff_phase` para estructura de mercado
+3. Usa `get_historical_summary` para contexto de largo plazo
+4. **NUEVO:** Combina `detect_trading_range` con `analyze_wyckoff_volume` para confirmar fases
+5. Identifica patrones con `identify_volume_anomalies`
+6. **NUEVO:** Usa `get_wyckoff_interpretation` para entender implicaciones de la fase actual
+7. Valida breakouts con `validate_breakout` antes de tomar decisiones
 
 ### Para Monitoreo
 1. Revisa `get_system_health` periódicamente
-2. Usa `get_trap_statistics` para evaluar efectividad
-3. Genera reportes diarios con `generate_daily_report`
-4. Mantén el rendimiento con `get_cache_stats`
+2. **NUEVO:** Usa `track_phase_progression` para seguir el desarrollo de fases Wyckoff
+3. Usa `get_trap_statistics` para evaluar efectividad
+4. Genera reportes diarios con `generate_daily_report`
+5. Mantén el rendimiento con `get_cache_stats`
 
 ---
 
@@ -584,6 +694,9 @@ invalidate_cache BTCUSDT
 - Los tiempos están en UTC por defecto (configurable con timezone)
 - El sistema guarda automáticamente los análisis para referencia futura
 - La detección de trampas usa múltiples señales para mayor precisión
+- **NUEVO:** El análisis Wyckoff identifica 15 fases diferentes con eventos clave
+- **NUEVO:** Los springs y upthrusts se detectan automáticamente con scoring de significancia
+- **NUEVO:** El sistema de validación Wyckoff evalúa setups con puntuación 0-100
 
 ---
 
@@ -597,4 +710,5 @@ Si encuentras problemas:
 
 ---
 
-*Versión: 1.6.2 - Actualizado: 11/06/2025*
+*Versión: 1.6.4 - Actualizado: 11/06/2025*
+*Última actualización: Sistema Wyckoff Básico - 7 nuevas herramientas de análisis*

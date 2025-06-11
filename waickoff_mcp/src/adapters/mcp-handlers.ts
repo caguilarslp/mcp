@@ -16,6 +16,7 @@ import { SystemConfigurationHandlers } from './handlers/systemConfigurationHandl
 import { HistoricalAnalysisHandlers } from './handlers/historicalAnalysisHandlers.js';
 import { HybridStorageHandlers } from './handlers/hybridStorageHandlers.js';
 import { TrapDetectionHandlers } from './handlers/trapDetectionHandlers.js';
+import { WyckoffBasicHandlers } from './handlers/wyckoffBasicHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -30,6 +31,7 @@ export class MCPHandlers {
   private readonly systemConfigurationHandlers: SystemConfigurationHandlers;
   private readonly historicalAnalysisHandlers: HistoricalAnalysisHandlers;
   private readonly trapDetectionHandlers: TrapDetectionHandlers;
+  private readonly wyckoffBasicHandlers: WyckoffBasicHandlers;
   private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
@@ -53,6 +55,7 @@ export class MCPHandlers {
       engine.historicalCacheService
     );
     this.trapDetectionHandlers = new TrapDetectionHandlers(engine.trapDetectionService);
+    this.wyckoffBasicHandlers = new WyckoffBasicHandlers(engine);
     
     // Initialize Hybrid Storage Handlers if available (TASK-015)
     if (engine.hybridStorageService) {
@@ -62,7 +65,8 @@ export class MCPHandlers {
 
     this.logger.info('MCP Handlers initialized with modular architecture', {
       hybridStorageEnabled: !!engine.hybridStorageService,
-      trapDetectionEnabled: true
+      trapDetectionEnabled: true,
+      wyckoffBasicEnabled: true
     });
   }
 
@@ -1048,6 +1052,38 @@ export class MCPHandlers {
 
   async handleGetTrapPerformance(args: any): Promise<MCPServerResponse> {
     return await this.trapDetectionHandlers.handleGetTrapPerformance(args);
+  }
+
+  // ====================
+  // WYCKOFF BASIC HANDLERS (TASK-005) - DELEGATED
+  // ====================
+
+  async handleAnalyzeWyckoffPhase(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffBasicHandlers.handleAnalyzeWyckoffPhase(args);
+  }
+
+  async handleDetectTradingRange(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffBasicHandlers.handleDetectTradingRange(args);
+  }
+
+  async handleFindWyckoffEvents(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffBasicHandlers.handleFindWyckoffEvents(args);
+  }
+
+  async handleAnalyzeWyckoffVolume(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffBasicHandlers.handleAnalyzeWyckoffVolume(args);
+  }
+
+  async handleGetWyckoffInterpretation(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffBasicHandlers.handleGetWyckoffInterpretation(args);
+  }
+
+  async handleTrackPhaseProgression(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffBasicHandlers.handleTrackPhaseProgression(args);
+  }
+
+  async handleValidateWyckoffSetup(args: any): Promise<MCPServerResponse> {
+    return await this.wyckoffBasicHandlers.handleValidateWyckoffSetup(args);
   }
 
   // ====================

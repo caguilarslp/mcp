@@ -28,6 +28,8 @@
 - `claude/docs/architecture/system-overview.md` - **NUEVA** arquitectura completa
 - `claude/docs/api/tools-reference.md` - **NUEVA** referencia de API
 - `claude/docs/troubleshooting/common-issues.md` - **NUEVA** guía de resolución
+- `claude/docs/user-guide.md` - **UBICACIÓN OFICIAL** Guía completa de usuario v1.6.4
+- `claude/docs/task-005-wyckoff-basic-complete.md` - **NUEVA** documentación Wyckoff Básico
 - `claude/docs/task-005-auto-save-system.md` - **NUEVA** documentación auto-save
 - `claude/docs/task-009-storage-system-complete.md` - **NUEVA** documentación storage completo
 - `claude/docs/timezone-system.md` - **NUEVA** documentación sistema timezone

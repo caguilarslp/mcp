@@ -8,6 +8,43 @@
 
 ### **🔥 ALTA PRIORIDAD (Esta Semana)**
 
+#### ✅ TASK-005 - Detección Wyckoff Básica (COMPLETADA)
+- **Estado:** ✅ COMPLETADA
+- **Fecha completada:** 11/06/2025
+- **Descripción:** Implementar sistema básico de análisis Wyckoff para detección de fases y eventos
+- **Prioridad:** **ALTA** (Base fundamental para análisis avanzados)
+- **Tiempo Real:** 6h (implementación completa)
+- **Componentes implementados:**
+  - ✅ **WyckoffBasicService completo**: Análisis de fases, trading ranges, springs, upthrusts, tests
+  - ✅ **15 fases Wyckoff identificadas**: Acumulación A-E, Distribución A-E, Markup, Markdown, etc.
+  - ✅ **Algoritmos de detección avanzados**: Spring, upthrust, test events con scoring
+  - ✅ **Volume context analysis**: Climax events, dry-up periods, trend analysis
+  - ✅ **WyckoffBasicHandlers especializados**: 7 handlers MCP con validation completa
+  - ✅ **Integración Core Engine**: Inyección de dependencias y métodos públicos
+  - ✅ **7 herramientas MCP**: analyze_wyckoff_phase, detect_trading_range, find_wyckoff_events, etc.
+  - ✅ **Sistema modular completo**: Registry, handlers, routing integrado
+  - ✅ **Pattern storage**: Integración con Analysis Repository para almacenamiento
+  - ✅ **Performance monitoring**: Métricas y logging integrados
+- **Beneficios logrados:**
+  - **Identificación temprana de acumulación/distribución**: Detecta antes que mercado salga del rango
+  - **Mejor timing de entrada**: Springs y tests dan puntos de entrada precisos
+  - **Base sólida para análisis avanzado**: Fundamento para TASK-018 (Wyckoff Avanzado)
+  - **Modular integration**: Perfectamente integrado con arquitectura existente
+  - **Educational value**: Interpretaciones claras de cada fase y evento
+- **Archivos creados:**
+  - `src/services/wyckoffBasic.ts` - Servicio principal (1,200+ líneas)
+  - `src/adapters/handlers/wyckoffBasicHandlers.ts` - Handlers MCP (600+ líneas)
+  - `src/adapters/tools/wyckoffBasicTools.ts` - Definiciones de herramientas
+  - `claude/tasks/task-005-wyckoff-basic-completed.md` - Documentación técnica
+- **Algoritmos implementados:**
+  - **Trading Range Detection**: Consolidación con <25% rango, 70% períodos válidos
+  - **Spring Detection**: Penetración bajo soporte + recuperación rápida + scoring
+  - **Upthrust Detection**: Penetración sobre resistencia + rechazo rápido + scoring
+  - **Test Event Detection**: Proximidad a niveles clave + quality assessment
+  - **Volume Context**: Climax (>3x avg), dry-up (<50% avg), trend analysis
+  - **Phase Classification**: Context-based con progressive scoring A→B→C
+- **Resultado:** Sistema Wyckoff básico 100% operativo, base sólida para análisis avanzados
+
 #### ✅ TASK-018 - Modularización Completa MCP Adapter (COMPLETADA)
 - **Estado:** ✅ COMPLETADA
 - **Fecha completada:** 11/06/2025
@@ -234,17 +271,42 @@
 - **APIs:** Etherscan, CoinGecko, WhaleAlert, Glassnode
 - **Beneficios:** Early signals, anticipar movimientos grandes
 
-#### 📋 TASK-005 - Detección Wyckoff Básica
-- **Descripción:** Identificar fases de acumulación/distribución
-- **Prioridad:** Media
-- **Estimado:** 6h
-- **Dependencias:** ✅ TASK-002 completada (S/R necesarios)
-- **Preparación:** ✅ AnalysisRepositoryHandlers listos para patterns
-- **Detalles:**
-  - Detectar rangos de consolidación
-  - Analizar volumen en el rango
-  - Identificar springs/upthrusts
-  - Storage automático de patterns detectados
+#### ✅ TASK-005 - Detección Wyckoff Básica (COMPLETADA)
+- **Estado:** ✅ COMPLETADA
+- **Fecha completada:** 11/06/2025
+- **Descripción:** Implementar sistema básico de análisis Wyckoff para detección de fases y eventos
+- **Prioridad:** **ALTA** (Base fundamental para análisis avanzados)
+- **Tiempo Real:** 6h (implementación completa)
+- **Componentes implementados:**
+  - ✅ **WyckoffBasicService completo**: Análisis de fases, trading ranges, springs, upthrusts, tests
+  - ✅ **15 fases Wyckoff identificadas**: Acumulación A-E, Distribución A-E, Markup, Markdown, etc.
+  - ✅ **Algoritmos de detección avanzados**: Spring, upthrust, test events con scoring
+  - ✅ **Volume context analysis**: Climax events, dry-up periods, trend analysis
+  - ✅ **WyckoffBasicHandlers especializados**: 7 handlers MCP con validation completa
+  - ✅ **Integración Core Engine**: Inyección de dependencias y métodos públicos
+  - ✅ **7 herramientas MCP**: analyze_wyckoff_phase, detect_trading_range, find_wyckoff_events, etc.
+  - ✅ **Sistema modular completo**: Registry, handlers, routing integrado
+  - ✅ **Pattern storage**: Integración con Analysis Repository para almacenamiento
+  - ✅ **Performance monitoring**: Métricas y logging integrados
+- **Beneficios logrados:**
+  - **Identificación temprana de acumulación/distribución**: Detecta antes que mercado salga del rango
+  - **Mejor timing de entrada**: Springs y tests dan puntos de entrada precisos
+  - **Base sólida para análisis avanzado**: Fundamento para TASK-018 (Wyckoff Avanzado)
+  - **Modular integration**: Perfectamente integrado con arquitectura existente
+  - **Educational value**: Interpretaciones claras de cada fase y evento
+- **Archivos creados:**
+  - `src/services/wyckoffBasic.ts` - Servicio principal (1,200+ líneas)
+  - `src/adapters/handlers/wyckoffBasicHandlers.ts` - Handlers MCP (600+ líneas)
+  - `src/adapters/tools/wyckoffBasicTools.ts` - Definiciones de herramientas
+  - `claude/docs/task-005-wyckoff-basic-complete.md` - Documentación técnica completa
+- **Algoritmos implementados:**
+  - **Trading Range Detection**: Consolidación con <25% rango, 70% períodos válidos
+  - **Spring Detection**: Penetración bajo soporte + recuperación rápida + scoring
+  - **Upthrust Detection**: Penetración sobre resistencia + rechazo rápida + scoring
+  - **Test Event Detection**: Proximidad a niveles clave + quality assessment
+  - **Volume Context**: Climax (>3x avg), dry-up (<50% avg), trend analysis
+  - **Phase Classification**: Context-based con progressive scoring A→B→C
+- **Resultado:** Sistema Wyckoff básico 100% operativo, base sólida para análisis avanzados
 
 #### 📋 TASK-006 - Order Flow Imbalance
 - **Descripción:** Detectar desequilibrios en orderbook

@@ -19,6 +19,7 @@ import { envConfigTools } from './envConfigTools.js';
 import { historicalTools } from './historicalTools.js';
 import { hybridStorageTools } from './hybridStorageTools.js';
 import { trapDetectionTools } from './trapDetectionTools.js';
+import { wyckoffBasicTools } from './wyckoffBasicTools.js';
 
 // Tool Registry Map for O(1) lookup
 export const toolRegistry = new Map<string, ToolDefinition>();
@@ -33,6 +34,7 @@ const allToolCategories = [
   // Advanced Analysis Features
   { name: 'Historical Analysis', tools: historicalTools },
   { name: 'Trap Detection', tools: trapDetectionTools },
+  { name: 'Wyckoff Basic Analysis', tools: wyckoffBasicTools },
   
   // Data Management
   { name: 'Analysis Repository', tools: repositoryTools },

@@ -69,6 +69,7 @@ import { HistoricalAnalysisService } from '../services/historicalAnalysis.js';
 import { HistoricalCacheService } from '../services/historicalCache.js';
 import { HybridStorageService } from '../services/storage/hybridStorageService.js';
 import { TrapDetectionService } from '../services/trapDetection.js';
+import { WyckoffBasicService, type IWyckoffBasicService } from '../services/wyckoffBasic.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -113,6 +114,9 @@ export class MarketAnalysisEngine {
   // Trap detection service (TASK-012)
   public readonly trapDetectionService: ITrapDetectionService;
   
+  // Wyckoff Basic service (TASK-005)
+  public readonly wyckoffBasicService: IWyckoffBasicService;
+  
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
   
@@ -130,7 +134,8 @@ export class MarketAnalysisEngine {
     timezoneConfig?: Partial<TimezoneConfig>,
     configurationManager?: ConfigurationManager,
     hybridStorageService?: HybridStorageService,
-    trapDetectionService?: ITrapDetectionService
+    trapDetectionService?: ITrapDetectionService,
+    wyckoffBasicService?: IWyckoffBasicService
   ) {
     this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
@@ -207,13 +212,21 @@ export class MarketAnalysisEngine {
       this.analysisService
     );
     
-    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator and Trap Detection', {
+    // Initialize Wyckoff Basic service (TASK-005)
+    this.wyckoffBasicService = wyckoffBasicService || new WyckoffBasicService(
+      this.marketDataService,
+      this.analysisService,
+      this.historicalAnalysisService
+    );
+    
+    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator, Trap Detection and Wyckoff Basic', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
       repositoryEnabled: true,
       reportGeneratorEnabled: true,
       configurationManagerEnabled: true,
-      trapDetectionEnabled: true
+      trapDetectionEnabled: true,
+      wyckoffBasicEnabled: true
     });
   }
 
@@ -653,6 +666,55 @@ export class MarketAnalysisEngine {
    */
   getTrapDetectionPerformanceMetrics(): PerformanceMetrics[] {
     return this.trapDetectionService.getPerformanceMetrics();
+  }
+
+  // ====================
+  // WYCKOFF BASIC METHODS (TASK-005)
+  // ====================
+
+  /**
+   * Analyze Wyckoff phase for a symbol
+   */
+  async analyzeWyckoffPhase(
+    symbol: string,
+    timeframe: string = '60',
+    lookback: number = 100
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('analyzeWyckoffPhase', async () => {
+      try {
+        const result = await this.wyckoffBasicService.analyzeWyckoffPhase(symbol, timeframe, lookback);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to analyze Wyckoff phase for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to analyze Wyckoff phase: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Detect trading range for Wyckoff analysis
+   */
+  async detectTradingRange(
+    symbol: string,
+    timeframe: string = '60',
+    minPeriods: number = 20
+  ): Promise<ApiResponse<any>> {
+    return this.performanceMonitor.measure('detectTradingRange', async () => {
+      try {
+        const result = await this.wyckoffBasicService.detectTradingRange(symbol, timeframe, minPeriods);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to detect trading range for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to detect trading range: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get Wyckoff Basic service performance metrics
+   */
+  getWyckoffBasicPerformanceMetrics(): PerformanceMetrics[] {
+    return this.wyckoffBasicService.getPerformanceMetrics();
   }
 
   // ====================

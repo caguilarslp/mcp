@@ -109,6 +109,15 @@ export class HandlerRegistry {
     this.register('configure_trap_detection', (args) => this.mcpHandlers.handleConfigureTrapDetection(args));
     this.register('validate_breakout', (args) => this.mcpHandlers.handleValidateBreakout(args));
     this.register('get_trap_performance', (args) => this.mcpHandlers.handleGetTrapPerformance(args));
+
+    // Wyckoff Basic Analysis Tools (TASK-005)
+    this.register('analyze_wyckoff_phase', (args) => this.mcpHandlers.handleAnalyzeWyckoffPhase(args));
+    this.register('detect_trading_range', (args) => this.mcpHandlers.handleDetectTradingRange(args));
+    this.register('find_wyckoff_events', (args) => this.mcpHandlers.handleFindWyckoffEvents(args));
+    this.register('analyze_wyckoff_volume', (args) => this.mcpHandlers.handleAnalyzeWyckoffVolume(args));
+    this.register('get_wyckoff_interpretation', (args) => this.mcpHandlers.handleGetWyckoffInterpretation(args));
+    this.register('track_phase_progression', (args) => this.mcpHandlers.handleTrackPhaseProgression(args));
+    this.register('validate_wyckoff_setup', (args) => this.mcpHandlers.handleValidateWyckoffSetup(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

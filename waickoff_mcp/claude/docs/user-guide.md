@@ -1,1029 +1,714 @@
-# 📊 Guía de Uso wAIckoff MCP v1.6.1 - Trading Analysis + Configuration System
+# 📚 wAIckoff MCP User Guide
 
-## 🎯 Para qué sirve este MCP
+## 🎯 Guía Completa de Herramientas MCP
 
-El **wAIckoff MCP v1.6.1** es tu herramienta de análisis técnico profesional integrada en Claude Desktop que te proporciona:
-
-- **Análisis técnico completo** en segundos con auto-guardado
-- **🆕 Análisis histórico avanzado** - 3+ años de datos con patrones identificados
-- **🆕 Sistema de configuración cross-platform** - .env support + timezone management
-- **Sugerencias de grid trading** basadas en volatilidad y S/R
-- **Detección de divergencias** precio/volumen
-- **Niveles de soporte/resistencia dinámicos** con scoring avanzado
-- **Volume Delta** para presión compradora/vendedora
-- **Datos de mercado en tiempo real** de Bybit con cache inteligente
-- **Sistema de almacenamiento avanzado** con búsqueda histórica
-- **Repositorio de análisis** con consultas complejas
-- **Generación de reportes** automáticos diarios/semanales
-- **Cache inteligente** con invalidación granular
-- **🆕 Historical Support/Resistance** con scoring por toques históricos
-- **🆕 Volume Anomaly Detection** - Eventos significativos históricos
-- **🆕 Market Cycle Analysis** - Patrones cíclicos y estacionales
-- **🆕 Environment Configuration** - Cross-platform deployment ready
-
-## 🚀 Setup Rápido
-
-### **1. Verificar que Claude Desktop esté configurado**
-El MCP ya está configurado en tu Claude Desktop. Para verificar:
-
-1. Abre Claude Desktop
-2. Deberías ver herramientas MCP disponibles automáticamente
-3. Si no aparecen, el MCP se recarga automáticamente
-
-### **2. Comandos Básicos para Trading**
-
-### **🆕 Sistema de Configuración Cross-Platform (NUEVO TASK-015b)**
-
-#### `get_system_config` - **Configuración Completa del Sistema**
-```
-Uso: get_system_config
-```
-**Lo que obtienes:**
-- Configuración completa desde variables de entorno
-- Estado del archivo .env y variables cargadas
-- Configuración de MongoDB, APIs, análisis, grid y logging
-- Información de compatibilidad cross-platform
-
-**Cuándo usarla:** Verificar configuración del sistema, troubleshooting de deployment
-
-#### `get_mongo_config` - **Estado MongoDB**
-```
-Uso: get_mongo_config
-```
-**Lo que obtienes:**
-- Estado de conexión MongoDB (configurada/no configurada)
-- Recomendaciones para habilitar dual storage
-- Variables de entorno necesarias
-- Guía rápida de setup
-
-**Cuándo usarla:** Setup de MongoDB, verificar dual storage status
-
-#### `get_api_config` - **Configuración APIs Externas**
-```
-Uso: get_api_config
-```
-**Lo que obtienes:**
-- URL de Bybit API y configuración de timeouts
-- Número de reintentos configurado
-- Recomendaciones de optimización
-- Variables: BYBIT_API_URL, API_TIMEOUT, API_RETRY_ATTEMPTS
-
-**Cuándo usarla:** Optimizar performance de APIs, troubleshooting de conexión
-
-#### `get_analysis_config` - **Parámetros de Análisis Técnico**
-```
-Uso: get_analysis_config
-```
-**Lo que obtienes:**
-- Sensibilidad de detección de pivots (1-5)
-- Número de períodos para análisis
-- Threshold de volume spikes
-- Variables: ANALYSIS_SENSITIVITY, ANALYSIS_PERIODS, VOLUME_THRESHOLD
-- Recomendaciones para diferentes estrategias
-
-**Cuándo usarla:** Optimizar parámetros de análisis para tu estilo de trading
-
-#### `get_grid_config` - **Configuración Grid Trading**
-```
-Uso: get_grid_config
-```
-**Lo que obtienes:**
-- Número default de grids
-- Rangos de volatilidad mínima y máxima para grid
-- Variables: GRID_COUNT, MIN_VOLATILITY, MAX_VOLATILITY
-- Recomendaciones de optimización
-
-**Cuándo usarla:** Personalizar configuración de grid trading
-
-#### `get_logging_config` - **Configuración de Logging y Monitoreo**
-```
-Uso: get_logging_config
-```
-**Lo que obtienes:**
-- Nivel de logging configurado (debug, info, warn, error)
-- Estado de performance tracking
-- Variables: LOG_LEVEL, ENABLE_PERFORMANCE_TRACKING
-
-**Cuándo usarla:** Debugging, optimización de performance
-
-#### `validate_env_config` - **Validación Completa de Configuración**
-```
-Uso: validate_env_config
-```
-**Lo que obtienes:**
-- Validación completa de todas las variables
-- Errores específicos con soluciones claras
-- Warnings de configuración suboptimal
-- Recomendaciones de corrección automáticas
-- 15+ reglas de validación aplicadas
-
-**Cuándo usarla:** Antes de deployment, troubleshooting de configuración
-
-#### `reload_env_config` - **Recarga en Caliente**
-```
-Uso: reload_env_config
-```
-**Lo que obtienes:**
-- Recarga de configuración sin reiniciar el sistema
-- Nuevos valores aplicados inmediatamente
-- Hot reload capability para desarrollo iterativo
-
-**Cuándo usarla:** Desarrollo, cambios de configuración sin downtime
-
-#### `get_env_file_info` - **Información del Archivo .env**
-```
-Uso: get_env_file_info
-```
-**Lo que obtienes:**
-- Path del archivo .env y estado (existe/no existe)
-- Número de variables configuradas vs total
-- Template completo del archivo .env con documentación
-- Rate de configuración (% de variables configuradas)
-- Recomendaciones de configuración
-
-**Cuándo usarla:** Setup inicial, generar template, auditoria de configuración
-
-### **🌐 Sistema de Configuración de Usuario**
-
-#### `get_user_config` - **Configuración Personal**
-```
-Uso: get_user_config
-```
-**Lo que obtienes:**
-- Configuración completa de timezone y preferencias
-- Configuración de trading y display
-- Path del archivo de configuración
-- Estado del sistema de auto-detección
-
-**Cuándo usarla:** Verificar configuración personal, troubleshooting timezone
-
-#### `set_user_timezone` - **Configurar Zona Horaria**
-```
-Uso: set_user_timezone America/New_York true
-```
-**Lo que obtienes:**
-- Configuración de timezone específica
-- Habilitación/deshabilitación de auto-detección
-- Validación automática del timezone
-- Persistencia entre sesiones
-
-**Cuándo usarla:** Cambio de ubicación, configuración inicial
-
-#### `detect_timezone` - **Auto-Detección de Zona Horaria**
-```
-Uso: detect_timezone
-```
-**Lo que obtienes:**
-- Detección inteligente con múltiples métodos
-- Nivel de confianza del resultado
-- Método usado (env var, Intl API, sistema)
-- Fallback configurado
-
-**Cuándo usarla:** Setup inicial, verificar zona horaria detectada
-
-#### `validate_config` - **Validación de Configuración Usuario**
-```
-Uso: validate_config
-```
-**Lo que obtienes:**
-- Validación completa de configuración usuario
-- Errores y sugerencias de corrección
-- Estado de validez del timezone
-- Recomendaciones de optimización
-
-**Cuándo usarla:** Troubleshooting, verificación post-setup
-
-## 📋 Herramientas Disponibles v1.6.1
-
-### **🆕 Análisis Histórico (NUEVO TASK-017)**
-
-#### `get_historical_klines` - **Datos Históricos Base**
-```
-Uso: get_historical_klines BTCUSDT D
-```
-**Lo que obtienes:**
-- 800+ días de datos OHLCV históricos
-- Metadata completa (fechas, puntos de datos)
-- Intervalos: Diario (D), Semanal (W), Mensual (M)
-- Cache optimizado (24h TTL)
-- Datos desde 2021 hasta presente
-
-**Cuándo usarla:** Base para análisis profundo, investigación histórica
-
-#### `analyze_historical_sr` - **S/R Histórico Avanzado**
-```
-Uso: analyze_historical_sr BTCUSDT D
-```
-**Lo que obtienes:**
-- Niveles S/R con scoring histórico
-- Número de toques y éxito por nivel
-- Significancia basada en volumen histórico
-- Distancia actual a niveles clave
-- Niveles "major" vs "minor" clasificados
-- Estadísticas de fortaleza histórica
-
-**Cuándo usarla:** Identificar niveles macro críticos, validar S/R actuales con historial
-
-#### `identify_volume_anomalies` - **Eventos de Volumen Históricos**
-```
-Uso: identify_volume_anomalies ETHUSDT D 2.5
-```
-**Lo que obtienes:**
-- Eventos de volumen excepcional (2.5x+ promedio)
-- Correlación con movimientos de precio
-- Identificación de manipulación histórica
-- Patrones de acumulación/distribución
-- Contexto temporal de eventos
-
-**Cuándo usarla:** Investigar manipulación, identificar zonas de interés institucional
-
-#### `get_price_distribution` - **Value Areas Históricas**
-```
-Uso: get_price_distribution XRPUSDT W
-```
-**Lo que obtienes:**
-- Distribución estadística de precios históricos
-- "Value areas" de mayor actividad
-- Zones de equilibrio de largo plazo
-- Análisis de concentración por rango de precios
-- Datos para estrategias de mean reversion
-
-**Cuándo usarla:** Identificar zonas de "fair value", configurar targets de largo plazo
-
-#### `identify_market_cycles` - **Ciclos de Mercado**
-```
-Uso: identify_market_cycles BTCUSDT
-```
-**Lo que obtienes:**
-- Patrones cíclicos identificados
-- Duración promedio de tendencias
-- Amplitud típica de movimientos
-- Timing estacional si existe
-- Predicciones basadas en ciclos históricos
-
-**Cuándo usarla:** Timing de entries/exits, prepararse para reversiones cíclicas
-
-#### `get_historical_summary` - **Análisis Histórico Completo**
-```
-Uso: get_historical_summary BTCUSDT W
-```
-**Lo que obtienes:**
-- Resumen consolidado de TODOS los análisis históricos
-- S/R + Volume Events + Price Distribution + Market Cycles
-- Insights y recomendaciones agregadas
-- Contexto histórico comprehensivo
-- **✨ TU HERRAMIENTA DE RESEARCH PRINCIPAL**
-
-**Cuándo usarla:** Due diligence completa, tesis de trading de largo plazo
-
-### **🔍 Análisis Principal de Mercado**
-
-#### `get_complete_analysis` - **TU HERRAMIENTA PRINCIPAL**
-```
-Uso: get_complete_analysis XRPUSDT 1000
-```
-**Lo que obtienes:**
-- Precio actual y cambio 24h
-- Niveles de soporte/resistencia críticos con scoring
-- Análisis de volumen y VWAP
-- Volume Delta (presión compradora/vendedora)
-- Sugerencias de grid trading automáticas
-- Recomendación general (BUY/SELL/HOLD)
-- **🆕 Auto-guardado** en repositorio para consulta histórica
-
-**Cuándo usarla:** Antes de cualquier decisión de trading, análisis diario
-
-#### `perform_technical_analysis` - **Análisis Técnico Modular**
-```
-Uso: perform_technical_analysis HBARUSDT
-Parámetros opcionales: includeVolatility, includeVolume, includeVolumeDelta, includeSupportResistance
-```
-**Lo que obtienes:**
-- Análisis modular personalizable
-- Solo los indicadores que necesitas
-- **🆕 Auto-guardado** automático
-- Optimizado para velocidad
-
-**Cuándo usarla:** Análisis específico de indicadores individuales
-
-#### `get_market_data` - **Datos Básicos con Cache**
-```
-Uso: get_market_data HBARUSDT
-```
-**Lo que obtienes:**
-- Precio, volumen, cambios 24h
-- Orderbook (bids/asks principales)
-- Últimas velas (OHLCV)
-- **🆕 Cache automático** para mejor performance
-
-**Cuándo usarla:** Check rápido de precio y momentum
-
-### **📊 Análisis Técnico Especializado**
-
-#### `identify_support_resistance` - **Niveles Clave Avanzados**
-```
-Uso: identify_support_resistance ONDOUSDT 60 100 2
-```
-**Lo que obtienes:**
-- Niveles de soporte/resistencia con scoring 1-10
-- Configuración de grid optimizada
-- Nivel crítico más relevante
-- **🆕 Algoritmo mejorado** multi-factor
-- Estadísticas de detección de pivots
-
-**Cuándo usarla:** Para identificar entries/exits precisos, colocar stop losses
-
-#### `analyze_volume_delta` - **Presión Institucional**
-```
-Uso: analyze_volume_delta XRPUSDT 5 60
-```
-**Lo que obtienes:**
-- Presión compradora vs vendedora
-- Divergencias con el precio
-- Tendencia del Volume Delta
-- Señales de reversión temprana
-- **🆕 Market pressure analysis** detallado
-
-**Cuándo usarla:** Confirmar direccionalidad, detectar reversiones
-
-#### `suggest_grid_levels` - **Grid Trading Inteligente**
-```
-Uso: suggest_grid_levels XRPUSDT 500 10 medium false
-```
-**Lo que obtienes:**
-- Niveles de grid optimizados
-- Cantidad por nivel calculada
-- Rango de trading recomendado
-- ROI estimado y riesgo
-- **🆕 Integración con S/R** para niveles más precisos
-
-**Cuándo usarla:** Configurar bots de grid trading, trading de rango
-
-### **🆕 Sistema de Repositorio Histórico**
-
-#### `get_analysis_history` - **Tu Historial de Trading**
-```
-Uso: get_analysis_history XRPUSDT 20 technical_analysis
-```
-**Lo que obtienes:**
-- Últimos análisis guardados del símbolo
-- Filtrado por tipo de análisis
-- Metadata completa (versión, confianza, tags)
-- Evolución temporal de indicadores
-
-**Cuándo usarla:** Revisar decisiones pasadas, ver tendencias históricas
-
-#### `get_latest_analysis` - **Último Análisis Guardado**
-```
-Uso: get_latest_analysis XRPUSDT complete_analysis
-```
-**Lo que obtienes:**
-- Análisis más reciente guardado
-- Datos completos del último estudio
-- Evita recálculos innecesarios
-- **🆕 Formato UUID** mejorado
-
-**Cuándo usarla:** Recuperar tu último análisis sin repetir cálculos
-
-#### `search_analyses` - **Búsqueda Avanzada Compleja**
-```
-Uso: search_analyses con filtros avanzados
-Parámetros: symbol, type, dateFrom, dateTo, limit, orderBy, orderDirection
-```
-**Lo que obtienes:**
-- Búsqueda por rangos de fecha específicos
-- Filtros por tipo de análisis
-- Ordenamiento personalizado
-- **🆕 Query engine** potente
-
-**Cuándo usarla:** Investigación profunda, backtest de estrategias
-
-#### `get_analysis_by_id` - **Recuperar Análisis Específico**
-```
-Uso: get_analysis_by_id [UUID-del-análisis]
-```
-**Lo que obtienes:**
-- Análisis específico por ID único
-- Datos completos preservados
-- **🆕 Sistema UUID** robusto
-
-**Cuándo usarla:** Referenciar análisis específicos en decisiones
-
-#### `get_analysis_summary` - **Resumen Agregado por Período**
-```
-Uso: get_analysis_summary XRPUSDT 1d
-```
-**Lo que obtienes:**
-- Resumen estadístico del período
-- Promedio de indicadores
-- Tendencias identificadas
-- **🆕 Insights agregados** automáticos
-
-**Cuándo usarla:** Vista panorámica de períodos, análisis de tendencias
-
-#### `get_aggregated_metrics` - **Métricas Estadísticas**
-```
-Uso: get_aggregated_metrics XRPUSDT volatility.volatilityPercent 1d
-```
-**Lo que obtienes:**
-- Estadísticas de métricas específicas
-- Agregaciones por período
-- **🆕 Analytics avanzado** de indicadores
-
-**Cuándo usarla:** Análisis cuantitativo profundo
-
-#### `find_patterns` - **Búsqueda de Patrones**
-```
-Uso: find_patterns con criterios específicos
-```
-**Lo que obtienes:**
-- Patrones detectados automáticamente
-- Criterios de confianza
-- **🆕 Pattern recognition** inteligente
-
-**Cuándo usarla:** Identificar setups recurrentes, patrones Wyckoff
-
-#### `get_repository_stats` - **Estadísticas del Sistema**
-```
-Uso: get_repository_stats
-```
-**Lo que obtienes:**
-- Total de análisis guardados
-- Distribución por tipo y símbolo
-- Uso de almacenamiento
-- **🆕 Métricas de uso** detalladas
-
-**Cuándo usarla:** Mantenimiento, ver qué datos tienes disponibles
-
-### **🆕 Sistema de Reportes Automáticos**
-
-#### `generate_daily_report` - **Reporte Diario Automático**
-```
-Uso: generate_daily_report 2024-06-10 ["XRPUSDT", "HBARUSDT"]
-```
-**Lo que obtienes:**
-- Reporte comprehensivo del día
-- Análisis de mercado consolidado
-- Top movers y patrones
-- Recomendaciones agregadas
-
-**Cuándo usarla:** Revisión diaria, planificación de trading
-
-#### `generate_weekly_report` - **Reporte Semanal**
-```
-Uso: generate_weekly_report 2024-06-10 ["XRPUSDT", "HBARUSDT", "ONDOUSDT"]
-```
-**Lo que obtienes:**
-- Resumen semanal del mercado
-- Tendencias identificadas
-- Performance de estrategias
-- Insights históricos
-
-**Cuándo usarla:** Análisis semanal, ajuste de estrategias
-
-#### `generate_symbol_report` - **Reporte por Símbolo**
-```
-Uso: generate_symbol_report XRPUSDT 7d
-```
-**Lo que obtienes:**
-- Análisis completo de un símbolo
-- Historial de patrones
-- Recomendaciones específicas
-- **🆕 Deep dive** por token
-
-**Cuándo usarla:** Investigación profunda de un activo específico
-
-#### `generate_performance_report` - **Análisis de Rendimiento**
-```
-Uso: generate_performance_report 7d
-```
-**Lo que obtienes:**
-- Performance del sistema de análisis
-- Métricas de precisión
-- Estadísticas de uso
-- **🆕 System analytics** completo
-
-**Cuándo usarla:** Evaluar efectividad del sistema, optimización
-
-#### `list_reports` - **Listar Reportes Disponibles**
-```
-Uso: list_reports
-```
-**Lo que obtienes:**
-- Lista de reportes generados
-- Metadata de cada reporte
-- **🆕 Gestión de reportes** centralizada
-
-**Cuándo usarla:** Navegación de reportes históricos
-
-### **🆕 Gestión de Cache Inteligente**
-
-#### `get_cache_stats` - **Estadísticas de Cache**
-```
-Uso: get_cache_stats
-```
-**Lo que obtienes:**
-- Hit rate del cache
-- Uso de memoria
-- Recomendaciones de optimización
-- **🆕 Performance insights** automáticos
-
-**Cuándo usarla:** Optimización de performance, troubleshooting
-
-#### `clear_cache` - **Limpiar Cache**
-```
-Uso: clear_cache true
-```
-**Lo que obtienes:**
-- Limpieza completa del cache
-- Liberación de memoria
-- **⚠️ Requiere confirmación**
-
-**Cuándo usarla:** Resolver problemas de datos obsoletos
-
-#### `invalidate_cache` - **Invalidar Cache Específico**
-```
-Uso: invalidate_cache XRPUSDT spot
-```
-**Lo que obtienes:**
-- Invalidación granular por símbolo
-- **🆕 Cache inteligente** por categoría
-
-**Cuándo usarla:** Forzar actualización de datos específicos
-
-### **⚡ Herramientas de Análisis Avanzado**
-
-#### `analyze_volatility` - **Timing de Entry Optimizado**
-```
-Uso: analyze_volatility ALGOUSDT 1d
-```
-**Lo que obtienes:**
-- Volatilidad actual vs histórica
-- Mejor momento para diferentes estrategias
-- Expansión/contracción de volatilidad
-- **🆕 Grid suitability** mejorado
-
-**Cuándo usarla:** Decidir timing y tipo de estrategia
-
-## 🎯 Workflows de Trading v1.6.1
-
-### **🆕 Workflow de Setup Inicial Cross-Platform (NUEVO)**
-```
-1. get_env_file_info (verificar estado del archivo .env)
-2. validate_env_config (validar configuración completa)
-3. get_system_config (verificar configuración cargada)
-4. detect_timezone (auto-detectar zona horaria)
-5. get_user_config (verificar configuración personal)
-6. Sistema listo para trading con configuración optimizada
-```
-
-### **🗺️ Workflow de Deployment Cross-Platform (NUEVO)**
-```
-1. validate_env_config (verificar antes de deploy)
-2. get_mongo_config (configurar dual storage si se desea)
-3. get_api_config (optimizar timeouts para entorno)
-4. get_analysis_config (ajustar parámetros para estrategia)
-5. get_logging_config (configurar nivel de logs)
-6. Deploy con configuración validada
-```
-
-### **🔧 Workflow de Configuración y Troubleshooting (NUEVO)**
-```
-1. get_system_config (overview completo del sistema)
-2. validate_env_config (identificar problemas)
-3. reload_env_config (aplicar cambios sin restart)
-4. validate_config (verificar configuración usuario)
-5. get_cache_stats (verificar performance)
-6. Sistema optimizado y validado
-```
-
-### **📊 Workflow de Investigación Histórica (NUEVO)**
-```
-1. get_historical_summary [TOKEN] W (contexto histórico completo)
-2. analyze_historical_sr [TOKEN] D (niveles clave históricos)
-3. identify_volume_anomalies [TOKEN] D (eventos significativos)
-4. get_price_distribution [TOKEN] W (value areas de largo plazo)
-5. identify_market_cycles [TOKEN] (patrones cíclicos)
-6. Desarrollar tesis basada en análisis histórico profundo
-```
-
-### **📈 Workflow de Análisis Diario Optimizado**
-```
-1. generate_daily_report [fecha] [tus-símbolos]
-2. get_complete_analysis para símbolos interesantes
-3. get_latest_analysis para comparar con análisis previos
-4. Tomar decisiones basadas en reportes + análisis fresh
-```
-
-### **🎯 Workflow de Entry/Exit Avanzado**
-```
-1. get_complete_analysis [TOKEN] [CAPITAL]
-2. get_latest_analysis [TOKEN] technical_analysis (comparar cambios)
-3. identify_support_resistance [TOKEN] (niveles precisos)
-4. analyze_volume_delta [TOKEN] (confirmar timing)
-5. Ejecutar trade con niveles identificados
-6. Los análisis se guardan automáticamente para seguimiento
-```
-
-### **🤖 Workflow de Grid Trading Inteligente**
-```
-1. analyze_volatility [TOKEN] (verificar suitability)
-2. suggest_grid_levels [TOKEN] [CAPITAL] [grids] [risk] [optimize]
-3. identify_support_resistance [TOKEN] (confirmar rango)
-4. Configurar grid con niveles sugeridos
-5. Monitor con reportes diarios automáticos
-```
-
-### **🔄 Workflow de Swing Trading con Historial**
-```
-1. get_analysis_summary [TOKEN] 7d (contexto histórico)
-2. get_complete_analysis [TOKEN] [CAPITAL] (setup actual)
-3. search_analyses para patterns similares históricos
-4. analyze_volume_delta [TOKEN] (timing preciso)
-5. Ejecutar con apalancamiento basado en confianza histórica
-```
-
-### **📊 Workflow de Investigación y Backtesting**
-```
-1. search_analyses con filtros temporales amplios
-2. get_aggregated_metrics para indicadores clave
-3. find_patterns para identificar setups recurrentes
-4. generate_symbol_report para análisis completo
-5. Desarrollar estrategias basadas en datos históricos
-```
-
-### **🆕 Workflow de Reportes Automáticos**
-```
-1. generate_daily_report cada mañana (automático)
-2. generate_weekly_report cada domingo
-3. generate_symbol_report para análisis específicos
-4. generate_performance_report para optimización mensual
-5. list_reports para revisar tendencias históricas
-```
-
-## 💡 Tips de Uso Efectivo v1.6.1
-
-### **🆕 Para Configuración Cross-Platform**
-- **Zero-config start:** El sistema funciona out-of-the-box con defaults
-- **Template generation:** Usa `get_env_file_info` para generar .env completo
-- **Validation first:** Siempre `validate_env_config` antes de deployment
-- **Hot reload:** Usa `reload_env_config` para cambios sin downtime
-- **Cross-platform:** Mismo .env funciona en Windows, Linux, macOS, Docker
-- **Environment precedence:** Variables del sistema > .env > defaults
-
-### **🌐 Para Configuración de Usuario**
-- **Auto-detection:** `detect_timezone` funciona en la mayoría de sistemas
-- **Persistent config:** Configuración se mantiene entre sesiones
-- **Validation:** `validate_config` para verificar configuración usuario
-- **Multi-environment:** Diferentes configs para desarrollo/producción
-
-### **🆕 Para Análisis Histórico Profundo**
-- **Research completo:** Usa `get_historical_summary` como punto de partida
-- **Validación S/R:** Combina `identify_support_resistance` actual + `analyze_historical_sr`
-- **Event correlation:** `identify_volume_anomalies` para encontrar manipulación histórica
-- **Long-term targets:** `get_price_distribution` para value areas de largo plazo
-- **Timing estacional:** `identify_market_cycles` para patterns cíclicos
-
-### **🎯 Para tu Portfolio (XRP, HBAR, ONDO)**
-- **Análisis diario:** Usa `generate_daily_report` con tus símbolos
-- **Decisions críticas:** Combina `get_complete_analysis` + historial
-- **Grid setup:** `suggest_grid_levels` integrado con S/R
-- **🆕 Tracking:** Usa `get_analysis_summary` para seguimiento semanal
-
-### **💰 Para $2,000 USDC de Trading**
-- **Capital por trade:** Usar capital real en `suggest_grid_levels`
-- **Risk management:** S/R levels con scoring alto como stop losses
-- **🆕 Performance:** `generate_performance_report` para evaluar ROI
-
-### **🔍 Interpretación de Señales Mejorada**
-
-#### **Bullish Setup Confirmado:**
-- Volume Delta positivo + precio rompiendo resistencia (strength >8)
-- VWAP como soporte + volumen creciente
-- Análisis histórico muestra patterns alcistas recurrentes
-- **🆕 Scoring S/R >8.5** en resistencia rota
-
-#### **Bearish Setup Confirmado:**
-- Volume Delta negativo + precio perdiendo soporte (strength >8)
-- VWAP como resistencia + volumen bajista
-- Divergencia negativa confirmada en análisis previos
-- **🆕 Pattern recognition** de distribución
-
-#### **🆕 Historical Research Setup:**
-- Análisis histórico profundo con 3+ años de datos
-- S/R levels validados históricamente con scoring por toques
-- Volume events y anomalías identificadas automáticamente
-- Value areas de largo plazo para mean reversion
-- **🆕 Scoring S/R histórico >80** en niveles críticos validados
-
-### **⚠️ Nuevas Consideraciones v1.6.1**
-- **Auto-save:** Todos los análisis se guardan automáticamente
-- **Cache inteligente:** Primer request más lento, subsecuentes muy rápidos
-- **Reportes:** Generación puede tomar 30-60 segundos
-- **Storage:** Sistema almacena análisis indefinidamente
-- **Performance:** `get_cache_stats` si notas lentitud
-- **🆕 Historical cache:** Datos históricos se cachean hasta 24h
-- **🆕 API limits:** Análisis histórico respeta rate limits de Bybit
-- **🆕 Data freshness:** Datos históricos siempre desde fuente, análisis procesados se cachean
-- **🆕 Environment config:** Sistema funciona out-of-the-box con configuración automática
-- **🆕 Cross-platform:** Funciona idénticamente en Windows, Linux, macOS, Docker
-- **🆕 Zero-config deployment:** Template .env generado automáticamente si es necesario
-- **🆕 Hot reload:** Cambios de configuración aplicados sin reiniciar el sistema
-
-## 🌍 Deployment Cross-Platform v1.6.1 (NUEVO)
-
-### **Setup Para Diferentes Entornos**
-
-#### **Windows Development**
-```powershell
-# Crear archivo .env en el directorio del proyecto
-echo "# wAIckoff MCP Configuration" > .env
-echo "LOG_LEVEL=info" >> .env
-echo "ENABLE_PERFORMANCE_TRACKING=true" >> .env
-
-# Verificar configuración
-npm start
-# En Claude Desktop: get_system_config
-```
-
-#### **Linux/Ubuntu Production**
-```bash
-# Crear .env con variables específicas
-cat > .env << EOF
-# Production Configuration
-LOG_LEVEL=warn
-API_TIMEOUT=10000
-API_RETRY_ATTEMPTS=3
-ENABLE_PERFORMANCE_TRACKING=false
-EOF
-
-# Deploy y verificar
-npm run build && npm start
-```
-
-#### **macOS Development**
-```bash
-# Auto-detectar timezone y configurar
-echo "# macOS Configuration" > .env
-echo "LOG_LEVEL=debug" >> .env
-
-# El sistema auto-detecta timezone automáticamente
-npm start
-```
-
-#### **Docker Deployment**
-```dockerfile
-# Dockerfile example
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-
-# Variables de entorno pueden pasarse via -e o docker-compose
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-```yaml
-# docker-compose.yml example
-version: '3.8'
-services:
-  waickoff-mcp:
-    build: .
-    environment:
-      - LOG_LEVEL=info
-      - API_TIMEOUT=8000
-      - MONGODB_CONNECTION_STRING=mongodb://mongo:27017/waickoff
-    depends_on:
-      - mongo
-  mongo:
-    image: mongo:5
-    volumes:
-      - mongo_data:/data/db
-volumes:
-  mongo_data:
-```
-
-#### **CI/CD Pipeline**
-```yaml
-# GitHub Actions example
-name: Deploy wAIckoff MCP
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Create production .env
-        run: |
-          echo "LOG_LEVEL=warn" >> .env
-          echo "API_TIMEOUT=12000" >> .env
-          echo "ENABLE_PERFORMANCE_TRACKING=false" >> .env
-      - name: Build and test
-        run: |
-          npm ci
-          npm run build
-          npm run test
-      - name: Deploy
-        run: npm start
-```
-
-### **Variables de Entorno Recomendadas por Entorno**
-
-#### **Development (.env)**
-```env
-# Development Configuration
-LOG_LEVEL=debug
-ENABLE_PERFORMANCE_TRACKING=true
-ANALYSIS_SENSITIVITY=2
-API_TIMEOUT=5000
-API_RETRY_ATTEMPTS=2
-```
-
-#### **Staging (.env)**
-```env
-# Staging Configuration
-LOG_LEVEL=info
-ENABLE_PERFORMANCE_TRACKING=true
-ANALYSIS_SENSITIVITY=2
-API_TIMEOUT=8000
-API_RETRY_ATTEMPTS=3
-MONGODB_CONNECTION_STRING=mongodb://staging-mongo:27017/waickoff
-```
-
-#### **Production (.env)**
-```env
-# Production Configuration
-LOG_LEVEL=warn
-ENABLE_PERFORMANCE_TRACKING=false
-ANALYSIS_SENSITIVITY=3
-API_TIMEOUT=10000
-API_RETRY_ATTEMPTS=3
-MONGODB_CONNECTION_STRING=mongodb://prod-mongo:27017/waickoff
-GRID_COUNT=15
-MIN_VOLATILITY=0.02
-MAX_VOLATILITY=0.15
-```
-
-### **Mejores Prácticas de Configuración**
-
-#### **🔒 Seguridad**
-- **Nunca commitear .env** al repositorio
-- **Usar variables del sistema** para secretos en producción
-- **MongoDB connection strings** solo en staging/production
-- **API keys futuras** siempre como variables de entorno
-
-#### **⚡ Performance**
-- **LOG_LEVEL=warn** en producción para mejor performance
-- **ENABLE_PERFORMANCE_TRACKING=false** en producción
-- **API_TIMEOUT** más alto en producción (10-12 segundos)
-- **Cache TTL** optimizado según uso
-
-#### **🔧 Mantenimiento**
-- **validate_env_config** antes de cada deployment
-- **reload_env_config** para cambios sin downtime
-- **get_system_config** para verificar configuración cargada
-- **Backup de configuración** en deployment scripts
-
-## 🚨 Troubleshooting v1.6.1
-
-### **🆕 Problemas de Configuración:**
-1. `validate_env_config` para identificar errores de configuración
-2. `get_env_file_info` para verificar estado del archivo .env
-3. `reload_env_config` para aplicar cambios sin reiniciar
-4. `get_system_config` para verificar variables cargadas
-
-### **🌐 Problemas de Timezone:**
-1. `detect_timezone` para auto-detectar zona horaria
-2. `validate_config` para verificar configuración usuario
-3. `set_user_timezone` para configurar manualmente
-4. `get_user_config` para verificar configuración actual
-
-### **Si el MCP no responde:**
-1. `get_cache_stats` para verificar estado del sistema
-2. `clear_cache true` si hay problemas de memoria
-3. Reinicia Claude Desktop como último recurso
-
-### **Si hay datos inconsistentes:**
-1. `invalidate_cache [SYMBOL]` para el símbolo específico
-2. Verifica con `get_latest_analysis` si hay análisis recientes
-3. `get_repository_stats` para verificar integridad del sistema
-
-### **Si los reportes fallan:**
-1. Verifica que tengas análisis suficientes con `get_analysis_history`
-2. Usa `generate_symbol_report` individual en vez de múltiples símbolos
-3. Reduce el período de tiempo del reporte
-
-### **Para debugging avanzado:**
-```
-get_debug_logs         # Sistema general
-get_cache_stats        # Performance y memoria
-get_repository_stats   # Estado del almacenamiento
-```
-
-## 🎯 Nuevas Features v1.6.1
-
-### **✅ Implementadas v1.6.1**
-- **🆕 Repositorio de análisis** completo con 7 herramientas
-- **🆕 Sistema de reportes** con 8 herramientas diferentes
-- **🆕 Cache inteligente** con gestión automática
-- **🆕 Auto-save** de todos los análisis
-- **🆕 Búsquedas complejas** con filtros avanzados
-- **🆕 Métricas agregadas** y analytics
-- **🆕 Pattern detection** automático
-- **🆕 Sistema de configuración** de timezone persistente
-- **🆕 Análisis histórico** - 6 herramientas nuevas (TASK-017):
-  - `get_historical_klines` - 800+ días de datos OHLCV
-  - `analyze_historical_sr` - S/R histórico con scoring avanzado
-  - `identify_volume_anomalies` - Eventos de volumen significativos
-  - `get_price_distribution` - Value areas históricas
-  - `identify_market_cycles` - Patrones cíclicos de mercado
-  - `get_historical_summary` - Resumen histórico comprehensivo
-- **🆕 Sistema de configuración .env** cross-platform (TASK-015b):
-  - `get_system_config` - Configuración completa del sistema
-  - `validate_env_config` - Validación con 15+ reglas específicas
-  - `reload_env_config` - Hot reload sin downtime
-  - `get_env_file_info` - Template generation automático
-  - Variables de entorno para MongoDB, APIs, análisis, grid, logging
-  - Compatibilidad Windows, Linux, macOS, Docker, CI/CD
-  - Zero-config deployment con auto-discovery de archivos
-
-### **🔜 Próximas Features**
-- **Detección de trampas alcistas/bajistas** (Bull/Bear traps) - TASK-012
-- **Datos on-chain** - Flujos de stablecoins y ballenas - TASK-013
-- **Detección de patrones Wyckoff** avanzados
-- **Alertas automáticas** basadas en patrones
-- **Integración completa con wAIckoff AI**
-- **Dual storage MongoDB** opcional (TASK-015)
-- **Multi-exchange support** (Binance, Coinbase)
-- **WebSocket real-time feeds** para datos en vivo
-- **Machine Learning pattern recognition** avanzado
-
-## 📊 Nuevas Capacidades del Sistema
-
-### **Performance y Escalabilidad**
-- **Cache hit rate:** 85%+ en uso típico
-- **Análisis guardados:** Ilimitados con búsqueda rápida
-- **Reportes:** Generación automática optimizada
-- **Memory management:** Auto-cleanup y optimización
-
-### **Analytics y Business Intelligence**
-- **Historical tracking:** Tendencias de indicadores en el tiempo
-- **Pattern recognition:** Detección automática de setups
-- **Performance analytics:** ROI y precisión del sistema
-- **Custom queries:** Búsquedas específicas por cualquier criterio
+Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.6.4, organizadas por categorías.
 
 ---
 
-## 📞 Recordatorio de tu Setup
+## 📊 Herramientas de Datos de Mercado
 
-**Portfolio HODL:** 6,250 XRP, 7,500 HBAR, 500 ONDO  
-**Capital Trading:** $2,000 USDC  
-**Estrategias:** Grid (spot/futuros) + Swing (2x-4x leverage)  
-**Risk:** 2-3% stop loss, máximo 3 posiciones simultáneas  
-**🆕 Herramientas:** 55+ herramientas MCP (Core + Historical + Configuration + System)
+### `get_ticker`
+Obtiene precio actual y estadísticas de 24h para un par de trading.
 
-## 📈 Estadísticas del Sistema v1.6.1
+**Parámetros:**
+- `symbol` (requerido): Par de trading (ej: BTCUSDT, XRPUSDT)
+- `category` (opcional): Categoría del mercado ('spot', 'linear', 'inverse'). Default: 'spot'
 
-### **🔧 Herramientas MCP Disponibles: 55+**
-- **Market Data & Analysis:** 10 herramientas (ticker, orderbook, technical analysis, etc.)
-- **Historical Analysis:** 6 herramientas (3+ años de datos históricos)
-- **Analysis Repository:** 7 herramientas (almacenamiento y consulta avanzada)
-- **Report Generator:** 8 herramientas (reportes automáticos)
-- **Configuration System:** 9 herramientas (sistema .env cross-platform)
-- **User Configuration:** 7 herramientas (timezone y preferencias)
-- **Cache & System:** 8 herramientas (performance y debugging)
+**Ejemplo:**
+```
+get_ticker BTCUSDT
+```
 
-### **🌍 Cross-Platform Compatibility**
-- **Windows:** Full support con PowerShell y CMD
-- **Linux/Ubuntu:** Optimizado para servidores de producción
-- **macOS:** Native support con auto-detección
-- **Docker:** Container-ready con docker-compose
-- **CI/CD:** GitHub Actions, Jenkins, etc.
-- **Cloud:** AWS, GCP, Azure compatible
+### `get_orderbook`
+Obtiene profundidad del libro de órdenes para análisis de mercado.
 
-### **🚀 Performance Metrics**
-- **Cache Hit Rate:** 85%+ en uso típico
-- **API Response Time:** <100ms con cache, <500ms sin cache
-- **Historical Data:** 800+ días disponibles por símbolo
-- **Analysis Storage:** Ilimitado con búsqueda rápida
-- **Concurrent Analysis:** Múltiples símbolos simultáneamente
-- **Memory Usage:** Optimizado con auto-cleanup
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `category` (opcional): Categoría del mercado. Default: 'spot'
+- `limit` (opcional): Número de niveles del orderbook. Default: 25
 
-### **🔍 Data Coverage**
-- **Real-time:** Precios, volumen, orderbook en vivo
-- **Historical:** 3+ años de datos OHLCV
-- **Technical Indicators:** 15+ indicadores implementados
-- **Support/Resistance:** Niveles dinámicos con scoring
-- **Volume Analysis:** Delta, VWAP, anomalías
-- **Market Cycles:** Patrones estacionales y cíclicos
+**Ejemplo:**
+```
+get_orderbook ETHUSDT limit=50
+```
 
-**¡El MCP v1.6.1 está listo para llevar tu trading al siguiente nivel con análisis profesional, configuración cross-platform, almacenamiento inteligente, reportes automáticos y 3+ años de datos históricos!** 🚀
+### `get_market_data`
+Obtiene datos completos del mercado (ticker + orderbook + klines recientes).
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `category` (opcional): Categoría del mercado. Default: 'spot'
+
+**Ejemplo:**
+```
+get_market_data BTCUSDT
+```
+
+---
+
+## 📈 Herramientas de Análisis Técnico
+
+### `analyze_volatility`
+Analiza la volatilidad del precio para timing de grid trading.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `period` (opcional): Período de análisis ('1h', '4h', '1d', '7d'). Default: '1d'
+
+**Ejemplo:**
+```
+analyze_volatility BTCUSDT period=4h
+```
+
+### `analyze_volume`
+Analiza patrones de volumen con VWAP y detección de anomalías.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `interval` (opcional): Intervalo de tiempo ('1', '5', '15', '30', '60', '240', 'D'). Default: '60'
+- `periods` (opcional): Número de períodos a analizar. Default: 24
+
+**Ejemplo:**
+```
+analyze_volume ETHUSDT interval=15 periods=48
+```
+
+### `analyze_volume_delta`
+Calcula Volume Delta (presión compradora vs vendedora).
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `interval` (opcional): Intervalo de tiempo ('1', '5', '15', '30', '60'). Default: '5'
+- `periods` (opcional): Número de períodos. Default: 60
+
+**Ejemplo:**
+```
+analyze_volume_delta BTCUSDT interval=5 periods=120
+```
+
+### `identify_support_resistance`
+Identifica niveles dinámicos de soporte y resistencia con scoring de fuerza.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `interval` (opcional): Intervalo para análisis. Default: '60'
+- `periods` (opcional): Número de períodos a analizar. Default: 100
+- `sensitivity` (opcional): Sensibilidad de detección (1-5). Default: 2
+
+**Ejemplo:**
+```
+identify_support_resistance BTCUSDT sensitivity=3
+```
+
+### `perform_technical_analysis`
+Análisis técnico completo incluyendo todos los indicadores.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `includeVolatility` (opcional): Incluir análisis de volatilidad. Default: true
+- `includeVolume` (opcional): Incluir análisis de volumen. Default: true
+- `includeVolumeDelta` (opcional): Incluir análisis de volume delta. Default: true
+- `includeSupportResistance` (opcional): Incluir análisis S/R. Default: true
+- `timeframe` (opcional): Marco temporal de análisis. Default: '60'
+- `periods` (opcional): Número de períodos. Default: 100
+
+**Ejemplo:**
+```
+perform_technical_analysis BTCUSDT
+```
+
+### `get_complete_analysis`
+Análisis completo del mercado con resumen y recomendaciones.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `investment` (opcional): Monto de inversión para sugerencias de grid
+
+**Ejemplo:**
+```
+get_complete_analysis BTCUSDT investment=1000
+```
+
+---
+
+## 🎯 Herramientas de Análisis Wyckoff Básico (NUEVO!)
+
+### `analyze_wyckoff_phase`
+Analiza la fase actual de Wyckoff para análisis de estructura de mercado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal de análisis ('15', '30', '60', '240', 'D'). Default: '60'
+- `lookback` (opcional): Número de períodos a analizar (50-200). Default: 100
+
+**Ejemplo:**
+```
+analyze_wyckoff_phase BTCUSDT timeframe=240 lookback=150
+```
+
+**Respuesta incluye:**
+- Fase actual de Wyckoff (acumulación/distribución A-E, markup/markdown)
+- Confianza en la identificación de fase
+- Progreso dentro de la fase actual
+- Rango de trading detectado
+- Eventos clave identificados
+- Características de volumen
+- Interpretación y bias del mercado
+
+### `detect_trading_range`
+Detecta rangos de trading para análisis de acumulación/distribución.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('15', '30', '60', '240', 'D'). Default: '60'
+- `minPeriods` (opcional): Períodos mínimos para rango válido (10-50). Default: 20
+
+**Ejemplo:**
+```
+detect_trading_range ETHUSDT minPeriods=30
+```
+
+### `find_wyckoff_events`
+Busca eventos Wyckoff (springs, upthrusts, tests) en datos de mercado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `eventTypes` (opcional): Tipos de eventos a detectar. Default: ['spring', 'upthrust', 'test']
+- `lookback` (opcional): Períodos a analizar. Default: 100
+
+**Ejemplo:**
+```
+find_wyckoff_events BTCUSDT eventTypes=["spring","test"] lookback=200
+```
+
+### `analyze_wyckoff_volume`
+Analiza características de volumen en contexto Wyckoff.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `lookback` (opcional): Períodos a analizar. Default: 100
+
+**Ejemplo:**
+```
+analyze_wyckoff_volume BTCUSDT timeframe=240
+```
+
+### `get_wyckoff_interpretation`
+Obtiene interpretación comprehensiva del análisis Wyckoff y bias.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+get_wyckoff_interpretation ETHUSDT timeframe=240
+```
+
+### `track_phase_progression`
+Realiza seguimiento de progresión y timeline de desarrollo de fases Wyckoff.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+track_phase_progression BTCUSDT
+```
+
+### `validate_wyckoff_setup`
+Valida setup de trading Wyckoff con evaluación de riesgo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `tradingDirection` (opcional): Dirección de trading ('long', 'short')
+
+**Ejemplo:**
+```
+validate_wyckoff_setup BTCUSDT tradingDirection=long
+```
+
+---
+
+## 🎯 Herramientas de Detección de Trampas
+
+### `detect_bull_trap`
+Detecta trampas alcistas (falsas rupturas sobre resistencia).
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `sensitivity` (opcional): Sensibilidad de detección ('low', 'medium', 'high'). Default: 'medium'
+
+**Ejemplo:**
+```
+detect_bull_trap BTCUSDT sensitivity=high
+```
+
+**Respuesta incluye:**
+- Probabilidad de trampa alcista
+- Triggers detectados (volumen bajo, orderbook débil, etc.)
+- Niveles de precio objetivo
+- Recomendaciones específicas
+- Ventana de tiempo esperada
+
+### `detect_bear_trap`
+Detecta trampas bajistas (falsas rupturas bajo soporte).
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `sensitivity` (opcional): Sensibilidad de detección ('low', 'medium', 'high'). Default: 'medium'
+
+**Ejemplo:**
+```
+detect_bear_trap ETHUSDT sensitivity=medium
+```
+
+### `get_trap_history`
+Obtiene historial de trampas detectadas para backtesting.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `days` (opcional): Número de días hacia atrás. Default: 30
+- `trapType` (opcional): Tipo de trampas ('bull', 'bear', 'both'). Default: 'both'
+
+**Ejemplo:**
+```
+get_trap_history BTCUSDT days=7 trapType=bull
+```
+
+### `get_trap_statistics`
+Obtiene estadísticas de rendimiento de detección de trampas.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `period` (opcional): Período de estadísticas ('7d', '30d', '90d', '1y'). Default: '30d'
+
+**Ejemplo:**
+```
+get_trap_statistics BTCUSDT period=90d
+```
+
+### `configure_trap_detection`
+Configura parámetros de detección de trampas.
+
+**Parámetros:**
+- `sensitivity` (opcional): Sensibilidad general ('low', 'medium', 'high')
+- `volumeThreshold` (opcional): Multiplicador de umbral de volumen
+- `orderbookDepthRatio` (opcional): Ratio mínimo de profundidad del orderbook
+- `timeWindowMinutes` (opcional): Ventana de tiempo de análisis en minutos
+- `minimumBreakout` (opcional): Porcentaje mínimo de ruptura para analizar
+- `confidenceThreshold` (opcional): Umbral mínimo de confianza para alertas
+
+**Ejemplo:**
+```
+configure_trap_detection sensitivity=high volumeThreshold=0.8
+```
+
+### `validate_breakout`
+Valida si actualmente hay una situación de ruptura.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+
+**Ejemplo:**
+```
+validate_breakout BTCUSDT
+```
+
+### `get_trap_performance`
+Obtiene métricas de rendimiento del servicio de detección de trampas.
+
+**Ejemplo:**
+```
+get_trap_performance
+```
+
+---
+
+## 📐 Herramientas de Grid Trading
+
+### `suggest_grid_levels`
+Genera sugerencias inteligentes de grid trading.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `investment` (requerido): Monto a invertir en USD
+- `gridCount` (opcional): Número de niveles de grid. Default: 10
+- `riskTolerance` (opcional): Nivel de tolerancia al riesgo ('low', 'medium', 'high'). Default: 'medium'
+- `optimize` (opcional): Usar optimización avanzada. Default: false
+
+**Ejemplo:**
+```
+suggest_grid_levels BTCUSDT investment=5000 gridCount=15 riskTolerance=low
+```
+
+---
+
+## 📜 Herramientas de Análisis Histórico
+
+### `get_historical_klines`
+Obtiene datos históricos OHLCV con metadata completa.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `interval` (opcional): Intervalo de tiempo ('D', 'W', 'M'). Default: 'D'
+- `startTime` (opcional): Timestamp de inicio
+- `endTime` (opcional): Timestamp de fin
+- `useCache` (opcional): Usar datos en caché si están disponibles. Default: true
+
+**Ejemplo:**
+```
+get_historical_klines BTCUSDT interval=W
+```
+
+### `analyze_historical_sr`
+Analiza niveles históricos de soporte y resistencia con scoring avanzado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('D', 'W', 'M'). Default: 'D'
+- `minTouches` (opcional): Toques mínimos para validación. Default: 3
+- `tolerance` (opcional): Tolerancia de precio en %. Default: 0.5
+- `volumeWeight` (opcional): Ponderar niveles por volumen. Default: true
+- `recencyBias` (opcional): Sesgo hacia niveles recientes (0-1). Default: 0.1
+
+**Ejemplo:**
+```
+analyze_historical_sr BTCUSDT minTouches=5 tolerance=0.3
+```
+
+### `identify_volume_anomalies`
+Identifica anomalías de volumen y eventos significativos.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('D', 'W'). Default: 'D'
+- `threshold` (opcional): Multiplicador de umbral de anomalía. Default: 2.5
+
+**Ejemplo:**
+```
+identify_volume_anomalies ETHUSDT threshold=3.0
+```
+
+### `get_price_distribution`
+Analiza distribución de precios y áreas de valor.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('D', 'W'). Default: 'D'
+
+**Ejemplo:**
+```
+get_price_distribution BTCUSDT timeframe=W
+```
+
+### `identify_market_cycles`
+Identifica ciclos de mercado y tendencias.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+
+**Ejemplo:**
+```
+identify_market_cycles BTCUSDT
+```
+
+### `get_historical_summary`
+Obtiene resumen completo de análisis histórico.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('D', 'W', 'M'). Default: 'D'
+
+**Ejemplo:**
+```
+get_historical_summary BTCUSDT timeframe=M
+```
+
+---
+
+## 🗄️ Herramientas de Repositorio de Análisis
+
+### `get_analysis_by_id`
+Obtiene un análisis específico por su ID.
+
+**Parámetros:**
+- `id` (requerido): ID del análisis (UUID)
+
+**Ejemplo:**
+```
+get_analysis_by_id 123e4567-e89b-12d3-a456-426614174000
+```
+
+### `get_latest_analysis`
+Obtiene el análisis más reciente para un símbolo y tipo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `type` (requerido): Tipo de análisis
+
+**Ejemplo:**
+```
+get_latest_analysis BTCUSDT type=technical_analysis
+```
+
+### `search_analyses`
+Busca análisis con consulta compleja.
+
+**Parámetros:**
+- `symbol` (opcional): Par de trading
+- `type` (opcional): Tipo de análisis
+- `dateFrom` (opcional): Fecha de inicio (formato ISO)
+- `dateTo` (opcional): Fecha de fin (formato ISO)
+- `limit` (opcional): Máximo de resultados. Default: 100
+- `orderBy` (opcional): Campo de ordenamiento. Default: 'timestamp'
+- `orderDirection` (opcional): Dirección de orden. Default: 'desc'
+
+**Ejemplo:**
+```
+search_analyses symbol=BTCUSDT limit=10
+```
+
+### `get_analysis_summary`
+Obtiene resumen de análisis para un símbolo en un período.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `period` (opcional): Período del resumen ('1h', '4h', '1d', '1w', '1m'). Default: '1d'
+
+**Ejemplo:**
+```
+get_analysis_summary ETHUSDT period=1w
+```
+
+### `get_repository_stats`
+Obtiene estadísticas del repositorio y uso de almacenamiento.
+
+**Ejemplo:**
+```
+get_repository_stats
+```
+
+---
+
+## 📊 Herramientas de Generación de Reportes
+
+### `generate_report`
+Genera un reporte completo basado en datos de análisis.
+
+**Parámetros:**
+- `type` (requerido): Tipo de reporte ('daily', 'weekly', 'symbol', 'performance', 'patterns', 'custom')
+- `format` (opcional): Formato de salida ('markdown', 'json', 'html'). Default: 'markdown'
+- `symbol` (opcional): Par de trading (para reportes de símbolo)
+- `dateFrom` (opcional): Fecha de inicio
+- `dateTo` (opcional): Fecha de fin
+
+**Ejemplo:**
+```
+generate_report type=daily format=markdown
+```
+
+### `generate_daily_report`
+Genera reporte de análisis diario del mercado.
+
+**Parámetros:**
+- `date` (opcional): Fecha del reporte (formato ISO). Default: hoy
+
+**Ejemplo:**
+```
+generate_daily_report
+```
+
+### `generate_symbol_report`
+Genera reporte detallado para un símbolo específico.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `period` (opcional): Período de análisis. Default: '1d'
+
+**Ejemplo:**
+```
+generate_symbol_report BTCUSDT period=1w
+```
+
+---
+
+## ⚙️ Herramientas de Sistema
+
+### `get_system_health`
+Obtiene estado de salud del sistema y métricas de rendimiento.
+
+**Ejemplo:**
+```
+get_system_health
+```
+
+### `get_debug_logs`
+Obtiene logs de depuración para troubleshooting.
+
+**Parámetros:**
+- `logType` (opcional): Tipo de logs ('all', 'errors', 'json_errors', 'requests'). Default: 'all'
+- `limit` (opcional): Número de entradas. Default: 50
+
+**Ejemplo:**
+```
+get_debug_logs logType=errors limit=100
+```
+
+### `get_analysis_history`
+Obtiene historial de análisis guardados para un símbolo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `limit` (opcional): Número de análisis históricos. Default: 10
+- `analysisType` (opcional): Filtrar por tipo
+
+**Ejemplo:**
+```
+get_analysis_history BTCUSDT limit=20
+```
+
+---
+
+## 🗂️ Herramientas de Configuración
+
+### `get_user_config`
+Obtiene configuración actual del usuario incluyendo timezone.
+
+**Ejemplo:**
+```
+get_user_config
+```
+
+### `set_user_timezone`
+Establece preferencia de zona horaria del usuario.
+
+**Parámetros:**
+- `timezone` (requerido): Identificador de zona horaria (ej: America/New_York)
+- `autoDetect` (opcional): Habilitar detección automática. Default: false
+
+**Ejemplo:**
+```
+set_user_timezone timezone=Europe/London
+```
+
+### `detect_timezone`
+Auto-detecta zona horaria del sistema usando múltiples métodos.
+
+**Ejemplo:**
+```
+detect_timezone
+```
+
+### `get_system_config`
+Obtiene configuración completa del sistema desde variables de entorno.
+
+**Ejemplo:**
+```
+get_system_config
+```
+
+### `validate_env_config`
+Valida configuración de entorno y obtiene recomendaciones.
+
+**Ejemplo:**
+```
+validate_env_config
+```
+
+---
+
+## 💾 Herramientas de Caché
+
+### `get_cache_stats`
+Obtiene estadísticas de rendimiento del caché.
+
+**Ejemplo:**
+```
+get_cache_stats
+```
+
+### `clear_cache`
+Limpia todos los datos en caché del mercado.
+
+**Parámetros:**
+- `confirm` (requerido): Confirmar operación de limpieza
+
+**Ejemplo:**
+```
+clear_cache confirm=true
+```
+
+### `invalidate_cache`
+Invalida entradas de caché para un símbolo específico.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `category` (opcional): Categoría del mercado
+
+**Ejemplo:**
+```
+invalidate_cache BTCUSDT
+```
+
+---
+
+## 🔍 Consejos de Uso
+
+### Para Trading
+1. Usa `get_complete_analysis` para obtener una visión general rápida
+2. **NUEVO:** Comienza con `analyze_wyckoff_phase` para entender la estructura de mercado
+3. Combina `detect_bull_trap` y `detect_bear_trap` para evitar falsas señales
+4. **NUEVO:** Usa `find_wyckoff_events` para identificar springs y upthrusts como puntos de entrada
+5. Utiliza `analyze_volume_delta` para confirmar movimientos de precio
+6. **NUEVO:** Valida setups con `validate_wyckoff_setup` antes de entrar en posición
+7. Revisa `identify_support_resistance` antes de establecer niveles de grid
+
+### Para Análisis
+1. Comienza con `perform_technical_analysis` para análisis completo
+2. **NUEVO:** Complementa con `analyze_wyckoff_phase` para estructura de mercado
+3. Usa `get_historical_summary` para contexto de largo plazo
+4. **NUEVO:** Combina `detect_trading_range` con `analyze_wyckoff_volume` para confirmar fases
+5. Identifica patrones con `identify_volume_anomalies`
+6. **NUEVO:** Usa `get_wyckoff_interpretation` para entender implicaciones de la fase actual
+7. Valida breakouts con `validate_breakout` antes de tomar decisiones
+
+### Para Monitoreo
+1. Revisa `get_system_health` periódicamente
+2. **NUEVO:** Usa `track_phase_progression` para seguir el desarrollo de fases Wyckoff
+3. Usa `get_trap_statistics` para evaluar efectividad
+4. Genera reportes diarios con `generate_daily_report`
+5. Mantén el rendimiento con `get_cache_stats`
+
+---
+
+## 📝 Notas Importantes
+
+- Todas las herramientas funcionan sin API keys
+- Los datos son públicos de Bybit v5
+- Los tiempos están en UTC por defecto (configurable con timezone)
+- El sistema guarda automáticamente los análisis para referencia futura
+- La detección de trampas usa múltiples señales para mayor precisión
+- **NUEVO:** El análisis Wyckoff identifica 15 fases diferentes con eventos clave
+- **NUEVO:** Los springs y upthrusts se detectan automáticamente con scoring de significancia
+- **NUEVO:** El sistema de validación Wyckoff evalúa setups con puntuación 0-100
+
+---
+
+## 🆘 Soporte
+
+Si encuentras problemas:
+1. Usa `get_debug_logs` para obtener información de depuración
+2. Revisa `get_system_health` para verificar el estado del sistema
+3. Consulta la documentación técnica en `/claude/docs/`
+4. Reporta issues en el repositorio del proyecto
+
+---
+
+*Versión: 1.6.4 - Actualizado: 11/06/2025*
+*Última actualización: Sistema Wyckoff Básico - 7 nuevas herramientas de análisis*
