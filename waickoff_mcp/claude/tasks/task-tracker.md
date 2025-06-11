@@ -334,6 +334,85 @@
 - **Beneficios:** Análisis institucional, mejores entradas, objetivos precisos
 - **ROI Esperado:** Muy alto para traders avanzados
 
+#### 📈 TASK-019 - Herramientas de Análisis Técnico Adicionales (NUEVA)
+- **Estado:** NUEVO - Análisis técnico clásico para trading algorítmico
+- **Descripción:** Implementar Fibonacci, Elliott Waves y Bollinger Bands con optimización para bots
+- **Prioridad:** **MEDIA-ALTA** (Herramientas esenciales para trading algorítmico)
+- **Tiempo Estimado:** 8h
+- **Archivos:** `claude/tasks/task-019-technical-analysis-tools.md`
+- **Componentes:**
+  - **Fibonacci Retracement/Extension:**
+    - Auto-detección de swings high/low significativos
+    - Niveles clásicos: 23.6%, 38.2%, 50%, 61.8%, 78.6%, 100%, 161.8%
+    - Confluencia con S/R existentes para mayor validación
+    - Scoring de niveles por toques históricos
+  - **Elliott Wave Analysis:**
+    - Detección automática de ondas impulsivas (1-5) y correctivas (A-C)
+    - Validación de reglas Elliott (onda 3 no más corta, etc.)
+    - Multi-timeframe wave counting
+    - Proyección de targets basada en ratios de Fibonacci
+  - **Bollinger Bands:**
+    - Bandas adaptativas con período configurable
+    - Detección de squeeze (baja volatilidad)
+    - Identificación de walking the bands (tendencia fuerte)
+    - Divergencias con precio para reversiones
+  - **Integration con análisis existente:**
+    - Confluencia con Wyckoff phases
+    - Validación con Volume Delta
+    - Combinación con S/R dinámicos
+- **Herramientas MCP nuevas:**
+  - `calculate_fibonacci_levels` - Niveles Fibo con auto-detección de swings
+  - `detect_elliott_waves` - Conteo de ondas con validación de reglas
+  - `analyze_bollinger_bands` - Análisis completo con squeeze y divergencias
+  - `find_technical_confluences` - Confluencias entre múltiples indicadores
+- **Beneficios:** Análisis técnico completo, mejor timing, validación cruzada
+- **ROI Esperado:** Alto para estrategias algorítmicas
+
+#### 💰 TASK-020 - Smart Money Concepts (SMC) para Trading Algorítmico (NUEVA)
+- **Estado:** NUEVO - Conceptos institucionales optimizados para bots
+- **Descripción:** Implementar conceptos SMC adaptados para trading algorítmico de alta frecuencia
+- **Prioridad:** **MEDIA** (Complementa análisis Wyckoff con enfoque moderno)
+- **Tiempo Estimado:** 10h
+- **Archivos:** `claude/tasks/task-020-smart-money-concepts.md`
+- **Componentes:**
+  - **Order Blocks (OB):**
+    - Detección automática de zonas institucionales
+    - Clasificación: Bullish OB, Bearish OB, Breaker Blocks
+    - Validación por volumen y movimiento posterior
+    - Mitigation tracking (cuando se testean)
+  - **Fair Value Gaps (FVG):**
+    - Identificación de imbalances de precio
+    - Clasificación por tamaño y contexto
+    - Probabilidad de relleno basada en histórico
+    - Integration con volatilidad para timing
+  - **Liquidity Concepts:**
+    - Buy-side/Sell-side liquidity identification
+    - Liquidity grabs/sweeps detection
+    - Stop hunt patterns
+    - Integration con order flow
+  - **Market Structure:**
+    - Break of Structure (BoS) automático
+    - Change of Character (ChoCh) detection
+    - Higher highs/lows, Lower highs/lows tracking
+    - Trend strength scoring
+  - **Displacement & Momentum:**
+    - Detección de movimientos institucionales fuertes
+    - Momentum shifts para cambios de tendencia
+    - Integration con Volume Delta para confirmación
+- **Optimización para Bots:**
+  - Señales claras y cuantificables (no subjetivas)
+  - Backtesting metrics para cada concepto
+  - Risk/reward ratios predefinidos por setup
+  - Timeframe optimization (mejor en 15m-4h para crypto)
+- **Herramientas MCP nuevas:**
+  - `detect_order_blocks` - Identificación y clasificación de OBs
+  - `find_fair_value_gaps` - FVGs con probabilidad de relleno
+  - `analyze_liquidity_levels` - Liquidez y stop hunts
+  - `track_market_structure` - BoS, ChoCh, tendencia
+  - `detect_smc_setups` - Setups completos listos para ejecutar
+- **Beneficios:** Perspectiva institucional, mejor comprensión del mercado, setups de alta probabilidad
+- **ROI Esperado:** Muy alto cuando se combina con gestión de riesgo adecuada
+
 ### **🟢 BAJA PRIORIDAD (Próximo Mes)**
 
 #### 📋 TASK-007 - Market Profile Básico
@@ -373,10 +452,10 @@
 
 ### **Velocidad de Desarrollo**
 - **Tareas Completadas:** 14 (incluyendo TASK-018 Modularización MCP)
-- **Tareas Planificadas:** 8 nuevas (TASK-017, TASK-012, TASK-005, TASK-006, TASK-015, TASK-016, TASK-013)
+- **Tareas Planificadas:** 10 nuevas (TASK-017, TASK-012, TASK-019, TASK-020, TASK-006, TASK-015, TASK-016, TASK-013, TASK-018 Wyckoff Avanzado, TASK-011)
 - **Tiempo Invertido:** ~35h
-- **Tiempo Planificado:** +58h (Sistema completo con Wyckoff Avanzado)
-- **Promedio por Tarea:** 2.5h (actual) / 7.25h (planificadas - alta complejidad)
+- **Tiempo Planificado:** +76h (Sistema completo con herramientas técnicas y SMC)
+- **Promedio por Tarea:** 2.5h (actual) / 7.6h (planificadas - alta complejidad)
 - **Eficiencia:** **MUY ALTA** (sistema completamente operativo + modularización crítica)
 
 ### **Calidad del Código**
@@ -420,7 +499,7 @@
 - [ ] 📋 **TASK-011**: Documentación sistema modular
 - [ ] 📝 **Planning**: Iniciar especificación FastAPI wAIckoff
 
-**Resultado Esperado:** MCP con trading signals avanzados + roadmap FastAPI claro
+**Resultado Esperado:** MCP con análisis técnico completo + SMC + trading signals avanzados
 
 ---
 
@@ -515,4 +594,4 @@ Las tareas se priorizan considerando la nueva arquitectura modular:
 
 ---
 
-*Actualizado: 10/06/2025 - Siguiente revisión: Al completar TASK-009 FASE 3*
+*Actualizado: 11/06/2025 - Siguiente revisión: Al completar TASK-019 o TASK-020*
