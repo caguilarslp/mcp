@@ -698,6 +698,116 @@ export { ConfigurationManager } from '../services/config/configurationManager.js
 export { EnvironmentConfig, environmentConfig } from '../services/config/environmentConfig.js';
 
 // ====================
+// TRAP DETECTION TYPES (TASK-012)
+// ====================
+
+export interface TrapTrigger {
+  type: 'VOLUME' | 'ORDERBOOK' | 'PRICE_ACTION' | 'DIVERGENCE' | 'MOMENTUM';
+  description: string;
+  weight: number;      // Peso en la decisión final (0-100)
+  value: number;       // Valor específico del trigger
+  threshold: number;   // Umbral que se cruzó
+  timestamp: number;
+}
+
+export interface TrapAnalysis {
+  symbol: string;
+  trapType: 'bull_trap' | 'bear_trap';
+  probability: number;          // 0-100% probabilidad de trampa
+  confidence: number;           // 0-100% confianza en detección
+  triggers: TrapTrigger[];      // Señales que indican trampa
+  priceTargets: number[];       // Niveles objetivo del movimiento
+  timeWindow: string;           // Ventana de tiempo esperada
+  riskLevel: 'LOW' | 'MEDIUM' | 'HIGH';
+  actionable: boolean;          // Si es accionable para trading
+  keyLevel: number;             // Nivel S/R que se rompió
+  currentPrice: number;         // Precio actual
+  timestamp: string;
+}
+
+export interface TrapEvent {
+  id: string;
+  symbol: string;
+  trapType: 'bull_trap' | 'bear_trap';
+  detectedAt: string;
+  resolvedAt?: string;
+  keyLevel: number;
+  breakoutPrice: number;
+  currentPrice: number;
+  maxPriceReached: number;
+  actualTimeWindow: number;     // minutos que duró
+  wasCorrect: boolean;
+  triggers: TrapTrigger[];
+  outcome: {
+    priceReturned: boolean;
+    targetHit: boolean;
+    maxDrawdown: number;
+    finalResult: 'confirmed_trap' | 'false_alarm' | 'ongoing';
+  };
+}
+
+export interface TrapConfig {
+  sensitivity: 'low' | 'medium' | 'high';
+  volumeThreshold: number;        // Multiplicador volumen promedio
+  orderbookDepthRatio: number;    // Ratio profundidad mínima
+  timeWindowMinutes: number;      // Ventana máxima análisis
+  minimumBreakout: number;        // % mínimo breakout para analizar
+  confidenceThreshold: number;    // Confianza mínima para alertar
+}
+
+export interface TrapStatistics {
+  symbol: string;
+  period: string;
+  totalTrapsDetected: number;
+  bullTraps: number;
+  bearTraps: number;
+  accuracy: number;               // % de trampas correctamente identificadas
+  falsePositives: number;
+  avgDetectionTime: number;       // minutos promedio detección
+  mostCommonTriggers: string[];
+  profitability: {
+    totalTrades: number;
+    profitableTrades: number;
+    avgReturn: number;
+    maxDrawdown: number;
+  };
+}
+
+export interface BreakoutContext {
+  symbol: string;
+  level: SupportResistanceLevel;
+  breakoutPrice: number;
+  breakoutTime: string;
+  breakoutDirection: 'up' | 'down';
+  volumeAtBreakout: number;
+  avgVolume: number;
+  priceChange: number;
+  timeFromLevel: number;          // minutos desde último toque del nivel
+}
+
+export interface TrapDetectionResult {
+  hasTrap: boolean;
+  analysis?: TrapAnalysis;
+  breakoutContext: BreakoutContext;
+  nextAnalysisTime?: string;      // Cuándo revisar nuevamente
+}
+
+// Trap Detection Service Interface
+export interface ITrapDetectionService {
+  detectBullTrap(symbol: string, sensitivity?: 'low' | 'medium' | 'high'): Promise<TrapDetectionResult>;
+  detectBearTrap(symbol: string, sensitivity?: 'low' | 'medium' | 'high'): Promise<TrapDetectionResult>;
+  getTrapHistory(
+    symbol: string, 
+    days: number, 
+    trapType?: 'bull' | 'bear' | 'both'
+  ): Promise<TrapEvent[]>;
+  getTrapStatistics(symbol: string, period: string): Promise<TrapStatistics>;
+  configureTrapDetection(config: Partial<TrapConfig>): Promise<TrapConfig>;
+  validateBreakout(symbol: string): Promise<BreakoutContext | null>;
+  getPerformanceMetrics(): PerformanceMetrics[];
+}
+
+// ====================
 // EXPORT ALL TYPES
 // ====================
 

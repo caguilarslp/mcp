@@ -4,7 +4,7 @@
  * @version 1.3.0
  */
 
-import {
+import type {
   SystemConfig,
   MarketTicker,
   Orderbook,
@@ -45,7 +45,13 @@ import {
   VolumeEvent,
   MarketCycle,
   PriceDistribution,
-  HistoricalTimeframe
+  HistoricalTimeframe,
+  ITrapDetectionService,
+  TrapDetectionResult,
+  TrapEvent,
+  TrapStatistics,
+  TrapConfig,
+  BreakoutContext
 } from '../types/index.js';
 
 import { BybitMarketDataService } from '../services/marketData.js';
@@ -62,6 +68,7 @@ import { HistoricalDataService } from '../services/historicalData.js';
 import { HistoricalAnalysisService } from '../services/historicalAnalysis.js';
 import { HistoricalCacheService } from '../services/historicalCache.js';
 import { HybridStorageService } from '../services/storage/hybridStorageService.js';
+import { TrapDetectionService } from '../services/trapDetection.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -103,6 +110,9 @@ export class MarketAnalysisEngine {
   public readonly historicalAnalysisService: IHistoricalAnalysisService;
   public readonly historicalCacheService: IHistoricalCacheService;
   
+  // Trap detection service (TASK-012)
+  public readonly trapDetectionService: ITrapDetectionService;
+  
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
   
@@ -119,7 +129,8 @@ export class MarketAnalysisEngine {
     cacheManager?: ICacheManager,
     timezoneConfig?: Partial<TimezoneConfig>,
     configurationManager?: ConfigurationManager,
-    hybridStorageService?: HybridStorageService
+    hybridStorageService?: HybridStorageService,
+    trapDetectionService?: ITrapDetectionService
   ) {
     this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
@@ -190,12 +201,19 @@ export class MarketAnalysisEngine {
     // Initialize hybrid storage service (TASK-015) - Optional
     this.hybridStorageService = hybridStorageService;
     
-    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository and Report Generator', {
+    // Initialize trap detection service (TASK-012)
+    this.trapDetectionService = trapDetectionService || new TrapDetectionService(
+      this.marketDataService,
+      this.analysisService
+    );
+    
+    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator and Trap Detection', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
       repositoryEnabled: true,
       reportGeneratorEnabled: true,
-      configurationManagerEnabled: true
+      configurationManagerEnabled: true,
+      trapDetectionEnabled: true
     });
   }
 
@@ -519,6 +537,122 @@ export class MarketAnalysisEngine {
         return this.createErrorResponse(`Complete analysis failed: ${error}`);
       }
     });
+  }
+
+  // ====================
+  // TRAP DETECTION METHODS (TASK-012)
+  // ====================
+
+  /**
+   * Detect bull trap (false breakout above resistance)
+   */
+  async detectBullTrap(
+    symbol: string,
+    sensitivity: 'low' | 'medium' | 'high' = 'medium'
+  ): Promise<ApiResponse<TrapDetectionResult>> {
+    return this.performanceMonitor.measure('detectBullTrap', async () => {
+      try {
+        const result = await this.trapDetectionService.detectBullTrap(symbol, sensitivity);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to detect bull trap for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to detect bull trap: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Detect bear trap (false breakdown below support)
+   */
+  async detectBearTrap(
+    symbol: string,
+    sensitivity: 'low' | 'medium' | 'high' = 'medium'
+  ): Promise<ApiResponse<TrapDetectionResult>> {
+    return this.performanceMonitor.measure('detectBearTrap', async () => {
+      try {
+        const result = await this.trapDetectionService.detectBearTrap(symbol, sensitivity);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to detect bear trap for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to detect bear trap: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get trap history for backtesting and analysis
+   */
+  async getTrapHistory(
+    symbol: string,
+    days: number,
+    trapType?: 'bull' | 'bear' | 'both'
+  ): Promise<ApiResponse<TrapEvent[]>> {
+    return this.performanceMonitor.measure('getTrapHistory', async () => {
+      try {
+        const result = await this.trapDetectionService.getTrapHistory(symbol, days, trapType);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to get trap history for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to get trap history: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get trap statistics for performance analysis
+   */
+  async getTrapStatistics(
+    symbol: string,
+    period: string
+  ): Promise<ApiResponse<TrapStatistics>> {
+    return this.performanceMonitor.measure('getTrapStatistics', async () => {
+      try {
+        const result = await this.trapDetectionService.getTrapStatistics(symbol, period);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to get trap statistics for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to get trap statistics: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Configure trap detection parameters
+   */
+  async configureTrapDetection(
+    config: Partial<TrapConfig>
+  ): Promise<ApiResponse<TrapConfig>> {
+    return this.performanceMonitor.measure('configureTrapDetection', async () => {
+      try {
+        const result = await this.trapDetectionService.configureTrapDetection(config);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error('Failed to configure trap detection:', error);
+        return this.createErrorResponse(`Failed to configure trap detection: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Validate if there's a breakout situation
+   */
+  async validateBreakout(symbol: string): Promise<ApiResponse<BreakoutContext | null>> {
+    return this.performanceMonitor.measure('validateBreakout', async () => {
+      try {
+        const result = await this.trapDetectionService.validateBreakout(symbol);
+        return this.createSuccessResponse(result);
+      } catch (error) {
+        this.logger.error(`Failed to validate breakout for ${symbol}:`, error);
+        return this.createErrorResponse(`Failed to validate breakout: ${error}`);
+      }
+    });
+  }
+
+  /**
+   * Get trap detection performance metrics
+   */
+  getTrapDetectionPerformanceMetrics(): PerformanceMetrics[] {
+    return this.trapDetectionService.getPerformanceMetrics();
   }
 
   // ====================

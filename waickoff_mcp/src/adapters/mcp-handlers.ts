@@ -15,6 +15,7 @@ import { ConfigurationHandlers } from './handlers/configurationHandlers.js';
 import { SystemConfigurationHandlers } from './handlers/systemConfigurationHandlers.js';
 import { HistoricalAnalysisHandlers } from './handlers/historicalAnalysisHandlers.js';
 import { HybridStorageHandlers } from './handlers/hybridStorageHandlers.js';
+import { TrapDetectionHandlers } from './handlers/trapDetectionHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -28,6 +29,7 @@ export class MCPHandlers {
   private readonly configurationHandlers: ConfigurationHandlers;
   private readonly systemConfigurationHandlers: SystemConfigurationHandlers;
   private readonly historicalAnalysisHandlers: HistoricalAnalysisHandlers;
+  private readonly trapDetectionHandlers: TrapDetectionHandlers;
   private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
@@ -50,6 +52,7 @@ export class MCPHandlers {
       engine.historicalAnalysisService,
       engine.historicalCacheService
     );
+    this.trapDetectionHandlers = new TrapDetectionHandlers(engine.trapDetectionService);
     
     // Initialize Hybrid Storage Handlers if available (TASK-015)
     if (engine.hybridStorageService) {
@@ -58,7 +61,8 @@ export class MCPHandlers {
     }
 
     this.logger.info('MCP Handlers initialized with modular architecture', {
-      hybridStorageEnabled: !!engine.hybridStorageService
+      hybridStorageEnabled: !!engine.hybridStorageService,
+      trapDetectionEnabled: true
     });
   }
 
@@ -1012,6 +1016,38 @@ export class MCPHandlers {
 
   async handleGetEnvFileInfo(args: any): Promise<MCPServerResponse> {
     return await this.systemConfigurationHandlers.handleGetEnvFileInfo();
+  }
+
+  // ====================
+  // TRAP DETECTION HANDLERS (TASK-012) - DELEGATED
+  // ====================
+
+  async handleDetectBullTrap(args: any): Promise<MCPServerResponse> {
+    return await this.trapDetectionHandlers.handleDetectBullTrap(args);
+  }
+
+  async handleDetectBearTrap(args: any): Promise<MCPServerResponse> {
+    return await this.trapDetectionHandlers.handleDetectBearTrap(args);
+  }
+
+  async handleGetTrapHistory(args: any): Promise<MCPServerResponse> {
+    return await this.trapDetectionHandlers.handleGetTrapHistory(args);
+  }
+
+  async handleGetTrapStatistics(args: any): Promise<MCPServerResponse> {
+    return await this.trapDetectionHandlers.handleGetTrapStatistics(args);
+  }
+
+  async handleConfigureTrapDetection(args: any): Promise<MCPServerResponse> {
+    return await this.trapDetectionHandlers.handleConfigureTrapDetection(args);
+  }
+
+  async handleValidateBreakout(args: any): Promise<MCPServerResponse> {
+    return await this.trapDetectionHandlers.handleValidateBreakout(args);
+  }
+
+  async handleGetTrapPerformance(args: any): Promise<MCPServerResponse> {
+    return await this.trapDetectionHandlers.handleGetTrapPerformance(args);
   }
 
   // ====================
