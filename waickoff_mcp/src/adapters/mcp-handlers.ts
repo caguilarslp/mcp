@@ -9,6 +9,7 @@ import { MCPServerResponse, MarketCategoryType } from '../types/index.js';
 import { FileLogger } from '../utils/fileLogger.js';
 import { MarketDataHandlers } from './handlers/marketDataHandlers.js';
 import { AnalysisRepositoryHandlers } from './handlers/analysisRepositoryHandlers.js';
+import { ReportGeneratorHandlers } from './handlers/reportGeneratorHandlers.js';
 import { CacheHandlers } from './cacheHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
@@ -18,6 +19,7 @@ export class MCPHandlers {
   private readonly engine: MarketAnalysisEngine;
   private readonly marketDataHandlers: MarketDataHandlers;
   private readonly analysisRepositoryHandlers: AnalysisRepositoryHandlers;
+  private readonly reportGeneratorHandlers: ReportGeneratorHandlers;
   private readonly cacheHandlers: CacheHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
@@ -31,6 +33,7 @@ export class MCPHandlers {
     // Initialize modular handlers
     this.marketDataHandlers = new MarketDataHandlers(engine, this.logger);
     this.analysisRepositoryHandlers = new AnalysisRepositoryHandlers(engine, this.logger);
+    this.reportGeneratorHandlers = new ReportGeneratorHandlers(engine, this.logger);
     this.cacheHandlers = new CacheHandlers(engine);
 
     this.logger.info('MCP Handlers initialized with modular architecture');
@@ -804,6 +807,42 @@ export class MCPHandlers {
 
   async handleInvalidateCache(args: any): Promise<MCPServerResponse> {
     return await this.cacheHandlers.handleInvalidateCache(args);
+  }
+
+  // ====================
+  // REPORT GENERATOR HANDLERS (DELEGATED)
+  // ====================
+
+  async handleGenerateReport(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleGenerateReport(args);
+  }
+
+  async handleGenerateDailyReport(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleGenerateDailyReport(args);
+  }
+
+  async handleGenerateWeeklyReport(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleGenerateWeeklyReport(args);
+  }
+
+  async handleGenerateSymbolReport(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleGenerateSymbolReport(args);
+  }
+
+  async handleGeneratePerformanceReport(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleGeneratePerformanceReport(args);
+  }
+
+  async handleGetReport(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleGetReport(args);
+  }
+
+  async handleListReports(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleListReports(args);
+  }
+
+  async handleExportReport(args: any): Promise<MCPServerResponse> {
+    return await this.reportGeneratorHandlers.handleExportReport(args);
   }
 
   // ====================

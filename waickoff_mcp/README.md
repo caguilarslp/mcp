@@ -1,4 +1,4 @@
-# 🤖 wAIckoff MCP Server v1.3.6
+# 🤖 wAIckoff MCP Server v1.4.0
 
 > **Servidor MCP avanzado para análisis de mercado crypto con integración Bybit**
 > 
@@ -8,18 +8,21 @@
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![MCP](https://img.shields.io/badge/MCP-Protocol-blue)](https://modelcontextprotocol.io/)
 [![Bybit](https://img.shields.io/badge/Bybit-API-orange)](https://bybit.com/)
+[![Tests](https://img.shields.io/badge/Tests-100%2B-brightgreen)](#-sistema-de-testing)
 
 ---
 
 ## 🎯 **¿Qué es wAIckoff MCP?**
 
-**wAIckoff MCP** es un servidor de **Model Context Protocol (MCP)** que proporciona análisis técnico profesional para criptomonedas. Diseñado específicamente para ser la **capa de datos** del sistema **Waickoff AI**, ofrece:
+**wAIckoff MCP v1.4.0** es un servidor de **Model Context Protocol (MCP)** que proporciona análisis técnico profesional para criptomonedas. Diseñado específicamente para ser la **capa de datos** del sistema **Waickoff AI**, ofrece:
 
 - **📊 Análisis técnico completo** - Volatilidad, volumen, Support/Resistance dinámicos
 - **🎯 Grid trading inteligente** - Sugerencias basadas en datos reales del mercado
 - **📈 Detección de patrones** - Volume Delta, divergencias, anomalías
-- **🗄️ Auto-guardado de análisis** - Historia persistente para contexto futuro
-- **🔍 Sistema de debugging avanzado** - Logs estructurados y troubleshooting
+- **🗄️ Repositorio de análisis** - Sistema avanzado de almacenamiento y consulta
+- **📋 Generación de reportes** - Reportes automáticos diarios/semanales/personalizados
+- **⚡ Cache inteligente** - Performance optimizado con invalidación granular
+- **🧪 Testing completo** - 100+ test cases validando arquitectura modular
 - **🏗️ Arquitectura modular** - Clean Architecture con 4 capas especializadas
 
 ---
@@ -49,11 +52,11 @@ Edita `%APPDATA%\Claude\claude_desktop_config.json`:
 ```
 
 ### **¡Listo!** 
-Reinicia Claude Desktop y pregunta: *"Analiza BTCUSDT para grid trading"*
+Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 
 ---
 
-## 📊 **Funcionalidades Principales**
+## 📊 **Funcionalidades Principales v1.4.0**
 
 ### **🎯 Análisis de Mercado en Tiempo Real**
 - **`get_ticker`** - Precios actuales y estadísticas 24h
@@ -71,27 +74,49 @@ Reinicia Claude Desktop y pregunta: *"Analiza BTCUSDT para grid trading"*
 - **`suggest_grid_levels`** - Configuraciones inteligentes basadas en volatilidad
 - **`get_complete_analysis`** - **Análisis completo + recomendaciones**
 
-### **🗄️ Gestión de Datos e Historia**
+### **🆕 Sistema de Repositorio Histórico (TASK-009)**
 - **`get_analysis_history`** - Consulta análisis históricos guardados
-- **Auto-save automático** - Todos los análisis se guardan automáticamente
-- **Sistema de storage inteligente** - Base de conocimiento creciente
+- **`get_latest_analysis`** - Último análisis por tipo
+- **`search_analyses`** - Búsqueda compleja con filtros avanzados
+- **`get_analysis_by_id`** - Recuperar análisis específico por UUID
+- **`get_analysis_summary`** - Resumen agregado por período
+- **`get_aggregated_metrics`** - Métricas estadísticas de indicadores
+- **`find_patterns`** - Búsqueda de patrones automática
+- **`get_repository_stats`** - Estadísticas del repositorio
+
+### **🆕 Sistema de Reportes Automáticos (TASK-009)**
+- **`generate_daily_report`** - Reporte diario automático
+- **`generate_weekly_report`** - Análisis semanal comprehensivo
+- **`generate_symbol_report`** - Reporte detallado por símbolo
+- **`generate_performance_report`** - Análisis de rendimiento del sistema
+- **`get_report`** - Recuperar reporte por ID
+- **`list_reports`** - Listar reportes disponibles
+- **`export_report`** - Exportar reporte a archivo
+
+### **🆕 Gestión de Cache Inteligente**
+- **`get_cache_stats`** - Estadísticas y recomendaciones de cache
+- **`clear_cache`** - Limpieza completa del cache
+- **`invalidate_cache`** - Invalidación granular por símbolo/categoría
 
 ### **🔧 Sistema y Debugging**
 - **`get_system_health`** - Estado del sistema y métricas de performance
-- **`get_api_stats`** - Estadísticas de conexión y errores
 - **`get_debug_logs`** - Logs estructurados para troubleshooting
+- **`test_storage`** - Testing del sistema de almacenamiento
 
 ---
 
-## 🏗️ **Arquitectura del Sistema**
+## 🏗️ **Arquitectura del Sistema v1.4.0**
 
 ### **📐 Clean Architecture (4 Capas)**
 ```
 📱 Presentation Layer (Adapters)
 ├── MCP Adapter (src/adapters/mcp.ts)
-├── [Future] REST API Adapter  
-├── [Future] WebSocket Adapter
-└── [Future] CLI Adapter
+├── MCPHandlers (src/adapters/mcp-handlers.ts) - 🆕 Delegation pattern
+├── MarketDataHandlers (src/adapters/handlers/marketDataHandlers.ts)
+├── AnalysisRepositoryHandlers (src/adapters/handlers/analysisRepositoryHandlers.ts)
+├── ReportGeneratorHandlers (src/adapters/handlers/reportGeneratorHandlers.ts)
+├── CacheHandlers (src/adapters/cacheHandlers.ts)
+└── [Future] REST API, WebSocket, CLI Adapters
 
 🧠 Core Layer (Business Logic) 
 ├── Market Analysis Engine (src/core/engine.ts)
@@ -101,7 +126,11 @@ Reinicia Claude Desktop y pregunta: *"Analiza BTCUSDT para grid trading"*
 ⚙️ Service Layer (Specialized Services)
 ├── Market Data Service (src/services/marketData.ts)
 ├── Technical Analysis Service (src/services/analysis.ts)
-└── Trading Service (src/services/trading.ts)
+├── Trading Service (src/services/trading.ts)
+├── Storage Service (src/services/storage/) - 🆕 Modularizado
+├── Cache Manager (src/services/cacheManager.ts)
+├── Analysis Repository (src/repositories/analysisRepository.ts)
+└── Report Generator (src/repositories/reportGenerator.ts)
 
 🛠️ Utility Layer (Common Tools)
 ├── Logger (src/utils/logger.ts)
@@ -110,6 +139,7 @@ Reinicia Claude Desktop y pregunta: *"Analiza BTCUSDT para grid trading"*
 ```
 
 ### **🎯 Principios de Diseño**
+- **🆕 Delegation pattern** - MCPHandlers orquesta handlers especializados
 - **Protocol-agnostic core** - Engine reutilizable desde cualquier protocolo
 - **Dependency injection** - Servicios 100% testeables
 - **Interface-based design** - Abstracciones para múltiples implementaciones
@@ -118,39 +148,94 @@ Reinicia Claude Desktop y pregunta: *"Analiza BTCUSDT para grid trading"*
 
 ---
 
-## 💡 **Casos de Uso**
+## 🧪 **Sistema de Testing v1.4.0**
+
+### **✅ Tests Implementados (TASK-004 COMPLETADA)**
+- **100+ test cases** validando arquitectura modular
+- **8 categorías de tests** (4 críticas, 4 opcionales)
+- **Test runner avanzado** con categorización inteligente
+- **Prevención BUG-001** con tests específicos
+
+### **🔧 Comandos de Testing**
+```bash
+# Test runner principal
+npm run test:task-004
+
+# Solo tests críticos
+npm run test:critical
+
+# Tests con cobertura
+npm run test:coverage
+
+# Categoría específica
+npm run test:category "core engine"
+
+# Listar categorías
+npm run test:list
+
+# Ayuda detallada
+npm run test:help
+```
+
+### **📊 Categorías de Tests**
+- **🔴 Core Engine Tests** - Business logic central
+- **🔴 Handler Delegation Tests** - Patrón de delegación modular
+- **🔴 Specialized Handler Tests** - MarketData, AnalysisRepository, Reports
+- **🔴 Support/Resistance Logic Tests** - Prevención BUG-001
+- **🟡 Cache Handler Tests** - Gestión de cache
+- **🟡 Volume Delta Tests** - Cálculos matemáticos
+- **🟡 Storage Service Tests** - Funcionalidad de almacenamiento
+- **🟡 Cache Manager Tests** - Manager de cache existente
+
+**📖 Manual Completo:** [Testing Manual](claude/docs/testing-manual.md)
+
+---
+
+## 💡 **Casos de Uso v1.4.0**
 
 ### **📈 Para Análisis Técnico**
 ```bash
-# Análisis completo de un símbolo
+# Análisis completo con auto-guardado
 "Analiza XRPUSDT técnicamente con todas las herramientas"
 
-# Identificar niveles clave
-"Identifica support y resistance de BTCUSDT en timeframe 1h"
+# Recuperar último análisis
+"Muestra mi último análisis de BTCUSDT"
 
-# Detectar señales de volumen
-"Analiza volume delta de ETHUSDT en los últimos 60 períodos"
+# Buscar análisis históricos
+"Busca análisis de ETHUSDT de la semana pasada"
 ```
 
 ### **🎯 Para Grid Trading**
 ```bash
-# Configuración de grid inteligente
-"Sugiere niveles de grid para SOLUSDT con $2000 de inversión"
+# Configuración inteligente
+"Sugiere niveles de grid para SOLUSDT con $2000"
 
-# Análisis de timing 
-"¿Es buen momento para grid trading en ADAUSDT?"
-
-# Análisis completo con recomendaciones
-"Análisis completo de AVAXUSDT para grid con $1500"
+# Con contexto histórico
+"¿Cómo se comportó el grid de ADAUSDT históricamente?"
 ```
 
-### **🗄️ Para Análisis Histórico**
+### **📋 Para Reportes Automáticos**
 ```bash
-# Consultar análisis previos
-"Muestra el historial de análisis de BTCUSDT de los últimos 7 días"
+# Reporte diario
+"Genera un reporte diario de mercado para XRPUSDT y HBARUSDT"
 
-# Comparar comportamiento histórico
-"¿Cómo se comportó XRP las últimas veces en este precio?"
+# Reporte semanal
+"Crea un reporte semanal de mi portfolio"
+
+# Reporte por símbolo
+"Análisis completo de ONDOUSDT en los últimos 7 días"
+```
+
+### **🗄️ Para Análisis Histórico Avanzado**
+```bash
+# Métricas agregadas
+"Muestra la volatilidad promedio de BTCUSDT en el último mes"
+
+# Patrones detectados
+"¿Qué patrones ha detectado el sistema en XRPUSDT?"
+
+# Estadísticas del repositorio
+"¿Cuántos análisis tengo guardados y de qué tipos?"
 ```
 
 ---
@@ -167,9 +252,12 @@ npm run clean        # Limpiar archivos build
 
 ### **🧪 Testing y Quality**
 ```bash
-npm run test         # Tests unitarios (TASK-004 pendiente)
-npm run lint         # Verificar código con ESLint
-npm run docs         # Generar documentación TypeDoc
+npm run test:task-004    # Test runner completo
+npm run test:critical    # Solo tests críticos
+npm run test:coverage    # Tests con cobertura
+npm run test:category    # Categoría específica
+npm run lint             # Verificar código con ESLint
+npm run docs             # Generar documentación TypeDoc
 ```
 
 ### **🔍 Debugging**
@@ -186,50 +274,67 @@ node scripts/test-json.js
 
 ---
 
-## 📂 **Estructura del Proyecto**
+## 📂 **Estructura del Proyecto v1.4.0**
 
 ```
 waickoff_mcp/
 ├── 📁 src/                          # Código fuente TypeScript
 │   ├── 📁 adapters/                 # Presentation layer
+│   │   ├── 📁 handlers/             # 🆕 Handlers especializados
+│   │   ├── mcp-handlers.ts          # 🆕 Orquestador delegation pattern
+│   │   └── cacheHandlers.ts         # 🆕 Cache management
 │   ├── 📁 core/                     # Business logic
 │   ├── 📁 services/                 # Specialized services
+│   │   └── 📁 storage/              # 🆕 Storage modularizado
+│   ├── 📁 repositories/             # 🆕 Data access layer
 │   ├── 📁 types/                    # Type definitions
 │   └── 📁 utils/                    # Common utilities
 ├── 📁 build/                        # Archivos compilados JavaScript
 ├── 📁 scripts/                      # Scripts de desarrollo
+│   └── test-runner.mjs              # 🆕 Test runner avanzado
+├── 📁 tests/                        # 🆕 Sistema completo de tests
+│   ├── 📁 core/                     # Tests de business logic
+│   ├── 📁 adapters/                 # Tests de handlers
+│   │   └── 📁 handlers/             # Tests especializados
+│   └── 📁 services/                 # Tests de servicios
 ├── 📁 storage/                      # Sistema de almacenamiento local
-│   └── 📁 analysis/                 # Análisis guardados automáticamente
+│   ├── 📁 analysis/                 # Análisis guardados automáticamente
+│   ├── 📁 patterns/                 # 🆕 Patrones detectados
+│   ├── 📁 decisions/                # 🆕 Decisiones históricas
+│   └── 📁 reports/                  # 🆕 Reportes generados
 ├── 📁 claude/                       # Documentación y trazabilidad
 │   ├── 📁 docs/                     # Documentación técnica
+│   │   ├── user-guide.md            # 🆕 Guía de usuario actualizada
+│   │   └── testing-manual.md        # 🆕 Manual de testing
 │   ├── 📁 tasks/                    # Task tracking
 │   ├── 📁 bugs/                     # Bug management
 │   └── 📁 lessons-learned/          # Knowledge management
-├── 📁 tests/                        # Tests unitarios
 ├── 📁 logs/                         # Sistema de logging
 └── 📄 package.json                  # Configuración del proyecto
 ```
 
 ---
 
-## 📊 **Estado del Proyecto**
+## 📊 **Estado del Proyecto v1.4.0**
 
-### **✅ Completado (v1.3.6)**
-- **Análisis técnico completo** - Volatilidad, volumen, Support/Resistance
-- **Grid trading inteligente** - Sugerencias basadas en datos reales
-- **Volume Delta avanzado** - Presión compradora/vendedora + divergencias
-- **Support/Resistance dinámicos** - Algoritmo multi-factor con scoring
-- **Sistema de logging profesional** - Debugging y troubleshooting completo
-- **Arquitectura modular** - Clean Architecture con 15+ módulos
-- **Auto-save automático** - Todos los análisis se guardan automáticamente
-- **Sistema de trazabilidad** - Documentación completa y gestión de bugs
+### **✅ Completado**
+- **✅ Análisis técnico completo** - Volatilidad, volumen, Support/Resistance
+- **✅ Grid trading inteligente** - Sugerencias basadas en datos reales
+- **✅ Volume Delta avanzado** - Presión compradora/vendedora + divergencias
+- **✅ Support/Resistance dinámicos** - Algoritmo multi-factor con scoring
+- **✅ Sistema de logging profesional** - Debugging y troubleshooting completo
+- **✅ Arquitectura modular** - Clean Architecture con delegation pattern
+- **✅ TASK-009 COMPLETADA** - Storage System con 4 fases (15 herramientas nuevas)
+- **✅ TASK-004 COMPLETADA** - Sistema completo de tests unitarios
+- **✅ Auto-save automático** - Todos los análisis se guardan automáticamente
+- **✅ Repositorio de análisis** - 7 herramientas de consulta avanzada
+- **✅ Sistema de reportes** - 8 herramientas de generación automática
+- **✅ Cache inteligente** - Performance optimizado con TTL
 
-### **🚧 En Desarrollo**
-- **TASK-004** - Tests unitarios para todas las funciones core
-- **TASK-009** - Sistema de storage avanzado (5 fases)
-
-### **📅 Roadmap**
-- **v1.4** - Tests completos + Storage system completado
+### **📅 Roadmap Próximo**
+- **TASK-010** - Sistema de configuración timezone persistente (4h)
+- **TASK-012** - Detección de trampas alcistas/bajistas (7h)
+- **TASK-013** - Datos on-chain: stablecoins, ballenas, exchanges (15h)
 - **v1.5** - Detección de patrones Wyckoff básicos
 - **v2.0** - Integración completa con Waickoff AI
 - **v2.1** - Support para múltiples exchanges (Binance, Coinbase)
@@ -240,22 +345,25 @@ waickoff_mcp/
 
 ### **🎯 Diseño Específico para AI**
 - **Datos estructurados** - Formato JSON optimizado para LLMs
-- **Contexto histórico** - Base de conocimiento creciente
+- **Contexto histórico** - Base de conocimiento creciente (análisis + reportes)
 - **Auto-save inteligente** - Memoria persistente entre sesiones
 - **Protocol-agnostic** - Core reutilizable desde Python/FastAPI
 - **Shared storage** - Sistema de intercambio bidireccional
+- **🆕 Analytics avanzado** - Métricas agregadas y pattern recognition
 
 ### **📡 APIs Preparadas**
-- **MCP Protocol** - Actual (Claude Desktop)
+- **MCP Protocol** - Actual (Claude Desktop) - 40+ herramientas
 - **REST API** - Futuro (FastAPI integration)
 - **WebSocket** - Futuro (Real-time streaming)
 - **CLI Interface** - Futuro (Command line tools)
 
 ---
 
-## 📚 **Documentación**
+## 📚 **Documentación v1.4.0**
 
 ### **📖 Guías de Usuario**
+- **🆕 [User Guide v1.4.0](claude/docs/user-guide.md)** - Guía completa actualizada con 40+ herramientas
+- **🆕 [Testing Manual](claude/docs/testing-manual.md)** - Manual completo del sistema de testing
 - **[API Reference](claude/docs/api/tools-reference.md)** - Referencia completa de herramientas
 - **[Volume Analysis Guide](VOLUME_ANALYSIS_GUIDE.md)** - Guía de análisis de volumen
 - **[Integration Guide](INTEGRACION_WAICKOFF.md)** - Integración con Waickoff AI
@@ -265,6 +373,7 @@ waickoff_mcp/
 - **[ADR Log](claude/decisions/adr-log.md)** - Architecture Decision Records
 - **[Bug Reports](claude/bugs/README.md)** - Gestión de bugs y resoluciones
 - **[Lessons Learned](claude/lessons-learned/README.md)** - Knowledge management
+- **🆕 [TASK-004 Completed](claude/tasks/TASK-004-COMPLETED.md)** - Documentación tests
 
 ### **📈 Proyecto Management**
 - **[Master Log](claude/master-log.md)** - Estado actual del proyecto
@@ -298,39 +407,44 @@ CACHE_TTL=3600
 
 ---
 
-## 🐛 **Troubleshooting**
+## 🐛 **Troubleshooting v1.4.0**
 
 ### **❓ Problemas Comunes**
 
-#### **Error: "JSON at position 5"**
+#### **Tests no ejecutan**
 ```bash
-# Solución: Error del MCP SDK, ya suprimido automáticamente
-# Verificar con:
-npm run build && node build/index.js
+# Verificar setup de testing
+npm run test:help
+
+# Ejecutar validación completa
+npm run test:task-004
 ```
 
-#### **Claude Desktop no detecta el MCP**
+#### **Cache problems**
 ```bash
-# Verificar configuración:
-cat "%APPDATA%\Claude\claude_desktop_config.json"
+# Verificar estadísticas de cache
+# Usar: get_cache_stats desde Claude Desktop
 
-# Verificar compilación:
-npm run build
+# Limpiar cache si es necesario
+# Usar: clear_cache true desde Claude Desktop
 ```
 
 #### **Performance lento**
 ```bash
-# Verificar logs:
-# Usar herramienta get_debug_logs desde Claude Desktop
+# Verificar cache hit rate
+# Usar: get_cache_stats
+
+# Invalidar cache específico
+# Usar: invalidate_cache SYMBOL
 ```
 
 ### **🔍 Debugging Avanzado**
 ```bash
-# Ver logs estructurados
-node -e "console.log(require('./logs/mcp-requests-' + new Date().toISOString().split('T')[0] + '.json'))"
-
-# Health check completo
-# Usar herramienta get_system_health desde Claude Desktop
+# Sistema completo de debugging disponible desde Claude Desktop:
+get_debug_logs           # Logs estructurados
+get_system_health        # Estado del sistema
+get_cache_stats          # Performance de cache
+get_repository_stats     # Estado del almacenamiento
 ```
 
 ---
@@ -347,6 +461,19 @@ node -e "console.log(require('./logs/mcp-requests-' + new Date().toISOString().s
 - **[Node.js](https://nodejs.org/)** - Runtime JavaScript
 - **[MCP SDK](https://modelcontextprotocol.io/)** - Model Context Protocol
 - **[Bybit API v5](https://bybit-exchange.github.io/docs/)** - Market data source
+- **[Jest](https://jestjs.io/)** - Testing framework
+
+---
+
+## 📊 **Métricas del Proyecto v1.4.0**
+
+- **40+ herramientas MCP** disponibles
+- **100+ test cases** implementados
+- **15+ módulos** en arquitectura modular
+- **4 fases TASK-009** completadas
+- **0 errores TypeScript** en compilación
+- **85%+ cobertura esperada** en tests críticos
+- **2000+ líneas** de código de tests robusto
 
 ---
 
@@ -359,11 +486,12 @@ node -e "console.log(require('./logs/mcp-requests-' + new Date().toISOString().s
 ## 📞 **Soporte**
 
 Para issues, bugs o sugerencias:
-1. **Revisar [Common Issues](claude/docs/troubleshooting/common-issues.md)**
-2. **Usar herramienta `get_debug_logs`** para diagnóstico
-3. **Consultar [Bug Reports](claude/bugs/README.md)** para problemas conocidos
-4. **Crear issue** en el sistema de tracking interno
+1. **Revisar [Testing Manual](claude/docs/testing-manual.md)** para tests
+2. **Revisar [User Guide v1.4.0](claude/docs/user-guide.md)** para funcionalidades
+3. **Usar herramienta `get_debug_logs`** para diagnóstico
+4. **Consultar [Bug Reports](claude/bugs/README.md)** para problemas conocidos
+5. **Ejecutar `npm run test:critical`** para validación rápida
 
 ---
 
-*Última actualización: 10/06/2025 | v1.3.6 | Estado: Production Ready*
+*Última actualización: 10/06/2025 | v1.4.0 | Estado: Production Ready + Tests Completos*

@@ -22,6 +22,7 @@ import {
   ITradingService,
   CacheStats,
   IAnalysisRepository,
+  IReportGenerator,
   SavedAnalysis,
   Pattern,
   PatternCriteria,
@@ -32,7 +33,10 @@ import {
   Period,
   AnalysisType,
   TimezoneConfig,
-  TemporalContext
+  TemporalContext,
+  ReportOptions,
+  GeneratedReport,
+  ReportType
 } from '../types/index.js';
 
 import { BybitMarketDataService } from '../services/marketData.js';
@@ -42,6 +46,7 @@ import { StorageService } from '../services/storage.js';
 import { CacheManager } from '../services/cacheManager.js';
 import { ICacheManager } from '../types/storage.js';
 import { AnalysisRepository } from '../repositories/analysisRepository.js';
+import { ReportGenerator } from '../services/reports/reportGenerator.js';
 import { TimezoneManager, mexicoTimezone } from '../utils/timezone.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
@@ -75,6 +80,7 @@ export class MarketAnalysisEngine {
   private readonly tradingService: ITradingService;
   private readonly storageService: StorageService;
   private readonly analysisRepository: IAnalysisRepository;
+  private readonly reportGenerator: IReportGenerator;
   private readonly timezoneManager: TimezoneManager;
   
   // Configuration
@@ -129,10 +135,18 @@ export class MarketAnalysisEngine {
       './storage' // Relative path that matches StorageService basePath
     );
     
-    this.logger.info('Market Analysis Engine initialized with timezone support and Analysis Repository', {
+    // Initialize report generator
+    this.reportGenerator = new ReportGenerator(
+      this.analysisRepository,
+      this.storageService,
+      './storage'
+    );
+    
+    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository and Report Generator', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
-      repositoryEnabled: true
+      repositoryEnabled: true,
+      reportGeneratorEnabled: true
     });
   }
 
@@ -577,6 +591,120 @@ export class MarketAnalysisEngine {
         return this.createErrorResponse(`Failed to get analysis history: ${error}`);
       }
     });
+  }
+
+  // ====================
+  // REPORT GENERATOR METHODS
+  // ====================
+
+  /**
+   * Generate report (exposed for MCP handlers)
+   */
+  async generateReportHandler(options: ReportOptions): Promise<ApiResponse<GeneratedReport>> {
+    try {
+      const report = await this.reportGenerator.generateReport(options);
+      return this.createSuccessResponse(report);
+    } catch (error) {
+      this.logger.error('Failed to generate report:', error);
+      return this.createErrorResponse(`Failed to generate report: ${error}`);
+    }
+  }
+
+  /**
+   * Generate daily report (exposed for MCP handlers)
+   */
+  async generateDailyReportHandler(date?: Date): Promise<ApiResponse<GeneratedReport>> {
+    try {
+      const report = await this.reportGenerator.generateDailyReport(date);
+      return this.createSuccessResponse(report);
+    } catch (error) {
+      this.logger.error('Failed to generate daily report:', error);
+      return this.createErrorResponse(`Failed to generate daily report: ${error}`);
+    }
+  }
+
+  /**
+   * Generate weekly report (exposed for MCP handlers)
+   */
+  async generateWeeklyReportHandler(weekStartDate?: Date): Promise<ApiResponse<GeneratedReport>> {
+    try {
+      const report = await this.reportGenerator.generateWeeklyReport(weekStartDate);
+      return this.createSuccessResponse(report);
+    } catch (error) {
+      this.logger.error('Failed to generate weekly report:', error);
+      return this.createErrorResponse(`Failed to generate weekly report: ${error}`);
+    }
+  }
+
+  /**
+   * Generate symbol report (exposed for MCP handlers)
+   */
+  async generateSymbolReportHandler(symbol: string, period?: Period): Promise<ApiResponse<GeneratedReport>> {
+    try {
+      const report = await this.reportGenerator.generateSymbolReport(symbol, period);
+      return this.createSuccessResponse(report);
+    } catch (error) {
+      this.logger.error(`Failed to generate symbol report for ${symbol}:`, error);
+      return this.createErrorResponse(`Failed to generate symbol report: ${error}`);
+    }
+  }
+
+  /**
+   * Generate performance report (exposed for MCP handlers)
+   */
+  async generatePerformanceReportHandler(period?: Period): Promise<ApiResponse<GeneratedReport>> {
+    try {
+      const report = await this.reportGenerator.generatePerformanceReport(period);
+      return this.createSuccessResponse(report);
+    } catch (error) {
+      this.logger.error('Failed to generate performance report:', error);
+      return this.createErrorResponse(`Failed to generate performance report: ${error}`);
+    }
+  }
+
+  /**
+   * Get report by ID (exposed for MCP handlers)
+   */
+  async getReportHandler(id: string): Promise<ApiResponse<GeneratedReport | null>> {
+    try {
+      const report = await this.reportGenerator.getReport(id);
+      return this.createSuccessResponse(report);
+    } catch (error) {
+      this.logger.error(`Failed to get report ${id}:`, error);
+      return this.createErrorResponse(`Failed to get report: ${error}`);
+    }
+  }
+
+  /**
+   * List reports (exposed for MCP handlers)
+   */
+  async listReportsHandler(type?: ReportType, limit?: number): Promise<ApiResponse<GeneratedReport[]>> {
+    try {
+      const reports = await this.reportGenerator.listReports(type, limit);
+      return this.createSuccessResponse(reports);
+    } catch (error) {
+      this.logger.error('Failed to list reports:', error);
+      return this.createErrorResponse(`Failed to list reports: ${error}`);
+    }
+  }
+
+  /**
+   * Export report (exposed for MCP handlers)
+   */
+  async exportReportHandler(id: string, outputPath: string): Promise<ApiResponse<void>> {
+    try {
+      // Get report first
+      const report = await this.reportGenerator.getReport(id);
+      if (!report) {
+        throw new Error(`Report not found: ${id}`);
+      }
+      
+      await this.reportGenerator.exportReport(report, outputPath);
+      return this.createSuccessResponse(undefined);
+    } catch (error) {
+      this.logger.error(`Failed to export report ${id}:`, error);
+      return this.createErrorResponse(`Failed to export report: ${error}`);
+    }
   }
 
   // ====================

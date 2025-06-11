@@ -271,3 +271,90 @@ export interface RepositoryStats {
   };
   storageUsed: number;
 }
+
+// ====================
+// REPORT GENERATOR TYPES
+// ====================
+
+export type ReportType = 'daily' | 'weekly' | 'symbol' | 'performance' | 'patterns' | 'custom';
+
+export type ReportFormat = 'markdown' | 'json' | 'html';
+
+export interface ReportOptions {
+  type: ReportType;
+  format?: ReportFormat;
+  symbol?: string;
+  symbols?: string[];
+  dateFrom?: Date;
+  dateTo?: Date;
+  includeCharts?: boolean;
+  includePatterns?: boolean;
+  includeTrades?: boolean;
+  customQuery?: AnalysisQuery;
+}
+
+export interface ReportSection {
+  title: string;
+  content: string | any;
+  priority: 'high' | 'medium' | 'low';
+  charts?: ChartData[];
+  tables?: TableData[];
+}
+
+export interface ChartData {
+  type: 'line' | 'bar' | 'candlestick' | 'pie';
+  title: string;
+  data: any;
+  config?: any;
+}
+
+export interface TableData {
+  headers: string[];
+  rows: any[][];
+  summary?: any;
+}
+
+export interface GeneratedReport {
+  id: string;
+  type: ReportType;
+  format: ReportFormat;
+  generatedAt: Date;
+  period: {
+    from: Date;
+    to: Date;
+  };
+  metadata: {
+    symbols: string[];
+    analysisCount: number;
+    patternCount: number;
+    version: string;
+  };
+  sections: ReportSection[];
+  summary: {
+    keyFindings: string[];
+    recommendations: string[];
+    alerts?: string[];
+  };
+  content: string; // Final formatted content
+}
+
+export interface IReportGenerator {
+  // Report generation
+  generateReport(options: ReportOptions): Promise<GeneratedReport>;
+  
+  // Pre-built report types
+  generateDailyReport(date?: Date): Promise<GeneratedReport>;
+  generateWeeklyReport(weekStartDate?: Date): Promise<GeneratedReport>;
+  generateSymbolReport(symbol: string, period?: Period): Promise<GeneratedReport>;
+  generatePerformanceReport(period?: Period): Promise<GeneratedReport>;
+  generatePatternReport(patternType?: string, period?: Period): Promise<GeneratedReport>;
+  
+  // Report management
+  saveReport(report: GeneratedReport): Promise<string>; // Returns report ID
+  getReport(id: string): Promise<GeneratedReport | null>;
+  listReports(type?: ReportType, limit?: number): Promise<GeneratedReport[]>;
+  deleteOldReports(daysOld: number): Promise<number>;
+  
+  // Export
+  exportReport(report: GeneratedReport, outputPath: string): Promise<void>;
+}

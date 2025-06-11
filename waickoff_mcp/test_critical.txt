@@ -1,0 +1,64 @@
+
+> waickoff_mcp@1.4.0 test:critical
+> node scripts/test-runner.mjs critical
+
+≡ƒº¬ TASK-004 Test Suite - Modular Architecture Validation
+======================================================
+
+[36m[1m≡ƒöì Validating Test Setup[0m
+
+[32mΓ£à Found jest.config.js[0m
+[32mΓ£à Found package.json[0m
+[32mΓ£à Found tsconfig.json[0m
+[32mΓ£à Found tests/ directory[0m
+[32mΓ£à Found src/ directory[0m
+[32mΓ£à Found node_modules/ directory[0m
+[32mΓ£à TypeScript compilation check passed[0m
+[32mΓ£à Jest test runner available[0m
+
+[34mΓä╣∩╕Å  Running only critical tests...
+[0m
+[36m[1m≡ƒº¬ Running Core Engine Tests[0m
+
+[34mΓä╣∩╕Å  Business logic and service integration[0m
+Priority: [31m[CRITICAL][0m
+
+[31mΓ¥î Core Engine Tests failed[0m
+
+[36m[1m≡ƒº¬ Running Handler Delegation Tests[0m
+
+[34mΓä╣∩╕Å  Main orchestrator delegation pattern[0m
+Priority: [31m[CRITICAL][0m
+
+[31mΓ¥î Handler Delegation Tests failed[0m
+
+[36m[1m≡ƒº¬ Running Specialized Handler Tests[0m
+
+[34mΓä╣∩╕Å  MarketData, AnalysisRepository, ReportGenerator handlers[0m
+Priority: [31m[CRITICAL][0m
+
+[31mΓ¥î Specialized Handler Tests failed[0m
+
+[36m[1m≡ƒº¬ Running Support/Resistance Logic Tests[0m
+
+[34mΓä╣∩╕Å  BUG-001 regression prevention[0m
+Priority: [31m[CRITICAL][0m
+
+[31mΓ¥î Support/Resistance Logic Tests failed[0m
+
+[36m[1m≡ƒôï Test Execution Summary[0m
+
+Total test categories: 4
+[32mPassed: 0[0m
+[31mFailed: 4[0m
+[31mCritical failures: 4[0m
+
+[31mΓ¥î CRITICAL TEST FAILURES DETECTED![0m
+
+Failed critical test categories:
+  ΓÇó Core Engine Tests
+  ΓÇó Handler Delegation Tests
+  ΓÇó Specialized Handler Tests
+  ΓÇó Support/Resistance Logic Tests
+
+These failures must be fixed before merging.

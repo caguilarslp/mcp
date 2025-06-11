@@ -1,6 +1,6 @@
 {
   "name": "waickoff_mcp",
-  "version": "1.3.7",
+  "version": "1.4.0",
   "description": "Waickoff AI Market Analysis MCP Server",
   "main": "build/index.js",
   "type": "module",
@@ -10,6 +10,12 @@
     "start": "node build/index.js",
     "clean": "rm -rf build",
     "test": "jest",
+    "test:task-004": "node scripts/test-runner.mjs",
+    "test:critical": "node scripts/test-runner.mjs critical",
+    "test:coverage": "node scripts/test-runner.mjs coverage",
+    "test:category": "node scripts/test-runner.mjs category",
+    "test:list": "node scripts/test-runner.mjs list",
+    "test:help": "node scripts/test-runner.mjs help",
     "lint": "eslint src/**/*.ts",
     "docs": "typedoc src/index.ts"
   },

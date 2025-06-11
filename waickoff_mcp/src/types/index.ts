@@ -451,7 +451,16 @@ export type {
   Period,
   AggregatedMetrics,
   AnalysisQuery,
-  RepositoryStats
+  RepositoryStats,
+  // Report Generator types
+  IReportGenerator,
+  ReportType,
+  ReportFormat,
+  ReportOptions,
+  ReportSection,
+  ChartData,
+  TableData,
+  GeneratedReport
 } from './storage.js';
 
 // ====================
