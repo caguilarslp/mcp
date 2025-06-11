@@ -1045,6 +1045,95 @@ export class MCPAdapter {
               required: ['symbol'],
             },
           },
+
+          // Hybrid Storage Tools (TASK-015) - Optional
+          {
+            name: 'get_hybrid_storage_config',
+            description: 'Get hybrid storage configuration and status',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'update_hybrid_storage_config',
+            description: 'Update hybrid storage configuration',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                strategy: {
+                  type: 'string',
+                  description: 'Storage strategy',
+                  enum: ['mongo_first', 'file_first', 'smart_routing'],
+                },
+                fallbackEnabled: {
+                  type: 'boolean',
+                  description: 'Enable fallback between storage backends',
+                },
+                syncEnabled: {
+                  type: 'boolean',
+                  description: 'Enable synchronization between storage backends',
+                },
+                mongoTimeoutMs: {
+                  type: 'number',
+                  description: 'MongoDB timeout in milliseconds',
+                },
+                performanceTracking: {
+                  type: 'boolean',
+                  description: 'Enable performance metrics tracking',
+                },
+              },
+            },
+          },
+          {
+            name: 'get_storage_comparison',
+            description: 'Get detailed storage performance comparison',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'test_storage_performance',
+            description: 'Test storage backend performance with configurable parameters',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                testOperations: {
+                  type: 'number',
+                  description: 'Number of test operations to perform',
+                  default: 10,
+                },
+                testDataSize: {
+                  type: 'string',
+                  description: 'Size of test data',
+                  enum: ['small', 'medium', 'large'],
+                  default: 'medium',
+                },
+                symbol: {
+                  type: 'string',
+                  description: 'Symbol to use for test data',
+                  default: 'BTCUSDT',
+                },
+              },
+            },
+          },
+          {
+            name: 'get_mongo_status',
+            description: 'Get MongoDB connection status and information',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
+          {
+            name: 'get_evaluation_report',
+            description: 'Get comprehensive hybrid storage evaluation report',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+          },
         ],
       };
     });
@@ -1209,6 +1298,26 @@ export class MCPAdapter {
             break;
           case 'get_historical_summary':
             result = await this.handlers.handleGetHistoricalSummary(args);
+            break;
+          
+          // Hybrid Storage Tools (TASK-015)
+          case 'get_hybrid_storage_config':
+            result = await this.handlers.handleGetHybridStorageConfig(args);
+            break;
+          case 'update_hybrid_storage_config':
+            result = await this.handlers.handleUpdateHybridStorageConfig(args);
+            break;
+          case 'get_storage_comparison':
+            result = await this.handlers.handleGetStorageComparison(args);
+            break;
+          case 'test_storage_performance':
+            result = await this.handlers.handleTestStoragePerformance(args);
+            break;
+          case 'get_mongo_status':
+            result = await this.handlers.handleGetMongoStatus(args);
+            break;
+          case 'get_evaluation_report':
+            result = await this.handlers.handleGetEvaluationReport(args);
             break;
           
           default:

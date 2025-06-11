@@ -61,6 +61,7 @@ import { ConfigurationManager } from '../services/config/configurationManager.js
 import { HistoricalDataService } from '../services/historicalData.js';
 import { HistoricalAnalysisService } from '../services/historicalAnalysis.js';
 import { HistoricalCacheService } from '../services/historicalCache.js';
+import { HybridStorageService } from '../services/storage/hybridStorageService.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -102,6 +103,9 @@ export class MarketAnalysisEngine {
   public readonly historicalAnalysisService: IHistoricalAnalysisService;
   public readonly historicalCacheService: IHistoricalCacheService;
   
+  // Hybrid storage service (TASK-015) - Optional
+  public readonly hybridStorageService?: HybridStorageService;
+  
   // Configuration
   private config: SystemConfig;
   private timezoneConfig: TimezoneConfig;
@@ -114,7 +118,8 @@ export class MarketAnalysisEngine {
     tradingService?: ITradingService,
     cacheManager?: ICacheManager,
     timezoneConfig?: Partial<TimezoneConfig>,
-    configurationManager?: ConfigurationManager
+    configurationManager?: ConfigurationManager,
+    hybridStorageService?: HybridStorageService
   ) {
     this.logger = new FileLogger('MarketAnalysisEngine', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
@@ -181,6 +186,9 @@ export class MarketAnalysisEngine {
     this.historicalAnalysisService = new HistoricalAnalysisService(
       this.historicalDataService
     );
+    
+    // Initialize hybrid storage service (TASK-015) - Optional
+    this.hybridStorageService = hybridStorageService;
     
     this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository and Report Generator', {
       timezone: this.timezoneConfig.userTimezone,

@@ -54,8 +54,75 @@ export interface StorageStats {
 export type StorageCategory = 'market-data' | 'analysis' | 'patterns' | 'decisions' | 'reports';
 
 export interface StorageError extends Error {
-  code: 'NOT_FOUND' | 'PERMISSION_DENIED' | 'QUOTA_EXCEEDED' | 'INVALID_PATH' | 'IO_ERROR';
+  code: 'NOT_FOUND' | 'PERMISSION_DENIED' | 'QUOTA_EXCEEDED' | 'INVALID_PATH' | 'IO_ERROR' | 'CONNECTION_FAILED' | 'TIMEOUT' | 'SAVE_FAILED';
   path?: string;
+  originalError?: Error;
+}
+
+// ====================
+// MONGODB STORAGE TYPES
+// ====================
+
+export interface MongoConfig {
+  connectionString: string;
+  dbName: string;
+  maxPoolSize: number;
+  serverSelectionTimeoutMS: number;
+  connectTimeoutMS: number;
+  retryWrites: boolean;
+  retryReads: boolean;
+}
+
+export interface MongoDocument {
+  _id?: any;
+  path: string;
+  category: string;
+  filename: string;
+  data: any;
+  size: number;
+  createdAt: Date;
+  updatedAt: Date;
+  metadata: Record<string, any>;
+}
+
+// ====================
+// HYBRID STORAGE TYPES
+// ====================
+
+export interface HybridStorageConfig {
+  strategy: 'mongo_first' | 'file_first' | 'smart_routing';
+  fallbackEnabled: boolean;
+  syncEnabled: boolean;
+  mongoTimeoutMs: number;
+  performanceTracking: boolean;
+}
+
+export interface StorageBackendMetrics {
+  avgResponseTime: number;
+  successRate: number;
+  isAvailable: boolean;
+  lastError?: string;
+}
+
+export interface StoragePerformanceMetrics {
+  mongo: StorageBackendMetrics;
+  file: StorageBackendMetrics;
+}
+
+// Enhanced storage service interface for MongoDB/Hybrid support
+export interface IEnhancedStorageService extends IStorageService {
+  // Health and monitoring
+  isAvailable(): Promise<boolean>;
+  getPerformanceMetrics?(): StoragePerformanceMetrics;
+  
+  // MongoDB specific (optional)
+  initialize?(): Promise<void>;
+  close?(): Promise<void>;
+  
+  // Hybrid specific (optional)
+  getConfig?(): HybridStorageConfig;
+  updateConfig?(config: Partial<HybridStorageConfig>): void;
+  forceHealthCheck?(): Promise<StoragePerformanceMetrics>;
 }
 
 // ====================

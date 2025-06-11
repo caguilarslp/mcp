@@ -13,6 +13,7 @@ import { ReportGeneratorHandlers } from './handlers/reportGeneratorHandlers.js';
 import { CacheHandlers } from './cacheHandlers.js';
 import { ConfigurationHandlers } from './handlers/configurationHandlers.js';
 import { HistoricalAnalysisHandlers } from './handlers/historicalAnalysisHandlers.js';
+import { HybridStorageHandlers } from './handlers/hybridStorageHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -25,6 +26,7 @@ export class MCPHandlers {
   private readonly cacheHandlers: CacheHandlers;
   private readonly configurationHandlers: ConfigurationHandlers;
   private readonly historicalAnalysisHandlers: HistoricalAnalysisHandlers;
+  private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
     this.engine = engine;
@@ -45,8 +47,16 @@ export class MCPHandlers {
       engine.historicalAnalysisService,
       engine.historicalCacheService
     );
+    
+    // Initialize Hybrid Storage Handlers if available (TASK-015)
+    if (engine.hybridStorageService) {
+      this.hybridStorageHandlers = new HybridStorageHandlers(engine.hybridStorageService);
+      this.logger.info('Hybrid Storage Handlers initialized');
+    }
 
-    this.logger.info('MCP Handlers initialized with modular architecture');
+    this.logger.info('MCP Handlers initialized with modular architecture', {
+      hybridStorageEnabled: !!engine.hybridStorageService
+    });
   }
 
   // ====================
@@ -913,6 +923,52 @@ export class MCPHandlers {
 
   async handleGetHistoricalSummary(args: any): Promise<MCPServerResponse> {
     return await this.historicalAnalysisHandlers.handleGetHistoricalSummary(args);
+  }
+
+  // ====================
+  // HYBRID STORAGE HANDLERS (TASK-015) - OPTIONAL
+  // ====================
+
+  async handleGetHybridStorageConfig(args: any): Promise<MCPServerResponse> {
+    if (!this.hybridStorageHandlers) {
+      return this.createErrorResponse('hybrid_storage_disabled', new Error('Hybrid storage not enabled'));
+    }
+    return await this.hybridStorageHandlers.handleGetHybridStorageConfig();
+  }
+
+  async handleUpdateHybridStorageConfig(args: any): Promise<MCPServerResponse> {
+    if (!this.hybridStorageHandlers) {
+      return this.createErrorResponse('hybrid_storage_disabled', new Error('Hybrid storage not enabled'));
+    }
+    return await this.hybridStorageHandlers.handleUpdateHybridStorageConfig(args);
+  }
+
+  async handleGetStorageComparison(args: any): Promise<MCPServerResponse> {
+    if (!this.hybridStorageHandlers) {
+      return this.createErrorResponse('hybrid_storage_disabled', new Error('Hybrid storage not enabled'));
+    }
+    return await this.hybridStorageHandlers.handleGetStorageComparison();
+  }
+
+  async handleTestStoragePerformance(args: any): Promise<MCPServerResponse> {
+    if (!this.hybridStorageHandlers) {
+      return this.createErrorResponse('hybrid_storage_disabled', new Error('Hybrid storage not enabled'));
+    }
+    return await this.hybridStorageHandlers.handleTestStoragePerformance(args);
+  }
+
+  async handleGetMongoStatus(args: any): Promise<MCPServerResponse> {
+    if (!this.hybridStorageHandlers) {
+      return this.createErrorResponse('hybrid_storage_disabled', new Error('Hybrid storage not enabled'));
+    }
+    return await this.hybridStorageHandlers.handleGetMongoStatus();
+  }
+
+  async handleGetEvaluationReport(args: any): Promise<MCPServerResponse> {
+    if (!this.hybridStorageHandlers) {
+      return this.createErrorResponse('hybrid_storage_disabled', new Error('Hybrid storage not enabled'));
+    }
+    return await this.hybridStorageHandlers.handleGetEvaluationReport();
   }
 
   // ====================

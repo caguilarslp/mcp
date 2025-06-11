@@ -108,6 +108,7 @@ import { MarketAnalysisEngine } from './core/engine.js';
 import { MCPAdapter } from './adapters/mcp.js';
 import { SystemConfig } from './types/index.js';
 import { FileLogger } from './utils/fileLogger.js';
+import { HybridStorageService } from './services/storage/hybridStorageService.js';
 import * as path from 'path';
 
 /**
@@ -117,6 +118,7 @@ class BybitMCPServer {
   private logger: FileLogger;
   private engine: MarketAnalysisEngine;
   private mcpAdapter: MCPAdapter;
+  private hybridStorage?: HybridStorageService;
 
   constructor() {
     this.logger = new FileLogger('BybitMCPServer', 'info', {
@@ -153,8 +155,33 @@ class BybitMCPServer {
       }
     };
 
-    // Initialize core engine
-    this.engine = new MarketAnalysisEngine(config);
+    // Initialize Hybrid Storage if MongoDB is available (TASK-015)
+    try {
+      const mongoConnectionString = process.env.MONGODB_CONNECTION_STRING || 'mongodb://localhost:27017';
+      this.hybridStorage = new HybridStorageService({
+        strategy: 'smart_routing',
+        fallbackEnabled: true,
+        syncEnabled: false,
+        mongoTimeoutMs: 5000,
+        performanceTracking: true
+      });
+      // Silent initialization - will log success later
+    } catch (error) {
+      // Silent MongoDB initialization failure - will use file storage only
+      this.hybridStorage = undefined;
+    }
+
+    // Initialize core engine with optional hybrid storage
+    this.engine = new MarketAnalysisEngine(
+      config,
+      undefined, // marketDataService - use default
+      undefined, // analysisService - use default
+      undefined, // tradingService - use default
+      undefined, // cacheManager - use default
+      undefined, // timezoneConfig - use default
+      undefined, // configurationManager - use default
+      this.hybridStorage // hybridStorageService - TASK-015
+    );
     
     // Initialize MCP adapter
     this.mcpAdapter = new MCPAdapter(this.engine);
@@ -183,7 +210,14 @@ class BybitMCPServer {
       // Only log after extended delay when MCP is completely ready
       setTimeout(() => {
         // Simple, minimal status message
-        _originalInfo('waickoff MCP Server v1.3.5 operational');
+        _originalInfo('waickoff MCP Server v1.6.0 operational');
+        
+        // Log Hybrid Storage status
+        if (this.hybridStorage) {
+          _originalInfo('🗃️ Hybrid Storage (MongoDB + File) enabled');
+        } else {
+          _originalInfo('📁 File Storage only (MongoDB not available)');
+        }
       }, 10000); // 10 seconds to ensure MCP is completely done
       
     } catch (error) {
