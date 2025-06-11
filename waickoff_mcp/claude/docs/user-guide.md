@@ -1,19 +1,23 @@
-# 📊 Guía de Uso wAIckoff MCP v1.4.0 - Trading Analysis
+# 📊 Guía de Uso wAIckoff MCP v1.5.1 - Trading Analysis + Historical Data
 
 ## 🎯 Para qué sirve este MCP
 
-El **wAIckoff MCP v1.4.0** es tu herramienta de análisis técnico profesional integrada en Claude Desktop que te proporciona:
+El **wAIckoff MCP v1.5.1** es tu herramienta de análisis técnico profesional integrada en Claude Desktop que te proporciona:
 
 - **Análisis técnico completo** en segundos con auto-guardado
+- **🆕 Análisis histórico avanzado** - 3+ años de datos con patrones identificados
 - **Sugerencias de grid trading** basadas en volatilidad y S/R
 - **Detección de divergencias** precio/volumen
 - **Niveles de soporte/resistencia dinámicos** con scoring avanzado
 - **Volume Delta** para presión compradora/vendedora
 - **Datos de mercado en tiempo real** de Bybit con cache inteligente
 - **Sistema de almacenamiento avanzado** con búsqueda histórica
-- **🆕 Repositorio de análisis** con consultas complejas
-- **🆕 Generación de reportes** automáticos diarios/semanales
-- **🆕 Cache inteligente** con invalidación granular
+- **Repositorio de análisis** con consultas complejas
+- **Generación de reportes** automáticos diarios/semanales
+- **Cache inteligente** con invalidación granular
+- **🆕 Historical Support/Resistance** con scoring por toques históricos
+- **🆕 Volume Anomaly Detection** - Eventos significativos históricos
+- **🆕 Market Cycle Analysis** - Patrones cíclicos y estacionales
 
 ## 🚀 Setup Rápido
 
@@ -26,7 +30,88 @@ El MCP ya está configurado en tu Claude Desktop. Para verificar:
 
 ### **2. Comandos Básicos para Trading**
 
-## 📋 Herramientas Disponibles v1.4.0
+## 📋 Herramientas Disponibles v1.5.1
+
+### **🆕 Análisis Histórico (NUEVO TASK-017)**
+
+#### `get_historical_klines` - **Datos Históricos Base**
+```
+Uso: get_historical_klines BTCUSDT D
+```
+**Lo que obtienes:**
+- 800+ días de datos OHLCV históricos
+- Metadata completa (fechas, puntos de datos)
+- Intervalos: Diario (D), Semanal (W), Mensual (M)
+- Cache optimizado (24h TTL)
+- Datos desde 2021 hasta presente
+
+**Cuándo usarla:** Base para análisis profundo, investigación histórica
+
+#### `analyze_historical_sr` - **S/R Histórico Avanzado**
+```
+Uso: analyze_historical_sr BTCUSDT D
+```
+**Lo que obtienes:**
+- Niveles S/R con scoring histórico
+- Número de toques y éxito por nivel
+- Significancia basada en volumen histórico
+- Distancia actual a niveles clave
+- Niveles "major" vs "minor" clasificados
+- Estadísticas de fortaleza histórica
+
+**Cuándo usarla:** Identificar niveles macro críticos, validar S/R actuales con historial
+
+#### `identify_volume_anomalies` - **Eventos de Volumen Históricos**
+```
+Uso: identify_volume_anomalies ETHUSDT D 2.5
+```
+**Lo que obtienes:**
+- Eventos de volumen excepcional (2.5x+ promedio)
+- Correlación con movimientos de precio
+- Identificación de manipulación histórica
+- Patrones de acumulación/distribución
+- Contexto temporal de eventos
+
+**Cuándo usarla:** Investigar manipulación, identificar zonas de interés institucional
+
+#### `get_price_distribution` - **Value Areas Históricas**
+```
+Uso: get_price_distribution XRPUSDT W
+```
+**Lo que obtienes:**
+- Distribución estadística de precios históricos
+- "Value areas" de mayor actividad
+- Zones de equilibrio de largo plazo
+- Análisis de concentración por rango de precios
+- Datos para estrategias de mean reversion
+
+**Cuándo usarla:** Identificar zonas de "fair value", configurar targets de largo plazo
+
+#### `identify_market_cycles` - **Ciclos de Mercado**
+```
+Uso: identify_market_cycles BTCUSDT
+```
+**Lo que obtienes:**
+- Patrones cíclicos identificados
+- Duración promedio de tendencias
+- Amplitud típica de movimientos
+- Timing estacional si existe
+- Predicciones basadas en ciclos históricos
+
+**Cuándo usarla:** Timing de entries/exits, prepararse para reversiones cíclicas
+
+#### `get_historical_summary` - **Análisis Histórico Completo**
+```
+Uso: get_historical_summary BTCUSDT W
+```
+**Lo que obtienes:**
+- Resumen consolidado de TODOS los análisis históricos
+- S/R + Volume Events + Price Distribution + Market Cycles
+- Insights y recomendaciones agregadas
+- Contexto histórico comprehensivo
+- **✨ TU HERRAMIENTA DE RESEARCH PRINCIPAL**
+
+**Cuándo usarla:** Due diligence completa, tesis de trading de largo plazo
 
 ### **🔍 Análisis Principal de Mercado**
 
@@ -319,6 +404,16 @@ Uso: analyze_volatility ALGOUSDT 1d
 
 ## 🎯 Workflows de Trading v1.4.0
 
+### **📊 Workflow de Investigación Histórica (NUEVO)**
+```
+1. get_historical_summary [TOKEN] W (contexto histórico completo)
+2. analyze_historical_sr [TOKEN] D (niveles clave históricos)
+3. identify_volume_anomalies [TOKEN] D (eventos significativos)
+4. get_price_distribution [TOKEN] W (value areas de largo plazo)
+5. identify_market_cycles [TOKEN] (patrones cíclicos)
+6. Desarrollar tesis basada en análisis histórico profundo
+```
+
 ### **📈 Workflow de Análisis Diario Optimizado**
 ```
 1. generate_daily_report [fecha] [tus-símbolos]
@@ -373,7 +468,14 @@ Uso: analyze_volatility ALGOUSDT 1d
 5. list_reports para revisar tendencias históricas
 ```
 
-## 💡 Tips de Uso Efectivo v1.4.0
+## 💡 Tips de Uso Efectivo v1.5.1
+
+### **🆕 Para Análisis Histórico Profundo**
+- **Research completo:** Usa `get_historical_summary` como punto de partida
+- **Validación S/R:** Combina `identify_support_resistance` actual + `analyze_historical_sr`
+- **Event correlation:** `identify_volume_anomalies` para encontrar manipulación histórica
+- **Long-term targets:** `get_price_distribution` para value areas de largo plazo
+- **Timing estacional:** `identify_market_cycles` para patterns cíclicos
 
 ### **🎯 Para tu Portfolio (XRP, HBAR, ONDO)**
 - **Análisis diario:** Usa `generate_daily_report` con tus símbolos
@@ -400,18 +502,22 @@ Uso: analyze_volatility ALGOUSDT 1d
 - Divergencia negativa confirmada en análisis previos
 - **🆕 Pattern recognition** de distribución
 
-#### **Grid Setup Optimizado:**
-- Volatilidad óptima (4-8%)
-- S/R levels claros con strength >7
-- Rango bien definido en análisis histórico
-- **🆕 Cache warming** automático para mejor performance
+#### **🆕 Historical Research Setup:**
+- Análisis histórico profundo con 3+ años de datos
+- S/R levels validados históricamente con scoring por toques
+- Volume events y anomalías identificadas automáticamente
+- Value areas de largo plazo para mean reversion
+- **🆕 Scoring S/R histórico >80** en niveles críticos validados
 
-### **⚠️ Nuevas Consideraciones v1.4.0**
+### **⚠️ Nuevas Consideraciones v1.5.1**
 - **Auto-save:** Todos los análisis se guardan automáticamente
 - **Cache inteligente:** Primer request más lento, subsecuentes muy rápidos
 - **Reportes:** Generación puede tomar 30-60 segundos
 - **Storage:** Sistema almacena análisis indefinidamente
 - **Performance:** `get_cache_stats` si notas lentitud
+- **🆕 Historical cache:** Datos históricos se cachean hasta 24h
+- **🆕 API limits:** Análisis histórico respeta rate limits de Bybit
+- **🆕 Data freshness:** Datos históricos siempre desde fuente, análisis procesados se cachean
 
 ## 🚨 Troubleshooting v1.4.0
 
@@ -437,7 +543,7 @@ get_cache_stats        # Performance y memoria
 get_repository_stats   # Estado del almacenamiento
 ```
 
-## 🎯 Nuevas Features v1.4.0
+## 🎯 Nuevas Features v1.5.1
 
 ### **✅ Implementadas**
 - **🆕 Repositorio de análisis** completo con 7 herramientas
@@ -447,6 +553,14 @@ get_repository_stats   # Estado del almacenamiento
 - **🆕 Búsquedas complejas** con filtros avanzados
 - **🆕 Métricas agregadas** y analytics
 - **🆕 Pattern detection** automático
+- **🆕 Sistema de configuración** de timezone persistente
+- **🆕 Análisis histórico** - 6 herramientas nuevas (TASK-017):
+  - `get_historical_klines` - 800+ días de datos OHLCV
+  - `analyze_historical_sr` - S/R histórico con scoring avanzado
+  - `identify_volume_anomalies` - Eventos de volumen significativos
+  - `get_price_distribution` - Value areas históricas
+  - `identify_market_cycles` - Patrones cíclicos de mercado
+  - `get_historical_summary` - Resumen histórico comprehensivo
 
 ### **🔜 Próximas Features**
 - **Detección de trampas alcistas/bajistas** (Bull/Bear traps) - TASK-012
@@ -478,6 +592,6 @@ get_repository_stats   # Estado del almacenamiento
 **Capital Trading:** $2,000 USDC  
 **Estrategias:** Grid (spot/futuros) + Swing (2x-4x leverage)  
 **Risk:** 2-3% stop loss, máximo 3 posiciones simultáneas  
-**🆕 Herramientas:** 40+ herramientas MCP con auto-save y reportes
+**🆕 Herramientas:** 46+ herramientas MCP con análisis histórico, auto-save y reportes
 
-**¡El MCP v1.4.0 está listo para llevar tu trading al siguiente nivel con análisis profesional, almacenamiento inteligente y reportes automáticos!** 🚀
+**¡El MCP v1.5.1 está listo para llevar tu trading al siguiente nivel con análisis profesional, almacenamiento inteligente, reportes automáticos y 3+ años de datos históricos!** 🚀
