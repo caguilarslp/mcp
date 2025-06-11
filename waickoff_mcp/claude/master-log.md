@@ -370,7 +370,32 @@ Dependencies: @modelcontextprotocol/sdk, node-fetch
 - 📈 **Integration Points**: 1 → 5+ protocolos (+400%)
 - 📈 **Maintainability**: Monolito → Clean Architecture (Exponencial)
 
-### 10/06/2025 - **v1.4.0 TASK-004 COMPLETADA - TESTS UNITARIOS SISTEMA MODULAR** 🧪
+### 10/06/2025 - **v1.4.0 TASK-004 EN PROGRESO - CONFIGURACIÓN DE TESTS ACTUALIZADA** 🧪
+**🔧 CONFIGURACIÓN BASE FUNCIONAL - TESTS UNITARIOS EN DESARROLLO**
+
+#### **✅ Configuración de Jest con ES Modules**
+- ✅ **Jest configurado para ES modules** - Usando `--experimental-vm-modules`
+- ✅ **Archivos de configuración CommonJS** - `jest.config.cjs` y `jest.setup.cjs`
+- ✅ **Imports sin extensiones .js** - Todos los archivos de test actualizados
+- ✅ **Test básico funcional** - `setup.test.ts` ejecutándose correctamente
+- ✅ **Utilidades de mocking** - `test-utils.ts` con helpers para tests
+
+#### **🚧 Estado de Tests**
+- **Tests configurados**: 10 suites, 33+ test cases
+- **Tests pasando**: 2 (setup básico)
+- **Tests fallando**: Mayoría por errores de tipos en mocks
+- **Problemas principales**:
+  - Errores de tipos en `MockedMarketAnalysisEngine`
+  - Timer abierto en `CacheManager` (solucionado con `stopCleanupTimer`)
+  - Necesidad de actualizar mocks para usar tipos correctos
+
+#### **📋 Próximos Pasos**
+1. **Corregir errores de tipos** - Usar `createMockEngine()` en todos los tests
+2. **Validar tests críticos** - Core Engine, Handlers, Support/Resistance
+3. **Alcanzar 80% cobertura** - En código crítico de negocio
+4. **Documentar patrones** - Mejores prácticas para futuros tests
+
+### 10/06/2025 - **v1.4.0 TASK-004 EN PROGRESO - CONFIGURACIÓN DE TESTS ACTUALIZADA** 🧪
 **🏆 DEUDA TÉCNICA CRÍTICA RESUELTA - SISTEMA 100% VALIDADO**
 
 #### **✅ Sistema Completo de Tests Unitarios Implementado**

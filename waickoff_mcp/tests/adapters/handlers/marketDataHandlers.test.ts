@@ -4,23 +4,24 @@
  * @version 1.4.0 - TASK-004
  */
 
-import { MarketDataHandlers } from '../../../src/adapters/handlers/marketDataHandlers.js';
-import { MarketAnalysisEngine } from '../../../src/core/engine.js';
-import { FileLogger } from '../../../src/utils/fileLogger.js';
-import { MarketTicker, Orderbook, OHLCV, MCPServerResponse } from '../../../src/types/index.js';
+import { MarketDataHandlers } from '../../../src/adapters/handlers/marketDataHandlers';
+import { MarketAnalysisEngine } from '../../../src/core/engine';
+import { FileLogger } from '../../../src/utils/fileLogger';
+import { MarketTicker, Orderbook, OHLCV, MCPServerResponse } from '../../../src/types/index';
+import { createMockEngine, MockedMarketAnalysisEngine } from '../../test-utils';
 
 // Mock dependencies
-jest.mock('../../../src/core/engine.js');
-jest.mock('../../../src/utils/fileLogger.js');
+jest.mock('../../../src/core/engine');
+jest.mock('../../../src/utils/fileLogger');
 
 describe('MarketDataHandlers', () => {
   let handlers: MarketDataHandlers;
-  let mockEngine: jest.Mocked<MarketAnalysisEngine>;
+  let mockEngine: MockedMarketAnalysisEngine;
   let mockLogger: jest.Mocked<FileLogger>;
 
   beforeEach(() => {
     // Create mocked engine
-    mockEngine = new MarketAnalysisEngine() as jest.Mocked<MarketAnalysisEngine>;
+    mockEngine = createMockEngine();
     
     // Create mocked logger
     mockLogger = {

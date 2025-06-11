@@ -101,7 +101,7 @@ function validateTestSetup() {
   printHeader('🔍 Validating Test Setup');
 
   const requiredFiles = [
-    'jest.config.js',
+    'jest.config.cjs',
     'package.json',
     'tsconfig.json'
   ];
@@ -168,7 +168,7 @@ function runTestCategory(category) {
   console.log(`Priority: ${criticalLabel}\n`);
 
   try {
-    const result = execSync(`npx jest "${category.pattern}" --verbose --detectOpenHandles`, {
+    const result = execSync(`node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs "${category.pattern}" --verbose --detectOpenHandles`, {
       stdio: 'inherit',
       encoding: 'utf8'
     });
@@ -186,7 +186,7 @@ function runFullTestSuite() {
   printHeader('📊 Running Full Test Suite with Coverage');
 
   try {
-    execSync('npx jest --coverage --detectOpenHandles', {
+    execSync('node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs --coverage --detectOpenHandles', {
       stdio: 'inherit',
       encoding: 'utf8'
     });

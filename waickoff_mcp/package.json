@@ -9,7 +9,7 @@
     "dev": "tsc --watch",
     "start": "node build/index.js",
     "clean": "rm -rf build",
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.cjs",
     "test:task-004": "node scripts/test-runner.mjs",
     "test:critical": "node scripts/test-runner.mjs critical",
     "test:coverage": "node scripts/test-runner.mjs coverage",
@@ -42,16 +42,5 @@
     "@typescript-eslint/parser": "^6.13.0",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
     "typedoc": "^0.25.0"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "testMatch": [
-      "**/tests/**/*.test.ts"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/examples/**"
-    ]
   }
 }

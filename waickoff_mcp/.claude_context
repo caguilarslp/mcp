@@ -211,11 +211,11 @@ export class MCPHandlers {
 
 ### En DESARROLLO ACTIVO v1.4.0
 - ✅ **TASK-009 COMPLETADA** - Sistema Storage completo con 4 fases implementadas
+- 🚧 **TASK-004 EN PROGRESO** - Tests unitarios (configuración base funcional, corrección de tipos pendiente)
 - 🚀 **PRÓXIMAS TAREAS**:
   - **TASK-012** - Detección Trampas Alcistas/Bajistas (7h)
   - **TASK-013** - On-chain Data Collection (15h)
   - **TASK-010** - Sistema Configuración Timezone (4h)
-- 🚧 **Tests unitarios** - Para todos los servicios (CRÍTICO - TASK-004)
 - 🚧 **Documentación** - Actualizar guías con sistema completo
 
 ### NUEVAS FUNCIONALIDADES PLANIFICADAS v1.4.0

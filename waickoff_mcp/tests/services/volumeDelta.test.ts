@@ -4,8 +4,8 @@
  * @version 1.4.0 - TASK-004
  */
 
-import { AnalysisService } from '../../src/services/analysis.js';
-import { OHLCV, VolumeDelta } from '../../src/types/index.js';
+import { AnalysisService } from '../../src/services/analysis';
+import { OHLCV, VolumeDelta } from '../../src/types/index';
 
 // Mock MarketDataService
 const mockMarketDataService = {

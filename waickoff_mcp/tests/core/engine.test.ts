@@ -4,9 +4,9 @@
  * @version 1.4.0 - TASK-004
  */
 
-import { MarketAnalysisEngine } from '../../src/core/engine.js';
-import { IMarketDataService, IAnalysisService, ITradingService } from '../../src/types/index.js';
-import { MarketTicker, Orderbook, OHLCV, VolatilityAnalysis, VolumeAnalysis, SupportResistanceAnalysis } from '../../src/types/index.js';
+import { MarketAnalysisEngine } from '../../src/core/engine';
+import { IMarketDataService, IAnalysisService, ITradingService } from '../../src/types/index';
+import { MarketTicker, Orderbook, OHLCV, VolatilityAnalysis, VolumeAnalysis, SupportResistanceAnalysis } from '../../src/types/index';
 
 // Mock services
 const mockMarketDataService: jest.Mocked<IMarketDataService> = {

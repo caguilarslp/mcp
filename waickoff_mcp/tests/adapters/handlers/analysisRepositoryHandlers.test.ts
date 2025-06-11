@@ -4,14 +4,14 @@
  * @version 1.4.0 - TASK-004
  */
 
-import { AnalysisRepositoryHandlers } from '../../../src/adapters/handlers/analysisRepositoryHandlers.js';
-import { MarketAnalysisEngine } from '../../../src/core/engine.js';
-import { FileLogger } from '../../../src/utils/fileLogger.js';
-import { MCPServerResponse, SavedAnalysis, AnalysisSummary, Pattern, RepositoryStats } from '../../../src/types/index.js';
+import { AnalysisRepositoryHandlers } from '../../../src/adapters/handlers/analysisRepositoryHandlers';
+import { MarketAnalysisEngine } from '../../../src/core/engine';
+import { FileLogger } from '../../../src/utils/fileLogger';
+import { MCPServerResponse, SavedAnalysis, AnalysisSummary, Pattern, RepositoryStats } from '../../../src/types/index';
 
 // Mock dependencies
-jest.mock('../../../src/core/engine.js');
-jest.mock('../../../src/utils/fileLogger.js');
+jest.mock('../../../src/core/engine');
+jest.mock('../../../src/utils/fileLogger');
 
 describe('AnalysisRepositoryHandlers', () => {
   let handlers: AnalysisRepositoryHandlers;

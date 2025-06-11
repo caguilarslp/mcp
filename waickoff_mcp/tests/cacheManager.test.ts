@@ -3,8 +3,8 @@
  * Basic tests for TASK-009 Phase 2 implementation
  */
 
-import { CacheManager } from '../src/services/cacheManager.js';
-import { CacheKeys } from '../src/types/storage.js';
+import { CacheManager } from '../src/services/cacheManager';
+import { CacheKeys } from '../src/types/storage';
 
 describe('CacheManager - TASK-009 Phase 2', () => {
   let cacheManager: CacheManager;
@@ -261,5 +261,6 @@ describe('MarketDataService Cache Integration', () => {
     expect(cachedData).toEqual(mockApiResponse);
     
     await mockCacheManager.clear();
+    mockCacheManager.stopCleanupTimer();
   });
 });

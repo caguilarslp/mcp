@@ -4,12 +4,12 @@
  * @version 1.4.0 - TASK-004
  */
 
-import { CacheHandlers } from '../../src/adapters/cacheHandlers.js';
-import { MarketAnalysisEngine } from '../../src/core/engine.js';
-import { CacheStats } from '../../src/types/index.js';
+import { CacheHandlers } from '../../src/adapters/cacheHandlers';
+import { MarketAnalysisEngine } from '../../src/core/engine';
+import { CacheStats } from '../../src/types/index';
 
 // Mock dependencies
-jest.mock('../../src/core/engine.js');
+jest.mock('../../src/core/engine');
 
 describe('CacheHandlers', () => {
   let handlers: CacheHandlers;

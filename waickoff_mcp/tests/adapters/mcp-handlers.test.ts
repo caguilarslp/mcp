@@ -4,21 +4,21 @@
  * @version 1.4.0 - TASK-004
  */
 
-import { MCPHandlers } from '../../src/adapters/mcp-handlers.js';
-import { MarketAnalysisEngine } from '../../src/core/engine.js';
-import { MarketDataHandlers } from '../../src/adapters/handlers/marketDataHandlers.js';
-import { AnalysisRepositoryHandlers } from '../../src/adapters/handlers/analysisRepositoryHandlers.js';
-import { ReportGeneratorHandlers } from '../../src/adapters/handlers/reportGeneratorHandlers.js';
-import { CacheHandlers } from '../../src/adapters/cacheHandlers.js';
-import { MCPServerResponse } from '../../src/types/index.js';
+import { MCPHandlers } from '../../src/adapters/mcp-handlers';
+import { MarketAnalysisEngine } from '../../src/core/engine';
+import { MarketDataHandlers } from '../../src/adapters/handlers/marketDataHandlers';
+import { AnalysisRepositoryHandlers } from '../../src/adapters/handlers/analysisRepositoryHandlers';
+import { ReportGeneratorHandlers } from '../../src/adapters/handlers/reportGeneratorHandlers';
+import { CacheHandlers } from '../../src/adapters/cacheHandlers';
+import { MCPServerResponse } from '../../src/types/index';
 
 // Mock all dependencies
-jest.mock('../../src/core/engine.js');
-jest.mock('../../src/adapters/handlers/marketDataHandlers.js');
-jest.mock('../../src/adapters/handlers/analysisRepositoryHandlers.js');
-jest.mock('../../src/adapters/handlers/reportGeneratorHandlers.js');
-jest.mock('../../src/adapters/cacheHandlers.js');
-jest.mock('../../src/utils/fileLogger.js');
+jest.mock('../../src/core/engine');
+jest.mock('../../src/adapters/handlers/marketDataHandlers');
+jest.mock('../../src/adapters/handlers/analysisRepositoryHandlers');
+jest.mock('../../src/adapters/handlers/reportGeneratorHandlers');
+jest.mock('../../src/adapters/cacheHandlers');
+jest.mock('../../src/utils/fileLogger');
 
 describe('MCPHandlers - Delegation Pattern', () => {
   let mcpHandlers: MCPHandlers;
