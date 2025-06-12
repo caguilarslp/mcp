@@ -588,6 +588,150 @@ export type VolumeInterval = '1' | '5' | '15' | '30' | '60' | '240' | 'D';
 export type HistoricalTimeframe = 'D' | 'W' | 'M';
 
 // ====================
+// SMART MONEY CONCEPTS TYPES (TASK-020)
+// ====================
+
+export interface SmartMoneyConfluence {
+  id: string;
+  types: Array<'orderBlock' | 'fairValueGap' | 'breakOfStructure'>;
+  priceLevel: number;
+  strength: number;
+  zone: {
+    upper: number;
+    lower: number;
+    midpoint: number;
+  };
+  components: {
+    orderBlock?: OrderBlock;
+    fairValueGap?: FairValueGap;
+    structuralBreak?: StructuralBreak;
+  };
+  alignment: 'bullish' | 'bearish' | 'mixed';
+  validUntil: string;
+  description: string;
+}
+
+export interface SMCMarketBias {
+  direction: 'bullish' | 'bearish' | 'neutral';
+  strength: number;
+  confidence: number;
+  reasoning: string[];
+  components: {
+    orderBlockBias: 'bullish' | 'bearish' | 'neutral';
+    fvgBias: 'bullish' | 'bearish' | 'neutral';
+    structureBias: 'bullish' | 'bearish' | 'neutral';
+  };
+  confluenceSupport?: {
+    strong: number;
+    moderate: number;
+    weak: number;
+  };
+  institutionalAlignment?: number;
+  keyInfluencers?: string[];
+  nextUpdateTime?: Date;
+}
+
+export interface SMCSetupValidation {
+  isValid: boolean;
+  setupScore: number;
+  factors: {
+    directionalAlignment: number;
+    confluenceQuality: number;
+    structureAlignment: number;
+    institutionalPresence: number;
+    riskRewardRatio: number;
+  };
+  optimalEntry: {
+    price: number;
+    zone: { min: number; max: number };
+    reasoning: string;
+  };
+  riskManagement: {
+    stopLoss: number;
+    takeProfits: number[];
+    positionSize: number;
+    maxRisk: number;
+    riskRewardRatio: number;
+  };
+  warnings: string[];
+  alternativeScenarios: Array<{
+    scenario: string;
+    probability: number;
+    action: string;
+  }>;
+  confidence: number;
+  timestamp: string;
+}
+
+export interface SmartMoneyAnalysis {
+  symbol: string;
+  timeframe: string;
+  currentPrice: number;
+  confluences: SmartMoneyConfluence[];
+  premiumDiscountZones: {
+    premium: { start: number; end: number };
+    discount: { start: number; end: number };
+    equilibrium: number;
+    currentZone: 'premium' | 'discount' | 'equilibrium';
+  };
+  institutionalActivity: {
+    score: number;
+    signals: string[];
+    footprint: {
+      orderBlockActivity: number;
+      fvgCreation: number;
+      structuralManipulation: number;
+      confluenceStrength: number;
+    };
+    interpretation: string;
+  };
+  marketBias: SMCMarketBias;
+  tradingRecommendations: Array<{
+    action: 'buy' | 'sell' | 'wait';
+    reasoning: string;
+    entryZone: { min: number; max: number };
+    targets: number[];
+    stopLoss: number;
+    confidence: number;
+    timeframe: string;
+  }>;
+  keyLevels: Array<{
+    price: number;
+    type: string;
+    strength: number;
+    description: string;
+  }>;
+  statistics: {
+    totalConfluences: number;
+    strongConfluences: number;
+    activeOrderBlocks: number;
+    openFVGs: number;
+    recentBOS: number;
+    overallConfidence: number;
+  };
+  rawAnalysis: {
+    orderBlocks: OrderBlockAnalysis;
+    fairValueGaps: FVGAnalysis;
+    breakOfStructure: MarketStructureAnalysis;
+  };
+  timestamp: Date | string;
+}
+
+export interface SMCConfig {
+  confluenceThreshold: number;
+  minConfluenceScore: number;
+  biasStrengthThreshold: number;
+  setupValidationMinScore: number;
+  weights: {
+    orderBlock: number;
+    fairValueGap: number;
+    breakOfStructure: number;
+  };
+  premiumDiscountThreshold: number;
+  institutionalActivityThreshold: number;
+}
+
+// ====================
 // FUTURE INTEGRATION TYPES (Waickoff AI)
 // ====================
 
@@ -852,6 +996,8 @@ export interface ITrapDetectionService {
 // ORDER BLOCKS TYPES (TASK-020)
 // ====================
 
+namespace __deprecated_SM {
+
 export interface OrderBlockZone {
   upper: number;
   lower: number;
@@ -1068,16 +1214,8 @@ export interface FVGAnalysis {
     netImbalance: 'bullish' | 'bearish' | 'neutral';
     strength: number;
   };
-  tradingOpportunities: Array<{
-    gap: FairValueGap;
-    action: 'target_gap' | 'fade_gap' | 'wait';
-    confidence: number;
-    reasoning: string;
-    entryZone: { min: number; max: number };
-    targets: number[];
-    stopLoss?: number;
-  }>;
-  timestamp: Date;
+  tradingOpportunities?: any;
+  timestamp: string;
 }
 
 export interface FVGConfig {
@@ -1230,7 +1368,7 @@ export interface MarketStructureAnalysis {
   activeBreaks: StructuralBreak[];
   recentBreaks: StructuralBreak[];
   currentStructure: {
-    type: 'uptrend' | 'downtrend' | 'range' | 'transition';
+    type: 'uptrend' | 'downtrend' | 'range' | 'transition' | 'sideways';
     strength: number;
     duration: number;          // Periodos desde inicio
     keyLevels: number[];       // Niveles estructurales clave
@@ -1241,23 +1379,9 @@ export interface MarketStructureAnalysis {
     confidence: number;        // 0-100
     reasoning: string[];
   };
-  nexteDecisionPoints: Array<{
-    level: number;
-    type: 'breakout' | 'rejection';
-    significance: 'high' | 'medium' | 'low';
-    probability: number;
-  }>;
-  tradingOpportunities: Array<{
-    type: 'continuation' | 'reversal' | 'breakout';
-    direction: 'long' | 'short';
-    entryZone: { min: number; max: number };
-    targets: number[];
-    stopLoss: number;
-    riskReward: number;
-    confidence: number;
-    reasoning: string;
-  }>;
-  timestamp: Date;
+  tradingOpportunities?: any;
+  nexteDecisionPoints?: any;
+  timestamp: Date | string;
 }
 
 export interface StructureShiftValidation {
@@ -1335,7 +1459,210 @@ export interface IBreakOfStructureService {
 }
 
 // ====================
+// SMART MONEY ANALYSIS INTEGRATION TYPES (TASK-020 FASE 4)
+// ====================
+
+export interface SmartMoneyConfluence {
+  id: string;
+  types: Array<'orderBlock' | 'fairValueGap' | 'breakOfStructure'>;
+  priceLevel: number;
+  strength: number;           // 0-100 score de confluencia
+  zone: {
+    upper: number;
+    lower: number;
+    midpoint: number;
+  };
+  components: {
+    orderBlock?: OrderBlock;
+    fairValueGap?: FairValueGap;
+    structuralBreak?: StructuralBreak;
+  };
+  alignment: 'bullish' | 'bearish' | 'mixed';
+  validUntil: string;
+  description: string;
+}
+
+export interface SMCMarketBias {
+  direction: 'bullish' | 'bearish' | 'neutral';
+  strength: number;           // 0-100
+  confidence: number;         // 0-100
+  reasoning: string[];
+  components: {
+    orderBlockBias: 'bullish' | 'bearish' | 'neutral';
+    fvgBias: 'bullish' | 'bearish' | 'neutral';
+    structureBias: 'bullish' | 'bearish' | 'neutral';
+  };
+  confluenceSupport?: {
+    strong: number;
+    moderate: number;
+    weak: number;
+  };
+  institutionalAlignment?: number;
+  keyInfluencers?: string[];
+  nextUpdateTime?: Date;
+}
+
+export interface SMCSetupValidation {
+  isValid: boolean;
+  setupScore: number;         // 0-100
+  factors: {
+    directionalAlignment: number;
+    confluenceQuality: number;
+    structureAlignment: number;
+    institutionalPresence: number;
+    riskRewardRatio: number;
+  };
+  optimalEntry: {
+    price: number;
+    zone: { min: number; max: number };
+    reasoning: string;
+  };
+  riskManagement: {
+    stopLoss: number;
+    takeProfits: number[];
+    positionSize: number;
+    maxRisk: number;
+    riskRewardRatio: number;
+  };
+  warnings: string[];
+  alternativeScenarios: Array<{
+    scenario: string;
+    probability: number;
+    action: string;
+  }>;
+  confidence: number;
+  timestamp: string;
+}
+
+export interface SmartMoneyAnalysis {
+  symbol: string;
+  timeframe: string;
+  currentPrice: number;
+  confluences: SmartMoneyConfluence[];
+  premiumDiscountZones: {
+    premium: { start: number; end: number };
+    discount: { start: number; end: number };
+    equilibrium: number;
+    currentZone: 'premium' | 'discount' | 'equilibrium';
+  };
+  institutionalActivity: {
+    score: number;
+    signals: string[];
+    footprint: {
+      orderBlockActivity: number;
+      fvgCreation: number;
+      structuralManipulation: number;
+      confluenceStrength: number;
+    };
+    interpretation: string;
+  };
+  marketBias: SMCMarketBias;
+  tradingRecommendations: Array<{
+    action: 'buy' | 'sell' | 'wait';
+    reasoning: string;
+    entryZone: { min: number; max: number };
+    targets: number[];
+    stopLoss: number;
+    confidence: number;
+    timeframe: string;
+  }>;
+  keyLevels: Array<{
+    price: number;
+    type: string;
+    strength: number;
+    description: string;
+  }>;
+  statistics: {
+    totalConfluences: number;
+    strongConfluences: number;
+    activeOrderBlocks: number;
+    openFVGs: number;
+    recentBOS: number;
+    overallConfidence: number;
+  };
+  rawAnalysis: {
+    orderBlocks: OrderBlockAnalysis;
+    fairValueGaps: FVGAnalysis;
+    breakOfStructure: MarketStructureAnalysis;
+  };
+  timestamp: string;
+}
+
+export interface SMCConfig {
+  confluenceThreshold: number;        // Distancia máxima para confluencia
+  minConfluenceScore: number;         // Score mínimo para confluencia válida
+  biasStrengthThreshold: number;      // Umbral para bias fuerte
+  setupValidationMinScore: number;    // Score mínimo para setup válido
+  weights: {
+    orderBlock: number;               // Peso Order Blocks
+    fairValueGap: number;             // Peso FVGs
+    breakOfStructure: number;         // Peso BOS
+  };
+  premiumDiscountThreshold: number;   // Para determinar zonas premium/discount
+  institutionalActivityThreshold: number; // Umbral actividad institucional
+}
+
+// Smart Money Analysis Service Interface
+export interface ISmartMoneyAnalysisService {
+  analyzeSmartMoneyConfluence(
+    symbol: string,
+    timeframe?: string,
+    lookback?: number
+  ): Promise<SmartMoneyAnalysis>;
+  
+  getSMCMarketBias(
+    symbol: string,
+    timeframe?: string
+  ): Promise<SMCMarketBias>;
+  
+  validateSMCSetup(
+    symbol: string,
+    setupType: 'long' | 'short',
+    entryPrice?: number
+  ): Promise<SMCSetupValidation>;
+  
+  updateConfig(config: Partial<SMCConfig>): SMCConfig;
+  getConfig(): SMCConfig;
+  getPerformanceMetrics(): PerformanceMetrics[];
+}
+
+} // <-- close __deprecated_SM namespace
+
+// ====================
 // EXPORT ALL TYPES
 // ====================
 
 // Note: All types are already exported individually above
+
+// Re-import canonical Smart Money service types and re-export them here so that
+// every module can rely on a single unified definition. This avoids structural
+// mismatches when the same logical model is declared in multiple places.
+
+// Import types from SMC services
+import type {
+  OrderBlock as OrderBlockType,
+  OrderBlockAnalysis as OrderBlockAnalysisType
+} from '../services/smartMoney/orderBlocks.js';
+
+import type {
+  FairValueGap as FairValueGapType,
+  FVGAnalysis as FVGAnalysisType
+} from '../services/smartMoney/fairValueGaps.js';
+
+import type {
+  StructuralBreak as StructuralBreakType,
+  MarketStructurePoint as MarketStructurePointType,
+  MarketStructureAnalysis as MarketStructureAnalysisType
+} from '../services/smartMoney/breakOfStructure.js';
+
+// Re-export with proper names so downstream code can use types from this module
+export type OrderBlock = OrderBlockType;
+export type OrderBlockAnalysis = OrderBlockAnalysisType;
+export type FairValueGap = FairValueGapType;
+export type FVGAnalysis = FVGAnalysisType;
+export type MarketStructurePoint = MarketStructurePointType;
+export type MarketStructureAnalysis = MarketStructureAnalysisType;
+export type StructuralBreak = StructuralBreakType;
+export type StructureShiftValidation = __deprecated_SM.StructureShiftValidation;
+export type BOSConfig = __deprecated_SM.BOSConfig;
+export type IBreakOfStructureService = __deprecated_SM.IBreakOfStructureService;

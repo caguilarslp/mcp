@@ -1193,6 +1193,28 @@ export class MCPHandlers {
   }
 
   // ====================
+  // SMART MONEY CONCEPTS - INTEGRATION HANDLERS (TASK-020 FASE 4)
+  // ====================
+
+  async handleAnalyzeSmartMoneyConfluence(args: any): Promise<MCPServerResponse> {
+    const { SmartMoneyAnalysisHandlers } = await import('./handlers/smartMoney/smartMoneyAnalysisHandlers.js');
+    const handlers = SmartMoneyAnalysisHandlers.createSmartMoneyAnalysisHandlers(this.engine);
+    return await handlers.handleAnalyzeSmartMoneyConfluence(args);
+  }
+
+  async handleGetSMCMarketBias(args: any): Promise<MCPServerResponse> {
+    const { SmartMoneyAnalysisHandlers } = await import('./handlers/smartMoney/smartMoneyAnalysisHandlers.js');
+    const handlers = SmartMoneyAnalysisHandlers.createSmartMoneyAnalysisHandlers(this.engine);
+    return await handlers.handleGetSMCMarketBias(args);
+  }
+
+  async handleValidateSMCSetup(args: any): Promise<MCPServerResponse> {
+    const { SmartMoneyAnalysisHandlers } = await import('./handlers/smartMoney/smartMoneyAnalysisHandlers.js');
+    const handlers = SmartMoneyAnalysisHandlers.createSmartMoneyAnalysisHandlers(this.engine);
+    return await handlers.handleValidateSMCSetup(args);
+  }
+
+  // ====================
   // HELPER METHODS
   // ====================
 

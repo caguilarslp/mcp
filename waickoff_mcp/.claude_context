@@ -1,12 +1,12 @@
 # 🤖 wAIckoff MCP Server - Contexto Mínimo v1.6.5
 
 ## 📋 Estado Actual
-- **Versión:** v1.6.5
+- **Versión:** v1.6.6
 - **Fecha:** 12/06/2025
-- **Status:** Production Ready - 82+ herramientas MCP operativas
-- **Última tarea:** TASK-020 FASE 3 - Smart Money Concepts: Break of Structure ✅ COMPLETADO
-- **Crítico:** Sistema completo BOS con detección estructural, validación multi-factor y targets implementado
-- **Próximo:** TASK-020 FASE 4 - Market Structure Integration (integrar Order Blocks + FVG + BOS)
+- **Status:** Production Ready - 85+ herramientas MCP operativas
+- **Última tarea:** TASK-020 FASE 4 - Smart Money Concepts: Market Structure Integration ✅ COMPLETADO
+- **Crítico:** Sistema completo SMC con integración de Order Blocks + FVG + BOS + Confluencias
+- **Próximo:** TASK-020 FASE 5 - Confluence Analysis & Dashboard (dashboard completo SMC)
 
 ## 🎯 Próximas Tareas Priorizadas (DIVIDIDAS EN FASES)
 1. **TASK-020**: Smart Money Concepts (10h) - 5 fases - FASES 1-3 ✅ COMPLETADAS
@@ -102,13 +102,13 @@ npm test         # Tests
 6. **Seguir arquitectura modular** establecida
 7. **Código primero**, documentación después
 
-## 📊 Sistema Actual (82+ herramientas)
+## 📊 Sistema Actual (85+ herramientas)
 - **Market Data**: Ticker, orderbook, klines
 - **Analysis**: Volatilidad, volumen, S/R, grid trading
 - **Wyckoff**: Básico (7 herramientas) + Avanzado (7 herramientas)
 - **Traps**: Detección bull/bear traps (7 herramientas)
 - **Historical**: Análisis histórico (6 herramientas)
-- **Smart Money**: Order Blocks (3) + Fair Value Gaps (2) + Break of Structure (3) = 8 herramientas ✅
+- **Smart Money**: Order Blocks (3) + FVG (2) + BOS (3) + Integration (3) = 11 herramientas ✅
 - **Storage**: Repository + Cache + Reports (15 herramientas)
 - **Config**: Usuario + Sistema (16 herramientas)
 - **Technical**: Fibonacci, Elliott, Bollinger, Confluencias (4 herramientas)

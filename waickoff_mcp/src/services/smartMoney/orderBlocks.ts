@@ -11,8 +11,10 @@ import { OHLCV, MarketTicker, MCPServerResponse, PerformanceMetrics, IMarketData
 // ORDER BLOCK TYPES
 // ====================
 
+// Export OrderBlock interface
 export interface OrderBlock {
   id: string;
+  symbol: string;
   type: 'bullish' | 'bearish' | 'breaker';
   origin: {
     high: number;
@@ -20,7 +22,7 @@ export interface OrderBlock {
     open: number;
     close: number;
     volume: number;
-    timestamp: Date;
+    timestamp: string;
     candleIndex: number;
   };
   zone: {
@@ -30,15 +32,34 @@ export interface OrderBlock {
   };
   strength: number;     // 0-100 based on volume and move
   mitigated: boolean;   // Has been tested/traded through
-  mitigationTime?: Date;
+  mitigationTime?: string;
   respectCount: number; // Times price respected this OB
-  lastTest?: Date;
-  validity: 'fresh' | 'tested' | 'broken';
-  createdAt: Date;
+  lastTest?: string;
+  validity: 'fresh' | 'tested' | 'mitigated' | 'breaker';
+  createdAt: string;
   subsequentMove: {
     magnitude: number;    // ATR units moved after OB
     candles: number;      // Candles to complete move
     maxPrice: number;     // Highest/lowest price after OB
+  };
+  // Additional properties required by types/index.ts
+  volumeAtCreation: number;
+  priceMovement: {
+    distance: number;         // Distancia del movimiento posterior
+    percentage: number;       // Porcentaje del movimiento
+    timeToTarget: number;     // Tiempo en alcanzar objetivo (minutos)
+  };
+  institutionalSignals: {
+    volumeMultiplier: number; // Multiplicador vs volumen promedio
+    orderFlowImbalance: number; // Desequilibrio en orderflow
+    absorptionLevel: number;   // Nivel de absorción detectado
+  };
+  currentDistance: number;   // Distancia actual del precio
+  priceAtCreation: number;
+  marketStructure: {
+    swingHigh?: number;
+    swingLow?: number;
+    structureBreak: boolean;
   };
 }
 
@@ -60,7 +81,25 @@ export interface OrderBlockAnalysis {
     distance: number;
   }>;
   marketBias: 'bullish' | 'bearish' | 'neutral';
-  timestamp: Date;
+  keyLevels: {
+    strongSupport: number[];
+    strongResistance: number[];
+  };
+  statistics: {
+    totalBlocks: number;
+    freshBlocks: number;
+    mitigatedBlocks: number;
+    breakerBlocks: number;
+    avgRespectRate: number;
+  };
+  tradingRecommendation: {
+    action: 'buy' | 'sell' | 'wait' | 'monitor';
+    confidence: number;
+    reason: string;
+    targets: number[];
+    stopLoss?: number;
+  };
+  timestamp: string;
 }
 
 export interface OrderBlockConfig {
@@ -149,6 +188,12 @@ export class OrderBlocksService {
       // Analizar mitigación y estado actual
       const analyzedBlocks = this.analyzeBlockMitigation(validBlocks, klines, ticker.lastPrice);
 
+      // Establecer símbolo y distancia actual en todos los bloques
+      analyzedBlocks.forEach(block => {
+        block.symbol = symbol;
+        block.currentDistance = Math.abs(ticker.lastPrice - block.zone.midpoint) / ticker.lastPrice * 100;
+      });
+
       // Separar activos y breakers
       const activeBlocks = analyzedBlocks.filter(block => 
         !block.mitigated && block.strength >= minStrength
@@ -166,6 +211,19 @@ export class OrderBlocksService {
       // Determinar sesgo del mercado
       const marketBias = this.determineMarketBias(activeBlocks, ticker.lastPrice);
 
+      // Calcular niveles clave
+      const keyLevels = this.calculateKeyLevels(activeBlocks, breakerBlocks);
+
+      // Generar estadísticas
+      const statistics = this.generateStatistics(analyzedBlocks, activeBlocks, breakerBlocks);
+
+      // Generar recomendación de trading
+      const tradingRecommendation = this.generateTradingRecommendation(
+        activeBlocks, 
+        marketBias, 
+        ticker.lastPrice
+      );
+
       // Registrar métricas de rendimiento
       this.recordPerformance('detectOrderBlocks', Date.now() - startTime, true);
 
@@ -179,7 +237,10 @@ export class OrderBlocksService {
         nearestBlock: nearestBlocks,
         confluenceWithLevels: [], // TODO: Implementar en siguiente fase
         marketBias,
-        timestamp: new Date()
+        keyLevels,
+        statistics,
+        tradingRecommendation,
+        timestamp: new Date().toISOString()
       };
 
     } catch (error) {
@@ -221,8 +282,8 @@ export class OrderBlocksService {
         const updatedBlock: OrderBlock = {
           ...block,
           mitigated: true,
-          mitigationTime: new Date(),
-          validity: 'broken'
+          mitigationTime: new Date().toISOString(),
+          validity: 'mitigated'
         };
 
         this.recordPerformance('validateOrderBlock', Date.now() - startTime, true);
@@ -230,7 +291,7 @@ export class OrderBlocksService {
       }
 
       // Verificar edad máxima
-      const ageInMs = Date.now() - block.createdAt.getTime();
+      const ageInMs = Date.now() - new Date(block.createdAt).getTime();
       const ageInCandles = ageInMs / (this.getTimeframeMs(60) || 3600000); // Default 1h
       
       if (ageInCandles > this.config.maxBlockAge) {
@@ -246,7 +307,7 @@ export class OrderBlocksService {
       if (isNearBlock && !block.lastTest) {
         updatedBlock = {
           ...block,
-          lastTest: new Date(),
+          lastTest: new Date().toISOString(),
           respectCount: block.respectCount + 1,
           validity: 'tested'
         };
@@ -374,6 +435,7 @@ export class OrderBlocksService {
 
       const orderBlock: OrderBlock = {
         id: this.generateOrderBlockId(potential.candle, potential.type),
+        symbol: '', // Will be set by caller
         type: potential.type,
         origin: {
           high: potential.candle.high,
@@ -381,7 +443,7 @@ export class OrderBlocksService {
           open: potential.candle.open,
           close: potential.candle.close,
           volume: potential.candle.volume,
-          timestamp: new Date(potential.candle.timestamp),
+          timestamp: new Date(potential.candle.timestamp).toISOString(),
           candleIndex: potential.index
         },
         zone,
@@ -389,8 +451,27 @@ export class OrderBlocksService {
         mitigated: false,
         respectCount: 0,
         validity: 'fresh',
-        createdAt: new Date(),
-        subsequentMove
+        createdAt: new Date().toISOString(),
+        subsequentMove,
+        // Additional required properties
+        volumeAtCreation: potential.candle.volume,
+        priceMovement: {
+          distance: subsequentMove.magnitude,
+          percentage: (subsequentMove.magnitude / potential.candle.close) * 100,
+          timeToTarget: subsequentMove.candles * 60 // Assuming 1-minute candles, convert to minutes
+        },
+        institutionalSignals: {
+          volumeMultiplier: potential.volumeRatio,
+          orderFlowImbalance: 0, // TODO: Calculate based on order flow
+          absorptionLevel: potential.volumeRatio * 50 // Approximation
+        },
+        currentDistance: 0, // Will be calculated later
+        priceAtCreation: potential.candle.close,
+        marketStructure: {
+          swingHigh: potential.type === 'bullish' ? potential.candle.high : undefined,
+          swingLow: potential.type === 'bearish' ? potential.candle.low : undefined,
+          structureBreak: subsequentMove.magnitude > 2 // If move > 2 ATR, consider structure break
+        }
       };
 
       validBlocks.push(orderBlock);
@@ -464,7 +545,7 @@ export class OrderBlocksService {
     return blocks.map(block => {
       // Buscar si el bloque fue mitigado después de su creación
       let mitigated = false;
-      let mitigationTime: Date | undefined;
+      let mitigationTime: string | undefined;
       let respectCount = 0;
 
       for (let i = block.origin.candleIndex + 1; i < klines.length; i++) {
@@ -484,7 +565,7 @@ export class OrderBlocksService {
           const penetration = this.calculateZonePenetration(candle, block);
           if (penetration > this.config.mitigationThreshold) {
             mitigated = true;
-            mitigationTime = new Date(candle.timestamp);
+            mitigationTime = new Date(candle.timestamp).toISOString();
             break;
           }
         }
@@ -505,7 +586,7 @@ export class OrderBlocksService {
         mitigationTime,
         respectCount,
         strength: updatedStrength,
-        validity: mitigated ? 'broken' : (respectCount > 0 ? 'tested' : 'fresh')
+        validity: mitigated ? 'mitigated' : (respectCount > 0 ? 'tested' : 'fresh')
       };
     });
   }
@@ -627,6 +708,132 @@ export class OrderBlocksService {
     if (biasStrength < 0.2) return 'neutral';
     
     return bullishScore > bearishScore ? 'bullish' : 'bearish';
+  }
+
+  private calculateKeyLevels(
+    activeBlocks: OrderBlock[],
+    breakerBlocks: OrderBlock[]
+  ): { strongSupport: number[]; strongResistance: number[] } {
+    const strongSupport: number[] = [];
+    const strongResistance: number[] = [];
+
+    // Procesar bloques activos
+    for (const block of activeBlocks) {
+      if (block.strength >= 80) {
+        if (block.type === 'bullish') {
+          strongSupport.push(block.zone.lower);
+        } else {
+          strongResistance.push(block.zone.upper);
+        }
+      }
+    }
+
+    // Procesar breaker blocks (actúan como niveles opuestos)
+    for (const block of breakerBlocks) {
+      if (block.strength >= 75) {
+        if (block.type === 'bullish') {
+          strongResistance.push(block.zone.upper);
+        } else {
+          strongSupport.push(block.zone.lower);
+        }
+      }
+    }
+
+    return {
+      strongSupport: strongSupport.sort((a, b) => b - a), // Descendente
+      strongResistance: strongResistance.sort((a, b) => a - b) // Ascendente
+    };
+  }
+
+  private generateStatistics(
+    allBlocks: OrderBlock[],
+    activeBlocks: OrderBlock[],
+    breakerBlocks: OrderBlock[]
+  ): {
+    totalBlocks: number;
+    freshBlocks: number;
+    mitigatedBlocks: number;
+    breakerBlocks: number;
+    avgRespectRate: number;
+  } {
+    const freshBlocks = allBlocks.filter(b => b.validity === 'fresh').length;
+    const mitigatedBlocks = allBlocks.filter(b => b.mitigated).length;
+    
+    const totalRespects = allBlocks.reduce((sum, block) => sum + block.respectCount, 0);
+    const avgRespectRate = allBlocks.length > 0 ? totalRespects / allBlocks.length : 0;
+
+    return {
+      totalBlocks: allBlocks.length,
+      freshBlocks,
+      mitigatedBlocks,
+      breakerBlocks: breakerBlocks.length,
+      avgRespectRate: Number(avgRespectRate.toFixed(2))
+    };
+  }
+
+  private generateTradingRecommendation(
+    activeBlocks: OrderBlock[],
+    marketBias: 'bullish' | 'bearish' | 'neutral',
+    currentPrice: number
+  ): {
+    action: 'buy' | 'sell' | 'wait' | 'monitor';
+    confidence: number;
+    reason: string;
+    targets: number[];
+    stopLoss?: number;
+  } {
+    if (activeBlocks.length === 0) {
+      return {
+        action: 'wait',
+        confidence: 0,
+        reason: 'No active order blocks detected',
+        targets: []
+      };
+    }
+
+    const strongBlocks = activeBlocks.filter(b => b.strength >= 75);
+    const nearbyBlocks = activeBlocks.filter(b => {
+      const distance = Math.abs(currentPrice - b.zone.midpoint) / currentPrice;
+      return distance <= 0.02; // Within 2%
+    });
+
+    let action: 'buy' | 'sell' | 'wait' | 'monitor' = 'monitor';
+    let confidence = 50;
+    let reason = 'Standard monitoring of order blocks';
+    let targets: number[] = [];
+    let stopLoss: number | undefined;
+
+    if (strongBlocks.length >= 2 && nearbyBlocks.length >= 1) {
+      const nearestBlock = nearbyBlocks[0];
+      
+      if (marketBias === nearestBlock.type) {
+        action = nearestBlock.type === 'bullish' ? 'buy' : 'sell';
+        confidence = Math.min(90, nearestBlock.strength + 10);
+        reason = `Strong ${nearestBlock.type} order block alignment with market bias`;
+        
+        if (nearestBlock.type === 'bullish') {
+          targets = [nearestBlock.zone.upper * 1.01, nearestBlock.zone.upper * 1.02];
+          stopLoss = nearestBlock.zone.lower * 0.995;
+        } else {
+          targets = [nearestBlock.zone.lower * 0.99, nearestBlock.zone.lower * 0.98];
+          stopLoss = nearestBlock.zone.upper * 1.005;
+        }
+      }
+    } else if (strongBlocks.length >= 1) {
+      confidence = 65;
+      reason = 'Strong order blocks present, monitor for entry opportunities';
+    } else if (nearbyBlocks.length >= 1) {
+      confidence = 55;
+      reason = 'Price near order block levels, monitor for reactions';
+    }
+
+    return {
+      action,
+      confidence,
+      reason,
+      targets,
+      stopLoss
+    };
   }
 
   // ====================

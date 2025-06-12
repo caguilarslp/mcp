@@ -160,5 +160,155 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
       },
       required: ['symbol']
     }
+  },
+
+  // ====================
+  // BREAK OF STRUCTURE TOOLS
+  // ====================
+  {
+    name: 'detect_break_of_structure',
+    description: 'Detect Break of Structure (BOS) and Change of Character (CHoCH) with multi-factor validation',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        timeframe: {
+          type: 'string',
+          description: 'Analysis timeframe',
+          enum: ['5', '15', '30', '60', '240'],
+          default: '60'
+        },
+        lookback: {
+          type: 'integer',
+          description: 'Number of periods to analyze for structure',
+          minimum: 50,
+          maximum: 200,
+          default: 100
+        }
+      },
+      required: ['symbol']
+    }
+  },
+  {
+    name: 'analyze_market_structure',
+    description: 'Perform comprehensive market structure analysis with trend identification and momentum',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        timeframe: {
+          type: 'string',
+          description: 'Analysis timeframe',
+          enum: ['5', '15', '30', '60', '240'],
+          default: '60'
+        }
+      },
+      required: ['symbol']
+    }
+  },
+  {
+    name: 'validate_structure_shift',
+    description: 'Validate if a specific structure shift is still valid and trading opportunities',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        breakId: {
+          type: 'string',
+          description: 'Unique identifier of the structure break to validate'
+        }
+      },
+      required: ['symbol', 'breakId']
+    }
+  },
+
+  // ====================
+  // SMART MONEY INTEGRATION TOOLS
+  // ====================
+  {
+    name: 'analyze_smart_money_confluence',
+    description: 'Analyze confluences between Order Blocks, Fair Value Gaps, and Break of Structure for complete SMC analysis',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        timeframe: {
+          type: 'string',
+          description: 'Analysis timeframe',
+          enum: ['5', '15', '30', '60', '240'],
+          default: '60'
+        },
+        lookback: {
+          type: 'integer',
+          description: 'Number of periods to analyze',
+          minimum: 50,
+          maximum: 500,
+          default: 100
+        }
+      },
+      required: ['symbol']
+    }
+  },
+  {
+    name: 'get_smc_market_bias',
+    description: 'Get integrated Smart Money Concepts market bias with institutional alignment and confluence support',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        timeframe: {
+          type: 'string',
+          description: 'Analysis timeframe',
+          enum: ['5', '15', '30', '60', '240'],
+          default: '60'
+        }
+      },
+      required: ['symbol']
+    }
+  },
+  {
+    name: 'validate_smc_setup',
+    description: 'Validate a complete Smart Money Concepts trading setup with multi-factor analysis and risk management',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        setupType: {
+          type: 'string',
+          description: 'Type of trading setup to validate',
+          enum: ['long', 'short']
+        },
+        entryPrice: {
+          type: 'number',
+          description: 'Optional specific entry price to validate (defaults to current price)',
+          minimum: 0
+        }
+      },
+      required: ['symbol', 'setupType']
+    }
   }
 ];

@@ -7,14 +7,120 @@
 
 import type {
   OHLCV,
-  MarketStructurePoint,
-  StructuralBreak,
-  MarketStructureAnalysis,
-  StructureShiftValidation,
   BOSConfig,
   IBreakOfStructureService,
   PerformanceMetrics
 } from '../../types/index.js';
+
+// Export local types
+export interface MarketStructurePoint {
+  timestamp: Date;
+  price: number;
+  type: 'higher_high' | 'higher_low' | 'lower_high' | 'lower_low';
+  strength: number;
+  volume: number;
+  confirmed: boolean;
+  index: number;
+}
+
+export interface StructuralBreak {
+  id: string;
+  type: 'BOS' | 'CHoCH';
+  direction: 'bullish' | 'bearish';
+  breakPoint: {
+    timestamp: Date;
+    price: number;
+    volume: number;
+    index: number;
+  };
+  previousStructure: {
+    pattern: 'higher_highs' | 'lower_lows' | 'consolidation';
+    duration: number;
+    strength: number;
+  };
+  significance: 'major' | 'minor' | 'false';
+  confirmation: {
+    volumeConfirmed: boolean;
+    followThrough: boolean;
+  };
+  institutionalFootprint: {
+    orderBlockPresent: boolean;
+    fvgPresent: boolean;
+    liquidityGrab: boolean;
+    absorptionDetected: boolean;
+  };
+  targets: {
+    conservative: number;
+    normal: number;
+    aggressive: number;
+  };
+  invalidationLevel: number;
+  probability: number;
+  createdAt: Date;
+  resolvedAt?: Date;
+}
+
+export interface MarketStructureAnalysis {
+  symbol: string;
+  timeframe: string;
+  currentPrice: number;
+  trend: {
+    shortTerm: 'bullish' | 'bearish' | 'sideways';
+    mediumTerm: 'bullish' | 'bearish' | 'sideways';
+    longTerm: 'bullish' | 'bearish' | 'sideways';
+    confidence: number;
+  };
+  structurePoints: MarketStructurePoint[];
+  activeBreaks: StructuralBreak[];
+  recentBreaks: StructuralBreak[];
+  currentStructure: {
+    type: 'uptrend' | 'downtrend' | 'sideways';
+    strength: number;
+    duration: number;
+    keyLevels: number[];
+  };
+  marketBias: {
+    direction: 'bullish' | 'bearish' | 'neutral';
+    strength: number;
+    confidence: number;
+    reasoning: string[];
+  };
+  nexteDecisionPoints?: Array<{
+    level: number;
+    type: 'support' | 'resistance';
+    strength: number;
+    timeframe: string;
+  }>;
+  tradingOpportunities: Array<{
+    type: 'continuation' | 'reversal';
+    direction: 'long' | 'short';
+    entryZone: { min: number; max: number };
+    targets: number[];
+    stopLoss: number;
+    confidence: number;
+    reasoning: string;
+  }>;
+  timestamp: Date;
+}
+
+export interface StructureShiftValidation {
+  isValid: boolean;
+  confidence: number;
+  factors: {
+    volumeConfirmation: number;
+    priceAction: number;
+    institutionalSignals: number;
+    timeConfirmation: number;
+    structuralIntegrity: number;
+  };
+  warnings: string[];
+  nextValidationTime?: Date;
+  invalidationScenarios: Array<{
+    trigger: string;
+    price: number;
+    probability: number;
+  }>;
+}
 import { performance } from 'perf_hooks';
 import { randomUUID } from 'crypto';
 

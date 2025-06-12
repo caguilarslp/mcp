@@ -145,6 +145,11 @@ export class HandlerRegistry {
     this.register('detect_break_of_structure', (args) => this.mcpHandlers.handleDetectBreakOfStructure(args));
     this.register('analyze_market_structure', (args) => this.mcpHandlers.handleAnalyzeMarketStructure(args));
     this.register('validate_structure_shift', (args) => this.mcpHandlers.handleValidateStructureShift(args));
+    
+    // Smart Money Concepts - Integration Tools (TASK-020 FASE 4)
+    this.register('analyze_smart_money_confluence', (args) => this.mcpHandlers.handleAnalyzeSmartMoneyConfluence(args));
+    this.register('get_smc_market_bias', (args) => this.mcpHandlers.handleGetSMCMarketBias(args));
+    this.register('validate_smc_setup', (args) => this.mcpHandlers.handleValidateSMCSetup(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

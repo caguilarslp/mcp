@@ -1065,6 +1065,66 @@ export class MarketAnalysisEngine {
   }
 
   // ====================
+  // SMART MONEY CONCEPTS METHODS (TASK-020)
+  // ====================
+
+  /**
+   * Analyze Smart Money confluence
+   */
+  async analyzeSmartMoneyConfluence(
+    symbol: string,
+    timeframe: string = '60',
+    lookback: number = 100
+  ): Promise<any> {
+    return this.performanceMonitor.measure('analyzeSmartMoneyConfluence', async () => {
+      try {
+        // TODO: Implement Smart Money Analysis Service integration
+        throw new Error('Smart Money confluence analysis not yet implemented');
+      } catch (error) {
+        this.logger.error(`Failed to analyze Smart Money confluence for ${symbol}:`, error);
+        throw error;
+      }
+    });
+  }
+
+  /**
+   * Get SMC market bias
+   */
+  async getSMCMarketBias(
+    symbol: string,
+    timeframe: string = '60'
+  ): Promise<any> {
+    return this.performanceMonitor.measure('getSMCMarketBias', async () => {
+      try {
+        // TODO: Implement Smart Money Analysis Service integration
+        throw new Error('SMC market bias analysis not yet implemented');
+      } catch (error) {
+        this.logger.error(`Failed to get SMC market bias for ${symbol}:`, error);
+        throw error;
+      }
+    });
+  }
+
+  /**
+   * Validate SMC setup
+   */
+  async validateSMCSetup(
+    symbol: string,
+    setupType: 'long' | 'short',
+    entryPrice?: number
+  ): Promise<any> {
+    return this.performanceMonitor.measure('validateSMCSetup', async () => {
+      try {
+        // TODO: Implement Smart Money Analysis Service integration
+        throw new Error('SMC setup validation not yet implemented');
+      } catch (error) {
+        this.logger.error(`Failed to validate SMC setup for ${symbol}:`, error);
+        throw error;
+      }
+    });
+  }
+
+  // ====================
   // ANALYSIS REPOSITORY METHODS
   // ====================
 
