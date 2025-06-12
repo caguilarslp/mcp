@@ -1,4 +1,4 @@
-# 🤖 wAIckoff MCP Server v1.4.0
+# 🤖 wAIckoff MCP Server v1.6.5
 
 > **Servidor MCP avanzado para análisis de mercado crypto con integración Bybit**
 > 
@@ -14,7 +14,7 @@
 
 ## 🎯 **¿Qué es wAIckoff MCP?**
 
-**wAIckoff MCP v1.4.0** es un servidor de **Model Context Protocol (MCP)** que proporciona análisis técnico profesional para criptomonedas. Diseñado específicamente para ser la **capa de datos** del sistema **Waickoff AI**, ofrece:
+**wAIckoff MCP v1.6.5** es un servidor de **Model Context Protocol (MCP)** que proporciona análisis técnico profesional para criptomonedas. Diseñado específicamente para ser la **capa de datos** del sistema **Waickoff AI**, ofrece:
 
 - **📊 Análisis técnico completo** - Volatilidad, volumen, Support/Resistance dinámicos
 - **🎯 Grid trading inteligente** - Sugerencias basadas en datos reales del mercado
@@ -56,7 +56,7 @@ Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 
 ---
 
-## 📊 **Funcionalidades Principales v1.4.0**
+## 📊 **Funcionalidades Principales v1.6.4**
 
 ### **🎯 Análisis de Mercado en Tiempo Real**
 - **`get_ticker`** - Precios actuales y estadísticas 24h
@@ -69,6 +69,32 @@ Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 - **`analyze_volume_delta`** - Presión compradora vs vendedora con divergencias
 - **`identify_support_resistance`** - Niveles dinámicos con scoring multi-factor
 - **`perform_technical_analysis`** - **Análisis técnico completo** (TODO en uno)
+
+### **🎯 Análisis Wyckoff Básico (NUEVO v1.6.4)**
+- **`analyze_wyckoff_phase`** - Análisis completo de fase Wyckoff actual con interpretación
+- **`detect_trading_range`** - Detección de rangos de consolidación/acumulación
+- **`find_wyckoff_events`** - Búsqueda de springs, upthrusts, tests automática
+- **`analyze_wyckoff_volume`** - Análisis de volumen en contexto Wyckoff (climax, dry-up)
+- **`get_wyckoff_interpretation`** - Interpretación comprensiva con bias del mercado
+- **`track_phase_progression`** - Seguimiento de progreso y timeline de fases
+- **`validate_wyckoff_setup`** - Validación de setup con evaluación de riesgo
+
+### **🎯 Detección de Trampas (NUEVO v1.6.4)**
+- **`detect_bull_trap`** - Detecta falsas rupturas alcistas sobre resistencia
+- **`detect_bear_trap`** - Detecta falsas rupturas bajistas bajo soporte
+- **`get_trap_history`** - Historial de trampas para backtesting
+- **`get_trap_statistics`** - Estadísticas de rendimiento de detección
+- **`configure_trap_detection`** - Configuración de parámetros de detección
+- **`validate_breakout`** - Validación de situaciones de ruptura actuales
+- **`get_trap_performance`** - Métricas de rendimiento del servicio
+
+### **📜 Análisis Histórico Completo (NUEVO v1.6.4)**
+- **`get_historical_klines`** - Datos históricos OHLCV con metadata
+- **`analyze_historical_sr`** - Análisis avanzado S/R histórico con scoring
+- **`identify_volume_anomalies`** - Detección de eventos de volumen significativos
+- **`get_price_distribution`** - Análisis distribución precios y value areas
+- **`identify_market_cycles`** - Identificación de ciclos de mercado históricos
+- **`get_historical_summary`** - Resumen comprehensivo análisis histórico
 
 ### **🎯 Trading y Grid Optimization**
 - **`suggest_grid_levels`** - Configuraciones inteligentes basadas en volatilidad
@@ -98,6 +124,17 @@ Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 - **`clear_cache`** - Limpieza completa del cache
 - **`invalidate_cache`** - Invalidación granular por símbolo/categoría
 
+### **⚙️ Configuración y Sistema (NUEVO v1.6.4)**
+- **`get_user_config`** - Configuración completa del usuario
+- **`set_user_timezone`** - Configurar zona horaria con auto-detección
+- **`detect_timezone`** - Auto-detectar zona horaria del sistema
+- **`get_system_config`** - Configuración completa desde variables entorno
+- **`validate_env_config`** - Validación configuración con recomendaciones
+- **`get_mongo_config`** - Estado configuración MongoDB
+- **`get_api_config`** - Configuración APIs externas
+- **`get_analysis_config`** - Parámetros análisis técnico configurables
+- **`get_grid_config`** - Configuración grid trading
+
 ### **🔧 Sistema y Debugging**
 - **`get_system_health`** - Estado del sistema y métricas de performance
 - **`get_debug_logs`** - Logs estructurados para troubleshooting
@@ -105,7 +142,7 @@ Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 
 ---
 
-## 🏗️ **Arquitectura del Sistema v1.4.0**
+## 🏗️ **Arquitectura del Sistema v1.6.4**
 
 ### **📐 Clean Architecture (4 Capas)**
 ```
@@ -148,7 +185,7 @@ Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 
 ---
 
-## 🧪 **Sistema de Testing v1.4.0**
+## 🧪 **Sistema de Testing v1.6.4**
 
 ### **✅ Tests Implementados (TASK-004 COMPLETADA)**
 - **100+ test cases** validando arquitectura modular
@@ -191,7 +228,7 @@ npm run test:help
 
 ---
 
-## 💡 **Casos de Uso v1.4.0**
+## 💡 **Casos de Uso v1.6.4**
 
 ### **📈 Para Análisis Técnico**
 ```bash
@@ -274,7 +311,7 @@ node scripts/test-json.js
 
 ---
 
-## 📂 **Estructura del Proyecto v1.4.0**
+## 📂 **Estructura del Proyecto v1.6.4**
 
 ```
 waickoff_mcp/
@@ -315,7 +352,7 @@ waickoff_mcp/
 
 ---
 
-## 📊 **Estado del Proyecto v1.4.0**
+## 📊 **Estado del Proyecto v1.6.4**
 
 ### **✅ Completado**
 - **✅ Análisis técnico completo** - Volatilidad, volumen, Support/Resistance
@@ -326,16 +363,29 @@ waickoff_mcp/
 - **✅ Arquitectura modular** - Clean Architecture con delegation pattern
 - **✅ TASK-009 COMPLETADA** - Storage System con 4 fases (15 herramientas nuevas)
 - **✅ TASK-004 COMPLETADA** - Sistema completo de tests unitarios
+- **✅ TASK-005 COMPLETADA** - Análisis Wyckoff básico (7 herramientas)
+- **✅ TASK-010 COMPLETADA** - Sistema configuración timezone persistente
+- **✅ TASK-012 COMPLETADA** - Detección trampas alcistas/bajistas (7 herramientas)
+- **✅ TASK-015b COMPLETADA** - Soporte .env cross-platform (9 herramientas)
+- **✅ TASK-017 COMPLETADA** - Sistema análisis histórico (6 herramientas)
+- **✅ TASK-018 COMPLETADA** - Modularización completa MCP (eliminación corrupción)
+- **✅ TASK-019 COMPLETADA** - Resolución errores compilación TypeScript
 - **✅ Auto-save automático** - Todos los análisis se guardan automáticamente
 - **✅ Repositorio de análisis** - 7 herramientas de consulta avanzada
 - **✅ Sistema de reportes** - 8 herramientas de generación automática
 - **✅ Cache inteligente** - Performance optimizado con TTL
+- **✅ Análisis Wyckoff** - 15 fases identificadas, springs, upthrusts, tests
+- **✅ Detección de trampas** - Bull/bear traps con análisis multi-señal
+- **✅ Análisis histórico** - S/R histórico, anomalías volumen, ciclos mercado
+- **✅ Sistema modular MCP** - 93.3% reducción archivo principal, corrupción eliminada
 
 ### **📅 Roadmap Próximo**
-- **TASK-010** - Sistema de configuración timezone persistente (4h)
-- **TASK-012** - Detección de trampas alcistas/bajistas (7h)
 - **TASK-013** - Datos on-chain: stablecoins, ballenas, exchanges (15h)
-- **v1.5** - Detección de patrones Wyckoff básicos
+- **TASK-015** - Dual Storage MongoDB experimental (6h)
+- **TASK-016** - Migración MongoDB completa (8-12h, condicional)
+- **TASK-018** - Sistema Wyckoff avanzado: Composite Man, multi-timeframe (8-10h)
+- **TASK-019** - Herramientas análisis técnico: Fibonacci, Elliott, Bollinger (8h)
+- **TASK-020** - Smart Money Concepts para trading algorítmico (10h)
 - **v2.0** - Integración completa con Waickoff AI
 - **v2.1** - Support para múltiples exchanges (Binance, Coinbase)
 
@@ -359,10 +409,10 @@ waickoff_mcp/
 
 ---
 
-## 📚 **Documentación v1.4.0**
+## 📚 **Documentación v1.6.4**
 
 ### **📖 Guías de Usuario**
-- **🆕 [User Guide v1.4.0](claude/docs/user-guide.md)** - Guía completa actualizada con 40+ herramientas
+- **🆕 [User Guide v1.6.4](claude/docs/user-guide.md)** - Guía completa actualizada con 70+ herramientas
 - **🆕 [Testing Manual](claude/docs/testing-manual.md)** - Manual completo del sistema de testing
 - **[API Reference](claude/docs/api/tools-reference.md)** - Referencia completa de herramientas
 - **[Volume Analysis Guide](VOLUME_ANALYSIS_GUIDE.md)** - Guía de análisis de volumen
@@ -465,15 +515,17 @@ get_repository_stats     # Estado del almacenamiento
 
 ---
 
-## 📊 **Métricas del Proyecto v1.4.0**
+## 📊 **Métricas del Proyecto v1.6.4**
 
-- **40+ herramientas MCP** disponibles
+- **70+ herramientas MCP** disponibles
 - **100+ test cases** implementados
 - **15+ módulos** en arquitectura modular
-- **4 fases TASK-009** completadas
+- **10+ tareas completadas** (TASK-004 a TASK-019)
 - **0 errores TypeScript** en compilación
-- **85%+ cobertura esperada** en tests críticos
+- **93.3% reducción** archivo principal MCP (eliminación corrupción)
+- **7 categorías análisis** (Técnico, Wyckoff, Trampas, Histórico, etc.)
 - **2000+ líneas** de código de tests robusto
+- **Cross-platform** soporte completo (Windows, Linux, macOS)
 
 ---
 
@@ -494,4 +546,4 @@ Para issues, bugs o sugerencias:
 
 ---
 
-*Última actualización: 10/06/2025 | v1.4.0 | Estado: Production Ready + Tests Completos*
+*Última actualización: 11/06/2025 | v1.6.5 | Estado: Production Ready + Documentación Completa*

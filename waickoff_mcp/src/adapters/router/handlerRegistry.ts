@@ -127,6 +127,12 @@ export class HandlerRegistry {
     this.register('validate_wyckoff_signal', (args) => this.mcpHandlers.handleValidateWyckoffSignal(args));
     this.register('track_institutional_flow', (args) => this.mcpHandlers.handleTrackInstitutionalFlow(args));
     this.register('generate_wyckoff_advanced_insights', (args) => this.mcpHandlers.handleGenerateWyckoffAdvancedInsights(args));
+
+    // Technical Analysis Suite Tools (TASK-019)
+    this.register('calculate_fibonacci_levels', (args) => this.mcpHandlers.handleCalculateFibonacciLevels(args));
+    this.register('analyze_bollinger_bands', (args) => this.mcpHandlers.handleAnalyzeBollingerBands(args));
+    this.register('detect_elliott_waves', (args) => this.mcpHandlers.handleDetectElliottWaves(args));
+    this.register('find_technical_confluences', (args) => this.mcpHandlers.handleFindTechnicalConfluences(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

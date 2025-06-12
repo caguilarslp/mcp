@@ -1091,6 +1091,30 @@ export class MCPHandlers {
   }
 
   // ====================
+  // TECHNICAL ANALYSIS ADVANCED HANDLERS (NEW)
+  // ====================
+
+  async handleCalculateFibonacciLevels(args: any): Promise<MCPServerResponse> {
+    // Placeholder implementation for new Fibonacci handler
+    return this.createErrorResponse('calculate_fibonacci_levels', new Error('Handler not yet implemented'));
+  }
+
+  async handleAnalyzeBollingerBands(args: any): Promise<MCPServerResponse> {
+    // Placeholder implementation for new Bollinger Bands handler
+    return this.createErrorResponse('analyze_bollinger_bands', new Error('Handler not yet implemented'));
+  }
+
+  async handleDetectElliottWaves(args: any): Promise<MCPServerResponse> {
+    // Placeholder implementation for new Elliott Wave handler
+    return this.createErrorResponse('detect_elliott_waves', new Error('Handler not yet implemented'));
+  }
+
+  async handleFindTechnicalConfluences(args: any): Promise<MCPServerResponse> {
+    // Placeholder implementation for new Technical Confluences handler
+    return this.createErrorResponse('find_technical_confluences', new Error('Handler not yet implemented'));
+  }
+
+  // ====================
   // WYCKOFF ADVANCED HANDLERS (TASK-018) - DELEGATED
   // ====================
 

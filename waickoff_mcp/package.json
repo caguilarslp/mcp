@@ -1,6 +1,6 @@
 {
   "name": "waickoff_mcp",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Waickoff AI Market Analysis MCP Server",
   "main": "build/index.js",
   "type": "module",

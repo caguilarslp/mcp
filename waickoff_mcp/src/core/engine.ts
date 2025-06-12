@@ -72,6 +72,12 @@ import { TrapDetectionService } from '../services/trapDetection.js';
 import { WyckoffBasicService, type IWyckoffBasicService } from '../services/wyckoffBasic.js';
 import { WyckoffAdvancedService, type IWyckoffAdvancedService } from '../services/wyckoffAdvanced.js';
 
+// TASK-019: Import new technical analysis services
+import { FibonacciService, type FibonacciAnalysis } from '../services/fibonacci.js';
+import { BollingerBandsService, type BollingerAnalysis } from '../services/bollingerBands.js';
+import { ElliottWaveService, type ElliottWaveAnalysis } from '../services/elliottWave.js';
+import { ComprehensiveTechnicalAnalysisService, type ComprehensiveTechnicalAnalysis } from '../services/technicalAnalysis.js';
+
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
 import { PerformanceMonitor } from '../utils/performance.js';
@@ -120,6 +126,12 @@ export class MarketAnalysisEngine {
   
   // Wyckoff Advanced service (TASK-018)
   public readonly wyckoffAdvancedService: IWyckoffAdvancedService;
+  
+  // TASK-019: Technical Analysis Services
+  public readonly fibonacciService: FibonacciService;
+  public readonly bollingerBandsService: BollingerBandsService;
+  public readonly elliottWaveService: ElliottWaveService;
+  public readonly technicalAnalysisIntegrationService: ComprehensiveTechnicalAnalysisService;
   
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
@@ -232,7 +244,29 @@ export class MarketAnalysisEngine {
       this.historicalAnalysisService
     );
     
-    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator, Trap Detection and Wyckoff Basic', {
+    // TASK-019: Initialize Technical Analysis Services
+    this.fibonacciService = new FibonacciService(
+      this.marketDataService as any,  // Cast interface to concrete for now
+      this.analysisService as any  // Cast interface to concrete for now
+    );
+    
+    this.bollingerBandsService = new BollingerBandsService(
+      this.marketDataService as any  // Cast interface to concrete for now
+    );
+    
+    this.elliottWaveService = new ElliottWaveService(
+      this.marketDataService as any  // Cast interface to concrete for now
+    );
+    
+    this.technicalAnalysisIntegrationService = new ComprehensiveTechnicalAnalysisService(
+      this.marketDataService as any,  // Cast interface to concrete for now
+      this.analysisService as any,    // Cast interface to concrete for now
+      this.fibonacciService,
+      this.bollingerBandsService,
+      this.elliottWaveService
+    );
+    
+    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator, Trap Detection, Wyckoff Basic/Advanced, and Technical Analysis Suite', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
       repositoryEnabled: true,
@@ -240,7 +274,11 @@ export class MarketAnalysisEngine {
       configurationManagerEnabled: true,
       trapDetectionEnabled: true,
       wyckoffBasicEnabled: true,
-      wyckoffAdvancedEnabled: true
+      wyckoffAdvancedEnabled: true,
+      fibonacciEnabled: true,
+      bollingerBandsEnabled: true,
+      elliottWaveEnabled: true,
+      technicalAnalysisIntegrationEnabled: true
     });
   }
 
@@ -680,6 +718,143 @@ export class MarketAnalysisEngine {
    */
   getTrapDetectionPerformanceMetrics(): PerformanceMetrics[] {
     return this.trapDetectionService.getPerformanceMetrics();
+  }
+
+  // ====================
+  // TECHNICAL ANALYSIS METHODS (TASK-019)
+  // ====================
+
+  /**
+   * Calculate Fibonacci levels with automatic swing detection
+   */
+  async calculateFibonacciLevels(
+    symbol: string,
+    timeframe: string = '60',
+    customConfig?: any
+  ): Promise<FibonacciAnalysis> {
+    return this.performanceMonitor.measure('calculateFibonacciLevels', async () => {
+      try {
+        const result = await this.fibonacciService.analyzeFibonacci(symbol, timeframe, customConfig);
+        
+        // Save to Analysis Repository
+        await this.analysisRepository.saveAnalysis(
+          symbol,
+          'fibonacci_analysis' as any,
+          result,
+          [`timeframe:${timeframe}`]
+        );
+        
+        return result;
+      } catch (error) {
+        this.logger.error(`Failed to calculate Fibonacci levels for ${symbol}:`, error);
+        throw error;
+      }
+    });
+  }
+
+  /**
+   * Analyze Bollinger Bands with squeeze detection
+   */
+  async analyzeBollingerBands(
+    symbol: string,
+    timeframe: string = '60',
+    customConfig?: any
+  ): Promise<BollingerAnalysis> {
+    return this.performanceMonitor.measure('analyzeBollingerBands', async () => {
+      try {
+        const result = await this.bollingerBandsService.analyzeBollingerBands(symbol, timeframe, customConfig);
+        
+        // Save to Analysis Repository
+        await this.analysisRepository.saveAnalysis(
+          symbol,
+          'bollinger_analysis' as any,
+          result,
+          [`timeframe:${timeframe}`]
+        );
+        
+        return result;
+      } catch (error) {
+        this.logger.error(`Failed to analyze Bollinger Bands for ${symbol}:`, error);
+        throw error;
+      }
+    });
+  }
+
+  /**
+   * Detect Elliott Wave patterns
+   */
+  async detectElliottWaves(
+    symbol: string,
+    timeframe: string = '60',
+    customConfig?: any
+  ): Promise<ElliottWaveAnalysis> {
+    return this.performanceMonitor.measure('detectElliottWaves', async () => {
+      try {
+        const result = await this.elliottWaveService.analyzeElliottWave(symbol, timeframe, customConfig);
+        
+        // Save to Analysis Repository
+        await this.analysisRepository.saveAnalysis(
+          symbol,
+          'elliott_wave_analysis' as any,
+          result,
+          [`timeframe:${timeframe}`]
+        );
+        
+        return result;
+      } catch (error) {
+        this.logger.error(`Failed to detect Elliott Waves for ${symbol}:`, error);
+        throw error;
+      }
+    });
+  }
+
+  /**
+   * Find technical confluences between multiple indicators
+   */
+  async findTechnicalConfluences(
+    symbol: string,
+    timeframe: string = '60',
+    customConfig?: any
+  ): Promise<ComprehensiveTechnicalAnalysis> {
+    return this.performanceMonitor.measure('findTechnicalConfluences', async () => {
+      try {
+        const result = await this.technicalAnalysisIntegrationService.analyzeWithAllIndicators(
+          symbol, 
+          timeframe, 
+          customConfig
+        );
+        
+        // Save to Analysis Repository
+        await this.analysisRepository.saveAnalysis(
+          symbol,
+          'comprehensive_technical_analysis' as any,
+          result,
+          [`timeframe:${timeframe}`, `confluences:${result.confluences.length}`]
+        );
+        
+        return result;
+      } catch (error) {
+        this.logger.error(`Failed to find technical confluences for ${symbol}:`, error);
+        throw error;
+      }
+    });
+  }
+
+  /**
+   * Get Technical Analysis Services performance metrics
+   */
+  getTechnicalAnalysisPerformanceMetrics(): {
+    fibonacci: any[];
+    bollingerBands: any[];
+    elliottWave: any[];
+    integration: any[];
+  } {
+    return {
+      fibonacci: [], // FibonacciService doesn't have performance metrics yet
+      bollingerBands: [], // BollingerBandsService doesn't have performance metrics yet
+      elliottWave: [], // ElliottWaveService doesn't have performance metrics yet
+      integration: [] // TechnicalAnalysisIntegrationService doesn't have performance metrics yet
+    };
   }
 
   // ====================
