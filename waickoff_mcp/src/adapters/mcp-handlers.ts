@@ -18,6 +18,7 @@ import { HybridStorageHandlers } from './handlers/hybridStorageHandlers.js';
 import { TrapDetectionHandlers } from './handlers/trapDetectionHandlers.js';
 import { WyckoffBasicHandlers } from './handlers/wyckoffBasicHandlers.js';
 import { WyckoffAdvancedHandlers } from './handlers/wyckoffAdvancedHandlers.js';
+import { TechnicalAnalysisHandlers } from './handlers/technicalAnalysisHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -34,6 +35,7 @@ export class MCPHandlers {
   private readonly trapDetectionHandlers: TrapDetectionHandlers;
   private readonly wyckoffBasicHandlers: WyckoffBasicHandlers;
   private readonly wyckoffAdvancedHandlers: WyckoffAdvancedHandlers;
+  private readonly technicalAnalysisHandlers: TechnicalAnalysisHandlers;
   private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
@@ -59,6 +61,7 @@ export class MCPHandlers {
     this.trapDetectionHandlers = new TrapDetectionHandlers(engine.trapDetectionService);
     this.wyckoffBasicHandlers = new WyckoffBasicHandlers(engine);
     this.wyckoffAdvancedHandlers = new WyckoffAdvancedHandlers(engine.wyckoffAdvancedService);
+    this.technicalAnalysisHandlers = new TechnicalAnalysisHandlers(engine);
     
     // Initialize Hybrid Storage Handlers if available (TASK-015)
     if (engine.hybridStorageService) {
@@ -1091,27 +1094,23 @@ export class MCPHandlers {
   }
 
   // ====================
-  // TECHNICAL ANALYSIS ADVANCED HANDLERS (NEW)
+  // TECHNICAL ANALYSIS ADVANCED HANDLERS (TASK-019) - DELEGATED
   // ====================
 
   async handleCalculateFibonacciLevels(args: any): Promise<MCPServerResponse> {
-    // Placeholder implementation for new Fibonacci handler
-    return this.createErrorResponse('calculate_fibonacci_levels', new Error('Handler not yet implemented'));
+    return await this.technicalAnalysisHandlers.handleCalculateFibonacciLevels(args);
   }
 
   async handleAnalyzeBollingerBands(args: any): Promise<MCPServerResponse> {
-    // Placeholder implementation for new Bollinger Bands handler
-    return this.createErrorResponse('analyze_bollinger_bands', new Error('Handler not yet implemented'));
+    return await this.technicalAnalysisHandlers.handleAnalyzeBollingerBands(args);
   }
 
   async handleDetectElliottWaves(args: any): Promise<MCPServerResponse> {
-    // Placeholder implementation for new Elliott Wave handler
-    return this.createErrorResponse('detect_elliott_waves', new Error('Handler not yet implemented'));
+    return await this.technicalAnalysisHandlers.handleDetectElliottWaves(args);
   }
 
   async handleFindTechnicalConfluences(args: any): Promise<MCPServerResponse> {
-    // Placeholder implementation for new Technical Confluences handler
-    return this.createErrorResponse('find_technical_confluences', new Error('Handler not yet implemented'));
+    return await this.technicalAnalysisHandlers.handleFindTechnicalConfluences(args);
   }
 
   // ====================

@@ -334,38 +334,171 @@ interface CorrelationResult {
 
 ---
 
-## ⏱️ Cronograma de Implementación
+## ⏱️ Implementación Dividida en Fases Manejables
 
-### **Fase 1: Core Infrastructure (4h)**
-- OnChainDataService implementation
-- Rate limiting y error handling
-- Basic API integrations (Etherscan, CoinGecko)
-- Caching strategy para datos on-chain
+### **FASE 1: Infrastructure & Basic APIs (3-4h)**
+**Objetivo:** Establecer base sólida con rate limiting y APIs básicas
 
-### **Fase 2: Stablecoin Monitoring (3h)**
-- Tether mint detection
-- USDC/BUSD flow monitoring
-- Signal generation para stablecoin activity
-- Integration con análisis de mercado
+**Componentes:**
+- `OnChainDataService` base class con interfaces
+- Rate limiter con backoff exponencial
+- Cache manager específico para on-chain data
+- Integración básica Etherscan + CoinGecko
+- Error handling y retry logic
 
-### **Fase 3: Exchange Flow Detection (3h)**
-- Known exchange address tracking
-- Cold wallet movement detection
-- Hot wallet recharge monitoring
-- Exchange-specific implementations
+**Herramientas MCP:**
+- `test_onchain_connection` - Verificar APIs funcionando
+- `get_onchain_status` - Estado del sistema on-chain
 
-### **Fase 4: Whale Tracking (3h)**
-- Large transaction detection
-- Known whale address monitoring
-- New whale identification
-- Whale behavior pattern analysis
+**Entregables:**
+- Sistema base funcionando
+- Conexión a APIs verificada
+- Cache y rate limiting operativos
 
-### **Fase 5: Handlers y MCP Tools (2h)**
-- OnChainHandlers implementation
-- MCP tool integration
-- Testing y validation
+---
 
-### **Total: 15 horas**
+### **FASE 2: Stablecoin Mint/Burn Detection (3h)**
+**Objetivo:** Detectar minteos/burns de stablecoins como señal de liquidez
+
+**Componentes:**
+- `StablecoinMonitor` service
+- USDT tracking (Ethereum + Tron)
+- USDC tracking (Ethereum + Polygon)
+- Mint/burn event classification
+- Market impact estimation algorithm
+
+**Herramientas MCP:**
+- `get_stablecoin_mints` - Minteos recientes con impacto
+- `get_stablecoin_flows` - Flujos netos por período
+- `analyze_mint_impact` - Correlación histórica mint→precio
+
+**Algoritmos:**
+```typescript
+// Clasificación de impacto
+if (mintAmount > $1B) return 'EXTREME_BULLISH';
+if (mintAmount > $500M) return 'STRONG_BULLISH';
+if (mintAmount > $100M) return 'MODERATE_BULLISH';
+// Time to market: typically 2-6h for Tether, 6-24h for USDC
+```
+
+**Métricas de éxito:**
+- Detección de >90% de mints mayores
+- Latencia <5 min desde mint hasta alerta
+
+---
+
+### **FASE 3: Exchange Flow Analysis (3h)**
+**Objetivo:** Monitorear flujos exchange↔cold wallets como indicador de presión
+
+**Componentes:**
+- `ExchangeFlowTracker` service
+- Known address database (Binance, Coinbase, Kraken)
+- Hot/Cold wallet classification
+- Net flow calculation
+- Anomaly detection for large moves
+
+**Herramientas MCP:**
+- `get_exchange_flows` - Flujos por exchange
+- `detect_significant_moves` - Movimientos anómalos
+- `get_exchange_reserves` - Estimación de reservas
+
+**Señales clave:**
+```typescript
+// BTC leaving exchanges = Bullish (HODLing)
+if (netOutflow > 5000 BTC/day) signal = 'STRONG_BULLISH';
+// BTC entering exchanges = Bearish (potential selling)
+if (netInflow > 3000 BTC/day) signal = 'BEARISH_WARNING';
+```
+
+**Métricas de éxito:**
+- Tracking >80% de volumen de top 5 exchanges
+- Detección de movimientos >$10M en <10 min
+
+---
+
+### **FASE 4: Whale Behavior Tracking (3h)**
+**Objetivo:** Identificar y seguir comportamiento de grandes holders
+
+**Componentes:**
+- `WhaleTracker` service  
+- Whale address identification (>1000 BTC or >10K ETH)
+- Accumulation/distribution patterns
+- New whale emergence detection
+- Whale clustering analysis
+
+**Herramientas MCP:**
+- `get_whale_transactions` - Transacciones >$1M
+- `track_whale_address` - Seguimiento específico
+- `analyze_whale_behavior` - Patrones de comportamiento
+- `detect_whale_accumulation` - Zonas de acumulación
+
+**Patrones detectables:**
+```typescript
+interface WhalePattern {
+  type: 'accumulation' | 'distribution' | 'dormant_awakening';
+  addresses: string[];
+  totalValue: number;
+  timespan: number;
+  marketPhase: 'bottom' | 'top' | 'trending';
+}
+```
+
+**Métricas de éxito:**
+- Identificación de >70% de transacciones whale
+- Correlación >60% entre acumulación whale y rallies
+
+---
+
+### **FASE 5: Signal Integration & Alerts (2h)**
+**Objetivo:** Combinar todas las señales en sistema unificado
+
+**Componentes:**
+- `OnChainSignalAggregator` service
+- Signal scoring y priorización  
+- Confluencia multi-señal
+- Alert generation system
+- Historical correlation tracker
+
+**Herramientas MCP:**
+- `get_onchain_summary` - Resumen completo
+- `get_onchain_signals` - Señales activas priorizadas
+- `analyze_signal_confluence` - Confluencias detectadas
+
+**Sistema de scoring:**
+```typescript
+interface CompositeSignal {
+  components: {
+    stablecoinMint?: SignalComponent;
+    exchangeFlow?: SignalComponent;
+    whaleActivity?: SignalComponent;
+  };
+  totalScore: number;       // 0-100
+  direction: 'BULLISH' | 'BEARISH';
+  confidence: number;       // 0-100
+  timeHorizon: string;      // "2-6h", "1-3d", etc
+  actionableInsight: string;
+}
+```
+
+---
+
+### **FASE 6: Testing & Optimization (1h)**
+**Objetivo:** Validar sistema completo y optimizar performance
+
+**Componentes:**
+- Integration tests completos
+- Performance optimization
+- Alert accuracy validation
+- Documentation y ejemplos
+
+**Métricas finales:**
+- Sistema completo <1s response time
+- >80% señales verificables históricamente
+- <20% false positive rate
+
+---
+
+### **Total: 15 horas (6 fases manejables)**
 
 ---
 
