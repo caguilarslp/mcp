@@ -5,7 +5,7 @@
  * @author wAIckoff MCP Team
  */
 
-import { OHLCV, MarketTicker } from '../types/index.js';
+import { OHLCV, MarketTicker, BollingerTargets, BollingerTargetConfig } from '../types/index.js';
 import { BybitMarketDataService } from './marketData.js';
 import { Logger } from '../utils/logger.js';
 
@@ -45,7 +45,8 @@ export interface BollingerPattern {
   confidence: number;        // 0-100
   description: string;
   actionable: boolean;       // Whether pattern provides trading signal
-  targetPrice?: number;      // Expected target if available
+  targetPrice?: number;      // Expected target if available (deprecated - use targets)
+  targets?: BollingerTargets; // Multiple targets with probabilities
   stopLoss?: number;         // Suggested stop loss
 }
 
@@ -104,6 +105,7 @@ export interface BollingerConfig {
   walkingPeriods: number;      // Periods to confirm walking
   volatilityLookback: number;  // Periods for volatility analysis
   divergencePeriods: number;   // Periods for divergence detection
+  targetConfig: BollingerTargetConfig; // Target calculation parameters
 }
 
 export class BollingerBandsService {
@@ -114,7 +116,17 @@ export class BollingerBandsService {
     squeezePeriods: 5,
     walkingPeriods: 3,
     volatilityLookback: 100,
-    divergencePeriods: 14
+    divergencePeriods: 14,
+    targetConfig: {
+      minMovementPercent: 0.5,
+      conservativeRatio: 0.3,
+      aggressiveMultiplier: 1.27,
+      probabilityWeights: {
+        volatility: 0.4,
+        position: 0.4,
+        momentum: 0.2
+      }
+    }
   };
 
   constructor(
@@ -187,6 +199,26 @@ export class BollingerBandsService {
         pattern,
         volatility
       );
+      
+      // Validate and fix target price consistency
+      if (pattern.targetPrice) {
+        const validatedTarget = this.validateTarget(
+          pattern.targetPrice,
+          ticker.lastPrice,
+          signals.signal
+        );
+        pattern.targetPrice = validatedTarget;
+      }
+      
+      // Validate multiple targets if present
+      if (pattern.targets) {
+        const validatedTargets = this.validateMultipleTargets(
+          pattern.targets,
+          ticker.lastPrice,
+          signals.signal
+        );
+        pattern.targets = validatedTargets;
+      }
       
       // Calculate overall confidence
       const confidence = this.calculateConfidence(
@@ -581,6 +613,205 @@ export class BollingerBandsService {
   }
 
   /**
+   * Calculate smart targets with multiple levels and probabilities
+   */
+  private calculateSmartTargets(
+    pattern: BollingerPattern,
+    bands: BollingerBands,
+    currentPrice: number,
+    volatility: BollingerAnalysis['volatility'],
+    config: BollingerConfig
+  ): BollingerTargets {
+    const { targetConfig } = config;
+    const distanceToMiddle = Math.abs(currentPrice - bands.middle);
+    const bandWidth = bands.upper - bands.lower;
+    
+    let conservative: number;
+    let normal: number;
+    let aggressive: number;
+    let probabilities: { conservative: number; normal: number; aggressive: number };
+    
+    // Determine base targets based on position and pattern
+    if (currentPrice <= bands.lower * 1.01) {
+      // Near lower band - bullish targets
+      conservative = currentPrice + (distanceToMiddle * targetConfig.conservativeRatio);
+      normal = bands.middle;
+      aggressive = bands.upper;
+      
+      // Calculate probabilities based on position and volatility
+      const volatilityBonus = volatility.current > 60 ? 10 : 0;
+      const positionBonus = bands.position < 10 ? 15 : 0;
+      
+      probabilities = {
+        conservative: Math.min(90, 70 + volatilityBonus + positionBonus),
+        normal: Math.min(80, 50 + volatilityBonus),
+        aggressive: Math.min(60, 25 + volatilityBonus)
+      };
+      
+    } else if (currentPrice >= bands.upper * 0.99) {
+      // Near upper band - bearish targets
+      conservative = currentPrice - (distanceToMiddle * targetConfig.conservativeRatio);
+      normal = bands.middle;
+      aggressive = bands.lower;
+      
+      const volatilityBonus = volatility.current > 60 ? 10 : 0;
+      const positionBonus = bands.position > 90 ? 15 : 0;
+      
+      probabilities = {
+        conservative: Math.min(90, 70 + volatilityBonus + positionBonus),
+        normal: Math.min(80, 50 + volatilityBonus),
+        aggressive: Math.min(60, 25 + volatilityBonus)
+      };
+      
+    } else {
+      // Near middle - range targets based on pattern
+      const direction = pattern.type === 'breakout' || pattern.type === 'squeeze_setup';
+      
+      if (bands.position > 50) {
+        // Upper half - slight bearish bias
+        conservative = bands.middle;
+        normal = bands.lower + (bandWidth * 0.25);
+        aggressive = bands.lower;
+      } else {
+        // Lower half - slight bullish bias
+        conservative = bands.middle;
+        normal = bands.upper - (bandWidth * 0.25);
+        aggressive = bands.upper;
+      }
+      
+      probabilities = {
+        conservative: 60,
+        normal: 45,
+        aggressive: 25
+      };
+    }
+    
+    // Special adjustments for specific patterns
+    if (pattern.type === 'squeeze_setup' && pattern.confidence > 70) {
+      // Increase aggressive target probability for high-confidence squeeze
+      probabilities.aggressive += 15;
+      
+      // Extend aggressive target for squeeze breakouts
+      if (aggressive > currentPrice) {
+        aggressive *= targetConfig.aggressiveMultiplier;
+      } else {
+        aggressive /= targetConfig.aggressiveMultiplier;
+      }
+    }
+    
+    if (pattern.type === 'reversal' && pattern.confidence > 60) {
+      // Increase conservative probability for reversals
+      probabilities.conservative += 10;
+      probabilities.normal += 5;
+    }
+    
+    // Ensure minimum movement
+    const minMovement = currentPrice * (targetConfig.minMovementPercent / 100);
+    
+    if (Math.abs(conservative - currentPrice) < minMovement) {
+      conservative = currentPrice > bands.middle ? 
+        currentPrice - minMovement : currentPrice + minMovement;
+    }
+    
+    // Cap all probabilities at 100
+    probabilities = {
+      conservative: Math.min(100, probabilities.conservative),
+      normal: Math.min(100, probabilities.normal),
+      aggressive: Math.min(100, probabilities.aggressive)
+    };
+    
+    return {
+      conservative,
+      normal,
+      aggressive,
+      probability: probabilities
+    };
+  }
+
+  /**
+   * Validate multiple targets for consistency with trading signal
+   */
+  private validateMultipleTargets(
+    targets: BollingerTargets,
+    currentPrice: number,
+    signal: 'buy' | 'sell' | 'hold' | 'wait'
+  ): BollingerTargets | undefined {
+    if (signal === 'hold' || signal === 'wait') {
+      return targets;
+    }
+    
+    let validTargets = { ...targets };
+    let hasValidTarget = false;
+    
+    // Validate each target level
+    const targetLevels: ('conservative' | 'normal' | 'aggressive')[] = ['conservative', 'normal', 'aggressive'];
+    
+    for (const level of targetLevels) {
+      const targetPrice = validTargets[level];
+      const direction = targetPrice > currentPrice ? 'up' : 'down';
+      
+      // Check consistency with signal
+      const isConsistent = (signal === 'buy' && direction === 'up') || 
+                           (signal === 'sell' && direction === 'down');
+      
+      // Check minimum movement
+      const movementPercent = Math.abs((targetPrice - currentPrice) / currentPrice) * 100;
+      const hasMinMovement = movementPercent >= 0.5;
+      
+      if (!isConsistent || !hasMinMovement) {
+        this.logger.warn(`Invalid ${level} target: ${targetPrice} inconsistent with ${signal} signal at ${currentPrice}`);
+        // Remove invalid target by setting probability to 0
+        validTargets.probability[level] = 0;
+      } else {
+        hasValidTarget = true;
+      }
+    }
+    
+    // If no valid targets, return undefined
+    if (!hasValidTarget) {
+      this.logger.warn('No valid targets found after validation');
+      return undefined;
+    }
+    
+    return validTargets;
+  }
+
+  /**
+   * Validate that target price is consistent with trading signal
+   */
+  private validateTarget(
+    targetPrice: number | undefined,
+    currentPrice: number,
+    signal: 'buy' | 'sell' | 'hold' | 'wait'
+  ): number | undefined {
+    if (!targetPrice || signal === 'hold' || signal === 'wait') {
+      return targetPrice;
+    }
+    
+    const direction = targetPrice > currentPrice ? 'up' : 'down';
+    
+    // Target must be consistent with signal direction
+    if (signal === 'buy' && direction === 'down') {
+      this.logger.warn(`Invalid target: BUY signal but target ${targetPrice} below current ${currentPrice}`);
+      return undefined;
+    }
+    
+    if (signal === 'sell' && direction === 'up') {
+      this.logger.warn(`Invalid target: SELL signal but target ${targetPrice} above current ${currentPrice}`);
+      return undefined;
+    }
+    
+    // Target should have minimum meaningful movement (0.5%)
+    const movementPercent = Math.abs((targetPrice - currentPrice) / currentPrice) * 100;
+    if (movementPercent < 0.5) {
+      this.logger.warn(`Target movement too small: ${movementPercent.toFixed(2)}%`);
+      return undefined;
+    }
+    
+    return targetPrice;
+  }
+
+  /**
    * Recognize Bollinger Band patterns
    */
   private recognizePattern(
@@ -606,17 +837,41 @@ export class BollingerBandsService {
           bandHistory[bandHistory.length - 1].lower * 0.98 : undefined
       };
     }
-    // Walking the bands pattern
+    // Walking the bands pattern - FIXED: Mean reversion logic
     else if (walk.isWalking && walk.strength !== 'weak') {
+      const currentBands = bandHistory[bandHistory.length - 1];
+      
+      // Fix: Walking bands typically leads to mean reversion, not continuation
+      // Lower band walk -> expect bounce to middle/upper
+      // Upper band walk -> expect pullback to middle/lower
+      let targetPrice: number | undefined;
+      
+      if (walk.direction === 'lower') {
+        // Walking lower band -> expect bounce to middle (mean reversion)
+        targetPrice = currentBands.middle;
+      } else if (walk.direction === 'upper') {
+        // Walking upper band -> expect pullback to middle (mean reversion)
+        targetPrice = currentBands.middle;
+      }
+      
       pattern = {
         type: 'trend_continuation',
         confidence: walk.strength === 'strong' ? 80 : 60,
-        description: `Price walking the ${walk.direction} band for ${walk.duration} periods. Strong trend.`,
-        actionable: walk.strength === 'strong',
-        targetPrice: walk.direction === 'upper' ?
-          bandHistory[bandHistory.length - 1].upper * 1.05 :
-          bandHistory[bandHistory.length - 1].lower * 0.95
+        description: `Price walking the ${walk.direction} band for ${walk.duration} periods. Mean reversion expected.`,
+        actionable: walk.strength === 'strong' || walk.strength === 'moderate',
+        targetPrice
       };
+      
+      // Calculate multiple targets
+      if (pattern.actionable) {
+        pattern.targets = this.calculateSmartTargets(
+          pattern,
+          currentBands,
+          klines[klines.length - 1].close,
+          volatility,
+          this.config
+        );
+      }
     }
     // Divergence reversal pattern
     else if (divergence.type !== 'none' && divergence.confirmation && divergence.strength > 50) {
@@ -647,6 +902,18 @@ export class BollingerBandsService {
         description: 'No clear Bollinger pattern detected. Market in consolidation.',
         actionable: false
       };
+    }
+
+    // Calculate multiple targets for all actionable patterns
+    if (pattern.actionable && !pattern.targets) {
+      const currentBands = bandHistory[bandHistory.length - 1];
+      pattern.targets = this.calculateSmartTargets(
+        pattern,
+        currentBands,
+        klines[klines.length - 1].close,
+        volatility,
+        this.config
+      );
     }
 
     return pattern;

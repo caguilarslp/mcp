@@ -19,6 +19,32 @@ import type {
 } from './storage.js';
 
 // ====================
+// BOLLINGER BANDS ANALYSIS TYPES (TASK-023)
+// ====================
+
+export interface BollingerTargets {
+  conservative: number;    // Target conservador (ej: 50% hacia media)
+  normal: number;         // Target normal (ej: media móvil) 
+  aggressive: number;     // Target agresivo (ej: banda opuesta)
+  probability: {
+    conservative: number; // Probabilidad 0-100
+    normal: number;
+    aggressive: number;
+  };
+}
+
+export interface BollingerTargetConfig {
+  minMovementPercent: number;      // 0.5% mínimo
+  conservativeRatio: number;       // 0.3 (30% hacia media)
+  aggressiveMultiplier: number;    // 1.27 para extensiones
+  probabilityWeights: {
+    volatility: number;            // Peso de volatilidad en probabilidad
+    position: number;              // Peso de posición en banda  
+    momentum: number;              // Peso de momentum
+  };
+}
+
+// ====================
 // MCP HANDLER TYPES
 // ====================
 
