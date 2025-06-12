@@ -78,6 +78,9 @@ import { BollingerBandsService, type BollingerAnalysis } from '../services/bolli
 import { ElliottWaveService, type ElliottWaveAnalysis } from '../services/elliottWave.js';
 import { ComprehensiveTechnicalAnalysisService, type ComprehensiveTechnicalAnalysis } from '../services/technicalAnalysis.js';
 
+// TASK-020: Import Smart Money Concepts services
+import { OrderBlocksService } from '../services/smartMoney/orderBlocks.js';
+
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
 import { PerformanceMonitor } from '../utils/performance.js';
@@ -104,8 +107,8 @@ export class MarketAnalysisEngine {
   private readonly performanceMonitor: PerformanceMonitor;
   
   // Core services with dependency injection
-  private readonly marketDataService: IMarketDataService;
-  private readonly analysisService: IAnalysisService;
+  public readonly marketDataService: IMarketDataService;
+  public readonly analysisService: IAnalysisService;
   private readonly tradingService: ITradingService;
   private readonly storageService: StorageService;
   private readonly analysisRepository: IAnalysisRepository;
@@ -132,6 +135,9 @@ export class MarketAnalysisEngine {
   public readonly bollingerBandsService: BollingerBandsService;
   public readonly elliottWaveService: ElliottWaveService;
   public readonly technicalAnalysisIntegrationService: ComprehensiveTechnicalAnalysisService;
+  
+  // TASK-020: Smart Money Concepts Services
+  public readonly orderBlocksService: OrderBlocksService;
   
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
@@ -266,7 +272,13 @@ export class MarketAnalysisEngine {
       this.elliottWaveService
     );
     
-    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator, Trap Detection, Wyckoff Basic/Advanced, and Technical Analysis Suite', {
+    // TASK-020: Initialize Smart Money Concepts Services
+    this.orderBlocksService = new OrderBlocksService(
+      this.marketDataService as any,  // Cast interface to concrete for now
+      this.analysisService as any     // Cast interface to concrete for now
+    );
+    
+    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator, Trap Detection, Wyckoff Basic/Advanced, Technical Analysis Suite, and Smart Money Concepts', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
       repositoryEnabled: true,
@@ -278,7 +290,8 @@ export class MarketAnalysisEngine {
       fibonacciEnabled: true,
       bollingerBandsEnabled: true,
       elliottWaveEnabled: true,
-      technicalAnalysisIntegrationEnabled: true
+      technicalAnalysisIntegrationEnabled: true,
+      smartMoneyConceptsEnabled: true
     });
   }
 

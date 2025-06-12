@@ -19,6 +19,7 @@ import { TrapDetectionHandlers } from './handlers/trapDetectionHandlers.js';
 import { WyckoffBasicHandlers } from './handlers/wyckoffBasicHandlers.js';
 import { WyckoffAdvancedHandlers } from './handlers/wyckoffAdvancedHandlers.js';
 import { TechnicalAnalysisHandlers } from './handlers/technicalAnalysisHandlers.js';
+import { SmartMoneyConceptsHandlers } from './handlers/smartMoneyConceptsHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import * as path from 'path';
 
@@ -36,6 +37,7 @@ export class MCPHandlers {
   private readonly wyckoffBasicHandlers: WyckoffBasicHandlers;
   private readonly wyckoffAdvancedHandlers: WyckoffAdvancedHandlers;
   private readonly technicalAnalysisHandlers: TechnicalAnalysisHandlers;
+  private readonly smartMoneyConceptsHandlers: SmartMoneyConceptsHandlers;
   private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
@@ -62,6 +64,10 @@ export class MCPHandlers {
     this.wyckoffBasicHandlers = new WyckoffBasicHandlers(engine);
     this.wyckoffAdvancedHandlers = new WyckoffAdvancedHandlers(engine.wyckoffAdvancedService);
     this.technicalAnalysisHandlers = new TechnicalAnalysisHandlers(engine);
+    this.smartMoneyConceptsHandlers = new SmartMoneyConceptsHandlers(
+      engine.marketDataService,
+      engine.analysisService
+    );
     
     // Initialize Hybrid Storage Handlers if available (TASK-015)
     if (engine.hybridStorageService) {
@@ -73,7 +79,8 @@ export class MCPHandlers {
       hybridStorageEnabled: !!engine.hybridStorageService,
       trapDetectionEnabled: true,
       wyckoffBasicEnabled: true,
-      wyckoffAdvancedEnabled: true
+      wyckoffAdvancedEnabled: true,
+      smartMoneyConceptsEnabled: true
     });
   }
 
@@ -1143,6 +1150,46 @@ export class MCPHandlers {
 
   async handleGenerateWyckoffAdvancedInsights(args: any): Promise<MCPServerResponse> {
     return await this.wyckoffAdvancedHandlers.handleGenerateAdvancedInsights(args);
+  }
+
+  // ====================
+  // SMART MONEY CONCEPTS HANDLERS (TASK-020) - DELEGATED
+  // ====================
+
+  async handleDetectOrderBlocks(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleDetectOrderBlocks(args);
+  }
+
+  async handleValidateOrderBlock(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleValidateOrderBlock(args);
+  }
+
+  async handleGetOrderBlockZones(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleGetOrderBlockZones(args);
+  }
+
+  async handleFindFairValueGaps(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleFindFairValueGaps(args);
+  }
+
+  async handleAnalyzeFVGFilling(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleAnalyzeFVGFilling(args);
+  }
+
+  // ====================
+  // SMART MONEY CONCEPTS - BREAK OF STRUCTURE HANDLERS (TASK-020 FASE 3)
+  // ====================
+
+  async handleDetectBreakOfStructure(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleDetectBreakOfStructure(args);
+  }
+
+  async handleAnalyzeMarketStructure(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleAnalyzeMarketStructure(args);
+  }
+
+  async handleValidateStructureShift(args: any): Promise<MCPServerResponse> {
+    return await this.smartMoneyConceptsHandlers.handleValidateStructureShift(args);
   }
 
   // ====================

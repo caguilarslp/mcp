@@ -9,6 +9,7 @@
 [![MCP](https://img.shields.io/badge/MCP-Protocol-blue)](https://modelcontextprotocol.io/)
 [![Bybit](https://img.shields.io/badge/Bybit-API-orange)](https://bybit.com/)
 [![Tests](https://img.shields.io/badge/Tests-100%2B-brightgreen)](#-sistema-de-testing)
+[![SMC](https://img.shields.io/badge/Smart%20Money-60%25-brightgreen)](#-smart-money-concepts-nuevo)
 
 ---
 
@@ -230,6 +231,18 @@ npm run test:help
 
 ## 💡 **Casos de Uso v1.6.4**
 
+### **📺 Casos de Uso para Smart Money Concepts (NUEVO v1.6.5)**
+```bash
+# Detectar Order Blocks institucionales
+"Detecta order blocks en BTCUSDT con fuerza mínima de 80"
+
+# Validar si un Order Block sigue activo
+"Valida si el order block ob_bullish_1234567890_45632 de ETHUSDT sigue siendo válido"
+
+# Obtener zonas categorizadas por fuerza
+"Muestra las zonas de order blocks de XRPUSDT categorizadas por fuerza"
+```
+
 ### **📈 Para Análisis Técnico**
 ```bash
 # Análisis completo con auto-guardado
@@ -412,7 +425,8 @@ waickoff_mcp/
 ## 📚 **Documentación v1.6.4**
 
 ### **📖 Guías de Usuario**
-- **🆕 [User Guide v1.6.4](claude/docs/user-guide.md)** - Guía completa actualizada con 70+ herramientas
+- **🆕 [User Guide v1.6.5](claude/docs/user-guide.md)** - Guía completa actualizada con 77+ herramientas
+- **💰 [Smart Money Concepts Guide](claude/docs/user-guide-smc.md)** - Guía completa Smart Money Concepts
 - **🆕 [Testing Manual](claude/docs/testing-manual.md)** - Manual completo del sistema de testing
 - **[API Reference](claude/docs/api/tools-reference.md)** - Referencia completa de herramientas
 - **[Volume Analysis Guide](VOLUME_ANALYSIS_GUIDE.md)** - Guía de análisis de volumen
@@ -515,15 +529,15 @@ get_repository_stats     # Estado del almacenamiento
 
 ---
 
-## 📊 **Métricas del Proyecto v1.6.4**
+## 📊 **Métricas del Proyecto v1.6.5**
 
-- **70+ herramientas MCP** disponibles
+- **77+ herramientas MCP** disponibles (3 nuevas Smart Money Concepts)
 - **100+ test cases** implementados
 - **15+ módulos** en arquitectura modular
-- **10+ tareas completadas** (TASK-004 a TASK-019)
+- **11+ tareas completadas** (TASK-004 a TASK-020 FASE 1)
 - **0 errores TypeScript** en compilación
 - **93.3% reducción** archivo principal MCP (eliminación corrupción)
-- **7 categorías análisis** (Técnico, Wyckoff, Trampas, Histórico, etc.)
+- **8 categorías análisis** (Técnico, Wyckoff, Trampas, Histórico, Smart Money, etc.)
 - **2000+ líneas** de código de tests robusto
 - **Cross-platform** soporte completo (Windows, Linux, macOS)
 

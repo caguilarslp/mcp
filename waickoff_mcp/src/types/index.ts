@@ -849,6 +849,492 @@ export interface ITrapDetectionService {
 }
 
 // ====================
+// ORDER BLOCKS TYPES (TASK-020)
+// ====================
+
+export interface OrderBlockZone {
+  upper: number;
+  lower: number;
+  midpoint: number;
+}
+
+export interface OrderBlock {
+  id: string;
+  symbol: string;
+  type: 'bullish' | 'bearish' | 'breaker';
+  zone: OrderBlockZone;
+  strength: number;           // 0-100 score
+  validity: 'fresh' | 'tested' | 'mitigated' | 'breaker';
+  respectCount: number;       // Número de veces respetado
+  createdAt: string;
+  lastTestedAt?: string;
+  mitigatedAt?: string;
+  volumeAtCreation: number;
+  priceMovement: {
+    distance: number;         // Distancia del movimiento posterior
+    percentage: number;       // Porcentaje del movimiento
+    timeToTarget: number;     // Tiempo en alcanzar objetivo (minutos)
+  };
+  institutionalSignals: {
+    volumeMultiplier: number; // Multiplicador vs volumen promedio
+    orderFlowImbalance: number; // Desequilibrio en orderflow
+    absorptionLevel: number;   // Nivel de absorción detectado
+  };
+  currentDistance: number;   // Distancia actual del precio
+  priceAtCreation: number;
+  marketStructure: {
+    swingHigh?: number;
+    swingLow?: number;
+    structureBreak: boolean;
+  };
+}
+
+export interface OrderBlockAnalysis {
+  symbol: string;
+  timeframe: string;
+  currentPrice: number;
+  activeBlocks: OrderBlock[];
+  nearestBlock?: OrderBlock;
+  marketBias: 'bullish' | 'bearish' | 'neutral';
+  keyLevels: {
+    strongSupport: number[];
+    strongResistance: number[];
+  };
+  statistics: {
+    totalBlocks: number;
+    freshBlocks: number;
+    mitigatedBlocks: number;
+    breakerBlocks: number;
+    avgRespectRate: number;
+  };
+  tradingRecommendation: {
+    action: 'buy' | 'sell' | 'wait' | 'monitor';
+    confidence: number;
+    reason: string;
+    targets: number[];
+    stopLoss?: number;
+  };
+}
+
+export interface OrderBlockCreationContext {
+  priceAction: {
+    impulsiveMove: boolean;
+    moveDistance: number;
+    moveSpeed: number;        // Velocidad del movimiento
+  };
+  volumeProfile: {
+    volumeSpike: boolean;
+    volumeRatio: number;
+    institutionalFootprint: boolean;
+  };
+  marketStructure: {
+    structureBreak: boolean;
+    liquidityGrab: boolean;
+    failedPattern: boolean;
+  };
+}
+
+export interface OrderBlockValidation {
+  isValid: boolean;
+  confidence: number;
+  factors: {
+    timeDecay: number;        // Deterioro por tiempo
+    testCount: number;        // Número de pruebas
+    volumeConfirmation: number; // Confirmación volumétrica
+    structuralIntegrity: number; // Integridad estructural
+  };
+  nextExpiration?: string;   // Cuándo revisar validez
+}
+
+export interface OrderBlockConfig {
+  minVolumeMultiplier: number;     // 1.5x volumen promedio mínimo
+  minMovementPercent: number;      // 0.5% movimiento mínimo
+  maxTestCount: number;            // Máximo número de pruebas antes de invalidar
+  timeDecayHours: number;          // Horas para deterioro temporal
+  institutionalThreshold: number;   // Umbral para señales institucionales
+  breakerConversionRatio: number;  // Ratio para conversión a breaker
+}
+
+// Order Blocks Service Interface
+export interface IOrderBlocksService {
+  detectOrderBlocks(
+    symbol: string,
+    timeframe?: string,
+    lookback?: number
+  ): Promise<OrderBlockAnalysis>;
+  
+  validateOrderBlock(
+    symbol: string,
+    blockId: string
+  ): Promise<OrderBlockValidation>;
+  
+  getOrderBlockZones(
+    symbol: string,
+    minStrength?: number,
+    includeBreakers?: boolean
+  ): Promise<OrderBlock[]>;
+  
+  trackOrderBlockMitigation(
+    symbol: string,
+    blockId: string
+  ): Promise<{
+    isMitigated: boolean;
+    mitigationType: 'full' | 'partial' | 'none';
+    timestamp?: string;
+  }>;
+  
+  configureOrderBlocks(config: Partial<OrderBlockConfig>): Promise<OrderBlockConfig>;
+  
+  getPerformanceMetrics(): PerformanceMetrics[];
+}
+
+// ====================
+// FAIR VALUE GAPS TYPES (TASK-020 FASE 2)
+// ====================
+
+export interface FairValueGap {
+  id: string;
+  type: 'bullish' | 'bearish';
+  formation: {
+    beforeCandle: OHLCV;
+    gapCandle: OHLCV;
+    afterCandle: OHLCV;
+    timestamp: Date;
+    candleIndex: number;
+  };
+  gap: {
+    upper: number;
+    lower: number;
+    size: number;
+    sizePercent: number;
+    midpoint: number;
+  };
+  context: {
+    trendDirection: 'up' | 'down' | 'sideways';
+    impulsiveMove: boolean;
+    volumeProfile: number;
+    atr: number;
+    significance: 'high' | 'medium' | 'low';
+  };
+  status: 'open' | 'partially_filled' | 'filled' | 'expired';
+  filling: {
+    fillProgress: number;
+    firstTouch?: Date;
+    fullFillTime?: Date;
+    partialFills: Array<{
+      timestamp: Date;
+      price: number;
+      fillPercentage: number;
+    }>;
+  };
+  probability: {
+    fill: number;
+    timeToFill: number;
+    confidence: number;
+    factors: {
+      size: number;
+      trend: number;
+      volume: number;
+      age: number;
+    };
+  };
+  targetZones: {
+    conservative: number;
+    normal: number;
+    complete: number;
+  };
+  createdAt: Date;
+  expirationTime?: Date;
+}
+
+export interface FVGAnalysis {
+  symbol: string;
+  timeframe: string;
+  currentPrice: number;
+  openGaps: FairValueGap[];
+  filledGaps: FairValueGap[];
+  nearestGap?: FairValueGap;
+  statistics: {
+    totalGapsDetected: number;
+    openGaps: number;
+    filledGaps: number;
+    avgFillTime: number;
+    fillRate: number;
+    avgGapSize: number;
+  };
+  marketImbalance: {
+    bullishGaps: number;
+    bearishGaps: number;
+    netImbalance: 'bullish' | 'bearish' | 'neutral';
+    strength: number;
+  };
+  tradingOpportunities: Array<{
+    gap: FairValueGap;
+    action: 'target_gap' | 'fade_gap' | 'wait';
+    confidence: number;
+    reasoning: string;
+    entryZone: { min: number; max: number };
+    targets: number[];
+    stopLoss?: number;
+  }>;
+  timestamp: Date;
+}
+
+export interface FVGConfig {
+  minGapSize: number;
+  maxGapSize: number;
+  minVolumeRatio: number;
+  maxGapAge: number;
+  fillThreshold: number;
+  significanceThresholds: {
+    high: number;
+    medium: number;
+    low: number;
+  };
+  probabilityWeights: {
+    size: number;
+    trend: number;
+    volume: number;
+    age: number;
+  };
+}
+
+export interface FVGStatistics {
+  symbol: string;
+  period: string;
+  totalGaps: number;
+  fillStatistics: {
+    filled: number;
+    partially: number;
+    unfilled: number;
+    fillRate: number;
+    avgTimeToFill: number;
+    fastestFill: number;
+    slowestFill: number;
+  };
+  sizeDistribution: {
+    small: number;
+    medium: number;
+    large: number;
+    avgSize: number;
+  };
+  contextAnalysis: {
+    inTrend: number;
+    inConsolidation: number;
+    afterNews: number;
+    institutional: number;
+  };
+  performance: {
+    accuracy: number;
+    profitability: number;
+    sharpeRatio: number;
+    maxDrawdown: number;
+  };
+}
+
+// Fair Value Gaps Service Interface
+export interface IFairValueGapsService {
+  findFairValueGaps(
+    symbol: string,
+    timeframe?: string,
+    lookback?: number
+  ): Promise<FVGAnalysis>;
+  
+  analyzeFVGFilling(
+    symbol: string,
+    timeframe?: string,
+    lookbackDays?: number
+  ): Promise<FVGStatistics>;
+  
+  getFilteredGaps(
+    gaps: FairValueGap[],
+    filters: {
+      type?: 'bullish' | 'bearish';
+      status?: 'open' | 'filled';
+      minSize?: number;
+      maxDistance?: number;
+      currentPrice: number;
+    }
+  ): FairValueGap[];
+  
+  updateConfig(config: Partial<FVGConfig>): FVGConfig;
+  getConfig(): FVGConfig;
+  getPerformanceMetrics(): PerformanceMetrics[];
+}
+
+// ====================
+// BREAK OF STRUCTURE TYPES (TASK-020 FASE 3)
+// ====================
+
+export interface MarketStructurePoint {
+  timestamp: Date;
+  price: number;
+  type: 'higher_high' | 'lower_high' | 'higher_low' | 'lower_low';
+  strength: number;        // 0-100 score basado en volumen y contexto
+  volume: number;
+  confirmed: boolean;
+  index: number;           // Índice en los datos OHLCV
+}
+
+export interface StructuralBreak {
+  id: string;
+  type: 'BOS' | 'CHoCH';   // Break of Structure vs Change of Character
+  direction: 'bullish' | 'bearish';
+  breakPoint: {
+    timestamp: Date;
+    price: number;
+    volume: number;
+    index: number;
+  };
+  previousStructure: {
+    pattern: 'higher_highs' | 'lower_lows' | 'consolidation';
+    duration: number;      // Duración en periodos
+    strength: number;      // Fuerza de la estructura previa
+  };
+  significance: 'major' | 'minor' | 'false';
+  confirmation: {
+    volumeConfirmed: boolean;
+    followThrough: boolean;     // Si hubo seguimiento del movimiento
+    retestLevel?: number;       // Precio de retest si aplica
+    retestTime?: Date;
+  };
+  institutionalFootprint: {
+    orderBlockPresent: boolean;
+    fvgPresent: boolean;
+    liquidityGrab: boolean;
+    absorptionDetected: boolean;
+  };
+  targets: {
+    conservative: number;
+    normal: number;
+    aggressive: number;
+  };
+  invalidationLevel: number;   // Nivel que invalidaría el BOS
+  probability: number;         // 0-100 probabilidad de continuación
+  createdAt: Date;
+  resolvedAt?: Date;
+  outcome?: 'success' | 'failure' | 'pending';
+}
+
+export interface MarketStructureAnalysis {
+  symbol: string;
+  timeframe: string;
+  currentPrice: number;
+  trend: {
+    shortTerm: 'bullish' | 'bearish' | 'sideways';
+    mediumTerm: 'bullish' | 'bearish' | 'sideways';
+    longTerm: 'bullish' | 'bearish' | 'sideways';
+    confidence: number;
+  };
+  structurePoints: MarketStructurePoint[];
+  activeBreaks: StructuralBreak[];
+  recentBreaks: StructuralBreak[];
+  currentStructure: {
+    type: 'uptrend' | 'downtrend' | 'range' | 'transition';
+    strength: number;
+    duration: number;          // Periodos desde inicio
+    keyLevels: number[];       // Niveles estructurales clave
+  };
+  marketBias: {
+    direction: 'bullish' | 'bearish' | 'neutral';
+    strength: number;          // 0-100
+    confidence: number;        // 0-100
+    reasoning: string[];
+  };
+  nexteDecisionPoints: Array<{
+    level: number;
+    type: 'breakout' | 'rejection';
+    significance: 'high' | 'medium' | 'low';
+    probability: number;
+  }>;
+  tradingOpportunities: Array<{
+    type: 'continuation' | 'reversal' | 'breakout';
+    direction: 'long' | 'short';
+    entryZone: { min: number; max: number };
+    targets: number[];
+    stopLoss: number;
+    riskReward: number;
+    confidence: number;
+    reasoning: string;
+  }>;
+  timestamp: Date;
+}
+
+export interface StructureShiftValidation {
+  isValid: boolean;
+  confidence: number;
+  factors: {
+    volumeConfirmation: number;    // 0-100
+    priceAction: number;           // 0-100
+    institutionalSignals: number;  // 0-100
+    timeConfirmation: number;      // 0-100
+    structuralIntegrity: number;   // 0-100
+  };
+  warnings: string[];
+  nextValidationTime?: Date;
+  invalidationScenarios: Array<{
+    trigger: string;
+    price: number;
+    probability: number;
+  }>;
+}
+
+export interface BOSConfig {
+  minBreakDistance: number;      // % mínimo para considerar ruptura
+  volumeThreshold: number;       // Multiplicador volumen promedio
+  confirmationPeriods: number;   // Periodos para confirmar ruptura
+  retestTolerance: number;       // % tolerancia para retest
+  structureMemory: number;       // Periodos de memoria estructural
+  significanceThresholds: {
+    major: number;               // Umbral para BOS mayor
+    minor: number;               // Umbral para BOS menor
+  };
+  institutionalWeight: number;   // Peso de señales institucionales
+}
+
+// Break of Structure Service Interface
+export interface IBreakOfStructureService {
+  detectBreakOfStructure(
+    symbol: string,
+    timeframe?: string,
+    lookback?: number
+  ): Promise<MarketStructureAnalysis>;
+  
+  analyzeMarketStructure(
+    symbol: string,
+    timeframe?: string
+  ): Promise<MarketStructureAnalysis>;
+  
+  validateStructureShift(
+    symbol: string,
+    breakId: string
+  ): Promise<StructureShiftValidation>;
+  
+  getStructuralLevels(
+    symbol: string,
+    includeHistorical?: boolean
+  ): Promise<{
+    support: number[];
+    resistance: number[];
+    pivotPoints: MarketStructurePoint[];
+  }>;
+  
+  trackStructureDevelopment(
+    symbol: string,
+    breakId: string
+  ): Promise<{
+    currentStatus: 'developing' | 'confirmed' | 'failed';
+    progress: number;
+    nextMilestone: string;
+    timeToNextCheck: number;
+  }>;
+  
+  updateConfig(config: Partial<BOSConfig>): BOSConfig;
+  getBOSConfig(): BOSConfig;
+  getPerformanceMetrics(): PerformanceMetrics[];
+}
+
+// ====================
 // EXPORT ALL TYPES
 // ====================
 

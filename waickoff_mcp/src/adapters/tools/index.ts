@@ -22,6 +22,7 @@ import { trapDetectionTools } from './trapDetectionTools.js';
 import { wyckoffBasicTools } from './wyckoffBasicTools.js';
 import { wyckoffAdvancedTools } from './wyckoffAdvancedTools.js';
 import { technicalAnalysisTools } from './technicalAnalysisTools.js';
+import { smartMoneyConceptsTools } from './smartMoneyConceptsTools.js';
 
 // Tool Registry Map for O(1) lookup
 export const toolRegistry = new Map<string, ToolDefinition>();
@@ -36,6 +37,7 @@ const allToolCategories = [
   // Advanced Analysis Features
   { name: 'Historical Analysis', tools: historicalTools },
   { name: 'Trap Detection', tools: trapDetectionTools },
+  { name: 'Smart Money Concepts', tools: smartMoneyConceptsTools },
   { name: 'Wyckoff Basic Analysis', tools: wyckoffBasicTools },
   { name: 'Wyckoff Advanced Analysis', tools: wyckoffAdvancedTools },
   { name: 'Technical Analysis Suite', tools: technicalAnalysisTools },

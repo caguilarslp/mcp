@@ -133,6 +133,18 @@ export class HandlerRegistry {
     this.register('analyze_bollinger_bands', (args) => this.mcpHandlers.handleAnalyzeBollingerBands(args));
     this.register('detect_elliott_waves', (args) => this.mcpHandlers.handleDetectElliottWaves(args));
     this.register('find_technical_confluences', (args) => this.mcpHandlers.handleFindTechnicalConfluences(args));
+
+    // Smart Money Concepts Tools (TASK-020)
+    this.register('detect_order_blocks', (args) => this.mcpHandlers.handleDetectOrderBlocks(args));
+    this.register('validate_order_block', (args) => this.mcpHandlers.handleValidateOrderBlock(args));
+    this.register('get_order_block_zones', (args) => this.mcpHandlers.handleGetOrderBlockZones(args));
+    this.register('find_fair_value_gaps', (args) => this.mcpHandlers.handleFindFairValueGaps(args));
+    this.register('analyze_fvg_filling', (args) => this.mcpHandlers.handleAnalyzeFVGFilling(args));
+    
+    // Smart Money Concepts - Break of Structure Tools (TASK-020 FASE 3)
+    this.register('detect_break_of_structure', (args) => this.mcpHandlers.handleDetectBreakOfStructure(args));
+    this.register('analyze_market_structure', (args) => this.mcpHandlers.handleAnalyzeMarketStructure(args));
+    this.register('validate_structure_shift', (args) => this.mcpHandlers.handleValidateStructureShift(args));
   }
 
   private register(name: string, handler: ToolHandler): void {
