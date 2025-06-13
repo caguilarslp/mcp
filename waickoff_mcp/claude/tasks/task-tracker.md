@@ -86,6 +86,47 @@
 
 ---
 
+## 🔴 Tareas Urgentísimas
+
+### 🔴 TASK-024: Fix Errores Críticos SMC (URGENTÍSIMA)
+**Estado:** EN PROGRESO
+**Prioridad:** CRÍTICA - Funcionalidad core no operativa
+**Descripción:** Corregir 4 errores críticos en herramientas SMC que afectan 30% del sistema
+**Tiempo Estimado:** 4-6h total
+**Fecha inicio:** 13/06/2025
+**Archivos afectados:**
+- `src/services/analysis/smartMoney/handlers/smcDashboard.ts`
+- `src/services/analysis/smartMoney/handlers/orderBlocks.ts`
+- `src/services/analysis/smartMoney/handlers/smcConfluence.ts`
+- `src/services/analysis/technical/confluenceAnalyzer.ts`
+
+**Errores a corregir:**
+1. **SMC Dashboard & Order Blocks:** Error "Field required" - Respuesta JSON malformada
+2. **Smart Money Confluence:** "not yet implemented" - Handler placeholder sin código
+3. **Technical Confluences:** "Insufficient swing highs" - Parámetros Fibonacci restrictivos
+
+**Plan de acción:**
+- **FASE 1 (1-2h):** Fix response structure en Dashboard y Order Blocks
+- **FASE 2 (2-3h):** Implementar lógica real en SMC Confluence
+- **FASE 3 (30min):** Relajar parámetros Fibonacci
+- **FASE 4 (1-2h):** Testing completo con múltiples símbolos
+
+**Soluciones propuestas:**
+```typescript
+// Fix para handlers SMC
+return {
+  text: JSON.stringify(data, null, 2)
+};
+// NO retornar objetos complejos directamente
+```
+
+**Testing requerido:**
+- Symbols: BTCUSDT, ETHUSDT, XRPUSDT
+- Timeframes: 5m, 15m, 1h, 4h
+- Escenarios: trending, ranging, high volatility
+
+---
+
 ## 🟡 Tareas Pendientes
 
 ### 🟡 TASK-008: Integración con Waickoff AI
