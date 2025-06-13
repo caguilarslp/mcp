@@ -310,5 +310,77 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
       },
       required: ['symbol', 'setupType']
     }
+  },
+
+  // ====================
+  // SMART MONEY DASHBOARD TOOLS (FASE 5)
+  // ====================
+  {
+    name: 'get_smc_dashboard',
+    description: 'Get comprehensive Smart Money Concepts dashboard with complete market analysis and trading insights',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        timeframe: {
+          type: 'string',
+          description: 'Analysis timeframe',
+          enum: ['5', '15', '30', '60', '240'],
+          default: '60'
+        }
+      },
+      required: ['symbol']
+    }
+  },
+  {
+    name: 'get_smc_trading_setup',
+    description: 'Get optimal Smart Money Concepts trading setup with detailed entry, risk management, and probability analysis',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        timeframe: {
+          type: 'string',
+          description: 'Analysis timeframe',
+          enum: ['5', '15', '30', '60', '240'],
+          default: '60'
+        },
+        preferredDirection: {
+          type: 'string',
+          description: 'Preferred trading direction (optional - will be auto-determined if not specified)',
+          enum: ['long', 'short']
+        }
+      },
+      required: ['symbol']
+    }
+  },
+  {
+    name: 'analyze_smc_confluence_strength',
+    description: 'Analyze Smart Money Concepts confluence strength with detailed breakdown and quality metrics',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        symbol: {
+          type: 'string',
+          description: 'Trading pair symbol (e.g., BTCUSDT, ETHUSDT)',
+          pattern: '^[A-Z]{3,10}USDT?$'
+        },
+        timeframe: {
+          type: 'string',
+          description: 'Analysis timeframe',
+          enum: ['5', '15', '30', '60', '240'],
+          default: '60'
+        }
+      },
+      required: ['symbol']
+    }
   }
 ];

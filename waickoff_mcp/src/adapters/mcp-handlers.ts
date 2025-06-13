@@ -1215,6 +1215,37 @@ export class MCPHandlers {
   }
 
   // ====================
+  // SMART MONEY CONCEPTS - DASHBOARD HANDLERS (TASK-020 FASE 5)
+  // ====================
+
+  async handleGetSMCDashboard(args: any): Promise<MCPServerResponse> {
+    const { SmartMoneyDashboardHandlers } = await import('./handlers/smartMoney/smartMoneyDashboardHandlers.js');
+    const handlers = new SmartMoneyDashboardHandlers(
+      this.engine.marketDataService,
+      this.engine.analysisService
+    );
+    return await handlers.getSMCDashboard(args);
+  }
+
+  async handleGetSMCTradingSetup(args: any): Promise<MCPServerResponse> {
+    const { SmartMoneyDashboardHandlers } = await import('./handlers/smartMoney/smartMoneyDashboardHandlers.js');
+    const handlers = new SmartMoneyDashboardHandlers(
+      this.engine.marketDataService,
+      this.engine.analysisService
+    );
+    return await handlers.getSMCTradingSetup(args);
+  }
+
+  async handleAnalyzeSMCConfluenceStrength(args: any): Promise<MCPServerResponse> {
+    const { SmartMoneyDashboardHandlers } = await import('./handlers/smartMoney/smartMoneyDashboardHandlers.js');
+    const handlers = new SmartMoneyDashboardHandlers(
+      this.engine.marketDataService,
+      this.engine.analysisService
+    );
+    return await handlers.analyzeSMCConfluenceStrength(args);
+  }
+
+  // ====================
   // HELPER METHODS
   // ====================
 

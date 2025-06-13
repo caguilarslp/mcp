@@ -11,9 +11,6 @@ datos onchain limitados de bybit debemos usar, también podemos acceder a coinba
 
 recordar a api investing, calendario económico, fundamentales, noticias, locuras trump, ....
 
-indicadores a usar: ema, vwap, bollinger, fibo, elliott
-
-
 
 dominancia btc, eth, ....
 

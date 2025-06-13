@@ -150,6 +150,11 @@ export class HandlerRegistry {
     this.register('analyze_smart_money_confluence', (args) => this.mcpHandlers.handleAnalyzeSmartMoneyConfluence(args));
     this.register('get_smc_market_bias', (args) => this.mcpHandlers.handleGetSMCMarketBias(args));
     this.register('validate_smc_setup', (args) => this.mcpHandlers.handleValidateSMCSetup(args));
+    
+    // Smart Money Concepts - Dashboard Tools (TASK-020 FASE 5)
+    this.register('get_smc_dashboard', (args) => this.mcpHandlers.handleGetSMCDashboard(args));
+    this.register('get_smc_trading_setup', (args) => this.mcpHandlers.handleGetSMCTradingSetup(args));
+    this.register('analyze_smc_confluence_strength', (args) => this.mcpHandlers.handleAnalyzeSMCConfluenceStrength(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

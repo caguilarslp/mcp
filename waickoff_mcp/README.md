@@ -9,13 +9,13 @@
 [![MCP](https://img.shields.io/badge/MCP-Protocol-blue)](https://modelcontextprotocol.io/)
 [![Bybit](https://img.shields.io/badge/Bybit-API-orange)](https://bybit.com/)
 [![Tests](https://img.shields.io/badge/Tests-100%2B-brightgreen)](#-sistema-de-testing)
-[![SMC](https://img.shields.io/badge/Smart%20Money-60%25-brightgreen)](#-smart-money-concepts-nuevo)
+[![SMC](https://img.shields.io/badge/Smart%20Money-80%25-brightgreen)](#-smart-money-concepts-nuevo)
 
 ---
 
 ## 🎯 **¿Qué es wAIckoff MCP?**
 
-**wAIckoff MCP v1.6.5** es un servidor de **Model Context Protocol (MCP)** que proporciona análisis técnico profesional para criptomonedas. Diseñado específicamente para ser la **capa de datos** del sistema **Waickoff AI**, ofrece:
+**wAIckoff MCP v1.6.6** es un servidor de **Model Context Protocol (MCP)** que proporciona análisis técnico profesional para criptomonedas. Diseñado específicamente para ser la **capa de datos** del sistema **Waickoff AI**, ofrece:
 
 - **📊 Análisis técnico completo** - Volatilidad, volumen, Support/Resistance dinámicos
 - **🎯 Grid trading inteligente** - Sugerencias basadas en datos reales del mercado
@@ -57,7 +57,7 @@ Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 
 ---
 
-## 📊 **Funcionalidades Principales v1.6.4**
+## 📊 **Funcionalidades Principales v1.6.6**
 
 ### **🎯 Análisis de Mercado en Tiempo Real**
 - **`get_ticker`** - Precios actuales y estadísticas 24h
@@ -141,9 +141,22 @@ Reinicia Claude Desktop y pregunta: *"Genera un reporte diario de BTCUSDT"*
 - **`get_debug_logs`** - Logs estructurados para troubleshooting
 - **`test_storage`** - Testing del sistema de almacenamiento
 
+### **💰 Smart Money Concepts Tools (TASK-020) - 80% Completo**
+- **`detect_order_blocks`** - Detecta Order Blocks institucionales con strength scoring
+- **`validate_order_block`** - Valida si un Order Block específico sigue activo
+- **`get_order_block_zones`** - Obtiene zonas categorizadas por fuerza y proximidad
+- **`find_fair_value_gaps`** - Detecta Fair Value Gaps con análisis de probabilidad
+- **`analyze_fvg_filling`** - Analiza estadísticas históricas de llenado de FVG
+- **`detect_break_of_structure`** - Detecta BOS y CHoCH con validación multi-factor
+- **`analyze_market_structure`** - Análisis completo de estructura de mercado
+- **`validate_structure_shift`** - Valida cambios estructurales con scoring
+- **`analyze_smart_money_confluence`** - 🆕 Análisis integrado de confluencias SMC
+- **`get_smc_market_bias`** - 🆕 Sesgo institucional con confianza y reasoning
+- **`validate_smc_setup`** - 🆕 Validación completa de setup con risk management
+
 ---
 
-## 🏗️ **Arquitectura del Sistema v1.6.4**
+## 🏗️ **Arquitectura del Sistema v1.6.6**
 
 ### **📐 Clean Architecture (4 Capas)**
 ```
@@ -231,16 +244,22 @@ npm run test:help
 
 ## 💡 **Casos de Uso v1.6.4**
 
-### **📺 Casos de Uso para Smart Money Concepts (NUEVO v1.6.5)**
+### **📺 Casos de Uso para Smart Money Concepts (NUEVO v1.6.6)**
 ```bash
 # Detectar Order Blocks institucionales
 "Detecta order blocks en BTCUSDT con fuerza mínima de 80"
 
-# Validar si un Order Block sigue activo
-"Valida si el order block ob_bullish_1234567890_45632 de ETHUSDT sigue siendo válido"
+# Analizar confluencias completas SMC  🆕
+"Analiza las confluencias de Smart Money en ETHUSDT con todos los conceptos"
 
-# Obtener zonas categorizadas por fuerza
-"Muestra las zonas de order blocks de XRPUSDT categorizadas por fuerza"
+# Obtener sesgo institucional del mercado  🆕
+"Cuál es el sesgo institucional actual de BTCUSDT?"
+
+# Validar setup de trading completo  🆕
+"Valida un setup long en XRPUSDT con precio de entrada 0.52"
+
+# Detectar cambios estructurales
+"Detecta break of structure en SOLUSDT en timeframe de 1 hora"
 ```
 
 ### **📈 Para Análisis Técnico**
@@ -365,7 +384,7 @@ waickoff_mcp/
 
 ---
 
-## 📊 **Estado del Proyecto v1.6.4**
+## 📊 **Estado del Proyecto v1.6.6**
 
 ### **✅ Completado**
 - **✅ Análisis técnico completo** - Volatilidad, volumen, Support/Resistance
@@ -383,6 +402,7 @@ waickoff_mcp/
 - **✅ TASK-017 COMPLETADA** - Sistema análisis histórico (6 herramientas)
 - **✅ TASK-018 COMPLETADA** - Modularización completa MCP (eliminación corrupción)
 - **✅ TASK-019 COMPLETADA** - Resolución errores compilación TypeScript
+- **✅ TASK-020 FASES 1-4 COMPLETADAS** - Smart Money Concepts 80% (11 herramientas)
 - **✅ Auto-save automático** - Todos los análisis se guardan automáticamente
 - **✅ Repositorio de análisis** - 7 herramientas de consulta avanzada
 - **✅ Sistema de reportes** - 8 herramientas de generación automática
@@ -396,9 +416,7 @@ waickoff_mcp/
 - **TASK-013** - Datos on-chain: stablecoins, ballenas, exchanges (15h)
 - **TASK-015** - Dual Storage MongoDB experimental (6h)
 - **TASK-016** - Migración MongoDB completa (8-12h, condicional)
-- **TASK-018** - Sistema Wyckoff avanzado: Composite Man, multi-timeframe (8-10h)
-- **TASK-019** - Herramientas análisis técnico: Fibonacci, Elliott, Bollinger (8h)
-- **TASK-020** - Smart Money Concepts para trading algorítmico (10h)
+- **TASK-020 FASE 5** - Dashboard y Análisis Avanzado de Confluencias SMC (1h)
 - **v2.0** - Integración completa con Waickoff AI
 - **v2.1** - Support para múltiples exchanges (Binance, Coinbase)
 
@@ -422,10 +440,10 @@ waickoff_mcp/
 
 ---
 
-## 📚 **Documentación v1.6.4**
+## 📚 **Documentación v1.6.6**
 
 ### **📖 Guías de Usuario**
-- **🆕 [User Guide v1.6.5](claude/docs/user-guide.md)** - Guía completa actualizada con 77+ herramientas
+- **🆕 [User Guide v1.6.6](claude/docs/user-guide.md)** - Guía completa actualizada con 85+ herramientas
 - **💰 [Smart Money Concepts Guide](claude/docs/user-guide-smc.md)** - Guía completa Smart Money Concepts
 - **🆕 [Testing Manual](claude/docs/testing-manual.md)** - Manual completo del sistema de testing
 - **[API Reference](claude/docs/api/tools-reference.md)** - Referencia completa de herramientas
@@ -529,12 +547,12 @@ get_repository_stats     # Estado del almacenamiento
 
 ---
 
-## 📊 **Métricas del Proyecto v1.6.5**
+## 📊 **Métricas del Proyecto v1.6.6**
 
-- **77+ herramientas MCP** disponibles (3 nuevas Smart Money Concepts)
+- **85+ herramientas MCP** disponibles (11 herramientas Smart Money Concepts)
 - **100+ test cases** implementados
 - **15+ módulos** en arquitectura modular
-- **11+ tareas completadas** (TASK-004 a TASK-020 FASE 1)
+- **14+ tareas completadas** (TASK-004 a TASK-020 FASE 4)
 - **0 errores TypeScript** en compilación
 - **93.3% reducción** archivo principal MCP (eliminación corrupción)
 - **8 categorías análisis** (Técnico, Wyckoff, Trampas, Histórico, Smart Money, etc.)
@@ -560,4 +578,4 @@ Para issues, bugs o sugerencias:
 
 ---
 
-*Última actualización: 11/06/2025 | v1.6.5 | Estado: Production Ready + Documentación Completa*
+*Última actualización: 12/06/2025 | v1.6.6 | Estado: Production Ready + SMC 80% Completo*

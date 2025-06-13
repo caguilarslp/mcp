@@ -2,7 +2,7 @@
 
 ## 🎯 Guía Completa de Herramientas MCP
 
-Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.6.5, organizadas por categorías.
+Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.6.6, organizadas por categorías.
 
 ---
 
@@ -132,7 +132,183 @@ get_complete_analysis BTCUSDT investment=1000
 
 ---
 
-## 🎯 Herramientas de Análisis Wyckoff Básico (NUEVO!)
+## 💰 Herramientas de Smart Money Concepts (80% Completo)
+
+### Order Blocks
+
+#### `detect_order_blocks`
+Detecta Order Blocks institucionales con scoring de fuerza.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('5', '15', '30', '60', '240'). Default: '60'
+- `lookback` (opcional): Períodos a analizar (50-500). Default: 100
+- `minStrength` (opcional): Fuerza mínima (0-100). Default: 70
+- `includeBreakers` (opcional): Incluir breaker blocks. Default: true
+
+**Ejemplo:**
+```
+detect_order_blocks BTCUSDT minStrength=80
+```
+
+#### `validate_order_block`
+Valida si un Order Block específico sigue activo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `orderBlockId` (requerido): ID único del Order Block
+- `storedBlocks` (requerido): Array de Order Blocks detectados previamente
+
+**Ejemplo:**
+```
+validate_order_block BTCUSDT orderBlockId=OB_BULL_123456
+```
+
+#### `get_order_block_zones`
+Obtiene zonas de Order Blocks categorizadas por fuerza.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `activeBlocks` (requerido): Array de Order Blocks activos
+
+**Ejemplo:**
+```
+get_order_block_zones BTCUSDT
+```
+
+### Fair Value Gaps
+
+#### `find_fair_value_gaps`
+Detecta Fair Value Gaps con análisis de probabilidad de llenado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `lookback` (opcional): Períodos a analizar. Default: 100
+
+**Ejemplo:**
+```
+find_fair_value_gaps ETHUSDT timeframe=15
+```
+
+#### `analyze_fvg_filling`
+Analiza estadísticas históricas de llenado de FVG.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `lookbackDays` (opcional): Días a analizar (7-90). Default: 30
+
+**Ejemplo:**
+```
+analyze_fvg_filling BTCUSDT lookbackDays=60
+```
+
+### Break of Structure
+
+#### `detect_break_of_structure`
+Detecta BOS y CHoCH con validación multi-factor.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `lookback` (opcional): Períodos a analizar. Default: 100
+
+**Ejemplo:**
+```
+detect_break_of_structure BTCUSDT
+```
+
+#### `analyze_market_structure`
+Análisis completo de estructura de mercado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+analyze_market_structure ETHUSDT timeframe=240
+```
+
+#### `validate_structure_shift`
+Valida cambios estructurales con scoring.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `breakId` (requerido): ID de la ruptura estructural
+
+**Ejemplo:**
+```
+validate_structure_shift BTCUSDT breakId=BOS_123456
+```
+
+### Integración Smart Money (NUEVO!) 🆕
+
+#### `analyze_smart_money_confluence`
+Análisis integrado de confluencias entre todos los conceptos SMC.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `lookback` (opcional): Períodos a analizar. Default: 100
+
+**Ejemplo:**
+```
+analyze_smart_money_confluence BTCUSDT
+```
+
+**Respuesta incluye:**
+- Confluencias detectadas entre Order Blocks, FVG y BOS
+- Zonas Premium/Discount con equilibrium
+- Actividad institucional con score y señales
+- Sesgo de mercado integrado con confianza
+- Recomendaciones de trading basadas en confluencias
+- Niveles clave unificados
+
+#### `get_smc_market_bias`
+Obtiene sesgo institucional del mercado con análisis integrado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+get_smc_market_bias BTCUSDT
+```
+
+**Respuesta incluye:**
+- Dirección del sesgo (bullish/bearish/neutral)
+- Fuerza y confianza del sesgo
+- Componentes individuales (OB, FVG, BOS)
+- Factores clave que influyen
+- Reasoning detallado
+
+#### `validate_smc_setup`
+Valida setup completo de trading con Smart Money Concepts.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `setupType` (requerido): Tipo de setup ('long' o 'short')
+- `entryPrice` (opcional): Precio de entrada específico
+
+**Ejemplo:**
+```
+validate_smc_setup BTCUSDT setupType=long entryPrice=44000
+```
+
+**Respuesta incluye:**
+- Validación del setup con score total
+- Factores multi-análisis evaluados
+- Entrada óptima con zona y reasoning
+- Gestión de riesgo completa (SL, TPs, R:R)
+- Warnings y escenarios alternativos
+- Confianza general del setup
+
+---
+
+## 🎯 Herramientas de Análisis Wyckoff Básico
 
 ### `analyze_wyckoff_phase`
 Analiza la fase actual de Wyckoff para análisis de estructura de mercado.
@@ -146,15 +322,6 @@ Analiza la fase actual de Wyckoff para análisis de estructura de mercado.
 ```
 analyze_wyckoff_phase BTCUSDT timeframe=240 lookback=150
 ```
-
-**Respuesta incluye:**
-- Fase actual de Wyckoff (acumulación/distribución A-E, markup/markdown)
-- Confianza en la identificación de fase
-- Progreso dentro de la fase actual
-- Rango de trading detectado
-- Eventos clave identificados
-- Características de volumen
-- Interpretación y bias del mercado
 
 ### `detect_trading_range`
 Detecta rangos de trading para análisis de acumulación/distribución.
@@ -248,13 +415,6 @@ Detecta trampas alcistas (falsas rupturas sobre resistencia).
 ```
 detect_bull_trap BTCUSDT sensitivity=high
 ```
-
-**Respuesta incluye:**
-- Probabilidad de trampa alcista
-- Triggers detectados (volumen bajo, orderbook débil, etc.)
-- Niveles de precio objetivo
-- Recomendaciones específicas
-- Ventana de tiempo esperada
 
 ### `detect_bear_trap`
 Detecta trampas bajistas (falsas rupturas bajo soporte).
@@ -660,27 +820,35 @@ invalidate_cache BTCUSDT
 
 ## 🔍 Consejos de Uso
 
-### Para Trading
+### Para Trading con Smart Money Concepts 🆕
+1. Comienza con `analyze_smart_money_confluence` para visión completa SMC
+2. Verifica el sesgo con `get_smc_market_bias` antes de tomar decisiones
+3. Valida tu setup con `validate_smc_setup` para gestión de riesgo óptima
+4. Combina Order Blocks + FVG + BOS para confluencias de alta probabilidad
+5. Usa zonas Premium/Discount para timing de entradas
+6. Confirma actividad institucional antes de grandes posiciones
+
+### Para Trading General
 1. Usa `get_complete_analysis` para obtener una visión general rápida
-2. **NUEVO:** Comienza con `analyze_wyckoff_phase` para entender la estructura de mercado
+2. Comienza con `analyze_wyckoff_phase` para entender la estructura de mercado
 3. Combina `detect_bull_trap` y `detect_bear_trap` para evitar falsas señales
-4. **NUEVO:** Usa `find_wyckoff_events` para identificar springs y upthrusts como puntos de entrada
+4. Usa `find_wyckoff_events` para identificar springs y upthrusts como puntos de entrada
 5. Utiliza `analyze_volume_delta` para confirmar movimientos de precio
-6. **NUEVO:** Valida setups con `validate_wyckoff_setup` antes de entrar en posición
+6. Valida setups con `validate_wyckoff_setup` antes de entrar en posición
 7. Revisa `identify_support_resistance` antes de establecer niveles de grid
 
 ### Para Análisis
 1. Comienza con `perform_technical_analysis` para análisis completo
-2. **NUEVO:** Complementa con `analyze_wyckoff_phase` para estructura de mercado
+2. Complementa con `analyze_wyckoff_phase` para estructura de mercado
 3. Usa `get_historical_summary` para contexto de largo plazo
-4. **NUEVO:** Combina `detect_trading_range` con `analyze_wyckoff_volume` para confirmar fases
+4. Combina `detect_trading_range` con `analyze_wyckoff_volume` para confirmar fases
 5. Identifica patrones con `identify_volume_anomalies`
-6. **NUEVO:** Usa `get_wyckoff_interpretation` para entender implicaciones de la fase actual
+6. Usa `get_wyckoff_interpretation` para entender implicaciones de la fase actual
 7. Valida breakouts con `validate_breakout` antes de tomar decisiones
 
 ### Para Monitoreo
 1. Revisa `get_system_health` periódicamente
-2. **NUEVO:** Usa `track_phase_progression` para seguir el desarrollo de fases Wyckoff
+2. Usa `track_phase_progression` para seguir el desarrollo de fases Wyckoff
 3. Usa `get_trap_statistics` para evaluar efectividad
 4. Genera reportes diarios con `generate_daily_report`
 5. Mantén el rendimiento con `get_cache_stats`
@@ -694,9 +862,12 @@ invalidate_cache BTCUSDT
 - Los tiempos están en UTC por defecto (configurable con timezone)
 - El sistema guarda automáticamente los análisis para referencia futura
 - La detección de trampas usa múltiples señales para mayor precisión
-- **NUEVO:** El análisis Wyckoff identifica 15 fases diferentes con eventos clave
-- **NUEVO:** Los springs y upthrusts se detectan automáticamente con scoring de significancia
-- **NUEVO:** El sistema de validación Wyckoff evalúa setups con puntuación 0-100
+- El análisis Wyckoff identifica 15 fases diferentes con eventos clave
+- Los springs y upthrusts se detectan automáticamente con scoring de significancia
+- El sistema de validación Wyckoff evalúa setups con puntuación 0-100
+- **NUEVO:** Smart Money Concepts integra Order Blocks, FVG y BOS automáticamente
+- **NUEVO:** Las confluencias SMC se detectan y puntúan automáticamente
+- **NUEVO:** El sesgo institucional combina todos los conceptos SMC ponderadamente
 
 ---
 
@@ -710,5 +881,5 @@ Si encuentras problemas:
 
 ---
 
-*Versión: 1.6.5 - Actualizado: 11/06/2025*
-*Última actualización: TASK-019 Completada - Documentación Sincronizada*
+*Versión: 1.6.6 - Actualizado: 12/06/2025*
+*Última actualización: TASK-020 FASE 4 Completada - Smart Money Integration*
