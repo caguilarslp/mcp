@@ -1,0 +1,45 @@
+{
+  "id": "a8267b4f-986c-4783-9281-bffedd3309ad",
+  "timestamp": 1749829557165,
+  "symbol": "XLMUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volumeDelta": {
+      "symbol": "XLMUSDT",
+      "interval": "5",
+      "current": 4021.9,
+      "average": 6969.729897434581,
+      "bias": "buyer",
+      "strength": 173.29446026590867,
+      "cumulativeDelta": -359493.90393286827,
+      "divergence": {
+        "detected": false,
+        "type": "No divergence",
+        "signal": "trend_confirmed"
+      },
+      "marketPressure": {
+        "bullishCandles": 6,
+        "bearishCandles": 4,
+        "bullishPercent": 60,
+        "trend": "balanced"
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-13T15:45:57.165Z",
+    "tags": [
+      "timeframe:5",
+      "periods:48"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "bullish",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

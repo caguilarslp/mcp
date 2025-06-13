@@ -88,42 +88,28 @@
 
 ## 🔴 Tareas Urgentísimas
 
-### 🔴 TASK-024: Fix Errores Críticos SMC (URGENTÍSIMA)
-**Estado:** EN PROGRESO
-**Prioridad:** CRÍTICA - Funcionalidad core no operativa
-**Descripción:** Corregir 4 errores críticos en herramientas SMC que afectan 30% del sistema
-**Tiempo Estimado:** 4-6h total
+### 🔴 TASK-025: Fix Errores Críticos de Producción (NUEVA - URGENTE)
+**Estado:** 🔴 URGENTE - Sistema parcialmente operativo
+**Prioridad:** CRÍTICA
+**Descripción:** Resolver 4 errores críticos detectados en testing de producción
+**Tiempo Estimado:** 3-4h total
 **Fecha inicio:** 13/06/2025
-**Archivos afectados:**
-- `src/services/analysis/smartMoney/handlers/smcDashboard.ts`
-- `src/services/analysis/smartMoney/handlers/orderBlocks.ts`
-- `src/services/analysis/smartMoney/handlers/smcConfluence.ts`
-- `src/services/analysis/technical/confluenceAnalyzer.ts`
+**Archivo detallado:** `claude/tasks/task-025-fix-critical-errors.md`
 
-**Errores a corregir:**
-1. **SMC Dashboard & Order Blocks:** Error "Field required" - Respuesta JSON malformada
-2. **Smart Money Confluence:** "not yet implemented" - Handler placeholder sin código
-3. **Technical Confluences:** "Insufficient swing highs" - Parámetros Fibonacci restrictivos
+**Errores críticos a resolver:**
+1. **Order Blocks Connection Error** - "upstream connect error" - Herramienta completamente inoperativa
+2. **Fibonacci Swing Detection Inversion** - Swing Low ($2,771) > Swing High ($2,563)
+3. **SMC Zero Confluences** - Score 0/100 en todos los timeframes de BTCUSDT
+4. **Order Blocks Zero Detection** - No detecta bloques en ningún símbolo
 
-**Plan de acción:**
-- **FASE 1 (1-2h):** Fix response structure en Dashboard y Order Blocks
-- **FASE 2 (2-3h):** Implementar lógica real en SMC Confluence
-- **FASE 3 (30min):** Relajar parámetros Fibonacci
-- **FASE 4 (1-2h):** Testing completo con múltiples símbolos
+**Fases de solución:**
+- **FASE 1 (45min):** Fix Order Blocks Connection - Retry logic y error handling
+- **FASE 2 (30min):** Fix Fibonacci Swing Detection - Validación High > Low
+- **FASE 3 (1h):** Fix SMC Confluence Detection - Relajar criterios
+- **FASE 4 (45min):** Fix Order Blocks Parameters - Ajustar umbrales
+- **FASE 5 (30min):** Testing integral y validación
 
-**Soluciones propuestas:**
-```typescript
-// Fix para handlers SMC
-return {
-  text: JSON.stringify(data, null, 2)
-};
-// NO retornar objetos complejos directamente
-```
-
-**Testing requerido:**
-- Symbols: BTCUSDT, ETHUSDT, XRPUSDT
-- Timeframes: 5m, 15m, 1h, 4h
-- Escenarios: trending, ranging, high volatility
+**Impacto:** 50% de tests fallando, análisis institucional comprometido
 
 ---
 

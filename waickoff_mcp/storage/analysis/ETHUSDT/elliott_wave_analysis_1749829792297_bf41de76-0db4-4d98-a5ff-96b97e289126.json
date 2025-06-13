@@ -1,0 +1,170 @@
+{
+  "id": "bf41de76-0db4-4d98-a5ff-96b97e289126",
+  "timestamp": 1749829792297,
+  "symbol": "ETHUSDT",
+  "analysisType": "elliott_wave_analysis",
+  "data": {
+    "symbol": "ETHUSDT",
+    "timeframe": "60",
+    "currentPrice": 2555.35,
+    "currentSequence": {
+      "type": "corrective",
+      "waves": [
+        {
+          "number": 65,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 16,
+          "endIndex": 31,
+          "startPrice": 2382.82,
+          "endPrice": 2530.89,
+          "startTime": "2025-06-06T00:00:00.000Z",
+          "endTime": "2025-06-06T15:00:00.000Z",
+          "length": 6.214065686875203,
+          "duration": 15,
+          "confidence": 50.88997818844804
+        },
+        {
+          "number": 66,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 31,
+          "endIndex": 40,
+          "startPrice": 2530.89,
+          "endPrice": 2456.96,
+          "startTime": "2025-06-06T15:00:00.000Z",
+          "endTime": "2025-06-07T00:00:00.000Z",
+          "length": -2.9211068043257447,
+          "duration": 9,
+          "confidence": 40.45785739681953
+        },
+        {
+          "number": 67,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 40,
+          "endIndex": 62,
+          "startPrice": 2456.96,
+          "endPrice": 2544.85,
+          "startTime": "2025-06-07T00:00:00.000Z",
+          "endTime": "2025-06-07T22:00:00.000Z",
+          "length": 3.5771848137535764,
+          "duration": 22,
+          "confidence": 50.771912599897924
+        }
+      ],
+      "isComplete": true,
+      "degree": "minuette",
+      "startTime": "2025-06-06T00:00:00.000Z",
+      "endTime": "2025-06-07T22:00:00.000Z",
+      "validity": 100
+    },
+    "historicalSequences": [
+      {
+        "type": "corrective",
+        "waves": [
+          {
+            "number": 65,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 16,
+            "endIndex": 31,
+            "startPrice": 2382.82,
+            "endPrice": 2530.89,
+            "startTime": "2025-06-06T00:00:00.000Z",
+            "endTime": "2025-06-06T15:00:00.000Z",
+            "length": 6.214065686875203,
+            "duration": 15,
+            "confidence": 50.88997818844804
+          },
+          {
+            "number": 66,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 31,
+            "endIndex": 40,
+            "startPrice": 2530.89,
+            "endPrice": 2456.96,
+            "startTime": "2025-06-06T15:00:00.000Z",
+            "endTime": "2025-06-07T00:00:00.000Z",
+            "length": -2.9211068043257447,
+            "duration": 9,
+            "confidence": 40.45785739681953
+          },
+          {
+            "number": 67,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 40,
+            "endIndex": 62,
+            "startPrice": 2456.96,
+            "endPrice": 2544.85,
+            "startTime": "2025-06-07T00:00:00.000Z",
+            "endTime": "2025-06-07T22:00:00.000Z",
+            "length": 3.5771848137535764,
+            "duration": 22,
+            "confidence": 50.771912599897924
+          }
+        ],
+        "isComplete": true,
+        "degree": "minuette",
+        "startTime": "2025-06-06T00:00:00.000Z",
+        "endTime": "2025-06-07T22:00:00.000Z",
+        "validity": 100
+      }
+    ],
+    "currentWave": {
+      "wave": {
+        "number": 67,
+        "type": "corrective",
+        "subType": "zigzag",
+        "startIndex": 40,
+        "endIndex": 62,
+        "startPrice": 2456.96,
+        "endPrice": 2544.85,
+        "startTime": "2025-06-07T00:00:00.000Z",
+        "endTime": "2025-06-07T22:00:00.000Z",
+        "length": 3.5771848137535764,
+        "duration": 22,
+        "confidence": 50.771912599897924
+      },
+      "position": "uncertain",
+      "nextExpected": "Corrective sequence complete, new impulse likely"
+    },
+    "projections": [],
+    "ruleValidation": {
+      "wave2Rule": true,
+      "wave3Rule": true,
+      "wave4Rule": true,
+      "alternationRule": true,
+      "channelRule": true,
+      "overallValidity": 100
+    },
+    "signals": {
+      "signal": "hold",
+      "strength": 50,
+      "reasoning": "",
+      "waveContext": "",
+      "riskLevel": "medium"
+    },
+    "analysisTime": "2025-06-13T15:49:52.297Z",
+    "confidence": 80,
+    "dataQuality": 100
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-13T15:49:52.297Z",
+    "tags": [
+      "timeframe:60"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

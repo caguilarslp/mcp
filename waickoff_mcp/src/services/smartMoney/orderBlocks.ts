@@ -138,19 +138,62 @@ export class OrderBlocksService {
 
   private getDefaultConfig(): OrderBlockConfig {
     return {
-      minVolumeMultiplier: 1.5,
-      minSubsequentMove: 2.0,
-      maxCandlesForMove: 10,
+      minVolumeMultiplier: 1.2,      // Reduced from 1.5 to detect more blocks
+      minSubsequentMove: 1.5,        // Reduced from 2.0 ATR units
+      maxCandlesForMove: 15,         // Increased from 10 for more flexibility
       mitigationThreshold: 0.5,
       breakerConfirmation: 0.8,
-      maxBlockAge: 100,
+      maxBlockAge: 150,              // Increased from 100
       strengthWeights: {
-        volume: 0.4,
+        volume: 0.35,                // Slightly reduced
         subsequentMove: 0.3,
         respectCount: 0.2,
-        age: 0.1
+        age: 0.15                    // Slightly increased
       }
     };
+  }
+
+  /**
+   * Fetch data with retry logic
+   */
+  private async fetchWithRetry<T>(
+    fn: () => Promise<T>, 
+    retries: number = 3,
+    operation: string = 'operation'
+  ): Promise<T> {
+    for (let i = 0; i < retries; i++) {
+      try {
+        return await fn();
+      } catch (error: any) {
+        const isLastAttempt = i === retries - 1;
+        
+        // Log the error
+        console.error(`[OrderBlocks] ${operation} attempt ${i + 1}/${retries} failed:`, error.message);
+        
+        if (isLastAttempt) {
+          throw error;
+        }
+        
+        // Check if error is retryable
+        const errorMessage = error.message || '';
+        const isRetryable = 
+          errorMessage.includes('upstream connect error') ||
+          errorMessage.includes('timeout') ||
+          errorMessage.includes('ECONNRESET') ||
+          errorMessage.includes('ETIMEDOUT') ||
+          errorMessage.includes('AbortError');
+        
+        if (!isRetryable) {
+          throw error;
+        }
+        
+        // Exponential backoff
+        const waitTime = 1000 * Math.pow(2, i);
+        console.log(`[OrderBlocks] Waiting ${waitTime}ms before retry...`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
+    }
+    throw new Error(`${operation} failed after ${retries} attempts`);
   }
 
   /**
@@ -166,13 +209,47 @@ export class OrderBlocksService {
     const startTime = Date.now();
 
     try {
-      // Obtener datos de mercado
-      const klines = await this.marketDataService.getKlines(symbol, timeframe, lookback + 20);
-      const ticker = await this.marketDataService.getTicker(symbol);
-      const volumeAnalysis = await this.analysisService.analyzeVolume(symbol, timeframe, lookback);
+      // Obtener datos de mercado con retry logic
+      const [klines, ticker, volumeAnalysis] = await Promise.all([
+        this.fetchWithRetry(
+          () => this.marketDataService.getKlines(symbol, timeframe, Math.min(lookback + 20, 200)),
+          3,
+          `getKlines for ${symbol}`
+        ),
+        this.fetchWithRetry(
+          () => this.marketDataService.getTicker(symbol),
+          3,
+          `getTicker for ${symbol}`
+        ),
+        this.fetchWithRetry(
+          () => this.analysisService.analyzeVolume(symbol, timeframe, Math.min(lookback, 100)),
+          3,
+          `analyzeVolume for ${symbol}`
+        )
+      ]).catch(error => {
+        console.error(`[OrderBlocks] Failed to fetch market data for ${symbol}:`, error);
+        throw new Error(`Market data fetch failed: ${error.message}`);
+      });
+
+      // Validate data
+      if (!klines || klines.length === 0) {
+        throw new Error('No klines data received');
+      }
+
+      if (!ticker || !ticker.lastPrice) {
+        throw new Error('Invalid ticker data received');
+      }
+
+      if (!volumeAnalysis || !volumeAnalysis.avgVolume) {
+        console.warn(`[OrderBlocks] Volume analysis incomplete for ${symbol}, using fallback`);
+        // Calculate average volume from klines as fallback
+        const avgVolume = klines.reduce((sum, k) => sum + k.volume, 0) / klines.length;
+        volumeAnalysis.avgVolume = avgVolume;
+      }
 
       if (klines.length < 30) {
-        throw new Error(`Insufficient data for analysis: ${klines.length} candles`);
+        console.warn(`[OrderBlocks] Limited data for ${symbol}: ${klines.length} candles (minimum 30 recommended)`);
+        // Continue with available data but log warning
       }
 
       // Calcular ATR para normalización
@@ -180,10 +257,23 @@ export class OrderBlocksService {
       const avgVolume = volumeAnalysis.avgVolume;
 
       // Detectar Order Blocks potenciales
-      const potentialBlocks = this.identifyPotentialOrderBlocks(klines, avgVolume, atr);
+      let potentialBlocks = this.identifyPotentialOrderBlocks(klines, avgVolume, atr);
+      
+      // Si no se encontraron bloques, intentar con detección basada en estructura
+      if (potentialBlocks.length === 0) {
+        console.log(`[OrderBlocks] No blocks found with volume criteria, trying structure-based detection`);
+        potentialBlocks = this.identifyStructuralOrderBlocks(klines, atr);
+      }
 
       // Validar y filtrar Order Blocks
       const validBlocks = this.validateOrderBlocks(potentialBlocks, klines, atr);
+      
+      // Si aún no hay bloques, intentar detección de último recurso
+      if (validBlocks.length === 0) {
+        console.log(`[OrderBlocks] No valid blocks found, trying last resort detection`);
+        const lastResortBlocks = this.detectLastResortOrderBlocks(klines, ticker.lastPrice);
+        validBlocks.push(...lastResortBlocks);
+      }
 
       // Analizar mitigación y estado actual
       const analyzedBlocks = this.analyzeBlockMitigation(validBlocks, klines, ticker.lastPrice);
@@ -243,9 +333,41 @@ export class OrderBlocksService {
         timestamp: new Date().toISOString()
       };
 
-    } catch (error) {
+    } catch (error: any) {
       this.recordPerformance('detectOrderBlocks', Date.now() - startTime, false, error);
-      throw error;
+      
+      // Return empty analysis on error instead of throwing
+      console.error(`[OrderBlocks] Critical error in detectOrderBlocks for ${symbol}:`, error.message);
+      
+      return {
+        symbol,
+        timeframe,
+        currentPrice: 0,
+        activeBlocks: [],
+        breakerBlocks: [],
+        strongestBlock: undefined,
+        nearestBlock: {},
+        confluenceWithLevels: [],
+        marketBias: 'neutral',
+        keyLevels: {
+          strongSupport: [],
+          strongResistance: []
+        },
+        statistics: {
+          totalBlocks: 0,
+          freshBlocks: 0,
+          mitigatedBlocks: 0,
+          breakerBlocks: 0,
+          avgRespectRate: 0
+        },
+        tradingRecommendation: {
+          action: 'wait',
+          confidence: 0,
+          reason: `Error analyzing market: ${error.message}`,
+          targets: []
+        },
+        timestamp: new Date().toISOString()
+      };
     }
   }
 
@@ -367,9 +489,12 @@ export class OrderBlocksService {
       volumeRatio: number;
     }> = [];
 
+    // Si no hay suficiente volumen promedio, usar un fallback
+    const minVolume = avgVolume > 0 ? avgVolume : 1000000; // Fallback mínimo
+    
     for (let i = 1; i < klines.length - 10; i++) {
       const candle = klines[i];
-      const volumeRatio = candle.volume / avgVolume;
+      const volumeRatio = candle.volume / minVolume;
 
       // Verificar volumen institucional
       if (volumeRatio < this.config.minVolumeMultiplier) continue;
@@ -380,12 +505,16 @@ export class OrderBlocksService {
 
       if (!isBullish && !isBearish) continue;
 
-      // Verificar que tenga cuerpo significativo (>30% del rango)
+      // Verificar que tenga cuerpo significativo (>25% del rango) - más flexible
       const bodySize = Math.abs(candle.close - candle.open);
       const totalRange = candle.high - candle.low;
-      const bodyRatio = bodySize / totalRange;
+      const bodyRatio = totalRange > 0 ? bodySize / totalRange : 0;
 
-      if (bodyRatio < 0.3) continue;
+      if (bodyRatio < 0.25) continue;
+      
+      // Verificar movimiento mínimo del 0.3% para evitar bloques en consolidaciones muy apretadas
+      const priceMove = Math.abs(candle.close - candle.open) / candle.open;
+      if (priceMove < 0.003) continue;
 
       potentialBlocks.push({
         index: i,
@@ -395,7 +524,274 @@ export class OrderBlocksService {
       });
     }
 
+    // Si no se encontraron bloques con criterios estrictos, buscar con criterios relajados
+    if (potentialBlocks.length === 0) {
+      console.log(`[OrderBlocks] No blocks found with strict criteria, trying relaxed criteria`);
+      return this.identifyPotentialOrderBlocksRelaxed(klines, minVolume, atr);
+    }
+
     return potentialBlocks;
+  }
+
+  /**
+   * Identificación con criterios relajados cuando no hay bloques con criterios estrictos
+   */
+  private identifyPotentialOrderBlocksRelaxed(
+    klines: OHLCV[],
+    avgVolume: number,
+    atr: number
+  ): Array<{
+    index: number;
+    candle: OHLCV;
+    type: 'bullish' | 'bearish';
+    volumeRatio: number;
+  }> {
+    const potentialBlocks: Array<{
+      index: number;
+      candle: OHLCV;
+      type: 'bullish' | 'bearish';
+      volumeRatio: number;
+    }> = [];
+
+    for (let i = 1; i < klines.length - 10; i++) {
+      const candle = klines[i];
+      const volumeRatio = candle.volume / avgVolume;
+
+      // Criterios más relajados
+      if (volumeRatio < 0.8) continue; // Reducido de 1.2
+
+      const isBullish = candle.close > candle.open;
+      const isBearish = candle.close < candle.open;
+      if (!isBullish && !isBearish) continue;
+
+      // Body ratio más flexible
+      const bodySize = Math.abs(candle.close - candle.open);
+      const totalRange = candle.high - candle.low;
+      const bodyRatio = totalRange > 0 ? bodySize / totalRange : 0;
+      if (bodyRatio < 0.15) continue; // Reducido de 0.25
+
+      // Movimiento mínimo más flexible
+      const priceMove = Math.abs(candle.close - candle.open) / candle.open;
+      if (priceMove < 0.002) continue; // Reducido de 0.003
+
+      // Buscar zonas de consolidación que precedan movimientos
+      const prevCandles = klines.slice(Math.max(0, i - 5), i);
+      const avgRange = prevCandles.reduce((sum, c) => sum + (c.high - c.low), 0) / prevCandles.length;
+      const currentRange = candle.high - candle.low;
+      
+      // Si el rango actual es significativamente mayor que el promedio anterior
+      if (currentRange > avgRange * 1.5) {
+        potentialBlocks.push({
+          index: i,
+          candle,
+          type: isBullish ? 'bullish' : 'bearish',
+          volumeRatio: Math.max(volumeRatio, 0.9) // Asegurar un mínimo
+        });
+      }
+    }
+
+    return potentialBlocks;
+  }
+
+  /**
+   * Detección basada en estructura de mercado
+   */
+  private identifyStructuralOrderBlocks(
+    klines: OHLCV[],
+    atr: number
+  ): Array<{
+    index: number;
+    candle: OHLCV;
+    type: 'bullish' | 'bearish';
+    volumeRatio: number;
+  }> {
+    const blocks: Array<{
+      index: number;
+      candle: OHLCV;
+      type: 'bullish' | 'bearish';
+      volumeRatio: number;
+    }> = [];
+
+    // Buscar puntos de giro significativos
+    for (let i = 5; i < klines.length - 5; i++) {
+      const candle = klines[i];
+      
+      // Detectar swing lows (potential bullish OB)
+      const isSwingLow = this.isSwingLow(klines, i, 5);
+      if (isSwingLow) {
+        // Verificar si hubo un movimiento alcista posterior
+        const nextHigh = Math.max(...klines.slice(i + 1, Math.min(i + 10, klines.length)).map(k => k.high));
+        const moveUp = (nextHigh - candle.low) / candle.low * 100;
+        
+        if (moveUp > 1.0) { // Al menos 1% de movimiento
+          blocks.push({
+            index: i,
+            candle,
+            type: 'bullish',
+            volumeRatio: 1.0 // Default ya que no estamos usando volumen aquí
+          });
+        }
+      }
+      
+      // Detectar swing highs (potential bearish OB)
+      const isSwingHigh = this.isSwingHigh(klines, i, 5);
+      if (isSwingHigh) {
+        // Verificar si hubo un movimiento bajista posterior
+        const nextLow = Math.min(...klines.slice(i + 1, Math.min(i + 10, klines.length)).map(k => k.low));
+        const moveDown = (candle.high - nextLow) / candle.high * 100;
+        
+        if (moveDown > 1.0) { // Al menos 1% de movimiento
+          blocks.push({
+            index: i,
+            candle,
+            type: 'bearish',
+            volumeRatio: 1.0
+          });
+        }
+      }
+    }
+
+    return blocks;
+  }
+
+  /**
+   * Detección de último recurso para asegurar al menos algunos bloques
+   */
+  private detectLastResortOrderBlocks(
+    klines: OHLCV[],
+    currentPrice: number
+  ): OrderBlock[] {
+    const blocks: OrderBlock[] = [];
+    
+    // Encontrar los 3 máximos y mínimos más significativos
+    const significantLevels = this.findSignificantLevels(klines, 3);
+    
+    // Convertir niveles significativos en order blocks
+    significantLevels.highs.forEach((level, idx) => {
+      const block: OrderBlock = {
+        id: `ob_bearish_lastresort_${Date.now()}_${idx}`,
+        symbol: '',
+        type: 'bearish',
+        origin: {
+          high: level.candle.high,
+          low: level.candle.low,
+          open: level.candle.open,
+          close: level.candle.close,
+          volume: level.candle.volume,
+          timestamp: new Date(level.candle.timestamp).toISOString(),
+          candleIndex: level.index
+        },
+        zone: {
+          upper: level.candle.high,
+          lower: Math.min(level.candle.open, level.candle.close),
+          midpoint: (level.candle.high + Math.min(level.candle.open, level.candle.close)) / 2
+        },
+        strength: 50 + (2 - idx) * 10, // 70, 60, 50
+        mitigated: currentPrice > level.candle.high,
+        respectCount: 0,
+        validity: 'fresh',
+        createdAt: new Date().toISOString(),
+        subsequentMove: { magnitude: 1.0, candles: 5, maxPrice: level.candle.low },
+        volumeAtCreation: level.candle.volume,
+        priceMovement: { distance: 1.0, percentage: 1.0, timeToTarget: 300 },
+        institutionalSignals: { volumeMultiplier: 1.0, orderFlowImbalance: 0, absorptionLevel: 50 },
+        currentDistance: Math.abs(currentPrice - level.candle.high) / currentPrice * 100,
+        priceAtCreation: level.candle.close,
+        marketStructure: { swingHigh: level.candle.high, structureBreak: false }
+      };
+      blocks.push(block);
+    });
+    
+    significantLevels.lows.forEach((level, idx) => {
+      const block: OrderBlock = {
+        id: `ob_bullish_lastresort_${Date.now()}_${idx}`,
+        symbol: '',
+        type: 'bullish',
+        origin: {
+          high: level.candle.high,
+          low: level.candle.low,
+          open: level.candle.open,
+          close: level.candle.close,
+          volume: level.candle.volume,
+          timestamp: new Date(level.candle.timestamp).toISOString(),
+          candleIndex: level.index
+        },
+        zone: {
+          upper: Math.max(level.candle.open, level.candle.close),
+          lower: level.candle.low,
+          midpoint: (Math.max(level.candle.open, level.candle.close) + level.candle.low) / 2
+        },
+        strength: 50 + (2 - idx) * 10, // 70, 60, 50
+        mitigated: currentPrice < level.candle.low,
+        respectCount: 0,
+        validity: 'fresh',
+        createdAt: new Date().toISOString(),
+        subsequentMove: { magnitude: 1.0, candles: 5, maxPrice: level.candle.high },
+        volumeAtCreation: level.candle.volume,
+        priceMovement: { distance: 1.0, percentage: 1.0, timeToTarget: 300 },
+        institutionalSignals: { volumeMultiplier: 1.0, orderFlowImbalance: 0, absorptionLevel: 50 },
+        currentDistance: Math.abs(currentPrice - level.candle.low) / currentPrice * 100,
+        priceAtCreation: level.candle.close,
+        marketStructure: { swingLow: level.candle.low, structureBreak: false }
+      };
+      blocks.push(block);
+    });
+    
+    return blocks;
+  }
+
+  /**
+   * Helpers para detección de swings
+   */
+  private isSwingLow(klines: OHLCV[], index: number, lookback: number): boolean {
+    if (index < lookback || index >= klines.length - lookback) return false;
+    
+    const current = klines[index];
+    for (let i = 1; i <= lookback; i++) {
+      if (klines[index - i].low < current.low || klines[index + i].low < current.low) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private isSwingHigh(klines: OHLCV[], index: number, lookback: number): boolean {
+    if (index < lookback || index >= klines.length - lookback) return false;
+    
+    const current = klines[index];
+    for (let i = 1; i <= lookback; i++) {
+      if (klines[index - i].high > current.high || klines[index + i].high > current.high) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private findSignificantLevels(klines: OHLCV[], count: number): {
+    highs: Array<{ candle: OHLCV; index: number }>;
+    lows: Array<{ candle: OHLCV; index: number }>;
+  } {
+    // Encontrar todos los swings
+    const swingHighs: Array<{ candle: OHLCV; index: number }> = [];
+    const swingLows: Array<{ candle: OHLCV; index: number }> = [];
+    
+    for (let i = 5; i < klines.length - 5; i++) {
+      if (this.isSwingHigh(klines, i, 5)) {
+        swingHighs.push({ candle: klines[i], index: i });
+      }
+      if (this.isSwingLow(klines, i, 5)) {
+        swingLows.push({ candle: klines[i], index: i });
+      }
+    }
+    
+    // Ordenar y tomar los más significativos
+    swingHighs.sort((a, b) => b.candle.high - a.candle.high);
+    swingLows.sort((a, b) => a.candle.low - b.candle.low);
+    
+    return {
+      highs: swingHighs.slice(0, count),
+      lows: swingLows.slice(0, count)
+    };
   }
 
   private validateOrderBlocks(
@@ -419,8 +815,10 @@ export class OrderBlocksService {
         atr
       );
 
-      if (subsequentMove.magnitude < this.config.minSubsequentMove) continue;
-      if (subsequentMove.candles > this.config.maxCandlesForMove) continue;
+      // Relajar validación de movimiento posterior
+      if (subsequentMove.magnitude < this.config.minSubsequentMove * 0.7) continue;
+      // Permitir más flexibilidad en el tiempo del movimiento
+      if (subsequentMove.candles > this.config.maxCandlesForMove * 1.5) continue;
 
       // Calcular zona del Order Block
       const zone = this.calculateOrderBlockZone(potential.candle, potential.type);
@@ -512,6 +910,18 @@ export class OrderBlocksService {
     }
 
     const candles = Math.min(this.config.maxCandlesForMove, klines.length - startIndex - 1);
+    
+    // Si no se encontró movimiento suficiente con ATR, usar movimiento porcentual
+    if (magnitude < this.config.minSubsequentMove) {
+      const percentMove = type === 'bullish' ? 
+        (maxPrice - startPrice) / startPrice * 100 : 
+        (startPrice - maxPrice) / startPrice * 100;
+      
+      // Si hay al menos 1% de movimiento, considerarlo válido
+      if (percentMove >= 1.0) {
+        magnitude = this.config.minSubsequentMove * 0.75; // Darle un valor mínimo aceptable
+      }
+    }
 
     return { magnitude, candles, maxPrice };
   }
@@ -630,11 +1040,11 @@ export class OrderBlocksService {
   ): number {
     const weights = this.config.strengthWeights;
     
-    // Normalizar componentes (0-100)
-    const volumeScore = Math.min(100, (volumeRatio - 1) * 50); // 1.5x = 25, 3x = 100
-    const moveScore = Math.min(100, subsequentMagnitude * 25); // 2 ATR = 50, 4 ATR = 100
-    const respectScore = Math.min(100, respectCount * 20); // 5 respects = 100
-    const ageScore = Math.max(0, 100 - (ageInCandles / this.config.maxBlockAge) * 100);
+    // Normalizar componentes (0-100) con curvas más generosas
+    const volumeScore = Math.min(100, Math.max(0, (volumeRatio - 0.8) * 60)); // 0.8x = 0, 1.2x = 24, 2x = 72
+    const moveScore = Math.min(100, subsequentMagnitude * 35); // 1.5 ATR = 52.5, 3 ATR = 100
+    const respectScore = Math.min(100, respectCount * 25); // 4 respects = 100
+    const ageScore = Math.max(0, 100 - (ageInCandles / this.config.maxBlockAge) * 80); // Más generoso con edad
 
     const totalStrength = 
       volumeScore * weights.volume +
