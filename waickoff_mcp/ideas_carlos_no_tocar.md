@@ -14,3 +14,13 @@ recordar a api investing, calendario económico, fundamentales, noticias, locura
 
 dominancia btc, eth, ....
 
+Curso de quant sección métricas de rendimiento
+kpis y métricas para rendimiento, eso lo haremos en otro mcp
+cagr, sharpe, sortino, máximo rendimiento, ....
+
+
+orderflow
+https://github.com/fintools-ai/mcp-order-flow-server?tab=readme-ov-file
+https://mcp.so/server/mcp-order-flow-server/fintools-ai
+
+

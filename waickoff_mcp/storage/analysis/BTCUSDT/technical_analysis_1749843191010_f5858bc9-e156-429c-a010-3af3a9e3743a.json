@@ -1,0 +1,45 @@
+{
+  "id": "f5858bc9-e156-429c-a010-3af3a9e3743a",
+  "timestamp": 1749843191010,
+  "symbol": "BTCUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volumeDelta": {
+      "symbol": "BTCUSDT",
+      "interval": "5",
+      "current": -31.660912105268487,
+      "average": 4.424441119556404,
+      "bias": "buyer",
+      "strength": 12.724112491211068,
+      "cumulativeDelta": 3.114581817634388,
+      "divergence": {
+        "detected": false,
+        "type": "No divergence",
+        "signal": "trend_confirmed"
+      },
+      "marketPressure": {
+        "bullishCandles": 6,
+        "bearishCandles": 4,
+        "bullishPercent": 60,
+        "trend": "balanced"
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-13T19:33:11.010Z",
+    "tags": [
+      "timeframe:5",
+      "periods:24"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "bullish",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

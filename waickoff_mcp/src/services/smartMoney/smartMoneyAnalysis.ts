@@ -61,17 +61,17 @@ export class SmartMoneyAnalysisService {
 
   private getDefaultConfig(): SMCConfig {
     return {
-      confluenceThreshold: 0.02,        // 2% distancia máxima para confluencia
-      minConfluenceScore: 70,           // Score mínimo para considerar confluencia válida
-      biasStrengthThreshold: 65,        // Umbral para bias fuerte
-      setupValidationMinScore: 75,      // Score mínimo para setup válido
+      confluenceThreshold: 0.005,       // 0.5% distancia máxima para confluencia (relajado de 2%)
+      minConfluenceScore: 60,           // Score mínimo para considerar confluencia válida (bajado de 70)
+      biasStrengthThreshold: 60,        // Umbral para bias fuerte (bajado de 65)
+      setupValidationMinScore: 70,      // Score mínimo para setup válido (bajado de 75)
       weights: {
         orderBlock: 0.35,               // 35% peso Order Blocks
         fairValueGap: 0.30,             // 30% peso FVGs
         breakOfStructure: 0.35          // 35% peso BOS
       },
       premiumDiscountThreshold: 0.5,   // 50% para determinar zonas premium/discount
-      institutionalActivityThreshold: 70 // Umbral actividad institucional
+      institutionalActivityThreshold: 60 // Umbral actividad institucional (bajado de 70)
     };
   }
 
@@ -290,7 +290,7 @@ export class SmartMoneyAnalysisService {
   }
 
   /**
-   * Detecta confluencias entre conceptos SMC
+   * Detecta confluencias entre conceptos SMC con criterios relajados
    */
   private detectConfluences(
     orderBlocks: OrderBlockAnalysis,
@@ -299,6 +299,9 @@ export class SmartMoneyAnalysisService {
   ): SmartMoneyConfluence[] {
     const confluences: SmartMoneyConfluence[] = [];
     const threshold = this.config.confluenceThreshold;
+    
+    // Log para debugging
+    console.log(`[SMC] Detecting confluences - OBs: ${orderBlocks.activeBlocks.length}, FVGs: ${fvgs.openGaps.length}, BOS: ${bos.activeBreaks.length}`);
 
     // 1. Confluencias Order Block + FVG
     for (const ob of orderBlocks.activeBlocks) {
@@ -357,6 +360,21 @@ export class SmartMoneyAnalysisService {
     // 4. Confluencias triples (las más fuertes)
     this.detectTripleConfluences(confluences, orderBlocks, fvgs, bos);
 
+    // 5. Si no hay confluencias completas, buscar confluencias parciales
+    if (confluences.length === 0) {
+      console.log('[SMC] No full confluences found, looking for partial confluences...');
+      const partialConfluences = this.detectPartialConfluences(orderBlocks, fvgs, bos);
+      confluences.push(...partialConfluences);
+    }
+
+    // 6. Si aun no hay confluencias, generar confluencias individuales de elementos fuertes
+    if (confluences.length === 0) {
+      console.log('[SMC] No confluences found, generating individual strong levels...');
+      const individualConfluences = this.generateIndividualConfluences(orderBlocks, fvgs, bos);
+      confluences.push(...individualConfluences);
+    }
+
+    console.log(`[SMC] Total confluences detected: ${confluences.length}`);
     return confluences.sort((a, b) => b.strength - a.strength);
   }
 
@@ -398,6 +416,142 @@ export class SmartMoneyAnalysisService {
   }
 
   /**
+   * Detecta confluencias parciales cuando no hay confluencias completas
+   */
+  private detectPartialConfluences(
+    orderBlocks: OrderBlockAnalysis,
+    fvgs: FVGAnalysis,
+    bos: MarketStructureAnalysis
+  ): SmartMoneyConfluence[] {
+    const partialConfluences: SmartMoneyConfluence[] = [];
+    
+    // Caso 1: Solo FVG + BOS (sin Order Blocks)
+    if (orderBlocks.activeBlocks.length === 0 && fvgs.openGaps.length > 0 && bos.activeBreaks.length > 0) {
+      console.log('[SMC] Creating FVG + BOS partial confluences');
+      for (const fvg of fvgs.openGaps) {
+        for (const breakItem of bos.activeBreaks) {
+          const distance = Math.abs(fvg.gap.midpoint - breakItem.breakPoint.price) / fvg.gap.midpoint;
+          
+          // Usar umbral más relajado para parciales
+          if (distance <= this.config.confluenceThreshold * 2) {
+            partialConfluences.push(this.createConfluence(
+              ['fairValueGap', 'breakOfStructure'],
+              [fvg.gap.midpoint, breakItem.breakPoint.price],
+              { fairValueGap: fvg, structuralBreak: breakItem },
+              fvg.type === 'bullish' && breakItem.direction === 'bullish' ? 'bullish' :
+              fvg.type === 'bearish' && breakItem.direction === 'bearish' ? 'bearish' : 'mixed',
+              undefined,
+              60 // Base score para confluencias parciales
+            ));
+          }
+        }
+      }
+    }
+    
+    // Caso 2: Solo OB + elementos individuales con criterios más relajados
+    if (partialConfluences.length === 0 && orderBlocks.activeBlocks.length > 0) {
+      const relaxedThreshold = this.config.confluenceThreshold * 3; // 1.5% en lugar de 0.5%
+      
+      for (const ob of orderBlocks.activeBlocks) {
+        // OB + FVG con umbral relajado
+        for (const fvg of fvgs.openGaps) {
+          const distance = this.calculateZoneDistance(
+            ob.zone,
+            { upper: fvg.gap.upper, lower: fvg.gap.lower, midpoint: fvg.gap.midpoint }
+          );
+          
+          if (distance <= relaxedThreshold) {
+            partialConfluences.push(this.createConfluence(
+              ['orderBlock', 'fairValueGap'],
+              [ob.zone.midpoint, fvg.gap.midpoint],
+              { orderBlock: ob, fairValueGap: fvg },
+              ob.type === 'bullish' && fvg.type === 'bullish' ? 'bullish' : 
+              ob.type === 'bearish' && fvg.type === 'bearish' ? 'bearish' : 'mixed',
+              undefined,
+              50 // Score reducido para umbral relajado
+            ));
+          }
+        }
+        
+        // OB + BOS con umbral relajado
+        for (const breakItem of bos.activeBreaks) {
+          const distance = Math.abs(ob.zone.midpoint - breakItem.breakPoint.price) / ob.zone.midpoint;
+          
+          if (distance <= relaxedThreshold) {
+            partialConfluences.push(this.createConfluence(
+              ['orderBlock', 'breakOfStructure'],
+              [ob.zone.midpoint, breakItem.breakPoint.price],
+              { orderBlock: ob, structuralBreak: breakItem },
+              ob.type === 'bullish' && breakItem.direction === 'bullish' ? 'bullish' :
+              ob.type === 'bearish' && breakItem.direction === 'bearish' ? 'bearish' : 'mixed',
+              undefined,
+              50 // Score reducido para umbral relajado
+            ));
+          }
+        }
+      }
+    }
+    
+    return partialConfluences;
+  }
+
+  /**
+   * Genera confluencias individuales de elementos fuertes cuando no hay confluencias reales
+   */
+  private generateIndividualConfluences(
+    orderBlocks: OrderBlockAnalysis,
+    fvgs: FVGAnalysis,
+    bos: MarketStructureAnalysis
+  ): SmartMoneyConfluence[] {
+    const individualConfluences: SmartMoneyConfluence[] = [];
+    
+    // Order Blocks fuertes como confluencias individuales
+    orderBlocks.activeBlocks
+      .filter(ob => ob.strength >= 70)
+      .forEach(ob => {
+        individualConfluences.push(this.createConfluence(
+          ['orderBlock'],
+          [ob.zone.midpoint],
+          { orderBlock: ob },
+          ob.type === 'bullish' ? 'bullish' : ob.type === 'bearish' ? 'bearish' : 'mixed',
+          ob.zone.midpoint,
+          ob.strength * 0.4 // Score reducido para elementos individuales
+        ));
+      });
+    
+    // FVGs significativos como confluencias individuales
+    fvgs.openGaps
+      .filter(fvg => fvg.context.significance === 'high')
+      .forEach(fvg => {
+        individualConfluences.push(this.createConfluence(
+          ['fairValueGap'],
+          [fvg.gap.midpoint],
+          { fairValueGap: fvg },
+          fvg.type,
+          fvg.gap.midpoint,
+          fvg.probability.fill * 0.4 // Score reducido para elementos individuales
+        ));
+      });
+    
+    // BOS mayores como confluencias individuales
+    bos.activeBreaks
+      .filter((b: StructuralBreak) => b.significance === 'major')
+      .forEach((breakItem: StructuralBreak) => {
+        individualConfluences.push(this.createConfluence(
+          ['breakOfStructure'],
+          [breakItem.breakPoint.price],
+          { structuralBreak: breakItem },
+          breakItem.direction,
+          breakItem.breakPoint.price,
+          breakItem.probability * 0.4 // Score reducido para elementos individuales
+        ));
+      });
+    
+    console.log(`[SMC] Generated ${individualConfluences.length} individual confluences`);
+    return individualConfluences;
+  }
+
+  /**
    * Crea un objeto de confluencia
    */
   private createConfluence(
@@ -405,13 +559,14 @@ export class SmartMoneyAnalysisService {
     priceLevels: number[],
     components: any,
     alignment: 'bullish' | 'bearish' | 'mixed',
-    overridePrice?: number
+    overridePrice?: number,
+    baseScore?: number
   ): SmartMoneyConfluence {
     const avgPrice = overridePrice || priceLevels.reduce((a, b) => a + b, 0) / priceLevels.length;
     const priceRange = Math.max(...priceLevels) - Math.min(...priceLevels);
     
     // Calcular fuerza basada en tipo y alineación
-    let strength = 50;
+    let strength = baseScore !== undefined ? baseScore : 50;
     
     // Bonus por cantidad de componentes
     strength += types.length * 15;
@@ -502,7 +657,7 @@ export class SmartMoneyAnalysisService {
   }
 
   /**
-   * Analiza actividad institucional
+   * Analiza actividad institucional con criterios ajustados
    */
   private analyzeInstitutionalActivity(
     orderBlocks: OrderBlockAnalysis,
@@ -522,44 +677,88 @@ export class SmartMoneyAnalysisService {
   } {
     const signals: string[] = [];
     let score = 0;
+    let componentsAnalyzed = 0;
 
-    // Analizar Order Blocks
-    const strongOBs = orderBlocks.activeBlocks.filter(ob => ob.strength >= 80).length;
-    const orderBlockActivity = Math.min(100, strongOBs * 25);
-    if (strongOBs > 2) {
-      signals.push(`${strongOBs} strong order blocks detected`);
-      score += 25;
+    // Analizar Order Blocks (criterios más flexibles)
+    const strongOBs = orderBlocks.activeBlocks.filter(ob => ob.strength >= 70).length; // Bajado de 80
+    const moderateOBs = orderBlocks.activeBlocks.filter(ob => ob.strength >= 50).length;
+    const orderBlockActivity = Math.min(100, strongOBs * 30 + moderateOBs * 10);
+    
+    if (orderBlocks.activeBlocks.length > 0) {
+      componentsAnalyzed++;
+      if (strongOBs > 0) {
+        signals.push(`${strongOBs} strong order blocks detected`);
+        score += strongOBs * 15; // Más puntos por OB
+      } else if (moderateOBs > 0) {
+        signals.push(`${moderateOBs} moderate order blocks present`);
+        score += moderateOBs * 8;
+      }
     }
 
-    // Analizar FVGs
+    // Analizar FVGs (criterios más flexibles)
     const significantFVGs = fvgs.openGaps.filter(fvg => fvg.context.significance === 'high').length;
-    const fvgCreation = Math.min(100, significantFVGs * 30);
-    if (significantFVGs > 1) {
-      signals.push(`${significantFVGs} significant fair value gaps present`);
-      score += 20;
+    const moderateFVGs = fvgs.openGaps.filter(fvg => fvg.context.significance === 'medium').length;
+    const fvgCreation = Math.min(100, significantFVGs * 35 + moderateFVGs * 15);
+    
+    if (fvgs.openGaps.length > 0) {
+      componentsAnalyzed++;
+      if (significantFVGs > 0) {
+        signals.push(`${significantFVGs} significant fair value gaps present`);
+        score += significantFVGs * 15;
+      } else if (moderateFVGs > 0) {
+        signals.push(`${moderateFVGs} moderate fair value gaps detected`);
+        score += moderateFVGs * 8;
+      }
     }
 
     // Analizar manipulación estructural
     const majorBreaks = bos.activeBreaks.filter((b: StructuralBreak) => b.significance === 'major').length;
-    const structuralManipulation = Math.min(100, majorBreaks * 35);
-    if (majorBreaks > 0) {
-      signals.push(`${majorBreaks} major structural breaks identified`);
-      score += 30;
+    const minorBreaks = bos.activeBreaks.filter((b: StructuralBreak) => b.significance === 'minor').length;
+    const structuralManipulation = Math.min(100, majorBreaks * 40 + minorBreaks * 20);
+    
+    if (bos.activeBreaks.length > 0) {
+      componentsAnalyzed++;
+      if (majorBreaks > 0) {
+        signals.push(`${majorBreaks} major structural breaks identified`);
+        score += majorBreaks * 20;
+      } else if (minorBreaks > 0) {
+        signals.push(`${minorBreaks} minor structural breaks detected`);
+        score += minorBreaks * 10;
+      }
     }
 
-    // Analizar confluencias
-    const strongConfluences = confluences.filter(c => c.strength >= 80).length;
-    const confluenceStrength = Math.min(100, strongConfluences * 40);
-    if (strongConfluences > 1) {
-      signals.push(`${strongConfluences} strong SMC confluences detected`);
-      score += 25;
+    // Analizar confluencias (con criterios ajustados)
+    const strongConfluences = confluences.filter(c => c.strength >= 70).length; // Bajado de 80
+    const moderateConfluences = confluences.filter(c => c.strength >= 50 && c.strength < 70).length;
+    const confluenceStrength = Math.min(100, strongConfluences * 35 + moderateConfluences * 15);
+    
+    if (confluences.length > 0) {
+      if (strongConfluences > 0) {
+        signals.push(`${strongConfluences} strong SMC confluences detected`);
+        score += strongConfluences * 15;
+      } else if (moderateConfluences > 0) {
+        signals.push(`${moderateConfluences} moderate SMC confluences present`);
+        score += moderateConfluences * 8;
+      }
+    }
+
+    // Ajustar score si hay pocos componentes analizados
+    if (componentsAnalyzed < 3 && componentsAnalyzed > 0) {
+      // Normalizar score basado en componentes disponibles
+      score = Math.round(score * (3 / componentsAnalyzed) * 0.8); // 0.8 factor de penalización
+    }
+
+    // Si no hay datos suficientes, dar un score base
+    if (signals.length === 0) {
+      signals.push('Limited institutional footprint data available');
+      score = 30; // Score base para datos limitados
     }
 
     const interpretation = score >= this.config.institutionalActivityThreshold ?
       'High institutional activity detected - Smart money is actively positioning' :
-      score >= 50 ?
+      score >= 40 ? // Bajado de 50
       'Moderate institutional activity - Monitor for increased participation' :
-      'Low institutional activity - Retail-driven market conditions';
+      'Low institutional activity - Limited smart money footprint';
 
     return {
       score: Math.min(100, score),
@@ -575,7 +774,7 @@ export class SmartMoneyAnalysisService {
   }
 
   /**
-   * Calcula sesgo de mercado integrado
+   * Calcula sesgo de mercado integrado con manejo mejorado de datos limitados
    */
   private calculateIntegratedMarketBias(
     orderBlocks: OrderBlockAnalysis,
@@ -584,6 +783,14 @@ export class SmartMoneyAnalysisService {
     confluences: SmartMoneyConfluence[]
   ): SMCMarketBias {
     const weights = this.config.weights;
+    
+    // Contar elementos disponibles para ajustar ponderación
+    const hasOrderBlocks = orderBlocks.activeBlocks.length > 0;
+    const hasFVGs = fvgs.openGaps.length > 0;
+    const hasBOS = bos.activeBreaks.length > 0;
+    
+    // Ajustar pesos dinámicamente si faltan elementos
+    const adjustedWeights = this.adjustWeightsForMissingData(weights, hasOrderBlocks, hasFVGs, hasBOS);
     
     // Obtener bias de cada componente
     const obBias = this.normalizeMarketBias(orderBlocks.marketBias);
@@ -595,27 +802,37 @@ export class SmartMoneyAnalysisService {
     let bearishScore = 0;
     let neutralScore = 0;
 
-    // Order Blocks
-    if (obBias.direction === 'bullish') bullishScore += obBias.strength * weights.orderBlock;
-    else if (obBias.direction === 'bearish') bearishScore += obBias.strength * weights.orderBlock;
-    else neutralScore += 50 * weights.orderBlock;
+    // Order Blocks (solo si hay datos)
+    if (hasOrderBlocks) {
+      if (obBias.direction === 'bullish') bullishScore += obBias.strength * adjustedWeights.orderBlock;
+      else if (obBias.direction === 'bearish') bearishScore += obBias.strength * adjustedWeights.orderBlock;
+      else neutralScore += 50 * adjustedWeights.orderBlock;
+    }
 
-    // Fair Value Gaps
-    if (fvgBias.direction === 'bullish') bullishScore += fvgBias.strength * weights.fairValueGap;
-    else if (fvgBias.direction === 'bearish') bearishScore += fvgBias.strength * weights.fairValueGap;
-    else neutralScore += 50 * weights.fairValueGap;
+    // Fair Value Gaps (solo si hay datos)
+    if (hasFVGs) {
+      if (fvgBias.direction === 'bullish') bullishScore += fvgBias.strength * adjustedWeights.fairValueGap;
+      else if (fvgBias.direction === 'bearish') bearishScore += fvgBias.strength * adjustedWeights.fairValueGap;
+      else neutralScore += 50 * adjustedWeights.fairValueGap;
+    }
 
-    // Break of Structure
-    if (bosBias.direction === 'bullish') bullishScore += bosBias.strength * weights.breakOfStructure;
-    else if (bosBias.direction === 'bearish') bearishScore += bosBias.strength * weights.breakOfStructure;
-    else neutralScore += 50 * weights.breakOfStructure;
+    // Break of Structure (solo si hay datos)
+    if (hasBOS) {
+      if (bosBias.direction === 'bullish') bullishScore += bosBias.strength * adjustedWeights.breakOfStructure;
+      else if (bosBias.direction === 'bearish') bearishScore += bosBias.strength * adjustedWeights.breakOfStructure;
+      else neutralScore += 50 * adjustedWeights.breakOfStructure;
+    }
 
     // Determinar dirección final
     let direction: 'bullish' | 'bearish' | 'neutral';
     let strength: number;
     const totalScore = bullishScore + bearishScore + neutralScore;
 
-    if (bullishScore > bearishScore && bullishScore > neutralScore) {
+    // Manejar caso donde no hay datos
+    if (totalScore === 0) {
+      direction = 'neutral';
+      strength = 50;
+    } else if (bullishScore > bearishScore && bullishScore > neutralScore) {
       direction = 'bullish';
       strength = (bullishScore / totalScore) * 100;
     } else if (bearishScore > bullishScore && bearishScore > neutralScore) {
@@ -626,14 +843,18 @@ export class SmartMoneyAnalysisService {
       strength = 50;
     }
 
-    // Ajustar por confluencias
-    const alignedConfluences = confluences.filter(c => c.alignment === direction).length;
-    const conflictingConfluences = confluences.filter(c => 
-      c.alignment !== direction && c.alignment !== 'mixed'
-    ).length;
+    // Ajustar por confluencias (con menor impacto si hay pocas)
+    if (confluences.length > 0) {
+      const alignedConfluences = confluences.filter(c => c.alignment === direction).length;
+      const conflictingConfluences = confluences.filter(c => 
+        c.alignment !== direction && c.alignment !== 'mixed'
+      ).length;
+      
+      const confluenceImpact = Math.min(5, confluences.length); // Limitar impacto
+      strength += alignedConfluences * confluenceImpact;
+      strength -= conflictingConfluences * (confluenceImpact * 0.6);
+    }
     
-    strength += alignedConfluences * 5;
-    strength -= conflictingConfluences * 3;
     strength = Math.max(0, Math.min(100, strength));
 
     // Calcular confianza
@@ -660,6 +881,53 @@ export class SmartMoneyAnalysisService {
         structureBias: bosBias.direction
       }
     };
+  }
+
+  /**
+   * Ajusta pesos cuando faltan elementos del análisis
+   */
+  private adjustWeightsForMissingData(
+    originalWeights: { orderBlock: number; fairValueGap: number; breakOfStructure: number },
+    hasOrderBlocks: boolean,
+    hasFVGs: boolean,
+    hasBOS: boolean
+  ): { orderBlock: number; fairValueGap: number; breakOfStructure: number } {
+    const adjustedWeights = { ...originalWeights };
+    const totalActive = (hasOrderBlocks ? 1 : 0) + (hasFVGs ? 1 : 0) + (hasBOS ? 1 : 0);
+    
+    if (totalActive === 0) {
+      // No hay datos, mantener pesos originales
+      return adjustedWeights;
+    }
+    
+    if (totalActive < 3) {
+      // Faltan elementos, redistribuir pesos
+      const totalOriginalWeight = 
+        (hasOrderBlocks ? originalWeights.orderBlock : 0) +
+        (hasFVGs ? originalWeights.fairValueGap : 0) +
+        (hasBOS ? originalWeights.breakOfStructure : 0);
+      
+      // Normalizar pesos para que sumen 1.0
+      if (hasOrderBlocks) {
+        adjustedWeights.orderBlock = originalWeights.orderBlock / totalOriginalWeight;
+      } else {
+        adjustedWeights.orderBlock = 0;
+      }
+      
+      if (hasFVGs) {
+        adjustedWeights.fairValueGap = originalWeights.fairValueGap / totalOriginalWeight;
+      } else {
+        adjustedWeights.fairValueGap = 0;
+      }
+      
+      if (hasBOS) {
+        adjustedWeights.breakOfStructure = originalWeights.breakOfStructure / totalOriginalWeight;
+      } else {
+        adjustedWeights.breakOfStructure = 0;
+      }
+    }
+    
+    return adjustedWeights;
   }
 
   /**
@@ -840,8 +1108,10 @@ export class SmartMoneyAnalysisService {
     let bullishCount = 0;
     let bearishCount = 0;
 
+    // Order Block type (breaker counts as mixed, neither bullish nor bearish)
     if (obType === 'bullish') bullishCount++;
     else if (obType === 'bearish') bearishCount++;
+    // breaker blocks don't add to either count
     
     if (fvgType === 'bullish') bullishCount++;
     else bearishCount++;
