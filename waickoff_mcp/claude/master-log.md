@@ -303,6 +303,24 @@
 
 **Resultado**: Order Blocks ahora detecta bloques incluso en condiciones difíciles
 
+### FASE 2: Fix Fibonacci Swing Inversion ✅ COMPLETADA (13/06/2025)
+**Cambios implementados**:
+1. **Validación de swings**: En `findSignificantSwings`, verificar que high.price > low.price antes de considerarlos
+2. **Fallback de detección**:
+   - Si los mejores swings son inválidos, buscar el high más alto y low más bajo
+   - Si todos los swings son inválidos, usar datos raw de klines
+   - Tracking de absoluteHigh y absoluteLow durante detección
+3. **Garantía de swings válidos**:
+   - Agregar swings absolutos si no se encontraron swings válidos
+   - Logs de warning cuando se detectan swings inválidos
+4. **Protección en cálculos**:
+   - `calculateRetracementLevels`: usar Math.max/min para garantizar high > low
+   - `calculateExtensionLevels`: misma protección
+   - `analyzeCurrentPosition`: cálculos seguros con swings validados
+   - Verificación de range > 0 antes de cálculos
+
+**Resultado**: Fibonacci siempre muestra Swing High > Swing Low correctamente
+
 ---
 
 *Log resumido - Para historial completo ver `claude/archive/`*

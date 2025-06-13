@@ -215,9 +215,21 @@ export class FibonacciService {
     const swings: SwingPoint[] = [];
     // TASK-024 FIX: More flexible swing detection - reduced from /20 to /30
     const minSwingBars = Math.max(2, Math.floor(config.lookbackPeriods / 30));
+    
+    // FASE 2 ADD: Track absolute high and low as fallback
+    let absoluteHigh = { price: 0, index: 0, kline: klines[0] };
+    let absoluteLow = { price: Infinity, index: 0, kline: klines[0] };
 
     for (let i = minSwingBars; i < klines.length - minSwingBars; i++) {
       const current = klines[i];
+      
+      // FASE 2 ADD: Track absolute extremes
+      if (current.high > absoluteHigh.price) {
+        absoluteHigh = { price: current.high, index: i, kline: current };
+      }
+      if (current.low < absoluteLow.price) {
+        absoluteLow = { price: current.low, index: i, kline: current };
+      }
       
       // Check for swing high
       let isSwingHigh = true;
@@ -278,10 +290,42 @@ export class FibonacciService {
     }
 
     // Sort by strength and return most significant swings
-    return swings
+    const confirmedSwings = swings
       .filter(swing => swing.confirmed)
       .sort((a, b) => b.strength - a.strength)
       .slice(0, 20); // Keep top 20 swings
+    
+    // FASE 2 ADD: Ensure we have at least one valid high and low
+    const hasValidHigh = confirmedSwings.some(s => s.type === 'high');
+    const hasValidLow = confirmedSwings.some(s => s.type === 'low');
+    
+    if (!hasValidHigh && absoluteHigh.price > 0) {
+      console.log(`[Fibonacci] No valid highs found, adding absolute high: ${absoluteHigh.price}`);
+      confirmedSwings.push({
+        index: absoluteHigh.index,
+        timestamp: absoluteHigh.kline.timestamp,
+        price: absoluteHigh.price,
+        type: 'high',
+        strength: 60, // Lower strength for fallback
+        volume: absoluteHigh.kline.volume,
+        confirmed: true
+      });
+    }
+    
+    if (!hasValidLow && absoluteLow.price < Infinity) {
+      console.log(`[Fibonacci] No valid lows found, adding absolute low: ${absoluteLow.price}`);
+      confirmedSwings.push({
+        index: absoluteLow.index,
+        timestamp: absoluteLow.kline.timestamp,
+        price: absoluteLow.price,
+        type: 'low',
+        strength: 60, // Lower strength for fallback
+        volume: absoluteLow.kline.volume,
+        confirmed: true
+      });
+    }
+    
+    return confirmedSwings;
   }
 
   /**
@@ -403,6 +447,12 @@ export class FibonacciService {
 
     for (const high of highs.slice(0, 5)) {
       for (const low of lows.slice(0, 5)) {
+        // FASE 2 FIX: Ensure high is actually higher than low
+        if (high.price <= low.price) {
+          console.warn(`[Fibonacci] Skipping invalid swing pair: High ${high.price} <= Low ${low.price}`);
+          continue;
+        }
+        
         // Calculate move size and time relationship
         const moveSize = Math.abs(high.price - low.price) / Math.min(high.price, low.price) * 100;
         const timeDistance = Math.abs(high.index - low.index);
@@ -420,6 +470,65 @@ export class FibonacciService {
       }
     }
 
+    // FASE 2 FIX: Final validation and fallback
+    if (bestHigh.price <= bestLow.price) {
+      console.warn(`[Fibonacci] Best swings invalid, searching for valid pair...`);
+      
+      // Find the actual highest high and lowest low in the dataset
+      const actualHighest = highs.reduce((prev, current) => 
+        (current.price > prev.price) ? current : prev
+      );
+      const actualLowest = lows.reduce((prev, current) => 
+        (current.price < prev.price) ? current : prev
+      );
+      
+      // If even these are invalid, we need to search the raw data
+      if (actualHighest.price <= actualLowest.price) {
+        console.error(`[Fibonacci] Critical: All swings invalid. Using raw data fallback.`);
+        
+        // Find absolute high and low from raw klines
+        let rawHigh = klines[0];
+        let rawLow = klines[0];
+        let highIndex = 0;
+        let lowIndex = 0;
+        
+        klines.forEach((k, idx) => {
+          if (k.high > rawHigh.high) {
+            rawHigh = k;
+            highIndex = idx;
+          }
+          if (k.low < rawLow.low) {
+            rawLow = k;
+            lowIndex = idx;
+          }
+        });
+        
+        bestHigh = {
+          index: highIndex,
+          timestamp: rawHigh.timestamp,
+          price: rawHigh.high,
+          type: 'high',
+          strength: 75, // Default strength
+          volume: rawHigh.volume,
+          confirmed: true
+        };
+        
+        bestLow = {
+          index: lowIndex,
+          timestamp: rawLow.timestamp,
+          price: rawLow.low,
+          type: 'low',
+          strength: 75, // Default strength
+          volume: rawLow.volume,
+          confirmed: true
+        };
+      } else {
+        bestHigh = actualHighest;
+        bestLow = actualLowest;
+      }
+    }
+
+    console.log(`[Fibonacci] Selected swings - High: ${bestHigh.price}, Low: ${bestLow.price}, Distance: ${bestHigh.price - bestLow.price}`);
     return { swingHigh: bestHigh, swingLow: bestLow };
   }
 
@@ -459,9 +568,15 @@ export class FibonacciService {
     swingLow: SwingPoint,
     levels: number[]
   ): FibonacciLevel[] {
-    const highPrice = swingHigh.price;
-    const lowPrice = swingLow.price;
+    // FASE 2 FIX: Always ensure high > low for calculations
+    const highPrice = Math.max(swingHigh.price, swingLow.price);
+    const lowPrice = Math.min(swingHigh.price, swingLow.price);
     const range = highPrice - lowPrice;
+    
+    if (range <= 0) {
+      console.error(`[Fibonacci] Invalid range for retracement: ${range}`);
+      throw new Error('Invalid price range for Fibonacci calculation');
+    }
 
     return levels.map(level => ({
       level,
@@ -482,9 +597,15 @@ export class FibonacciService {
     levels: number[],
     trend: 'uptrend' | 'downtrend' | 'sideways'
   ): FibonacciLevel[] {
-    const highPrice = swingHigh.price;
-    const lowPrice = swingLow.price;
+    // FASE 2 FIX: Always ensure high > low for calculations
+    const highPrice = Math.max(swingHigh.price, swingLow.price);
+    const lowPrice = Math.min(swingHigh.price, swingLow.price);
     const range = highPrice - lowPrice;
+    
+    if (range <= 0) {
+      console.error(`[Fibonacci] Invalid range for extension: ${range}`);
+      throw new Error('Invalid price range for Fibonacci calculation');
+    }
 
     return levels.map(level => {
       let price: number;
@@ -556,9 +677,11 @@ export class FibonacciService {
     swingHigh: SwingPoint,
     swingLow: SwingPoint
   ): FibonacciAnalysis['currentPosition'] {
-    // Calculate current retracement percentage
-    const range = swingHigh.price - swingLow.price;
-    const retracement = (swingHigh.price - currentPrice) / range;
+    // FASE 2 FIX: Ensure proper calculation with validated swings
+    const highPrice = Math.max(swingHigh.price, swingLow.price);
+    const lowPrice = Math.min(swingHigh.price, swingLow.price);
+    const range = highPrice - lowPrice;
+    const retracement = range > 0 ? (highPrice - currentPrice) / range : 0;
     
     // Find nearest level
     let nearestLevel = allLevels[0];
