@@ -371,6 +371,11 @@ export class ComprehensiveTechnicalAnalysisService {
       if (fibonacci && config.fibonacci.enabled) {
         this.logger.debug(`📈 Collecting Fibonacci levels...`);
         
+        // TASK-024 FIX: Verificar que tenemos niveles Fibonacci
+        if (!fibonacci.retracementLevels || fibonacci.retracementLevels.length === 0) {
+          this.logger.warn(`⚠️ No Fibonacci retracement levels found for ${symbol}`);
+        }
+        
         // Retracement levels
         fibonacci.retracementLevels.forEach(level => {
           allLevels.push({

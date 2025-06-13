@@ -50,8 +50,13 @@ export class SmartMoneyConceptsHandlers {
       const validation = this.validateDetectOrderBlocksArgs(args);
       if (!validation.isValid) {
         return {
-          error: `Validation failed: ${validation.errors.join(', ')}`,
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: `Validation failed: ${validation.errors.join(', ')}`,
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -73,7 +78,7 @@ export class SmartMoneyConceptsHandlers {
 
       const response = this.formatOrderBlockAnalysis(analysis);
 
-      return {
+      const result = {
         analysis: response,
         summary: this.generateOrderBlockSummary(analysis),
         metadata: {
@@ -87,10 +92,22 @@ export class SmartMoneyConceptsHandlers {
         }
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `Order Blocks detection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `Order Blocks detection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }
@@ -103,8 +120,13 @@ export class SmartMoneyConceptsHandlers {
     try {
       if (!args.symbol || !args.orderBlockId || !args.storedBlocks) {
         return {
-          error: 'Missing required parameters: symbol, orderBlockId, storedBlocks',
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: 'Missing required parameters: symbol, orderBlockId, storedBlocks',
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -116,7 +138,7 @@ export class SmartMoneyConceptsHandlers {
         storedBlocks
       );
 
-      return {
+      const result = {
         validation: {
           valid: validationResult.valid,
           orderBlockId,
@@ -127,10 +149,22 @@ export class SmartMoneyConceptsHandlers {
         timestamp: new Date().toISOString()
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `Order Block validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `Order Block validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }
@@ -142,8 +176,13 @@ export class SmartMoneyConceptsHandlers {
     try {
       if (!args.symbol || !args.activeBlocks) {
         return {
-          error: 'Missing required parameters: symbol, activeBlocks',
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: 'Missing required parameters: symbol, activeBlocks',
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -154,7 +193,7 @@ export class SmartMoneyConceptsHandlers {
 
       const zones = this.orderBlocksService.getOrderBlockZones(activeBlocks, currentPrice);
 
-      return {
+      const result = {
         zones: {
           strong: zones.strong.map((block: OrderBlock) => this.formatOrderBlockForZone(block, currentPrice)),
           medium: zones.medium.map((block: OrderBlock) => this.formatOrderBlockForZone(block, currentPrice)),
@@ -174,10 +213,22 @@ export class SmartMoneyConceptsHandlers {
         timestamp: new Date().toISOString()
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `Order Block zones analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `Order Block zones analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }
@@ -195,8 +246,13 @@ export class SmartMoneyConceptsHandlers {
       const validation = this.validateFVGArgs(args);
       if (!validation.isValid) {
         return {
-          error: `Validation failed: ${validation.errors.join(', ')}`,
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: `Validation failed: ${validation.errors.join(', ')}`,
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -214,7 +270,7 @@ export class SmartMoneyConceptsHandlers {
 
       const response = this.formatFVGAnalysis(analysis);
 
-      return {
+      const result = {
         analysis: response,
         summary: this.generateFVGSummary(analysis),
         metadata: {
@@ -228,10 +284,22 @@ export class SmartMoneyConceptsHandlers {
         }
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `Fair Value Gaps detection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `Fair Value Gaps detection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }
@@ -244,8 +312,13 @@ export class SmartMoneyConceptsHandlers {
     try {
       if (!args.symbol || typeof args.symbol !== 'string') {
         return {
-          error: 'symbol is required and must be a string',
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: 'symbol is required and must be a string',
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -263,17 +336,29 @@ export class SmartMoneyConceptsHandlers {
 
       const response = this.formatFVGStatistics(statistics);
 
-      return {
+      const result = {
         statistics: response,
         summary: this.generateFVGStatisticsSummary(statistics),
         insights: this.generateFVGInsights(statistics),
         timestamp: new Date().toISOString()
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `FVG filling analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `FVG filling analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }
@@ -291,8 +376,13 @@ export class SmartMoneyConceptsHandlers {
       const validation = this.validateBOSArgs(args);
       if (!validation.isValid) {
         return {
-          error: `Validation failed: ${validation.errors.join(', ')}`,
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: `Validation failed: ${validation.errors.join(', ')}`,
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -310,7 +400,7 @@ export class SmartMoneyConceptsHandlers {
 
       const response = this.formatMarketStructureAnalysis(analysis);
 
-      return {
+      const result = {
         analysis: response,
         summary: this.generateBOSSummary(analysis),
         metadata: {
@@ -326,10 +416,22 @@ export class SmartMoneyConceptsHandlers {
         }
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `Break of Structure detection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `Break of Structure detection failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }
@@ -341,8 +443,13 @@ export class SmartMoneyConceptsHandlers {
     try {
       if (!args.symbol || typeof args.symbol !== 'string') {
         return {
-          error: 'symbol is required and must be a string',
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: 'symbol is required and must be a string',
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -358,17 +465,29 @@ export class SmartMoneyConceptsHandlers {
 
       const response = this.formatMarketStructureAnalysis(analysis);
 
-      return {
+      const result = {
         marketStructure: response,
         summary: this.generateMarketStructureSummary(analysis),
         keyInsights: this.generateMarketStructureInsights(analysis),
         timestamp: new Date().toISOString()
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `Market structure analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `Market structure analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }
@@ -380,8 +499,13 @@ export class SmartMoneyConceptsHandlers {
     try {
       if (!args.symbol || !args.breakId) {
         return {
-          error: 'Missing required parameters: symbol, breakId',
-          timestamp: new Date().toISOString()
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              error: 'Missing required parameters: symbol, breakId',
+              timestamp: new Date().toISOString()
+            }, null, 2)
+          }]
         };
       }
 
@@ -394,17 +518,29 @@ export class SmartMoneyConceptsHandlers {
 
       const response = this.formatStructureShiftValidation(validation);
 
-      return {
+      const result = {
         validation: response,
         summary: this.generateValidationSummary(validation),
         recommendations: this.generateStructureValidationRecommendations(validation),
         timestamp: new Date().toISOString()
       };
 
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(result, null, 2)
+        }]
+      };
+
     } catch (error) {
       return {
-        error: `Structure shift validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        timestamp: new Date().toISOString()
+        content: [{
+          type: 'text',
+          text: JSON.stringify({
+            error: `Structure shift validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            timestamp: new Date().toISOString()
+          }, null, 2)
+        }]
       };
     }
   }

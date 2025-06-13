@@ -73,7 +73,7 @@ export class FibonacciService {
   private readonly defaultConfig: FibonacciConfig = {
     retracementLevels: [0.236, 0.382, 0.500, 0.618, 0.786],
     extensionLevels: [1.000, 1.272, 1.414, 1.618, 2.000, 2.618],
-    minSwingSize: 2.0,              // 2% minimum swing
+    minSwingSize: 0.5,              // TASK-024 FIX: Reduced from 2.0% to 0.5% minimum swing
     lookbackPeriods: 100,
     confluenceDistance: 0.5,        // 0.5% for confluence
     minSwingConfirmation: 3
@@ -213,7 +213,8 @@ export class FibonacciService {
    */
   private detectSwingPoints(klines: OHLCV[], config: FibonacciConfig): SwingPoint[] {
     const swings: SwingPoint[] = [];
-    const minSwingBars = Math.max(3, Math.floor(config.lookbackPeriods / 20));
+    // TASK-024 FIX: More flexible swing detection - reduced from /20 to /30
+    const minSwingBars = Math.max(2, Math.floor(config.lookbackPeriods / 30));
 
     for (let i = minSwingBars; i < klines.length - minSwingBars; i++) {
       const current = klines[i];
@@ -243,7 +244,8 @@ export class FibonacciService {
         const strength = this.calculateSwingStrength(i, 'high', klines, minSwingBars);
         const swingSize = this.calculateSwingSize(i, 'high', klines, minSwingBars);
         
-        if (swingSize >= config.minSwingSize) {
+        // TASK-024 FIX: Also consider strength for smaller swings
+        if (swingSize >= config.minSwingSize || (swingSize >= config.minSwingSize * 0.5 && strength >= 70)) {
           swings.push({
             index: i,
             timestamp: current.timestamp,
@@ -260,7 +262,8 @@ export class FibonacciService {
         const strength = this.calculateSwingStrength(i, 'low', klines, minSwingBars);
         const swingSize = this.calculateSwingSize(i, 'low', klines, minSwingBars);
         
-        if (swingSize >= config.minSwingSize) {
+        // TASK-024 FIX: Also consider strength for smaller swings
+        if (swingSize >= config.minSwingSize || (swingSize >= config.minSwingSize * 0.5 && strength >= 70)) {
           swings.push({
             index: i,
             timestamp: current.timestamp,
@@ -408,7 +411,8 @@ export class FibonacciService {
         // Score based on move size, time relationship, and recency
         const score = moveSize * 0.4 + (high.strength + low.strength) * 0.3 + recentScore * 0.3;
         
-        if (score > bestScore && moveSize >= 3.0 && timeDistance >= 5) {
+        // TASK-024 FIX: Reduced move size requirement from 3.0% to 1.0%, time distance from 5 to 3
+        if (score > bestScore && moveSize >= 1.0 && timeDistance >= 3) {
           bestScore = score;
           bestHigh = high;
           bestLow = low;

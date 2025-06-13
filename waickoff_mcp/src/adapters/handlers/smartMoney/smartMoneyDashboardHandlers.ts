@@ -44,7 +44,7 @@ export class SmartMoneyDashboardHandlers {
 
       const dashboard = await this.dashboardService.getSMCDashboard(symbol, timeframe);
 
-      return {
+      const response = {
         dashboard: this.formatDashboard(dashboard),
         summary: this.generateDashboardSummary(dashboard),
         alerts: dashboard.alerts,
@@ -55,6 +55,13 @@ export class SmartMoneyDashboardHandlers {
           timestamp: dashboard.timestamp,
           version: '1.0.0'
         }
+      };
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(response, null, 2)
+        }]
       };
 
     } catch (error) {
@@ -83,7 +90,7 @@ export class SmartMoneyDashboardHandlers {
         preferredDirection
       );
 
-      return {
+      const response = {
         setup: this.formatTradingSetup(setup),
         summary: this.generateSetupSummary(setup),
         riskProfile: this.generateRiskProfile(setup),
@@ -93,6 +100,13 @@ export class SmartMoneyDashboardHandlers {
           setupId: setup.id,
           timestamp: setup.timestamp
         }
+      };
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(response, null, 2)
+        }]
       };
 
     } catch (error) {
@@ -119,7 +133,7 @@ export class SmartMoneyDashboardHandlers {
         timeframe
       );
 
-      return {
+      const response = {
         confluenceAnalysis: this.formatConfluenceStrength(confluenceStrength),
         summary: this.generateConfluenceSummary(confluenceStrength),
         keyZones: confluenceStrength.keyZones,
@@ -130,6 +144,13 @@ export class SmartMoneyDashboardHandlers {
           timestamp: confluenceStrength.timestamp,
           overallStrength: confluenceStrength.overallStrength
         }
+      };
+
+      return {
+        content: [{
+          type: 'text',
+          text: JSON.stringify(response, null, 2)
+        }]
       };
 
     } catch (error) {

@@ -80,6 +80,7 @@ import { ComprehensiveTechnicalAnalysisService, type ComprehensiveTechnicalAnaly
 
 // TASK-020: Import Smart Money Concepts services
 import { OrderBlocksService } from '../services/smartMoney/orderBlocks.js';
+  import { SmartMoneyAnalysisService } from '../services/smartMoney/smartMoneyAnalysis.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -138,6 +139,7 @@ export class MarketAnalysisEngine {
   
   // TASK-020: Smart Money Concepts Services
   public readonly orderBlocksService: OrderBlocksService;
+  public readonly smartMoneyAnalysisService: SmartMoneyAnalysisService;
   
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
@@ -274,6 +276,11 @@ export class MarketAnalysisEngine {
     
     // TASK-020: Initialize Smart Money Concepts Services
     this.orderBlocksService = new OrderBlocksService(
+      this.marketDataService as any,  // Cast interface to concrete for now
+      this.analysisService as any     // Cast interface to concrete for now
+    );
+    
+    this.smartMoneyAnalysisService = new SmartMoneyAnalysisService(
       this.marketDataService as any,  // Cast interface to concrete for now
       this.analysisService as any     // Cast interface to concrete for now
     );
@@ -1078,8 +1085,21 @@ export class MarketAnalysisEngine {
   ): Promise<any> {
     return this.performanceMonitor.measure('analyzeSmartMoneyConfluence', async () => {
       try {
-        // TODO: Implement Smart Money Analysis Service integration
-        throw new Error('Smart Money confluence analysis not yet implemented');
+        const result = await this.smartMoneyAnalysisService.analyzeSmartMoneyConfluence(
+          symbol,
+          timeframe,
+          lookback
+        );
+        
+        // Save to Analysis Repository
+        await this.analysisRepository.saveAnalysis(
+          symbol,
+          'smart_money_analysis' as any,
+          result,
+          [`timeframe:${timeframe}`, `confluences:${result.confluences.length}`]
+        );
+        
+        return result;
       } catch (error) {
         this.logger.error(`Failed to analyze Smart Money confluence for ${symbol}:`, error);
         throw error;
@@ -1096,8 +1116,12 @@ export class MarketAnalysisEngine {
   ): Promise<any> {
     return this.performanceMonitor.measure('getSMCMarketBias', async () => {
       try {
-        // TODO: Implement Smart Money Analysis Service integration
-        throw new Error('SMC market bias analysis not yet implemented');
+        const result = await this.smartMoneyAnalysisService.getSMCMarketBias(
+          symbol,
+          timeframe
+        );
+        
+        return result;
       } catch (error) {
         this.logger.error(`Failed to get SMC market bias for ${symbol}:`, error);
         throw error;
@@ -1115,8 +1139,13 @@ export class MarketAnalysisEngine {
   ): Promise<any> {
     return this.performanceMonitor.measure('validateSMCSetup', async () => {
       try {
-        // TODO: Implement Smart Money Analysis Service integration
-        throw new Error('SMC setup validation not yet implemented');
+        const result = await this.smartMoneyAnalysisService.validateSMCSetup(
+          symbol,
+          setupType,
+          entryPrice
+        );
+        
+        return result;
       } catch (error) {
         this.logger.error(`Failed to validate SMC setup for ${symbol}:`, error);
         throw error;
