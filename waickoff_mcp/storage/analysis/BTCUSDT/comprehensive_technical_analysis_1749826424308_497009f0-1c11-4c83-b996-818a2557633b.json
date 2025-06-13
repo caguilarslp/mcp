@@ -1,0 +1,931 @@
+{
+  "id": "497009f0-1c11-4c83-b996-818a2557633b",
+  "timestamp": 1749826424308,
+  "symbol": "BTCUSDT",
+  "analysisType": "comprehensive_technical_analysis",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "60",
+    "currentPrice": 104674.9,
+    "fibonacci": {
+      "symbol": "BTCUSDT",
+      "timeframe": "60",
+      "currentPrice": 104674.9,
+      "trend": "downtrend",
+      "swingHigh": {
+        "index": 10,
+        "timestamp": "2025-06-09T21:00:00.000Z",
+        "price": 110665.8,
+        "type": "high",
+        "strength": 12.51670000794762,
+        "volume": 910.322653,
+        "confirmed": true
+      },
+      "swingLow": {
+        "index": 86,
+        "timestamp": "2025-06-13T01:00:00.000Z",
+        "price": 102684.7,
+        "type": "low",
+        "strength": 10.03252406145738,
+        "volume": 2035.852166,
+        "confirmed": true
+      },
+      "retracementLevels": [
+        {
+          "level": 0.236,
+          "price": 108782.2604,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 36.83305322777298,
+          "distance": 3.9239210164041283
+        },
+        {
+          "level": 0.382,
+          "price": 107617.0198,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 2.8107213859291966
+        },
+        {
+          "level": 0.5,
+          "price": 106675.25,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 1.9110120955453562
+        },
+        {
+          "level": 0.618,
+          "price": 105733.4802,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 1.0113028051615156
+        },
+        {
+          "level": 0.786,
+          "price": 104392.6554,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -0.2696392353849786
+        }
+      ],
+      "extensionLevels": [
+        {
+          "level": 1,
+          "price": 102684.7,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 77.53489101694441,
+          "distance": -1.9013154060811115
+        },
+        {
+          "level": 1.272,
+          "price": 100513.84079999999,
+          "label": "127.2%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -3.975221566965914
+        },
+        {
+          "level": 1.414,
+          "price": 99380.52459999999,
+          "label": "141.4%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -5.057922577427831
+        },
+        {
+          "level": 1.618,
+          "price": 97752.38019999999,
+          "label": "161.8%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -6.613352198091434
+        },
+        {
+          "level": 2,
+          "price": 94703.59999999999,
+          "label": "200.0%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -9.525970409334047
+        },
+        {
+          "level": 2.618,
+          "price": 89771.2802,
+          "label": "261.8%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -14.238007201344354
+        }
+      ],
+      "keyLevels": [
+        {
+          "level": 1,
+          "price": 102684.7,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 77.53489101694441,
+          "distance": -1.9013154060811115
+        },
+        {
+          "level": 0.236,
+          "price": 108782.2604,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 36.83305322777298,
+          "distance": 3.9239210164041283
+        },
+        {
+          "level": 0.382,
+          "price": 107617.0198,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 2.8107213859291966
+        },
+        {
+          "level": 0.5,
+          "price": 106675.25,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 1.9110120955453562
+        },
+        {
+          "level": 0.618,
+          "price": 105733.4802,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 1.0113028051615156
+        },
+        {
+          "level": 0.786,
+          "price": 104392.6554,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -0.2696392353849786
+        },
+        {
+          "level": 1.272,
+          "price": 100513.84079999999,
+          "label": "127.2%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -3.975221566965914
+        },
+        {
+          "level": 1.414,
+          "price": 99380.52459999999,
+          "label": "141.4%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -5.057922577427831
+        }
+      ],
+      "currentPosition": {
+        "nearestLevel": {
+          "level": 0.786,
+          "price": 104392.6554,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -0.2696392353849786
+        },
+        "retracement": 75.06358772600274,
+        "nextTargets": [
+          {
+            "level": 0.786,
+            "price": 104392.6554,
+            "label": "78.6%",
+            "type": "retracement",
+            "strength": 0,
+            "distance": -0.2696392353849786
+          },
+          {
+            "level": 0.618,
+            "price": 105733.4802,
+            "label": "61.8%",
+            "type": "retracement",
+            "strength": 0,
+            "distance": 1.0113028051615156
+          },
+          {
+            "level": 1,
+            "price": 102684.7,
+            "label": "100.0%",
+            "type": "extension",
+            "strength": 77.53489101694441,
+            "distance": -1.9013154060811115
+          },
+          {
+            "level": 0.5,
+            "price": 106675.25,
+            "label": "50.0%",
+            "type": "retracement",
+            "strength": 0,
+            "distance": 1.9110120955453562
+          }
+        ]
+      },
+      "analysisTime": "2025-06-13T14:53:43.714Z",
+      "confidence": 30.22824202611687,
+      "validity": 87
+    },
+    "bollingerBands": {
+      "symbol": "BTCUSDT",
+      "timeframe": "60",
+      "currentPrice": 104674.9,
+      "currentBands": {
+        "upper": 106474.21565194972,
+        "middle": 104873.325,
+        "lower": 103272.43434805027,
+        "bandwidth": 3.0529987524467734,
+        "position": 43.808915063668685
+      },
+      "bandHistory": [
+        {
+          "upper": 110106.97898180525,
+          "middle": 109616.7,
+          "lower": 109126.42101819474,
+          "bandwidth": 0.894533372752975,
+          "position": 56.67987028108187
+        },
+        {
+          "upper": 110124.76267112223,
+          "middle": 109646.75999999998,
+          "lower": 109168.75732887773,
+          "bandwidth": 0.8718956604321833,
+          "position": 74.70069878957048
+        },
+        {
+          "upper": 110133.99690755298,
+          "middle": 109658,
+          "lower": 109182.00309244702,
+          "bandwidth": 0.868148074108557,
+          "position": 58.98115078515331
+        },
+        {
+          "upper": 110096.50285832353,
+          "middle": 109632.61499999999,
+          "lower": 109168.72714167646,
+          "bandwidth": 0.8462588588688406,
+          "position": 30.047440703774164
+        },
+        {
+          "upper": 110118.90402977768,
+          "middle": 109588.90999999999,
+          "lower": 109058.9159702223,
+          "bandwidth": 0.9672402614054508,
+          "position": 0
+        },
+        {
+          "upper": 110170.56083635881,
+          "middle": 109542.675,
+          "lower": 108914.7891636412,
+          "bandwidth": 1.1463766725777107,
+          "position": 0
+        },
+        {
+          "upper": 110092.11695676403,
+          "middle": 109465.22,
+          "lower": 108838.32304323597,
+          "bandwidth": 1.1453810749460525,
+          "position": 0
+        },
+        {
+          "upper": 110068.50211519467,
+          "middle": 109418.94500000002,
+          "lower": 108769.38788480537,
+          "bandwidth": 1.1872845514908767,
+          "position": 10.146306776666261
+        },
+        {
+          "upper": 110121.73440680961,
+          "middle": 109363.715,
+          "lower": 108605.69559319038,
+          "bandwidth": 1.3862356574291885,
+          "position": 0
+        },
+        {
+          "upper": 110143.245474919,
+          "middle": 109302.36499999999,
+          "lower": 108461.48452508099,
+          "bandwidth": 1.538631803472875,
+          "position": 0
+        },
+        {
+          "upper": 110113.93685234847,
+          "middle": 109248.575,
+          "lower": 108383.21314765152,
+          "bandwidth": 1.5842071209596582,
+          "position": 14.865853610847143
+        },
+        {
+          "upper": 110088.68262434339,
+          "middle": 109204.86499999999,
+          "lower": 108321.04737565659,
+          "bandwidth": 1.6186414851451887,
+          "position": 21.28564841773408
+        },
+        {
+          "upper": 110079.37630553823,
+          "middle": 109157.39000000001,
+          "lower": 108235.4036944618,
+          "bandwidth": 1.6892787662625783,
+          "position": 15.699598996169497
+        },
+        {
+          "upper": 110056.63041717456,
+          "middle": 109096.95999999999,
+          "lower": 108137.28958282543,
+          "bandwidth": 1.7592981824141867,
+          "position": 12.447524321837719
+        },
+        {
+          "upper": 110103.156994023,
+          "middle": 109018.665,
+          "lower": 107934.17300597699,
+          "bandwidth": 1.989552878900146,
+          "position": 0
+        },
+        {
+          "upper": 110111.21212947811,
+          "middle": 108928.88499999998,
+          "lower": 107746.55787052185,
+          "bandwidth": 2.17082389024386,
+          "position": 0.8729449305311107
+        },
+        {
+          "upper": 110131.93024061635,
+          "middle": 108852.975,
+          "lower": 107574.01975938366,
+          "bandwidth": 2.3498765019813965,
+          "position": 6.496718389310063
+        },
+        {
+          "upper": 110098.51359572005,
+          "middle": 108780.045,
+          "lower": 107461.57640427994,
+          "bandwidth": 2.424100110861429,
+          "position": 17.054770859917717
+        },
+        {
+          "upper": 110089.44392642385,
+          "middle": 108698.905,
+          "lower": 107308.36607357615,
+          "bandwidth": 2.5585150584982386,
+          "position": 11.467997060825821
+        },
+        {
+          "upper": 109969.86668384077,
+          "middle": 108599.91,
+          "lower": 107229.95331615924,
+          "bandwidth": 2.5229425767309803,
+          "position": 18.2942530137332
+        },
+        {
+          "upper": 109845.44402824302,
+          "middle": 108491.14499999999,
+          "lower": 107136.84597175696,
+          "bandwidth": 2.496607494082629,
+          "position": 13.66219795354623
+        },
+        {
+          "upper": 109649.6419850197,
+          "middle": 108362.98499999999,
+          "lower": 107076.32801498027,
+          "bandwidth": 2.374716763329678,
+          "position": 9.457531721867369
+        },
+        {
+          "upper": 109493.07325119484,
+          "middle": 108221.17,
+          "lower": 106949.26674880515,
+          "bandwidth": 2.3505627433058547,
+          "position": 0
+        },
+        {
+          "upper": 109346.64966064633,
+          "middle": 108098.50499999998,
+          "lower": 106850.36033935362,
+          "bandwidth": 2.3092727520077325,
+          "position": 5.762139004460079
+        },
+        {
+          "upper": 109257.37922797506,
+          "middle": 108002.93499999998,
+          "lower": 106748.4907720249,
+          "bandwidth": 2.322981737440895,
+          "position": 12.99018404752728
+        },
+        {
+          "upper": 109153.63169050294,
+          "middle": 107944.04999999997,
+          "lower": 106734.46830949701,
+          "bandwidth": 2.2411271218802047,
+          "position": 36.57593767540684
+        },
+        {
+          "upper": 109075.37109720398,
+          "middle": 107858.425,
+          "lower": 106641.47890279602,
+          "bandwidth": 2.256561964823761,
+          "position": 15.506894597514387
+        },
+        {
+          "upper": 108919.77416166301,
+          "middle": 107800.51999999997,
+          "lower": 106681.26583833694,
+          "bandwidth": 2.076528316677941,
+          "position": 47.43489897260457
+        },
+        {
+          "upper": 108887.13781032282,
+          "middle": 107790.14499999997,
+          "lower": 106693.15218967713,
+          "bandwidth": 2.0354232018573595,
+          "position": 72.60064949076991
+        },
+        {
+          "upper": 108803.66511175116,
+          "middle": 107746.06999999998,
+          "lower": 106688.47488824879,
+          "bandwidth": 1.963125173384397,
+          "position": 41.58609953740776
+        },
+        {
+          "upper": 108705.35774206842,
+          "middle": 107653.705,
+          "lower": 106602.05225793159,
+          "bandwidth": 1.9537697138587367,
+          "position": 9.087968605133662
+        },
+        {
+          "upper": 108695.81853096712,
+          "middle": 107516.54,
+          "lower": 106337.26146903286,
+          "bandwidth": 2.193669050300783,
+          "position": 0
+        },
+        {
+          "upper": 108670.18413460163,
+          "middle": 107384.245,
+          "lower": 106098.30586539836,
+          "bandwidth": 2.395023840977109,
+          "position": 0
+        },
+        {
+          "upper": 108618.20426994763,
+          "middle": 107259.535,
+          "lower": 105900.86573005238,
+          "bandwidth": 2.5334237556551518,
+          "position": 0
+        },
+        {
+          "upper": 108644.13175616636,
+          "middle": 107149.17,
+          "lower": 105654.20824383364,
+          "bandwidth": 2.7904308659905843,
+          "position": 0.20039830924256105
+        },
+        {
+          "upper": 109014.08136609543,
+          "middle": 106950.215,
+          "lower": 104886.34863390456,
+          "bandwidth": 3.8594898871319403,
+          "position": 0
+        },
+        {
+          "upper": 109201.86249583603,
+          "middle": 106751.525,
+          "lower": 104301.18750416396,
+          "bandwidth": 4.590730663259446,
+          "position": 0
+        },
+        {
+          "upper": 109273.20943204874,
+          "middle": 106538.38,
+          "lower": 103803.55056795127,
+          "bandwidth": 5.133979758372021,
+          "position": 0
+        },
+        {
+          "upper": 109224.3454042537,
+          "middle": 106371.80499999998,
+          "lower": 103519.26459574625,
+          "bandwidth": 5.363339287612403,
+          "position": 13.61129544555752
+        },
+        {
+          "upper": 109108.44608234851,
+          "middle": 106205.88,
+          "lower": 103303.3139176515,
+          "bandwidth": 5.4659235107293656,
+          "position": 19.110436263536858
+        },
+        {
+          "upper": 109018.33020019419,
+          "middle": 106031.48000000001,
+          "lower": 103044.62979980583,
+          "bandwidth": 5.633893255463719,
+          "position": 16.309324788548583
+        },
+        {
+          "upper": 108878.82887481208,
+          "middle": 105901.85999999999,
+          "lower": 102924.89112518789,
+          "bandwidth": 5.6221276468838175,
+          "position": 30.272551555075967
+        },
+        {
+          "upper": 108771.42429009403,
+          "middle": 105801.66499999996,
+          "lower": 102831.9057099059,
+          "bandwidth": 5.613823355415184,
+          "position": 34.87478424604058
+        },
+        {
+          "upper": 108640.20047910111,
+          "middle": 105688.84,
+          "lower": 102737.47952089888,
+          "bandwidth": 5.584999284884037,
+          "position": 33.88641430392664
+        },
+        {
+          "upper": 108478.98656093137,
+          "middle": 105576.55999999998,
+          "lower": 102674.1334390686,
+          "bandwidth": 5.4982404445293325,
+          "position": 37.11836485261449
+        },
+        {
+          "upper": 108198.36109619075,
+          "middle": 105438.84999999998,
+          "lower": 102679.3389038092,
+          "bandwidth": 5.234334585763745,
+          "position": 39.60413674741199
+        },
+        {
+          "upper": 108006.18111032943,
+          "middle": 105340.17,
+          "lower": 102674.15888967057,
+          "bandwidth": 5.061717880898489,
+          "position": 44.46982799776181
+        },
+        {
+          "upper": 107628.2258400313,
+          "middle": 105195.95,
+          "lower": 102763.6741599687,
+          "bandwidth": 4.624276581049562,
+          "position": 43.06719257640491
+        },
+        {
+          "upper": 106998.79811666136,
+          "middle": 105017.975,
+          "lower": 103037.15188333865,
+          "bandwidth": 3.7723506221889256,
+          "position": 42.64257879594817
+        },
+        {
+          "upper": 106474.21565194972,
+          "middle": 104873.325,
+          "lower": 103272.43434805027,
+          "bandwidth": 3.0529987524467734,
+          "position": 43.808915063668685
+        }
+      ],
+      "squeeze": {
+        "isActive": false,
+        "duration": 0,
+        "intensity": 0,
+        "breakoutProbability": 0,
+        "expectedDirection": "unknown"
+      },
+      "walk": {
+        "isWalking": false,
+        "direction": "none",
+        "duration": 0,
+        "strength": "weak",
+        "integrityBreaches": 0
+      },
+      "divergence": {
+        "type": "none",
+        "strength": 0,
+        "periods": 0,
+        "confirmation": false
+      },
+      "pattern": {
+        "type": "consolidation",
+        "confidence": 40,
+        "description": "No clear Bollinger pattern detected. Market in consolidation.",
+        "actionable": false
+      },
+      "volatility": {
+        "current": 67,
+        "trend": "contracting",
+        "extremes": {
+          "isAtLow": false,
+          "isAtHigh": false
+        }
+      },
+      "signals": {
+        "signal": "hold",
+        "strength": 20,
+        "reasoning": "No clear Bollinger signals. Maintain current position.",
+        "confluence": []
+      },
+      "analysisTime": "2025-06-13T14:53:44.022Z",
+      "period": 20,
+      "standardDeviation": 2,
+      "confidence": 90.5
+    },
+    "elliottWave": {
+      "symbol": "BTCUSDT",
+      "timeframe": "60",
+      "currentPrice": 104674.9,
+      "currentSequence": {
+        "type": "impulsive",
+        "waves": [
+          {
+            "number": 1,
+            "type": "impulsive",
+            "subType": "motive",
+            "startIndex": 41,
+            "endIndex": 86,
+            "startPrice": 103874.6,
+            "endPrice": 106493.5,
+            "startTime": "2025-06-07T00:00:00.000Z",
+            "endTime": "2025-06-08T21:00:00.000Z",
+            "length": 2.5212130780768294,
+            "duration": 45,
+            "confidence": 35.34682507646353
+          },
+          {
+            "number": 2,
+            "type": "impulsive",
+            "subType": "motive",
+            "startIndex": 86,
+            "endIndex": 92,
+            "startPrice": 106493.5,
+            "endPrice": 105316.2,
+            "startTime": "2025-06-08T21:00:00.000Z",
+            "endTime": "2025-06-09T03:00:00.000Z",
+            "length": -1.1055134820435077,
+            "duration": 6,
+            "confidence": 19.824161677475445
+          },
+          {
+            "number": 3,
+            "type": "impulsive",
+            "subType": "motive",
+            "startIndex": 92,
+            "endIndex": 110,
+            "startPrice": 105316.2,
+            "endPrice": 110665.8,
+            "startTime": "2025-06-09T03:00:00.000Z",
+            "endTime": "2025-06-09T21:00:00.000Z",
+            "length": 5.079560409509654,
+            "duration": 18,
+            "confidence": 54.32194750171552
+          }
+        ],
+        "isComplete": false,
+        "degree": "minuette",
+        "startTime": "2025-06-07T00:00:00.000Z",
+        "endTime": "2025-06-09T21:00:00.000Z",
+        "validity": 100
+      },
+      "historicalSequences": [
+        {
+          "type": "impulsive",
+          "waves": [
+            {
+              "number": 1,
+              "type": "impulsive",
+              "subType": "motive",
+              "startIndex": 41,
+              "endIndex": 86,
+              "startPrice": 103874.6,
+              "endPrice": 106493.5,
+              "startTime": "2025-06-07T00:00:00.000Z",
+              "endTime": "2025-06-08T21:00:00.000Z",
+              "length": 2.5212130780768294,
+              "duration": 45,
+              "confidence": 35.34682507646353
+            },
+            {
+              "number": 2,
+              "type": "impulsive",
+              "subType": "motive",
+              "startIndex": 86,
+              "endIndex": 92,
+              "startPrice": 106493.5,
+              "endPrice": 105316.2,
+              "startTime": "2025-06-08T21:00:00.000Z",
+              "endTime": "2025-06-09T03:00:00.000Z",
+              "length": -1.1055134820435077,
+              "duration": 6,
+              "confidence": 19.824161677475445
+            },
+            {
+              "number": 3,
+              "type": "impulsive",
+              "subType": "motive",
+              "startIndex": 92,
+              "endIndex": 110,
+              "startPrice": 105316.2,
+              "endPrice": 110665.8,
+              "startTime": "2025-06-09T03:00:00.000Z",
+              "endTime": "2025-06-09T21:00:00.000Z",
+              "length": 5.079560409509654,
+              "duration": 18,
+              "confidence": 54.32194750171552
+            }
+          ],
+          "isComplete": false,
+          "degree": "minuette",
+          "startTime": "2025-06-07T00:00:00.000Z",
+          "endTime": "2025-06-09T21:00:00.000Z",
+          "validity": 100
+        }
+      ],
+      "currentWave": {
+        "wave": {
+          "number": 3,
+          "type": "impulsive",
+          "subType": "motive",
+          "startIndex": 92,
+          "endIndex": 110,
+          "startPrice": 105316.2,
+          "endPrice": 110665.8,
+          "startTime": "2025-06-09T03:00:00.000Z",
+          "endTime": "2025-06-09T21:00:00.000Z",
+          "length": 5.079560409509654,
+          "duration": 18,
+          "confidence": 54.32194750171552
+        },
+        "position": "beginning",
+        "nextExpected": "Wave 4 correction expected (typically 38.2%-50% of Wave 3)"
+      },
+      "projections": [
+        {
+          "targetWave": 4,
+          "targets": {
+            "conservative": 109403.2944,
+            "normal": 108622.2528,
+            "extended": 107991
+          },
+          "fibonacciRatios": [
+            {
+              "ratio": 0.236,
+              "price": 109403.2944,
+              "description": "Shallow correction"
+            },
+            {
+              "ratio": 0.382,
+              "price": 108622.2528,
+              "description": "Common correction"
+            },
+            {
+              "ratio": 0.5,
+              "price": 107991,
+              "description": "Moderate correction"
+            }
+          ],
+          "timeProjection": {
+            "minPeriods": 6,
+            "maxPeriods": 18,
+            "estimatedCompletion": "2025-06-10T08:00:00.000Z"
+          },
+          "probability": 70
+        }
+      ],
+      "ruleValidation": {
+        "wave2Rule": true,
+        "wave3Rule": true,
+        "wave4Rule": true,
+        "alternationRule": true,
+        "channelRule": true,
+        "overallValidity": 100
+      },
+      "signals": {
+        "signal": "hold",
+        "strength": 50,
+        "reasoning": "",
+        "waveContext": "",
+        "riskLevel": "medium"
+      },
+      "analysisTime": "2025-06-13T14:53:44.304Z",
+      "confidence": 70,
+      "dataQuality": 100
+    },
+    "confluences": [],
+    "confluenceMetrics": {
+      "totalLevelsCollected": 0,
+      "clustersFormed": 0,
+      "confluencesFound": 0,
+      "actionableConfluences": 0,
+      "keyConfluences": []
+    },
+    "signals": {
+      "immediate": {
+        "signal": "hold",
+        "strength": 60,
+        "timeframe": "short",
+        "confluence": [],
+        "reasoning": [
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 60
+      },
+      "shortTerm": {
+        "signal": "hold",
+        "strength": 60,
+        "timeframe": "medium",
+        "confluence": [],
+        "reasoning": [
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 60
+      },
+      "mediumTerm": {
+        "signal": "hold",
+        "strength": 60,
+        "timeframe": "long",
+        "confluence": [],
+        "reasoning": [
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 60
+      }
+    },
+    "marketStructure": {
+      "trend": "downtrend",
+      "phase": "markup",
+      "volatility": "high",
+      "momentum": "bearish"
+    },
+    "keyLevels": {
+      "immediateSupport": [],
+      "immediateResistance": [],
+      "targets": {
+        "conservative": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        },
+        "normal": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        },
+        "optimistic": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        }
+      },
+      "stopLoss": {
+        "tight": 0,
+        "normal": 0,
+        "wide": 0
+      }
+    },
+    "riskAssessment": {
+      "overall": "medium",
+      "factors": [],
+      "opportunities": [],
+      "warnings": []
+    },
+    "analysisTime": "2025-06-13T14:53:44.308Z",
+    "confidence": 70,
+    "dataQuality": 80,
+    "recommendedTimeframe": "1h"
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-13T14:53:44.308Z",
+    "tags": [
+      "timeframe:60",
+      "confluences:0"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}
