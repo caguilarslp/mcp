@@ -1,11 +1,11 @@
-# 🤖 Cloud MarketData MCP Server - Contexto Mínimo v0.1.0
+# 🤖 Cloud MarketData MCP Server - Contexto Mínimo v0.1.1
 
 ## 📋 Estado Actual
-- **Versión:** v0.1.0
+- **Versión:** v0.1.1
 - **Fecha:** 13/06/2025
-- **Status:** En Diseño - Arquitectura inicial
-- **Última tarea:** Inicialización del proyecto
-- **Próximo:** TASK-001: Setup inicial Docker + FastMCP
+- **Status:** En Diseño - Reestructurado en subfases atómicas
+- **Última tarea:** Reestructuración task tracker v2.0
+- **Próximo:** TASK-001: Setup Docker + FastAPI base (1.5h)
 
 ## 🎯 Objetivo del Proyecto
 Microservicio robusto y escalable para la recopilación, procesamiento y almacenamiento de datos de mercado en tiempo real (Bybit/Binance) para nutrir indicadores de Order Flow y Volume Profile. Diseñado como el primer componente de la futura **wAIckoff Platform** con IA y dashboard.
@@ -62,15 +62,17 @@ docker build -t cloud-marketdata .
 docker run -d cloud-marketdata
 ```
 
-## 🎯 Próximas Tareas Priorizadas
-1. **TASK-001**: Setup inicial Docker + FastAPI + FastMCP (2h)
-2. **TASK-002**: WebSocket collectors Bybit/Binance (4h)
-3. **TASK-003**: MongoDB schema y repositories (3h)
-4. **TASK-004**: Volume Profile calculator service (4h)
-5. **TASK-005**: Order Flow analyzer service (4h)
-6. **TASK-006**: Data retention y cleanup system (3h)
-7. **TASK-007**: FastMCP server implementation (3h)
-8. **TASK-008**: Integration tests y monitoring (2h)
+## 🎯 Subfases Atómicas Priorizadas (v2.0)
+1. **TASK-001**: Setup Docker + FastAPI base (1.5h)
+2. **TASK-001B**: FastMCP integration (1h)
+3. **TASK-002A**: WebSocket base + Bybit trades (2h)
+4. **TASK-002B**: OrderBook + Binance trades (2h)
+5. **TASK-002C**: Production hardening (1.5h)
+6. **TASK-003A**: MongoDB schemas básicos (1.5h)
+7. **TASK-003B**: Schemas avanzados + TTL (1.5h)
+8. **Continuar con TASK-004A...** - Ver task-tracker.md para lista completa
+
+**🚨 REGLA CRÍTICA**: Máximo 2h por subfase - Completable en una sesión
 
 ## 🚀 Visión Futura: wAIckoff Platform
 - **Fase 1** (Actual): MCP Service para datos
@@ -108,3 +110,18 @@ Ver `claude/docs/roadmap-waickoff-platform.md` y ADR-004 para detalles.
 - **CPU compartida**: Optimizar algoritmos para baja latencia
 - **Network**: Retry logic y backpressure handling
 - **Monitoring**: Alertas tempranas de recursos
+
+## 🔄 Principios de Subfases Atómicas (NUEVO)
+1. **Máximo 2h por subfase** - Completable en una sesión
+2. **Criterio de completitud claro** - Verificable objetivamente
+3. **Entregables específicos** - Lista concreta de outputs
+4. **Estado funcional** - Proyecto ejecutable tras cada subfase
+5. **Rollback seguro** - Fácil reversión si se interrumpe
+6. **Dependencias explícitas** - Sin ambigüedades
+
+## 📊 Métricas del Proyecto v2.0
+- **Total Subfases**: 16 (8 tareas → 16 subfases atómicas)
+- **Horas Estimadas**: 26h (optimizado)
+- **Promedio por subfase**: 1.6h (máximo 2h)
+- **Riesgo de interrupción**: MINIMIZADO
+- **Verificabilidad**: 100% con criterios objetivos

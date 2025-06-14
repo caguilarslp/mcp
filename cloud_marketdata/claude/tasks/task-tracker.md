@@ -1,124 +1,263 @@
-# 📋 Cloud MarketData Task Tracker
+# 📋 Cloud MarketData Task Tracker v2.0 - Subfases Atómicas
 
-## 🎯 Tareas Activas
+## 🎯 Tareas Activas (Críticas)
 
-### TASK-001: Setup Inicial Docker + FastAPI + FastMCP
+### TASK-001: Setup Inicial Docker + FastAPI Base
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: CRÍTICA
-- **Estimación**: 2 horas
-- **Descripción**: Configurar entorno base con Docker, FastAPI y FastMCP
+- **Estimación**: 1.5 horas
+- **Descripción**: Configurar entorno base mínimo funcional
 - **Entregables**:
-  - [ ] Dockerfile con Python 3.12-slim
-  - [ ] docker-compose.yml con todos los servicios
-  - [ ] FastAPI app básica con health check
-  - [ ] FastMCP server skeleton
-  - [ ] Makefile para comandos comunes
+  - [ ] Dockerfile con Python 3.12-slim + requirements básicos
+  - [ ] docker-compose.yml con FastAPI + MongoDB + Redis
+  - [ ] FastAPI app básica con health check en /health
+  - [ ] Estructura src/ con __init__.py
+  - [ ] Makefile con comandos: up, down, logs, test
 - **Dependencias**: Ninguna
-- **Notas**: Base para todo el desarrollo posterior
+- **Criterio de Completitud**: `docker-compose up` funciona, GET /health retorna 200
+- **Notas**: Base mínima funcional, sin FastMCP aún
+
+### TASK-001B: FastMCP Server Skeleton
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: CRÍTICA
+- **Estimación**: 1 hora
+- **Descripción**: Agregar FastMCP al setup existente
+- **Entregables**:
+  - [ ] FastMCP server integrado con FastAPI
+  - [ ] 1 tool MCP de prueba (ping)
+  - [ ] package.json para cliente MCP local
+  - [ ] Documentación de conexión MCP
+- **Dependencias**: TASK-001
+- **Criterio de Completitud**: Cliente MCP puede conectar y usar tool ping
+- **Notas**: Completa el setup inicial
 
 ---
 
-## 📅 Backlog Priorizado
+## 📅 Backlog Priorizado - Subfases Atómicas
 
-### TASK-002: WebSocket Collectors Bybit/Binance
+### TASK-002A: WebSocket Collector Base + Bybit Trades
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: ALTA
-- **Estimación**: 4 horas
-- **Descripción**: Implementar collectors para trades y orderbook
+- **Estimación**: 2 horas
+- **Descripción**: Collector base y primer implementación funcional
 - **Entregables**:
-  - [ ] Abstract WebSocket collector base
-  - [ ] Bybit v5 trades collector
-  - [ ] Bybit v5 orderbook collector
-  - [ ] Binance trades collector
-  - [ ] Binance orderbook collector
-  - [ ] Sistema de reconnection automático
-- **Dependencias**: TASK-001
-- **Notas**: Manejar rate limits y disconnections
+  - [ ] Abstract WebSocketCollector base class
+  - [ ] BybitTradesCollector implementation
+  - [ ] Basic reconnection logic
+  - [ ] Trade entity model (Pydantic)
+  - [ ] Simple in-memory storage para tests
+- **Dependencias**: TASK-001B
+- **Criterio de Completitud**: Recibe trades de BTCUSDT por 5 minutos sin crash
+- **Notas**: Un solo collector funcional completo
 
-### TASK-003: MongoDB Schema y Repositories
+### TASK-002B: Bybit OrderBook + Binance Trades
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: ALTA
-- **Estimación**: 3 horas
-- **Descripción**: Diseñar schema y capa de persistencia
+- **Estimación**: 2 horas
+- **Descripción**: Expandir collectors con OrderBook y segundo exchange
 - **Entregables**:
-  - [ ] Schema para trades collection
-  - [ ] Schema para orderbook snapshots
-  - [ ] Schema para volume profile agregado
-  - [ ] Schema para order flow metrics
-  - [ ] Repository pattern implementation
+  - [ ] BybitOrderBookCollector implementation
+  - [ ] BinanceTradesCollector implementation
+  - [ ] OrderBook entity model (Pydantic)
+  - [ ] Rate limiting handling
+  - [ ] Circuit breaker pattern básico
+- **Dependencias**: TASK-002A
+- **Criterio de Completitud**: 3 collectors funcionando simultáneamente
+- **Notas**: Expandir sin romper base existente
+
+### TASK-002C: Binance OrderBook + Production Ready
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 1.5 horas
+- **Descripción**: Completar collectors y hardening
+- **Entregables**:
+  - [ ] BinanceOrderBookCollector implementation
+  - [ ] Advanced reconnection con exponential backoff
+  - [ ] Error handling y logging estructurado
+  - [ ] Health checks por collector
+  - [ ] Graceful shutdown
+- **Dependencias**: TASK-002B
+- **Criterio de Completitud**: 4 collectors 24h sin crash, logs limpios
+- **Notas**: Sistema de collectors production-ready
+
+### TASK-003A: MongoDB Schemas + Basic Repository
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 1.5 horas
+- **Descripción**: Schemas fundamentales y patrón repository
+- **Entregables**:
+  - [ ] MongoDB connection manager
+  - [ ] Trade document schema con indexes
+  - [ ] OrderBook document schema con indexes
+  - [ ] Abstract Repository base class
+  - [ ] TradeRepository implementation
+- **Dependencias**: TASK-001B
+- **Criterio de Completitud**: Puede guardar trades en MongoDB y retrievar por símbolo/tiempo
+- **Notas**: Base sólida para persistencia
+
+### TASK-003B: Advanced Schemas + TTL + OrderBook Repository
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 1.5 horas
+- **Descripción**: Completar schemas y optimizaciones
+- **Entregables**:
+  - [ ] VolumeProfile document schema
+  - [ ] OrderFlow document schema
   - [ ] TTL indexes para auto-cleanup
-- **Dependencias**: TASK-001
-- **Notas**: Optimizar para queries de rango temporal
+  - [ ] OrderBookRepository implementation
+  - [ ] Compound indexes para queries optimizadas
+- **Dependencias**: TASK-003A
+- **Criterio de Completitud**: Schemas completos, TTL funcionando, queries < 100ms
+- **Notas**: Persistencia completa y optimizada
 
-### TASK-004: Volume Profile Calculator Service
+### TASK-004A: Volume Profile Core + Basic Calculation
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: ALTA
-- **Estimación**: 4 horas
-- **Descripción**: Servicio para calcular Volume Profile
+- **Estimación**: 2 horas
+- **Descripción**: Entidad VolumeProfile y algoritmo básico
 - **Entregables**:
-  - [ ] VolumeProfile entity model
-  - [ ] Calculator service con algoritmos
-  - [ ] POC, VAH, VAL detection
-  - [ ] Aggregation por timeframes
-  - [ ] Cache strategy con Redis
-- **Dependencias**: TASK-002, TASK-003
-- **Notas**: Optimizar para cálculo incremental
+  - [ ] VolumeProfile entity con price levels
+  - [ ] VolumeProfileCalculator service
+  - [ ] Basic histogram calculation
+  - [ ] POC (Point of Control) detection
+  - [ ] Unit tests para algoritmos
+- **Dependencias**: TASK-002A, TASK-003A
+- **Criterio de Completitud**: Calcula VP de trades históricos, identifica POC correctamente
+- **Notas**: Algoritmo core funcional
 
-### TASK-005: Order Flow Analyzer Service
+### TASK-004B: VAH/VAL + Timeframes + Redis Cache
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: ALTA
-- **Estimación**: 4 horas
-- **Descripción**: Servicio para analizar Order Flow
+- **Estimación**: 2 horas
+- **Descripción**: Completar Volume Profile con optimizaciones
+- **Entregables**:
+  - [ ] VAH/VAL (Value Area High/Low) calculation
+  - [ ] Multiple timeframes support (1m, 5m, 15m, 1h, 1d)
+  - [ ] Redis caching strategy
+  - [ ] Incremental calculation optimization
+  - [ ] Volume Profile API endpoints
+- **Dependencias**: TASK-004A
+- **Criterio de Completitud**: VP completo en múltiples timeframes, cache hits > 80%
+- **Notas**: Volume Profile production-ready
+
+### TASK-005A: Order Flow Core + Delta Calculation
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 2 horas
+- **Descripción**: Entidad OrderFlow y algoritmo delta básico
 - **Entregables**:
   - [ ] OrderFlow entity model
-  - [ ] Delta calculator (buy vs sell)
-  - [ ] Absorption detection
-  - [ ] Imbalance zones identification
-  - [ ] Real-time streaming vía Redis
-- **Dependencias**: TASK-002, TASK-003
-- **Notas**: Balance entre precisión y performance
+  - [ ] OrderFlowAnalyzer service
+  - [ ] Buy vs Sell delta calculation
+  - [ ] Cumulative delta tracking
+  - [ ] Basic imbalance detection
+- **Dependencias**: TASK-002A, TASK-003A
+- **Criterio de Completitud**: Calcula delta correctamente, detecta imbalances básicos
+- **Notas**: Order Flow algoritmo base
 
-### TASK-006: Data Retention y Cleanup System
-- **Estado**: 🔴 PENDIENTE
-- **Prioridad**: MEDIA
-- **Estimación**: 3 horas
-- **Descripción**: Sistema automático de limpieza de datos
-- **Entregables**:
-  - [ ] Retention policies configuration
-  - [ ] Celery tasks para cleanup
-  - [ ] Archiving strategy (compress old data)
-  - [ ] Monitoring de uso de storage
-  - [ ] Alertas de espacio bajo
-- **Dependencias**: TASK-003
-- **Notas**: Crítico para VPS con storage limitado
-
-### TASK-007: FastMCP Server Implementation
+### TASK-005B: Advanced Analysis + Streaming + Redis
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: ALTA
-- **Estimación**: 3 horas
-- **Descripción**: Implementar servidor MCP completo
+- **Estimación**: 2 horas
+- **Descripción**: Análisis avanzado y streaming en tiempo real
 - **Entregables**:
-  - [ ] MCP tools para volume profile
-  - [ ] MCP tools para order flow
-  - [ ] MCP tools para market depth
-  - [ ] Rate limiting y auth
-  - [ ] Documentation automática
-- **Dependencias**: TASK-004, TASK-005
-- **Notas**: Compatible con wAIckoff MCP client
+  - [ ] Absorption zone detection
+  - [ ] Volume imbalance zones identification
+  - [ ] Real-time streaming vía Redis pub/sub
+  - [ ] Order Flow API endpoints
+  - [ ] WebSocket endpoints para streaming
+- **Dependencias**: TASK-005A
+- **Criterio de Completitud**: Order Flow streaming < 50ms latency, algoritmos precisos
+- **Notas**: Order Flow production-ready
 
-### TASK-008: Integration Tests y Monitoring
+### TASK-006A: Retention Policies + Basic Cleanup
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: MEDIA
-- **Estimación**: 2 horas
-- **Descripción**: Suite de tests y observabilidad
+- **Estimación**: 1.5 horas
+- **Descripción**: Políticas de retención y limpieza básica
+- **Entregables**:
+  - [ ] Retention configuration (1h/24h/7d tiers)
+  - [ ] Basic cleanup Celery task
+  - [ ] Storage monitoring utilities
+  - [ ] Manual cleanup commands
+- **Dependencias**: TASK-003B
+- **Criterio de Completitud**: Cleanup manual funciona, monitoreo de storage
+- **Notas**: Gestión básica de datos
+
+### TASK-006B: Advanced Cleanup + Compression + Alerts
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: MEDIA
+- **Estimación**: 1.5 horas
+- **Descripción**: Sistema avanzado de gestión de datos
+- **Entregables**:
+  - [ ] Automatic scheduled cleanup
+  - [ ] Data compression para archiving
+  - [ ] Storage alerts y thresholds
+  - [ ] Celery beat scheduler
+  - [ ] Cleanup metrics y reporting
+- **Dependencias**: TASK-006A
+- **Criterio de Completitud**: Cleanup automático 24/7, alertas funcionando
+- **Notas**: Data management production-ready
+
+### TASK-007A: FastMCP Tools - Volume Profile
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 1.5 horas
+- **Descripción**: Herramientas MCP para Volume Profile
+- **Entregables**:
+  - [ ] get_volume_profile MCP tool
+  - [ ] get_volume_profile_levels MCP tool
+  - [ ] Input validation con Pydantic
+  - [ ] Error handling y responses
+  - [ ] Tool documentation
+- **Dependencias**: TASK-004B
+- **Criterio de Completitud**: Tools MCP funcionando desde wAIckoff
+- **Notas**: Primera integración MCP
+
+### TASK-007B: FastMCP Tools - Order Flow + Market Depth
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 1.5 horas
+- **Descripción**: Completar herramientas MCP
+- **Entregables**:
+  - [ ] get_order_flow MCP tool
+  - [ ] get_order_flow_stream MCP tool
+  - [ ] get_market_depth MCP tool
+  - [ ] Rate limiting implementation
+  - [ ] Authentication básica
+- **Dependencias**: TASK-005B, TASK-007A
+- **Criterio de Completitud**: 5 tools MCP funcionando, rate limiting activo
+- **Notas**: FastMCP server completo
+
+### TASK-008A: Integration Tests + Basic Monitoring
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: MEDIA
+- **Estimación**: 1.5 horas
+- **Descripción**: Suite de tests y monitoreo básico
 - **Entregables**:
   - [ ] Integration tests con pytest
-  - [ ] Prometheus metrics
-  - [ ] Grafana dashboards
-  - [ ] Health checks detallados
+  - [ ] Docker test environment
+  - [ ] Basic health checks
+  - [ ] Performance tests básicos
+  - [ ] CI/CD pipeline preparación
+- **Dependencias**: TASK-007B
+- **Criterio de Completitud**: Tests passing, health checks completos
+- **Notas**: Base para calidad y observabilidad
+
+### TASK-008B: Advanced Monitoring + Dashboards
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: MEDIA
+- **Estimación**: 1.5 horas
+- **Descripción**: Observabilidad production-ready
+- **Entregables**:
+  - [ ] Prometheus metrics integration
+  - [ ] Grafana dashboards setup
   - [ ] Performance benchmarks
-- **Dependencias**: TASK-007
-- **Notas**: CI/CD ready
+  - [ ] Alert rules configuration
+  - [ ] Documentation completa
+- **Dependencias**: TASK-008A
+- **Criterio de Completitud**: Dashboards funcionando, alertas configuradas
+- **Notas**: Sistema completo y monitorizado
 
 ---
 
@@ -127,17 +266,32 @@
 
 ---
 
-## 📊 Métricas del Proyecto
-- **Total Tareas**: 8
+## 📊 Métricas del Proyecto v2.0
+- **Total Tareas**: 16 (8 originales → 16 subfases atómicas)
 - **Completadas**: 0 (0%)
 - **En Progreso**: 0
-- **Pendientes**: 8
-- **Horas Estimadas**: 25h
-- **Horas Reales**: 0h
+- **Pendientes**: 16
+- **Horas Estimadas**: 26h (optimizado de 25h originales)
+- **Promedio por tarea**: 1.6h (máximo 2h por subfase)
 
 ---
 
 ## 🔄 Última Actualización
 - **Fecha**: 2025-06-13
-- **Por**: Sistema de inicialización
-- **Cambios**: Creación inicial del task tracker
+- **Por**: Reestructuración en subfases atómicas
+- **Cambios**: 
+  - Dividido 8 tareas complejas en 16 subfases atómicas
+  - Máximo 2h por subfase para evitar implementaciones incompletas
+  - Criterios de completitud específicos para cada subfase
+  - Dependencias claras entre subfases
+  - Entregables concretos y verificables
+
+---
+
+## 🎯 Principios de Subfases Atómicas
+1. **Máximo 2h por subfase** - Completable en una sesión
+2. **Criterio de completitud claro** - Verificable objetivamente  
+3. **Entregables específicos** - Lista concreta de outputs
+4. **Dependencias explícitas** - No ambigüedades
+5. **Estado funcional** - Cada subfase deja el proyecto en estado ejecutable
+6. **Rollback seguro** - Si se interrumpe, se puede revertir fácilmente

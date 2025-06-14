@@ -193,4 +193,103 @@ waickoff/
 
 ---
 
-*Proyecto listo para comenzar desarrollo activo con visión clara de evolución*
+## 📅 2025-06-13 - Reestructuración en Subfases Atómicas
+
+### ✅ Acciones Realizadas
+
+1. **Análisis de Riesgo de Implementación**
+   - Identificación de tareas complejas susceptibles a interrupción
+   - Evaluación de puntos de fallo en sesiones de desarrollo
+   - Definición de criterios para subfases atómicas
+
+2. **Reestructuración del Task Tracker v2.0**
+   - **8 tareas complejas → 16 subfases atómicas**
+   - Máximo 2h por subfase (completable en una sesión)
+   - Criterios de completitud específicos y verificables
+   - Entregables concretos para cada subfase
+   - Dependencias explícitas sin ambigüedades
+
+3. **Principios de Subfases Implementados**
+   - **Estado funcional**: Cada subfase deja proyecto ejecutable
+   - **Rollback seguro**: Reversión fácil si se interrumpe
+   - **Verificación objetiva**: Criterios de completitud claros
+   - **Entregables específicos**: Lista concreta de outputs
+
+### 🎯 Cambios Específicos en Planificación
+
+**TASK-001** → **TASK-001 + TASK-001B**:
+- 001: Docker + FastAPI base (1.5h)
+- 001B: FastMCP integration (1h)
+
+**TASK-002** → **TASK-002A/B/C**:
+- 002A: Base + Bybit trades (2h)
+- 002B: OrderBook + Binance (2h) 
+- 002C: Production hardening (1.5h)
+
+**TASK-003** → **TASK-003A/B**:
+- 003A: Schemas básicos + Repository pattern (1.5h)
+- 003B: Schemas avanzados + TTL + optimizations (1.5h)
+
+**TASK-004** → **TASK-004A/B**:
+- 004A: Volume Profile core + POC (2h)
+- 004B: VAH/VAL + timeframes + Redis (2h)
+
+**TASK-005** → **TASK-005A/B**:
+- 005A: Order Flow core + delta (2h)
+- 005B: Advanced analysis + streaming (2h)
+
+**TASK-006** → **TASK-006A/B**:
+- 006A: Retention policies + basic cleanup (1.5h)
+- 006B: Advanced cleanup + compression (1.5h)
+
+**TASK-007** → **TASK-007A/B**:
+- 007A: FastMCP Volume Profile tools (1.5h)
+- 007B: FastMCP Order Flow + Market Depth (1.5h)
+
+**TASK-008** → **TASK-008A/B**:
+- 008A: Integration tests + basic monitoring (1.5h)
+- 008B: Advanced monitoring + dashboards (1.5h)
+
+### 📊 Nuevas Métricas del Proyecto
+
+- **Total Subfases**: 16 (optimizado de 8 tareas originales)
+- **Tiempo Estimado**: 26h (incremento de 1h por mayor granularidad)
+- **Tiempo Promedio**: 1.6h por subfase (máximo 2h)
+- **Riesgo de Interrupción**: MINIMIZADO
+- **Verificabilidad**: 100% con criterios objetivos
+
+### 💡 Beneficios de la Reestructuración
+
+1. **Eliminación de archivos corruptos**: Cada subfase es completable
+2. **Progreso medible**: Criterios de completitud claros
+3. **Rollback seguro**: Fácil reversión si se interrumpe
+4. **Estado siempre funcional**: Proyecto ejecutable tras cada subfase
+5. **Menor frustración**: Sesiones de desarrollo exitosas
+6. **Mejor trazabilidad**: Progreso granular y verificable
+
+### 🚨 Consideraciones de Implementación
+
+- **Prioridad absoluta**: Completar subfase antes de pasar a siguiente
+- **Verificación obligatoria**: Confirmar criterios antes de continuar
+- **Commits atómicos**: Un commit por subfase completada
+- **Testing incluido**: Cada subfase debe pasar tests básicos
+- **Documentación**: Actualizar estado tras cada subfase
+
+### ⏭️ Próximos Pasos con Nueva Estructura
+
+1. **TASK-001**: Setup Docker + FastAPI base (1.5h)
+   - Criterio: `docker-compose up` funciona, `/health` retorna 200
+2. **TASK-001B**: FastMCP integration (1h)
+   - Criterio: Cliente MCP conecta y usa tool ping
+3. Continuar con TASK-002A según disponibilidad
+
+### 📝 Notas para Desarrollo
+
+- **Nunca comenzar nueva subfase sin completar anterior**
+- **Verificar criterios de completitud antes de continuar**
+- **Mantener `.claude_context` actualizado tras cada subfase**
+- **Commits con formato `[TASK-XXX] descripción de subfase`**
+
+---
+
+*Proyecto ahora estructurado para desarrollo seguro y sin interrupciones críticas*
