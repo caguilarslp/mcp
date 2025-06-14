@@ -1,96 +1,204 @@
-# 📚 Sistema de Trazabilidad - Cloud MarketData
+# 📋 Sistema de Trazabilidad v1.2.0
 
-## 🎯 Propósito
-Este documento establece el sistema de trazabilidad para el proyecto Cloud MarketData, asegurando que todos los cambios, decisiones y problemas sean registrados de manera consistente.
+## 🎯 Objetivo
+Mantener registro detallado y organizado del desarrollo de Cloud MarketData para facilitar continuidad, debugging y toma de decisiones arquitectónicas.
 
-## 📁 Estructura de Documentación
+## 📁 Estructura de Trazabilidad
 
-### 1. Master Log (`claude/master-log.md`)
-- Registro cronológico de todas las sesiones de desarrollo
-- Formato: Fecha → Acciones → Decisiones → Próximos pasos
-- Se actualiza al inicio y fin de cada sesión
-
-### 2. Task Tracker (`claude/tasks/task-tracker.md`)
-- Lista priorizada de tareas pendientes y completadas
-- Estados: 🔴 PENDIENTE | 🟡 EN PROGRESO | ✅ COMPLETADA | ⏸️ PAUSADA
-- Incluye estimaciones, dependencias y entregables
-
-### 3. ADRs (`claude/adr/`)
-- Architecture Decision Records numerados (ADR-XXX)
-- Formato: Contexto → Decisión → Consecuencias
-- Inmutables una vez aceptados
-
-### 4. Documentación Técnica (`claude/docs/`)
-- Guías de implementación
-- Diagramas de arquitectura
-- APIs y protocolos
-- Troubleshooting
-
-### 5. Contexto Rápido (`.claude_context`)
-- Estado actual resumido para inicio rápido
-- Máximo 100 líneas
-- Se actualiza con cambios significativos
-
-## 🔄 Flujo de Trabajo
-
-### Inicio de Sesión
-1. Leer `.claude_context`
-2. Revisar últimas entradas en `master-log.md`
-3. Verificar tareas activas en `task-tracker.md`
-
-### Durante Desarrollo
-1. Actualizar task tracker al cambiar estado
-2. Documentar decisiones importantes en ADRs
-3. Mantener código autodocumentado
-
-### Fin de Sesión
-1. Actualizar `master-log.md` con resumen
-2. Actualizar `.claude_context` si hay cambios mayores
-3. Commit con mensaje descriptivo
-
-## 📊 Métricas de Trazabilidad
-- **Cobertura de documentación**: 100% de decisiones arquitectónicas
-- **Granularidad de logs**: Por sesión de trabajo
-- **Retención**: Indefinida (archivos en `claude/archive/` si necesario)
-
-## 🏷️ Etiquetas y Convenciones
-
-### Commits
+### 🗂️ Archivos Principales
 ```
-[TASK-XXX] Descripción breve
-[DOC] Actualización de documentación
-[FIX] Corrección de bugs
-[FEAT] Nueva funcionalidad
-[REFACTOR] Refactorización
-[DOCKER] Actualización de configuración Docker
-[ENV] Cambios en configuración de entorno
+claude/
+├── .claude_context          # Estado mínimo actualizado
+├── master-log.md           # Registro cronológico completo
+├── tasks/
+│   └── task-tracker.md     # Gestión de tareas con estado
+├── docs/
+│   ├── arquitectura.md     # Documentación técnica actualizada
+│   ├── integracion-waickoff.md  # Guía de integración MCP
+│   ├── CLAUDE_PROMPT.md    # Prompt de desarrollo actualizado
+│   └── sistema-trazabilidad.md  # Este documento
+├── adr/
+│   ├── ADR-001-stack.md    # Decisiones arquitectónicas
+│   ├── ADR-002-collectors.md
+│   ├── ADR-003-retention.md
+│   └── ADR-004-waickoff.md
+└── archive/                # Logs históricos
 ```
 
-### Prioridades
-- **CRÍTICA**: Bloquea todo desarrollo
-- **ALTA**: Necesaria para MVP
-- **MEDIA**: Mejora significativa
-- **BAJA**: Nice to have
+## 🔄 Flujo de Actualización
 
-### Estados de Componentes
-- **STABLE**: Listo para producción
-- **BETA**: Funcional pero puede cambiar
-- **ALPHA**: En desarrollo activo
-- **DEPRECATED**: Marcado para eliminación
+### ✅ Después de Completar Tarea
+1. **Actualizar `.claude_context`**
+   - Cambiar versión (v0.1.X)
+   - Actualizar estado de última tarea
+   - Actualizar próxima tarea
+   - Añadir funcionalidades implementadas
 
-## 🔍 Búsqueda y Navegación
-- Usar grep para buscar en logs: `grep -r "TASK-001" claude/`
-- Los ADRs están numerados secuencialmente
-- Task IDs son únicos y permanentes
+2. **Actualizar `master-log.md`**
+   - Nueva entrada con fecha
+   - Acciones realizadas detalladas
+   - Criterio de completitud verificado
+   - Estado actualizado del proyecto
+   - Comandos de verificación
+   - Aspectos destacados
+   - Próximos pasos
 
-## 🚨 Gestión de Problemas
-- Bugs críticos se documentan en `claude/docs/known-issues.md`
-- Post-mortems en `claude/docs/post-mortems/`
-- Soluciones temporales marcadas con `TODO` o `FIXME`
+3. **Actualizar `task-tracker.md`**
+   - Marcar tarea como ✅ COMPLETADA
+   - Agregar duración real
+   - Actualizar métricas del proyecto
+   - Mover próxima tarea a 🟡 PRÓXIMA
 
-## 📈 Evolución del Sistema
-Este sistema de trazabilidad evolucionará con el proyecto. Los cambios al sistema mismo se documentan como ADRs.
+4. **Actualizar Documentación Técnica**
+   - `arquitectura.md` - Nueva estructura implementada
+   - `integracion-waickoff.md` - Nuevas capacidades MCP
+   - `CLAUDE_PROMPT.md` - Estado actual y comandos
+   - Cualquier guía específica (como `task-002a-verification-guide.md`)
+
+### 🐛 Después de Aplicar Fix
+1. **Documentar en `master-log.md`**
+   - Entrada específica del fix
+   - Problema identificado
+   - Solución aplicada
+   - Verificación del fix
+
+2. **Actualizar documentación relevante**
+   - Si afecta comandos o arquitectura
+   - Actualizar guías de troubleshooting
+
+## 🏷️ Convenciones de Nomenclatura
+
+### 📅 Commits
+```bash
+[TASK-XXX] Descripción de la subfase completada
+[FIX] Descripción del problema corregido
+[DOCS] Actualización de documentación
+[REFACTOR] Mejoras de código sin nueva funcionalidad
+```
+
+### 📋 Estados de Tareas
+- 🔴 **PENDIENTE** - No iniciada
+- 🟡 **PRÓXIMA** - Siguiente en cola
+- 🔄 **EN PROGRESO** - Actualmente trabajando
+- ✅ **COMPLETADA** - Finalizada y verificada
+- ⚠️ **BLOQUEADA** - Dependencias no resueltas
+- 🚫 **CANCELADA** - Descartada por cambio de prioridades
+
+### 🏷️ Versiones
+- **v0.1.X** - Desarrollo inicial (TASK-001 a TASK-008)
+- **v0.2.X** - Expansión funcionalidades core
+- **v1.0.0** - Primera versión estable para producción
+
+## 📊 Métricas de Seguimiento
+
+### 📈 Por Tarea
+- Tiempo estimado vs tiempo real
+- Criterio de completitud (objetivo/verificado)
+- Dependencias cumplidas
+- Bloqueos encontrados
+- Calidad del código/arquitectura
+
+### 📊 Por Proyecto
+- Total tareas completadas/pendientes
+- Horas consumidas/restantes
+- Cobertura funcional (% features implementadas)
+- Deuda técnica acumulada
+- Performance metrics alcanzados
+
+## 🔍 Uso del Sistema
+
+### 👨‍💻 Para el Desarrollador
+1. **Antes de empezar sesión**:
+   - Leer `.claude_context` para estado actual
+   - Revisar últimas entradas de `master-log.md`
+   - Verificar próxima tarea en `task-tracker.md`
+
+2. **Durante desarrollo**:
+   - Mantener notas de progreso
+   - Documentar decisiones importantes
+   - Registrar bloqueos o problemas
+
+3. **Al finalizar tarea**:
+   - Seguir flujo de actualización completo
+   - Verificar criterio de completitud
+   - Preparar estado para próxima sesión
+
+### 🤖 Para Claude
+1. **Al inicio de sesión**:
+   - Leer contexto mínimo
+   - Verificar última tarea completada
+   - Identificar próximo objetivo
+
+2. **Durante trabajo**:
+   - Mantener coherencia con arquitectura
+   - Seguir principios establecidos en ADRs
+   - Respetar convenciones de código
+
+3. **Al completar trabajo**:
+   - Actualizar todos los archivos relevantes
+   - Crear documentación específica si es necesaria
+   - Preparar verificación para el usuario
+
+## ⚠️ Puntos Críticos
+
+### 🚨 Información que NUNCA Perder
+- Estado actual de implementación
+- Decisiones arquitectónicas y rationale
+- Comandos de verificación funcionales
+- Dependencias entre tareas
+- Problemas conocidos y sus soluciones
+
+### 🔄 Información que Mantener Actualizada
+- Versión del proyecto
+- Funcionalidades implementadas
+- Estructura de archivos actual
+- Comandos de Docker actualizados
+- Performance metrics actuales
+
+### 📝 Información que Archivar
+- Logs de desarrollo detallados
+- Experimentos fallidos
+- Versiones anteriores de documentos
+- Debug logs específicos
+
+## 🎯 Beneficios del Sistema
+
+### 🚀 Para Desarrollo
+- **Continuidad**: Fácil retomar trabajo después de interrupciones
+- **Debugging**: Historial completo para identificar cuándo se introdujeron problemas
+- **Decisiones**: Contexto completo para decisiones arquitectónicas
+- **Onboarding**: Documentación completa para nuevos desarrolladores
+
+### 📊 Para Gestión
+- **Progreso**: Métricas claras de avance del proyecto
+- **Estimaciones**: Datos históricos para mejorar estimaciones futuras
+- **Calidad**: Trazabilidad de decisiones y cambios
+- **Riesgos**: Identificación temprana de problemas y bloqueos
+
+## 🔄 Evolución del Sistema
+
+### v1.0.0 (Inicial)
+- ✅ Estructura básica de archivos
+- ✅ Convenciones de nomenclatura
+- ✅ Flujo de actualización manual
+
+### v1.1.0 (Docker-First)
+- ✅ Eliminación de Makefile
+- ✅ Comandos Docker directos
+- ✅ Troubleshooting integrado
+
+### v1.2.0 (WebSocket Collectors) - ACTUAL
+- ✅ Documentación técnica expandida
+- ✅ Verificación de tareas detallada
+- ✅ Performance metrics tracking
+- ✅ Fix tracking integrado
+
+### v1.3.0 (Futuro)
+- [ ] Automatización de updates
+- [ ] Métricas de calidad automáticas
+- [ ] Integration con CI/CD
+- [ ] Dashboard de progreso
 
 ---
 
-*Versión: 1.1.0 | Fecha: 2025-06-14 | Última actualización: Eliminación Makefile, comandos Docker directos*
+**Última actualización**: 2025-06-14 - v1.2.0 con WebSocket Collectors + Logger Fix

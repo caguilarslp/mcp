@@ -18,7 +18,7 @@
 - **Criterio de Completitud**: ✅ `docker-compose up` funciona, GET /health retorna 200
 - **Notas**: Base funcional completada - listo para FastMCP
 
-### TASK-001B: FastMCP Server Integration ✅
+### TASK-001B: FastMCP Server Integration
 - **Estado**: ✅ COMPLETADA
 - **Prioridad**: CRÍTICA
 - **Estimación**: 1 hora
@@ -34,54 +34,85 @@
 - **Criterio de Completitud**: ✅ Cliente MCP conecta via HTTP y usa tools
 - **Notas**: Implementación SimpleMCP funcional - sin dependencias complejas
 
+### TASK-002A: WebSocket Collector Base + Bybit Trades
+- **Estado**: ✅ COMPLETADA
+- **Prioridad**: ALTA
+- **Estimación**: 2 horas
+- **Tiempo Real**: 2 horas
+- **Descripción**: Collector base y primer implementación funcional
+- **Entregables**:
+  - [x] Abstract WebSocketCollector base class
+  - [x] BybitTradesCollector implementation
+  - [x] Basic reconnection logic
+  - [x] Trade entity model (Pydantic)
+  - [x] Simple in-memory storage para tests
+- **Dependencias**: TASK-001B
+- **Criterio de Completitud**: ✅ Recibe trades de BTCUSDT por 5 minutos sin crash
+- **Notas**: Base WebSocket collectors funcional - Template pattern establecido
+
 ---
 
 ## 📅 Backlog Priorizado - Subfases Atómicas
 
-### TASK-002A: WebSocket Collector Base + Bybit Trades
-- **Estado**: 🔴 PENDIENTE
+### TASK-002B: Binance WebSocket Planning & Architecture
+- **Estado**: 🟡 PRÓXIMA
 - **Prioridad**: ALTA
-- **Estimación**: 2 horas
-- **Descripción**: Collector base y primer implementación funcional
+- **Estimación**: 1.5 horas
+- **Descripción**: Diseñar arquitectura para integración Binance como referencia de mercado
 - **Entregables**:
-  - [ ] Abstract WebSocketCollector base class
-  - [ ] BybitTradesCollector implementation
-  - [ ] Basic reconnection logic
-  - [ ] Trade entity model (Pydantic)
-  - [ ] Simple in-memory storage para tests
-- **Dependencias**: TASK-001B
-- **Criterio de Completitud**: Recibe trades de BTCUSDT por 5 minutos sin crash
-- **Notas**: Un solo collector funcional completo
-
-### TASK-002B: Bybit OrderBook + Binance Trades
-- **Estado**: 🔴 PENDIENTE
-- **Prioridad**: ALTA
-- **Estimación**: 2 horas
-- **Descripción**: Expandir collectors con OrderBook y segundo exchange
-- **Entregables**:
-  - [ ] BybitOrderBookCollector implementation
-  - [ ] BinanceTradesCollector implementation
-  - [ ] OrderBook entity model (Pydantic)
-  - [ ] Rate limiting handling
-  - [ ] Circuit breaker pattern básico
+  - [ ] Análisis de endpoints WebSocket Binance (trades, depth, ticker)
+  - [ ] Diseño de sincronización Bybit-Binance
+  - [ ] Strategy pattern para múltiples exchanges
+  - [ ] Plan de manejo de diferencias de formato
+  - [ ] Documentación de arquitectura multi-exchange
 - **Dependencias**: TASK-002A
-- **Criterio de Completitud**: 3 collectors funcionando simultáneamente
-- **Notas**: Expandir sin romper base existente
+- **Criterio de Completitud**: ADR con diseño aprobado + plan de implementación
+- **Notas**: Binance como fuente de verdad del mercado
 
-### TASK-002C: Binance OrderBook + Production Ready
+### TASK-002C: Binance Trades Collector Implementation
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 2 horas
+- **Descripción**: Implementar BinanceTradesCollector basado en diseño
+- **Entregables**:
+  - [ ] BinanceTradesCollector implementation
+  - [ ] Adaptador de formato Binance → Trade entity
+  - [ ] Tests de integración Binance
+  - [ ] Manejo de reconexión específico Binance
+  - [ ] Rate limiting para Binance API
+- **Dependencias**: TASK-002B
+- **Criterio de Completitud**: Binance trades sincronizados con Bybit
+- **Notas**: Mantener consistencia con Bybit collector
+
+### TASK-002D: OrderBook Collectors (Bybit + Binance)
+- **Estado**: 🔴 PENDIENTE
+- **Prioridad**: ALTA
+- **Estimación**: 2 horas
+- **Descripción**: Implementar collectors de OrderBook para ambos exchanges
+- **Entregables**:
+  - [ ] OrderBook entity model (Pydantic)
+  - [ ] BybitOrderBookCollector implementation
+  - [ ] BinanceOrderBookCollector implementation
+  - [ ] OrderBook depth configuration (5/10/20 levels)
+  - [ ] Snapshot + updates handling
+- **Dependencias**: TASK-002C
+- **Criterio de Completitud**: OrderBooks sincronizados de ambos exchanges
+- **Notas**: Optimizar para baja latencia
+
+### TASK-002E: Production Hardening & Multi-Exchange
 - **Estado**: 🔴 PENDIENTE
 - **Prioridad**: ALTA
 - **Estimación**: 1.5 horas
-- **Descripción**: Completar collectors y hardening
+- **Descripción**: Hardening final del sistema de collectors
 - **Entregables**:
-  - [ ] BinanceOrderBookCollector implementation
-  - [ ] Advanced reconnection con exponential backoff
-  - [ ] Error handling y logging estructurado
-  - [ ] Health checks por collector
-  - [ ] Graceful shutdown
-- **Dependencias**: TASK-002B
-- **Criterio de Completitud**: 4 collectors 24h sin crash, logs limpios
-- **Notas**: Sistema de collectors production-ready
+  - [ ] Advanced circuit breaker con health scoring
+  - [ ] Métricas por exchange (latencia, reconnects)
+  - [ ] Alerting system para desincronización
+  - [ ] Exchange failover strategy
+  - [ ] Performance optimization
+- **Dependencias**: TASK-002D
+- **Criterio de Completitud**: Sistema 24/7 con < 10ms latencia
+- **Notas**: Listo para producción real
 
 ### TASK-003A: MongoDB Schemas + Basic Repository
 - **Estado**: 🔴 PENDIENTE
@@ -280,32 +311,39 @@
 - **Criterio**: ✅ Cliente MCP conecta via HTTP, tools funcionando
 - **Notas**: Implementación SimpleMCP robusta sin dependencias complejas
 
+### TASK-002A: WebSocket Collector Base + Bybit Trades ✅
+- **Completada**: 14/06/2025
+- **Duración**: 2 horas (según estimación)
+- **Entregables**: Abstract WebSocketCollector, BybitTradesCollector, Trade entity, InMemoryStorage, CollectorManager
+- **Criterio**: ✅ Recibe trades de BTCUSDT por 5 minutos sin crash
+- **Notas**: Template pattern establecido - Base sólida para expansion
+
 ---
 
 ## 📊 Métricas del Proyecto v2.0
-- **Total Tareas**: 16 (8 originales → 16 subfases atómicas)
-- **Completadas**: 2 (12.5%)
+- **Total Tareas**: 19 (8 originales → 19 subfases atómicas)
+- **Completadas**: 3 (15.8%)
 - **En Progreso**: 0
-- **Pendientes**: 14
-- **Horas Estimadas**: 26h (optimizado de 25h originales)
-- **Horas Consumidas**: 2.5h
-- **Horas Restantes**: 23.5h
-- **Promedio por tarea**: 1.6h (máximo 2h por subfase)
+- **Pendientes**: 16
+- **Horas Estimadas**: 29h (actualizado con tareas Binance)
+- **Horas Consumidas**: 4.5h
+- **Horas Restantes**: 24.5h
+- **Promedio por tarea**: 1.5h (máximo 2h por subfase)
 
 ---
 
 ## 🔄 Última Actualización
 - **Fecha**: 2025-06-14
-- **Por**: Eliminación Makefile - Docker-First Approach
+- **Por**: TASK-002A Completada - WebSocket Collectors Base
 - **Cambios**: 
-  - ✅ TASK-001 completada exitosamente en 1.5h
-  - 🚫 Eliminado Makefile completamente
-  - 🐳 Creado DOCKER_COMMANDS.md con guía completa Docker
-  - 📝 Actualizada toda la documentación para comandos Docker directos
-  - 🔧 README.md reescrito con Docker-first approach
-  - 📈 Task tracker y master log actualizados
-  - 🔍 Troubleshooting guides con comandos Docker
-  - ➡️ Próxima: TASK-001B FastMCP integration
+  - ✅ TASK-002A completada exitosamente en 2h
+  - 🏗️ Arquitectura WebSocket collectors establecida
+  - 🔗 Template pattern implementado para extensibilidad
+  - 📊 Trade entity model con Pydantic validation
+  - 💾 InMemoryStorage funcional con estadísticas
+  - 🎛️ CollectorManager integrado con FastAPI
+  - 📈 Observabilidad completa (health checks, metrics, logs)
+  - ➡️ Próxima: TASK-002B Bybit OrderBook + Binance Trades
 
 ---
 

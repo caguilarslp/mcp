@@ -67,6 +67,20 @@ def setup_logger(name: str, level: str = "INFO") -> logging.Logger:
     return logger
 
 
+def get_logger(name: str, level: str = "INFO") -> logging.Logger:
+    """
+    Get or create a structured logger (alias for setup_logger)
+    
+    Args:
+        name: Logger name (usually __name__ or module.submodule)
+        level: Log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+        
+    Returns:
+        Configured logger instance
+    """
+    return setup_logger(name, level)
+
+
 def log_with_context(logger: logging.Logger, level: str, message: str, 
                     context: Optional[Dict[str, Any]] = None) -> None:
     """

@@ -35,3 +35,6 @@ pytest-cov
 
 # Type checking
 mypy
+
+# Additional dependencies for collectors
+python-json-logger

@@ -1,301 +1,370 @@
-# 🎯 Integración con wAIckoff MCP
+# 🔗 Integración wAIckoff Platform v0.1.4
 
-## Visión General
+## 📋 Estado de Integración MCP
+- **Versión**: v0.1.4 - Base MCP Funcional + WebSocket Collectors  
+- **MCP Server**: SimpleMCP operativo con tools básicos
+- **Data Flow**: Trades en tiempo real disponibles para wAIckoff
+- **Próximo**: Expansión con herramientas específicas de análisis
 
-Cloud MarketData actúa como fuente de datos en tiempo real para wAIckoff MCP, proporcionando Volume Profile y Order Flow calculados a partir de datos de múltiples exchanges.
+## 🎯 Objetivo de Integración
 
-## Arquitectura de Integración
+Cloud MarketData actúa como **proveedor de datos especializado** para wAIckoff, suministrando:
+- 📊 Datos de mercado en tiempo real (trades, orderbook)
+- 📈 Volume Profile calculations
+- 🌊 Order Flow analysis  
+- 📉 Market depth information
+- 🔄 Historical data con diferentes timeframes
 
+## 🏗️ Arquitectura MCP Actual
+
+### 📡 SimpleMCP Server
+```python
+# Implementación actual - sin dependencias complejas
+class SimpleMCPServer:
+    def __init__(self):
+        self.tools = {
+            "ping": ping_tool,
+            "get_system_info": system_info_tool
+        }
+    
+    async def handle_request(self, method, params):
+        # Process MCP requests
 ```
-┌─────────────────┐     MCP Protocol      ┌──────────────────┐
-│  Cloud          │ ←─────────────────→   │   wAIckoff       │
-│  MarketData     │                       │   MCP Server     │
-│  (Provider)     │                       │   (Consumer)     │
-└─────────────────┘                       └──────────────────┘
-```
 
-## Herramientas MCP Expuestas
+### 🔧 Tools MCP Disponibles (v0.1.4)
 
-### 1. Volume Profile Tools
+#### 1. ping - Conectividad Test
+```bash
+# Via HTTP (testing)
+curl "http://localhost:8000/mcp/ping?message=test"
 
-#### get_volume_profile
-```typescript
+# Response
 {
-  name: "get_volume_profile",
-  parameters: {
-    symbol: string,        // "BTCUSDT"
-    timeframe: string,     // "1h", "4h", "1d"
-    lookback: number,      // períodos hacia atrás
-    resolution: number     // niveles de precio
-  },
-  returns: {
-    poc: number,          // Point of Control
-    vah: number,          // Value Area High
-    val: number,          // Value Area Low
-    profile: Array<{
-      price: number,
-      volume: number,
-      buyVolume: number,
-      sellVolume: number
-    }>
+  "status": "pong",
+  "message": "test", 
+  "timestamp": "2025-06-14T17:30:00.000Z",
+  "server": "Cloud MarketData Simple MCP v0.1.4",
+  "tool": "ping"
+}
+```
+
+#### 2. get_system_info - System Status
+```bash
+# Via HTTP (testing)
+curl http://localhost:8000/mcp/info
+
+# Response  
+{
+  "server_name": "Cloud MarketData Simple MCP",
+  "version": "0.1.4",
+  "capabilities": ["ping", "get_system_info"],
+  "status": "operational",
+  "uptime_seconds": 1243.5,
+  "collectors": {
+    "active": 1,
+    "total": 1,
+    "types": ["bybit_trades"]
   }
 }
 ```
 
-#### get_volume_profile_history
-```typescript
-{
-  name: "get_volume_profile_history",
-  parameters: {
-    symbol: string,
-    startTime: number,    // timestamp
-    endTime: number,      // timestamp
-    interval: string      // "1m", "5m", "1h"
-  }
-}
+## 📊 Data Flow: Cloud MarketData → wAIckoff
+
+### 🔄 Current Flow (v0.1.4)
+```
+Bybit WebSocket v5
+       ↓
+BybitTradesCollector
+       ↓
+Trade Entity (validated)
+       ↓
+InMemoryStorage
+       ↓
+FastAPI Endpoints
+       ↓
+MCP Tools (futuro)
+       ↓
+wAIckoff MCP Client
 ```
 
-### 2. Order Flow Tools
+### 📈 Planned Flow (v0.2.0+)
+```
+Multiple Exchanges (Bybit, Binance)
+       ↓
+Multiple Data Types (Trades, OrderBook, Candles)
+       ↓
+MongoDB Storage + Redis Cache
+       ↓
+Volume Profile & Order Flow Engines
+       ↓
+Comprehensive MCP Tools
+       ↓
+wAIckoff Platform
+```
 
-#### get_order_flow_metrics
-```typescript
+## 🛠️ MCP Tools Roadmap
+
+### 📊 TASK-007A: Volume Profile Tools
+```python
+# Planned MCP tools
 {
-  name: "get_order_flow_metrics",
-  parameters: {
-    symbol: string,
-    timeframe: string,
-    lookback: number
-  },
-  returns: {
-    delta: number,              // buy - sell volume
-    cumulativeDelta: number,
-    absorption: {
-      bullish: Array<Level>,
-      bearish: Array<Level>
+  "get_volume_profile": {
+    "description": "Get volume profile for symbol and timeframe",
+    "parameters": {
+      "symbol": "BTCUSDT",
+      "timeframe": "1h", 
+      "lookback_periods": 24
     },
-    imbalances: Array<{
-      price: number,
-      ratio: number,
-      side: "buy" | "sell"
-    }>
-  }
-}
-```
-
-#### stream_order_flow
-```typescript
-{
-  name: "stream_order_flow",
-  parameters: {
-    symbol: string,
-    subscribe: boolean
+    "response": {
+      "poc": 50000.5,  # Point of Control
+      "vah": 50200.0,  # Value Area High
+      "val": 49800.0,  # Value Area Low
+      "levels": [...]   # Price levels with volume
+    }
   },
-  returns: EventStream<{
-    timestamp: number,
-    price: number,
-    volume: number,
-    side: string,
-    delta: number,
-    cumulativeDelta: number
-  }>
-}
-```
-
-### 3. Market Depth Tools
-
-#### get_market_depth
-```typescript
-{
-  name: "get_market_depth",
-  parameters: {
-    symbol: string,
-    levels: number        // default 20
-  },
-  returns: {
-    bids: Array<[price: number, volume: number]>,
-    asks: Array<[price: number, volume: number]>,
-    spread: number,
-    midPrice: number,
-    imbalance: number    // (bidVol - askVol) / (bidVol + askVol)
-  }
-}
-```
-
-## Configuración en wAIckoff
-
-### 1. Agregar Cloud MarketData como servidor MCP
-
-En `mcp_servers.json`:
-```json
-{
-  "cloud-marketdata": {
-    "command": "node",
-    "args": ["cloud-marketdata-client.js"],
-    "env": {
-      "CLOUD_MARKETDATA_URL": "http://your-vps:8000",
-      "API_KEY": "your-api-key"
+  
+  "get_volume_profile_levels": {
+    "description": "Get specific volume levels",
+    "parameters": {
+      "symbol": "BTCUSDT",
+      "min_volume_threshold": 1000
     }
   }
 }
 ```
 
-### 2. Cliente MCP Local
-
-Crear `cloud-marketdata-client.js`:
-```javascript
-import { MCPClient } from '@modelcontextprotocol/sdk';
-
-class CloudMarketDataClient {
-  constructor(config) {
-    this.baseURL = config.url;
-    this.apiKey = config.apiKey;
-    this.mcp = new MCPClient();
-  }
-
-  async initialize() {
-    // Registrar herramientas
-    this.mcp.registerTool('get_volume_profile', this.getVolumeProfile.bind(this));
-    this.mcp.registerTool('get_order_flow_metrics', this.getOrderFlowMetrics.bind(this));
-    this.mcp.registerTool('get_market_depth', this.getMarketDepth.bind(this));
-  }
-
-  async getVolumeProfile(params) {
-    const response = await fetch(`${this.baseURL}/mcp/volume-profile`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(params)
-    });
-    return response.json();
-  }
-}
-```
-
-### 3. Uso en wAIckoff
-
-```typescript
-// En cualquier servicio de wAIckoff
-class EnhancedAnalysisService {
-  async analyzeWithRealData(symbol: string) {
-    // Obtener Volume Profile de Cloud MarketData
-    const volumeProfile = await this.mcp.call('get_volume_profile', {
-      symbol,
-      timeframe: '4h',
-      lookback: 24,
-      resolution: 50
-    });
-
-    // Obtener Order Flow
-    const orderFlow = await this.mcp.call('get_order_flow_metrics', {
-      symbol,
-      timeframe: '1h',
-      lookback: 24
-    });
-
-    // Combinar con análisis técnico existente
-    const analysis = this.combineAnalysis(volumeProfile, orderFlow);
-    
-    return analysis;
-  }
-}
-```
-
-## Autenticación y Seguridad
-
-### API Key Management
-```yaml
-# docker-compose.yml en Cloud MarketData
-environment:
-  - API_KEYS=key1:read,key2:read_write
-  - RATE_LIMIT_PER_MINUTE=100
-  - IP_WHITELIST=192.168.1.0/24
-```
-
-### Rate Limiting
-- 100 requests/minuto por defecto
-- Configurable por API key
-- Burst allowance para streaming
-
-## Monitoreo de Integración
-
-### Métricas a Trackear
-1. **Latencia end-to-end**: Desde request hasta response
-2. **Error rate**: Por herramienta MCP
-3. **Data freshness**: Edad de los datos servidos
-4. **Usage patterns**: Qué herramientas se usan más
-
-### Health Check Endpoint
-```bash
-GET /mcp/health
+### 🌊 TASK-007B: Order Flow Tools
+```python
 {
-  "status": "healthy",
-  "version": "1.0.0",
-  "uptime": "72h",
-  "tools": [
-    {"name": "get_volume_profile", "calls_last_hour": 234},
-    {"name": "get_order_flow_metrics", "calls_last_hour": 156}
+  "get_order_flow": {
+    "description": "Get order flow analysis",
+    "parameters": {
+      "symbol": "BTCUSDT",
+      "timeframe": "5m"
+    },
+    "response": {
+      "cumulative_delta": 15000,
+      "delta_per_level": [...],
+      "absorption_zones": [...],
+      "imbalance_zones": [...]
+    }
+  },
+  
+  "get_order_flow_stream": {
+    "description": "Stream real-time order flow",
+    "parameters": {
+      "symbol": "BTCUSDT"
+    }
+  },
+  
+  "get_market_depth": {
+    "description": "Get current market depth",
+    "parameters": {
+      "symbol": "BTCUSDT",
+      "depth": 20
+    }
+  }
+}
+```
+
+## 🔌 Configuración de Conexión MCP
+
+### 📦 Package.json (Cliente wAIckoff)
+```json
+{
+  "name": "waickoff-cloud-marketdata-client",
+  "version": "0.1.4",
+  "mcpServers": {
+    "cloud-marketdata": {
+      "command": "node",
+      "args": [
+        "cloud-marketdata-client.js"
+      ],
+      "env": {
+        "CLOUD_MARKETDATA_URL": "http://localhost:8000",
+        "API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+### 🔗 Connection Methods
+
+#### 1. HTTP (Development & Testing)
+```python
+# Direct HTTP calls para testing rápido
+import requests
+
+# Test connectivity
+response = requests.get("http://localhost:8000/mcp/ping")
+
+# Get system info
+response = requests.get("http://localhost:8000/mcp/info")
+
+# Get trades (current available)
+response = requests.get("http://localhost:8000/collectors/trades?symbol=BTCUSDT&limit=10")
+```
+
+#### 2. MCP Protocol (Production)
+```python
+# Via MCP client (futuro)
+from mcp import Client
+
+client = Client()
+await client.connect("http://localhost:8000/mcp")
+
+# Use tools
+result = await client.call_tool("get_volume_profile", {
+    "symbol": "BTCUSDT",
+    "timeframe": "1h"
+})
+```
+
+## 📊 Data Formats & Schemas
+
+### 🔄 Trade Data Format
+```json
+{
+  "symbol": "BTCUSDT",
+  "side": "Buy",
+  "price": "50000.50",
+  "quantity": "0.001", 
+  "timestamp": "2025-06-14T17:30:00.000Z",
+  "exchange": "bybit",
+  "trade_id": "2280000000054932641",
+  "raw_data": {
+    "bybit_trade": {...},
+    "message_metadata": {...}
+  }
+}
+```
+
+### 📈 Volume Profile Format (Planned)
+```json
+{
+  "symbol": "BTCUSDT",
+  "timeframe": "1h",
+  "timestamp": "2025-06-14T17:00:00.000Z",
+  "poc": 50000.5,
+  "vah": 50200.0,
+  "val": 49800.0,
+  "value_area_percentage": 70,
+  "total_volume": 1500000,
+  "levels": [
+    {
+      "price": 50000.0,
+      "volume": 15000,
+      "percentage": 1.0,
+      "type": "high_volume_node"
+    }
   ]
 }
 ```
 
-## Troubleshooting
+## 🔄 Error Handling & Reliability
 
-### Problemas Comunes
+### 🛡️ Connection Resilience
+```python
+# Auto-retry mechanism
+max_retries = 3
+retry_delay = [1, 2, 4]  # exponential backoff
 
-1. **Timeout en requests**
-   - Verificar latencia de red VPS ↔ Local
-   - Aumentar timeout en cliente MCP
-   - Considerar cache local para datos frecuentes
-
-2. **Datos desactualizados**
-   - Verificar collectors están activos
-   - Revisar logs de Cloud MarketData
-   - Validar retención de datos
-
-3. **Rate limit exceeded**
-   - Implementar cache en wAIckoff
-   - Solicitar aumento de límite
-   - Usar batch requests cuando sea posible
-
-### Comandos de Diagnóstico
-```bash
-# Verificar estado de Cloud MarketData
-docker-compose ps
-curl http://your-vps:8000/health
-
-# Verificar conectividad desde wAIckoff
-curl http://your-vps:8000/mcp/health
-
-# Logs de integración
-docker-compose logs -f app | grep MCP
-
-# Test de herramientas MCP
-docker-compose exec app python -c "
-import requests
-response = requests.post('http://localhost:8000/mcp/volume-profile', json={'symbol': 'BTCUSDT'})
-print(response.json())
-"
+# Circuit breaker pattern
+if error_count > threshold:
+    circuit_state = "OPEN"
+    fallback_response()
 ```
 
-## Roadmap de Integración
+### 📊 Health Monitoring
+```bash
+# Health check incluye MCP status
+curl http://localhost:8000/health
 
-### Fase 1 (Actual)
-- ✅ Volume Profile básico
-- ✅ Order Flow metrics
-- ✅ Market Depth
+{
+  "status": "healthy",
+  "services": {
+    "mcp_server": "healthy",
+    "collector_manager": "healthy", 
+    "collectors": "1/1 active"
+  }
+}
+```
 
-### Fase 2
-- [ ] Historical data API
-- [ ] Custom indicators
-- [ ] Multi-symbol queries
+## 🔧 Development & Testing
 
-### Fase 3
-- [ ] Machine Learning features
-- [ ] Pattern detection
-- [ ] Alerting system
+### 🧪 Local Testing Setup
+```bash
+# 1. Start Cloud MarketData
+docker-compose --profile dev up -d
+
+# 2. Verify MCP endpoints
+curl http://localhost:8000/mcp/ping
+curl http://localhost:8000/mcp/info
+
+# 3. Monitor data flow
+curl "http://localhost:8000/collectors/trades?limit=5"
+
+# 4. Check collector health
+curl http://localhost:8000/collectors/status
+```
+
+### 📊 Data Verification
+```bash
+# Verify trades are flowing
+watch -n 5 'curl -s "http://localhost:8000/collectors/storage/stats" | jq ".trades_per_second, .current_trades_stored"'
+
+# Check specific symbol data
+curl "http://localhost:8000/collectors/trades?symbol=BTCUSDT&limit=1" | jq '.'
+```
+
+## 🚀 Integration Roadmap
+
+### Phase 1: Base MCP (v0.1.4) ✅
+- ✅ SimpleMCP server operational
+- ✅ Basic tools (ping, system_info)
+- ✅ HTTP endpoints for testing
+- ✅ WebSocket data collection (Bybit trades)
+- ✅ Health monitoring
+
+### Phase 2: Data Tools (v0.2.0) - TASK-002B
+- [ ] Multiple collectors (Bybit OrderBook, Binance)
+- [ ] Enhanced data models (OrderBook entity)
+- [ ] Rate limiting & circuit breakers
+- [ ] Production hardening
+
+### Phase 3: Analytics Tools (v0.3.0) - TASK-004A/B
+- [ ] Volume Profile calculation engine
+- [ ] MCP tools for Volume Profile
+- [ ] Multiple timeframes support
+- [ ] Redis caching layer
+
+### Phase 4: Advanced Analysis (v0.4.0) - TASK-005A/B
+- [ ] Order Flow analysis engine
+- [ ] Real-time streaming capabilities
+- [ ] MCP tools for Order Flow
+- [ ] Advanced analytics algorithms
+
+### Phase 5: Production Ready (v0.5.0) - TASK-008A/B
+- [ ] Complete monitoring & alerting
+- [ ] Performance optimization
+- [ ] Full test coverage
+- [ ] Production deployment guides
+
+## 📈 Performance Targets
+
+### Current (v0.1.4)
+- ✅ **Latency**: < 10ms per trade processing
+- ✅ **Reliability**: Auto-reconnection functional
+- ✅ **Data Quality**: Pydantic validation ensures clean data
+- ✅ **Monitoring**: Health checks operational
+
+### Target (v0.5.0)
+- **Throughput**: 10K trades/segundo
+- **Latency**: < 5ms end-to-end processing
+- **Uptime**: 99.9% availability
+- **Coverage**: Multiple exchanges & data types
 
 ---
 
-*Para configuración detallada del cliente, ver `/examples/waickoff-integration/`*
+**Última actualización**: 2025-06-14 - Base MCP funcional + WebSocket collectors operativos
