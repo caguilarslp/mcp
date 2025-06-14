@@ -11,8 +11,8 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 from threading import Lock
 
-from src.entities.trade import Trade
-from src.core.logger import get_logger
+from ...entities.trade import Trade
+from ...core.logger import get_logger
 
 
 class InMemoryStorage:

@@ -10,8 +10,8 @@ from decimal import Decimal
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from src.collectors.base import WebSocketCollector
-from src.entities.trade import Trade, TradeSide
+from ..base import WebSocketCollector
+from ...entities.trade import Trade, TradeSide
 
 
 class BybitTradesCollector(WebSocketCollector):
@@ -40,6 +40,7 @@ class BybitTradesCollector(WebSocketCollector):
             storage_handler: Handler for storing trades (optional)
             **kwargs: Additional arguments for WebSocketCollector
         """
+        # Call parent constructor first to initialize logger
         super().__init__(
             name=f"bybit_trades",
             websocket_url=self.WEBSOCKET_URL,
@@ -47,9 +48,18 @@ class BybitTradesCollector(WebSocketCollector):
             **kwargs
         )
         
+        # Now we can use logger and assign storage handler
+        self.logger.info(f"Constructor received storage_handler: {type(storage_handler).__name__ if storage_handler else 'None'}")
+        self.logger.info(f"Constructor storage_handler ID: {id(storage_handler) if storage_handler else 'None'}")
+        
+        # IMPORTANT: Storage handler assignment AFTER super().__init__()
         self.storage_handler = storage_handler
+        
+        self.logger.info(f"After assignment - self.storage_handler: {type(self.storage_handler).__name__ if self.storage_handler else 'None'}")
+        self.logger.info(f"After assignment - storage_handler ID: {id(self.storage_handler) if self.storage_handler else 'None'}")
         self.logger.info(f"Initialized Bybit trades collector for symbols: {symbols}")
         self.logger.info(f"WebSocket URL: {self.websocket_url}")
+        self.logger.info(f"Storage handler: {type(storage_handler).__name__ if storage_handler else 'None'}")
     
     async def create_subscription_message(self, symbols: List[str]) -> str:
         """

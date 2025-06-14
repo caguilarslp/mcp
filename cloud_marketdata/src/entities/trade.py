@@ -49,7 +49,7 @@ class Trade(BaseModel):
             Decimal: lambda v: str(v),
             datetime: lambda v: v.isoformat(),
         }
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "symbol": "BTCUSDT",
                 "side": "Buy",

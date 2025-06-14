@@ -13,7 +13,7 @@ from fastapi import HTTPException, Security, status
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel
 
-from src.core.logger import get_logger
+from ..core.logger import get_logger
 
 logger = get_logger("auth")
 

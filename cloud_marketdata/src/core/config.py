@@ -58,7 +58,7 @@ class Settings(BaseSettings):
     MCP_HOST: str = Field(default="localhost")
     
     # Trading Symbols
-    SYMBOLS: List[str] = Field(default=["BTCUSDT", "ETHUSDT", "ADAUSDT"])
+    SYMBOLS: List[str] = Field(default=[])
     
     # Nested settings
     database: DatabaseSettings = Field(default_factory=DatabaseSettings)

@@ -17,7 +17,7 @@ from datetime import datetime
 import websockets
 from websockets.exceptions import ConnectionClosed, WebSocketException
 
-from src.core.logger import get_logger
+from ..core.logger import get_logger
 
 
 class CollectorStatus(str, Enum):

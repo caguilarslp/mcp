@@ -10,11 +10,20 @@ import logging
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 
-from src.collectors.base import WebSocketCollector, CollectorStatus
-from src.collectors.bybit import BybitTradesCollector
-from src.collectors.storage import InMemoryStorage
-from src.core.logger import get_logger
-from src.core.config import Settings
+from .base import WebSocketCollector, CollectorStatus
+from .bybit import BybitTradesCollector
+from .storage import InMemoryStorage
+from ..core.logger import get_logger
+from ..core.config import Settings
+
+# TRADING SYMBOLS - Change these as needed
+TRADING_SYMBOLS = [
+    "BTCUSDT",
+    "XRPUSDT", 
+    "HBARUSDT",
+    "ICPUSDT",
+    "ONDOUSDT"
+]
 
 
 class CollectorManager:
@@ -92,15 +101,15 @@ class CollectorManager:
     
     async def _initialize_default_collectors(self) -> None:
         """Initialize default collectors from configuration"""
-        # Get symbols from configuration
-        settings = Settings()
-        symbols = settings.SYMBOLS
-        
-        if not symbols:
-            self.logger.warning("No symbols configured, using default BTCUSDT")
-            symbols = ["BTCUSDT"]
+        # Use hardcoded trading symbols (easy to change)
+        symbols = TRADING_SYMBOLS
+        self.logger.info(f"Using configured trading symbols: {symbols}")
         
         # Create Bybit trades collector
+        self.logger.info(f"Creating Bybit collector with storage: {type(self.storage).__name__}")
+        self.logger.info(f"Storage object ID: {id(self.storage)}")
+        self.logger.info(f"Storage object: {self.storage}")
+        
         bybit_collector = BybitTradesCollector(
             symbols=symbols,
             storage_handler=self.storage,
@@ -108,6 +117,10 @@ class CollectorManager:
             reconnect_delay_base=1.0,
             reconnect_delay_max=30.0
         )
+        
+        # Verify storage was assigned
+        self.logger.info(f"After creation - collector storage_handler: {bybit_collector.storage_handler}")
+        self.logger.info(f"After creation - storage_handler ID: {id(bybit_collector.storage_handler) if bybit_collector.storage_handler else 'None'}")
         
         self.collectors["bybit_trades"] = bybit_collector
         self.logger.info(f"Initialized default collectors for symbols: {symbols}")
