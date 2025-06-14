@@ -170,6 +170,20 @@ GET /health
 }
 ```
 
+### Docker Commands
+```bash
+# Verificar salud del sistema
+docker-compose ps
+curl http://localhost:8000/health
+
+# Monitoreo en tiempo real
+docker stats $(docker-compose ps -q)
+docker-compose logs -f
+
+# Debugging específico
+docker-compose exec app python -c "from src.core.config import Settings; print(Settings())"
+```
+
 ## Seguridad
 
 - **API Keys**: Rotación automática cada 30 días
@@ -180,3 +194,4 @@ GET /health
 ---
 
 *Para más detalles de implementación, ver `/claude/docs/`*
+*Comandos Docker: Ver `DOCKER_COMMANDS.md` y `claude/docs/docker-commands-guide.md`*

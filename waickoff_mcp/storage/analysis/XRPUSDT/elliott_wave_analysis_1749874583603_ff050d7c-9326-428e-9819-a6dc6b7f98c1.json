@@ -1,0 +1,202 @@
+{
+  "id": "ff050d7c-9326-428e-9819-a6dc6b7f98c1",
+  "timestamp": 1749874583603,
+  "symbol": "XRPUSDT",
+  "analysisType": "elliott_wave_analysis",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "240",
+    "currentPrice": 2.1691,
+    "currentSequence": {
+      "type": "impulsive",
+      "waves": [
+        {
+          "number": 1,
+          "type": "impulsive",
+          "subType": "motive",
+          "startIndex": 66,
+          "endIndex": 81,
+          "startPrice": 2.4798,
+          "endPrice": 2.2659,
+          "startTime": "2025-05-23T00:00:00.000Z",
+          "endTime": "2025-05-25T12:00:00.000Z",
+          "length": -8.625695620614573,
+          "duration": 15,
+          "confidence": 53.993849840799356
+        },
+        {
+          "number": 2,
+          "type": "impulsive",
+          "subType": "motive",
+          "startIndex": 81,
+          "endIndex": 85,
+          "startPrice": 2.2659,
+          "endPrice": 2.3586,
+          "startTime": "2025-05-25T12:00:00.000Z",
+          "endTime": "2025-05-26T04:00:00.000Z",
+          "length": 4.091089633258319,
+          "duration": 4,
+          "confidence": 50.647313931032315
+        },
+        {
+          "number": 3,
+          "type": "impulsive",
+          "subType": "motive",
+          "startIndex": 85,
+          "endIndex": 114,
+          "startPrice": 2.3586,
+          "endPrice": 2.079,
+          "startTime": "2025-05-26T04:00:00.000Z",
+          "endTime": "2025-05-31T00:00:00.000Z",
+          "length": -11.854489951666237,
+          "duration": 29,
+          "confidence": 55.08473189569732
+        }
+      ],
+      "isComplete": false,
+      "degree": "minute",
+      "startTime": "2025-05-23T00:00:00.000Z",
+      "endTime": "2025-05-31T00:00:00.000Z",
+      "validity": 100
+    },
+    "historicalSequences": [
+      {
+        "type": "impulsive",
+        "waves": [
+          {
+            "number": 1,
+            "type": "impulsive",
+            "subType": "motive",
+            "startIndex": 66,
+            "endIndex": 81,
+            "startPrice": 2.4798,
+            "endPrice": 2.2659,
+            "startTime": "2025-05-23T00:00:00.000Z",
+            "endTime": "2025-05-25T12:00:00.000Z",
+            "length": -8.625695620614573,
+            "duration": 15,
+            "confidence": 53.993849840799356
+          },
+          {
+            "number": 2,
+            "type": "impulsive",
+            "subType": "motive",
+            "startIndex": 81,
+            "endIndex": 85,
+            "startPrice": 2.2659,
+            "endPrice": 2.3586,
+            "startTime": "2025-05-25T12:00:00.000Z",
+            "endTime": "2025-05-26T04:00:00.000Z",
+            "length": 4.091089633258319,
+            "duration": 4,
+            "confidence": 50.647313931032315
+          },
+          {
+            "number": 3,
+            "type": "impulsive",
+            "subType": "motive",
+            "startIndex": 85,
+            "endIndex": 114,
+            "startPrice": 2.3586,
+            "endPrice": 2.079,
+            "startTime": "2025-05-26T04:00:00.000Z",
+            "endTime": "2025-05-31T00:00:00.000Z",
+            "length": -11.854489951666237,
+            "duration": 29,
+            "confidence": 55.08473189569732
+          }
+        ],
+        "isComplete": false,
+        "degree": "minute",
+        "startTime": "2025-05-23T00:00:00.000Z",
+        "endTime": "2025-05-31T00:00:00.000Z",
+        "validity": 100
+      }
+    ],
+    "currentWave": {
+      "wave": {
+        "number": 3,
+        "type": "impulsive",
+        "subType": "motive",
+        "startIndex": 85,
+        "endIndex": 114,
+        "startPrice": 2.3586,
+        "endPrice": 2.079,
+        "startTime": "2025-05-26T04:00:00.000Z",
+        "endTime": "2025-05-31T00:00:00.000Z",
+        "length": -11.854489951666237,
+        "duration": 29,
+        "confidence": 55.08473189569732
+      },
+      "position": "end",
+      "nextExpected": "Wave 4 correction expected (typically 38.2%-50% of Wave 3)"
+    },
+    "projections": [
+      {
+        "targetWave": 4,
+        "targets": {
+          "conservative": 2.1449856,
+          "normal": 2.1858072,
+          "extended": 2.2188
+        },
+        "fibonacciRatios": [
+          {
+            "ratio": 0.236,
+            "price": 2.1449856,
+            "description": "Shallow correction"
+          },
+          {
+            "ratio": 0.382,
+            "price": 2.1858072,
+            "description": "Common correction"
+          },
+          {
+            "ratio": 0.5,
+            "price": 2.2188,
+            "description": "Moderate correction"
+          }
+        ],
+        "timeProjection": {
+          "minPeriods": 11,
+          "maxPeriods": 29,
+          "estimatedCompletion": "2025-05-31T17:00:00.000Z"
+        },
+        "probability": 70
+      }
+    ],
+    "ruleValidation": {
+      "wave2Rule": true,
+      "wave3Rule": true,
+      "wave4Rule": true,
+      "alternationRule": true,
+      "channelRule": true,
+      "overallValidity": 100
+    },
+    "signals": {
+      "signal": "wait",
+      "strength": 60,
+      "reasoning": "Correction expected - wait for better entry",
+      "waveContext": "End of Wave 3",
+      "riskLevel": "high"
+    },
+    "analysisTime": "2025-06-14T04:16:23.603Z",
+    "confidence": 70,
+    "dataQuality": 0
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-14T04:16:23.603Z",
+    "tags": [
+      "timeframe:240"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

@@ -62,6 +62,8 @@ Este documento establece el sistema de trazabilidad para el proyecto Cloud Marke
 [FIX] Corrección de bugs
 [FEAT] Nueva funcionalidad
 [REFACTOR] Refactorización
+[DOCKER] Actualización de configuración Docker
+[ENV] Cambios en configuración de entorno
 ```
 
 ### Prioridades
@@ -91,4 +93,4 @@ Este sistema de trazabilidad evolucionará con el proyecto. Los cambios al siste
 
 ---
 
-*Versión: 1.0.0 | Fecha: 2025-06-13*
+*Versión: 1.1.0 | Fecha: 2025-06-14 | Última actualización: Eliminación Makefile, comandos Docker directos*

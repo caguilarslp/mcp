@@ -259,6 +259,26 @@ GET /mcp/health
    - Solicitar aumento de límite
    - Usar batch requests cuando sea posible
 
+### Comandos de Diagnóstico
+```bash
+# Verificar estado de Cloud MarketData
+docker-compose ps
+curl http://your-vps:8000/health
+
+# Verificar conectividad desde wAIckoff
+curl http://your-vps:8000/mcp/health
+
+# Logs de integración
+docker-compose logs -f app | grep MCP
+
+# Test de herramientas MCP
+docker-compose exec app python -c "
+import requests
+response = requests.post('http://localhost:8000/mcp/volume-profile', json={'symbol': 'BTCUSDT'})
+print(response.json())
+"
+```
+
 ## Roadmap de Integración
 
 ### Fase 1 (Actual)

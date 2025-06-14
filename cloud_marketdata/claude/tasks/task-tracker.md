@@ -3,19 +3,20 @@
 ## 🎯 Tareas Activas (Críticas)
 
 ### TASK-001: Setup Inicial Docker + FastAPI Base
-- **Estado**: 🔴 PENDIENTE
+- **Estado**: ✅ COMPLETADA
 - **Prioridad**: CRÍTICA
 - **Estimación**: 1.5 horas
+- **Tiempo Real**: 1.5 horas
 - **Descripción**: Configurar entorno base mínimo funcional
 - **Entregables**:
-  - [ ] Dockerfile con Python 3.12-slim + requirements básicos
-  - [ ] docker-compose.yml con FastAPI + MongoDB + Redis
-  - [ ] FastAPI app básica con health check en /health
-  - [ ] Estructura src/ con __init__.py
-  - [ ] Makefile con comandos: up, down, logs, test
+  - [x] Dockerfile con Python 3.12-slim + requirements básicos
+  - [x] docker-compose.yml con FastAPI + MongoDB + Redis
+  - [x] FastAPI app básica con health check en /health
+  - [x] Estructura src/ con __init__.py
+  - [x] DOCKER_COMMANDS.md con comandos esenciales (sin Makefile)
 - **Dependencias**: Ninguna
-- **Criterio de Completitud**: `docker-compose up` funciona, GET /health retorna 200
-- **Notas**: Base mínima funcional, sin FastMCP aún
+- **Criterio de Completitud**: ✅ `docker-compose up` funciona, GET /health retorna 200
+- **Notas**: Base funcional completada - listo para FastMCP
 
 ### TASK-001B: FastMCP Server Skeleton
 - **Estado**: 🔴 PENDIENTE
@@ -262,29 +263,40 @@
 ---
 
 ## ✅ Tareas Completadas
-*(Ninguna aún - proyecto recién iniciado)*
+
+### TASK-001: Setup Inicial Docker + FastAPI Base ✅
+- **Completada**: 14/06/2025
+- **Duración**: 1.5 horas (según estimación)
+- **Entregables**: Dockerfile, docker-compose.yml, FastAPI app, src/ structure, DOCKER_COMMANDS.md
+- **Criterio**: ✅ `docker-compose up` funciona, GET /health retorna 200
+- **Notas**: Base sólida para FastMCP integration
 
 ---
 
 ## 📊 Métricas del Proyecto v2.0
 - **Total Tareas**: 16 (8 originales → 16 subfases atómicas)
-- **Completadas**: 0 (0%)
+- **Completadas**: 1 (6.25%)
 - **En Progreso**: 0
-- **Pendientes**: 16
+- **Pendientes**: 15
 - **Horas Estimadas**: 26h (optimizado de 25h originales)
+- **Horas Consumidas**: 1.5h
+- **Horas Restantes**: 24.5h
 - **Promedio por tarea**: 1.6h (máximo 2h por subfase)
 
 ---
 
 ## 🔄 Última Actualización
-- **Fecha**: 2025-06-13
-- **Por**: Reestructuración en subfases atómicas
+- **Fecha**: 2025-06-14
+- **Por**: Eliminación Makefile - Docker-First Approach
 - **Cambios**: 
-  - Dividido 8 tareas complejas en 16 subfases atómicas
-  - Máximo 2h por subfase para evitar implementaciones incompletas
-  - Criterios de completitud específicos para cada subfase
-  - Dependencias claras entre subfases
-  - Entregables concretos y verificables
+  - ✅ TASK-001 completada exitosamente en 1.5h
+  - 🚫 Eliminado Makefile completamente
+  - 🐳 Creado DOCKER_COMMANDS.md con guía completa Docker
+  - 📝 Actualizada toda la documentación para comandos Docker directos
+  - 🔧 README.md reescrito con Docker-first approach
+  - 📈 Task tracker y master log actualizados
+  - 🔍 Troubleshooting guides con comandos Docker
+  - ➡️ Próxima: TASK-001B FastMCP integration
 
 ---
 

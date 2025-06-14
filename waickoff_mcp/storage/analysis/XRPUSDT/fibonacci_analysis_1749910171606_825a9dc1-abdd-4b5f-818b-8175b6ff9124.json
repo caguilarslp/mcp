@@ -1,0 +1,252 @@
+{
+  "id": "825a9dc1-abdd-4b5f-818b-8175b6ff9124",
+  "timestamp": 1749910171606,
+  "symbol": "XRPUSDT",
+  "analysisType": "fibonacci_analysis",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "15",
+    "currentPrice": 2.1632,
+    "trend": "sideways",
+    "swingHigh": {
+      "index": 19,
+      "timestamp": "2025-06-13T18:00:00.000Z",
+      "price": 2.1495,
+      "type": "high",
+      "strength": 6.570226886872098,
+      "volume": 419142.88,
+      "confirmed": true
+    },
+    "swingLow": {
+      "index": 21,
+      "timestamp": "2025-06-13T18:30:00.000Z",
+      "price": 2.1165,
+      "type": "low",
+      "strength": 8.157085129959285,
+      "volume": 563844.52,
+      "confirmed": true
+    },
+    "retracementLevels": [
+      {
+        "level": 0.236,
+        "price": 2.141712,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 56.21369058878288,
+        "distance": -0.9933431952662598
+      },
+      {
+        "level": 0.382,
+        "price": 2.136894,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 63.43602960746829,
+        "distance": -1.216068786982246
+      },
+      {
+        "level": 0.5,
+        "price": 2.133,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 35.220225532922385,
+        "distance": -1.396079881656795
+      },
+      {
+        "level": 0.618,
+        "price": 2.129106,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 29.37374232276665,
+        "distance": -1.5760909763313438
+      },
+      {
+        "level": 0.786,
+        "price": 2.1235619999999997,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 74.08718392799207,
+        "distance": -1.832377958579885
+      }
+    ],
+    "extensionLevels": [
+      {
+        "level": 1,
+        "price": 2.1165,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 40.45202766764158,
+        "distance": -2.158838757396448
+      },
+      {
+        "level": 1.272,
+        "price": 2.1075239999999997,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.5737795857988197
+      },
+      {
+        "level": 1.414,
+        "price": 2.1028379999999998,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.7904031065088772
+      },
+      {
+        "level": 1.618,
+        "price": 2.096106,
+        "label": "161.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -3.1016087278106506
+      },
+      {
+        "level": 2,
+        "price": 2.0834999999999995,
+        "label": "200.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -3.684356508875755
+      },
+      {
+        "level": 2.618,
+        "price": 2.0631059999999994,
+        "label": "261.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -4.627126479289958
+      }
+    ],
+    "keyLevels": [
+      {
+        "level": 0.786,
+        "price": 2.1235619999999997,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 74.08718392799207,
+        "distance": -1.832377958579885
+      },
+      {
+        "level": 0.382,
+        "price": 2.136894,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 63.43602960746829,
+        "distance": -1.216068786982246
+      },
+      {
+        "level": 0.236,
+        "price": 2.141712,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 56.21369058878288,
+        "distance": -0.9933431952662598
+      },
+      {
+        "level": 1,
+        "price": 2.1165,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 40.45202766764158,
+        "distance": -2.158838757396448
+      },
+      {
+        "level": 0.5,
+        "price": 2.133,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 35.220225532922385,
+        "distance": -1.396079881656795
+      },
+      {
+        "level": 0.618,
+        "price": 2.129106,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 29.37374232276665,
+        "distance": -1.5760909763313438
+      },
+      {
+        "level": 1.272,
+        "price": 2.1075239999999997,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.5737795857988197
+      },
+      {
+        "level": 1.414,
+        "price": 2.1028379999999998,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.7904031065088772
+      }
+    ],
+    "currentPosition": {
+      "nearestLevel": {
+        "level": 0.236,
+        "price": 2.141712,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 56.21369058878288,
+        "distance": -0.9933431952662598
+      },
+      "retracement": -41.51515151514985,
+      "nextTargets": [
+        {
+          "level": 0.236,
+          "price": 2.141712,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 56.21369058878288,
+          "distance": -0.9933431952662598
+        },
+        {
+          "level": 0.382,
+          "price": 2.136894,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 63.43602960746829,
+          "distance": -1.216068786982246
+        },
+        {
+          "level": 0.5,
+          "price": 2.133,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 35.220225532922385,
+          "distance": -1.396079881656795
+        },
+        {
+          "level": 0.618,
+          "price": 2.129106,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 29.37374232276665,
+          "distance": -1.5760909763313438
+        }
+      ]
+    },
+    "analysisTime": "2025-06-14T14:09:31.605Z",
+    "confidence": 37.88460738574497,
+    "validity": 22
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-14T14:09:31.606Z",
+    "tags": [
+      "timeframe:15"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

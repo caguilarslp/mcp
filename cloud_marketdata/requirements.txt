@@ -1,0 +1,37 @@
+# Core Framework - Latest versions
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+
+# MCP Server - Latest versions (fastmcp está en 2.x)
+fastmcp
+mcp
+
+# Async & HTTP
+aiohttp
+httpx
+websockets
+
+# Database & Cache
+pymongo
+motor
+redis
+aioredis
+
+# Task Queue & Background Jobs
+celery
+celery[redis]
+
+# Development & Monitoring
+python-dotenv
+loguru
+prometheus-client
+
+# Testing (development only)
+pytest
+pytest-asyncio
+pytest-cov
+
+# Type checking
+mypy

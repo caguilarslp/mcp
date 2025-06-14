@@ -1,95 +1,186 @@
-# Cloud MarketData MCP Server
+# 🐳 Cloud MarketData MCP Server
 
-Microservicio robusto y escalable para la recopilación, procesamiento y almacenamiento de datos de mercado en tiempo real.
+Professional-grade microservice for real-time market data collection and processing with MCP (Model Context Protocol) integration.
 
 ## 🚀 Quick Start
 
 ```bash
-# Desarrollo
-docker-compose up -d
+# 1. Setup environment
+git clone <repository>
+cd cloud_marketdata
+cp .env.example .env
+
+# 2. Start development environment
+docker-compose --profile dev up -d
+
+# 3. Verify everything is running
+docker-compose ps
+curl http://localhost:8000/health
+```
+
+## 🎯 What's Included
+
+- **FastAPI** application with health checks and structured logging
+- **MongoDB** for persistent data storage with TTL indexes
+- **Redis** for caching and pub/sub messaging
+- **Development tools**: MongoDB Express, Redis Commander
+- **Docker Compose** setup with dev/prod profiles
+- **Environment-based configuration** with Pydantic Settings
+
+## 🌍 Development Environment
+
+Once running, you can access:
+
+- **Application**: http://localhost:8000
+- **API Documentation**: http://localhost:8000/docs
+- **Health Check**: http://localhost:8000/health
+- **MongoDB Express**: http://localhost:8082 (admin/admin123)
+- **Redis Commander**: http://localhost:8081
+
+## 🔧 Development Commands
+
+See [DOCKER_COMMANDS.md](./DOCKER_COMMANDS.md) for comprehensive Docker commands.
+
+### Essential Commands
+```bash
+# Start development with tools
+docker-compose --profile dev up -d
+
+# View logs
 docker-compose logs -f
 
-# Tests
-pytest -v
+# Stop everything
+docker-compose down
 
-# Producción
-docker build -t cloud-marketdata .
-docker run -d cloud-marketdata
+# Access application container
+docker-compose exec app bash
+
+# Run tests
+docker-compose exec app python -m pytest -v
 ```
 
-## 🏗️ Arquitectura
-
-- **Clean Architecture** con 4 capas bien definidas
-- **Event-driven** para procesamiento asíncrono
-- **WebSocket collectors** para Bybit y Binance
-- **MongoDB** para persistencia con TTL automático
-- **Redis** para streaming y caché
-- **FastMCP** servidor para integración
-
-## 📊 Características
-
-- ✅ Recopilación 24/7 de trades y orderbook
-- ✅ Cálculo de Volume Profile en tiempo real
-- ✅ Análisis de Order Flow con delta y absorción
-- ✅ Sistema automático de limpieza de datos
-- ✅ API MCP para consumo externo
-- ✅ Monitoreo y métricas incluidas
-
-## 🔧 Configuración
-
-Variables de entorno en `.env`:
-
-```env
-# MongoDB
-MONGO_URI=mongodb://localhost:27017
-MONGO_DB=marketdata
-
-# Redis
-REDIS_URL=redis://localhost:6379
-
-# Exchange APIs
-BYBIT_TESTNET=false
-BINANCE_TESTNET=false
-
-# Data Retention (hours)
-RAW_DATA_RETENTION=1
-MINUTE_DATA_RETENTION=24
-HOURLY_DATA_RETENTION=168
-
-# MCP Server
-MCP_PORT=8000
-MCP_AUTH_KEY=your-secret-key
-```
-
-## 📁 Estructura
+## 📁 Project Structure
 
 ```
 cloud_marketdata/
-├── src/
-│   ├── core/           # Dominio y entidades
-│   ├── infrastructure/ # Adaptadores externos
-│   ├── application/    # Casos de uso
-│   └── presentation/   # API y MCP
-├── tests/              # Tests unitarios e integración
-├── docker/             # Configuración Docker
-└── config/            # Configuración y env
+├── src/                    # Application source code
+│   ├── core/              # Core utilities (config, logging)
+│   ├── infrastructure/    # External adapters (coming soon)
+│   ├── application/       # Use cases (coming soon)
+│   └── presentation/      # API and MCP (coming soon)
+├── tests/                 # Test suite
+├── docker/                # Docker configuration
+├── config/                # Configuration files
+├── claude/                # Development documentation
+└── DOCKER_COMMANDS.md     # Docker command reference
 ```
 
-## 🛠️ Desarrollo
+## 🎯 Roadmap
 
-Ver documentación completa en `claude/docs/` para:
-- Guía de contribución
-- Arquitectura detallada
-- API Reference
-- Troubleshooting
+- [x] **TASK-001**: Docker + FastAPI base setup
+- [ ] **TASK-001B**: FastMCP server integration
+- [ ] **TASK-002A**: WebSocket collectors (Bybit)
+- [ ] **TASK-002B**: Multiple exchange support
+- [ ] **TASK-003A**: MongoDB schemas and repositories
+- [ ] **TASK-004A**: Volume Profile calculations
+- [ ] **TASK-005A**: Order Flow analysis
 
-## 📈 Performance
+## 🔧 Configuration
 
-- Latencia: < 10ms por trade
-- Throughput: 10k trades/segundo
-- Storage: Optimizado con retención automática
-- CPU: < 30% en condiciones normales
+Environment variables are loaded from `.env` file:
 
-## 📄 Licencia
+```bash
+# Copy example and customize
+cp .env.example .env
+nano .env
+```
 
-MIT License - Ver LICENSE para detalles
+Key configuration options:
+- `MONGODB_URI`: MongoDB connection string
+- `REDIS_URI`: Redis connection string
+- `SYMBOLS`: Trading pairs to monitor
+- `LOG_LEVEL`: Logging verbosity
+
+## 🏗️ Architecture
+
+This project follows Clean Architecture principles with:
+
+- **Domain Layer**: Core business entities and rules
+- **Application Layer**: Use cases and business logic
+- **Infrastructure Layer**: External service adapters
+- **Presentation Layer**: API endpoints and MCP tools
+
+## 🔍 Health Monitoring
+
+The application includes comprehensive health checks:
+
+```bash
+# Application health
+curl http://localhost:8000/health
+
+# System information
+curl http://localhost:8000/
+
+# Simple ping
+curl http://localhost:8000/ping
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+docker-compose exec app python -m pytest -v
+
+# Run with coverage
+docker-compose exec app python -m pytest --cov=src --cov-report=html
+
+# Run specific test file
+docker-compose exec app python -m pytest tests/test_specific.py -v
+```
+
+## 🚀 Production Deployment
+
+```bash
+# Production build
+docker-compose build
+
+# Production start
+docker-compose up -d
+
+# With production overrides
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
+## 📊 Monitoring
+
+Monitor your application:
+
+```bash
+# Container resource usage
+docker stats $(docker-compose ps -q)
+
+# Application logs
+docker-compose logs -f app
+
+# Database operations
+docker-compose exec mongodb mongosh cloud_marketdata
+```
+
+## 🤝 Contributing
+
+1. Follow the atomic task structure in `claude/tasks/task-tracker.md`
+2. Each task should be completable in under 2 hours
+3. Update documentation after each completed task
+4. Use structured logging for all operations
+5. Maintain type hints and async/await patterns
+
+## 📚 Documentation
+
+- [Task Tracker](./claude/tasks/task-tracker.md) - Development progress
+- [Architecture](./claude/docs/arquitectura.md) - System design
+- [Docker Commands](./DOCKER_COMMANDS.md) - Command reference
+- [Integration Guide](./claude/docs/integracion-waickoff.md) - MCP integration
+
+## 📝 License
+
+This project is part of the wAIckoff Platform development.

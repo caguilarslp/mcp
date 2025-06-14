@@ -1,0 +1,47 @@
+{
+  "id": "62f26bb1-652f-4645-b126-ba929418be18",
+  "timestamp": 1749874172122,
+  "symbol": "XRPUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volumeDelta": {
+      "symbol": "XRPUSDT",
+      "interval": "5",
+      "current": 19185.321428575324,
+      "average": 21226.284427108956,
+      "bias": "buyer",
+      "strength": 79.02724898353821,
+      "cumulativeDelta": -70870.68595381084,
+      "divergence": {
+        "detected": true,
+        "type": "Price up but delta down",
+        "signal": "bearish_reversal"
+      },
+      "marketPressure": {
+        "bullishCandles": 9,
+        "bearishCandles": 1,
+        "bullishPercent": 90,
+        "trend": "strong_buying"
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-14T04:09:32.122Z",
+    "tags": [
+      "timeframe:240",
+      "periods:100"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "bullish",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": [
+      "bearish_reversal"
+    ]
+  }
+}

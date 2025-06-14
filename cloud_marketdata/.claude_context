@@ -1,11 +1,11 @@
 # 🤖 Cloud MarketData MCP Server - Contexto Mínimo v0.1.1
 
 ## 📋 Estado Actual
-- **Versión:** v0.1.1
-- **Fecha:** 13/06/2025
-- **Status:** En Diseño - Reestructurado en subfases atómicas
-- **Última tarea:** Reestructuración task tracker v2.0
-- **Próximo:** TASK-001: Setup Docker + FastAPI base (1.5h)
+- **Versión:** v0.1.2
+- **Fecha:** 14/06/2025
+- **Status:** En Desarrollo - Base funcional completada
+- **Última tarea:** Actualización Docker-First - Eliminación Makefile
+- **Próximo:** TASK-001B: FastMCP integration (1h)
 
 ## 🎯 Objetivo del Proyecto
 Microservicio robusto y escalable para la recopilación, procesamiento y almacenamiento de datos de mercado en tiempo real (Bybit/Binance) para nutrir indicadores de Order Flow y Volume Profile. Diseñado como el primer componente de la futura **wAIckoff Platform** con IA y dashboard.
@@ -50,16 +50,16 @@ cloud_marketdata/
 └── config/             # Configuración y env
 ```
 
-## ⚡ Comandos Clave
+### ⚡ Comandos Clave
 ```bash
 # Desarrollo
-docker-compose up -d        # Levantar servicios
-docker-compose logs -f      # Ver logs
-pytest                      # Ejecutar tests
+docker-compose --profile dev up -d  # Levantar servicios + tools
+docker-compose logs -f              # Ver logs
+docker-compose ps                   # Ver estado
 
 # Deployment
-docker build -t cloud-marketdata .
-docker run -d cloud-marketdata
+docker-compose build
+docker-compose up -d
 ```
 
 ## 🎯 Subfases Atómicas Priorizadas (v2.0)
