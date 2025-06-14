@@ -1,0 +1,110 @@
+# 🤖 Cloud MarketData MCP Server - Contexto Mínimo v0.1.0
+
+## 📋 Estado Actual
+- **Versión:** v0.1.0
+- **Fecha:** 13/06/2025
+- **Status:** En Diseño - Arquitectura inicial
+- **Última tarea:** Inicialización del proyecto
+- **Próximo:** TASK-001: Setup inicial Docker + FastMCP
+
+## 🎯 Objetivo del Proyecto
+Microservicio robusto y escalable para la recopilación, procesamiento y almacenamiento de datos de mercado en tiempo real (Bybit/Binance) para nutrir indicadores de Order Flow y Volume Profile. Diseñado como el primer componente de la futura **wAIckoff Platform** con IA y dashboard.
+
+## 🏗️ Arquitectura Propuesta
+- **Stack**: Python 3.12-slim + FastAPI + FastMCP + MongoDB + Redis + Celery
+- **Patrón**: Clean Architecture con 4 capas + Event-Driven
+- **Deployment**: Docker Compose para desarrollo, preparado para K8s y multi-VPS
+- **APIs**: WebSocket Bybit v5 + Binance para trades y orderbook
+- **Futuro**: Preparado para evolucionar a plataforma completa (app.waickoff.com, api.waickoff.com, ai.waickoff.com)
+
+## 📊 Funcionalidades Core
+1. **Recopilación 24/7**: WebSocket listeners para trades y orderbook
+2. **Procesamiento**: Cálculo de Volume Profile y Order Flow en tiempo real
+3. **Almacenamiento**: MongoDB para históricos, Redis para caché/streaming
+4. **Limpieza**: Sistema automático de archivado/eliminación de datos antiguos
+5. **API MCP**: FastMCP server para consumo desde wAIckoff MCP
+
+## 🔧 Principios de Diseño
+1. **Modularidad extrema**: Un archivo = una responsabilidad
+2. **OOP estricto**: Clases bien definidas con SRP
+3. **Mantenibilidad**: Código autodocumentado, tipado estricto
+4. **Escalabilidad**: Preparado para múltiples exchanges y símbolos
+5. **Robustez**: Manejo de errores, retry logic, circuit breakers
+
+## 📁 Estructura de Carpetas
+```
+cloud_marketdata/
+├── claude/                 # Documentación Claude
+│   ├── tasks/             # Task tracker
+│   ├── docs/              # Documentación técnica
+│   ├── adr/               # Architecture Decision Records
+│   └── archive/           # Logs históricos
+├── src/                   # Código fuente
+│   ├── core/             # Dominio y entidades
+│   ├── infrastructure/   # Adaptadores externos
+│   ├── application/      # Casos de uso
+│   ├── presentation/     # API y MCP
+│   └── utils/           # Utilidades
+├── tests/                # Tests unitarios e integración
+├── docker/              # Configuración Docker
+└── config/             # Configuración y env
+```
+
+## ⚡ Comandos Clave
+```bash
+# Desarrollo
+docker-compose up -d        # Levantar servicios
+docker-compose logs -f      # Ver logs
+pytest                      # Ejecutar tests
+
+# Deployment
+docker build -t cloud-marketdata .
+docker run -d cloud-marketdata
+```
+
+## 🎯 Próximas Tareas Priorizadas
+1. **TASK-001**: Setup inicial Docker + FastAPI + FastMCP (2h)
+2. **TASK-002**: WebSocket collectors Bybit/Binance (4h)
+3. **TASK-003**: MongoDB schema y repositories (3h)
+4. **TASK-004**: Volume Profile calculator service (4h)
+5. **TASK-005**: Order Flow analyzer service (4h)
+6. **TASK-006**: Data retention y cleanup system (3h)
+7. **TASK-007**: FastMCP server implementation (3h)
+8. **TASK-008**: Integration tests y monitoring (2h)
+
+## 🚀 Visión Futura: wAIckoff Platform
+- **Fase 1** (Actual): MCP Service para datos
+- **Fase 2**: API Gateway + Analytics Engine
+- **Fase 3**: Dashboard profesional (Next.js)
+- **Fase 4**: IA Integration (LLM + ML)
+- **Fase 5**: Trading Platform completa
+
+Ver `claude/docs/roadmap-waickoff-platform.md` y ADR-004 para detalles.
+
+## 🔗 Integración con wAIckoff
+- **Protocolo**: MCP sobre HTTP/WebSocket
+- **Endpoints**: Volume Profile, Order Flow, Market Depth
+- **Formato**: JSON con schemas Pydantic v2
+- **Autenticación**: API Keys con rate limiting
+
+## 🔧 Reglas de Desarrollo
+1. **Testing first**: TDD para todos los componentes
+2. **Type hints**: 100% coverage con mypy
+3. **Async by default**: Todo I/O debe ser async
+4. **Logs estructurados**: JSON logging con context
+5. **Métricas**: Prometheus-ready desde el inicio
+6. **No hardcoding**: Todo configurable via env
+
+## 📊 Métricas Target
+- **Latencia**: < 10ms procesamiento por trade
+- **Throughput**: 10k trades/segundo por símbolo
+- **Storage**: Retención configurable (1h-7d)
+- **Uptime**: 99.9% con auto-recovery
+- **CPU**: < 30% en condiciones normales
+- **RAM**: < 1GB por proceso
+
+## 🚨 Consideraciones VPS
+- **Storage limitado**: Implementar compresión y rotación agresiva
+- **CPU compartida**: Optimizar algoritmos para baja latencia
+- **Network**: Retry logic y backpressure handling
+- **Monitoring**: Alertas tempranas de recursos
