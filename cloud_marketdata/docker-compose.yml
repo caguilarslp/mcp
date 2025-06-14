@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - MONGODB_URI=mongodb://admin:admin123@mongodb:27017/cloud_marketdata?authSource=admin
+      - MONGODB_URI=mongodb://mongodb:27017/cloud_marketdata
       - REDIS_URI=redis://:redis123@redis:6379/0
       - LOG_LEVEL=INFO
     depends_on:
@@ -18,22 +18,19 @@ services:
     networks:
       - marketdata
 
-  # MongoDB Database - Latest 7.x
+  # MongoDB Database - Latest 7.x (sin auth para desarrollo)
   mongodb:
     image: mongo:7.0-jammy
     ports:
       - "27017:27017"
     environment:
       - MONGO_INITDB_DATABASE=cloud_marketdata
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin123
     volumes:
       - mongodb_data:/data/db
       - ./docker/mongodb-init:/docker-entrypoint-initdb.d:ro
     restart: unless-stopped
     networks:
       - marketdata
-    command: ["mongod", "--auth", "--bind_ip_all"]
 
   # Redis Cache & Pub/Sub - Latest 7.x
   redis:
@@ -61,7 +58,7 @@ services:
     networks:
       - marketdata
 
-  # MongoDB Express (Development) - Latest version
+  # MongoDB Express (Development) - Sin auth
   mongo-express:
     image: mongo-express:1.0.2-20
     ports:
@@ -69,11 +66,8 @@ services:
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongodb
       - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin123
       - ME_CONFIG_BASICAUTH_USERNAME=admin
       - ME_CONFIG_BASICAUTH_PASSWORD=admin123
-      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
     depends_on:
       - mongodb
     profiles:

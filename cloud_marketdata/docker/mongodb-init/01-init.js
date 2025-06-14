@@ -1,22 +1,10 @@
-// MongoDB 7.x Initialization Script
+// MongoDB 7.x Initialization Script - Sin auth
 // Creates indexes and basic setup for Cloud MarketData
 
 // Switch to our database
 db = db.getSiblingDB('cloud_marketdata');
 
-// Create application user
-db.createUser({
-  user: 'marketdata_user',
-  pwd: 'marketdata123',
-  roles: [
-    {
-      role: 'readWrite',
-      db: 'cloud_marketdata'
-    }
-  ]
-});
-
-print('✅ Created marketdata_user');
+print('✅ Connected to cloud_marketdata database');
 
 // Create collections with schema validation (MongoDB 7.x feature)
 
@@ -77,7 +65,7 @@ db.system_info.insertOne({
   initialized_at: new Date(),
   version: '0.1.0',
   mongodb_version: '7.0',
-  features: ['schema_validation', 'ttl_indexes', 'auth_enabled']
+  features: ['schema_validation', 'ttl_indexes', 'no_auth']
 });
 
-print('✅ Cloud MarketData MongoDB 7.x initialization complete!');
+print('✅ Cloud MarketData MongoDB 7.x initialization complete (no auth)!');
