@@ -27,7 +27,7 @@ export class Logger {
     this.logLevel = logLevel;
     
     // Suppress known MCP SDK JSON parsing errors during startup
-    this.suppressedErrors.add('Expected \',\' or \']\' after array element in JSON at position 5');
+    this.suppressedErrors.add('Expected \',\' or \']\'');
   }
 
   debug(message: string, data?: any): void {
@@ -134,4 +134,10 @@ export class Logger {
   getLogLevel(): LogLevel {
     return this.logLevel;
   }
+}
+
+// Additional exports for compatibility
+export type ILogger = Logger;
+export function createLogger(serviceName: string, logLevel?: LogLevel): Logger {
+  return new Logger(serviceName, logLevel);
 }

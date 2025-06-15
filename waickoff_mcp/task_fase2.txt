@@ -1,0 +1,6 @@
+
+> waickoff_mcp@1.7.0 build
+> tsc
+
+src/adapters/handlers/multiExchangeHandlers.ts(204,50): error TS18048: 'args.minDivergence' is possibly 'undefined'.
+src/adapters/handlers/multiExchangeHandlers.ts(252,53): error TS18048: 'args.minSpread' is possibly 'undefined'.

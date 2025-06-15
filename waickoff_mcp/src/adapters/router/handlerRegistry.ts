@@ -164,6 +164,14 @@ export class HandlerRegistry {
     this.register('update_context_config', (args) => this.mcpHandlers.handleUpdateContextConfig(args));
     this.register('cleanup_context', (args) => this.mcpHandlers.handleCleanupContext(args));
     this.register('get_context_stats', (args) => this.mcpHandlers.handleGetContextStats(args));
+    
+    // Multi-Exchange Tools (TASK-026 FASE 2)
+    this.register('get_aggregated_ticker', (args) => this.mcpHandlers.handleGetAggregatedTicker(args));
+    this.register('get_composite_orderbook', (args) => this.mcpHandlers.handleGetCompositeOrderbook(args));
+    this.register('detect_exchange_divergences', (args) => this.mcpHandlers.handleDetectExchangeDivergences(args));
+    this.register('identify_arbitrage_opportunities', (args) => this.mcpHandlers.handleIdentifyArbitrageOpportunities(args));
+    this.register('get_exchange_dominance', (args) => this.mcpHandlers.handleGetExchangeDominance(args));
+    this.register('get_multi_exchange_analytics', (args) => this.mcpHandlers.handleGetMultiExchangeAnalytics(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

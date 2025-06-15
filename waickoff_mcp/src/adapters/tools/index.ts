@@ -24,6 +24,7 @@ import { wyckoffAdvancedTools } from './wyckoffAdvancedTools.js';
 import { technicalAnalysisTools } from './technicalAnalysisTools.js';
 import { smartMoneyConceptsTools } from './smartMoneyConceptsTools.js';
 import { contextTools } from './contextTools.js';
+import { multiExchangeTools } from './multiExchangeTools.js';
 
 // Tool Registry Map for O(1) lookup
 export const toolRegistry = new Map<string, ToolDefinition>();
@@ -34,6 +35,9 @@ const allToolCategories = [
   { name: 'Market Data', tools: marketDataTools },
   { name: 'Technical Analysis', tools: analysisTools },
   { name: 'Grid Trading', tools: gridTradingTools },
+  
+  // Multi-Exchange Features (TASK-026 FASE 2)
+  { name: 'Multi-Exchange', tools: multiExchangeTools },
   
   // Advanced Analysis Features
   { name: 'Historical Analysis', tools: historicalTools },

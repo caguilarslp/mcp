@@ -1279,6 +1279,58 @@ export class MCPHandlers {
   }
 
   // ====================
+  // MULTI-EXCHANGE HANDLERS (TASK-026 FASE 2)
+  // ====================
+
+  async handleGetAggregatedTicker(args: any): Promise<MCPServerResponse> {
+    const { createMultiExchangeHandlers } = await import('./handlers/multiExchangeHandlers.js');
+    const handlers = createMultiExchangeHandlers(this.engine);
+    const handler = handlers[0]; // getAggregatedTickerHandler
+    if (!handler) throw new Error('Handler not found');
+    return await handler(args);
+  }
+
+  async handleGetCompositeOrderbook(args: any): Promise<MCPServerResponse> {
+    const { createMultiExchangeHandlers } = await import('./handlers/multiExchangeHandlers.js');
+    const handlers = createMultiExchangeHandlers(this.engine);
+    const handler = handlers[1]; // getCompositeOrderbookHandler
+    if (!handler) throw new Error('Handler not found');
+    return await handler(args);
+  }
+
+  async handleDetectExchangeDivergences(args: any): Promise<MCPServerResponse> {
+    const { createMultiExchangeHandlers } = await import('./handlers/multiExchangeHandlers.js');
+    const handlers = createMultiExchangeHandlers(this.engine);
+    const handler = handlers[2]; // detectExchangeDivergencesHandler
+    if (!handler) throw new Error('Handler not found');
+    return await handler(args);
+  }
+
+  async handleIdentifyArbitrageOpportunities(args: any): Promise<MCPServerResponse> {
+    const { createMultiExchangeHandlers } = await import('./handlers/multiExchangeHandlers.js');
+    const handlers = createMultiExchangeHandlers(this.engine);
+    const handler = handlers[3]; // identifyArbitrageOpportunitiesHandler
+    if (!handler) throw new Error('Handler not found');
+    return await handler(args);
+  }
+
+  async handleGetExchangeDominance(args: any): Promise<MCPServerResponse> {
+    const { createMultiExchangeHandlers } = await import('./handlers/multiExchangeHandlers.js');
+    const handlers = createMultiExchangeHandlers(this.engine);
+    const handler = handlers[4]; // getExchangeDominanceHandler
+    if (!handler) throw new Error('Handler not found');
+    return await handler(args);
+  }
+
+  async handleGetMultiExchangeAnalytics(args: any): Promise<MCPServerResponse> {
+    const { createMultiExchangeHandlers } = await import('./handlers/multiExchangeHandlers.js');
+    const handlers = createMultiExchangeHandlers(this.engine);
+    const handler = handlers[5]; // getMultiExchangeAnalyticsHandler
+    if (!handler) throw new Error('Handler not found');
+    return await handler(args);
+  }
+
+  // ====================
   // HELPER METHODS
   // ====================
 

@@ -44,3 +44,6 @@ export { SupportedExchange } from './types.js';
 
 // Base adapter
 export { BaseExchangeAdapter } from './BaseExchangeAdapter.js';
+
+// Exchange aggregator
+export { ExchangeAggregator } from './ExchangeAggregator.js';
