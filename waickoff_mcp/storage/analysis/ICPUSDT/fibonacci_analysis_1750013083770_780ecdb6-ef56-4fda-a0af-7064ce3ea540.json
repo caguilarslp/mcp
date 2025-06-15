@@ -1,0 +1,252 @@
+{
+  "id": "780ecdb6-ef56-4fda-a0af-7064ce3ea540",
+  "timestamp": 1750013083770,
+  "symbol": "ICPUSDT",
+  "analysisType": "fibonacci_analysis",
+  "data": {
+    "symbol": "ICPUSDT",
+    "timeframe": "60",
+    "currentPrice": 5.393,
+    "trend": "sideways",
+    "swingHigh": {
+      "index": 9,
+      "timestamp": "2025-06-12T00:00:00.000Z",
+      "price": 6.163,
+      "type": "high",
+      "strength": 11.303643244616602,
+      "volume": 60178.95,
+      "confirmed": true
+    },
+    "swingLow": {
+      "index": 77,
+      "timestamp": "2025-06-14T20:00:00.000Z",
+      "price": 5.399,
+      "type": "low",
+      "strength": 8.233513011995505,
+      "volume": 26387.09,
+      "confirmed": true
+    },
+    "retracementLevels": [
+      {
+        "level": 0.236,
+        "price": 5.982696,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 10.934470610050065
+      },
+      {
+        "level": 0.382,
+        "price": 5.871152,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 8.866159836825526
+      },
+      {
+        "level": 0.5,
+        "price": 5.781000000000001,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 61.43202788015473,
+        "distance": 7.1945114036714415
+      },
+      {
+        "level": 0.618,
+        "price": 5.690848,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 5.522862970517339
+      },
+      {
+        "level": 0.786,
+        "price": 5.562496,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 3.142888930094577
+      }
+    ],
+    "extensionLevels": [
+      {
+        "level": 1,
+        "price": 5.399,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 0.1112553309846139
+      },
+      {
+        "level": 1.272,
+        "price": 5.191192,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -3.742035972557014
+      },
+      {
+        "level": 1.414,
+        "price": 5.082704,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -5.7536806972000765
+      },
+      {
+        "level": 1.618,
+        "price": 4.926848,
+        "label": "161.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -8.643649174856298
+      },
+      {
+        "level": 2,
+        "price": 4.635,
+        "label": "200.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -14.055256814389022
+      },
+      {
+        "level": 2.618,
+        "price": 4.162847999999999,
+        "label": "261.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -22.810161320229934
+      }
+    ],
+    "keyLevels": [
+      {
+        "level": 0.5,
+        "price": 5.781000000000001,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 61.43202788015473,
+        "distance": 7.1945114036714415
+      },
+      {
+        "level": 0.236,
+        "price": 5.982696,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 10.934470610050065
+      },
+      {
+        "level": 0.382,
+        "price": 5.871152,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 8.866159836825526
+      },
+      {
+        "level": 0.618,
+        "price": 5.690848,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 5.522862970517339
+      },
+      {
+        "level": 0.786,
+        "price": 5.562496,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 3.142888930094577
+      },
+      {
+        "level": 1,
+        "price": 5.399,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 0.1112553309846139
+      },
+      {
+        "level": 1.272,
+        "price": 5.191192,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -3.742035972557014
+      },
+      {
+        "level": 1.414,
+        "price": 5.082704,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -5.7536806972000765
+      }
+    ],
+    "currentPosition": {
+      "nearestLevel": {
+        "level": 1,
+        "price": 5.399,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 0.1112553309846139
+      },
+      "retracement": 100.78534031413615,
+      "nextTargets": [
+        {
+          "level": 1,
+          "price": 5.399,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 0,
+          "distance": 0.1112553309846139
+        },
+        {
+          "level": 0.786,
+          "price": 5.562496,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 3.142888930094577
+        },
+        {
+          "level": 1.272,
+          "price": 5.191192,
+          "label": "127.2%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -3.742035972557014
+        },
+        {
+          "level": 0.618,
+          "price": 5.690848,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 5.522862970517339
+        }
+      ]
+    },
+    "analysisTime": "2025-06-15T18:44:43.770Z",
+    "confidence": 26.979032645330157,
+    "validity": 78
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-15T18:44:43.770Z",
+    "tags": [
+      "timeframe:60"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

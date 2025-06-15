@@ -2,7 +2,7 @@
 
 ## 🎯 Guía Completa de Herramientas MCP
 
-Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.6.6, organizadas por categorías.
+Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.7.1, organizadas por categorías.
 
 ---
 
@@ -132,7 +132,95 @@ get_complete_analysis BTCUSDT investment=1000
 
 ---
 
-## 💰 Herramientas de Smart Money Concepts (80% Completo)
+## 📈 Herramientas de Análisis Técnico Avanzado (✅ COMPLETADO)
+
+### `calculate_fibonacci_levels`
+Calcula niveles de retroceso y extensión de Fibonacci con detección automática de swings.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('15', '30', '60', '240', 'D'). Default: '60'
+- `retracementLevels` (opcional): Niveles personalizados de retroceso. Default: [0.236, 0.382, 0.5, 0.618, 0.786]
+- `extensionLevels` (opcional): Niveles personalizados de extensión. Default: [1.0, 1.272, 1.414, 1.618, 2.0, 2.618]
+- `minSwingSize` (opcional): Tamaño mínimo del swing en % (0.5-10.0). Default: 2.0
+
+**Ejemplo:**
+```
+calculate_fibonacci_levels BTCUSDT minSwingSize=1.5
+```
+
+**Características:**
+- ✅ **Detección automática de swings** - Identifica automáticamente los puntos de swing más significativos
+- ✅ **Análisis de confluencias** - Detecta confluencias con niveles de S/R
+- ✅ **Validación robusta** - Garantíza que High > Low siempre
+- ✅ **Múltiples fallbacks** - Sistema multicapa para detección confiable
+
+### `analyze_bollinger_bands`
+Análisis completo de Bandas de Bollinger con detección de squeeze y divergencias.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `period` (opcional): Período de las bandas (5-50). Default: 20
+- `standardDeviation` (opcional): Multiplicador de desviación estándar (1-3). Default: 2.0
+- `includeSignals` (opcional): Incluir señales de trading. Default: true
+
+**Ejemplo:**
+```
+analyze_bollinger_bands ETHUSDT period=20 standardDeviation=2
+```
+
+**Características:**
+- Detección de squeeze con probabilidad de ruptura
+- Análisis de volatilidad relativa
+- Identificación de patrones (W-bottom, M-top)
+- Señales de trading con reasoning
+
+### `detect_elliott_waves`
+Detección de patrones de Ondas de Elliott con validación de reglas y proyecciones.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `minWaveLength` (opcional): Longitud mínima de onda en % (0.5-5.0). Default: 1.0
+- `strictRules` (opcional): Aplicar reglas estrictas de Elliott. Default: true
+- `includeProjections` (opcional): Incluir proyecciones de ondas. Default: true
+
+**Ejemplo:**
+```
+detect_elliott_waves BTCUSDT strictRules=true
+```
+
+**Características:**
+- Detección de secuencias impulsivas y correctivas
+- Validación de reglas de Elliott (Wave 2, 3, 4)
+- Proyecciones basadas en ratios de Fibonacci
+- Señales con contexto de onda actual
+
+### `find_technical_confluences`
+Encuentra confluencias entre múltiples indicadores técnicos para setups de alta probabilidad.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `indicators` (opcional): Indicadores a incluir ['fibonacci', 'bollinger', 'elliott']. Default: todos
+- `minConfluenceStrength` (opcional): Fuerza mínima de confluencia (0-100). Default: 60
+- `distanceTolerance` (opcional): Tolerancia de distancia en %. Default: 0.5
+
+**Ejemplo:**
+```
+find_technical_confluences BTCUSDT minConfluenceStrength=70
+```
+
+**Características:**
+- Integración completa de Fibonacci + Bollinger + Elliott
+- Detección automática de zonas de confluencia
+- Señales multi-temporales (inmediato, corto, medio plazo)
+- Evaluación de riesgo integrada
+
+---
+
+## 💰 Herramientas de Smart Money Concepts (✅ COMPLETADO)
 
 ### Order Blocks
 
@@ -243,7 +331,7 @@ Valida cambios estructurales con scoring.
 validate_structure_shift BTCUSDT breakId=BOS_123456
 ```
 
-### Integración Smart Money (NUEVO!) 🆕
+### Integración Smart Money
 
 #### `analyze_smart_money_confluence`
 Análisis integrado de confluencias entre todos los conceptos SMC.
@@ -305,6 +393,70 @@ validate_smc_setup BTCUSDT setupType=long entryPrice=44000
 - Gestión de riesgo completa (SL, TPs, R:R)
 - Warnings y escenarios alternativos
 - Confianza general del setup
+
+### Dashboard y Análisis Avanzado
+
+#### `get_smc_dashboard`
+Dashboard completo de Smart Money Concepts con market overview y métricas clave.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+get_smc_dashboard BTCUSDT
+```
+
+**Respuesta incluye:**
+- Market overview con fase actual y tendencia
+- Métricas clave: sesgo, liquidez, confluencias
+- Análisis de niveles activos con proximidad
+- Análisis de confluencias con strength y alignment
+- Trading analysis completo con setups primarios y alternativos
+- Risk assessment con factores detallados
+- Smart alerts activas y pendientes
+
+#### `get_smc_trading_setup`
+Obtiene setup de trading óptimo con entry, SL/TP y análisis de probabilidad.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+- `preferredDirection` (opcional): Dirección preferida ('long', 'short')
+
+**Ejemplo:**
+```
+get_smc_trading_setup ETHUSDT preferredDirection=long
+```
+
+**Respuesta incluye:**
+- Dirección óptima basada en confluencias SMC
+- Entry analysis con zona precisa y timing
+- Risk management completo (SL dinámico, múltiples TPs)
+- Probability analysis con escenarios ponderados
+- Monitoring plan con niveles clave e invalidación
+- Scenario analysis con acciones específicas
+
+#### `analyze_smc_confluence_strength`
+Analiza la fuerza de las confluencias SMC con breakdown detallado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal. Default: '60'
+
+**Ejemplo:**
+```
+analyze_smc_confluence_strength BTCUSDT
+```
+
+**Respuesta incluye:**
+- Overall strength score (0-100)
+- Breakdown por tipo de confluencia
+- Strength factors (density, consistency, proximity)
+- Key zones identificadas con recomendaciones
+- Quality metrics y sugerencias de mejora
+- Trading recommendations basadas en fuerza
 
 ---
 
@@ -820,7 +972,15 @@ invalidate_cache BTCUSDT
 
 ## 🔍 Consejos de Uso
 
-### Para Trading con Smart Money Concepts 🆕
+### Para Análisis Técnico Avanzado
+1. Usa `calculate_fibonacci_levels` - detecta swings automáticamente, no necesitas especificarlos
+2. Combina `find_technical_confluences` para zonas de alta probabilidad
+3. Verifica squeeze con `analyze_bollinger_bands` antes de entradas en rangos
+4. Usa `detect_elliott_waves` para contexto de tendencia mayor
+5. Los niveles de Fibonacci se ajustan automáticamente con validación High > Low
+6. Las confluencias técnicas se puntean automáticamente por fuerza
+
+### Para Trading con Smart Money Concepts
 1. Comienza con `analyze_smart_money_confluence` para visión completa SMC
 2. Verifica el sesgo con `get_smc_market_bias` antes de tomar decisiones
 3. Valida tu setup con `validate_smc_setup` para gestión de riesgo óptima
@@ -865,9 +1025,13 @@ invalidate_cache BTCUSDT
 - El análisis Wyckoff identifica 15 fases diferentes con eventos clave
 - Los springs y upthrusts se detectan automáticamente con scoring de significancia
 - El sistema de validación Wyckoff evalúa setups con puntuación 0-100
-- **NUEVO:** Smart Money Concepts integra Order Blocks, FVG y BOS automáticamente
-- **NUEVO:** Las confluencias SMC se detectan y puntúan automáticamente
-- **NUEVO:** El sesgo institucional combina todos los conceptos SMC ponderadamente
+- Smart Money Concepts integra Order Blocks, FVG y BOS automáticamente
+- Las confluencias SMC se detectan y puntúan automáticamente
+- El sesgo institucional combina todos los conceptos SMC ponderadamente
+- **Fibonacci detecta swings automáticamente** - No necesitas especificar high/low manualmente
+- **Elliott Wave valida reglas estrictas** - Asegura patrones válidos según teoría clásica
+- **Bollinger Bands detecta squeezes** - Identifica compresión de volatilidad pre-movimiento
+- **Confluencias técnicas multi-indicador** - Combina Fibo + Elliott + Bollinger automáticamente
 
 ---
 
@@ -881,5 +1045,5 @@ Si encuentras problemas:
 
 ---
 
-*Versión: 1.6.6 - Actualizado: 12/06/2025*
-*Última actualización: TASK-020 FASE 4 Completada - Smart Money Integration*
+*Versión: 1.7.1 - Actualizado: 13/06/2025*
+*Última actualización: Sistema 100% Operativo - Smart Money Concepts Completado*

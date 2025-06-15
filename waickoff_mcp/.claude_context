@@ -15,9 +15,14 @@
    - **FASE 3: Break of Structure ✅ COMPLETADA** - Identificar cambios de estructura de mercado (BOS/CHoCH)
    - **FASE 4: Market Structure Integration ✅ COMPLETADA** - Integración completa de todos los conceptos SMC
    - **FASE 5: Dashboard & Confluence Analysis ✅ COMPLETADA** - Dashboard completo SMC con análisis avanzado
-2. **TASK-013**: On-chain data collection (15h) - 6 fases - 🔴 STANDBY (datos insuficientes)
-3. **TASK-007**: Volume Profile & Market Profile (4-5h) - 🔴 STANDBY (datos insuficientes)
-4. **TASK-008**: Integración con Waickoff AI (2h) - PENDIENTE
+2. **TASK-026**: Integración Binance API (12-15h) - 4 fases - 🆕 NUEVA
+   - **FASE 1: Exchange Adapter Base** - Crear infraestructura multi-exchange
+   - **FASE 2: Exchange Aggregator** - Sistema de agregación inteligente
+   - **FASE 3: Análisis Multi-Exchange** - Mejorar servicios existentes
+   - **FASE 4: Features Exclusivos** - Nuevas capacidades cross-exchange
+3. **TASK-013**: On-chain data collection (15h) - 6 fases - 🔴 STANDBY (datos insuficientes)
+4. **TASK-007**: Volume Profile & Market Profile (4-5h) - 🔴 STANDBY (datos insuficientes)
+5. **TASK-008**: Integración con Waickoff AI (2h) - PENDIENTE
 
 ## ✅ Tareas Completadas Recientemente
 - **TASK-025**: Fix Errores Críticos de Producción - COMPLETADA ✅

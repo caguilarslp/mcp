@@ -1,0 +1,45 @@
+{
+  "id": "ac11b9ff-7308-4dbe-bd27-46c5d43dfa5b",
+  "timestamp": 1750013040319,
+  "symbol": "ICPUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volumeDelta": {
+      "symbol": "ICPUSDT",
+      "interval": "5",
+      "current": 223.86999999988058,
+      "average": -49.31798709050494,
+      "bias": "seller",
+      "strength": 4.405948728324916,
+      "cumulativeDelta": -835.4975773118317,
+      "divergence": {
+        "detected": false,
+        "type": "No divergence",
+        "signal": "trend_confirmed"
+      },
+      "marketPressure": {
+        "bullishCandles": 7,
+        "bearishCandles": 3,
+        "bullishPercent": 70,
+        "trend": "strong_buying"
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-15T18:44:00.319Z",
+    "tags": [
+      "timeframe:60",
+      "periods:48"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "bearish",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}
