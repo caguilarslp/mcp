@@ -8,6 +8,31 @@ Este documento describe todas las herramientas disponibles en el servidor wAIcko
 
 ## 📊 Herramientas de Datos de Mercado
 
+### Multi-Exchange System (✅ FASE 1 COMPLETADA)
+
+El sistema wAIckoff MCP ahora incluye **infraestructura multi-exchange** que permite integrar múltiples exchanges para análisis más precisos.
+
+**Exchanges Soportados:**
+- **Binance**: Weight 0.6, Rate limit 1200 req/min
+- **Bybit**: Weight 0.4, Rate limit 600 req/min
+
+**Características Implementadas (FASE 1):**
+- ✅ **Interfaz Unificada**: Todos los exchanges usan la misma interfaz
+- ✅ **Health Monitoring**: Monitoreo automático de latencia y errores
+- ✅ **Rate Limiting**: Protección inteligente contra límites de API
+- ✅ **Caching Inteligente**: TTL optimizado por tipo de datos
+- ✅ **Error Handling**: Retry logic con backoff exponencial
+- ✅ **Symbol Normalization**: Mapeo automático entre formatos
+- ✅ **Performance Metrics**: Tracking detallado de operaciones
+- ✅ **Factory Pattern**: Creación dinámica de adapters
+
+**Próximas Fases:**
+- **FASE 2**: Exchange Aggregator - Agregación inteligente de datos
+- **FASE 3**: Enhanced Analysis - Servicios SMC/Wyckoff con multi-exchange
+- **FASE 4**: Exclusive Features - Arbitraje, dominancia, manipulación
+
+**Estado Actual**: Sistema actual (single exchange) sigue funcionando sin cambios. Multi-exchange en desarrollo para FASE 2.
+
 ### `get_ticker`
 Obtiene precio actual y estadísticas de 24h para un par de trading.
 

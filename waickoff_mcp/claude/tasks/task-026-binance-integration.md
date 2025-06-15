@@ -269,12 +269,11 @@ src/
 
 ## 🔧 Configuración Requerida
 
-### API Keys (Usuario debe proveer)
+### Configuración API (Sin autenticación requerida)
 ```env
 # Binance API Configuration
-BINANCE_API_KEY=your_api_key_here
-BINANCE_API_SECRET=your_api_secret_here
 BINANCE_API_URL=https://api.binance.com
+# No se requieren API keys - usamos endpoints públicos
 
 # Exchange Weights (for averaging)
 BINANCE_WEIGHT=0.6
@@ -319,7 +318,7 @@ DIVERGENCE_THRESHOLD_PERCENT=0.5
 ## 🚀 Próximos Pasos
 
 1. **Aprobar plan** y timeline
-2. **Usuario provee API keys** de Binance
+2. **Comenzar implementación** directamente
 3. **Comenzar FASE 1** con adapter base
 4. **Iteración incremental** con feedback
 
