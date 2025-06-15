@@ -19,6 +19,7 @@ from .core.config import Settings
 from .core.logger import setup_logger
 from .mcp_integration.server import get_mcp_server
 from .collectors.manager import collector_manager
+from .collectors.storage import GLOBAL_STORAGE
 from .collectors.base import CollectorStatus
 from .auth import create_api_key, list_api_keys, revoke_api_key, require_read, require_write
 
@@ -263,9 +264,12 @@ async def debug_storage() -> Dict[str, Any]:
     
     storage = collector_manager.storage
     
-    # Get internal state safely
+    # Get internal state safely  
     debug_info = {
         "storage_type": type(storage).__name__,
+        "storage_id": id(storage),
+        "global_storage_id": id(GLOBAL_STORAGE),
+        "storage_is_global": storage is GLOBAL_STORAGE,
         "stats": await storage.get_stats(),
         "symbols": await storage.get_symbols(),
         "trade_counts": {}
@@ -296,6 +300,51 @@ async def debug_storage() -> Dict[str, Any]:
             debug_info[f"collector_{name}_storage_same"] = collector.storage_handler is storage
     
     return debug_info
+
+
+@app.get("/debug/collector-details")
+async def debug_collector_details() -> Dict[str, Any]:
+    """Debug endpoint with complete collector details"""
+    if not hasattr(app.state, 'collector_manager'):
+        raise HTTPException(status_code=503, detail="Collector manager not initialized")
+    
+    details = {}
+    
+    for name, collector in collector_manager.collectors.items():
+        # Get basic info
+        details[name] = {
+            "class": type(collector).__name__,
+            "status": collector.status.value,
+            "websocket_url": collector.websocket_url,
+            "symbols": collector.symbols if hasattr(collector, 'symbols') else [],
+            "stats": collector.stats,
+            "has_storage_handler": hasattr(collector, 'storage_handler') and collector.storage_handler is not None,
+            "storage_handler_type": type(collector.storage_handler).__name__ if hasattr(collector, 'storage_handler') and collector.storage_handler else "None",
+            "storage_handler_id": id(collector.storage_handler) if hasattr(collector, 'storage_handler') and collector.storage_handler else None,
+            "manager_storage_id": id(collector_manager.storage),
+            "storage_handlers_match": (hasattr(collector, 'storage_handler') and 
+                                      collector.storage_handler is collector_manager.storage)
+        }
+        
+        # Check WebSocket state
+        if hasattr(collector, '_websocket'):
+            ws = collector._websocket
+            details[name]["websocket_state"] = {
+                "connected": ws is not None,
+                "closed": ws.state.name if ws and hasattr(ws, 'state') else None,
+                "type": type(ws).__name__ if ws else None
+            }
+    
+    # Add storage info
+    storage_stats = await collector_manager.storage.get_stats()
+    details["storage"] = {
+        "type": type(collector_manager.storage).__name__,
+        "id": id(collector_manager.storage),
+        "stats": storage_stats,
+        "total_objects": len(collector_manager.storage)
+    }
+    
+    return details
 
 
 # Symbol management endpoints

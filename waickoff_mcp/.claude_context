@@ -110,7 +110,7 @@ npm test         # Tests ✅ 100% PASANDO
 6. **Seguir arquitectura modular** establecida
 7. **Código primero**, documentación después
 
-## 📊 Sistema Actual (88+ herramientas)
+## 📊 Sistema Actual (95+ herramientas)
 - **Market Data**: Ticker, orderbook, klines
 - **Analysis**: Volatilidad, volumen, S/R, grid trading
 - **Wyckoff**: Básico (7 herramientas) + Avanzado (7 herramientas)
@@ -120,6 +120,7 @@ npm test         # Tests ✅ 100% PASANDO
 - **Storage**: Repository + Cache + Reports (15 herramientas)
 - **Config**: Usuario + Sistema (16 herramientas)
 - **Technical**: Fibonacci, Elliott, Bollinger, Confluencias (4 herramientas) ✅ OPTIMIZADOS
+- **Context Management**: Histórico comprimido multi-timeframe (7 herramientas) ✨ NUEVO
 
 ## 🎯 Próximos Pasos
 **Sistema Estable y Operativo**

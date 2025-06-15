@@ -21,6 +21,7 @@ import { WyckoffAdvancedHandlers } from './handlers/wyckoffAdvancedHandlers.js';
 import { TechnicalAnalysisHandlers } from './handlers/technicalAnalysisHandlers.js';
 import { SmartMoneyConceptsHandlers } from './handlers/smartMoneyConceptsHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
+import { contextHandlers } from './handlers/contextHandlers.js';
 import * as path from 'path';
 
 export class MCPHandlers {
@@ -1212,6 +1213,38 @@ export class MCPHandlers {
     const { SmartMoneyAnalysisHandlers } = await import('./handlers/smartMoney/smartMoneyAnalysisHandlers.js');
     const handlers = SmartMoneyAnalysisHandlers.createSmartMoneyAnalysisHandlers(this.engine);
     return await handlers.handleValidateSMCSetup(args);
+  }
+
+  // ====================
+  // CONTEXT MANAGEMENT HANDLERS
+  // ====================
+
+  async handleGetAnalysisContext(args: any): Promise<MCPServerResponse> {
+    return await contextHandlers.get_analysis_context(args);
+  }
+
+  async handleGetTimeframeContext(args: any): Promise<MCPServerResponse> {
+    return await contextHandlers.get_timeframe_context(args);
+  }
+
+  async handleAddAnalysisContext(args: any): Promise<MCPServerResponse> {
+    return await contextHandlers.add_analysis_context(args);
+  }
+
+  async handleGetMultiTimeframeContext(args: any): Promise<MCPServerResponse> {
+    return await contextHandlers.get_multi_timeframe_context(args);
+  }
+
+  async handleUpdateContextConfig(args: any): Promise<MCPServerResponse> {
+    return await contextHandlers.update_context_config(args);
+  }
+
+  async handleCleanupContext(args: any): Promise<MCPServerResponse> {
+    return await contextHandlers.cleanup_context(args);
+  }
+
+  async handleGetContextStats(args: any): Promise<MCPServerResponse> {
+    return await contextHandlers.get_context_stats(args);
   }
 
   // ====================

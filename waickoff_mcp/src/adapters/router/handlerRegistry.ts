@@ -155,6 +155,15 @@ export class HandlerRegistry {
     this.register('get_smc_dashboard', (args) => this.mcpHandlers.handleGetSMCDashboard(args));
     this.register('get_smc_trading_setup', (args) => this.mcpHandlers.handleGetSMCTradingSetup(args));
     this.register('analyze_smc_confluence_strength', (args) => this.mcpHandlers.handleAnalyzeSMCConfluenceStrength(args));
+    
+    // Context Management Tools
+    this.register('get_analysis_context', (args) => this.mcpHandlers.handleGetAnalysisContext(args));
+    this.register('get_timeframe_context', (args) => this.mcpHandlers.handleGetTimeframeContext(args));
+    this.register('add_analysis_context', (args) => this.mcpHandlers.handleAddAnalysisContext(args));
+    this.register('get_multi_timeframe_context', (args) => this.mcpHandlers.handleGetMultiTimeframeContext(args));
+    this.register('update_context_config', (args) => this.mcpHandlers.handleUpdateContextConfig(args));
+    this.register('cleanup_context', (args) => this.mcpHandlers.handleCleanupContext(args));
+    this.register('get_context_stats', (args) => this.mcpHandlers.handleGetContextStats(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

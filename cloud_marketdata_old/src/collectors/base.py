@@ -44,6 +44,7 @@ class WebSocketCollector(ABC):
         name: str,
         websocket_url: str,
         symbols: List[str],
+        storage_handler: Optional[Any] = None,
         max_reconnect_attempts: int = 10,
         reconnect_delay_base: float = 1.0,
         reconnect_delay_max: float = 30.0,
@@ -72,6 +73,13 @@ class WebSocketCollector(ABC):
         self.ping_interval = ping_interval
         self.ping_timeout = ping_timeout
         
+        # Create logger first
+        self.logger = get_logger(f"collector.{name}")
+        
+        # Initialize storage handler - CRITICAL: Store it first before any other operation
+        self.storage_handler = storage_handler
+        self.logger.info(f"Base class initialized with storage_handler: {type(storage_handler).__name__ if storage_handler else 'None'}")
+        
         # Internal state
         self._status = CollectorStatus.STOPPED
         self._websocket: Optional[websockets.WebSocketServerProtocol] = None
@@ -86,8 +94,7 @@ class WebSocketCollector(ABC):
             "reconnections": 0,
             "uptime_start": None,
         }
-        
-        self.logger = get_logger(f"collector.{name}")
+
     
     # Public Interface
     

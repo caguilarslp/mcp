@@ -23,6 +23,7 @@ import { wyckoffBasicTools } from './wyckoffBasicTools.js';
 import { wyckoffAdvancedTools } from './wyckoffAdvancedTools.js';
 import { technicalAnalysisTools } from './technicalAnalysisTools.js';
 import { smartMoneyConceptsTools } from './smartMoneyConceptsTools.js';
+import { contextTools } from './contextTools.js';
 
 // Tool Registry Map for O(1) lookup
 export const toolRegistry = new Map<string, ToolDefinition>();
@@ -41,6 +42,7 @@ const allToolCategories = [
   { name: 'Wyckoff Basic Analysis', tools: wyckoffBasicTools },
   { name: 'Wyckoff Advanced Analysis', tools: wyckoffAdvancedTools },
   { name: 'Technical Analysis Suite', tools: technicalAnalysisTools },
+  { name: 'Context Management', tools: contextTools },
   
   // Data Management
   { name: 'Analysis Repository', tools: repositoryTools },

@@ -148,6 +148,14 @@
 
 ## 🔄 **Flujo de Trabajo SMC**
 
+### **0. Contexto Histórico:** ✨ NUEVO
+```bash
+get_analysis_context BTCUSDT compressed
+```
+- Revisar patrones históricos
+- Identificar niveles recurrentes
+- Evaluar alineación multi-timeframe
+
 ### **1. Dashboard Overview:**
 ```bash
 get_smc_dashboard BTCUSDT 60
@@ -213,7 +221,14 @@ validate_smc_setup BTCUSDT long entryPrice=44250
 - Zonas clave identificadas
 - Recomendaciones específicas
 
+### ✨ **Integración Context Management**
+- Actualización automática del contexto
+- Historial comprimido 50:1
+- Patrones y niveles históricos
+- Vista multi-timeframe integrada
+
 ---
 
-*Resumen v1.0 - Basado en user-guide-smc.md v1.7.0*  
-*Sistema SMC: 14 herramientas - 100% completado*
+*Resumen v1.1 - Basado en user-guide-smc.md v1.7.0*  
+*Sistema SMC: 14 herramientas - 100% completado*  
+*Integrado con Context Management v1.0*

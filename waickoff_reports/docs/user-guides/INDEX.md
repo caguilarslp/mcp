@@ -3,7 +3,7 @@
 ## 📋 Resúmenes Creados
 
 ### 1. **user-guide-RESUMEN.md**
-**Guía Principal del Sistema (88+ herramientas)**
+**Guía Principal del Sistema (95+ herramientas)**
 - Herramientas por categoría
 - Comandos esenciales
 - Flujo de trabajo sugerido
@@ -23,9 +23,23 @@
 - Análisis de confluencias avanzado
 - 100% sistema completado
 
+### 4. **user-guide-context-management.md** ✨ NUEVO
+**Context Management v1.0 (7 herramientas)**
+- Compresión inteligente 50:1
+- Actualización automática
+- Vista multi-timeframe
+- Gestión de contexto histórico
+
 ## 🎯 Para Testing Phase
 
 **Comandos de Referencia Rápida:**
+
+### **Contexto Histórico:** ✨ NUEVO
+```bash
+get_analysis_context SYMBOL compressed
+get_multi_timeframe_context SYMBOL
+get_context_stats
+```
 
 ### **Análisis Completo:**
 ```bash
@@ -53,5 +67,5 @@ find_wyckoff_events SYMBOL TIMEFRAME
 
 ---
 
-*Índice v1.0 - 12/06/2025*  
-*Sistema: 88+ herramientas MCP resumidas*
+*Índice v1.1 - 15/06/2025*  
+*Sistema: 95+ herramientas MCP resumidas*

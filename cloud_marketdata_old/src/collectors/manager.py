@@ -12,7 +12,7 @@ from datetime import datetime
 
 from .base import WebSocketCollector, CollectorStatus
 from .bybit import BybitTradesCollector
-from .storage import InMemoryStorage
+from .storage import GLOBAL_STORAGE
 from ..core.logger import get_logger
 from ..core.config import Settings
 
@@ -37,12 +37,12 @@ class CollectorManager:
     def __init__(self):
         """Initialize collector manager"""
         self.collectors: Dict[str, WebSocketCollector] = {}
-        self.storage = InMemoryStorage()
+        self.storage = GLOBAL_STORAGE  # Use global storage
         self.logger = get_logger("collector_manager")
         self._running = False
         self._monitor_task: Optional[asyncio.Task] = None
         
-        self.logger.info("Collector manager initialized")
+        self.logger.info(f"Collector manager initialized with global storage: {type(self.storage).__name__}")
     
     async def start(self) -> None:
         """Start all collectors"""
@@ -108,7 +108,6 @@ class CollectorManager:
         # Create Bybit trades collector
         self.logger.info(f"Creating Bybit collector with storage: {type(self.storage).__name__}")
         self.logger.info(f"Storage object ID: {id(self.storage)}")
-        self.logger.info(f"Storage object: {self.storage}")
         
         bybit_collector = BybitTradesCollector(
             symbols=symbols,
@@ -117,10 +116,6 @@ class CollectorManager:
             reconnect_delay_base=1.0,
             reconnect_delay_max=30.0
         )
-        
-        # Verify storage was assigned
-        self.logger.info(f"After creation - collector storage_handler: {bybit_collector.storage_handler}")
-        self.logger.info(f"After creation - storage_handler ID: {id(bybit_collector.storage_handler) if bybit_collector.storage_handler else 'None'}")
         
         self.collectors["bybit_trades"] = bybit_collector
         self.logger.info(f"Initialized default collectors for symbols: {symbols}")

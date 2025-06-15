@@ -14,8 +14,8 @@ IMPORTANTE LEER Y HACER CASO (no eliminar):
 - **Fecha:** 14/06/2025
 - **Status:** En Desarrollo - Debug Storage Issue
 - **Última tarea:** TASK-002A: WebSocket Collector Base + Bybit Trades - COMPLETADA (pero trades no se almacenan)
-- **Issue actual:** Collector recibe 4032+ mensajes pero storage muestra 0 trades
-- **Próxima tarea:** La siguiente es TASK-002B (Planning Binance) - 1.5h
+- **Issue actual:** Storage handler bug RESUELTO con workaround directo - trades almacenándose via collector_manager.storage
+- **Próxima tarea:** TASK-002B (Binance Trades Collector) - 1.5h
 
 ## 🎯 Objetivo del Proyecto
 Microservicio robusto y escalable para la recopilación, procesamiento y almacenamiento de datos de mercado en tiempo real (Bybit/Binance) para nutrir indicadores de Order Flow y Volume Profile. Diseñado como el primer componente de la futura **wAIckoff Platform** con IA y dashboard.

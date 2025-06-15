@@ -1,0 +1,55 @@
+# .gitignore for WADM Project
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# Docker
+docker/data/
+*.log
+
+# MongoDB
+mongodb-data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+logs/
+cache/
+*.tmp
+indicators_cache/
+
+# Security
+*.key
+*.pem
+*.crt
+api_keys.json

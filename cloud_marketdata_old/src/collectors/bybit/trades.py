@@ -40,26 +40,20 @@ class BybitTradesCollector(WebSocketCollector):
             storage_handler: Handler for storing trades (optional)
             **kwargs: Additional arguments for WebSocketCollector
         """
-        # Call parent constructor first to initialize logger
+        # Call parent constructor and pass storage_handler
         super().__init__(
             name=f"bybit_trades",
             websocket_url=self.WEBSOCKET_URL,
             symbols=symbols,
+            storage_handler=storage_handler,  # CRITICAL: Pass storage_handler to parent
             **kwargs
         )
         
-        # Now we can use logger and assign storage handler
-        self.logger.info(f"Constructor received storage_handler: {type(storage_handler).__name__ if storage_handler else 'None'}")
-        self.logger.info(f"Constructor storage_handler ID: {id(storage_handler) if storage_handler else 'None'}")
-        
-        # IMPORTANT: Storage handler assignment AFTER super().__init__()
-        self.storage_handler = storage_handler
-        
-        self.logger.info(f"After assignment - self.storage_handler: {type(self.storage_handler).__name__ if self.storage_handler else 'None'}")
-        self.logger.info(f"After assignment - storage_handler ID: {id(self.storage_handler) if self.storage_handler else 'None'}")
+        # Log initialization details
         self.logger.info(f"Initialized Bybit trades collector for symbols: {symbols}")
         self.logger.info(f"WebSocket URL: {self.websocket_url}")
-        self.logger.info(f"Storage handler: {type(storage_handler).__name__ if storage_handler else 'None'}")
+        self.logger.info(f"Storage handler confirmed: {type(self.storage_handler).__name__ if self.storage_handler else 'None'}")
+        self.logger.info(f"Storage handler ID: {id(self.storage_handler) if self.storage_handler else 'None'}")
     
     async def create_subscription_message(self, symbols: List[str]) -> str:
         """
@@ -163,25 +157,24 @@ class BybitTradesCollector(WebSocketCollector):
             original_message: Original WebSocket message for context
         """
         try:
+            self.logger.debug(f"Processing trade data for {symbol}: {trade_data}")
+            
             # Parse trade data
             trade = self._parse_bybit_trade(symbol, trade_data, original_message)
+            self.logger.debug(f"Parsed trade object: {trade}")
             
-            # Store trade if handler is available
-            if self.storage_handler:
-                self.logger.info(f"Attempting to store trade: {trade.symbol} {trade.side.value} {trade.price} x {trade.quantity}")
-                await self.storage_handler.store_trade(trade)
-                # Log first few trades at INFO level for verification
-                if self._stats.get("messages_processed", 0) < 5:
-                    self.logger.info(f"Successfully stored trade: {trade.symbol} {trade.side.value} {trade.price} x {trade.quantity}")
+            # DIRECT FIX: Use global storage
+            from ..storage import GLOBAL_STORAGE
+            await GLOBAL_STORAGE.store_trade(trade)
+            # Log first few trades at INFO level for verification
+            if self._stats.get("messages_processed", 0) < 5:
+                self.logger.info(f"Successfully stored trade: {trade.symbol} {trade.side} {str(trade.price)} x {str(trade.quantity)}")
             else:
-                self.logger.error("No storage handler configured! Trade will be lost!")
-            
-            # Log trade (debug level to avoid spam)
-            self.logger.debug(f"Processed trade: {trade}")
+                self.logger.debug(f"Stored trade: {trade.symbol} {trade.side} {str(trade.price)} x {str(trade.quantity)}")
             
         except Exception as e:
-            self.logger.error(f"Error processing trade data: {e}")
-            self.logger.debug(f"Problematic trade data: {trade_data}")
+            self.logger.error(f"Error processing trade data: {e}", exc_info=True)
+            self.logger.error(f"Problematic trade data: {trade_data}")
     
     def _parse_bybit_trade(
         self, 

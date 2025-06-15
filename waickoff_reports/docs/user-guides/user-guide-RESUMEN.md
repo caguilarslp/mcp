@@ -1,6 +1,6 @@
-# 📚 RESUMEN - wAIckoff MCP User Guide v1.6.6
+# 📚 RESUMEN - wAIckoff MCP User Guide v1.7.1
 
-## 🎯 Herramientas por Categoría (88+ herramientas)
+## 🎯 Herramientas por Categoría (95+ herramientas)
 
 ### 📊 **Datos de Mercado (3 herramientas)**
 - `get_ticker` - Precio actual y estadísticas 24h
@@ -70,6 +70,15 @@
 - `identify_market_cycles` - Ciclos de mercado
 - `get_historical_summary` - Resumen histórico completo
 
+### 📝 **Context Management (7 herramientas) ✨ NUEVO**
+- `get_analysis_context` - Contexto histórico comprimido
+- `get_timeframe_context` - Contexto por timeframe específico
+- `add_analysis_context` - Agregar análisis al historial
+- `get_multi_timeframe_context` - Vista multi-temporal integral
+- `update_context_config` - Configurar gestión de contexto
+- `cleanup_context` - Limpiar datos antiguos
+- `get_context_stats` - Estadísticas de uso
+
 ### ⚙️ **Sistema y Configuración (20+ herramientas)**
 - Repositorio, reportes, caché, configuración, debug, etc.
 
@@ -80,6 +89,7 @@
 get_complete_analysis BTCUSDT
 get_smc_dashboard BTCUSDT 60
 get_wyckoff_interpretation BTCUSDT 240
+get_analysis_context BTCUSDT compressed  # ✨ Contexto histórico
 ```
 
 ### **Análisis Detallado:**
@@ -97,20 +107,30 @@ validate_smc_setup BTCUSDT long
 
 ## 💡 **Flujo de Trabajo Sugerido**
 
-1. **Vista General:** `get_smc_dashboard`
-2. **Confluencias:** `analyze_smart_money_confluence`
-3. **Setup Específico:** `get_smc_trading_setup`
-4. **Validación:** `validate_smc_setup`
-5. **Gestión Riesgo:** Usar niveles del setup
+1. **Contexto Histórico:** `get_analysis_context` ✨
+2. **Vista General:** `get_smc_dashboard`
+3. **Confluencias:** `analyze_smart_money_confluence`
+4. **Setup Específico:** `get_smc_trading_setup`
+5. **Validación:** `validate_smc_setup`
+6. **Gestión Riesgo:** Usar niveles del setup
 
 ## 🎯 **Consejos Clave**
 
+- Revisar **contexto histórico** antes de analizar ✨
 - Comenzar con **análisis completo** para context
 - Usar **confluencias SMC** para alta probabilidad
 - Validar con **Wyckoff** para timing
 - Confirmar con **volume delta** para momentum
 - Aplicar **gestión de riesgo** siempre
 
+## 🆕 **Context Management - Beneficios**
+
+- **Compresión 50:1** - De 100KB a 2KB por análisis
+- **Multi-timeframe** - Alineación temporal automática
+- **Actualización automática** - Con cada análisis
+- **Historial inteligente** - Patrones y niveles clave
+- **Mínimo consumo** - Optimizado para contexto AI
+
 ---
 
-*Resumen v1.0 - Basado en user-guide.md v1.6.6*
+*Resumen v1.1 - Basado en user-guide.md v1.7.1*
