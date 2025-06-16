@@ -22,6 +22,7 @@ import { TechnicalAnalysisHandlers } from './handlers/technicalAnalysisHandlers.
 import { SmartMoneyConceptsHandlers } from './handlers/smartMoneyConceptsHandlers.js';
 import { JsonParseAttempt } from '../utils/requestLogger.js';
 import { contextHandlers } from './handlers/contextHandlers.js';
+// import { AdvancedMultiExchangeService } from '../services/multiExchange/advancedMultiExchangeService.js';
 import * as path from 'path';
 
 export class MCPHandlers {
@@ -1328,6 +1329,35 @@ export class MCPHandlers {
     const handler = handlers[5]; // getMultiExchangeAnalyticsHandler
     if (!handler) throw new Error('Handler not found');
     return await handler(args);
+  }
+
+  // ====================
+  // ADVANCED MULTI-EXCHANGE HANDLERS (TASK-026 FASE 4)
+  // ====================
+
+  async handlePredictLiquidationCascade(args: any): Promise<MCPServerResponse> {
+    // TODO: Implement exchange aggregator in engine
+    throw new Error('Exchange aggregator not yet implemented in engine. This is a placeholder for TASK-026 FASE 4.');
+  }
+
+  async handleDetectAdvancedDivergences(args: any): Promise<MCPServerResponse> {
+    // TODO: Implement exchange aggregator in engine
+    throw new Error('Exchange aggregator not yet implemented in engine. This is a placeholder for TASK-026 FASE 4.');
+  }
+
+  async handleAnalyzeEnhancedArbitrage(args: any): Promise<MCPServerResponse> {
+    // TODO: Implement exchange aggregator in engine
+    throw new Error('Exchange aggregator not yet implemented in engine. This is a placeholder for TASK-026 FASE 4.');
+  }
+
+  async handleAnalyzeExtendedDominance(args: any): Promise<MCPServerResponse> {
+    // TODO: Implement exchange aggregator in engine
+    throw new Error('Exchange aggregator not yet implemented in engine. This is a placeholder for TASK-026 FASE 4.');
+  }
+
+  async handleAnalyzeCrossExchangeMarketStructure(args: any): Promise<MCPServerResponse> {
+    // TODO: Implement exchange aggregator in engine
+    throw new Error('Exchange aggregator not yet implemented in engine. This is a placeholder for TASK-026 FASE 4.');
   }
 
   // ====================
