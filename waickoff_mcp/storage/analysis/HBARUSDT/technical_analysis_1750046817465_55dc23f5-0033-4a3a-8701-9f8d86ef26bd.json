@@ -1,0 +1,65 @@
+{
+  "id": "55dc23f5-0033-4a3a-8701-9f8d86ef26bd",
+  "timestamp": 1750046817465,
+  "symbol": "HBARUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volume": {
+      "symbol": "HBARUSDT",
+      "interval": "240",
+      "avgVolume": 6145451.64125,
+      "currentVolume": 241230.06,
+      "maxVolume": 30429305.13,
+      "minVolume": 241230.06,
+      "volumeSpikes": [
+        {
+          "timestamp": "2025-06-13T00:00:00.000Z",
+          "volume": 30429305.13,
+          "multiplier": 4.95151648834887,
+          "price": 0.15559
+        },
+        {
+          "timestamp": "2025-06-13T04:00:00.000Z",
+          "volume": 9621767.67,
+          "multiplier": 1.5656729938961669,
+          "price": 0.15488
+        },
+        {
+          "timestamp": "2025-06-13T08:00:00.000Z",
+          "volume": 9911478.63,
+          "multiplier": 1.6128153321509142,
+          "price": 0.15505
+        },
+        {
+          "timestamp": "2025-06-13T12:00:00.000Z",
+          "volume": 9610491.64,
+          "multiplier": 1.5638381360763913,
+          "price": 0.15621
+        }
+      ],
+      "vwap": {
+        "current": 0.1571451701326047,
+        "priceVsVwap": "below",
+        "difference": -1.30145274645026
+      },
+      "trend": "stable"
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-16T04:06:57.465Z",
+    "tags": [
+      "timeframe:240",
+      "periods:24"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}
