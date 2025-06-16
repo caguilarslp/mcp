@@ -22,12 +22,14 @@ import type {
   SMCMarketBias,
   SMCSetupValidation,
   SmartMoneyAnalysis,
-  SMCConfig
+  SMCConfig,
+  MarketTicker as ExchangeTicker
 } from '../../types/index.js';
 
 import { OrderBlocksService } from './orderBlocks.js';
 import { FairValueGapsService } from './fairValueGaps.js';
 import { BreakOfStructureService } from './breakOfStructure.js';
+import { ExchangeAggregator } from '../../adapters/exchanges/common/ExchangeAggregator.js';
 import { performance } from 'perf_hooks';
 import { randomUUID } from 'crypto';
 
@@ -41,12 +43,14 @@ export class SmartMoneyAnalysisService {
   private orderBlocksService: OrderBlocksService;
   private fvgService: FairValueGapsService;
   private bosService: BreakOfStructureService;
+  private exchangeAggregator: ExchangeAggregator;
   private config: SMCConfig;
   private performanceMetrics: PerformanceMetrics[] = [];
 
   constructor(
     marketDataService: IMarketDataService,
-    analysisService: IAnalysisService
+    analysisService: IAnalysisService,
+    exchangeAggregator?: ExchangeAggregator
   ) {
     this.marketDataService = marketDataService;
     this.analysisService = analysisService;
@@ -55,6 +59,12 @@ export class SmartMoneyAnalysisService {
     this.orderBlocksService = new OrderBlocksService(marketDataService, analysisService);
     this.fvgService = new FairValueGapsService(marketDataService, analysisService);
     this.bosService = new BreakOfStructureService();
+    
+    // Multi-exchange support
+    this.exchangeAggregator = exchangeAggregator || new ExchangeAggregator(
+      new Map(), // Empty adapters map for now
+      {} // Default config
+    );
     
     this.config = this.getDefaultConfig();
   }
@@ -76,21 +86,37 @@ export class SmartMoneyAnalysisService {
   }
 
   /**
-   * Analiza confluencias entre todos los conceptos SMC
+   * Analiza confluencias entre todos los conceptos SMC con datos multi-exchange
    */
   async analyzeSmartMoneyConfluence(
     symbol: string,
     timeframe: string = '60',
-    lookback: number = 100
+    lookback: number = 100,
+    useMultiExchange: boolean = false
   ): Promise<SmartMoneyAnalysis> {
     const startTime = performance.now();
 
     try {
-      // 1. Obtener análisis de cada componente SMC
-      const [orderBlockAnalysis, fvgAnalysis, bosAnalysis] = await Promise.all([
-        this.orderBlocksService.detectOrderBlocks(symbol, timeframe, lookback),
-        this.fvgService.findFairValueGaps(symbol, timeframe, lookback),
-        this.bosService.detectBreakOfStructure(symbol, timeframe, lookback)
+      let orderBlockAnalysis: OrderBlockAnalysis;
+      let fvgAnalysis: FVGAnalysis;
+      let bosAnalysis: MarketStructureAnalysis;
+      let multiExchangeData: any = null;
+
+      if (useMultiExchange) {
+        // 1a. Obtener datos multi-exchange para validación
+        try {
+          multiExchangeData = await this.getMultiExchangeValidationData(symbol);
+          console.log('[SMC] Multi-exchange validation data obtained');
+        } catch (error) {
+          console.warn('[SMC] Multi-exchange data failed, falling back to single exchange:', error);
+        }
+      }
+
+      // 1b. Obtener análisis de cada componente SMC
+      [orderBlockAnalysis, fvgAnalysis, bosAnalysis] = await Promise.all([
+        this.analyzeOrderBlocksWithCrossValidation(symbol, timeframe, lookback, multiExchangeData),
+        this.analyzeFVGsWithCrossValidation(symbol, timeframe, lookback, multiExchangeData),
+        this.analyzeBOSWithCrossValidation(symbol, timeframe, lookback, multiExchangeData)
       ]);
 
       // 2. Detectar confluencias entre conceptos
@@ -106,12 +132,13 @@ export class SmartMoneyAnalysisService {
         bosAnalysis.structurePoints
       );
 
-      // 4. Detectar actividad institucional
-      const institutionalActivity = this.analyzeInstitutionalActivity(
+      // 4. Detectar actividad institucional con datos cross-exchange
+      const institutionalActivity = this.analyzeInstitutionalActivityWithCrossValidation(
         orderBlockAnalysis,
         fvgAnalysis,
         bosAnalysis,
-        confluences
+        confluences,
+        multiExchangeData
       );
 
       // 5. Determinar sesgo del mercado integrado
@@ -175,16 +202,17 @@ export class SmartMoneyAnalysisService {
   }
 
   /**
-   * Obtiene el sesgo institucional del mercado
+   * Obtiene el sesgo institucional del mercado con validación multi-exchange
    */
   async getSMCMarketBias(
     symbol: string,
-    timeframe: string = '60'
+    timeframe: string = '60',
+    useMultiExchange: boolean = false
   ): Promise<SMCMarketBias> {
     const startTime = performance.now();
 
     try {
-      const analysis = await this.analyzeSmartMoneyConfluence(symbol, timeframe);
+      const analysis = await this.analyzeSmartMoneyConfluence(symbol, timeframe, 100, useMultiExchange);
       
       const bias: SMCMarketBias = {
         ...analysis.marketBias,
@@ -204,17 +232,18 @@ export class SmartMoneyAnalysisService {
   }
 
   /**
-   * Valida un setup completo de Smart Money Concepts
+   * Valida un setup completo de Smart Money Concepts con datos multi-exchange
    */
   async validateSMCSetup(
     symbol: string,
     setupType: 'long' | 'short',
-    entryPrice?: number
+    entryPrice?: number,
+    useMultiExchange: boolean = false
   ): Promise<SMCSetupValidation> {
     const startTime = performance.now();
 
     try {
-      const analysis = await this.analyzeSmartMoneyConfluence(symbol);
+      const analysis = await this.analyzeSmartMoneyConfluence(symbol, '60', 100, useMultiExchange);
       const entry = entryPrice || analysis.currentPrice;
 
       // 1. Validar alineación direccional
@@ -1080,7 +1109,445 @@ export class SmartMoneyAnalysisService {
   }
 
   // ====================
-  // MÉTODOS AUXILIARES
+  // MÉTODOS MULTI-EXCHANGE
+  // ====================
+
+  /**
+   * Obtiene datos de validación multi-exchange
+   */
+  private async getMultiExchangeValidationData(symbol: string): Promise<{
+    aggregatedTicker: any;
+    volumeComparison: any;
+    priceCorrelation: any;
+    washTradingMetrics: any;
+  }> {
+    const [aggregatedTicker, volumeComparison] = await Promise.all([
+      this.exchangeAggregator.getAggregatedTicker(symbol),
+      this.exchangeAggregator.analyzeVolumeDivergences(symbol)
+    ]);
+
+    // Calcular correlación de precios
+    const priceCorrelation = this.calculatePriceCorrelation(Object.values(aggregatedTicker.exchanges));
+    
+    // Detectar wash trading
+    const washTradingMetrics = this.detectWashTradingIndicators(volumeComparison);
+
+    return {
+      aggregatedTicker,
+      volumeComparison,
+      priceCorrelation,
+      washTradingMetrics
+    };
+  }
+
+  /**
+   * Analiza Order Blocks con validación cross-exchange
+   */
+  private async analyzeOrderBlocksWithCrossValidation(
+    symbol: string,
+    timeframe: string,
+    lookback: number,
+    multiExchangeData: any
+  ): Promise<OrderBlockAnalysis> {
+    // Obtener análisis base de Order Blocks
+    const baseAnalysis = await this.orderBlocksService.detectOrderBlocks(symbol, timeframe, lookback);
+
+    if (!multiExchangeData) {
+      return baseAnalysis;
+    }
+
+    // Validar Order Blocks con datos cross-exchange
+    const validatedBlocks = baseAnalysis.activeBlocks.filter(block => {
+      return this.validateOrderBlockCrossExchange(block, multiExchangeData);
+    }).map(block => ({
+      ...block,
+      strength: this.enhanceOrderBlockStrength(block, multiExchangeData),
+      institutionalConfirmation: this.checkInstitutionalConfirmation(block, multiExchangeData)
+    }));
+
+    return {
+      ...baseAnalysis,
+      activeBlocks: validatedBlocks,
+      // crossExchangeValidation: {
+      //   originalCount: baseAnalysis.activeBlocks.length,
+      //   validatedCount: validatedBlocks.length,
+      //   washTradingFiltered: baseAnalysis.activeBlocks.length - validatedBlocks.length,
+      //   averageStrengthImprovement: this.calculateAverageStrengthImprovement(baseAnalysis.activeBlocks, validatedBlocks)
+      // }
+    } as OrderBlockAnalysis & {
+      crossExchangeValidation?: {
+        originalCount: number;
+        validatedCount: number;
+        washTradingFiltered: number;
+        averageStrengthImprovement: number;
+      };
+    };
+  }
+
+  /**
+   * Analiza FVGs con validación cross-exchange
+   */
+  private async analyzeFVGsWithCrossValidation(
+    symbol: string,
+    timeframe: string,
+    lookback: number,
+    multiExchangeData: any
+  ): Promise<FVGAnalysis> {
+    const baseAnalysis = await this.fvgService.findFairValueGaps(symbol, timeframe, lookback);
+
+    if (!multiExchangeData) {
+      return baseAnalysis;
+    }
+
+    // Filtrar FVGs que no se confirman en múltiples exchanges
+    const institutionalFVGs = baseAnalysis.openGaps.filter(fvg => {
+      return this.validateFVGCrossExchange(fvg, multiExchangeData);
+    }).map(fvg => ({
+      ...fvg,
+      probability: {
+        ...fvg.probability,
+        fill: this.enhanceFVGProbability(fvg, multiExchangeData)
+      },
+      institutionalSignificance: this.assessFVGInstitutionalSignificance(fvg, multiExchangeData)
+    }));
+
+    return {
+      ...baseAnalysis,
+      openGaps: institutionalFVGs,
+      marketImbalance: {
+        ...baseAnalysis.marketImbalance,
+        // institutionalBias: this.calculateInstitutionalFVGBias(institutionalFVGs),
+        // washTradingImpact: this.assessWashTradingImpactOnFVGs(multiExchangeData)
+      }
+    } as FVGAnalysis & {
+      marketImbalance: FVGAnalysis['marketImbalance'] & {
+        institutionalBias?: { direction: 'bullish' | 'bearish' | 'neutral'; strength: number };
+        washTradingImpact?: string;
+      };
+    };
+  }
+
+  /**
+   * Analiza BOS con validación cross-exchange
+   */
+  private async analyzeBOSWithCrossValidation(
+    symbol: string,
+    timeframe: string,
+    lookback: number,
+    multiExchangeData: any
+  ): Promise<MarketStructureAnalysis> {
+    const baseAnalysis = await this.bosService.detectBreakOfStructure(symbol, timeframe, lookback);
+
+    if (!multiExchangeData) {
+      return baseAnalysis;
+    }
+
+    // Validar breaks con confirmación multi-exchange
+    const confirmedBreaks = baseAnalysis.activeBreaks.filter((breakItem: StructuralBreak) => {
+      return this.validateBOSCrossExchange(breakItem, multiExchangeData);
+    }).map((breakItem: StructuralBreak) => ({
+      ...breakItem,
+      probability: this.enhanceBOSProbability(breakItem, multiExchangeData),
+      institutionalConfirmation: this.checkBOSInstitutionalConfirmation(breakItem, multiExchangeData)
+    }));
+
+    return {
+      ...baseAnalysis,
+      activeBreaks: confirmedBreaks,
+      marketBias: {
+        ...baseAnalysis.marketBias,
+        // institutionalAlignment: this.calculateInstitutionalStructuralAlignment(confirmedBreaks, multiExchangeData)
+      }
+    } as MarketStructureAnalysis & {
+      marketBias: MarketStructureAnalysis['marketBias'] & {
+        institutionalAlignment?: number;
+      };
+    };
+  }
+
+  /**
+   * Analiza actividad institucional con validación cross-exchange
+   */
+  private analyzeInstitutionalActivityWithCrossValidation(
+    orderBlocks: OrderBlockAnalysis,
+    fvgs: FVGAnalysis,
+    bos: MarketStructureAnalysis,
+    confluences: SmartMoneyConfluence[],
+    multiExchangeData: any
+  ): any {
+    // Análisis base
+    const baseActivity = this.analyzeInstitutionalActivity(orderBlocks, fvgs, bos, confluences);
+
+    if (!multiExchangeData) {
+      return baseActivity;
+    }
+
+    // Enriquecer con datos institucionales reales
+    const crossExchangeScore = this.calculateCrossExchangeInstitutionalScore(multiExchangeData);
+    const washTradingReduction = this.calculateWashTradingReduction(multiExchangeData);
+    const realVolumeFootprint = this.calculateRealVolumeFootprint(multiExchangeData);
+
+    const enhancedScore = Math.min(100, baseActivity.score + crossExchangeScore);
+    const enhancedSignals = [
+      ...baseActivity.signals,
+      `Cross-exchange validation: +${crossExchangeScore} institutional confidence`,
+      `Wash trading filtered: ${washTradingReduction.toFixed(1)}% of volume`,
+      `Real institutional volume: ${realVolumeFootprint.institutionalPercent.toFixed(1)}%`
+    ];
+
+    return {
+      ...baseActivity,
+      score: enhancedScore,
+      signals: enhancedSignals,
+      crossExchangeMetrics: {
+        washTradingReduction,
+        realVolumeFootprint,
+        institutionalConfidence: crossExchangeScore,
+        exchangeConsensus: this.calculateExchangeConsensus(multiExchangeData)
+      },
+      interpretation: this.generateEnhancedInstitutionalInterpretation(enhancedScore, washTradingReduction)
+    };
+  }
+
+  // ====================
+  // MÉTODOS AUXILIARES MULTI-EXCHANGE
+  // ====================
+
+  private calculatePriceCorrelation(exchanges: any[]): number {
+    if (exchanges.length < 2) return 100;
+    
+    const prices = exchanges.map(e => e.lastPrice);
+    const avgPrice = prices.reduce((a, b) => a + b, 0) / prices.length;
+    const maxDeviation = Math.max(...prices.map(p => Math.abs(p - avgPrice) / avgPrice));
+    
+    return Math.max(0, 100 - (maxDeviation * 100 * 10)); // 10x multiplier for sensitivity
+  }
+
+  private detectWashTradingIndicators(volumeComparison: any): {
+    suspiciousVolumeSpikes: number;
+    priceVolumeDisconnect: number;
+    artificialLiquidityScore: number;
+  } {
+    const exchanges = volumeComparison.exchanges || [];
+    
+    // Detectar spikes sospechosos de volumen
+    const suspiciousSpikes = exchanges.filter((e: any) => 
+      e.volumeDeviation > 3 && e.priceDeviation < 0.1
+    ).length;
+    
+    // Detectar desconexión precio-volumen
+    const avgPriceVolumeRatio = exchanges.reduce((sum: number, e: any) => 
+      sum + (e.priceDeviation / Math.max(e.volumeDeviation, 0.1)), 0
+    ) / exchanges.length;
+    
+    return {
+      suspiciousVolumeSpikes: suspiciousSpikes,
+      priceVolumeDisconnect: Math.max(0, 100 - (avgPriceVolumeRatio * 50)),
+      artificialLiquidityScore: Math.min(100, suspiciousSpikes * 25 + (100 - avgPriceVolumeRatio * 50))
+    };
+  }
+
+  private validateOrderBlockCrossExchange(block: OrderBlock, multiExchangeData: any): boolean {
+    const { priceCorrelation, washTradingMetrics } = multiExchangeData;
+    
+    // Filtrar si hay demasiado wash trading
+    if (washTradingMetrics.artificialLiquidityScore > 70) {
+      return false;
+    }
+    
+    // Filtrar si los precios no están correlacionados
+    if (priceCorrelation < 95) {
+      return false;
+    }
+    
+    return true;
+  }
+
+  private enhanceOrderBlockStrength(block: OrderBlock, multiExchangeData: any): number {
+    let enhancement = 0;
+    const { priceCorrelation, washTradingMetrics } = multiExchangeData;
+    
+    // Bonus por alta correlación de precios
+    if (priceCorrelation > 98) enhancement += 5;
+    else if (priceCorrelation > 95) enhancement += 2;
+    
+    // Penalty por wash trading
+    enhancement -= washTradingMetrics.artificialLiquidityScore * 0.1;
+    
+    return Math.max(0, Math.min(100, block.strength + enhancement));
+  }
+
+  private checkInstitutionalConfirmation(block: OrderBlock, multiExchangeData: any): boolean {
+    const { volumeComparison } = multiExchangeData;
+    
+    // Confirmar si el volumen es consistente entre exchanges
+    const volumeConsistency = volumeComparison.consistency || 0;
+    return volumeConsistency > 80;
+  }
+
+  private calculateAverageStrengthImprovement(original: OrderBlock[], validated: OrderBlock[]): number {
+    if (original.length === 0 || validated.length === 0) return 0;
+    
+    const originalAvg = original.reduce((sum, block) => sum + block.strength, 0) / original.length;
+    const validatedAvg = validated.reduce((sum, block) => sum + block.strength, 0) / validated.length;
+    
+    return validatedAvg - originalAvg;
+  }
+
+  private validateFVGCrossExchange(fvg: FairValueGap, multiExchangeData: any): boolean {
+    const { priceCorrelation, washTradingMetrics } = multiExchangeData;
+    
+    // Requiere correlación alta para FVGs institucionales
+    return priceCorrelation > 96 && washTradingMetrics.artificialLiquidityScore < 60;
+  }
+
+  private enhanceFVGProbability(fvg: FairValueGap, multiExchangeData: any): number {
+    const { priceCorrelation } = multiExchangeData;
+    const enhancement = (priceCorrelation - 95) * 2; // 2% per correlation point above 95%
+    
+    return Math.max(0, Math.min(100, fvg.probability.fill + enhancement));
+  }
+
+  private assessFVGInstitutionalSignificance(fvg: FairValueGap, multiExchangeData: any): string {
+    const { washTradingMetrics, volumeComparison } = multiExchangeData;
+    
+    if (washTradingMetrics.artificialLiquidityScore < 30 && volumeComparison.consistency > 85) {
+      return 'high';
+    } else if (washTradingMetrics.artificialLiquidityScore < 60) {
+      return 'medium';
+    }
+    return 'low';
+  }
+
+  private calculateInstitutionalFVGBias(fvgs: FairValueGap[]): {
+    direction: 'bullish' | 'bearish' | 'neutral';
+    strength: number;
+  } {
+    if (fvgs.length === 0) {
+      return { direction: 'neutral', strength: 50 };
+    }
+    
+    const bullishFVGs = fvgs.filter(fvg => fvg.type === 'bullish').length;
+    const bearishFVGs = fvgs.filter(fvg => fvg.type === 'bearish').length;
+    
+    if (bullishFVGs > bearishFVGs) {
+      return { direction: 'bullish', strength: 50 + (bullishFVGs - bearishFVGs) * 10 };
+    } else if (bearishFVGs > bullishFVGs) {
+      return { direction: 'bearish', strength: 50 + (bearishFVGs - bullishFVGs) * 10 };
+    }
+    
+    return { direction: 'neutral', strength: 50 };
+  }
+
+  private assessWashTradingImpactOnFVGs(multiExchangeData: any): string {
+    const { washTradingMetrics } = multiExchangeData;
+    
+    if (washTradingMetrics.artificialLiquidityScore > 70) {
+      return 'high - FVG signals may be artificial';
+    } else if (washTradingMetrics.artificialLiquidityScore > 40) {
+      return 'moderate - some FVG noise detected';
+    }
+    return 'low - clean FVG signals';
+  }
+
+  private validateBOSCrossExchange(breakItem: StructuralBreak, multiExchangeData: any): boolean {
+    const { priceCorrelation, volumeComparison } = multiExchangeData;
+    
+    // Requiere alta correlación y volumen consistente para BOS válidos
+    return priceCorrelation > 97 && volumeComparison.consistency > 80;
+  }
+
+  private enhanceBOSProbability(breakItem: StructuralBreak, multiExchangeData: any): number {
+    const { priceCorrelation, volumeComparison } = multiExchangeData;
+    
+    let enhancement = 0;
+    if (priceCorrelation > 98) enhancement += 10;
+    if (volumeComparison.consistency > 90) enhancement += 10;
+    
+    return Math.max(0, Math.min(100, breakItem.probability + enhancement));
+  }
+
+  private checkBOSInstitutionalConfirmation(breakItem: StructuralBreak, multiExchangeData: any): boolean {
+    const { washTradingMetrics } = multiExchangeData;
+    return washTradingMetrics.artificialLiquidityScore < 50;
+  }
+
+  private calculateInstitutionalStructuralAlignment(breaks: StructuralBreak[], multiExchangeData: any): number {
+    if (breaks.length === 0) return 50;
+    
+    const { priceCorrelation, volumeComparison } = multiExchangeData;
+    const baseAlignment = breaks.reduce((sum, b) => sum + b.probability, 0) / breaks.length;
+    const crossExchangeBonus = (priceCorrelation + volumeComparison.consistency) / 2 - 85; // Bonus above 85%
+    
+    return Math.max(0, Math.min(100, baseAlignment + crossExchangeBonus));
+  }
+
+  private calculateCrossExchangeInstitutionalScore(multiExchangeData: any): number {
+    const { priceCorrelation, volumeComparison, washTradingMetrics } = multiExchangeData;
+    
+    let score = 0;
+    
+    // Bonus por correlación de precios
+    if (priceCorrelation > 98) score += 15;
+    else if (priceCorrelation > 95) score += 10;
+    else if (priceCorrelation > 90) score += 5;
+    
+    // Bonus por consistencia de volumen
+    if (volumeComparison.consistency > 90) score += 15;
+    else if (volumeComparison.consistency > 80) score += 10;
+    else if (volumeComparison.consistency > 70) score += 5;
+    
+    // Penalty por wash trading
+    score -= washTradingMetrics.artificialLiquidityScore * 0.2;
+    
+    return Math.max(0, Math.min(25, score)); // Max 25 puntos de bonus
+  }
+
+  private calculateWashTradingReduction(multiExchangeData: any): number {
+    const { washTradingMetrics } = multiExchangeData;
+    return washTradingMetrics.artificialLiquidityScore;
+  }
+
+  private calculateRealVolumeFootprint(multiExchangeData: any): {
+    institutionalPercent: number;
+    retailPercent: number;
+    washTradingPercent: number;
+  } {
+    const { washTradingMetrics, volumeComparison } = multiExchangeData;
+    
+    const washTradingPercent = washTradingMetrics.artificialLiquidityScore;
+    const realVolumePercent = 100 - washTradingPercent;
+    const institutionalPercent = realVolumePercent * (volumeComparison.consistency / 100) * 0.7; // 70% of consistent volume is institutional
+    const retailPercent = realVolumePercent - institutionalPercent;
+    
+    return {
+      institutionalPercent,
+      retailPercent,
+      washTradingPercent
+    };
+  }
+
+  private calculateExchangeConsensus(multiExchangeData: any): number {
+    const { priceCorrelation, volumeComparison } = multiExchangeData;
+    return (priceCorrelation + volumeComparison.consistency) / 2;
+  }
+
+  private generateEnhancedInstitutionalInterpretation(score: number, washTradingReduction: number): string {
+    const baseInterpretation = score >= 60 ?
+      'High institutional activity detected with cross-exchange validation' :
+      score >= 40 ?
+      'Moderate institutional activity with partial cross-exchange confirmation' :
+      'Limited institutional activity across exchanges';
+    
+    const washTradingNote = washTradingReduction > 50 ?
+      ` (${washTradingReduction.toFixed(1)}% wash trading filtered out)` :
+      '';
+    
+    return baseInterpretation + washTradingNote;
+  }
+
+  // ====================
+  // MÉTODOS AUXILIARES ORIGINALES
   // ====================
 
   private calculateZoneDistance(

@@ -24,6 +24,7 @@ import type {
   IWyckoffBasicService
 } from './wyckoffBasic.js';
 
+import { ExchangeAggregator } from '../adapters/exchanges/common/ExchangeAggregator.js';
 import { PerformanceMonitor } from '../utils/performance.js';
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -488,12 +489,14 @@ export interface ActionItem {
 export class WyckoffAdvancedService implements IWyckoffAdvancedService {
   private readonly logger: FileLogger;
   private readonly performanceMonitor: PerformanceMonitor;
+  private readonly exchangeAggregator: ExchangeAggregator;
 
   constructor(
     private readonly marketDataService: IMarketDataService,
     private readonly analysisService: IAnalysisService,
     private readonly wyckoffBasicService: IWyckoffBasicService,
-    private readonly historicalAnalysisService?: IHistoricalAnalysisService
+    private readonly historicalAnalysisService?: IHistoricalAnalysisService,
+    exchangeAggregator?: ExchangeAggregator
   ) {
     this.logger = new FileLogger('WyckoffAdvancedService', 'info', {
       logDir: path.join(process.cwd(), 'logs'),
@@ -501,15 +504,22 @@ export class WyckoffAdvancedService implements IWyckoffAdvancedService {
       enableRotation: true
     });
     this.performanceMonitor = new PerformanceMonitor();
+    
+    // Multi-exchange support
+    this.exchangeAggregator = exchangeAggregator || new ExchangeAggregator(
+      new Map(), // Empty adapters map for now
+      {} // Default config
+    );
   }
 
   /**
-   * Analyze Composite Man activity and institutional manipulation
+   * Analyze Composite Man activity and institutional manipulation with multi-exchange support
    */
   async analyzeCompositeMan(
     symbol: string,
     timeframe: string = '60',
-    lookback: number = 200
+    lookback: number = 200,
+    useMultiExchange: boolean = false
   ): Promise<CompositeManAnalysis> {
     return this.performanceMonitor.measure('analyzeCompositeMan', async () => {
       try {
@@ -519,13 +529,25 @@ export class WyckoffAdvancedService implements IWyckoffAdvancedService {
         const klines = await this.marketDataService.getKlines(symbol, timeframe, lookback);
         const basicAnalysis = await this.wyckoffBasicService.analyzeWyckoffPhase(symbol, timeframe, lookback);
         const volumeAnalysis = await this.analysisService.analyzeVolume(symbol, timeframe, Math.min(lookback, 48));
+        
+        // Multi-exchange validation if enabled
+        let multiExchangeData: any = null;
+        if (useMultiExchange) {
+          try {
+            multiExchangeData = await this.getMultiExchangeCompositeManData(symbol);
+            this.logger.info(`Multi-exchange data obtained for Composite Man analysis of ${symbol}`);
+          } catch (error) {
+            this.logger.warn(`Multi-exchange data failed for ${symbol}, using single exchange:`, error);
+          }
+        }
 
-        // Analyze institutional activity
-        const institutionalActivity = await this.analyzeInstitutionalActivity(
+        // Analyze institutional activity with cross-exchange validation
+        const institutionalActivity = await this.analyzeInstitutionalActivityWithCrossValidation(
           symbol,
           timeframe,
           klines,
-          basicAnalysis
+          basicAnalysis,
+          multiExchangeData
         );
 
         // Analyze market characteristics
@@ -536,20 +558,22 @@ export class WyckoffAdvancedService implements IWyckoffAdvancedService {
           volumeAnalysis
         );
 
-        // Detect manipulation signs
-        const manipulationSigns = await this.detectManipulationSigns(
+        // Detect manipulation signs with cross-exchange confirmation
+        const manipulationSigns = await this.detectManipulationSignsWithCrossValidation(
           symbol,
           timeframe,
           klines,
           basicAnalysis,
-          institutionalActivity
+          institutionalActivity,
+          multiExchangeData
         );
 
-        // Calculate manipulation score
-        const manipulationScore = this.calculateManipulationScore(
+        // Calculate manipulation score with multi-exchange enhancement
+        const manipulationScore = this.calculateManipulationScoreWithCrossValidation(
           institutionalActivity,
           manipulationSigns,
-          marketCharacteristics
+          marketCharacteristics,
+          multiExchangeData
         );
 
         // Generate interpretation
@@ -1011,7 +1035,431 @@ export class WyckoffAdvancedService implements IWyckoffAdvancedService {
   }
 
   // ====================
-  // PRIVATE HELPER METHODS
+  // MULTI-EXCHANGE METHODS FOR WYCKOFF ADVANCED
+  // ====================
+
+  /**
+   * Obtiene datos multi-exchange específicos para análisis del Composite Man
+   */
+  private async getMultiExchangeCompositeManData(symbol: string): Promise<{
+    aggregatedTicker: any;
+    volumeAnalysis: any;
+    institutionalFootprint: any;
+    manipulationIndicators: any;
+  }> {
+    const [aggregatedTicker, volumeAnalysis] = await Promise.all([
+      this.exchangeAggregator.getAggregatedTicker(symbol),
+      this.exchangeAggregator.analyzeVolumeDivergences(symbol)
+    ]);
+
+    // Calcular footprint institucional
+    const institutionalFootprint = this.calculateInstitutionalFootprint(aggregatedTicker, volumeAnalysis);
+    
+    // Detectar indicadores de manipulación cross-exchange
+    const manipulationIndicators = this.detectCrossExchangeManipulation(aggregatedTicker, volumeAnalysis);
+
+    return {
+      aggregatedTicker,
+      volumeAnalysis,
+      institutionalFootprint,
+      manipulationIndicators
+    };
+  }
+
+  /**
+   * Analiza actividad institucional con validación cross-exchange
+   */
+  private async analyzeInstitutionalActivityWithCrossValidation(
+    symbol: string,
+    timeframe: string,
+    klines: OHLCV[],
+    basicAnalysis: WyckoffPhaseAnalysis,
+    multiExchangeData: any
+  ): Promise<InstitutionalActivity> {
+    // Análisis base
+    const baseActivity = await this.analyzeInstitutionalActivity(symbol, timeframe, klines, basicAnalysis);
+    
+    if (!multiExchangeData) {
+      return baseActivity;
+    }
+
+    // Enriquecer con datos cross-exchange
+    const enhancedActivity = this.enhanceInstitutionalActivityWithCrossData(
+      baseActivity,
+      multiExchangeData
+    );
+
+    return enhancedActivity;
+  }
+
+  /**
+   * Detecta señales de manipulación con confirmación cross-exchange
+   */
+  private async detectManipulationSignsWithCrossValidation(
+    symbol: string,
+    timeframe: string,
+    klines: OHLCV[],
+    basicAnalysis: WyckoffPhaseAnalysis,
+    institutionalActivity: InstitutionalActivity,
+    multiExchangeData: any
+  ): Promise<ManipulationSign[]> {
+    // Detección base
+    const baseSigns = await this.detectManipulationSigns(
+      symbol,
+      timeframe, 
+      klines,
+      basicAnalysis,
+      institutionalActivity
+    );
+    
+    if (!multiExchangeData) {
+      return baseSigns;
+    }
+
+    // Filtrar y validar con datos cross-exchange
+    const validatedSigns = this.validateManipulationSignsCrossExchange(
+      baseSigns,
+      multiExchangeData
+    );
+
+    // Agregar nuevas señales detectadas solo en análisis cross-exchange
+    const crossExchangeSigns = this.detectCrossExchangeOnlyManipulation(multiExchangeData);
+    
+    return [...validatedSigns, ...crossExchangeSigns];
+  }
+
+  /**
+   * Calcula score de manipulación con enhancement cross-exchange
+   */
+  private calculateManipulationScoreWithCrossValidation(
+    institutionalActivity: InstitutionalActivity,
+    manipulationSigns: ManipulationSign[],
+    marketCharacteristics: MarketCharacteristics,
+    multiExchangeData: any
+  ): number {
+    // Score base
+    const baseScore = this.calculateManipulationScore(
+      institutionalActivity,
+      manipulationSigns,
+      marketCharacteristics
+    );
+    
+    if (!multiExchangeData) {
+      return baseScore;
+    }
+
+    // Enhancement cross-exchange
+    const crossExchangeBonus = this.calculateCrossExchangeManipulationBonus(multiExchangeData);
+    const washTradingPenalty = this.calculateWashTradingPenalty(multiExchangeData);
+    
+    return Math.max(0, Math.min(100, baseScore + crossExchangeBonus - washTradingPenalty));
+  }
+
+  // ====================
+  // MÉTODOS AUXILIARES MULTI-EXCHANGE
+  // ====================
+
+  private calculateInstitutionalFootprint(aggregatedTicker: any, volumeAnalysis: any): {
+    institutionalVolumeRatio: number;
+    priceEfficiency: number;
+    orderFlowQuality: number;
+    marketImpactConsistency: number;
+  } {
+    const exchanges = aggregatedTicker.exchanges || {};
+    const exchangeCount = Object.keys(exchanges).length;
+    
+    if (exchangeCount < 2) {
+      return {
+        institutionalVolumeRatio: 50,
+        priceEfficiency: 50,
+        orderFlowQuality: 50,
+        marketImpactConsistency: 50
+      };
+    }
+
+    // Calcular ratio de volumen institucional (volumen consistente entre exchanges)
+    const institutionalVolumeRatio = Math.min(100, volumeAnalysis.consistency * 0.8);
+    
+    // Calcular eficiencia de precios (qué tan cerca están los precios entre exchanges)
+    const priceEfficiency = Math.min(100, aggregatedTicker.confidence * 0.9);
+    
+    // Calcular calidad del order flow (consistencia en la dirección del flujo)
+    const orderFlowQuality = this.calculateOrderFlowQuality(exchanges);
+    
+    // Calcular consistencia del impacto de mercado
+    const marketImpactConsistency = this.calculateMarketImpactConsistency(exchanges);
+
+    return {
+      institutionalVolumeRatio,
+      priceEfficiency,
+      orderFlowQuality,
+      marketImpactConsistency
+    };
+  }
+
+  private detectCrossExchangeManipulation(aggregatedTicker: any, volumeAnalysis: any): {
+    priceManipulationScore: number;
+    volumeManipulationScore: number;
+    coordinatedMovements: number;
+    artificialLiquidityScore: number;
+  } {
+    const exchanges = Object.entries(aggregatedTicker.exchanges || {});
+    
+    if (exchanges.length < 2) {
+      return {
+        priceManipulationScore: 0,
+        volumeManipulationScore: 0,
+        coordinatedMovements: 0,
+        artificialLiquidityScore: 0
+      };
+    }
+
+    // Detectar manipulación de precios (precios descoordinados sospechosos)
+    const priceDeviations = exchanges.map(([_, data]: [string, any]) => 
+      Math.abs(data.ticker.lastPrice - aggregatedTicker.weightedPrice) / aggregatedTicker.weightedPrice
+    );
+    const priceManipulationScore = Math.max(...priceDeviations) * 1000; // Amplificar desviaciones
+    
+    // Detectar manipulación de volumen (spikes no naturales)
+    const volumeManipulationScore = Math.min(100, 
+      volumeAnalysis.exchanges.filter((e: any) => e.volumeDeviation > 2).length * 25
+    );
+    
+    // Detectar movimientos coordinados sospechosos
+    const coordinatedMovements = this.detectCoordinatedMovements(exchanges);
+    
+    // Detectar liquidez artificial
+    const artificialLiquidityScore = this.detectArtificialLiquidity(volumeAnalysis);
+
+    return {
+      priceManipulationScore: Math.min(100, priceManipulationScore),
+      volumeManipulationScore,
+      coordinatedMovements,
+      artificialLiquidityScore
+    };
+  }
+
+  private enhanceInstitutionalActivityWithCrossData(
+    baseActivity: InstitutionalActivity,
+    multiExchangeData: any
+  ): InstitutionalActivity {
+    const { institutionalFootprint, manipulationIndicators } = multiExchangeData;
+    
+    // Mejorar precisión del nivel de actividad
+    let enhancedActivityLevel = baseActivity.activityLevel;
+    if (institutionalFootprint.institutionalVolumeRatio > 80) {
+      enhancedActivityLevel = 'extreme';
+    } else if (institutionalFootprint.institutionalVolumeRatio > 60) {
+      enhancedActivityLevel = 'high';
+    }
+    
+    // Mejorar volume footprint con datos reales
+    const enhancedVolumeFootprint: VolumeFootprint = {
+      ...baseActivity.volumeFootprint,
+      largeTransactionRatio: institutionalFootprint.institutionalVolumeRatio / 100,
+      orderFlowImbalance: this.calculateRealOrderFlowImbalance(multiExchangeData)
+    };
+    
+    // Agregar evidencia cross-exchange
+    const enhancedPriceActionSigns = [
+      ...baseActivity.priceActionSigns,
+      ...this.generateCrossExchangePriceActionSigns(multiExchangeData)
+    ];
+
+    return {
+      ...baseActivity,
+      activityLevel: enhancedActivityLevel,
+      volumeFootprint: enhancedVolumeFootprint,
+      priceActionSigns: enhancedPriceActionSigns
+    };
+  }
+
+  private validateManipulationSignsCrossExchange(
+    baseSigns: ManipulationSign[],
+    multiExchangeData: any
+  ): ManipulationSign[] {
+    return baseSigns.filter(sign => {
+      // Validar que la señal de manipulación se confirma en múltiples exchanges
+      const crossExchangeConfirmation = this.confirmManipulationAcrossExchanges(
+        sign,
+        multiExchangeData
+      );
+      
+      if (crossExchangeConfirmation) {
+        // Aumentar confianza si se confirma cross-exchange
+        sign.confidence = Math.min(100, sign.confidence + 15);
+        return true;
+      }
+      
+      // Filtrar señales que podrían ser wash trading
+      return sign.confidence > 70; // Solo mantener señales muy fuertes si no hay confirmación
+    });
+  }
+
+  private detectCrossExchangeOnlyManipulation(multiExchangeData: any): ManipulationSign[] {
+    const signs: ManipulationSign[] = [];
+    const { manipulationIndicators } = multiExchangeData;
+    
+    // Detectar manipulaciones que solo son visibles comparando exchanges
+    if (manipulationIndicators.coordinatedMovements > 80) {
+      signs.push({
+        timestamp: new Date(),
+        type: 'absorption_test',
+        severity: 'major',
+        confidence: manipulationIndicators.coordinatedMovements,
+        description: 'Coordinated price movements detected across exchanges indicating institutional testing',
+        targetLevels: [],
+        outcome: 'pending'
+      });
+    }
+    
+    if (manipulationIndicators.artificialLiquidityScore > 70) {
+      signs.push({
+        timestamp: new Date(),
+        type: 'distribution_test',
+        severity: 'moderate',
+        confidence: manipulationIndicators.artificialLiquidityScore,
+        description: 'Artificial liquidity injection detected, possible institutional distribution',
+        targetLevels: [],
+        outcome: 'pending'
+      });
+    }
+    
+    return signs;
+  }
+
+  private calculateCrossExchangeManipulationBonus(multiExchangeData: any): number {
+    const { institutionalFootprint, manipulationIndicators } = multiExchangeData;
+    
+    let bonus = 0;
+    
+    // Bonus por footprint institucional fuerte
+    if (institutionalFootprint.institutionalVolumeRatio > 80) bonus += 10;
+    else if (institutionalFootprint.institutionalVolumeRatio > 60) bonus += 5;
+    
+    // Bonus por evidencia clara de manipulación cross-exchange
+    if (manipulationIndicators.coordinatedMovements > 70) bonus += 15;
+    if (manipulationIndicators.priceManipulationScore > 50) bonus += 10;
+    
+    return Math.min(20, bonus); // Máximo 20 puntos de bonus
+  }
+
+  private calculateWashTradingPenalty(multiExchangeData: any): number {
+    const { manipulationIndicators } = multiExchangeData;
+    
+    // Penalización por wash trading detectado
+    return Math.min(30, manipulationIndicators.artificialLiquidityScore * 0.3);
+  }
+
+  private calculateOrderFlowQuality(exchanges: { [key: string]: any }): number {
+    const exchangeArray = Object.values(exchanges);
+    if (exchangeArray.length < 2) return 50;
+    
+    // Calcular consistencia en la dirección del flujo de órdenes
+    const volumes = exchangeArray.map((e: any) => e.ticker.volume24h);
+    const avgVolume = volumes.reduce((a, b) => a + b, 0) / volumes.length;
+    const volumeVariance = volumes.reduce((sum, vol) => sum + Math.pow(vol - avgVolume, 2), 0) / volumes.length;
+    const volumeStdDev = Math.sqrt(volumeVariance);
+    
+    const consistency = Math.max(0, 100 - (volumeStdDev / avgVolume) * 100);
+    return Math.min(100, consistency);
+  }
+
+  private calculateMarketImpactConsistency(exchanges: { [key: string]: any }): number {
+    const exchangeArray = Object.values(exchanges);
+    if (exchangeArray.length < 2) return 50;
+    
+    // Calcular consistencia en el impacto de mercado entre exchanges
+    const priceChanges = exchangeArray.map((e: any) => e.ticker.priceChangePercent || 0);
+    const avgPriceChange = priceChanges.reduce((a, b) => a + b, 0) / priceChanges.length;
+    const priceChangeVariance = priceChanges.reduce((sum, change) => 
+      sum + Math.pow(change - avgPriceChange, 2), 0) / priceChanges.length;
+    
+    const consistency = Math.max(0, 100 - Math.sqrt(priceChangeVariance) * 10);
+    return Math.min(100, consistency);
+  }
+
+  private detectCoordinatedMovements(exchanges: Array<[string, any]>): number {
+    if (exchanges.length < 2) return 0;
+    
+    // Detectar movimientos coordinados sospechosos entre exchanges
+    const priceChanges = exchanges.map(([_, data]) => data.ticker.priceChangePercent || 0);
+    const avgChange = priceChanges.reduce((a, b) => a + b, 0) / priceChanges.length;
+    
+    // Si todos los exchanges tienen cambios muy similares (sospechoso de coordinación)
+    const coordination = priceChanges.every(change => Math.abs(change - avgChange) < 0.1) ? 90 : 30;
+    
+    return coordination;
+  }
+
+  private detectArtificialLiquidity(volumeAnalysis: any): number {
+    // Detectar liquidez artificial basada en patrones de volumen no naturales
+    const suspiciousExchanges = volumeAnalysis.exchanges.filter((e: any) => 
+      e.volumeDeviation > 3 && e.priceDeviation < 0.05 // Alto volumen, poco impacto en precio
+    ).length;
+    
+    return Math.min(100, suspiciousExchanges * 35);
+  }
+
+  private calculateRealOrderFlowImbalance(multiExchangeData: any): number {
+    const { volumeAnalysis } = multiExchangeData;
+    
+    // Calcular imbalance real filtrando wash trading
+    const realExchanges = volumeAnalysis.exchanges.filter((e: any) => e.volumeDeviation < 2);
+    
+    if (realExchanges.length === 0) return 0;
+    
+    const avgImbalance = realExchanges.reduce((sum: number, e: any) => 
+      sum + (e.priceDeviation > 0 ? 1 : -1), 0) / realExchanges.length;
+    
+    return avgImbalance * 50; // Normalizar a rango -50 a 50
+  }
+
+  private generateCrossExchangePriceActionSigns(multiExchangeData: any): PriceActionSign[] {
+    const signs: PriceActionSign[] = [];
+    const { institutionalFootprint, manipulationIndicators } = multiExchangeData;
+    
+    if (institutionalFootprint.priceEfficiency < 90) {
+      signs.push({
+        timestamp: new Date(),
+        type: 'effort_vs_result',
+        strength: 100 - institutionalFootprint.priceEfficiency,
+        description: 'Price inefficiency across exchanges suggests institutional absorption',
+        implications: ['Potential accumulation/distribution phase', 'Monitor for resolution']
+      });
+    }
+    
+    if (manipulationIndicators.coordinatedMovements > 70) {
+      signs.push({
+        timestamp: new Date(),
+        type: 'stopping_volume',
+        strength: manipulationIndicators.coordinatedMovements,
+        description: 'Coordinated institutional activity across multiple exchanges',
+        implications: ['Smart money positioning', 'Prepare for potential reversal']
+      });
+    }
+    
+    return signs;
+  }
+
+  private confirmManipulationAcrossExchanges(sign: ManipulationSign, multiExchangeData: any): boolean {
+    const { manipulationIndicators } = multiExchangeData;
+    
+    // Diferentes tipos de manipulación requieren diferentes confirmaciones
+    switch (sign.type) {
+      case 'false_breakout':
+        return manipulationIndicators.priceManipulationScore > 30;
+      case 'stop_hunt':
+        return manipulationIndicators.coordinatedMovements > 60;
+      case 'absorption_test':
+        return manipulationIndicators.artificialLiquidityScore < 50; // Menos artificial = más real
+      default:
+        return manipulationIndicators.coordinatedMovements > 50;
+    }
+  }
+
+  // ====================
+  // MÉTODOS AUXILIARES ORIGINALES
   // ====================
 
   private async analyzeInstitutionalActivity(

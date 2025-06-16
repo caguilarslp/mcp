@@ -359,6 +359,50 @@ export class ExchangeAggregator {
   }
 
   /**
+   * Analyze volume divergences between exchanges
+   */
+  async analyzeVolumeDivergences(
+    symbol: string,
+    category: MarketCategoryType = 'spot'
+  ): Promise<{
+    exchanges: Array<{ name: string; volume: number; priceDeviation: number; volumeDeviation: number }>;
+    consistency: number;
+    totalVolume: number;
+  }> {
+    try {
+      const ticker = await this.getAggregatedTicker(symbol, category);
+      const exchanges = Object.entries(ticker.exchanges).map(([name, data]) => ({
+        name,
+        volume: data.ticker.volume24h,
+        priceDeviation: Math.abs(data.ticker.lastPrice - ticker.weightedPrice) / ticker.weightedPrice,
+        volumeDeviation: 0 // Will calculate below
+      }));
+
+      const totalVolume = exchanges.reduce((sum, e) => sum + e.volume, 0);
+      const avgVolume = totalVolume / exchanges.length;
+
+      // Calculate volume deviations
+      exchanges.forEach(e => {
+        e.volumeDeviation = Math.abs(e.volume - avgVolume) / avgVolume;
+      });
+
+      // Calculate consistency score
+      const volumeDeviations = exchanges.map(e => e.volumeDeviation);
+      const avgDeviation = volumeDeviations.reduce((sum, d) => sum + d, 0) / volumeDeviations.length;
+      const consistency = Math.max(0, 100 - (avgDeviation * 100));
+
+      return {
+        exchanges,
+        consistency,
+        totalVolume
+      };
+    } catch (error) {
+      this.logger.error('Failed to analyze volume divergences', { error });
+      throw error;
+    }
+  }
+
+  /**
    * Identify arbitrage opportunities
    */
   async identifyArbitrage(

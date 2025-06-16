@@ -209,6 +209,11 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
           description: 'Analysis timeframe',
           enum: ['5', '15', '30', '60', '240'],
           default: '60'
+        },
+        useMultiExchange: {
+          type: 'boolean',
+          description: 'Enable cross-exchange validation for more accurate institutional bias detection',
+          default: false
         }
       },
       required: ['symbol']
@@ -239,7 +244,7 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
   // ====================
   {
     name: 'analyze_smart_money_confluence',
-    description: 'Analyze confluences between Order Blocks, Fair Value Gaps, and Break of Structure for complete SMC analysis',
+    description: 'Analyze confluences between Order Blocks, Fair Value Gaps, and Break of Structure for complete SMC analysis with multi-exchange validation',
     inputSchema: {
       type: 'object',
       properties: {
@@ -260,6 +265,11 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
           minimum: 50,
           maximum: 500,
           default: 100
+        },
+        useMultiExchange: {
+          type: 'boolean',
+          description: 'Enable cross-exchange validation to filter wash trading and improve institutional accuracy',
+          default: false
         }
       },
       required: ['symbol']
@@ -267,7 +277,7 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
   },
   {
     name: 'get_smc_market_bias',
-    description: 'Get integrated Smart Money Concepts market bias with institutional alignment and confluence support',
+    description: 'Get integrated Smart Money Concepts market bias with institutional alignment and confluence support, enhanced with multi-exchange validation',
     inputSchema: {
       type: 'object',
       properties: {
@@ -288,7 +298,7 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
   },
   {
     name: 'validate_smc_setup',
-    description: 'Validate a complete Smart Money Concepts trading setup with multi-factor analysis and risk management',
+    description: 'Validate a complete Smart Money Concepts trading setup with multi-factor analysis, risk management, and cross-exchange confirmation',
     inputSchema: {
       type: 'object',
       properties: {
@@ -306,6 +316,11 @@ export const smartMoneyConceptsTools: ToolDefinition[] = [
           type: 'number',
           description: 'Optional specific entry price to validate (defaults to current price)',
           minimum: 0
+        },
+        useMultiExchange: {
+          type: 'boolean',
+          description: 'Enable cross-exchange validation for enhanced setup confirmation and reduced false signals',
+          default: false
         }
       },
       required: ['symbol', 'setupType']

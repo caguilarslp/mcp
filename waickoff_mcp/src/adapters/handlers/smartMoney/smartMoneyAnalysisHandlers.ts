@@ -26,12 +26,13 @@ export class SmartMoneyAnalysisHandlers {
   }
 
   /**
-   * Handle Smart Money confluence analysis request
+   * Handle Smart Money confluence analysis request with multi-exchange support
    */
   async handleAnalyzeSmartMoneyConfluence(args: {
     symbol: string;
     timeframe?: string;
     lookback?: number;
+    useMultiExchange?: boolean;
   }): Promise<MCPServerResponse> {
     try {
       this.logger.info('Processing Smart Money confluence analysis request', { symbol: args.symbol });
@@ -39,7 +40,8 @@ export class SmartMoneyAnalysisHandlers {
       const {
         symbol,
         timeframe = '60',
-        lookback = 100
+        lookback = 100,
+        useMultiExchange = false
       } = args;
       
       if (!symbol) {
@@ -49,7 +51,8 @@ export class SmartMoneyAnalysisHandlers {
       const analysis = await this.engine.analyzeSmartMoneyConfluence(
         symbol,
         timeframe,
-        lookback
+        lookback,
+        useMultiExchange
       );
       
       return this.formatSuccessResponse({
@@ -93,18 +96,20 @@ export class SmartMoneyAnalysisHandlers {
   }
 
   /**
-   * Handle SMC market bias analysis request
+   * Handle SMC market bias analysis request with multi-exchange support
    */
   async handleGetSMCMarketBias(args: {
     symbol: string;
     timeframe?: string;
+    useMultiExchange?: boolean;
   }): Promise<MCPServerResponse> {
     try {
       this.logger.info('Processing SMC market bias analysis request', { symbol: args.symbol });
       
       const {
         symbol,
-        timeframe = '60'
+        timeframe = '60',
+        useMultiExchange = false
       } = args;
       
       if (!symbol) {
@@ -113,7 +118,8 @@ export class SmartMoneyAnalysisHandlers {
       
       const bias = await this.engine.getSMCMarketBias(
         symbol,
-        timeframe
+        timeframe,
+        useMultiExchange
       );
       
       return this.formatSuccessResponse({
@@ -143,12 +149,13 @@ export class SmartMoneyAnalysisHandlers {
   }
 
   /**
-   * Handle SMC setup validation request
+   * Handle SMC setup validation request with multi-exchange support
    */
   async handleValidateSMCSetup(args: {
     symbol: string;
     setupType: 'long' | 'short';
     entryPrice?: number;
+    useMultiExchange?: boolean;
   }): Promise<MCPServerResponse> {
     try {
       this.logger.info('Processing SMC setup validation request', { 
@@ -159,7 +166,8 @@ export class SmartMoneyAnalysisHandlers {
       const {
         symbol,
         setupType,
-        entryPrice
+        entryPrice,
+        useMultiExchange = false
       } = args;
       
       if (!symbol) {
@@ -173,7 +181,8 @@ export class SmartMoneyAnalysisHandlers {
       const validation = await this.engine.validateSMCSetup(
         symbol,
         setupType,
-        entryPrice
+        entryPrice,
+        useMultiExchange
       );
       
       return this.formatSuccessResponse({

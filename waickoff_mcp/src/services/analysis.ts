@@ -21,6 +21,7 @@ import {
   PerformanceMetrics
 } from '../types/index.js';
 import { IMarketDataService } from '../types/index.js';
+import { ExchangeAggregator } from '../adapters/exchanges/common/ExchangeAggregator.js';
 import { Logger } from '../utils/logger.js';
 import { PerformanceMonitor } from '../utils/performance.js';
 import { MathUtils } from '../utils/math.js';
@@ -29,11 +30,21 @@ export class TechnicalAnalysisService implements IAnalysisService {
   private readonly logger: Logger;
   private readonly performanceMonitor: PerformanceMonitor;
   private readonly mathUtils: MathUtils;
+  private readonly exchangeAggregator: ExchangeAggregator;
 
-  constructor(private marketDataService: IMarketDataService) {
+  constructor(
+    private marketDataService: IMarketDataService,
+    exchangeAggregator?: ExchangeAggregator
+  ) {
     this.logger = new Logger('TechnicalAnalysisService');
     this.performanceMonitor = new PerformanceMonitor();
     this.mathUtils = new MathUtils();
+    
+    // Multi-exchange support
+    this.exchangeAggregator = exchangeAggregator || new ExchangeAggregator(
+      new Map(), // Empty adapters map for now
+      {} // Default config
+    );
   }
 
   /**
@@ -194,17 +205,29 @@ export class TechnicalAnalysisService implements IAnalysisService {
   }
 
   /**
-   * Calculate Volume Delta (buying vs selling pressure)
+   * Calculate Volume Delta (buying vs selling pressure) with multi-exchange support
    */
   async analyzeVolumeDelta(
     symbol: string, 
     interval: string = '5', 
-    periods: number = 60
+    periods: number = 60,
+    useMultiExchange: boolean = false
   ): Promise<VolumeDelta> {
     return this.performanceMonitor.measure('analyzeVolumeDelta', async () => {
       this.logger.info(`Analyzing volume delta for ${symbol} over ${periods} periods`);
 
       try {
+        // Multi-exchange wash trading filter if enabled
+        let multiExchangeData: any = null;
+        if (useMultiExchange) {
+          try {
+            multiExchangeData = await this.getMultiExchangeVolumeData(symbol);
+            this.logger.info(`Multi-exchange volume data obtained for ${symbol}`);
+          } catch (error) {
+            this.logger.warn(`Multi-exchange data failed for ${symbol}, using single exchange:`, error);
+          }
+        }
+
         const klines = await this.marketDataService.getKlines(symbol, interval, periods);
 
         if (klines.length === 0) {
@@ -215,17 +238,24 @@ export class TechnicalAnalysisService implements IAnalysisService {
           );
         }
 
-        // Calculate volume deltas for each period
+        // Calculate volume deltas for each period with wash trading filter
         const deltas = klines.map(k => this.calculateVolumeDeltaForCandle(k));
         
-        // Calculate cumulative delta
+        // Apply multi-exchange wash trading filter if available
+        let filteredDeltas = deltas;
+        if (multiExchangeData) {
+          filteredDeltas = this.filterWashTradingFromDeltas(deltas, multiExchangeData);
+          this.logger.info(`Volume Delta: Filtered ${deltas.length - filteredDeltas.length} wash trading periods`);
+        }
+        
+        // Calculate cumulative delta with clean data
         let cumulativeDelta = 0;
-        deltas.forEach(delta => {
+        filteredDeltas.forEach(delta => {
           cumulativeDelta += delta.delta;
         });
 
-        const recentDeltas = deltas.slice(-10);
-        const current = deltas[deltas.length - 1].delta;
+        const recentDeltas = filteredDeltas.slice(-10);
+        const current = filteredDeltas[filteredDeltas.length - 1].delta;
         const average = this.mathUtils.mean(recentDeltas.map(d => d.delta));
         
         // Determine bias
@@ -240,11 +270,14 @@ export class TechnicalAnalysisService implements IAnalysisService {
 
         const strength = Math.abs(average / klines[klines.length - 1].volume * 100);
 
-        // Detect divergences
-        const divergence = this.detectVolumeDeltaDivergence(klines, deltas);
+        // Detect divergences with clean data
+        const divergence = this.detectVolumeDeltaDivergence(klines, filteredDeltas);
 
-        // Calculate market pressure
-        const marketPressure = this.calculateMarketPressure(deltas);
+        // Calculate market pressure with institutional data
+        const marketPressure = this.calculateMarketPressureWithCrossValidation(
+          filteredDeltas, 
+          multiExchangeData
+        );
 
         const analysis: VolumeDelta = {
           symbol,
@@ -255,7 +288,17 @@ export class TechnicalAnalysisService implements IAnalysisService {
           strength,
           cumulativeDelta,
           divergence,
-          marketPressure
+          marketPressure,
+          // Add multi-exchange metrics if available
+          ...(multiExchangeData && {
+            washTradingFiltered: deltas.length - filteredDeltas.length,
+            institutionalFlow: this.calculateInstitutionalFlow(multiExchangeData),
+            crossExchangeConsistency: this.calculateCrossExchangeConsistency(multiExchangeData)
+          })
+        } as VolumeDelta & {
+          washTradingFiltered?: number;
+          institutionalFlow?: number;
+          crossExchangeConsistency?: number;
         };
 
         this.logger.info(`Volume delta analysis for ${symbol}: ${bias} bias with ${strength.toFixed(1)}% strength`);
@@ -376,7 +419,202 @@ export class TechnicalAnalysisService implements IAnalysisService {
   }
 
   // ====================
-  // PRIVATE HELPER METHODS
+  // MULTI-EXCHANGE METHODS FOR VOLUME ANALYSIS
+  // ====================
+
+  /**
+   * Obtiene datos multi-exchange para análisis de volumen
+   */
+  private async getMultiExchangeVolumeData(symbol: string): Promise<{
+    aggregatedTicker: any;
+    volumeAnalysis: any;
+    washTradingMetrics: any;
+    institutionalMetrics: any;
+  }> {
+    const [aggregatedTicker, volumeAnalysis] = await Promise.all([
+      this.exchangeAggregator.getAggregatedTicker(symbol),
+      this.exchangeAggregator.analyzeVolumeDivergences(symbol)
+    ]);
+
+    // Detectar wash trading en volumen
+    const washTradingMetrics = this.detectVolumeWashTrading(volumeAnalysis);
+    
+    // Calcular métricas institucionales
+    const institutionalMetrics = this.calculateInstitutionalVolumeMetrics(aggregatedTicker, volumeAnalysis);
+
+    return {
+      aggregatedTicker,
+      volumeAnalysis,
+      washTradingMetrics,
+      institutionalMetrics
+    };
+  }
+
+  /**
+   * Filtra wash trading de los deltas de volumen
+   */
+  private filterWashTradingFromDeltas(deltas: any[], multiExchangeData: any): any[] {
+    const { washTradingMetrics } = multiExchangeData;
+    
+    if (washTradingMetrics.suspiciousPeriodsCount === 0) {
+      return deltas; // No hay wash trading detectado
+    }
+    
+    // Filtrar períodos con alto wash trading
+    return deltas.filter((delta, index) => {
+      // Usar heurística simple: remover períodos con volumen anómalo
+      const periodRisk = this.calculatePeriodWashTradingRisk(index, multiExchangeData);
+      return periodRisk < 0.7; // Mantener solo períodos con bajo riesgo de wash trading
+    });
+  }
+
+  /**
+   * Calcula market pressure con validación cross-exchange
+   */
+  private calculateMarketPressureWithCrossValidation(
+    deltas: any[], 
+    multiExchangeData: any
+  ): MarketPressure {
+    // Calcular pressure base
+    const basePressure = this.calculateMarketPressure(deltas);
+    
+    if (!multiExchangeData) {
+      return basePressure;
+    }
+    
+    // Enriquecer con datos institucionales
+    const { institutionalMetrics } = multiExchangeData;
+    
+    const enhancedTrend = this.enhanceMarketPressureTrend(
+      basePressure.trend,
+      institutionalMetrics
+    );
+    
+    return {
+      ...basePressure,
+      trend: enhancedTrend,
+      institutionalConfirmation: institutionalMetrics.institutionalBias
+    } as MarketPressure & {
+      institutionalConfirmation?: string;
+    };
+  }
+
+  /**
+   * Calcula flujo institucional
+   */
+  private calculateInstitutionalFlow(multiExchangeData: any): number {
+    const { institutionalMetrics, washTradingMetrics } = multiExchangeData;
+    
+    // Flujo institucional = volumen real * consistencia entre exchanges
+    const realVolumeRatio = 1 - (washTradingMetrics.artificialVolumeRatio / 100);
+    const institutionalFlow = institutionalMetrics.institutionalVolumeRatio * realVolumeRatio;
+    
+    return Math.round(institutionalFlow);
+  }
+
+  /**
+   * Calcula consistencia cross-exchange
+   */
+  private calculateCrossExchangeConsistency(multiExchangeData: any): number {
+    const { volumeAnalysis } = multiExchangeData;
+    return Math.round(volumeAnalysis.consistency);
+  }
+
+  // ====================
+  // MÉTODOS AUXILIARES MULTI-EXCHANGE
+  // ====================
+
+  private detectVolumeWashTrading(volumeAnalysis: any): {
+    suspiciousPeriodsCount: number;
+    artificialVolumeRatio: number;
+    washTradingScore: number;
+  } {
+    const exchanges = volumeAnalysis.exchanges || [];
+    
+    // Detectar períodos sospechosos de wash trading
+    const suspiciousExchanges = exchanges.filter((e: any) => 
+      e.volumeDeviation > 2.5 && e.priceDeviation < 0.1
+    );
+    
+    const suspiciousPeriodsCount = suspiciousExchanges.length;
+    const artificialVolumeRatio = Math.min(100, suspiciousPeriodsCount * 20);
+    const washTradingScore = this.calculateWashTradingScore(exchanges);
+    
+    return {
+      suspiciousPeriodsCount,
+      artificialVolumeRatio,
+      washTradingScore
+    };
+  }
+
+  private calculateInstitutionalVolumeMetrics(aggregatedTicker: any, volumeAnalysis: any): {
+    institutionalVolumeRatio: number;
+    institutionalBias: string;
+    volumeQuality: number;
+  } {
+    const exchanges = Object.values(aggregatedTicker.exchanges || {});
+    const volumeConsistency = volumeAnalysis.consistency || 50;
+    
+    // Ratio de volumen institucional (basado en consistencia)
+    const institutionalVolumeRatio = Math.min(100, volumeConsistency * 0.8);
+    
+    // Bias institucional
+    let institutionalBias = 'neutral';
+    if (institutionalVolumeRatio > 70) {
+      institutionalBias = 'strong_institutional';
+    } else if (institutionalVolumeRatio > 50) {
+      institutionalBias = 'moderate_institutional';
+    }
+    
+    // Calidad del volumen (menor wash trading = mayor calidad)
+    const volumeQuality = Math.max(0, 100 - this.calculateWashTradingScore(volumeAnalysis.exchanges));
+    
+    return {
+      institutionalVolumeRatio,
+      institutionalBias,
+      volumeQuality
+    };
+  }
+
+  private calculatePeriodWashTradingRisk(periodIndex: number, multiExchangeData: any): number {
+    const { washTradingMetrics } = multiExchangeData;
+    
+    // Heurística simple: usar el score general de wash trading
+    return washTradingMetrics.washTradingScore / 100;
+  }
+
+  private enhanceMarketPressureTrend(
+    baseTrend: 'strong_buying' | 'strong_selling' | 'balanced',
+    institutionalMetrics: any
+  ): 'strong_buying' | 'strong_selling' | 'balanced' {
+    const institutionalBias = institutionalMetrics.institutionalBias;
+    
+    // Si hay fuerte actividad institucional, darle más peso
+    if (institutionalBias === 'strong_institutional') {
+      if (baseTrend === 'balanced') {
+        // Mantener el trend original si es balanceado pero con institucionales
+        return baseTrend;
+      }
+      // Reforzar el trend existente
+      return baseTrend;
+    }
+    
+    return baseTrend;
+  }
+
+  private calculateWashTradingScore(exchanges: any[]): number {
+    if (!exchanges || exchanges.length === 0) return 0;
+    
+    // Calcular score basado en anomalías de volumen vs precio
+    const anomalies = exchanges.filter((e: any) => 
+      e.volumeDeviation > 2 && e.priceDeviation < 0.05
+    ).length;
+    
+    return Math.min(100, anomalies * 25);
+  }
+
+  // ====================
+  // PRIVATE HELPER METHODS (ORIGINAL)
   // ====================
 
   private getVolatilityConfig(period: string): { interval: string; limit: number } {

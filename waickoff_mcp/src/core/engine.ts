@@ -1076,19 +1076,21 @@ export class MarketAnalysisEngine {
   // ====================
 
   /**
-   * Analyze Smart Money confluence
+   * Analyze Smart Money confluence with multi-exchange support
    */
   async analyzeSmartMoneyConfluence(
     symbol: string,
     timeframe: string = '60',
-    lookback: number = 100
+    lookback: number = 100,
+    useMultiExchange: boolean = false
   ): Promise<any> {
     return this.performanceMonitor.measure('analyzeSmartMoneyConfluence', async () => {
       try {
         const result = await this.smartMoneyAnalysisService.analyzeSmartMoneyConfluence(
           symbol,
           timeframe,
-          lookback
+          lookback,
+          useMultiExchange
         );
         
         // Save to Analysis Repository
@@ -1108,17 +1110,19 @@ export class MarketAnalysisEngine {
   }
 
   /**
-   * Get SMC market bias
+   * Get SMC market bias with multi-exchange support
    */
   async getSMCMarketBias(
     symbol: string,
-    timeframe: string = '60'
+    timeframe: string = '60',
+    useMultiExchange: boolean = false
   ): Promise<any> {
     return this.performanceMonitor.measure('getSMCMarketBias', async () => {
       try {
         const result = await this.smartMoneyAnalysisService.getSMCMarketBias(
           symbol,
-          timeframe
+          timeframe,
+          useMultiExchange
         );
         
         return result;
@@ -1130,19 +1134,21 @@ export class MarketAnalysisEngine {
   }
 
   /**
-   * Validate SMC setup
+   * Validate SMC setup with multi-exchange support
    */
   async validateSMCSetup(
     symbol: string,
     setupType: 'long' | 'short',
-    entryPrice?: number
+    entryPrice?: number,
+    useMultiExchange: boolean = false
   ): Promise<any> {
     return this.performanceMonitor.measure('validateSMCSetup', async () => {
       try {
         const result = await this.smartMoneyAnalysisService.validateSMCSetup(
           symbol,
           setupType,
-          entryPrice
+          entryPrice,
+          useMultiExchange
         );
         
         return result;
