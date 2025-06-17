@@ -36,6 +36,16 @@ class Trade(BaseModel):
         elif isinstance(v, str):
             return datetime.fromisoformat(v.replace('Z', '+00:00'))
         return v
+    
+    @property
+    def volume(self) -> Decimal:
+        """Alias for quantity (for Order Flow compatibility)."""
+        return self.quantity
+    
+    @property 
+    def trade_id(self) -> str:
+        """Alias for id (for Order Flow compatibility)."""
+        return self.id
 
 
 class OrderBookLevel(BaseModel):
@@ -213,3 +223,20 @@ class MarketStructure(BaseModel):
         json_encoders = {
             datetime: lambda v: v.isoformat(),
         }
+
+
+# Aliases for backward compatibility with Order Flow code
+TradeData = Trade
+OrderBookData = OrderBook
+KlineData = Kline
+
+# Import and re-export types needed by other modules
+from .types import Symbol, Exchange, Side, OrderType, TimeFrame
+
+__all__ = [
+    "Trade", "TradeData",
+    "OrderBook", "OrderBookData", "OrderBookLevel",
+    "Kline", "KlineData",
+    "VolumeProfile", "OrderFlow", "LiquidityLevel", "MarketStructure",
+    "Symbol", "Exchange", "Side", "OrderType", "TimeFrame"
+]

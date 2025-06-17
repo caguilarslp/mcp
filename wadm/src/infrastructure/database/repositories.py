@@ -89,6 +89,28 @@ class TradeRepository(SymbolExchangeRepository[Trade]):
             sort=[("quantity", DESCENDING), ("timestamp", DESCENDING)]
         )
     
+    async def get_trades_in_range(self,
+                                 symbol: Symbol,
+                                 exchange: Exchange,
+                                 start_time: datetime,
+                                 end_time: datetime,
+                                 limit: int = 10000) -> List[Trade]:
+        """Get trades in a specific time range."""
+        filter_dict = {
+            "symbol": symbol,
+            "exchange": exchange,
+            "timestamp": {
+                "$gte": start_time,
+                "$lte": end_time
+            }
+        }
+        
+        return await self.find_many(
+            filter_dict,
+            limit=limit,
+            sort=[("timestamp", ASCENDING)]
+        )
+    
     async def get_volume_by_side(self,
                                 symbol: Symbol,
                                 start_time: datetime,
@@ -207,6 +229,36 @@ class OrderBookRepository(SymbolExchangeRepository[OrderBook]):
         )
         
         return result[0] if result else None
+    
+    async def get_closest_orderbook(self,
+                                   symbol: Symbol,
+                                   exchange: Exchange,
+                                   timestamp: datetime,
+                                   max_time_diff: timedelta = timedelta(seconds=5)) -> Optional[OrderBook]:
+        """Get orderbook closest to given timestamp."""
+        filter_dict = {
+            "symbol": symbol,
+            "exchange": exchange,
+            "timestamp": {
+                "$gte": timestamp - max_time_diff,
+                "$lte": timestamp + max_time_diff
+            }
+        }
+        
+        # Find the closest one
+        pipeline = [
+            {"$match": filter_dict},
+            {"$addFields": {
+                "time_diff": {"$abs": {"$subtract": ["$timestamp", timestamp]}}
+            }},
+            {"$sort": {"time_diff": 1}},
+            {"$limit": 1}
+        ]
+        
+        result = await self.aggregate(pipeline)
+        if result:
+            return OrderBook(**result[0])
+        return None
     
     async def get_best_prices_history(self,
                                      symbol: Symbol,
@@ -655,3 +707,46 @@ class MarketStructureRepository(SymbolExchangeRepository[MarketStructure]):
         ]
         
         return await self.aggregate(pipeline)
+
+
+# Factory functions for dependency injection
+def get_trade_repository() -> TradeRepository:
+    """Get trade repository instance."""
+    from src.presentation.api.main import app
+    return TradeRepository(app.state.mongodb.db)
+
+
+def get_orderbook_repository() -> OrderBookRepository:
+    """Get orderbook repository instance."""
+    from src.presentation.api.main import app
+    return OrderBookRepository(app.state.mongodb.db)
+
+
+def get_kline_repository() -> KlineRepository:
+    """Get kline repository instance."""
+    from src.presentation.api.main import app
+    return KlineRepository(app.state.mongodb.db)
+
+
+def get_volume_profile_repository() -> VolumeProfileRepository:
+    """Get volume profile repository instance."""
+    from src.presentation.api.main import app
+    return VolumeProfileRepository(app.state.mongodb.db)
+
+
+def get_order_flow_repository() -> OrderFlowRepository:
+    """Get order flow repository instance."""
+    from src.presentation.api.main import app
+    return OrderFlowRepository(app.state.mongodb.db)
+
+
+def get_liquidity_level_repository() -> LiquidityLevelRepository:
+    """Get liquidity level repository instance."""
+    from src.presentation.api.main import app
+    return LiquidityLevelRepository(app.state.mongodb.db)
+
+
+def get_market_structure_repository() -> MarketStructureRepository:
+    """Get market structure repository instance."""
+    from src.presentation.api.main import app
+    return MarketStructureRepository(app.state.mongodb.db)

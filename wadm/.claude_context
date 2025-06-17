@@ -1,136 +1,74 @@
-# 🤖 WADM - wAIckoff Data Manager Context
+# 🚨 ARQUITECTURA ACLARADA: Sistema 24/7 Autónomo
 
-## 📋 Estado Actual
-- **Versión:** v0.1.0
-- **Fecha:** 17/06/2025
-- **Status:** Desarrollo Activo - Volume Profile Service Completado
-- **Fase Actual:** Desarrollo - 50% completado (4/8 tareas)
-- **Última Tarea:** [TASK-004] Volume Profile Service ✅
+## ✅ Entendimiento Confirmado
 
-## 🎯 Objetivo del Proyecto
-Sistema de recolección y distribución de indicadores de mercado (Volume Profile y Order Flow) para alimentar el ecosistema wAIckoff con datos procesados de alta calidad.
+### WADM es un Servicio 24/7 Autónomo
+- **Se ejecuta en VPS** dockerizado continuamente
+- **Auto-inicia collectors** al arrancar el contenedor
+- **Se conecta automáticamente** a símbolos configurados
+- **No requiere intervención manual** para operar
+- **MCP local solo consulta**, no controla la recolección
 
-## 🏗️ Arquitectura
-- **VPS con Docker**: Collectors (Binance/Bybit) → MongoDB → MCP Server
-- **Clientes locales**: MCP Client → Cache en waickoff_reports/indicators/
-- **Seguridad**: API Keys + HTTPS + MongoDB interno (solo localhost)
-- **Simplicidad**: Un solo requirements.txt, Docker Compose optimizado
-
-## 📁 Estructura del Proyecto
+### Flujo de Operación
 ```
-wadm/
-├── claude/              # Sistema completo de trazabilidad
-│   ├── master-log.md   # Log principal del proyecto
-│   ├── tasks/          # Gestión de tareas
-│   ├── adr/           # Architecture Decision Records
-│   ├── docs/          # Documentación técnica nueva
-│   │   ├── arquitectura-simplificada.md
-│   │   ├── deployment-vps.md
-│   │   └── api-reference.md
-│   ├── logs/          # Logs diarios
-│   ├── bugs/          # Bug tracking
-│   └── lessons-learned/ # Conocimiento acumulado
-├── docs/               # Documentación técnica
-│   ├── trazabilidad/  # Sistema anterior (migrado)
-│   └── arquitectura/  # Diseños técnicos
-├── docker/            # Docker Compose y configs
-├── src/               # Código fuente
-│   ├── core/          # Entidades y tipos
-│   ├── infrastructure/ # Collectors y base de datos
-│   │   ├── collectors/ # WebSocket collectors
-│   │   ├── database/  # MongoDB schemas y repositorios
-│   │   └── cache/     # Redis cache especializado
-│   ├── application/   # Casos de uso y servicios
-│   │   ├── services/  # VolumeProfileService
-│   │   └── use_cases/ # Clean Architecture use cases
-│   └── presentation/  # API y MCP
-│       └── api/routes/ # REST endpoints
-├── tests/             # Tests unitarios
-│   ├── infrastructure/ # Tests de infrastructure
-│   └── application/   # Tests de servicios (25+ test cases)
-├── examples/          # Ejemplos de uso
-│   └── volume_profile/ # Ejemplo completo Volume Profile
-├── requirements.txt   # Dependencias simplificadas
-├── docker-compose.yml # Setup VPS-ready
-├── Dockerfile         # Imagen optimizada
-├── Makefile           # Comandos esenciales
-├── verify_setup.py    # Script de verificación
-└── .env.example       # Variables mínimas
+1. Deploy en VPS: docker-compose up -d
+2. Collectors inician automáticamente
+3. Recolección continua 24/7
+4. MCP local consulta cuando necesita datos
 ```
 
-## ✅ Decisiones Tomadas
-- MongoDB para time-series data
-- WebSocket para recolección
-- MCP Protocol para distribución
-- Docker Compose para deployment
-- API Keys para autenticación
-- **Puerto API**: 8920 (no estándar, evita conflictos con Plesk)
-- **URLs**: https://tu-dominio.com:8920/* (con SSL)
+### Configuración de Símbolos
+```yaml
+environment:
+  - BINANCE_SYMBOLS=BTCUSDT,ETHUSDT,XRPUSDT
+  - BYBIT_SYMBOLS=BTCUSDT,ETHUSDT,SOLUSDT
+```
 
-## ❓ Decisiones Pendientes
-1. Timeframes a soportar (¿solo 1h o multi-timeframe?) ✅ Resuelto: Multi-timeframe
-2. Símbolos iniciales (¿BTC, ETH, SOL o más?) - Pendiente
-3. Frecuencia de actualización cliente (¿1min, 5min?) - Pendiente
-4. Retención de datos (¿7d, 30d?) - Pendiente
-5. Procesamiento: ¿buffer memoria o Redis Streams? ✅ Resuelto: Redis cache con TTL
+### Documentación Nueva
+- 📄 claude/docs/arquitectura-real-24-7.md - Arquitectura completa
 
-## 📊 Indicadores Implementados
-**Volume Profile**: ✅ COMPLETADO
-- POC (Point of Control) - Precio con mayor volumen
-- VAH (Value Area High) - Límite superior del 70% de volumen
-- VAL (Value Area Low) - Límite inferior del 70% de volumen
-- Distribución por precio con tick size automático
-- Análisis multi-timeframe (5m, 15m, 30m, 1h, 4h, 1d)
-- Cache Redis especializado con TTL optimizado
-- API REST con 6 endpoints completos
+### Cambios en Task Tracker
+- TASK-006 redefinida para auto-inicio 24/7
+- Añadidas tareas de Data Retention y Monitoring
+- Prioridades ajustadas para operación autónoma
 
-**Order Flow**: 📅 Próximo (TASK-005)
-- Delta y Delta acumulativo
-- Imbalance ratio
-- Large trades detection
-- Absorción detection
-
-## 🏁 Stack Tecnológico
-- Python 3.11 + FastAPI + Pydantic v2
-- MongoDB + TTL automático para time-series
-- Redis Cache especializado para Volume Profile
-- Repository pattern + Clean Architecture
-- WebSocket collectors (Binance/Bybit)
-- Docker + Docker Compose
-- Logging estructurado con structlog
-
-## 📈 Progreso: 50% (4/8 tareas completadas)
-
-## 🚀 Próximos Pasos
-1. [TASK-005] Order Flow Analyzer (4h) - Próxima tarea
-2. [TASK-006] FastMCP Tools Implementation (6h)
-3. [TASK-007] Sistema de Alertas (3h)
-4. [TASK-008] Historical Data Backfill (2h)
-
-## 📝 Archivos Clave
-- `claude/master-log.md` - Historial completo del proyecto
-- `claude/tasks/task-tracker.md` - Estado de todas las tareas
-- `claude/adr/` - Decisiones arquitectónicas
-- `claude/docs/` - Documentación técnica nueva
-  - `arquitectura-simplificada.md` - Diseño del sistema
-  - `deployment-vps.md` - Guía de deployment
-  - `api-reference.md` - Referencia de API
-- `src/application/services/volume_profile_service.py` - Servicio principal Volume Profile
-- `src/presentation/api/routes/volume_profile.py` - API REST endpoints
-- `tests/application/services/test_volume_profile_service.py` - Tests exhaustivos
-- `examples/volume_profile/volume_profile_example.py` - Ejemplo completo
-- `requirements.txt` - Dependencias simplificadas
-- `docker-compose.yml` - Setup VPS-ready
-
-## 🎯 Funcionalidades Volume Profile Implementadas
-- **Algoritmos Core**: POC/VAH/VAL calculation con expansión simétrica
-- **Multi-timeframe**: 5m, 15m, 30m, 1h, 4h, 1d support
-- **Tick Size Automático**: BTC/ETH: 0.01, USDT: 0.001, otros: 0.0001
-- **Cache Redis**: TTL optimizado (1min real-time, 5min calculated, 10min historical)
-- **API REST**: 6 endpoints con validación Pydantic v2
-- **Use Cases**: Clean Architecture con inyección de dependencias
-- **Tests**: 25+ test cases con cobertura completa
-- **Trading Insights**: Niveles soporte/resistencia automáticos
+### Próximos Pasos
+1. Verificar que BUG-001 esté resuelto
+2. Implementar TASK-006 con auto-inicio
+3. CollectorManager debe iniciar con FastAPI
+4. Health checks para monitoreo
 
 ---
-*Contexto actualizado para desarrollo continuo del proyecto WADM*
+
+# Proyecto: WADM (wAIckoff Data Manager)
+
+## Descripción
+Sistema autónomo 24/7 de recolección y procesamiento de datos de mercado que se ejecuta en VPS y expone API para consultas MCP.
+
+## Estado del Proyecto
+- **Versión**: 0.1.0
+- **Estado**: En desarrollo - Arquitectura aclarada
+- **Última actualización**: 2024-11-27
+
+## Arquitectura Clave
+- **Despliegue**: VPS con Docker (24/7)
+- **Collectors**: Auto-inicio al arrancar
+- **Configuración**: Variables de entorno
+- **Consumo**: MCP local vía API REST
+
+## Tareas Actuales
+- 🔄 BUG-001: Errores de importación (RESUELTO, pendiente verificar)
+- 📅 TASK-006: WebSocket collectors 24/7 (REDEFINIDA)
+- 📅 TASK-008: Data Retention (NUEVA)
+- 📅 TASK-009: Monitoring (NUEVA)
+
+## Stack Tecnológico
+- Python 3.12
+- FastAPI
+- MongoDB
+- Redis
+- Docker
+- WebSocket (Bybit/Binance)
+
+## Puerto API
+- 8920 (evita conflictos con Plesk)

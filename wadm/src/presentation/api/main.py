@@ -14,7 +14,8 @@ from fastapi.responses import JSONResponse
 from src.core.config import Settings, get_settings
 from src.infrastructure.database.mongodb import MongoDBClient
 from src.infrastructure.cache.redis import RedisCache
-from src.presentation.api.routes import health, volume_profile, order_flow
+from src.presentation.api.routes import health, volume_profile
+from src.presentation.api.routes.order_flow import router as order_flow_router
 
 # Configure structured logging
 structlog.configure(
@@ -107,8 +108,8 @@ def create_application() -> FastAPI:
     
     # Include routers
     app.include_router(health.router, tags=["health"])
-    app.include_router(volume_profile.router, prefix="/api/v1/volume-profile", tags=["volume-profile"])
-    app.include_router(order_flow.router, prefix="/api/v1/order-flow", tags=["order-flow"])
+    app.include_router(volume_profile.router, prefix="/api/v1", tags=["volume-profile"])
+    app.include_router(order_flow_router, prefix="/api/v1", tags=["order-flow"])
     
     return app
 
