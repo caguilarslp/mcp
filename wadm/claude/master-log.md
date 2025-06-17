@@ -13,6 +13,36 @@
 ---
 ```
 
+## 2025-06-17 18:00
+**Tarea:** [TASK-002] Sistema de WebSocket Collectors
+**Estado:** ✅ Completada
+**Cambios:**
+- Implementado BaseWebSocketCollector abstracto con funcionalidades completas:
+  - Gestión de conexiones con auto-reconexión y backoff exponencial
+  - Manejo robusto de errores y logging estructurado
+  - Buffer de mensajes y parseo JSON con manejo de mensajes parciales
+  - Estadísticas de performance y monitoreo en tiempo real
+  - Suscripción dinámica de símbolos
+- Implementado BybitCollector para API v5:
+  - Soporte completo para trades, orderbook y klines
+  - Manejo de mensajes de confirmación y pong
+  - Parseo robusto con validación de datos
+- Implementado BinanceCollector para Spot y Futures:
+  - Compatible con streams múltiples
+  - Soporte para suscripción/desuscripción dinámica
+  - Manejo de diferentes formatos de mensaje
+- Creado CollectorManager para gestión unificada:
+  - Soporte para múltiples exchanges simultáneos
+  - Health monitoring y auto-restart
+  - Callbacks unificados con manejo de errores
+  - Estadísticas agregadas
+- Implementados tests unitarios completos para Bybit collector
+- Creados ejemplos de uso prácticos y configuraciones
+- Script de verificación para testing rápido
+**Notas:** Sistema robusto y production-ready. Incluye manejo de edge cases, reconexiones automáticas, y arquitectura escalable. Tests cubren casos normales y de error.
+**Siguiente:** Continuar con TASK-003 - Schemas MongoDB
+---
+
 ## 2025-06-17 16:30
 **Tarea:** [TASK-001] Simplificación y corrección del proyecto
 **Estado:** ✅ Completada
@@ -95,18 +125,20 @@
 ## 📊 Estadísticas del Proyecto
 - **Inicio:** 2025-06-17
 - **Versión Actual:** 0.1.0
-- **Total Tareas:** 1
-- **Completadas:** 1
+- **Total Tareas:** 8
+- **Completadas:** 2
 - **En Progreso:** 0
 - **Bugs Resueltos:** 0/0
 
 ## 🔄 Últimas 5 Tareas Completadas
-1. [TASK-000] Inicialización del sistema de trazabilidad ✅
+1. [TASK-002] Sistema de WebSocket Collectors ✅
+2. [TASK-001] Setup Docker + FastAPI + MongoDB ✅
+3. [TASK-000] Inicialización del sistema de trazabilidad ✅
 
 ## 🎯 Próximas Prioridades
-1. [TASK-001] Setup Docker + FastAPI + MongoDB
-2. [TASK-002] Sistema de WebSocket collectors
-3. [TASK-003] Schemas MongoDB y modelos de datos
+1. [TASK-003] Schemas MongoDB y modelos de datos
+2. [TASK-004] Volume Profile service
+3. [TASK-005] Order Flow analyzer
 
 ## 📝 Convenciones
 - **Commits:** `[TASK-XXX] Descripción corta`

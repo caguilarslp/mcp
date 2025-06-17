@@ -4,8 +4,8 @@
 - **Versión:** v0.1.0
 - **Fecha:** 17/06/2025
 - **Status:** Listo para VPS - Setup completado y optimizado
-- **Fase Actual:** Desarrollo - Base técnica establecida
-- **Última Tarea:** [TASK-001] Simplificación y corrección del proyecto ✅
+- **Fase Actual:** Desarrollo - Collectors implementados
+- **Última Tarea:** [TASK-002] Sistema de WebSocket Collectors ✅
 
 ## 🎯 Objetivo del Proyecto
 Sistema de recolección y distribución de indicadores de mercado (Volume Profile y Order Flow) para alimentar el ecosistema wAIckoff con datos procesados de alta calidad.
@@ -23,6 +23,10 @@ wadm/
 │   ├── master-log.md   # Log principal del proyecto
 │   ├── tasks/          # Gestión de tareas
 │   ├── adr/           # Architecture Decision Records
+│   ├── docs/          # Documentación técnica nueva
+│   │   ├── arquitectura-simplificada.md
+│   │   ├── deployment-vps.md
+│   │   └── api-reference.md
 │   ├── logs/          # Logs diarios
 │   ├── bugs/          # Bug tracking
 │   └── lessons-learned/ # Conocimiento acumulado
@@ -31,7 +35,20 @@ wadm/
 │   └── arquitectura/  # Diseños técnicos
 ├── docker/            # Docker Compose y configs
 ├── src/               # Código fuente
-└── tests/             # Tests unitarios
+│   ├── core/          # Entidades y tipos
+│   ├── infrastructure/ # Collectors y adaptadores
+│   │   └── collectors/ # WebSocket collectors
+│   ├── application/   # Casos de uso
+│   └── presentation/  # API y MCP
+├── tests/             # Tests unitarios
+│   └── infrastructure/collectors/ # Tests de collectors
+├── examples/          # Ejemplos de uso
+├── requirements.txt   # Dependencias simplificadas
+├── docker-compose.yml # Setup VPS-ready
+├── Dockerfile         # Imagen optimizada
+├── Makefile           # Comandos esenciales
+├── verify_setup.py    # Script de verificación
+└── .env.example       # Variables mínimas
 ```
 
 ## ✅ Decisiones Tomadas
@@ -61,19 +78,23 @@ wadm/
 - Docker + Nginx (deployment)
 - WebSocket (data feeds)
 
-## 📈 Progreso: 15% (1/8 tareas completadas)
+## 📈 Progreso: 25% (2/8 tareas completadas)
 
 ## 🚀 Próximos Pasos
-1. [TASK-002] Sistema de WebSocket collectors (4h) - Lista para comenzar
-2. [TASK-003] Schemas MongoDB y modelos de datos (3h)
-3. [TASK-004] Volume Profile service (4h)
+1. [TASK-003] Schemas MongoDB y modelos de datos (3h) - Próxima tarea
+2. [TASK-004] Volume Profile service (4h)
+3. [TASK-005] Order Flow analyzer (4h)
 
 ## 📝 Archivos Clave
 - `claude/master-log.md` - Historial completo del proyecto
 - `claude/tasks/task-tracker.md` - Estado de todas las tareas
 - `claude/adr/` - Decisiones arquitectónicas
-- `docs/arquitectura/arquitectura-general.md` - Diseño del sistema
-- `docs/arquitectura/database-design.md` - Esquemas MongoDB
+- `claude/docs/` - Documentación técnica nueva
+  - `arquitectura-simplificada.md` - Diseño del sistema
+  - `deployment-vps.md` - Guía de deployment
+  - `api-reference.md` - Referencia de API
+- `requirements.txt` - Dependencias simplificadas
+- `docker-compose.yml` - Setup VPS-ready
 
 ---
 *Contexto mínimo para desarrollo del proyecto WADM*
