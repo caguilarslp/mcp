@@ -1,0 +1,85 @@
+services:
+  # FastAPI Application
+  wadm-api:
+    build: .
+    container_name: wadm-api
+    restart: unless-stopped
+    ports:
+      - "8920:8920"
+    environment:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+      - MONGODB_URL=mongodb://wadm:wadm_secure_pass@mongodb:27017/wadm?authSource=admin
+      - REDIS_URL=redis://redis:6379/0
+      - API_KEY=${API_KEY:-change_this_key}
+      - BYBIT_API_KEY=${BYBIT_API_KEY:-}
+      - BYBIT_API_SECRET=${BYBIT_API_SECRET:-}
+      - BINANCE_API_KEY=${BINANCE_API_KEY:-}
+      - BINANCE_API_SECRET=${BINANCE_API_SECRET:-}
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - wadm-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # MongoDB for time-series data
+  mongodb:
+    image: mongo:7.0
+    container_name: wadm-mongodb
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=wadm
+      - MONGO_INITDB_ROOT_PASSWORD=wadm_secure_pass
+      - MONGO_INITDB_DATABASE=wadm
+    volumes:
+      - mongodb_data:/data/db
+      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+    ports:
+      - "127.0.0.1:27017:27017"  # Only localhost access
+    networks:
+      - wadm-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    command: ["--storageEngine", "wiredTiger", "--wiredTigerCacheSizeGB", "0.5"]
+
+  # Redis for caching and pub/sub
+  redis:
+    image: redis:7-alpine
+    container_name: wadm-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    ports:
+      - "127.0.0.1:6379:6379"  # Only localhost access
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  wadm-network:
+    driver: bridge

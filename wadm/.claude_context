@@ -2,9 +2,10 @@
 
 ## 📋 Estado Actual
 - **Versión:** v0.1.0
-- **Fecha:** 15/06/2025
-- **Status:** Planificación - Sistema de trazabilidad creado
-- **Fase Actual:** Pre-desarrollo - Decisiones arquitectónicas pendientes
+- **Fecha:** 17/06/2025
+- **Status:** Listo para VPS - Setup completado y optimizado
+- **Fase Actual:** Desarrollo - Base técnica establecida
+- **Última Tarea:** [TASK-001] Simplificación y corrección del proyecto ✅
 
 ## 🎯 Objetivo del Proyecto
 Sistema de recolección y distribución de indicadores de mercado (Volume Profile y Order Flow) para alimentar el ecosistema wAIckoff con datos procesados de alta calidad.
@@ -12,17 +13,25 @@ Sistema de recolección y distribución de indicadores de mercado (Volume Profil
 ## 🏗️ Arquitectura
 - **VPS con Docker**: Collectors (Binance/Bybit) → MongoDB → MCP Server
 - **Clientes locales**: MCP Client → Cache en waickoff_reports/indicators/
-- **Seguridad**: API Keys + HTTPS + MongoDB interno
+- **Seguridad**: API Keys + HTTPS + MongoDB interno (solo localhost)
+- **Simplicidad**: Un solo requirements.txt, Docker Compose optimizado
 
 ## 📁 Estructura del Proyecto
 ```
 wadm/
-├── docs/
-│   ├── trazabilidad/    # Sistema de tracking
-│   └── arquitectura/    # Diseños técnicos
-├── docker/              # Docker Compose y configs
-├── src/                 # Código fuente
-└── tests/              # Tests unitarios
+├── claude/              # Sistema completo de trazabilidad
+│   ├── master-log.md   # Log principal del proyecto
+│   ├── tasks/          # Gestión de tareas
+│   ├── adr/           # Architecture Decision Records
+│   ├── logs/          # Logs diarios
+│   ├── bugs/          # Bug tracking
+│   └── lessons-learned/ # Conocimiento acumulado
+├── docs/               # Documentación técnica
+│   ├── trazabilidad/  # Sistema anterior (migrado)
+│   └── arquitectura/  # Diseños técnicos
+├── docker/            # Docker Compose y configs
+├── src/               # Código fuente
+└── tests/             # Tests unitarios
 ```
 
 ## ✅ Decisiones Tomadas
@@ -52,16 +61,17 @@ wadm/
 - Docker + Nginx (deployment)
 - WebSocket (data feeds)
 
-## 📈 Progreso: 0% (15 tareas definidas)
+## 📈 Progreso: 15% (1/8 tareas completadas)
 
 ## 🚀 Próximos Pasos
-1. Confirmar decisiones pendientes
-2. TASK-001: Setup Docker base
-3. TASK-002: MongoDB schema design
+1. [TASK-002] Sistema de WebSocket collectors (4h) - Lista para comenzar
+2. [TASK-003] Schemas MongoDB y modelos de datos (3h)
+3. [TASK-004] Volume Profile service (4h)
 
 ## 📝 Archivos Clave
-- `docs/trazabilidad/tareas.md` - Plan completo de tareas
-- `docs/trazabilidad/decisiones.md` - Registro de decisiones
+- `claude/master-log.md` - Historial completo del proyecto
+- `claude/tasks/task-tracker.md` - Estado de todas las tareas
+- `claude/adr/` - Decisiones arquitectónicas
 - `docs/arquitectura/arquitectura-general.md` - Diseño del sistema
 - `docs/arquitectura/database-design.md` - Esquemas MongoDB
 

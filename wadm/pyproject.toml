@@ -1,0 +1,96 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wadm"
+version = "0.1.0"
+description = "Wyckoff Alchemy Data Manager - Professional market data collection and distribution system"
+authors = [
+    {name = "WADM Team", email = "dev@waickoff.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+keywords = ["trading", "market-data", "volume-profile", "order-flow", "wyckoff", "mcp"]
+
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "pydantic-settings",
+    "httpx",
+    "websockets",
+    "aiofiles",
+    "anyio",
+    "motor",
+    "redis[hiredis]", 
+    "pymongo",
+    "numpy",
+    "pandas",
+    "python-jose[cryptography]",
+    "passlib[bcrypt]",
+    "python-multipart",
+    "orjson",
+    "msgpack",
+    "structlog",
+    "rich",
+    "fastmcp",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cov",
+    "pytest-mock",
+    "black",
+    "isort",
+    "flake8",
+    "mypy",
+]
+
+[project.urls]
+Repository = "https://github.com/waickoff/wadm"
+
+[project.scripts]
+wadm = "wadm.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["wadm*"]
+exclude = ["tests*"]
+
+# Testing Configuration
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--cov=src/wadm",
+    "--cov-report=term-missing",
+    "--cov-fail-under=80",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow tests",
+]
+asyncio_mode = "auto"
+
+# Code Formatting
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+# Type Checking
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

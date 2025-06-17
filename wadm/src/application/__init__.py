@@ -1,0 +1,1 @@
+"""WADM Application Module"""
