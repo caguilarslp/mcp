@@ -421,3 +421,12 @@ El sistema estaba implementado al 62.5% pero 0% funcional debido a múltiples er
 - **Branches:** `task-xxx-descripcion`
 - **PRs:** Incluir número de tarea en título
 - **Docs:** Actualizar master-log después de cada sesión
+
+## ⚠️ ESTADO ACTUAL DEL SISTEMA - CRÍTICO
+- **API funciona pero SIN DATOS REALES**
+- **NO hay collectors implementados**
+- **MongoDB está VACÍA**
+- **Los endpoints devuelven valores vacíos/default**
+- **NO hay mocks ni datos de prueba**
+- **NECESARIO:** Implementar TASK-006 para tener datos reales
+- **VER DOCUMENTO:** `claude/docs/ESTADO-ACTUAL-SISTEMA.md`

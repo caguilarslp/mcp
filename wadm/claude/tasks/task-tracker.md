@@ -54,23 +54,21 @@
 **Descripción:** Análisis de flujo de órdenes y delta acumulado
 **Resultado:** Sistema completo de Order Flow production-ready
 
-### [BUG-001] Errores de Importación - Sistema No Funcional
-**Estado:** 🔄 En Revisión  
+### [BUG-001] Errores de Importación
+**Estado:** ✅ Resuelto  
 **Prioridad:** 🔴 CRÍTICA  
 **Identificado:** 27/11/2024
-**Descripción:** Múltiples errores de importación impiden que el sistema arranque
-**Progreso:**
-- ✅ Arreglados todos los imports
-- ✅ Creados módulos faltantes
-- ✅ Documentación API creada
-- ⏳ Pendiente: Verificación de funcionamiento
+**Resuelto:** 17/06/2025
+**Descripción:** Múltiples errores de importación impedían que el sistema arranque
+**Resultado:** Sistema arranca correctamente, API responde
 
 ### [TASK-006] WebSocket Collectors 24/7 Auto-start
-**Estado:** 📅 Planificada  
-**Prioridad:** 🔴 CRÍTICA  
+**Estado:** ❌ NO IMPLEMENTADA  
+**Prioridad:** 🔴 CRÍTICA - SIN ESTO NO HAY DATOS  
 **Estimación:** 6h  
-**Dependencias:** BUG-001  
+**Dependencias:** Ninguna  
 **Descripción:** Implementar collectors que auto-inicien al arrancar el contenedor para recolección 24/7
+**⚠️ IMPORTANTE:** Sin collectors, el sistema NO tiene datos. Los endpoints devuelven valores vacíos/default.
 **Requerimientos Nuevos:**
 - [ ] Auto-inicio de collectors al inicializar contenedor
 - [ ] Lectura de símbolos desde variables de entorno
@@ -130,13 +128,19 @@
 
 | Estado | Cantidad | Tareas |
 |--------|----------|--------|
-| ✅ Completada | 5 | TASK-001 a TASK-005 |
-| 🔄 En Revisión | 1 | BUG-001 |
-| 📅 Planificada | 4 | TASK-006 a TASK-009 |
+| ✅ Completada | 6 | TASK-001 a TASK-005, BUG-001 |
+| ❌ No Implementada | 1 | TASK-006 (CRÍTICA) |
+| 📅 Planificada | 3 | TASK-007 a TASK-009 |
 | ⏳ En Progreso | 0 | - |
 
-**Total:** 10 items (5 tareas + 1 bug + 4 nuevas)
-**Progreso:** 50% (5/10 completadas)
+**Total:** 10 items
+**Progreso:** 60% (6/10 completadas)
+
+## ⚠️ ESTADO ACTUAL DEL SISTEMA
+- **API funciona** pero **SIN DATOS REALES**
+- **MongoDB vacía** - No hay collectors guardando datos
+- **Endpoints devuelven defaults** - No hay trades que analizar
+- **NECESARIO:** Implementar TASK-006 para tener un sistema funcional
 
 ## 🔄 Historial de Cambios
 
@@ -159,8 +163,18 @@
 - Símbolos configurados por variables de entorno
 - MCP local solo consulta, no controla
 
-### Próximos Pasos Críticos
-1. Verificar que BUG-001 esté resuelto
-2. Implementar TASK-006 con auto-inicio
-3. Probar resiliencia 24/7
-4. Documentar configuración para VPS
+### Estado Real y Próximos Pasos
+
+**Realidad Actual:**
+1. ✅ El sistema arranca y responde
+2. ✅ Los endpoints están implementados
+3. ❌ NO hay collectors = NO hay datos
+4. ❌ MongoDB vacía = respuestas vacías
+
+**Único Paso Crítico:**
+1. **Implementar TASK-006** - Sin esto el sistema es inútil
+2. Los collectors deben:
+   - Conectar a WebSockets de exchanges
+   - Guardar trades en MongoDB
+   - Auto-iniciar con el contenedor
+3. Solo entonces los endpoints mostrarán datos reales

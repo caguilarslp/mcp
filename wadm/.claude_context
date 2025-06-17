@@ -1,3 +1,9 @@
+# 🤔 Lección Aprendida - BUG-002
+**Archivo:** claude/lessons/LESSON-001-bug-002-endpoints-no-visibles.md
+**Resumen:** Cuando un endpoint simple no funciona en 15 minutos, es mejor hacer git reset y reimplementar desde un estado conocido. No sobre-complicar con múltiples archivos de debug.
+
+---
+
 # 🚨 ARQUITECTURA ACLARADA: Sistema 24/7 Autónomo
 
 ## ✅ Entendimiento Confirmado
@@ -47,8 +53,14 @@ Sistema autónomo 24/7 de recolección y procesamiento de datos de mercado que s
 
 ## Estado del Proyecto
 - **Versión**: 0.1.0
-- **Estado**: En desarrollo - Arquitectura aclarada
-- **Última actualización**: 2024-11-27
+- **Estado**: API funcional pero SIN DATOS REALES
+- **Última actualización**: 2025-06-17
+- **⚠️ IMPORTANTE**: Los endpoints responden pero con datos vacíos porque NO hay collectors implementados
+
+## 📁 Carpeta de Lecciones Aprendidas
+- Nueva carpeta: `claude/lessons/`
+- Documenta bugs complejos y sus soluciones
+- Evita repetir los mismos errores
 
 ## Arquitectura Clave
 - **Despliegue**: VPS con Docker (24/7)
@@ -57,10 +69,10 @@ Sistema autónomo 24/7 de recolección y procesamiento de datos de mercado que s
 - **Consumo**: MCP local vía API REST
 
 ## Tareas Actuales
-- 🔄 BUG-001: Errores de importación (RESUELTO, pendiente verificar)
-- 📅 TASK-006: WebSocket collectors 24/7 (REDEFINIDA)
-- 📅 TASK-008: Data Retention (NUEVA)
-- 📅 TASK-009: Monitoring (NUEVA)
+- ✅ BUG-001: Errores de importación (RESUELTO)
+- ❌ TASK-006: WebSocket collectors NO IMPLEMENTADA
+- ⚠️ **SISTEMA SIN DATOS**: Los endpoints funcionan pero devuelven valores vacíos/default
+- ⚠️ **NO HAY COLLECTORS**: No se está recolectando ningún dato de exchanges
 
 ## Stack Tecnológico
 - Python 3.12
