@@ -189,22 +189,38 @@ class BaseWebSocketCollector(ABC):
                 self.websocket = None
     
     async def _subscribe_all(self) -> None:
-        """Subscribe to all symbols."""
+        """Subscribe to all symbols using batched subscriptions to respect Bybit limits."""
         if not self.symbols:
             return
         
         symbols_to_subscribe = [s for s in self.symbols if s not in self._subscribed_symbols]
         
-        if symbols_to_subscribe:
-            subscription_msg = await self._build_subscription_message(symbols_to_subscribe)
-            await self._send_message(subscription_msg)
-            self._subscribed_symbols.update(symbols_to_subscribe)
+        if not symbols_to_subscribe:
+            return
+        
+        # Bybit limits to 10 args per subscription
+        # With 3 streams per symbol (trade, orderbook, kline), we can do ~3 symbols per batch
+        symbols_per_batch = 3
+        
+        for i in range(0, len(symbols_to_subscribe), symbols_per_batch):
+            batch_symbols = symbols_to_subscribe[i:i + symbols_per_batch]
+            subscription_msg = await self._build_subscription_message(batch_symbols)
             
-            self.logger.info(
-                "Subscribed to symbols",
-                symbols=symbols_to_subscribe,
-                total_subscriptions=len(self._subscribed_symbols)
-            )
+            # Only send if we have topics
+            if subscription_msg["args"]:
+                await self._send_message(subscription_msg)
+                self._subscribed_symbols.update(batch_symbols)
+                
+                self.logger.info(
+                    "Subscribed to symbols batch",
+                    symbols=batch_symbols,
+                    total_subscriptions=len(self._subscribed_symbols),
+                    batch_size=len(batch_symbols)
+                )
+                
+                # Small delay between batches to avoid rate limiting
+                if i + symbols_per_batch < len(symbols_to_subscribe):
+                    await asyncio.sleep(0.1)
     
     async def _subscribe_symbol(self, symbol: Symbol) -> None:
         """Subscribe to a single symbol."""

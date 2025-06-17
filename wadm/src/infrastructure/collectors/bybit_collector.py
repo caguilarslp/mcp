@@ -51,27 +51,25 @@ class BybitCollector(BaseWebSocketCollector):
         - publicTrade for trade data
         - orderbook.200 for order book data
         - kline.1m for 1-minute klines
+        
+        Note: Bybit limits to 10 args per subscription, so we prioritize essential streams.
         """
         topics = []
         
         for symbol in symbols:
             bybit_symbol = self._symbol_map[symbol]
+            # Prioritize most important streams to stay within 10 arg limit
             topics.extend([
                 f"publicTrade.{bybit_symbol}",
                 f"orderbook.200.{bybit_symbol}",
-                f"kline.1.{bybit_symbol}",        # 1 minute
-                f"kline.5.{bybit_symbol}",        # 5 minutes  
-                f"kline.15.{bybit_symbol}",       # 15 minutes
-                f"kline.60.{bybit_symbol}",       # 1 hour
-                f"kline.240.{bybit_symbol}",      # 4 hours
-                f"kline.D.{bybit_symbol}",        # Daily
+                f"kline.1.{bybit_symbol}",        # 1 minute only for now
             ])
         
         self._subscription_id += 1
         
         return {
             "op": "subscribe",
-            "args": topics,
+            "args": topics[:10],  # Limit to 10 args max
             "req_id": str(self._subscription_id)
         }
     
@@ -151,15 +149,16 @@ class BybitCollector(BaseWebSocketCollector):
         """
         Parse Bybit trade data.
         
-        Data format:
+        Data format (updated for v5):
         {
-            "execId": "2100000000047355506",
-            "symbol": "BTCUSDT",
-            "price": "16596.5",
-            "size": "0.012",
-            "side": "Buy",
-            "time": "1672323400122",
-            "isBlockTrade": false
+            "i": "2290000000838719315",
+            "T": 1750183369838,
+            "p": "103889.4",
+            "v": "0.0001",
+            "S": "Sell",
+            "s": "BTCUSDT",
+            "BT": false,
+            "RPI": false
         }
         """
         if not data:
@@ -170,14 +169,14 @@ class BybitCollector(BaseWebSocketCollector):
         
         try:
             return Trade(
-                id=trade_data["execId"],
+                id=trade_data["i"],  # Changed from "execId" to "i"
                 symbol=symbol,
                 exchange=self.exchange,
-                price=Decimal(trade_data["price"]),
-                quantity=Decimal(trade_data["size"]),
-                side=Side.BUY if trade_data["side"] == "Buy" else Side.SELL,
-                timestamp=datetime.fromtimestamp(int(trade_data["time"]) / 1000, tz=timezone.utc),
-                is_buyer_maker=trade_data["side"] == "Sell"  # In Bybit, Sell means buyer was maker
+                price=Decimal(trade_data["p"]),  # Changed from "price" to "p"
+                quantity=Decimal(trade_data["v"]),  # Changed from "size" to "v"
+                side=Side.BUY if trade_data["S"] == "Buy" else Side.SELL,  # Changed from "side" to "S"
+                timestamp=datetime.fromtimestamp(int(trade_data["T"]) / 1000, tz=timezone.utc),  # Changed from "time" to "T"
+                is_buyer_maker=trade_data["S"] == "Sell"  # In Bybit, Sell means buyer was maker
             )
         except (KeyError, ValueError, TypeError) as e:
             self.logger.warning("Failed to parse Bybit trade", error=str(e), data=trade_data)

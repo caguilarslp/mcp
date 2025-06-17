@@ -70,11 +70,6 @@ class TestBybitCollector:
             "publicTrade.BTCUSDT",
             "orderbook.200.BTCUSDT",
             "kline.1.BTCUSDT",
-            "kline.5.BTCUSDT",
-            "kline.15.BTCUSDT",
-            "kline.60.BTCUSDT",
-            "kline.240.BTCUSDT",
-            "kline.D.BTCUSDT",
         ]
         
         for topic in expected_topics:
@@ -112,13 +107,14 @@ class TestBybitCollector:
             "topic": "publicTrade.BTCUSDT",
             "ts": 1672324800000,
             "data": [{
-                "execId": "2100000000047355506",
-                "symbol": "BTCUSDT",
-                "price": "16596.5",
-                "size": "0.012",
-                "side": "Buy",
-                "time": "1672323400122",
-                "isBlockTrade": False
+                "i": "2100000000047355506",
+                "s": "BTCUSDT",
+                "p": "16596.5",
+                "v": "0.012",
+                "S": "Buy",
+                "T": 1672323400122,
+                "BT": False,
+                "RPI": False
             }]
         }
         
@@ -140,13 +136,14 @@ class TestBybitCollector:
             "topic": "publicTrade.BTCUSDT",
             "ts": 1672324800000,
             "data": [{
-                "execId": "2100000000047355507",
-                "symbol": "BTCUSDT",
-                "price": "16595.0",
-                "size": "0.025",
-                "side": "Sell",
-                "time": "1672323400122",
-                "isBlockTrade": False
+                "i": "2100000000047355507",
+                "s": "BTCUSDT",
+                "p": "16595.0",
+                "v": "0.025",
+                "S": "Sell",
+                "T": 1672323400122,
+                "BT": False,
+                "RPI": False
             }]
         }
         
@@ -258,9 +255,9 @@ class TestBybitCollector:
             "topic": "publicTrade.BTCUSDT",
             "ts": 1672324800000,
             "data": [{
-                "execId": "123",
+                "i": "123",
                 # Missing required fields
-                "symbol": "BTCUSDT"
+                "s": "BTCUSDT"
             }]
         }
         
@@ -343,13 +340,14 @@ class TestBybitCollectorIntegration:
             "topic": "publicTrade.BTCUSDT",
             "ts": 1672324800000,
             "data": [{
-                "execId": "123",
-                "symbol": "BTCUSDT",
-                "price": "50000",
-                "size": "0.01",
-                "side": "Buy",
-                "time": "1672323400122",
-                "isBlockTrade": False
+                "i": "123",
+                "s": "BTCUSDT",
+                "p": "50000",
+                "v": "0.01",
+                "S": "Buy",
+                "T": 1672323400122,
+                "BT": False,
+                "RPI": False
             }]
         }
         

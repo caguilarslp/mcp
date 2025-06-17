@@ -97,6 +97,11 @@ class Settings(BaseSettings):
         return self.ENVIRONMENT == "production"
 
 
+def get_config() -> Settings:
+    """Get configuration instance (non-cached for tests)."""
+    return Settings()
+
+
 @lru_cache()
 def get_settings() -> Settings:
     """Get cached settings instance."""
