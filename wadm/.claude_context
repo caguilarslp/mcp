@@ -1,0 +1,45 @@
+# WADM Project Context
+
+## Current Status
+- **Version**: v0.1.0
+- **Stage**: Initial Development
+- **Last Updated**: 2024-12-27
+
+## System Overview
+WADM (wAIckoff Data Manager) is a real-time market data collector and indicator calculator for cryptocurrency trading.
+
+### Working Features
+- ✅ WebSocket connections to Bybit and Binance
+- ✅ Real-time trade collection
+- ✅ MongoDB storage with automatic TTL
+- ✅ Graceful shutdown
+- ✅ Basic error recovery
+
+### In Progress
+- ⚠️ Indicator calculations (Volume Profile, Order Flow)
+- 🔧 Need to debug why indicators aren't being calculated
+
+### Architecture
+- **Language**: Python 3.12
+- **Style**: KISS (Keep It Simple, Stupid)
+- **Database**: MongoDB
+- **Exchanges**: Bybit, Binance
+- **Async**: All I/O operations
+
+### Key Files
+- `main.py` - Entry point
+- `src/manager.py` - Main coordinator
+- `src/collectors/` - Exchange WebSocket collectors
+- `src/indicators/` - Volume Profile, Order Flow calculators
+- `src/storage/` - MongoDB manager
+
+### Next Session TODOs
+1. Debug why indicators aren't calculating
+2. Fix the MongoDB query for recent trades
+3. Test indicator calculations
+4. Add simple status API
+
+### Environment
+- MongoDB required (see .env for connection string)
+- Python 3.12+ with venv
+- No Docker yet (keeping it simple)

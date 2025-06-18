@@ -17,7 +17,7 @@ LOGS_DIR.mkdir(exist_ok=True)
 APP_NAME = os.getenv("APP_NAME", "WADM")
 APP_VERSION = os.getenv("APP_VERSION", "0.1.0")
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
-LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG")  # Temporarily set to DEBUG
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 # Database
 MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017/wadm")

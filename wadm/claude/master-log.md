@@ -39,3 +39,17 @@
 - Fixed Binance WebSocket URL and subscription format
 - Fixed graceful shutdown handling with proper async event
 - Changed from trade to aggTrade stream for Binance
+- Fixed Binance trade ID field (uses 'a' not 't')
+- Added more logging and reduced batch size for faster processing
+
+### Current Status
+- ✅ System connects to both exchanges
+- ✅ Trades are being collected (1454 trades in test)
+- ⚠️ Indicators not calculating yet - needs investigation
+- ✅ MongoDB storage working
+- ✅ Graceful shutdown working
+
+### Known Issues
+- Indicators not being calculated despite having enough trades
+- Need to investigate the trade retrieval query from MongoDB
+- May need to adjust the time window or calculation logic
