@@ -1,0 +1,14 @@
+[
+  {
+    "id": "XRPUSDT_60_1750278024446",
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-18T20:20:24.446Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 198
+  }
+]

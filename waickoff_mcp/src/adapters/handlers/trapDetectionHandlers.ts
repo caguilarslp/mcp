@@ -253,17 +253,27 @@ export class TrapDetectionHandlers {
 
   private formatSuccessResponse(data: any): MCPServerResponse {
     return {
-      success: true,
-      data,
-      timestamp: new Date().toISOString()
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          success: true,
+          timestamp: new Date().toISOString(),
+          data
+        }, null, 2)
+      }]
     };
   }
 
   private formatErrorResponse(error: string): MCPServerResponse {
     return {
-      success: false,
-      error,
-      timestamp: new Date().toISOString()
+      content: [{
+        type: 'text',
+        text: JSON.stringify({
+          success: false,
+          error,
+          timestamp: new Date().toISOString()
+        }, null, 2)
+      }]
     };
   }
 

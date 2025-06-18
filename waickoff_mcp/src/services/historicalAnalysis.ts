@@ -291,22 +291,47 @@ export class HistoricalAnalysisService implements IHistoricalAnalysisService {
         const lastPrice = klines[klines.length - 1].close;
         const priceChange = ((lastPrice - firstPrice) / firstPrice) * 100;
 
-        // Safe timestamp conversion
+        // Fixed timestamp conversion - properly handle timestamps
         let startDate: Date, endDate: Date;
         try {
-          // Handle string timestamps
-          if (typeof klines[0].timestamp === 'string') {
-            const startTimestamp = parseInt(klines[0].timestamp);
-            const endTimestamp = parseInt(klines[klines.length - 1].timestamp);
-            startDate = new Date(startTimestamp);
-            endDate = new Date(endTimestamp);
+          // Handle both string and number timestamps properly
+          const firstTimestamp = klines[0].timestamp;
+          const lastTimestamp = klines[klines.length - 1].timestamp;
+          
+          if (typeof firstTimestamp === 'string') {
+            // Check if it's a number string (milliseconds) or ISO date
+            if (/^\d+$/.test(firstTimestamp)) {
+              // It's a numeric timestamp string - parse as milliseconds
+              startDate = new Date(parseInt(firstTimestamp));
+            } else {
+              // It's an ISO date string
+              startDate = new Date(firstTimestamp);
+            }
           } else {
-            startDate = new Date(klines[0].timestamp);
-            endDate = new Date(klines[klines.length - 1].timestamp);
+            // It's already a number
+            startDate = new Date(firstTimestamp);
           }
-        } catch {
-          startDate = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000); // 1 year ago
+          
+          if (typeof lastTimestamp === 'string') {
+            if (/^\d+$/.test(lastTimestamp)) {
+              endDate = new Date(parseInt(lastTimestamp));
+            } else {
+              endDate = new Date(lastTimestamp);
+            }
+          } else {
+            endDate = new Date(lastTimestamp);
+          }
+          
+          // Validate dates are reasonable (not in 1970)
+          if (startDate.getFullYear() < 2010 || endDate.getFullYear() < 2010) {
+            throw new Error('Invalid timestamp detected');
+          }
+          
+        } catch (timestampError) {
+          this.logger.warn(`Timestamp conversion failed for ${symbol}, using fallback dates:`, timestampError);
+          // Fallback to reasonable dates
           endDate = new Date();
+          startDate = new Date(endDate.getTime() - (klines.length * 7 * 24 * 60 * 60 * 1000)); // weeks * 7 days
         }
 
         const duration = Math.floor((endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000));
@@ -332,7 +357,10 @@ export class HistoricalAnalysisService implements IHistoricalAnalysisService {
 
         this.logger.info(`Market cycles identified for ${symbol}`, {
           cycles: cycles.length,
-          mainCycle: cycleType
+          mainCycle: cycleType,
+          startDate: startDate.toISOString(),
+          endDate: endDate.toISOString(),
+          duration
         });
 
         return cycles;

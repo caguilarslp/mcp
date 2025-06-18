@@ -1,0 +1,14 @@
+[
+  {
+    "id": "HBARUSDT_60_1750278083341",
+    "symbol": "HBARUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-18T20:21:23.341Z",
+    "type": "wyckoff",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 198
+  }
+]

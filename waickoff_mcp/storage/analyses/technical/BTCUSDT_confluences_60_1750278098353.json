@@ -1,0 +1,2132 @@
+{
+  "id": "BTCUSDT_confluences_60_1750278098353",
+  "type": "technical",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "60",
+    "currentPrice": 104073.8,
+    "fibonacci": {
+      "symbol": "BTCUSDT",
+      "timeframe": "60",
+      "currentPrice": 104073.8,
+      "trend": "downtrend",
+      "swingHigh": {
+        "index": 38,
+        "timestamp": "2025-06-16T07:00:00.000Z",
+        "price": 107262.1,
+        "type": "high",
+        "strength": 9.806973799106709,
+        "volume": 564.811491,
+        "confirmed": true
+      },
+      "swingLow": {
+        "index": 92,
+        "timestamp": "2025-06-18T13:00:00.000Z",
+        "price": 103812.4,
+        "type": "low",
+        "strength": 7.870773131169994,
+        "volume": 704.527424,
+        "confirmed": true
+      },
+      "retracementLevels": [
+        {
+          "level": 0.236,
+          "price": 106447.97080000001,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 34.22062535534959,
+          "distance": 2.281237737067357
+        },
+        {
+          "level": 0.382,
+          "price": 105944.3146,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 55.20676876557961,
+          "distance": 1.7972963416344891
+        },
+        {
+          "level": 0.5,
+          "price": 105537.25,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 48.50244977453021,
+          "distance": 1.4061656247777992
+        },
+        {
+          "level": 0.618,
+          "price": 105130.1854,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 47.97233004655878,
+          "distance": 1.015034907921109
+        },
+        {
+          "level": 0.786,
+          "price": 104550.63579999999,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 0.45817083646411116
+        }
+      ],
+      "extensionLevels": [
+        {
+          "level": 1,
+          "price": 103812.4,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 9.52485038261886,
+          "distance": -0.25116792122513903
+        },
+        {
+          "level": 1.272,
+          "price": 102874.08159999999,
+          "label": "127.2%",
+          "type": "extension",
+          "strength": 3.683550569694862,
+          "distance": -1.1527573702507379
+        },
+        {
+          "level": 1.414,
+          "price": 102384.2242,
+          "label": "141.4%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -1.6234400973155645
+        },
+        {
+          "level": 1.618,
+          "price": 101680.48539999999,
+          "label": "161.8%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -2.2996321840847673
+        },
+        {
+          "level": 2,
+          "price": 100362.69999999998,
+          "label": "200.0%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -3.5658350132310153
+        },
+        {
+          "level": 2.618,
+          "price": 98230.78539999998,
+          "label": "261.8%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -5.614299276090643
+        }
+      ],
+      "keyLevels": [
+        {
+          "level": 0.382,
+          "price": 105944.3146,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 55.20676876557961,
+          "distance": 1.7972963416344891
+        },
+        {
+          "level": 0.5,
+          "price": 105537.25,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 48.50244977453021,
+          "distance": 1.4061656247777992
+        },
+        {
+          "level": 0.618,
+          "price": 105130.1854,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 47.97233004655878,
+          "distance": 1.015034907921109
+        },
+        {
+          "level": 0.236,
+          "price": 106447.97080000001,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 34.22062535534959,
+          "distance": 2.281237737067357
+        },
+        {
+          "level": 1,
+          "price": 103812.4,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 9.52485038261886,
+          "distance": -0.25116792122513903
+        },
+        {
+          "level": 1.272,
+          "price": 102874.08159999999,
+          "label": "127.2%",
+          "type": "extension",
+          "strength": 3.683550569694862,
+          "distance": -1.1527573702507379
+        },
+        {
+          "level": 0.786,
+          "price": 104550.63579999999,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 0.45817083646411116
+        },
+        {
+          "level": 1.414,
+          "price": 102384.2242,
+          "label": "141.4%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -1.6234400973155645
+        }
+      ],
+      "currentPosition": {
+        "nearestLevel": {
+          "level": 1,
+          "price": 103812.4,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 9.52485038261886,
+          "distance": -0.25116792122513903
+        },
+        "retracement": 92.4225294953182,
+        "nextTargets": [
+          {
+            "level": 1,
+            "price": 103812.4,
+            "label": "100.0%",
+            "type": "extension",
+            "strength": 9.52485038261886,
+            "distance": -0.25116792122513903
+          },
+          {
+            "level": 0.786,
+            "price": 104550.63579999999,
+            "label": "78.6%",
+            "type": "retracement",
+            "strength": 0,
+            "distance": 0.45817083646411116
+          },
+          {
+            "level": 0.618,
+            "price": 105130.1854,
+            "label": "61.8%",
+            "type": "retracement",
+            "strength": 47.97233004655878,
+            "distance": 1.015034907921109
+          },
+          {
+            "level": 1.272,
+            "price": 102874.08159999999,
+            "label": "127.2%",
+            "type": "extension",
+            "strength": 3.683550569694862,
+            "distance": -1.1527573702507379
+          }
+        ]
+      },
+      "analysisTime": "2025-06-18T20:21:38.350Z",
+      "confidence": 33.49107813077194,
+      "validity": 93
+    },
+    "bollingerBands": {
+      "symbol": "BTCUSDT",
+      "timeframe": "60",
+      "currentPrice": 104073.8,
+      "currentBands": {
+        "upper": 105581.95093514309,
+        "middle": 104649.005,
+        "lower": 103716.05906485692,
+        "bandwidth": 1.7830001061989744,
+        "position": 19.17265093653133
+      },
+      "bandHistory": [
+        {
+          "upper": 108564.95148437266,
+          "middle": 106935.68500000001,
+          "lower": 105306.41851562736,
+          "bandwidth": 3.0471895034340544,
+          "position": 100
+        },
+        {
+          "upper": 108771.92818053196,
+          "middle": 107103.495,
+          "lower": 105435.06181946803,
+          "bandwidth": 3.115553195592669,
+          "position": 100
+        },
+        {
+          "upper": 108907.95965517935,
+          "middle": 107239.375,
+          "lower": 105570.79034482065,
+          "bandwidth": 3.111888063837282,
+          "position": 88.69521980774768
+        },
+        {
+          "upper": 108874.66342966832,
+          "middle": 107335.08499999999,
+          "lower": 105795.50657033166,
+          "bandwidth": 2.8687328652477926,
+          "position": 61.97454422894986
+        },
+        {
+          "upper": 108800.78508252924,
+          "middle": 107378.86499999999,
+          "lower": 105956.94491747074,
+          "bandwidth": 2.6484170465561356,
+          "position": 29.64143670542445
+        },
+        {
+          "upper": 108771.80677595384,
+          "middle": 107421.43999999999,
+          "lower": 106071.07322404614,
+          "bandwidth": 2.5141475965204925,
+          "position": 43.411419653956706
+        },
+        {
+          "upper": 108751.14526392947,
+          "middle": 107451.745,
+          "lower": 106152.34473607052,
+          "bandwidth": 2.418574521855327,
+          "position": 39.64349140633248
+        },
+        {
+          "upper": 108733.80731953596,
+          "middle": 107496.84,
+          "lower": 106259.87268046403,
+          "bandwidth": 2.301402198494327,
+          "position": 49.57395802485923
+        },
+        {
+          "upper": 108744.8457315912,
+          "middle": 107524.35500000001,
+          "lower": 106303.86426840883,
+          "bandwidth": 2.27016610625785,
+          "position": 53.17269922644252
+        },
+        {
+          "upper": 108745.77917246318,
+          "middle": 107532.46500000001,
+          "lower": 106319.15082753684,
+          "bandwidth": 2.2566471855047148,
+          "position": 42.08098758090452
+        },
+        {
+          "upper": 108740.60288148752,
+          "middle": 107540.375,
+          "lower": 106340.14711851248,
+          "bandwidth": 2.2321437534275237,
+          "position": 32.33772908714022
+        },
+        {
+          "upper": 108741.41544713509,
+          "middle": 107539.76499999998,
+          "lower": 106338.11455286488,
+          "bandwidth": 2.234802069978686,
+          "position": 20.625192971754167
+        },
+        {
+          "upper": 108750.38070392796,
+          "middle": 107533.01500000001,
+          "lower": 106315.64929607206,
+          "bandwidth": 2.2641710621206883,
+          "position": 18.45175621747756
+        },
+        {
+          "upper": 108762.53908700614,
+          "middle": 107526.76999999999,
+          "lower": 106291.00091299384,
+          "bandwidth": 2.2985328900071096,
+          "position": 11.037623852003865
+        },
+        {
+          "upper": 108841.67885777158,
+          "middle": 107477.11000000002,
+          "lower": 106112.54114222845,
+          "bandwidth": 2.5392734467303084,
+          "position": 1.823244663988971
+        },
+        {
+          "upper": 108914.37370370408,
+          "middle": 107397.89000000001,
+          "lower": 105881.40629629594,
+          "bandwidth": 2.824047481201112,
+          "position": 2.4165674687116994
+        },
+        {
+          "upper": 109007.41435571638,
+          "middle": 107307.775,
+          "lower": 105608.13564428361,
+          "bandwidth": 3.167784171680725,
+          "position": 0.7785285633504292
+        },
+        {
+          "upper": 109050.22217718256,
+          "middle": 107194.52000000002,
+          "lower": 105338.81782281748,
+          "bandwidth": 3.462307918693116,
+          "position": 4.509941822578681
+        },
+        {
+          "upper": 109074.76790456865,
+          "middle": 107074.43500000001,
+          "lower": 105074.10209543137,
+          "bandwidth": 3.736340807343303,
+          "position": 6.973786811470721
+        },
+        {
+          "upper": 109046.05149952574,
+          "middle": 106903.54000000001,
+          "lower": 104761.02850047428,
+          "bandwidth": 4.008307862444465,
+          "position": 2.0576668910584246
+        },
+        {
+          "upper": 108964.98055466931,
+          "middle": 106682.98999999999,
+          "lower": 104400.99944533067,
+          "bandwidth": 4.278077610440651,
+          "position": 0
+        },
+        {
+          "upper": 108858.42355492475,
+          "middle": 106424.29500000001,
+          "lower": 103990.16644507527,
+          "bandwidth": 4.574385115588015,
+          "position": 0
+        },
+        {
+          "upper": 108675.33075825319,
+          "middle": 106187.98500000002,
+          "lower": 103700.63924174685,
+          "bandwidth": 4.684796981980908,
+          "position": 2.087782888819103
+        },
+        {
+          "upper": 108522.98000801711,
+          "middle": 106023.63500000001,
+          "lower": 103524.2899919829,
+          "bandwidth": 4.7146940548059915,
+          "position": 17.854878081141422
+        },
+        {
+          "upper": 108455.96879579959,
+          "middle": 105917.48000000001,
+          "lower": 103378.99120420043,
+          "bandwidth": 4.793333066080464,
+          "position": 25.56262603851253
+        },
+        {
+          "upper": 108321.8112916622,
+          "middle": 105773.20500000003,
+          "lower": 103224.59870833786,
+          "bandwidth": 4.8190017342524,
+          "position": 22.23570771543044
+        },
+        {
+          "upper": 108157.40811771649,
+          "middle": 105641.21,
+          "lower": 103125.01188228352,
+          "bandwidth": 4.76366773481009,
+          "position": 28.171233968711984
+        },
+        {
+          "upper": 107916.02961296725,
+          "middle": 105478.51000000001,
+          "lower": 103040.99038703277,
+          "bandwidth": 4.621831713336186,
+          "position": 24.436923638063153
+        },
+        {
+          "upper": 107588.31065350396,
+          "middle": 105326.35,
+          "lower": 103064.38934649606,
+          "bandwidth": 4.2951467576801985,
+          "position": 33.029103560871036
+        },
+        {
+          "upper": 107272.55977890037,
+          "middle": 105201.26499999998,
+          "lower": 103129.9702210996,
+          "bandwidth": 3.937775422948348,
+          "position": 41.24545178951997
+        },
+        {
+          "upper": 106965.33990155043,
+          "middle": 105084.55500000001,
+          "lower": 103203.77009844959,
+          "bandwidth": 3.5795648590802287,
+          "position": 41.96199948886326
+        },
+        {
+          "upper": 106687.41401061176,
+          "middle": 104985.34,
+          "lower": 103283.26598938824,
+          "bandwidth": 3.2424984490439503,
+          "position": 46.009574226705546
+        },
+        {
+          "upper": 106404.68960140353,
+          "middle": 104906.025,
+          "lower": 103407.36039859646,
+          "bandwidth": 2.85715639574283,
+          "position": 59.09392934699127
+        },
+        {
+          "upper": 106170.31536557301,
+          "middle": 104850.23000000001,
+          "lower": 103530.14463442701,
+          "bandwidth": 2.51803999967001,
+          "position": 72.63755116096436
+        },
+        {
+          "upper": 106018.27141823003,
+          "middle": 104812.375,
+          "lower": 103606.47858176997,
+          "bandwidth": 2.3010573288316882,
+          "position": 74.58026207881625
+        },
+        {
+          "upper": 105852.44238465514,
+          "middle": 104762.64000000001,
+          "lower": 103672.83761534489,
+          "bandwidth": 2.080517223802535,
+          "position": 59.0548526402079
+        },
+        {
+          "upper": 105748.65574013197,
+          "middle": 104729.17500000002,
+          "lower": 103709.69425986806,
+          "bandwidth": 1.9468896611320687,
+          "position": 61.58065035978133
+        },
+        {
+          "upper": 105663.89663741001,
+          "middle": 104701.675,
+          "lower": 103739.45336259,
+          "bandwidth": 1.8380252988502999,
+          "position": 63.22590295750848
+        },
+        {
+          "upper": 105583.62765895276,
+          "middle": 104668.91,
+          "lower": 103754.19234104725,
+          "bandwidth": 1.747830676659863,
+          "position": 51.57917581000214
+        },
+        {
+          "upper": 105566.70480721303,
+          "middle": 104639.775,
+          "lower": 103712.84519278696,
+          "bandwidth": 1.771658639772559,
+          "position": 29.864980223135408
+        },
+        {
+          "upper": 105581.39236825849,
+          "middle": 104669.735,
+          "lower": 103758.07763174151,
+          "bandwidth": 1.7419693825698246,
+          "position": 59.18464577980104
+        },
+        {
+          "upper": 105493.91129186854,
+          "middle": 104714.85499999998,
+          "lower": 103935.79870813142,
+          "bandwidth": 1.4879575431175665,
+          "position": 37.64819679856604
+        },
+        {
+          "upper": 105419.01101065018,
+          "middle": 104746.76999999999,
+          "lower": 104074.5289893498,
+          "bandwidth": 1.2835546349547429,
+          "position": 27.391293064225092
+        },
+        {
+          "upper": 105414.87318243032,
+          "middle": 104756.715,
+          "lower": 104098.55681756967,
+          "bandwidth": 1.256546050399401,
+          "position": 39.28714982473632
+        },
+        {
+          "upper": 105419.97682029536,
+          "middle": 104762.665,
+          "lower": 104105.35317970463,
+          "bandwidth": 1.25485891428089,
+          "position": 52.52049324056885
+        },
+        {
+          "upper": 105416.32627788406,
+          "middle": 104765.44499999999,
+          "lower": 104114.56372211593,
+          "bandwidth": 1.242549540803393,
+          "position": 22.97164537104285
+        },
+        {
+          "upper": 105425.64221252683,
+          "middle": 104755.39499999999,
+          "lower": 104085.14778747315,
+          "bandwidth": 1.2796423755107593,
+          "position": 19.138625848188344
+        },
+        {
+          "upper": 105530.12520449307,
+          "middle": 104724.78,
+          "lower": 103919.43479550692,
+          "bandwidth": 1.5380222417140903,
+          "position": 0
+        },
+        {
+          "upper": 105584.77272764967,
+          "middle": 104687.245,
+          "lower": 103789.71727235032,
+          "bandwidth": 1.7146840145610445,
+          "position": 1.0129340347674485
+        },
+        {
+          "upper": 105581.95093514309,
+          "middle": 104649.005,
+          "lower": 103716.05906485692,
+          "bandwidth": 1.7830001061989744,
+          "position": 19.17265093653133
+        }
+      ],
+      "squeeze": {
+        "isActive": false,
+        "duration": 0,
+        "intensity": 0,
+        "breakoutProbability": 0,
+        "expectedDirection": "unknown"
+      },
+      "walk": {
+        "isWalking": true,
+        "direction": "upper",
+        "duration": 19,
+        "strength": "weak",
+        "integrityBreaches": 3
+      },
+      "divergence": {
+        "type": "none",
+        "strength": 0,
+        "periods": 0,
+        "confirmation": false
+      },
+      "pattern": {
+        "type": "consolidation",
+        "confidence": 40,
+        "description": "No clear Bollinger pattern detected. Market in consolidation.",
+        "actionable": false
+      },
+      "volatility": {
+        "current": 48,
+        "trend": "expanding",
+        "extremes": {
+          "isAtLow": false,
+          "isAtHigh": false
+        }
+      },
+      "signals": {
+        "signal": "hold",
+        "strength": 20,
+        "reasoning": "No clear Bollinger signals. Maintain current position.",
+        "confluence": []
+      },
+      "analysisTime": "2025-06-18T20:21:37.616Z",
+      "period": 20,
+      "standardDeviation": 2,
+      "confidence": 68.85714285714286
+    },
+    "elliottWave": {
+      "symbol": "BTCUSDT",
+      "timeframe": "60",
+      "currentPrice": 104073.8,
+      "currentSequence": {
+        "type": "impulsive",
+        "waves": [],
+        "isComplete": false,
+        "degree": "minuette",
+        "startTime": "2025-06-18T20:21:37.617Z",
+        "validity": 0
+      },
+      "historicalSequences": [],
+      "currentWave": {
+        "wave": null,
+        "position": "uncertain",
+        "nextExpected": "Waiting for initial wave formation"
+      },
+      "projections": [],
+      "ruleValidation": {
+        "wave2Rule": true,
+        "wave3Rule": true,
+        "wave4Rule": true,
+        "alternationRule": true,
+        "channelRule": true,
+        "overallValidity": 0
+      },
+      "signals": {
+        "signal": "hold",
+        "strength": 30,
+        "reasoning": "Insufficient Elliott Wave structure or low validity",
+        "waveContext": "Pattern not clear",
+        "riskLevel": "high"
+      },
+      "analysisTime": "2025-06-18T20:21:37.617Z",
+      "confidence": 0,
+      "dataQuality": 100
+    },
+    "confluences": [
+      {
+        "level": 103581.76963041756,
+        "indicators": [
+          "Support/Resistance",
+          "Bollinger Bands",
+          "Fibonacci"
+        ],
+        "strength": 100,
+        "type": "support",
+        "distance": -0.47277063927947327,
+        "actionable": true,
+        "cluster": {
+          "averagePrice": 103581.76963041756,
+          "priceRange": {
+            "min": 103362.1,
+            "max": 103812.4
+          },
+          "indicators": [
+            "Support/Resistance",
+            "Bollinger Bands",
+            "Fibonacci"
+          ],
+          "levels": [
+            {
+              "price": 103362.1,
+              "indicator": "Support/Resistance",
+              "type": "support",
+              "strength": 71.90000205102737,
+              "timeframe": "60",
+              "source": "sr_support_0",
+              "metadata": {
+                "levelType": "support",
+                "touches": 1,
+                "volume": 0
+              }
+            },
+            {
+              "price": 103716.05906485692,
+              "indicator": "Bollinger Bands",
+              "type": "support",
+              "strength": 70,
+              "timeframe": "60",
+              "source": "bb_lower",
+              "metadata": {
+                "bandType": "lower",
+                "bandwidth": 1.7830001061989744,
+                "position": 19.17265093653133,
+                "squeeze": false
+              }
+            },
+            {
+              "price": 103812.4,
+              "indicator": "Fibonacci",
+              "type": "support",
+              "strength": 29.524850382618858,
+              "timeframe": "60",
+              "source": "fib_key_100.0%",
+              "metadata": {
+                "fibLevel": 1,
+                "label": "100.0%",
+                "levelType": "key"
+              }
+            }
+          ],
+          "strength": 100,
+          "type": "support",
+          "distance": -0.47277063927947327
+        }
+      },
+      {
+        "level": 105580.36059311341,
+        "indicators": [
+          "Fibonacci",
+          "Bollinger Bands",
+          "Support/Resistance"
+        ],
+        "strength": 100,
+        "type": "resistance",
+        "distance": 1.4475887236878109,
+        "actionable": true,
+        "cluster": {
+          "averagePrice": 105580.36059311341,
+          "priceRange": {
+            "min": 104550.63579999999,
+            "max": 106447.97080000001
+          },
+          "indicators": [
+            "Fibonacci",
+            "Bollinger Bands",
+            "Support/Resistance"
+          ],
+          "levels": [
+            {
+              "price": 104550.63579999999,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 20,
+              "timeframe": "60",
+              "source": "fib_key_78.6%",
+              "metadata": {
+                "fibLevel": 0.786,
+                "label": "78.6%",
+                "levelType": "key"
+              }
+            },
+            {
+              "price": 104649.005,
+              "indicator": "Bollinger Bands",
+              "type": "resistance",
+              "strength": 70,
+              "timeframe": "60",
+              "source": "bb_middle",
+              "metadata": {
+                "bandType": "middle",
+                "bandwidth": 1.7830001061989744,
+                "position": 19.17265093653133,
+                "walking": true
+              }
+            },
+            {
+              "price": 105130.1854,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 47.97233004655878,
+              "timeframe": "60",
+              "source": "fib_ret_61.8%",
+              "metadata": {
+                "fibLevel": 0.618,
+                "label": "61.8%",
+                "levelType": "retracement"
+              }
+            },
+            {
+              "price": 105130.1854,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 67.97233004655878,
+              "timeframe": "60",
+              "source": "fib_key_61.8%",
+              "metadata": {
+                "fibLevel": 0.618,
+                "label": "61.8%",
+                "levelType": "key"
+              }
+            },
+            {
+              "price": 105335.1,
+              "indicator": "Support/Resistance",
+              "type": "resistance",
+              "strength": 78.62127822090622,
+              "timeframe": "60",
+              "source": "sr_resistance_1",
+              "metadata": {
+                "levelType": "resistance",
+                "touches": 4,
+                "volume": 0
+              }
+            },
+            {
+              "price": 105537.25,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 48.50244977453021,
+              "timeframe": "60",
+              "source": "fib_ret_50.0%",
+              "metadata": {
+                "fibLevel": 0.5,
+                "label": "50.0%",
+                "levelType": "retracement"
+              }
+            },
+            {
+              "price": 105537.25,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 68.50244977453022,
+              "timeframe": "60",
+              "source": "fib_key_50.0%",
+              "metadata": {
+                "fibLevel": 0.5,
+                "label": "50.0%",
+                "levelType": "key"
+              }
+            },
+            {
+              "price": 105581.95093514309,
+              "indicator": "Bollinger Bands",
+              "type": "resistance",
+              "strength": 70,
+              "timeframe": "60",
+              "source": "bb_upper",
+              "metadata": {
+                "bandType": "upper",
+                "bandwidth": 1.7830001061989744,
+                "position": 19.17265093653133,
+                "squeeze": false
+              }
+            },
+            {
+              "price": 105944.3146,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 55.20676876557961,
+              "timeframe": "60",
+              "source": "fib_ret_38.2%",
+              "metadata": {
+                "fibLevel": 0.382,
+                "label": "38.2%",
+                "levelType": "retracement"
+              }
+            },
+            {
+              "price": 105944.3146,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 75.20676876557961,
+              "timeframe": "60",
+              "source": "fib_key_38.2%",
+              "metadata": {
+                "fibLevel": 0.382,
+                "label": "38.2%",
+                "levelType": "key"
+              }
+            },
+            {
+              "price": 106130,
+              "indicator": "Support/Resistance",
+              "type": "resistance",
+              "strength": 85.00331925728575,
+              "timeframe": "60",
+              "source": "sr_resistance_0",
+              "metadata": {
+                "levelType": "resistance",
+                "touches": 4,
+                "volume": 0
+              }
+            },
+            {
+              "price": 106447.97080000001,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 34.22062535534959,
+              "timeframe": "60",
+              "source": "fib_ret_23.6%",
+              "metadata": {
+                "fibLevel": 0.236,
+                "label": "23.6%",
+                "levelType": "retracement"
+              }
+            },
+            {
+              "price": 106447.97080000001,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 54.22062535534959,
+              "timeframe": "60",
+              "source": "fib_key_23.6%",
+              "metadata": {
+                "fibLevel": 0.236,
+                "label": "23.6%",
+                "levelType": "key"
+              }
+            }
+          ],
+          "strength": 100,
+          "type": "resistance",
+          "distance": 1.4475887236878109
+        }
+      }
+    ],
+    "confluenceMetrics": {
+      "totalLevelsCollected": 16,
+      "clustersFormed": 2,
+      "confluencesFound": 2,
+      "actionableConfluences": 2,
+      "keyConfluences": [
+        {
+          "level": 103581.76963041756,
+          "indicators": [
+            "Support/Resistance",
+            "Bollinger Bands",
+            "Fibonacci"
+          ],
+          "strength": 100,
+          "type": "support",
+          "distance": -0.47277063927947327,
+          "actionable": true,
+          "cluster": {
+            "averagePrice": 103581.76963041756,
+            "priceRange": {
+              "min": 103362.1,
+              "max": 103812.4
+            },
+            "indicators": [
+              "Support/Resistance",
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "levels": [
+              {
+                "price": 103362.1,
+                "indicator": "Support/Resistance",
+                "type": "support",
+                "strength": 71.90000205102737,
+                "timeframe": "60",
+                "source": "sr_support_0",
+                "metadata": {
+                  "levelType": "support",
+                  "touches": 1,
+                  "volume": 0
+                }
+              },
+              {
+                "price": 103716.05906485692,
+                "indicator": "Bollinger Bands",
+                "type": "support",
+                "strength": 70,
+                "timeframe": "60",
+                "source": "bb_lower",
+                "metadata": {
+                  "bandType": "lower",
+                  "bandwidth": 1.7830001061989744,
+                  "position": 19.17265093653133,
+                  "squeeze": false
+                }
+              },
+              {
+                "price": 103812.4,
+                "indicator": "Fibonacci",
+                "type": "support",
+                "strength": 29.524850382618858,
+                "timeframe": "60",
+                "source": "fib_key_100.0%",
+                "metadata": {
+                  "fibLevel": 1,
+                  "label": "100.0%",
+                  "levelType": "key"
+                }
+              }
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -0.47277063927947327
+          }
+        },
+        {
+          "level": 105580.36059311341,
+          "indicators": [
+            "Fibonacci",
+            "Bollinger Bands",
+            "Support/Resistance"
+          ],
+          "strength": 100,
+          "type": "resistance",
+          "distance": 1.4475887236878109,
+          "actionable": true,
+          "cluster": {
+            "averagePrice": 105580.36059311341,
+            "priceRange": {
+              "min": 104550.63579999999,
+              "max": 106447.97080000001
+            },
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands",
+              "Support/Resistance"
+            ],
+            "levels": [
+              {
+                "price": 104550.63579999999,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 20,
+                "timeframe": "60",
+                "source": "fib_key_78.6%",
+                "metadata": {
+                  "fibLevel": 0.786,
+                  "label": "78.6%",
+                  "levelType": "key"
+                }
+              },
+              {
+                "price": 104649.005,
+                "indicator": "Bollinger Bands",
+                "type": "resistance",
+                "strength": 70,
+                "timeframe": "60",
+                "source": "bb_middle",
+                "metadata": {
+                  "bandType": "middle",
+                  "bandwidth": 1.7830001061989744,
+                  "position": 19.17265093653133,
+                  "walking": true
+                }
+              },
+              {
+                "price": 105130.1854,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 47.97233004655878,
+                "timeframe": "60",
+                "source": "fib_ret_61.8%",
+                "metadata": {
+                  "fibLevel": 0.618,
+                  "label": "61.8%",
+                  "levelType": "retracement"
+                }
+              },
+              {
+                "price": 105130.1854,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 67.97233004655878,
+                "timeframe": "60",
+                "source": "fib_key_61.8%",
+                "metadata": {
+                  "fibLevel": 0.618,
+                  "label": "61.8%",
+                  "levelType": "key"
+                }
+              },
+              {
+                "price": 105335.1,
+                "indicator": "Support/Resistance",
+                "type": "resistance",
+                "strength": 78.62127822090622,
+                "timeframe": "60",
+                "source": "sr_resistance_1",
+                "metadata": {
+                  "levelType": "resistance",
+                  "touches": 4,
+                  "volume": 0
+                }
+              },
+              {
+                "price": 105537.25,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 48.50244977453021,
+                "timeframe": "60",
+                "source": "fib_ret_50.0%",
+                "metadata": {
+                  "fibLevel": 0.5,
+                  "label": "50.0%",
+                  "levelType": "retracement"
+                }
+              },
+              {
+                "price": 105537.25,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 68.50244977453022,
+                "timeframe": "60",
+                "source": "fib_key_50.0%",
+                "metadata": {
+                  "fibLevel": 0.5,
+                  "label": "50.0%",
+                  "levelType": "key"
+                }
+              },
+              {
+                "price": 105581.95093514309,
+                "indicator": "Bollinger Bands",
+                "type": "resistance",
+                "strength": 70,
+                "timeframe": "60",
+                "source": "bb_upper",
+                "metadata": {
+                  "bandType": "upper",
+                  "bandwidth": 1.7830001061989744,
+                  "position": 19.17265093653133,
+                  "squeeze": false
+                }
+              },
+              {
+                "price": 105944.3146,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 55.20676876557961,
+                "timeframe": "60",
+                "source": "fib_ret_38.2%",
+                "metadata": {
+                  "fibLevel": 0.382,
+                  "label": "38.2%",
+                  "levelType": "retracement"
+                }
+              },
+              {
+                "price": 105944.3146,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 75.20676876557961,
+                "timeframe": "60",
+                "source": "fib_key_38.2%",
+                "metadata": {
+                  "fibLevel": 0.382,
+                  "label": "38.2%",
+                  "levelType": "key"
+                }
+              },
+              {
+                "price": 106130,
+                "indicator": "Support/Resistance",
+                "type": "resistance",
+                "strength": 85.00331925728575,
+                "timeframe": "60",
+                "source": "sr_resistance_0",
+                "metadata": {
+                  "levelType": "resistance",
+                  "touches": 4,
+                  "volume": 0
+                }
+              },
+              {
+                "price": 106447.97080000001,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 34.22062535534959,
+                "timeframe": "60",
+                "source": "fib_ret_23.6%",
+                "metadata": {
+                  "fibLevel": 0.236,
+                  "label": "23.6%",
+                  "levelType": "retracement"
+                }
+              },
+              {
+                "price": 106447.97080000001,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 54.22062535534959,
+                "timeframe": "60",
+                "source": "fib_key_23.6%",
+                "metadata": {
+                  "fibLevel": 0.236,
+                  "label": "23.6%",
+                  "levelType": "key"
+                }
+              }
+            ],
+            "strength": 100,
+            "type": "resistance",
+            "distance": 1.4475887236878109
+          }
+        }
+      ]
+    },
+    "signals": {
+      "immediate": {
+        "signal": "buy",
+        "strength": 100,
+        "timeframe": "short",
+        "confluence": [
+          {
+            "level": 103581.76963041756,
+            "indicators": [
+              "Support/Resistance",
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -0.47277063927947327,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 103581.76963041756,
+              "priceRange": {
+                "min": 103362.1,
+                "max": 103812.4
+              },
+              "indicators": [
+                "Support/Resistance",
+                "Bollinger Bands",
+                "Fibonacci"
+              ],
+              "levels": [
+                {
+                  "price": 103362.1,
+                  "indicator": "Support/Resistance",
+                  "type": "support",
+                  "strength": 71.90000205102737,
+                  "timeframe": "60",
+                  "source": "sr_support_0",
+                  "metadata": {
+                    "levelType": "support",
+                    "touches": 1,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 103716.05906485692,
+                  "indicator": "Bollinger Bands",
+                  "type": "support",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_lower",
+                  "metadata": {
+                    "bandType": "lower",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 103812.4,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 29.524850382618858,
+                  "timeframe": "60",
+                  "source": "fib_key_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "support",
+              "distance": -0.47277063927947327
+            }
+          },
+          {
+            "level": 105580.36059311341,
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands",
+              "Support/Resistance"
+            ],
+            "strength": 100,
+            "type": "resistance",
+            "distance": 1.4475887236878109,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 105580.36059311341,
+              "priceRange": {
+                "min": 104550.63579999999,
+                "max": 106447.97080000001
+              },
+              "indicators": [
+                "Fibonacci",
+                "Bollinger Bands",
+                "Support/Resistance"
+              ],
+              "levels": [
+                {
+                  "price": 104550.63579999999,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_78.6%",
+                  "metadata": {
+                    "fibLevel": 0.786,
+                    "label": "78.6%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 104649.005,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_middle",
+                  "metadata": {
+                    "bandType": "middle",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "walking": true
+                  }
+                },
+                {
+                  "price": 105130.1854,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 47.97233004655878,
+                  "timeframe": "60",
+                  "source": "fib_ret_61.8%",
+                  "metadata": {
+                    "fibLevel": 0.618,
+                    "label": "61.8%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105130.1854,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 67.97233004655878,
+                  "timeframe": "60",
+                  "source": "fib_key_61.8%",
+                  "metadata": {
+                    "fibLevel": 0.618,
+                    "label": "61.8%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 105335.1,
+                  "indicator": "Support/Resistance",
+                  "type": "resistance",
+                  "strength": 78.62127822090622,
+                  "timeframe": "60",
+                  "source": "sr_resistance_1",
+                  "metadata": {
+                    "levelType": "resistance",
+                    "touches": 4,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 105537.25,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 48.50244977453021,
+                  "timeframe": "60",
+                  "source": "fib_ret_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105537.25,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 68.50244977453022,
+                  "timeframe": "60",
+                  "source": "fib_key_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 105581.95093514309,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_upper",
+                  "metadata": {
+                    "bandType": "upper",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 105944.3146,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 55.20676876557961,
+                  "timeframe": "60",
+                  "source": "fib_ret_38.2%",
+                  "metadata": {
+                    "fibLevel": 0.382,
+                    "label": "38.2%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105944.3146,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 75.20676876557961,
+                  "timeframe": "60",
+                  "source": "fib_key_38.2%",
+                  "metadata": {
+                    "fibLevel": 0.382,
+                    "label": "38.2%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 106130,
+                  "indicator": "Support/Resistance",
+                  "type": "resistance",
+                  "strength": 85.00331925728575,
+                  "timeframe": "60",
+                  "source": "sr_resistance_0",
+                  "metadata": {
+                    "levelType": "resistance",
+                    "touches": 4,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 106447.97080000001,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 34.22062535534959,
+                  "timeframe": "60",
+                  "source": "fib_ret_23.6%",
+                  "metadata": {
+                    "fibLevel": 0.236,
+                    "label": "23.6%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 106447.97080000001,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 54.22062535534959,
+                  "timeframe": "60",
+                  "source": "fib_key_23.6%",
+                  "metadata": {
+                    "fibLevel": 0.236,
+                    "label": "23.6%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "resistance",
+              "distance": 1.4475887236878109
+            }
+          }
+        ],
+        "reasoning": [
+          "Near strong support at 103581.7696",
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 100
+      },
+      "shortTerm": {
+        "signal": "buy",
+        "strength": 100,
+        "timeframe": "medium",
+        "confluence": [
+          {
+            "level": 103581.76963041756,
+            "indicators": [
+              "Support/Resistance",
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -0.47277063927947327,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 103581.76963041756,
+              "priceRange": {
+                "min": 103362.1,
+                "max": 103812.4
+              },
+              "indicators": [
+                "Support/Resistance",
+                "Bollinger Bands",
+                "Fibonacci"
+              ],
+              "levels": [
+                {
+                  "price": 103362.1,
+                  "indicator": "Support/Resistance",
+                  "type": "support",
+                  "strength": 71.90000205102737,
+                  "timeframe": "60",
+                  "source": "sr_support_0",
+                  "metadata": {
+                    "levelType": "support",
+                    "touches": 1,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 103716.05906485692,
+                  "indicator": "Bollinger Bands",
+                  "type": "support",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_lower",
+                  "metadata": {
+                    "bandType": "lower",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 103812.4,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 29.524850382618858,
+                  "timeframe": "60",
+                  "source": "fib_key_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "support",
+              "distance": -0.47277063927947327
+            }
+          },
+          {
+            "level": 105580.36059311341,
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands",
+              "Support/Resistance"
+            ],
+            "strength": 100,
+            "type": "resistance",
+            "distance": 1.4475887236878109,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 105580.36059311341,
+              "priceRange": {
+                "min": 104550.63579999999,
+                "max": 106447.97080000001
+              },
+              "indicators": [
+                "Fibonacci",
+                "Bollinger Bands",
+                "Support/Resistance"
+              ],
+              "levels": [
+                {
+                  "price": 104550.63579999999,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_78.6%",
+                  "metadata": {
+                    "fibLevel": 0.786,
+                    "label": "78.6%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 104649.005,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_middle",
+                  "metadata": {
+                    "bandType": "middle",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "walking": true
+                  }
+                },
+                {
+                  "price": 105130.1854,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 47.97233004655878,
+                  "timeframe": "60",
+                  "source": "fib_ret_61.8%",
+                  "metadata": {
+                    "fibLevel": 0.618,
+                    "label": "61.8%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105130.1854,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 67.97233004655878,
+                  "timeframe": "60",
+                  "source": "fib_key_61.8%",
+                  "metadata": {
+                    "fibLevel": 0.618,
+                    "label": "61.8%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 105335.1,
+                  "indicator": "Support/Resistance",
+                  "type": "resistance",
+                  "strength": 78.62127822090622,
+                  "timeframe": "60",
+                  "source": "sr_resistance_1",
+                  "metadata": {
+                    "levelType": "resistance",
+                    "touches": 4,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 105537.25,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 48.50244977453021,
+                  "timeframe": "60",
+                  "source": "fib_ret_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105537.25,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 68.50244977453022,
+                  "timeframe": "60",
+                  "source": "fib_key_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 105581.95093514309,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_upper",
+                  "metadata": {
+                    "bandType": "upper",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 105944.3146,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 55.20676876557961,
+                  "timeframe": "60",
+                  "source": "fib_ret_38.2%",
+                  "metadata": {
+                    "fibLevel": 0.382,
+                    "label": "38.2%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105944.3146,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 75.20676876557961,
+                  "timeframe": "60",
+                  "source": "fib_key_38.2%",
+                  "metadata": {
+                    "fibLevel": 0.382,
+                    "label": "38.2%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 106130,
+                  "indicator": "Support/Resistance",
+                  "type": "resistance",
+                  "strength": 85.00331925728575,
+                  "timeframe": "60",
+                  "source": "sr_resistance_0",
+                  "metadata": {
+                    "levelType": "resistance",
+                    "touches": 4,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 106447.97080000001,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 34.22062535534959,
+                  "timeframe": "60",
+                  "source": "fib_ret_23.6%",
+                  "metadata": {
+                    "fibLevel": 0.236,
+                    "label": "23.6%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 106447.97080000001,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 54.22062535534959,
+                  "timeframe": "60",
+                  "source": "fib_key_23.6%",
+                  "metadata": {
+                    "fibLevel": 0.236,
+                    "label": "23.6%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "resistance",
+              "distance": 1.4475887236878109
+            }
+          }
+        ],
+        "reasoning": [
+          "Near strong support at 103581.7696",
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 100
+      },
+      "mediumTerm": {
+        "signal": "buy",
+        "strength": 100,
+        "timeframe": "long",
+        "confluence": [
+          {
+            "level": 103581.76963041756,
+            "indicators": [
+              "Support/Resistance",
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -0.47277063927947327,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 103581.76963041756,
+              "priceRange": {
+                "min": 103362.1,
+                "max": 103812.4
+              },
+              "indicators": [
+                "Support/Resistance",
+                "Bollinger Bands",
+                "Fibonacci"
+              ],
+              "levels": [
+                {
+                  "price": 103362.1,
+                  "indicator": "Support/Resistance",
+                  "type": "support",
+                  "strength": 71.90000205102737,
+                  "timeframe": "60",
+                  "source": "sr_support_0",
+                  "metadata": {
+                    "levelType": "support",
+                    "touches": 1,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 103716.05906485692,
+                  "indicator": "Bollinger Bands",
+                  "type": "support",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_lower",
+                  "metadata": {
+                    "bandType": "lower",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 103812.4,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 29.524850382618858,
+                  "timeframe": "60",
+                  "source": "fib_key_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "support",
+              "distance": -0.47277063927947327
+            }
+          },
+          {
+            "level": 105580.36059311341,
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands",
+              "Support/Resistance"
+            ],
+            "strength": 100,
+            "type": "resistance",
+            "distance": 1.4475887236878109,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 105580.36059311341,
+              "priceRange": {
+                "min": 104550.63579999999,
+                "max": 106447.97080000001
+              },
+              "indicators": [
+                "Fibonacci",
+                "Bollinger Bands",
+                "Support/Resistance"
+              ],
+              "levels": [
+                {
+                  "price": 104550.63579999999,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_78.6%",
+                  "metadata": {
+                    "fibLevel": 0.786,
+                    "label": "78.6%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 104649.005,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_middle",
+                  "metadata": {
+                    "bandType": "middle",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "walking": true
+                  }
+                },
+                {
+                  "price": 105130.1854,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 47.97233004655878,
+                  "timeframe": "60",
+                  "source": "fib_ret_61.8%",
+                  "metadata": {
+                    "fibLevel": 0.618,
+                    "label": "61.8%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105130.1854,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 67.97233004655878,
+                  "timeframe": "60",
+                  "source": "fib_key_61.8%",
+                  "metadata": {
+                    "fibLevel": 0.618,
+                    "label": "61.8%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 105335.1,
+                  "indicator": "Support/Resistance",
+                  "type": "resistance",
+                  "strength": 78.62127822090622,
+                  "timeframe": "60",
+                  "source": "sr_resistance_1",
+                  "metadata": {
+                    "levelType": "resistance",
+                    "touches": 4,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 105537.25,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 48.50244977453021,
+                  "timeframe": "60",
+                  "source": "fib_ret_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105537.25,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 68.50244977453022,
+                  "timeframe": "60",
+                  "source": "fib_key_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 105581.95093514309,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_upper",
+                  "metadata": {
+                    "bandType": "upper",
+                    "bandwidth": 1.7830001061989744,
+                    "position": 19.17265093653133,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 105944.3146,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 55.20676876557961,
+                  "timeframe": "60",
+                  "source": "fib_ret_38.2%",
+                  "metadata": {
+                    "fibLevel": 0.382,
+                    "label": "38.2%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 105944.3146,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 75.20676876557961,
+                  "timeframe": "60",
+                  "source": "fib_key_38.2%",
+                  "metadata": {
+                    "fibLevel": 0.382,
+                    "label": "38.2%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 106130,
+                  "indicator": "Support/Resistance",
+                  "type": "resistance",
+                  "strength": 85.00331925728575,
+                  "timeframe": "60",
+                  "source": "sr_resistance_0",
+                  "metadata": {
+                    "levelType": "resistance",
+                    "touches": 4,
+                    "volume": 0
+                  }
+                },
+                {
+                  "price": 106447.97080000001,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 34.22062535534959,
+                  "timeframe": "60",
+                  "source": "fib_ret_23.6%",
+                  "metadata": {
+                    "fibLevel": 0.236,
+                    "label": "23.6%",
+                    "levelType": "retracement"
+                  }
+                },
+                {
+                  "price": 106447.97080000001,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 54.22062535534959,
+                  "timeframe": "60",
+                  "source": "fib_key_23.6%",
+                  "metadata": {
+                    "fibLevel": 0.236,
+                    "label": "23.6%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "resistance",
+              "distance": 1.4475887236878109
+            }
+          }
+        ],
+        "reasoning": [
+          "Near strong support at 103581.7696",
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 100
+      }
+    },
+    "marketStructure": {
+      "trend": "downtrend",
+      "phase": "markup",
+      "volatility": "normal",
+      "momentum": "bearish"
+    },
+    "keyLevels": {
+      "immediateSupport": [],
+      "immediateResistance": [],
+      "targets": {
+        "conservative": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        },
+        "normal": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        },
+        "optimistic": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        }
+      },
+      "stopLoss": {
+        "tight": 0,
+        "normal": 0,
+        "wide": 0
+      }
+    },
+    "riskAssessment": {
+      "overall": "medium",
+      "factors": [],
+      "opportunities": [],
+      "warnings": []
+    },
+    "analysisTime": "2025-06-18T20:21:38.353Z",
+    "confidence": 70,
+    "dataQuality": 80,
+    "recommendedTimeframe": "1h"
+  },
+  "metadata": {
+    "id": "BTCUSDT_confluences_60_1750278098353",
+    "type": "technical",
+    "timestamp": "2025-06-18T20:21:38.353Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "60",
+    "confluences": 2
+  },
+  "timestamp": "2025-06-18T20:21:38.353Z"
+}

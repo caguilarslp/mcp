@@ -1,0 +1,14 @@
+[
+  {
+    "id": "BTCUSDT_240_1750278584356",
+    "symbol": "BTCUSDT",
+    "timeframe": "240",
+    "timestamp": "2025-06-18T20:29:44.356Z",
+    "type": "wyckoff",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 198
+  }
+]

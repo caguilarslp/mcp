@@ -1,0 +1,65 @@
+{
+  "id": "HBARUSDT_volume_60_1750278082820",
+  "type": "volume",
+  "data": {
+    "symbol": "HBARUSDT",
+    "interval": "60",
+    "avgVolume": 2400779.2316666665,
+    "currentVolume": 507780.68,
+    "maxVolume": 7325503.85,
+    "minVolume": 507780.68,
+    "volumeSpikes": [
+      {
+        "timestamp": "2025-06-16T22:00:00.000Z",
+        "volume": 4893585.27,
+        "multiplier": 2.0383320571307926,
+        "price": 0.15644
+      },
+      {
+        "timestamp": "2025-06-16T23:00:00.000Z",
+        "volume": 5001038.33,
+        "multiplier": 2.0830896335804208,
+        "price": 0.15346
+      },
+      {
+        "timestamp": "2025-06-17T00:00:00.000Z",
+        "volume": 7111298.75,
+        "multiplier": 2.9620794182992003,
+        "price": 0.1549
+      },
+      {
+        "timestamp": "2025-06-17T15:00:00.000Z",
+        "volume": 5977654.85,
+        "multiplier": 2.4898811065814654,
+        "price": 0.14937
+      },
+      {
+        "timestamp": "2025-06-17T19:00:00.000Z",
+        "volume": 4060926.49,
+        "multiplier": 1.6915035070429312,
+        "price": 0.15072
+      }
+    ],
+    "vwap": {
+      "current": 0.15063786848594043,
+      "priceVsVwap": "below",
+      "difference": -3.702832854715441
+    },
+    "trend": "decreasing"
+  },
+  "metadata": {
+    "id": "HBARUSDT_volume_60_1750278082820",
+    "type": "volume",
+    "timestamp": "2025-06-18T20:21:22.820Z",
+    "symbol": "HBARUSDT",
+    "interval": "60",
+    "tags": [
+      "interval:60",
+      "trend:decreasing",
+      "volume_ratio:21",
+      "spikes:5",
+      "vwap_position:below"
+    ]
+  },
+  "timestamp": "2025-06-18T20:21:22.820Z"
+}

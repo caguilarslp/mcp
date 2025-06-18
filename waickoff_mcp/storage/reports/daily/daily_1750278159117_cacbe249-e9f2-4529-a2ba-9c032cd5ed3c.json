@@ -1,0 +1,77 @@
+{
+  "id": "cacbe249-e9f2-4529-a2ba-9c032cd5ed3c",
+  "type": "daily",
+  "format": "markdown",
+  "generatedAt": "2025-06-18T20:22:39.117Z",
+  "period": {
+    "from": "2025-06-18T06:00:00.000Z",
+    "to": "2025-06-19T05:59:59.999Z"
+  },
+  "metadata": {
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "HBARUSDT",
+      "ICPUSDT",
+      "KASUSDT",
+      "SOLUSDT",
+      "XDCUSDT",
+      "XLMUSDT",
+      "XRPUSDT"
+    ],
+    "analysisCount": 0,
+    "patternCount": 0,
+    "version": "1.3.9"
+  },
+  "sections": [
+    {
+      "title": "Market Overview",
+      "content": {
+        "totalAnalyses": 0,
+        "symbols": [],
+        "avgConfidence": null
+      },
+      "priority": "high"
+    },
+    {
+      "title": "Top Movers",
+      "content": [],
+      "priority": "high",
+      "tables": [
+        {
+          "headers": [
+            "Symbol",
+            "Price",
+            "Trend"
+          ],
+          "rows": []
+        }
+      ]
+    },
+    {
+      "title": "Pattern Detections",
+      "content": {
+        "total": 0,
+        "byType": {},
+        "highConfidence": 0
+      },
+      "priority": "medium"
+    },
+    {
+      "title": "Volume Analysis",
+      "content": [],
+      "priority": "medium"
+    }
+  ],
+  "summary": {
+    "keyFindings": [
+      "Market Overview: Key data processed",
+      "Top Movers: Key data processed"
+    ],
+    "recommendations": [
+      "Continue monitoring high-volatility symbols",
+      "Review high-confidence patterns for trading opportunities"
+    ]
+  },
+  "content": "# DAILY Report\n\n**Generated:** 18/6/2025, 14:22:39\n**Period:** 18/6/2025 - 18/6/2025\n\n## Summary\n\n### Key Findings\n- Market Overview: Key data processed\n- Top Movers: Key data processed\n\n### Recommendations\n- Continue monitoring high-volatility symbols\n- Review high-confidence patterns for trading opportunities\n\n---\n\n## Market Overview\n\n```json\n{\n  \"totalAnalyses\": 0,\n  \"symbols\": [],\n  \"avgConfidence\": null\n}\n```\n\n## Top Movers\n\n```json\n[]\n```\n\n| Symbol | Price | Trend |\n| --- | --- | --- |\n\n\n## Pattern Detections\n\n```json\n{\n  \"total\": 0,\n  \"byType\": {},\n  \"highConfidence\": 0\n}\n```\n\n## Volume Analysis\n\n```json\n[]\n```\n\n\n---\n\n### Report Metadata\n- **ID:** cacbe249-e9f2-4529-a2ba-9c032cd5ed3c\n- **Symbols:** BTCUSDT, ETHUSDT, HBARUSDT, ICPUSDT, KASUSDT, SOLUSDT, XDCUSDT, XLMUSDT, XRPUSDT\n- **Analysis Count:** 0\n- **Pattern Count:** 0\n- **Version:** 1.3.9\n"
+}

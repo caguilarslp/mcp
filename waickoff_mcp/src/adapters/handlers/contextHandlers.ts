@@ -18,6 +18,38 @@ const repository = new ContextAwareRepository();
 const contextService = repository.getContextService();
 
 /**
+ * Format successful response for MCP
+ */
+function formatSuccessResponse(data: any): MCPServerResponse {
+  return {
+    content: [{
+      type: 'text',
+      text: JSON.stringify({
+        success: true,
+        timestamp: new Date().toISOString(),
+        data
+      }, null, 2)
+    }]
+  };
+}
+
+/**
+ * Format error response for MCP
+ */
+function formatErrorResponse(message: string): MCPServerResponse {
+  return {
+    content: [{
+      type: 'text',
+      text: JSON.stringify({
+        success: false,
+        error: message,
+        timestamp: new Date().toISOString()
+      }, null, 2)
+    }]
+  };
+}
+
+/**
  * Context management handlers
  */
 export const contextHandlers: MCPHandlers = {
@@ -28,24 +60,28 @@ export const contextHandlers: MCPHandlers = {
     const { symbol, format = 'compressed' } = args;
     
     try {
+      let data: any;
+      
       switch (format) {
         case 'compressed':
           const compressed = await contextService.getUltraCompressedContext(symbol);
-          return {
+          data = {
             symbol,
             format,
             context: compressed,
             timestamp: new Date().toISOString()
           };
+          break;
           
         case 'detailed':
           const detailed = await contextService.getMultiTimeframeContext(symbol);
-          return {
+          data = {
             symbol,
             format,
             timeframes: detailed,
             timestamp: new Date().toISOString()
           };
+          break;
           
         case 'summary':
           const mtf = await contextService.getMultiTimeframeContext(symbol);
@@ -75,14 +111,18 @@ export const contextHandlers: MCPHandlers = {
             timeframes_analyzed: count
           };
           
-          return summary;
+          data = summary;
+          break;
           
         default:
           throw new Error(`Invalid format: ${format}`);
       }
+      
+      return formatSuccessResponse(data);
+      
     } catch (error) {
       logger.error(`Failed to get context for ${symbol}:`, error);
-      throw error;
+      return formatErrorResponse(`Failed to get context: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   },
 
@@ -96,23 +136,23 @@ export const contextHandlers: MCPHandlers = {
       const context = await contextService.getContextSummary(symbol, timeframe);
       
       if (!context) {
-        return {
+        return formatSuccessResponse({
           symbol,
           timeframe,
           message: 'No context data available for this symbol/timeframe',
           timestamp: new Date().toISOString()
-        };
+        });
       }
       
-      return {
+      return formatSuccessResponse({
         symbol,
         timeframe,
         context,
         timestamp: new Date().toISOString()
-      };
+      });
     } catch (error) {
       logger.error(`Failed to get timeframe context:`, error);
-      throw error;
+      return formatErrorResponse(`Failed to get timeframe context: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   },
 
@@ -125,17 +165,17 @@ export const contextHandlers: MCPHandlers = {
     try {
       await contextService.addAnalysis(symbol, timeframe, analysis, type);
       
-      return {
+      return formatSuccessResponse({
         success: true,
         symbol,
         timeframe,
         type,
         message: 'Analysis added to context successfully',
         timestamp: new Date().toISOString()
-      };
+      });
     } catch (error) {
       logger.error(`Failed to add analysis context:`, error);
-      throw error;
+      return formatErrorResponse(`Failed to add analysis context: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   },
 
@@ -167,7 +207,7 @@ export const contextHandlers: MCPHandlers = {
       const alignedTrends = trends.filter(t => t === trends[0]).length;
       const alignmentScore = trends.length > 0 ? alignedTrends / trends.length : 0;
       
-      return {
+      return formatSuccessResponse({
         symbol,
         timeframes: contexts,
         alignment: {
@@ -176,10 +216,10 @@ export const contextHandlers: MCPHandlers = {
                          alignmentScore > 0.5 ? 'Moderate' : 'Weak'
         },
         timestamp: new Date().toISOString()
-      };
+      });
     } catch (error) {
       logger.error(`Failed to get multi-timeframe context:`, error);
-      throw error;
+      return formatErrorResponse(`Failed to get multi-timeframe context: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   },
 
@@ -194,15 +234,15 @@ export const contextHandlers: MCPHandlers = {
       // Update config
       contextService['config'] = newConfig;
       
-      return {
+      return formatSuccessResponse({
         success: true,
         config: newConfig,
         message: 'Context configuration updated successfully',
         timestamp: new Date().toISOString()
-      };
+      });
     } catch (error) {
       logger.error(`Failed to update context config:`, error);
-      throw error;
+      return formatErrorResponse(`Failed to update context config: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   },
 
@@ -215,15 +255,15 @@ export const contextHandlers: MCPHandlers = {
     try {
       const result = await contextService.cleanup();
       
-      return {
+      return formatSuccessResponse({
         success: true,
         cleaned_entries: result,
         message: `Cleaned up ${result} old context entries`,
         timestamp: new Date().toISOString()
-      };
+      });
     } catch (error) {
       logger.error(`Failed to cleanup context:`, error);
-      throw error;
+      return formatErrorResponse(`Failed to cleanup context: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   },
 
@@ -279,7 +319,7 @@ export const contextHandlers: MCPHandlers = {
         ? totalCompressionRatio / summaryCount 
         : 0;
       
-      return {
+      return formatSuccessResponse({
         stats: {
           total_entries: stats.total_entries,
           total_summaries: stats.total_summaries,
@@ -291,10 +331,10 @@ export const contextHandlers: MCPHandlers = {
           timeframes: Array.from(stats.timeframes)
         },
         timestamp: new Date().toISOString()
-      };
+      });
     } catch (error) {
       logger.error(`Failed to get context stats:`, error);
-      throw error;
+      return formatErrorResponse(`Failed to get context stats: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 };

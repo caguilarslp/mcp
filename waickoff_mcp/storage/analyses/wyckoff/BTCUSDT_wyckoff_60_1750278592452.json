@@ -1,0 +1,184 @@
+{
+  "id": "BTCUSDT_wyckoff_60_1750278592452",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "60",
+    "analysisDate": "2025-06-18T20:29:52.452Z",
+    "currentPhase": "uncertain",
+    "phaseConfidence": 30,
+    "phaseProgress": 50,
+    "keyEvents": [
+      {
+        "timestamp": "2025-06-14T20:00:00.000Z",
+        "type": "test",
+        "price": 104310.04,
+        "volume": 428.456234,
+        "significance": 50,
+        "description": "Test of 104064.3000: Price touched 104310.0400 (0.236% from level) and stalled near level with poor quality on 1.2x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_resistance",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 104064.3,
+        "testQuality": "poor",
+        "volumeOnTest": 428.456234,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-17T00:00:00.000Z",
+        "type": "test",
+        "price": 106120,
+        "volume": 879.662998,
+        "significance": 75,
+        "description": "Test of 105919.7000: Price touched 106120.0000 (0.189% from level) and stalled near level with good quality on 2.4x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 105919.7,
+        "testQuality": "good",
+        "volumeOnTest": 879.662998,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-17T15:00:00.000Z",
+        "type": "test",
+        "price": 104128.5,
+        "volume": 895.187999,
+        "significance": 75,
+        "description": "Test of 104064.3000: Price touched 104128.5000 (0.062% from level) and stalled near level with good quality on 2.5x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 104064.3,
+        "testQuality": "good",
+        "volumeOnTest": 895.187999,
+        "resultingAction": "stall"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "increasing",
+      "climaxEvents": [
+        {
+          "date": "2025-06-13T00:00:00.000Z",
+          "type": "selling_climax",
+          "volume": 3368.033187,
+          "priceAction": "-1.77% decline on 10.0x volume",
+          "significance": 75
+        }
+      ],
+      "dryUpPeriods": [
+        {
+          "startDate": "2025-06-06T20:00:00.000Z",
+          "endDate": "2025-06-06T23:00:00.000Z",
+          "averageVolume": 141.05397375,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-07T08:00:00.000Z",
+          "endDate": "2025-06-07T11:00:00.000Z",
+          "averageVolume": 150.748218,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-07T15:00:00.000Z",
+          "endDate": "2025-06-08T08:00:00.000Z",
+          "averageVolume": 104.84056811111112,
+          "significance": "major"
+        },
+        {
+          "startDate": "2025-06-08T10:00:00.000Z",
+          "endDate": "2025-06-08T12:00:00.000Z",
+          "averageVolume": 189.02853666666667,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-08T17:00:00.000Z",
+          "endDate": "2025-06-08T21:00:00.000Z",
+          "averageVolume": 105.527214,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-09T02:00:00.000Z",
+          "endDate": "2025-06-09T07:00:00.000Z",
+          "averageVolume": 125.5493735,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-11T02:00:00.000Z",
+          "endDate": "2025-06-11T05:00:00.000Z",
+          "averageVolume": 130.959393,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-13T21:00:00.000Z",
+          "endDate": "2025-06-13T23:00:00.000Z",
+          "averageVolume": 173.16791533333335,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-14T02:00:00.000Z",
+          "endDate": "2025-06-14T05:00:00.000Z",
+          "averageVolume": 142.116269,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-14T08:00:00.000Z",
+          "endDate": "2025-06-14T11:00:00.000Z",
+          "averageVolume": 138.113507,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-14T22:00:00.000Z",
+          "endDate": "2025-06-15T04:00:00.000Z",
+          "averageVolume": 102.87342371428572,
+          "significance": "major"
+        },
+        {
+          "startDate": "2025-06-18T02:00:00.000Z",
+          "endDate": "2025-06-18T05:00:00.000Z",
+          "averageVolume": 193.04522475,
+          "significance": "moderate"
+        }
+      ],
+      "avgVolumeInRange": 335.3652434037035,
+      "currentVolumeRank": 18.666666666666668,
+      "interpretation": "Volume trend: INCREASING - Rising participation and institutional activity | 1 climax event(s) detected (0 buying, 1 selling) | 12 dry-up period(s) detected - potential absorption | SIGNIFICANT: Major dry-up periods indicate institutional accumulation | Current volume at 19th percentile - LOW activity"
+    },
+    "interpretation": {
+      "bias": "uncertain",
+      "strength": "weak",
+      "implications": [
+        "Phase not clearly defined - market in transition",
+        "Monitor price and volume for pattern development"
+      ],
+      "nextExpectedEvents": [
+        "Watch for trading range development",
+        "Look for accumulation or distribution signs"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "BTCUSDT_wyckoff_60_1750278592452",
+    "type": "wyckoff",
+    "timestamp": "2025-06-18T20:29:52.452Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "phase:uncertain",
+      "confidence:30",
+      "progress:50",
+      "bias:uncertain",
+      "strength:weak",
+      "events:3",
+      "range:none"
+    ]
+  },
+  "timestamp": "2025-06-18T20:29:52.452Z"
+}
