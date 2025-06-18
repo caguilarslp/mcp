@@ -80,7 +80,7 @@ get_system_health
 get_ticker symbol=\"BTCUSDT\"
 ```
 
-## 📊 Herramientas Disponibles (106+)
+## 📊 Herramientas Disponibles (117+)
 
 ### Market Data (4 herramientas)
 - `get_ticker` - Datos de ticker
@@ -131,7 +131,11 @@ get_ticker symbol=\"BTCUSDT\"
 - `identify_arbitrage_opportunities` - Arbitraje
 - `get_exchange_dominance` - Dominancia
 - `get_multi_exchange_analytics` - Analytics
-- Y features avanzados (placeholders)
+- `predict_liquidation_cascade` - Predicción de liquidaciones ✨ NUEVO
+- `detect_advanced_divergences` - Divergencias avanzadas ✨ NUEVO
+- `analyze_enhanced_arbitrage` - Arbitraje mejorado ✨ NUEVO
+- `analyze_extended_dominance` - Dominancia extendida ✨ NUEVO
+- `analyze_cross_exchange_market_structure` - Estructura cross-exchange ✨ NUEVO
 
 ### Technical Indicators (4 herramientas)
 - `calculate_fibonacci_levels` - Niveles Fibonacci
@@ -152,6 +156,15 @@ get_ticker symbol=\"BTCUSDT\"
 - `generate_report` - Generar reporte
 - `get_cache_stats` - Estadísticas de cache
 - Y más...
+
+### Context Management (7 herramientas) ✨ NUEVO
+- `get_analysis_context` - Contexto histórico comprimido
+- `get_timeframe_context` - Contexto por timeframe
+- `get_multi_timeframe_context` - Contexto multi-timeframe
+- `add_analysis_context` - Agregar análisis al contexto
+- `update_context_config` - Configurar contexto
+- `cleanup_context` - Limpiar datos antiguos
+- `get_context_stats` - Estadísticas de contexto
 
 ### Configuration (16 herramientas)
 - `get_user_config` - Configuración de usuario
@@ -208,6 +221,26 @@ detect_exchange_divergences symbol=\"BTCUSDT\"
 
 # Identificar oportunidades de arbitraje
 identify_arbitrage_opportunities symbol=\"BTCUSDT\"
+
+# ✨ NUEVOS: Features avanzados
+predict_liquidation_cascade symbol=\"BTCUSDT\"
+detect_advanced_divergences symbol=\"BTCUSDT\"
+analyze_enhanced_arbitrage symbol=\"BTCUSDT\"
+```
+
+### Context Management ✨ NUEVO
+```
+# Obtener contexto histórico
+get_analysis_context symbol=\"BTCUSDT\"
+
+# Contexto multi-timeframe
+get_multi_timeframe_context symbol=\"BTCUSDT\"
+
+# Estadísticas del sistema de contexto
+get_context_stats
+
+# Configurar sistema de contexto
+update_context_config compression_level=\"medium\"
 ```
 
 ## ⚙️ Configuración Inicial
@@ -251,6 +284,9 @@ get_analysis_history symbol=\"BTCUSDT\" limit=10
 
 # Estadísticas del repositorio
 get_repository_stats
+
+# ✨ NUEVO: Contexto histórico comprimido
+get_analysis_context symbol=\"BTCUSDT\" format=\"compressed\"
 ```
 
 ## 🚨 Solución de Problemas
@@ -297,6 +333,8 @@ clear_cache
 ## 🔗 Enlaces Útiles
 
 - [Quick Reference](quick-reference.md) - Comandos rápidos
+- [Context Management Guide](context-management-guide.md) - Sistema de contexto histórico ✨ NUEVO
+- [Multi-Exchange Guide](multi-exchange-guide.md) - Análisis multi-exchange avanzado ✨ NUEVO
 - [Smart Money Guide](smart-money-concepts-guide.md) - Guía SMC
 - [Wyckoff Guide](wyckoff-analysis-guide.md) - Guía Wyckoff
 - [Troubleshooting](troubleshooting-guide.md) - Solución de problemas

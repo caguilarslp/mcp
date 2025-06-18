@@ -64,6 +64,30 @@ suggest_grid_levels symbol="BTCUSDT" investment=1000
 suggest_grid_levels symbol="BTCUSDT" investment=5000 optimize=true
 ```
 
+### Context Management ✨ NUEVO
+```bash
+# Contexto histórico
+get_analysis_context symbol="BTCUSDT"
+
+# Contexto multi-timeframe
+get_multi_timeframe_context symbol="BTCUSDT"
+
+# Estadísticas de contexto
+get_context_stats
+```
+
+### Multi-Exchange Avanzado ✨ NUEVO
+```bash
+# Predicción de liquidaciones
+predict_liquidation_cascade symbol="BTCUSDT"
+
+# Divergencias avanzadas
+detect_advanced_divergences symbol="BTCUSDT"
+
+# Arbitraje mejorado
+analyze_enhanced_arbitrage symbol="BTCUSDT"
+```
+
 ## 📊 Análisis por Timeframe
 
 ### Scalping (5-15 min)
@@ -188,10 +212,11 @@ validate_config
 ### Análisis Matutino
 ```bash
 1. get_system_health
-2. get_smc_dashboard symbol="BTCUSDT"
-3. get_smc_dashboard symbol="ETHUSDT"
-4. analyze_wyckoff_phase symbol="BTCUSDT" timeframe="D"
-5. detect_exchange_divergences symbol="BTCUSDT"
+2. get_analysis_context symbol="BTCUSDT"  ✨ NUEVO
+3. get_smc_dashboard symbol="BTCUSDT"
+4. get_smc_dashboard symbol="ETHUSDT"
+5. analyze_wyckoff_phase symbol="BTCUSDT" timeframe="D"
+6. detect_exchange_divergences symbol="BTCUSDT"
 ```
 
 ### Setup de Trading
@@ -204,11 +229,13 @@ validate_config
 
 ### Investigación Profunda
 ```bash
-1. get_complete_analysis symbol="BTCUSDT" investment=5000
-2. analyze_composite_man symbol="BTCUSDT"
-3. analyze_multi_timeframe_wyckoff symbol="BTCUSDT"
-4. find_technical_confluences symbol="BTCUSDT"
-5. generate_symbol_report symbol="BTCUSDT"
+1. get_multi_timeframe_context symbol="BTCUSDT"  ✨ NUEVO
+2. get_complete_analysis symbol="BTCUSDT" investment=5000
+3. analyze_composite_man symbol="BTCUSDT"
+4. analyze_multi_timeframe_wyckoff symbol="BTCUSDT"
+5. predict_liquidation_cascade symbol="BTCUSDT"  ✨ NUEVO
+6. find_technical_confluences symbol="BTCUSDT"
+7. generate_symbol_report symbol="BTCUSDT"
 ```
 
 ## 💡 Tips y Tricks
@@ -268,6 +295,21 @@ detect_exchange_divergences symbol="BTCUSDT"
 get_exchange_dominance symbol="BTCUSDT"
 ```
 
+### Context + Analysis ✨ NUEVO
+```bash
+get_analysis_context symbol="BTCUSDT"
+get_smc_dashboard symbol="BTCUSDT"
+analyze_wyckoff_phase symbol="BTCUSDT"
+```
+
+### Advanced Multi-Exchange ✨ NUEVO
+```bash
+predict_liquidation_cascade symbol="BTCUSDT"
+detect_advanced_divergences symbol="BTCUSDT"
+analyze_enhanced_arbitrage symbol="BTCUSDT"
+analyze_extended_dominance symbol="BTCUSDT"
+```
+
 ### Technical Confluences
 ```bash
 calculate_fibonacci_levels symbol="BTCUSDT"
@@ -320,9 +362,9 @@ analyze_enhanced_arbitrage symbol="BTCUSDT"
 
 ### Top 5 Comandos Avanzados
 1. `analyze_composite_man symbol="BTCUSDT"` - Institutional analysis
-2. `find_technical_confluences symbol="BTCUSDT"` - Confluencias
-3. `get_multi_exchange_analytics symbol="BTCUSDT"` - Multi-exchange
-4. `generate_symbol_report symbol="BTCUSDT"` - Reporte completo
+2. `predict_liquidation_cascade symbol="BTCUSDT"` - Predicción liquidaciones ✨ NUEVO
+3. `get_multi_timeframe_context symbol="BTCUSDT"` - Contexto histórico ✨ NUEVO
+4. `detect_advanced_divergences symbol="BTCUSDT"` - Divergencias avanzadas ✨ NUEVO
 5. `analyze_smc_confluence_strength symbol="BTCUSDT"` - Análisis SMC avanzado
 
 ---

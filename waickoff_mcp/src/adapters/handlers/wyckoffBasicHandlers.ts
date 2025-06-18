@@ -7,12 +7,20 @@
 import type { MarketAnalysisEngine } from '../../core/engine.js';
 import type { MCPServerResponse } from '../../types/index.js';
 import type { WyckoffPhaseAnalysis, TradingRangeAnalysis, SpringEvent, UpthrustEvent, TestEvent, VolumeContext } from '../../services/wyckoffBasic.js';
+import { ContextAwareRepository } from '../../services/context/contextRepository.js';
+import { Logger } from '../../utils/logger.js';
 
 /**
- * Wyckoff Basic Analysis Handlers
+ * Wyckoff Basic Analysis Handlers (Enhanced with Context - TASK-027 FASE 3)
  */
 export class WyckoffBasicHandlers {
-  constructor(private engine: MarketAnalysisEngine) {}
+  private readonly contextRepository: ContextAwareRepository;
+  private readonly logger: Logger;
+
+  constructor(private engine: MarketAnalysisEngine) {
+    this.contextRepository = new ContextAwareRepository();
+    this.logger = new Logger('WyckoffBasicHandlers');
+  }
 
   /**
    * Handle Wyckoff phase analysis request
@@ -35,7 +43,10 @@ export class WyckoffBasicHandlers {
         lookback
       );
 
-      return this.formatSuccessResponse(analysis, 'Wyckoff phase analysis completed');
+      // Enhanced response with context (TASK-027 FASE 3)
+      const enhancedResponse = await this.enhanceWithContext(analysis, symbol, timeframe, 'wyckoff_phase');
+
+      return this.formatSuccessResponse(enhancedResponse, 'Wyckoff phase analysis completed');
 
     } catch (error) {
       return this.formatErrorResponse(`Failed to analyze Wyckoff phase: ${error}`);
@@ -63,7 +74,10 @@ export class WyckoffBasicHandlers {
         minPeriods
       );
 
-      return this.formatSuccessResponse(analysis, 'Trading range detection completed');
+      // Enhanced response with context (TASK-027 FASE 3)
+      const enhancedResponse = await this.enhanceWithContext(analysis, symbol, timeframe, 'trading_range');
+
+      return this.formatSuccessResponse(enhancedResponse, 'Trading range detection completed');
 
     } catch (error) {
       return this.formatErrorResponse(`Failed to detect trading range: ${error}`);
@@ -334,6 +348,198 @@ export class WyckoffBasicHandlers {
     } catch (error) {
       return this.formatErrorResponse(`Failed to validate Wyckoff setup: ${error}`);
     }
+  }
+
+  // ====================
+  // CONTEXT ENHANCEMENT METHODS (TASK-027 FASE 3)
+  // ====================
+
+  /**
+   * Enhance analysis response with historical context
+   */
+  private async enhanceWithContext(
+    analysis: any, 
+    symbol: string, 
+    timeframe: string, 
+    analysisType: string
+  ): Promise<any> {
+    try {
+      // Get historical context for this symbol/timeframe
+      const contextService = this.contextRepository.getContextService();
+      const historicalContext = await contextService.getContextSummary(symbol, timeframe);
+      
+      if (!historicalContext) {
+        this.logger.info(`No historical context available for ${symbol}/${timeframe}`);
+        return {
+          analysis,
+          context: {
+            message: 'No historical context available',
+            first_analysis: true
+          }
+        };
+      }
+
+      // Extract relevant context insights
+      const contextInsights = {
+        historical_trend: historicalContext.trend_summary,
+        pattern_frequency: historicalContext.pattern_frequency,
+        key_levels_stability: this.assessLevelStability(historicalContext.key_levels.support.concat(historicalContext.key_levels.resistance)),
+        recommendation_consistency: {
+          confidence: historicalContext.recommendations_summary.confidence,
+          most_common: historicalContext.recommendations_summary.bias
+        },
+        // market_regime: historicalContext.market_regime, // Not available in ContextSummary
+        last_updated: historicalContext.metadata.last_updated,
+        data_points: historicalContext.analysis_count
+      };
+
+      // Generate contextual insights specific to Wyckoff analysis
+      const wyckoffContextInsights = this.generateWyckoffContextInsights(
+        analysis, 
+        historicalContext, 
+        analysisType
+      );
+
+      return {
+        analysis,
+        context: {
+          historical: contextInsights,
+          wyckoff_insights: wyckoffContextInsights,
+          continuity_score: this.calculateContinuityScore(analysis, historicalContext)
+        }
+      };
+
+    } catch (error) {
+      this.logger.warn(`Failed to enhance with context for ${symbol}:`, error);
+      return {
+        analysis,
+        context: {
+          error: 'Context enhancement failed',
+          message: 'Analysis provided without historical context'
+        }
+      };
+    }
+  }
+
+  /**
+   * Generate Wyckoff-specific context insights
+   */
+  private generateWyckoffContextInsights(
+    currentAnalysis: any, 
+    historicalContext: any, 
+    analysisType: string
+  ): any {
+    const insights: any = {
+      pattern_persistence: 'unknown',
+      phase_stability: 'unknown',
+      volume_behavior: 'unknown',
+      trading_range_evolution: 'unknown'
+    };
+
+    // Analyze pattern persistence in historical data
+    if (historicalContext.pattern_frequency) {
+      const wyckoffPatterns = Object.keys(historicalContext.pattern_frequency)
+        .filter(pattern => pattern.includes('wyckoff') || pattern.includes('accumulation') || pattern.includes('distribution'));
+      
+      if (wyckoffPatterns.length > 0) {
+        insights.pattern_persistence = wyckoffPatterns.length > 2 ? 'high' : 'moderate';
+        insights.dominant_patterns = wyckoffPatterns;
+      }
+    }
+
+    // Assess phase stability
+    if (currentAnalysis.currentPhase && historicalContext.trend_summary) {
+      const currentBias = currentAnalysis.interpretation?.bias;
+      const historicalDirection = historicalContext.trend_summary.direction;
+      
+      insights.phase_stability = currentBias === historicalDirection ? 'consistent' : 'transitioning';
+    }
+
+    // Assess volume behavior consistency
+    if (currentAnalysis.volumeCharacteristics && historicalContext.key_levels) {
+      insights.volume_behavior = currentAnalysis.volumeCharacteristics.climaxEvents?.length > 0 ? 
+        'active' : 'subdued';
+    }
+
+    // Trading range evolution
+    if (analysisType === 'trading_range' && currentAnalysis.tradingRange) {
+      insights.trading_range_evolution = {
+        current_width: currentAnalysis.tradingRange.width,
+        quality: currentAnalysis.tradingRange.strength,
+        historical_significance: this.assessRangeHistoricalSignificance(
+          currentAnalysis.tradingRange, 
+          historicalContext.key_levels.support.concat(historicalContext.key_levels.resistance)
+        )
+      };
+    }
+
+    return insights;
+  }
+
+  /**
+   * Calculate continuity score between current analysis and historical context
+   */
+  private calculateContinuityScore(currentAnalysis: any, historicalContext: any): number {
+    let score = 50; // Base score
+    let factors = 0;
+
+    // Trend consistency
+    if (currentAnalysis.interpretation?.bias && historicalContext.trend_summary?.direction) {
+      const consistent = currentAnalysis.interpretation.bias === historicalContext.trend_summary.direction;
+      score += consistent ? 20 : -10;
+      factors++;
+    }
+
+    // Phase confidence vs historical confidence
+    if (currentAnalysis.phaseConfidence && historicalContext.recommendations_summary?.confidence) {
+      const confidenceDiff = Math.abs(currentAnalysis.phaseConfidence - historicalContext.recommendations_summary.confidence);
+      score += confidenceDiff < 20 ? 15 : confidenceDiff < 40 ? 0 : -15;
+      factors++;
+    }
+
+    // Volume pattern consistency
+    if (currentAnalysis.volumeCharacteristics && historicalContext.pattern_frequency) {
+      const hasVolumeEvents = currentAnalysis.volumeCharacteristics.climaxEvents?.length > 0;
+      const historicalVolumePatterns = Object.keys(historicalContext.pattern_frequency)
+        .some(pattern => pattern.includes('volume') || pattern.includes('climax'));
+      
+      score += hasVolumeEvents === historicalVolumePatterns ? 15 : -5;
+      factors++;
+    }
+
+    return Math.max(0, Math.min(100, Math.round(score)));
+  }
+
+  /**
+   * Assess stability of key levels over time
+   */
+  private assessLevelStability(keyLevels: any[]): string {
+    if (!keyLevels || keyLevels.length === 0) return 'unknown';
+    
+    // Simple assessment based on number of levels
+    if (keyLevels.length >= 5) return 'well_established';
+    if (keyLevels.length >= 3) return 'moderate';
+    return 'developing';
+  }
+
+  /**
+   * Assess historical significance of current trading range
+   */
+  private assessRangeHistoricalSignificance(tradingRange: any, historicalLevels: number[]): string {
+    if (!historicalLevels || historicalLevels.length === 0) return 'unknown';
+
+    // Check if current range levels align with historical key levels
+    const supportNearHistorical = historicalLevels.some(level => 
+      Math.abs(level - tradingRange.support) / tradingRange.support < 0.02
+    );
+    
+    const resistanceNearHistorical = historicalLevels.some(level => 
+      Math.abs(level - tradingRange.resistance) / tradingRange.resistance < 0.02
+    );
+
+    if (supportNearHistorical && resistanceNearHistorical) return 'high';
+    if (supportNearHistorical || resistanceNearHistorical) return 'moderate';
+    return 'new_formation';
   }
 
   // ====================

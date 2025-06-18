@@ -2,14 +2,122 @@
 
 ## 🎯 Guía Completa de Herramientas MCP
 
-Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.6.5, organizadas por categorías.
+Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.8.3, organizadas por categorías.
 
-**🎆 NOVEDAD v1.6.5**: Errores de compilación resueltos - Sistema estable con nueva suite de análisis técnico en desarrollo.
+**🎆 NOVEDAD v1.8.3**: TASK-030 Modularización Wyckoff COMPLETADA - Arquitectura modular profesional con 6 módulos especializados.
 
 **🔧 ESTADO ACTUAL**: 
-- ✅ **Sistema Compilando**: Todos los errores TypeScript resueltos
-- ✅ **Funcionalidad Preservada**: Todas las 80+ herramientas existentes operativas
-- 🚧 **En Desarrollo**: 4 nuevas herramientas de análisis técnico avanzado (placeholders implementados)
+- ✅ **Sistema 100% Operativo**: 106+ herramientas MCP funcionando
+- ✅ **Arquitectura Modular Wyckoff**: 6 módulos especializados (PhaseAnalyzer, TradingRangeAnalyzer, VolumeAnalyzer, SpringDetector, UpthrustDetector, TestEventDetector)
+- ✅ **Compilación Limpia**: 0 errores TypeScript
+- ✅ **Contexto Histórico Activo**: Sistema guarda automáticamente análisis previos
+- ✅ **Multi-Exchange**: Agregación inteligente de datos de múltiples exchanges
+- ✅ **Smart Money Concepts**: 14 herramientas para análisis institucional avanzado
+
+---
+
+## 🏢 Arquitectura Modular Wyckoff (NUEVO v1.8.3)
+
+### 📊 Beneficios de la Modularización
+La versión 1.8.3 incluye una completa refactorización del sistema Wyckoff en 6 módulos especializados:
+
+**1. PhaseAnalyzer** - Clasificación inteligente de fases Wyckoff
+- 15 fases diferentes detectadas automáticamente
+- Algoritmos especializados para acumulación vs distribución
+- Análisis contextual basado en eventos y volumen
+- Predicciones de próximos eventos esperados
+
+**2. TradingRangeAnalyzer** - Detección y análisis completo de rangos
+- Múltiples métodos de detección (price action, volatilidad, trend break)
+- Evaluación de calidad con scoring de 0-100
+- Identificación automática de tipo (acumulación/distribución/consolidación)
+- Recomendaciones específicas basadas en quality assessment
+
+**3. VolumeAnalyzer** - Análisis especializado de volumen en contexto Wyckoff
+- Detección de events de climax (selling/buying)
+- Identificación de períodos de "dry-up" (absorción)
+- Cálculo de VWAP dinámico y rankings de volumen
+- Interpretación contextual para cada fase
+
+**4. SpringDetector** - Detección avanzada de springs
+- Criterios múltiples: penetración, recuperación, volumen, contexto
+- Scoring de significancia 0-100
+- Evaluación de éxito basada en follow-through
+- Filtrado por calidad y proximidad temporal
+
+**5. UpthrustDetector** - Detección de upthrusts y bull traps
+- Detección de penetración y rechazo above resistance
+- Análisis de volumen en penetración vs rechazo
+- Contexto de distribución y evaluación de éxito
+- Scoring integrado con eventos previos
+
+**6. TestEventDetector** - Análisis de retests de niveles clave
+- Detección de tests en soporte/resistencia
+- Evaluación de calidad (good/poor/failed)
+- Análisis de resulting action (bounce/break/stall)
+- Scoring basado en context y follow-through
+
+### 🛠️ Ventajas Técnicas
+- **Escalabilidad**: Cada módulo evoluciona independientemente
+- **Mantenibilidad**: Lógica especializada en archivos dedicados
+- **Testabilidad**: Módulos individuales unit-testables
+- **Performance**: Sin impacto en rendimiento
+- **Backward Compatibility**: 100% preservada - APIs públicas intactas
+
+### 🎯 Uso Práctico
+La modularización es transparente para el usuario:
+- Todas las herramientas Wyckoff siguen funcionando igual
+- Mayor precisión en detección de patrones
+- Análisis más profundo y contextual
+- Mejor handling de edge cases
+- Logs más detallados para debugging
+
+---
+
+## 📊 Smart Money Concepts (14 Herramientas)
+
+### 🔍 Order Blocks
+- `detect_order_blocks` - Detección de bloques institucionales
+- `validate_order_block` - Validación de mitigación
+- `get_order_block_zones` - Agrupación por proximidad y fuerza
+
+### ⚡ Fair Value Gaps
+- `find_fair_value_gaps` - Detección de desequilibrios
+- `analyze_fvg_filling` - Análisis de probabilidad de llenado
+
+### 🔄 Break of Structure
+- `detect_break_of_structure` - Cambios estructurales (BOS/CHoCH)
+- `analyze_market_structure` - Análisis de estructura multi-timeframe
+- `validate_structure_shift` - Validación de cambios
+
+### 🎯 Integración SMC
+- `analyze_smart_money_confluence` - Confluencias entre todos los conceptos
+- `get_smc_market_bias` - Sesgo de mercado integrado
+- `validate_smc_setup` - Validación de setups completos
+
+### 📊 Dashboard SMC
+- `get_smc_dashboard` - Dashboard unificado con overview completo
+- `get_smc_trading_setup` - Setup de trading con risk management
+- `analyze_smc_confluence_strength` - Análisis detallado de confluencias
+
+---
+
+## 🔄 Multi-Exchange (11 Herramientas)
+
+### 📊 Agregación Básica
+- `get_aggregated_ticker` - Precios ponderados cross-exchange
+- `get_composite_orderbook` - Libro de órdenes unificado
+- `detect_exchange_divergences` - Divergencias precio/volumen/estructura
+- `identify_arbitrage_opportunities` - Oportunidades de arbitraje
+- `get_exchange_dominance` - Análisis de dominancia
+- `get_multi_exchange_analytics` - Dashboard multi-exchange
+
+### 🚀 Features Avanzados
+- `predict_liquidation_cascade` - Predicción de cascadas de liquidación
+- `detect_advanced_divergences` - Divergencias momentum/institutional
+- `analyze_enhanced_arbitrage` - Arbitraje spatial/temporal/triangular
+- `analyze_extended_dominance` - Métricas extendidas de liderazgo
+- `analyze_cross_exchange_market_structure` - Estructura cross-exchange
 
 ---
 
@@ -717,6 +825,6 @@ Si encuentras problemas:
 
 ---
 
-*Versión: 1.6.4 - Actualizado: 11/06/2025*
-*Última actualización: TASK-018 - Arquitectura Modular MCP Completada*
-*Sistema: 15 categorías de herramientas con 80+ funciones organizadas*
+*Versión: 1.8.3 - Actualizado: 18/06/2025*
+*Última actualización: TASK-030 FASE 3 - Arquitectura Modular Wyckoff Completada*
+*Sistema: 106+ herramientas MCP con arquitectura modular profesional*

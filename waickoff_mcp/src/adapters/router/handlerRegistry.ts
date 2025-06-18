@@ -172,6 +172,13 @@ export class HandlerRegistry {
     this.register('identify_arbitrage_opportunities', (args) => this.mcpHandlers.handleIdentifyArbitrageOpportunities(args));
     this.register('get_exchange_dominance', (args) => this.mcpHandlers.handleGetExchangeDominance(args));
     this.register('get_multi_exchange_analytics', (args) => this.mcpHandlers.handleGetMultiExchangeAnalytics(args));
+    
+    // Advanced Multi-Exchange Tools (TASK-026 FASE 4)
+    this.register('predict_liquidation_cascade', (args) => this.mcpHandlers.handlePredictLiquidationCascade(args));
+    this.register('detect_advanced_divergences', (args) => this.mcpHandlers.handleDetectAdvancedDivergences(args));
+    this.register('analyze_enhanced_arbitrage', (args) => this.mcpHandlers.handleAnalyzeEnhancedArbitrage(args));
+    this.register('analyze_extended_dominance', (args) => this.mcpHandlers.handleAnalyzeExtendedDominance(args));
+    this.register('analyze_cross_exchange_market_structure', (args) => this.mcpHandlers.handleAnalyzeCrossExchangeMarketStructure(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

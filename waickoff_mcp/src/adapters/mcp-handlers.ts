@@ -7,6 +7,7 @@
 import { MarketAnalysisEngine } from '../core/engine.js';
 import { MCPServerResponse, MarketCategoryType } from '../types/index.js';
 import { FileLogger } from '../utils/fileLogger.js';
+import { Logger } from '../utils/logger.js';
 import { MarketDataHandlers } from './handlers/marketDataHandlers.js';
 import { AnalysisRepositoryHandlers } from './handlers/analysisRepositoryHandlers.js';
 import { ReportGeneratorHandlers } from './handlers/reportGeneratorHandlers.js';
@@ -466,13 +467,56 @@ export class MCPHandlers {
         supports_found: analysis.supportResistance.supports.length,
         critical_level: {
           type: analysis.supportResistance.criticalLevel.type,
-          price: `$${analysis.supportResistance.criticalLevel.level.toFixed(4)}`,
+          price: `${analysis.supportResistance.criticalLevel.level.toFixed(4)}`,
           distance: `${analysis.supportResistance.criticalLevel.priceDistance.toFixed(2)}%`
         }
       };
     }
 
+    // Enhanced response with context (TASK-027 FASE 3)
+    try {
+      const { ContextAwareRepository } = await import('../services/context/contextRepository.js');
+      const contextRepository = new ContextAwareRepository();
+      const contextService = contextRepository.getContextService();
+      const historicalContext = await contextService.getContextSummary(symbol, options.timeframe);
+      
+      if (historicalContext) {
+        formattedAnalysis.context = {
+          historical_trend: historicalContext.trend_summary.direction,
+          trend_strength: historicalContext.trend_summary.strength,
+          recommendation_consistency: historicalContext.recommendations_summary.confidence,
+          key_levels_count: (historicalContext.key_levels.support.length + historicalContext.key_levels.resistance.length),
+          analysis_count: historicalContext.analysis_count,
+          continuity_note: this.assessTechnicalContinuity(analysis, historicalContext)
+        };
+      }
+    } catch (contextError) {
+      // Context enhancement failed, proceed without it
+      this.logger?.info(`Context enhancement failed for ${symbol}: ${contextError}`);
+    }
+
     return this.createSuccessResponse(formattedAnalysis);
+  }
+
+  /**
+   * Assess continuity between current technical analysis and historical context
+   */
+  private assessTechnicalContinuity(analysis: any, historicalContext: any): string {
+    if (!analysis || !historicalContext) return 'unknown';
+    
+    // Check volume trend consistency
+    const currentVolumeTrend = analysis.volume?.trend;
+    const historicalTrend = historicalContext.trend_summary?.direction;
+    
+    if (currentVolumeTrend === 'increasing' && historicalTrend === 'bullish') {
+      return 'volume supports historical bullish trend';
+    } else if (currentVolumeTrend === 'decreasing' && historicalTrend === 'bearish') {
+      return 'volume supports historical bearish trend';
+    } else if (currentVolumeTrend === 'stable') {
+      return 'volume trend neutral - sideways action likely';
+    }
+    
+    return 'current signals diverging from historical trend';
   }
 
   async handleGetCompleteAnalysis(args: any): Promise<MCPServerResponse> {
