@@ -1,0 +1,50 @@
+
+> waickoff_mcp@1.8.3 build
+> tsc
+
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(9,3): error TS2305: Module '"../../services/multiExchange/advancedMultiExchangeService.js"' has no exported member 'LiquidationCascade'.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(10,3): error TS2305: Module '"../../services/multiExchange/advancedMultiExchangeService.js"' has no exported member 'AdvancedDivergence'.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(11,3): error TS2305: Module '"../../services/multiExchange/advancedMultiExchangeService.js"' has no exported member 'EnhancedArbitrage'.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(12,3): error TS2305: Module '"../../services/multiExchange/advancedMultiExchangeService.js"' has no exported member 'ExtendedExchangeDominance'.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(13,3): error TS2305: Module '"../../services/multiExchange/advancedMultiExchangeService.js"' has no exported member 'CrossExchangeMarketStructure'.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(249,14): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(249,17): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(251,12): error TS7006: Parameter 'factor' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(398,70): error TS7006: Parameter 'flow' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(421,62): error TS7006: Parameter 'm' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(426,70): error TS7006: Parameter 'm' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(432,14): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(432,17): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(434,12): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(444,60): error TS7006: Parameter 'm' implicitly has an 'any' type.
+src/adapters/handlers/advancedMultiExchangeHandlers.ts(449,73): error TS7006: Parameter 'l' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(61,63): error TS7006: Parameter 'trigger' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(70,75): error TS7006: Parameter 'cluster' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(76,77): error TS7006: Parameter 'cluster' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(89,44): error TS7006: Parameter 'alert' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(98,78): error TS7006: Parameter 'zone' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(100,82): error TS7006: Parameter 'zone' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(152,74): error TS7006: Parameter 'div' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(160,79): error TS7006: Parameter 'div' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(167,76): error TS7006: Parameter 'div' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(179,89): error TS7006: Parameter 'div' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(183,45): error TS7006: Parameter 'zone' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(188,73): error TS7006: Parameter 'zone' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(241,67): error TS7006: Parameter 'arb' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(249,69): error TS7006: Parameter 'arb' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(256,73): error TS7006: Parameter 'arb' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(263,75): error TS7006: Parameter 'arb' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(332,65): error TS7006: Parameter 'dom' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(339,65): error TS7006: Parameter 'lead' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(346,71): error TS7006: Parameter 'liq' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(421,85): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(438,96): error TS7006: Parameter 'signal' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(444,95): error TS7006: Parameter 'indicator' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(458,98): error TS7006: Parameter 'order' implicitly has an 'any' type.
+src/adapters/handlers/multiExchange/advancedMultiExchangeHandlers.ts(465,85): error TS7006: Parameter 'iceberg' implicitly has an 'any' type.
+src/services/multiExchange/index.ts(10,3): error TS2305: Module '"./advancedMultiExchangeService.js"' has no exported member 'LiquidationLevel'.
+src/services/multiExchange/index.ts(11,3): error TS2305: Module '"./advancedMultiExchangeService.js"' has no exported member 'LiquidationCascade'.
+src/services/multiExchange/index.ts(12,3): error TS2305: Module '"./advancedMultiExchangeService.js"' has no exported member 'AdvancedDivergence'.
+src/services/multiExchange/index.ts(13,3): error TS2305: Module '"./advancedMultiExchangeService.js"' has no exported member 'EnhancedArbitrage'.
+src/services/multiExchange/index.ts(14,3): error TS2305: Module '"./advancedMultiExchangeService.js"' has no exported member 'ExtendedExchangeDominance'.
+src/services/multiExchange/index.ts(15,3): error TS2305: Module '"./advancedMultiExchangeService.js"' has no exported member 'CrossExchangeMarketStructure'.

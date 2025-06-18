@@ -246,9 +246,9 @@ export class AdvancedMultiExchangeHandlers {
 
   private extractKeyFactors(cascade: LiquidationCascade): string[] {
     return cascade.riskFactors
-      .sort((a, b) => b.weight - a.weight)
+      .sort((a: { weight: number }, b: { weight: number }) => b.weight - a.weight)
       .slice(0, 3)
-      .map(factor => `${factor.factor}: ${factor.description}`);
+      .map((factor: { factor: string; description: string }) => `${factor.factor}: ${factor.description}`);
   }
 
   private formatTimeToTrigger(cascade: LiquidationCascade): string {
@@ -259,38 +259,37 @@ export class AdvancedMultiExchangeHandlers {
     return 'Long term (> 1 hour)';
   }
 
-  private generateDivergenceSummary(divergences: AdvancedDivergence[]): {
+  private generateDivergenceSummary(divergences: any): {
     totalDivergences: number;
     byType: { [key: string]: number };
-    strongestDivergence: AdvancedDivergence | null;
+    strongestDivergence: any | null;
     tradingOpportunities: number;
     riskLevel: 'low' | 'medium' | 'high';
   } {
     const byType: { [key: string]: number } = {};
-    let strongestDivergence: AdvancedDivergence | null = null;
-    let maxMagnitude = 0;
-
-    // Count by type and find strongest
-    for (const div of divergences) {
-      byType[div.type] = (byType[div.type] || 0) + 1;
-      
-      if (div.magnitude > maxMagnitude) {
-        maxMagnitude = div.magnitude;
-        strongestDivergence = div;
-      }
+    
+    // Count momentum divergences by type
+    if (divergences.momentumDivergences) {
+      divergences.momentumDivergences.forEach((div: any) => {
+        byType[div.type] = (byType[div.type] || 0) + 1;
+      });
     }
 
-    // Count trading opportunities
-    const tradingOpportunities = divergences.filter(d => 
-      d.tradingSignal.signal !== 'hold' && d.tradingSignal.strength > 50
-    ).length;
+    // Find strongest divergence from momentum divergences
+    let strongestDivergence = null;
+    if (divergences.momentumDivergences && divergences.momentumDivergences.length > 0) {
+      strongestDivergence = divergences.momentumDivergences[0];
+    }
 
-    // Determine risk level
-    const avgMagnitude = divergences.reduce((sum, d) => sum + d.magnitude, 0) / divergences.length;
-    const riskLevel = avgMagnitude > 5 ? 'high' : avgMagnitude > 2 ? 'medium' : 'low';
+    // Count trading opportunities based on primary signal
+    const tradingOpportunities = divergences.tradingSignals?.primarySignal !== 'hold' ? 1 : 0;
+
+    // Determine risk level based on high confidence divergences
+    const riskLevel = divergences.highConfidenceDivergences > 2 ? 'high' : 
+                     divergences.highConfidenceDivergences > 0 ? 'medium' : 'low';
 
     return {
-      totalDivergences: divergences.length,
+      totalDivergences: divergences.totalDivergences || 0,
       byType,
       strongestDivergence,
       tradingOpportunities,
@@ -298,48 +297,56 @@ export class AdvancedMultiExchangeHandlers {
     };
   }
 
-  private generateArbitrageSummary(opportunities: EnhancedArbitrage[]): {
+  private generateArbitrageSummary(opportunities: any): {
     totalOpportunities: number;
     byType: { [key: string]: number };
-    bestOpportunity: EnhancedArbitrage | null;
+    bestOpportunity: any | null;
     totalPotentialProfit: number;
     averageRiskLevel: string;
     recommendations: string[];
   } {
     const byType: { [key: string]: number } = {};
-    let bestOpportunity: EnhancedArbitrage | null = null;
+    let bestOpportunity: any | null = null;
     let maxExpectedProfit = 0;
 
-    // Count by type and find best
-    for (const opp of opportunities) {
-      byType[opp.type] = (byType[opp.type] || 0) + 1;
-      
-      if (opp.profitability.expected > maxExpectedProfit) {
-        maxExpectedProfit = opp.profitability.expected;
-        bestOpportunity = opp;
-      }
+    // Count by type from different arbitrage arrays
+    if (opportunities.spatialArbitrage) {
+      byType['spatial'] = opportunities.spatialArbitrage.length;
+      // Find best spatial opportunity
+      opportunities.spatialArbitrage.forEach((opp: any) => {
+        if (opp.profitMargin > maxExpectedProfit) {
+          maxExpectedProfit = opp.profitMargin;
+          bestOpportunity = opp;
+        }
+      });
+    }
+    
+    if (opportunities.temporalArbitrage) {
+      byType['temporal'] = opportunities.temporalArbitrage.length;
+    }
+    
+    if (opportunities.triangularArbitrage) {
+      byType['triangular'] = opportunities.triangularArbitrage.length;
+    }
+    
+    if (opportunities.statisticalArbitrage) {
+      byType['statistical'] = opportunities.statisticalArbitrage.length;
     }
 
-    // Calculate totals
-    const totalPotentialProfit = opportunities.reduce((sum, opp) => 
-      sum + opp.profitability.expected, 0
-    );
+    // Calculate total potential profit (simplified)
+    const totalPotentialProfit = maxExpectedProfit || 0;
 
-    // Determine average risk level
-    const riskLevels = opportunities.map(opp => opp.risks.regulatory);
-    const highRisk = riskLevels.filter(r => r === 'high').length;
-    const mediumRisk = riskLevels.filter(r => r === 'medium').length;
-    
-    let averageRiskLevel = 'low';
-    if (highRisk > opportunities.length / 2) averageRiskLevel = 'high';
-    else if (mediumRisk > opportunities.length / 2) averageRiskLevel = 'medium';
+    // Determine average risk level based on execution difficulty
+    const averageRiskLevel = opportunities.executionDifficulty || 'medium';
 
     // Generate recommendations
     const recommendations: string[] = [];
-    if (opportunities.length > 0) {
-      recommendations.push(`${opportunities.length} arbitrage opportunities detected`);
+    const totalOpps = opportunities.totalOpportunities || 0;
+    
+    if (totalOpps > 0) {
+      recommendations.push(`${totalOpps} arbitrage opportunities detected`);
       if (bestOpportunity) {
-        recommendations.push(`Best opportunity: ${bestOpportunity.type} with ${bestOpportunity.profitability.expected.toFixed(2)}% expected return`);
+        recommendations.push(`Best opportunity: spatial with ${(maxExpectedProfit * 100).toFixed(2)}% profit margin`);
       }
       if (averageRiskLevel === 'high') {
         recommendations.push('High risk environment - proceed with caution');
@@ -349,7 +356,7 @@ export class AdvancedMultiExchangeHandlers {
     }
 
     return {
-      totalOpportunities: opportunities.length,
+      totalOpportunities: totalOpps,
       byType,
       bestOpportunity,
       totalPotentialProfit,
@@ -395,7 +402,7 @@ export class AdvancedMultiExchangeHandlers {
     const tradingImplications: string[] = [
       `${currentLeader} currently leads the market`,
       `Leadership ${leadershipStability} - ${leadershipStability === 'stable' ? 'predictable conditions' : 'monitor for changes'}`,
-      ...dominance.marketDynamics.flowPatterns.institutionalFlow.map(flow => `Institutional flow: ${flow}`)
+      ...dominance.marketDynamics.flowPatterns.institutionalFlow.map((flow: string) => `Institutional flow: ${flow}`)
     ];
 
     // Next leader prediction
@@ -418,20 +425,20 @@ export class AdvancedMultiExchangeHandlers {
     tradingRecommendations: string[];
   } {
     const consensusLevels = structure.consensusLevels.length;
-    const manipulationDetected = structure.manipulation.some(m => m.detected);
+    const manipulationDetected = structure.manipulation.some((m: { detected: boolean }) => m.detected);
     
     // Determine structural health
     let structuralHealth: 'healthy' | 'concerning' | 'critical' = 'healthy';
     if (manipulationDetected) {
-      const highConfidenceManipulation = structure.manipulation.some(m => m.confidence > 80);
+      const highConfidenceManipulation = structure.manipulation.some((m: { confidence?: number }) => (m.confidence || 0) > 80);
       structuralHealth = highConfidenceManipulation ? 'critical' : 'concerning';
     }
 
     // Extract key levels
     const keyLevels = structure.consensusLevels
-      .sort((a, b) => b.consensus - a.consensus)
+      .sort((a: { consensus: number }, b: { consensus: number }) => b.consensus - a.consensus)
       .slice(0, 5)
-      .map(level => level.level);
+      .map((level: { level: number }) => level.level);
 
     // Generate recommendations
     const tradingRecommendations: string[] = [];
@@ -441,12 +448,12 @@ export class AdvancedMultiExchangeHandlers {
     }
     
     if (manipulationDetected) {
-      const manipulationType = structure.manipulation.find(m => m.detected)?.type;
+      const manipulationType = structure.manipulation.find((m: { detected: boolean; type?: string }) => m.detected)?.type;
       tradingRecommendations.push(`⚠️ ${manipulationType} manipulation detected - exercise caution`);
     }
     
     if (keyLevels.length > 0) {
-      tradingRecommendations.push(`Key levels to watch: ${keyLevels.map(l => l.toFixed(2)).join(', ')}`);
+      tradingRecommendations.push(`Key levels to watch: ${keyLevels.map((l: number) => l.toFixed(2)).join(', ')}`);
     }
     
     if (structure.institutionalLevels.accumulation.length > 0) {

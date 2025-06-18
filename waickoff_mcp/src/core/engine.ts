@@ -81,7 +81,10 @@ import { ComprehensiveTechnicalAnalysisService, type ComprehensiveTechnicalAnaly
 
 // TASK-020: Import Smart Money Concepts services
 import { OrderBlocksService } from '../services/smartMoney/orderBlocks.js';
-  import { SmartMoneyAnalysisService } from '../services/smartMoney/smartMoneyAnalysis.js';
+import { SmartMoneyAnalysisService } from '../services/smartMoney/smartMoneyAnalysis.js';
+
+// TASK-026 FASE 4: Advanced Multi-Exchange Service
+import { AdvancedMultiExchangeService } from '../services/multiExchange/advancedMultiExchangeService.js';
 
 import { FileLogger } from '../utils/fileLogger.js';
 import * as path from 'path';
@@ -142,6 +145,9 @@ export class MarketAnalysisEngine {
   // TASK-020: Smart Money Concepts Services
   public readonly orderBlocksService: OrderBlocksService;
   public readonly smartMoneyAnalysisService: SmartMoneyAnalysisService;
+  
+  // TASK-026 FASE 4: Advanced Multi-Exchange Service
+  public readonly advancedMultiExchangeService: AdvancedMultiExchangeService;
   
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
@@ -289,6 +295,9 @@ export class MarketAnalysisEngine {
       this.marketDataService as any,  // Cast interface to concrete for now
       this.analysisService as any     // Cast interface to concrete for now
     );
+    
+    // TASK-026 FASE 4: Initialize Advanced Multi-Exchange Service
+    this.advancedMultiExchangeService = new AdvancedMultiExchangeService();
     
     this.logger.info('Market Analysis Engine initialized with timezone support, Context-Aware Repository (TASK-027), Report Generator, Trap Detection, Wyckoff Basic/Advanced, Technical Analysis Suite, and Smart Money Concepts', {
       timezone: this.timezoneConfig.userTimezone,
@@ -1923,6 +1932,13 @@ export class MarketAnalysisEngine {
    */
   getConfigurationManager(): ConfigurationManager {
     return this.configurationManager;
+  }
+
+  /**
+   * Get advanced multi-exchange service (exposed for MCP handlers)
+   */
+  getAdvancedMultiExchangeService(): AdvancedMultiExchangeService {
+    return this.advancedMultiExchangeService;
   }
 
   // ====================
