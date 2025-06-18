@@ -157,15 +157,28 @@ class BybitMCPServer {
 
     // Initialize Hybrid Storage if MongoDB is available (TASK-015)
     try {
-      const mongoConnectionString = process.env.MONGODB_CONNECTION_STRING || 'mongodb://localhost:27017';
+      const mongoConnectionString = process.env.MONGODB_URI || process.env.MONGODB_CONNECTION_STRING || 'mongodb://localhost:27017';
       this.hybridStorage = new HybridStorageService({
-        strategy: 'smart_routing',
+        strategy: 'mongo_first',
         fallbackEnabled: true,
         syncEnabled: false,
         mongoTimeoutMs: 5000,
         performanceTracking: true
       });
-      // Silent initialization - will log success later
+      
+      // Wait for MongoDB initialization
+      setTimeout(async () => {
+        try {
+          await this.hybridStorage?.forceHealthCheck();
+          const metrics = this.hybridStorage?.getPerformanceMetrics();
+          if (metrics?.mongo.isAvailable) {
+            _originalInfo('✅ MongoDB connected successfully for context persistence');
+          }
+        } catch (error) {
+          // Silent error - MongoDB optional
+        }
+      }, 3000);
+      
     } catch (error) {
       // Silent MongoDB initialization failure - will use file storage only
       this.hybridStorage = undefined;
@@ -210,7 +223,7 @@ class BybitMCPServer {
       // Only log after extended delay when MCP is completely ready
       setTimeout(() => {
         // Simple, minimal status message
-        _originalInfo('waickoff MCP Server v1.6.0 operational');
+        _originalInfo('waickoff MCP Server v1.9.0 operational');
         
         // Log Hybrid Storage status
         if (this.hybridStorage) {

@@ -1,0 +1,123 @@
+{
+  "id": "BTCUSDT_wyckoff_15_1750288124410",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "15",
+    "analysisDate": "2025-06-18T23:08:44.410Z",
+    "currentPhase": "uncertain",
+    "phaseConfidence": 30,
+    "phaseProgress": 50,
+    "keyEvents": [
+      {
+        "timestamp": "2025-06-18T13:30:00.000Z",
+        "type": "test",
+        "price": 103812.4,
+        "volume": 226.502576,
+        "significance": 75,
+        "description": "Test of 103812.4000: Price touched 103812.4000 (0.000% from level) and stalled near level with good quality on 2.4x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 103812.4,
+        "testQuality": "good",
+        "volumeOnTest": 226.502576,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-18T14:00:00.000Z",
+        "type": "test",
+        "price": 105100,
+        "volume": 299.92084,
+        "significance": 75,
+        "description": "Test of 105183.2700: Price touched 105100.0000 (0.079% from level) and stalled near level with good quality on 3.2x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 105183.27,
+        "testQuality": "good",
+        "volumeOnTest": 299.92084,
+        "resultingAction": "stall"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "stable",
+      "climaxEvents": [],
+      "dryUpPeriods": [
+        {
+          "startDate": "2025-06-17T23:15:00.000Z",
+          "endDate": "2025-06-18T00:15:00.000Z",
+          "averageVolume": 40.710143599999995,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-18T02:30:00.000Z",
+          "endDate": "2025-06-18T03:00:00.000Z",
+          "averageVolume": 40.682191333333336,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-18T03:30:00.000Z",
+          "endDate": "2025-06-18T04:00:00.000Z",
+          "averageVolume": 40.79201833333334,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-18T05:15:00.000Z",
+          "endDate": "2025-06-18T05:45:00.000Z",
+          "averageVolume": 44.035187666666666,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-18T08:45:00.000Z",
+          "endDate": "2025-06-18T09:15:00.000Z",
+          "averageVolume": 45.42484033333333,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-18T22:15:00.000Z",
+          "endDate": "2025-06-18T23:00:00.000Z",
+          "averageVolume": 30.404831249999997,
+          "significance": "moderate"
+        }
+      ],
+      "avgVolumeInRange": 86.6072178888889,
+      "currentVolumeRank": 0,
+      "interpretation": "Volume trend: STABLE - Consistent participation levels | No significant climax events - orderly price movement | 6 dry-up period(s) detected - potential absorption | Current volume at 0th percentile - LOW activity"
+    },
+    "interpretation": {
+      "bias": "uncertain",
+      "strength": "weak",
+      "implications": [
+        "Phase not clearly defined - market in transition",
+        "Monitor price and volume for pattern development"
+      ],
+      "nextExpectedEvents": [
+        "Watch for trading range development",
+        "Look for accumulation or distribution signs"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "BTCUSDT_wyckoff_15_1750288124410",
+    "type": "wyckoff",
+    "timestamp": "2025-06-18T23:08:44.410Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "15",
+    "tags": [
+      "timeframe:15",
+      "phase:uncertain",
+      "confidence:30",
+      "progress:50",
+      "bias:uncertain",
+      "strength:weak",
+      "events:2",
+      "range:none"
+    ]
+  },
+  "timestamp": "2025-06-18T23:08:44.410Z"
+}

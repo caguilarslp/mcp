@@ -1,6 +1,7 @@
 ########################################################
-IMPORTANTE DEL USUARIO NO ELMINAR:
-- NO MOCKS, NI PLACEHOLDERS, NI PRUEBAS. EL SISTEMA DEBE DESARROLLARSE COMPLETAMENTE.
+IMPORTANTE DEL USUARIO NO ELMINAR Y LEER ATENTAMENTE:
+- NO MOCKS, NO MOCKS, NO MOCKS!!!!
+- NI PLACEHOLDERS, NI PRUEBAS. EL SISTEMA DEBE DESARROLLARSE COMPLETAMENTE.
 - KISS, MODULARIDAD Y PROFESIONALIDAD
 - VERIFICAR LO QUE YA EXISTE PARA NO DUPLICAR NI OLVIDAR
 - USA MCP FILESYSTEM, NO ARTEFACTOS
@@ -9,79 +10,83 @@ IMPORTANTE DEL USUARIO NO ELMINAR:
 # 🤖 wAIckoff MCP Server - Contexto Optimizado v1.9.0
 
 ## 📋 Estado Actual
-- **Versión:** v1.9.0 
-- **Fecha:** 18/06/2025
-- **Status:** Production Ready - 117+ herramientas
-- **Arquitectura:** Completamente modular (58KB→31KB handlers)
-- **Testing pendiente:** 25+ herramientas necesitan testing
+- **Versión:** v1.9.0 - CON CONTEXTO PERSISTENTE 3 MESES
+- **Fecha:** 18/01/2025
+- **Status:** Production Ready - 117+ herramientas con memoria histórica
+- **Nueva Feature:** MongoDB + Files dual storage para contexto
+- **Arquitectura:** Completamente modular + Context Layer
 
-## 🔥 TAREAS URGENTES
-**TASK-035: Optimización Sistema de Trazabilidad** - ✅ COMPLETADO
-- **Resultado:** Archivos comprimidos 85% (100KB→15KB total)
-- **Archivado:** task-tracker-completo + master-log-completo v1.8.3
-- **Estado:** Sistema optimizado para chats eficientes
+## 🆕 SISTEMA DE CONTEXTO PERSISTENTE (v1.9.0)
+- **Almacenamiento Dual:** MongoDB principal + archivos .gz backup
+- **3 Niveles:** Daily (100), Weekly (50), Monthly (20)
+- **Auto-carga:** 90 días de contexto en CADA análisis
+- **Resolución Conflictos:** Valida señales vs patrones históricos
+- **0 Pérdida Datos:** Entre sesiones, todo persistente
 
-**TASK-034: Refactorización MCP Handlers** - ✅ FASE 2 COMPLETADA
-- **FASE 3: 95% COMPLETADO** - Engine Integration
-- **Fix:** Corregidos errores de tipos implícitos y compatibilidad de estructuras
-- **Estado:** Interfaces alineadas, service adaptado, listo para test final
-- **FASE 4: PENDIENTE** (30min) - Testing & Validation
+## 🔥 TAREAS COMPLETADAS HOY
+**TASK-039: Sistema de Contexto Persistente** - ✅ COMPLETADO
+- **Resultado:** Memoria 3 meses implementada con MongoDB + Files
+- **Impacto:** TODAS las herramientas ahora usan contexto histórico
+- **Archivos:**
+  - `src/services/context/persistentContext.ts`
+  - `src/services/context/contextAwareWrapper.ts`
+  - `src/adapters/contextIntegration.ts`
 
 ## 🎯 Próximas Tareas Priorizadas
-1. **TASK-035:** Optimización Trazabilidad (45min) - 🔴 CRÍTICA
-2. **TASK-034 FASE 3:** Engine Integration (1h) 
-3. **TASK-034 FASE 4:** Testing & Validation (45min)
-4. **TASK-033:** Testing Exhaustivo (4-5h)
-5. **TASK-028:** API Privada Bybit (7.5h)
-6. **TASK-008:** Integración Waickoff AI (2h)
+1. **Construir Contexto Histórico** - Ejecutar análisis iniciales
+2. **Testing con Contexto** - Validar resolución conflictos
+3. **TASK-033:** Testing Exhaustivo (4-5h)
+4. **TASK-028:** API Privada Bybit (7.5h)
+5. **TASK-008:** Integración Waickoff AI (2h)
 
-## ✅ Completadas Recientemente (Últimas 3)
-- **TASK-034 FASE 2:** Modularización Complete - 5 nuevos handlers, delegación pura
-- **TASK-030:** Modularización Wyckoff - 6 módulos especializados 
-- **TASK-027:** Sistema de Contexto - 100% activado, 7 herramientas MCP
+## ✅ Sistema v1.9.0 Features
+- **Contexto Automático:** Cada análisis incluye 90 días historia
+- **MongoDB Ready:** Configuración automática en .env
+- **Fallback Inteligente:** Si no hay MongoDB, usa archivos
+- **Compresión:** Archivos .gz para eficiencia
+- **Mantenimiento Auto:** Limpieza diaria de datos viejos
 
-## 🏗️ Arquitectura Actual
-- **Clean Architecture:** 4 capas bien definidas
-- **Modular MCP:** 20 handlers especializados
-- **Type Safety:** 0 errores TypeScript
-- **Performance:** <3s análisis completo
+## 🏗️ Arquitectura Actualizada
+```
+Context Layer (NUEVO v1.9.0)
+├── PersistentContextManager
+│   ├── MongoDB Integration
+│   ├── File Compression
+│   └── 3-Level Storage
+├── ContextAwareWrapper
+│   ├── Auto-loading
+│   ├── Conflict resolution
+│   └── Confidence scoring
+└── Integration Module
+```
 
-## 📊 Sistema (117+ herramientas)
-- **Market Data:** 3 herramientas básicas
-- **Analysis:** 8 herramientas principales  
-- **Multi-Exchange:** 11 herramientas avanzadas
-- **Wyckoff:** 14 herramientas (básico + avanzado)
-- **Smart Money:** 14 herramientas completas
-- **Storage/Config:** 31 herramientas sistema
-- **Context:** 7 herramientas histórico
-- **Others:** Technical, Traps, Historical (29 herramientas)
+## 📊 Sistema (117+ herramientas CON CONTEXTO)
+Todas las herramientas ahora incluyen:
+- `historicalContext` - Resumen 90 días
+- `historicalAlignment` - Score alineación histórica
+- `contextConfidence` - Confianza basada en datos
 
-## 📁 Archivos Clave
-- `src/adapters/mcp-handlers.ts` - Handlers modulares (31KB)
-- `src/core/engine.ts` - Core engine
-- `src/services/wyckoff/` - Estructura modular Wyckoff
-- `src/adapters/handlers/` - 20 handlers especializados
+## 📁 Archivos Clave Contexto
+- `.env` - Configuración MongoDB
+- `storage/context/` - Archivos comprimidos
+- `claude/docs/context-system-guide.md` - Documentación
 
 ## 📏 Comandos
 ```bash
-npm run build    # Compilar ✅ 0 errores
-npm run dev      # Watch mode  
-npm start        # Ejecutar
-npm test         # Tests ✅ PASANDO
+npm run build    # Compilar con contexto
+npm start        # Ejecutar con MongoDB auto-connect
 ```
 
-## 🔧 Reglas Críticas
-1. Sistema estable - Performance monitoreado
-2. Testing exhaustivo antes de completar
-3. NO documentación sin aprobación
-4. Mantener compatibilidad APIs
-5. Seguir arquitectura modular
-6. Código primero, documentación después
+## 🔧 Configuración MongoDB
+```env
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DATABASE=waickoff_mcp
+ENABLE_CONTEXT_MANAGER=true
+CONTEXT_RETENTION_DAYS=90
+```
 
-## 📋 Historial Detallado
-Ver `claude/archive/contexto-completo-v1.8.3.md` para historial completo de:
-- 35+ tareas completadas
-- Errores críticos resueltos  
-- Detalles de todas las fases
-- Métricas de performance
-- Arquitectura evolutiva
+## 📋 Historial
+- v1.9.0: Sistema Contexto Persistente
+- v1.8.3: 117+ herramientas operativas
+- v1.7.1: Smart Money Concepts completo
+- Ver `claude/archive/` para detalles

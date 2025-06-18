@@ -24,11 +24,24 @@ export class MongoStorageService implements IStorageService {
 
   constructor(connectionString?: string) {
     this.logger = new Logger('MongoStorageService');
+    // Initialize with mock, will be replaced if MongoDB is available
+    this.implementation = new MockMongoStorageService();
     
+    // Try to initialize MongoDB asynchronously
+    this.initializeMongoDB(connectionString);
+  }
+  
+  // Add method to wait for initialization
+  async waitForInitialization(): Promise<void> {
+    // Give MongoDB 2 seconds to initialize
+    await new Promise(resolve => setTimeout(resolve, 2000));
+  }
+  
+  private async initializeMongoDB(connectionString?: string): Promise<void> {
     // Try to create real MongoDB service, fallback to mock
     try {
-      // This will throw if mongodb package is not installed
-      const mongodb = require('mongodb');
+      // Dynamic import for ES modules
+      const { MongoClient } = await import('mongodb');
       this.implementation = new RealMongoStorageService(connectionString);
       this.logger.info('MongoDB service initialized');
     } catch (error) {
@@ -110,11 +123,16 @@ class RealMongoStorageService implements IStorageService {
     if (this.initialized) return;
     
     try {
-      const { MongoClient } = require('mongodb');
+      const { MongoClient } = await import('mongodb');
       this.client = new MongoClient(this.connectionString);
       await this.client.connect();
       this.initialized = true;
       this.logger.info('MongoDB client connected');
+      
+      // Test the connection
+      const dbName = process.env.MONGODB_DATABASE || 'waickoff_mcp';
+      await this.client.db(dbName).admin().ping();
+      this.logger.info(`Connected to database: ${dbName}`);
     } catch (error) {
       this.logger.error('Failed to initialize MongoDB:', error);
       throw error;
@@ -123,7 +141,7 @@ class RealMongoStorageService implements IStorageService {
 
   async save(relativePath: string, data: any): Promise<void> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const document = {
@@ -143,7 +161,7 @@ class RealMongoStorageService implements IStorageService {
 
   async load<T>(relativePath: string): Promise<T | null> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const document = await collection.findOne({ path: relativePath });
@@ -152,7 +170,7 @@ class RealMongoStorageService implements IStorageService {
 
   async exists(relativePath: string): Promise<boolean> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const count = await collection.countDocuments({ path: relativePath });
@@ -161,7 +179,7 @@ class RealMongoStorageService implements IStorageService {
 
   async delete(relativePath: string): Promise<void> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     await collection.deleteOne({ path: relativePath });
@@ -169,7 +187,7 @@ class RealMongoStorageService implements IStorageService {
 
   async list(directory: string): Promise<string[]> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const regex = new RegExp(`^${directory.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`);
@@ -183,7 +201,7 @@ class RealMongoStorageService implements IStorageService {
 
   async query(pattern: string): Promise<string[]> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const mongoRegex = pattern
@@ -202,7 +220,7 @@ class RealMongoStorageService implements IStorageService {
 
   async getMetadata(relativePath: string): Promise<FileMetadata | null> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const document = await collection.findOne(
@@ -228,7 +246,7 @@ class RealMongoStorageService implements IStorageService {
 
   async vacuum(daysOld: number = 30): Promise<number> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const cutoffDate = new Date();
@@ -243,7 +261,7 @@ class RealMongoStorageService implements IStorageService {
 
   async getStorageStats(): Promise<StorageStats> {
     await this.initialize();
-    const db = this.client.db('waickoff_mcp');
+    const db = this.client.db(process.env.MONGODB_DATABASE || 'waickoff_mcp');
     const collection = db.collection('storage_files');
     
     const pipeline = [

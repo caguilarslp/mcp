@@ -1,0 +1,70 @@
+{
+  "id": "BTCUSDT_smc_setup_short_1750288106864",
+  "type": "smc",
+  "data": {
+    "isValid": false,
+    "setupScore": 35,
+    "factors": {
+      "directionalAlignment": 10,
+      "confluenceQuality": 20,
+      "structureAlignment": 75,
+      "institutionalPresence": 42,
+      "riskRewardRatio": 15.9
+    },
+    "optimalEntry": {
+      "price": 104833.6,
+      "zone": {
+        "min": 104309.432,
+        "max": 105357.768
+      },
+      "reasoning": "Entry at market price"
+    },
+    "riskManagement": {
+      "stopLoss": 107978.60800000001,
+      "takeProfits": [
+        55228.674076847274,
+        54797.07913687722,
+        52418.10422738972
+      ],
+      "positionSize": 1,
+      "maxRisk": 2,
+      "riskRewardRatio": 15.9
+    },
+    "warnings": [
+      "Setup score below recommended threshold",
+      "Low institutional activity may result in choppy price action"
+    ],
+    "alternativeScenarios": [
+      {
+        "scenario": "SHORT setup plays out as expected",
+        "probability": 68,
+        "action": "Follow original plan with proper risk management"
+      },
+      {
+        "scenario": "Setup invalidation due to structure break",
+        "probability": 32,
+        "action": "Exit at stop loss and reassess market conditions"
+      }
+    ],
+    "confidence": 35,
+    "timestamp": "2025-06-18T23:08:26.864Z",
+    "symbol": "BTCUSDT",
+    "setupType": "short"
+  },
+  "metadata": {
+    "id": "BTCUSDT_smc_setup_short_1750288106864",
+    "type": "smc",
+    "timestamp": "2025-06-18T23:08:26.864Z",
+    "symbol": "BTCUSDT",
+    "setupType": "short",
+    "tags": [
+      "type:setup_validation",
+      "direction:short",
+      "valid:false",
+      "score:35",
+      "confidence:35",
+      "rr:15.9"
+    ]
+  },
+  "timestamp": "2025-06-18T23:08:26.864Z"
+}

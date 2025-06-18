@@ -1,0 +1,242 @@
+{
+  "id": "BTCUSDT_fibonacci_60_1750287855247",
+  "type": "technical",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "60",
+    "currentPrice": 104900.8,
+    "trend": "downtrend",
+    "swingHigh": {
+      "index": 35,
+      "timestamp": "2025-06-16T07:00:00.000Z",
+      "price": 107262.1,
+      "type": "high",
+      "strength": 9.806973799106709,
+      "volume": 564.811491,
+      "confirmed": true
+    },
+    "swingLow": {
+      "index": 95,
+      "timestamp": "2025-06-18T19:00:00.000Z",
+      "price": 103485.5,
+      "type": "low",
+      "strength": 9.097182233698764,
+      "volume": 778.580799,
+      "confirmed": true
+    },
+    "retracementLevels": [
+      {
+        "level": 0.236,
+        "price": 106370.8224,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 46.91344265182608,
+        "distance": 1.4013452709607568
+      },
+      {
+        "level": 0.382,
+        "price": 105819.4388,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 35.410905361759696,
+        "distance": 0.8757214434970949
+      },
+      {
+        "level": 0.5,
+        "price": 105373.8,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 73.50895934508729,
+        "distance": 0.45090218568399854
+      },
+      {
+        "level": 0.618,
+        "price": 104928.1612,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 17.798955683679566,
+        "distance": 0.026082927870902196
+      },
+      {
+        "level": 0.786,
+        "price": 104293.6924,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 34.33233827541459,
+        "distance": -0.5787444900324906
+      }
+    ],
+    "extensionLevels": [
+      {
+        "level": 1,
+        "price": 103485.5,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 69.81764256787197,
+        "distance": -1.3491794152189525
+      },
+      {
+        "level": 1.272,
+        "price": 102458.2648,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.3284238061101523
+      },
+      {
+        "level": 1.414,
+        "price": 101921.9876,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.8396469807666
+      },
+      {
+        "level": 1.618,
+        "price": 101151.5612,
+        "label": "161.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -3.574080273935
+      },
+      {
+        "level": 2,
+        "price": 99708.9,
+        "label": "200.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -4.949342617024854
+      },
+      {
+        "level": 2.618,
+        "price": 97374.96119999999,
+        "label": "261.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -7.1742434757409015
+      }
+    ],
+    "keyLevels": [
+      {
+        "level": 0.5,
+        "price": 105373.8,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 73.50895934508729,
+        "distance": 0.45090218568399854
+      },
+      {
+        "level": 1,
+        "price": 103485.5,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 69.81764256787197,
+        "distance": -1.3491794152189525
+      },
+      {
+        "level": 0.236,
+        "price": 106370.8224,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 46.91344265182608,
+        "distance": 1.4013452709607568
+      },
+      {
+        "level": 0.382,
+        "price": 105819.4388,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 35.410905361759696,
+        "distance": 0.8757214434970949
+      },
+      {
+        "level": 0.786,
+        "price": 104293.6924,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 34.33233827541459,
+        "distance": -0.5787444900324906
+      },
+      {
+        "level": 0.618,
+        "price": 104928.1612,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 17.798955683679566,
+        "distance": 0.026082927870902196
+      },
+      {
+        "level": 1.272,
+        "price": 102458.2648,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.3284238061101523
+      },
+      {
+        "level": 1.414,
+        "price": 101921.9876,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -2.8396469807666
+      }
+    ],
+    "currentPosition": {
+      "nearestLevel": {
+        "level": 0.618,
+        "price": 104928.1612,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 17.798955683679566,
+        "distance": 0.026082927870902196
+      },
+      "retracement": 62.52449293014879,
+      "nextTargets": [
+        {
+          "level": 0.5,
+          "price": 105373.8,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 73.50895934508729,
+          "distance": 0.45090218568399854
+        },
+        {
+          "level": 0.786,
+          "price": 104293.6924,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 34.33233827541459,
+          "distance": -0.5787444900324906
+        },
+        {
+          "level": 0.382,
+          "price": 105819.4388,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 35.410905361759696,
+          "distance": 0.8757214434970949
+        },
+        {
+          "level": 1,
+          "price": 103485.5,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 69.81764256787197,
+          "distance": -1.3491794152189525
+        }
+      ]
+    },
+    "analysisTime": "2025-06-18T23:04:15.247Z",
+    "confidence": 37.66994340084305,
+    "validity": 96
+  },
+  "metadata": {
+    "id": "BTCUSDT_fibonacci_60_1750287855247",
+    "type": "technical",
+    "timestamp": "2025-06-18T23:04:15.247Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "60"
+  },
+  "timestamp": "2025-06-18T23:04:15.247Z"
+}

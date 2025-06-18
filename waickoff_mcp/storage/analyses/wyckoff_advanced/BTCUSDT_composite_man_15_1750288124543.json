@@ -1,0 +1,88 @@
+{
+  "id": "BTCUSDT_composite_man_15_1750288124543",
+  "type": "wyckoff_advanced",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "15",
+    "analysisDate": "2025-06-18T23:08:44.543Z",
+    "manipulationScore": 35,
+    "institutionalActivity": {
+      "absorptionRate": 0.5,
+      "distributionRate": 0.3,
+      "netPosition": "accumulating",
+      "activityLevel": "moderate",
+      "volumeFootprint": {
+        "largeTransactionRatio": 0.3,
+        "absorptionEvents": [],
+        "distributionEvents": [],
+        "volumeAnomalies": [],
+        "orderFlowImbalance": 0
+      },
+      "priceActionSigns": []
+    },
+    "marketCharacteristics": {
+      "volatilityProfile": {
+        "currentLevel": "normal",
+        "trend": "stable",
+        "compressionPhases": [],
+        "expansionPhases": []
+      },
+      "trendCharacter": {
+        "overallDirection": "sideways",
+        "strength": 50,
+        "maturity": "middle",
+        "pullbackCharacter": "healthy",
+        "breakoutProbability": 60
+      },
+      "rangeCharacter": {
+        "isActive": true,
+        "quality": "good",
+        "maturity": "developing",
+        "expansionProbability": 70,
+        "direction": "up"
+      },
+      "timeFactors": {
+        "cyclePosition": "middle",
+        "timeElapsed": 20,
+        "timeRemaining": 15,
+        "criticalTimeWindows": []
+      },
+      "seasonalityFactors": {
+        "historicalBias": "neutral",
+        "strength": 30,
+        "timeframe": "weekly",
+        "notes": []
+      }
+    },
+    "manipulationSigns": [],
+    "interpretation": {
+      "phase": "neutral",
+      "strength": "weak",
+      "confidence": 35,
+      "implications": [
+        "No clear institutional bias"
+      ],
+      "expectedMoves": [
+        "Monitor for phase development"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "BTCUSDT_composite_man_15_1750288124543",
+    "type": "wyckoff_advanced",
+    "timestamp": "2025-06-18T23:08:44.543Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "15",
+    "tags": [
+      "timeframe:15",
+      "type:composite_man",
+      "manipulation_score:35",
+      "phase:neutral",
+      "strength:weak",
+      "confidence:35",
+      "activity_level:moderate",
+      "manipulation_signs:0"
+    ]
+  },
+  "timestamp": "2025-06-18T23:08:44.543Z"
+}

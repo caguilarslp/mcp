@@ -1,0 +1,76 @@
+{
+  "id": "XRPUSDT_smc_setup_short_1750288172817",
+  "type": "smc",
+  "data": {
+    "isValid": false,
+    "setupScore": 47,
+    "factors": {
+      "directionalAlignment": 10,
+      "confluenceQuality": 20,
+      "structureAlignment": 75,
+      "institutionalPresence": 100,
+      "riskRewardRatio": 2.6
+    },
+    "optimalEntry": {
+      "price": 2.271875,
+      "zone": {
+        "min": 2.2451677500000002,
+        "max": 2.2987365
+      },
+      "reasoning": "Entry at Strong bearish confluence: orderBlock + fairValueGap"
+    },
+    "riskManagement": {
+      "stopLoss": 2.297957625,
+      "takeProfits": [
+        2.257075,
+        2.2052500000000004,
+        2.1755
+      ],
+      "positionSize": 1,
+      "maxRisk": 2,
+      "riskRewardRatio": 2.6
+    },
+    "warnings": [
+      "Setup score below recommended threshold",
+      "Short entry in discount zone - consider waiting for premium",
+      "Multiple mixed confluences indicate unclear market conditions"
+    ],
+    "alternativeScenarios": [
+      {
+        "scenario": "SHORT setup plays out as expected",
+        "probability": 95,
+        "action": "Follow original plan with proper risk management"
+      },
+      {
+        "scenario": "Market enters consolidation phase",
+        "probability": 40,
+        "action": "Consider taking partial profits early or tightening stops"
+      },
+      {
+        "scenario": "Setup invalidation due to structure break",
+        "probability": 5,
+        "action": "Exit at stop loss and reassess market conditions"
+      }
+    ],
+    "confidence": 62,
+    "timestamp": "2025-06-18T23:09:32.817Z",
+    "symbol": "XRPUSDT",
+    "setupType": "short"
+  },
+  "metadata": {
+    "id": "XRPUSDT_smc_setup_short_1750288172817",
+    "type": "smc",
+    "timestamp": "2025-06-18T23:09:32.817Z",
+    "symbol": "XRPUSDT",
+    "setupType": "short",
+    "tags": [
+      "type:setup_validation",
+      "direction:short",
+      "valid:false",
+      "score:47",
+      "confidence:62",
+      "rr:2.6"
+    ]
+  },
+  "timestamp": "2025-06-18T23:09:32.817Z"
+}

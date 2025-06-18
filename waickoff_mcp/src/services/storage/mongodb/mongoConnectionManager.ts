@@ -35,7 +35,7 @@ export class MongoConnectionManager {
     
     this.config = {
       connectionString: connectionString || this.getDefaultConnectionString(),
-      dbName: 'waickoff_mcp',
+      dbName: process.env.MONGODB_DATABASE || 'waickoff_mcp',
       maxPoolSize: 10,
       serverSelectionTimeoutMS: 5000,
       connectTimeoutMS: 10000,
@@ -45,7 +45,7 @@ export class MongoConnectionManager {
   }
 
   private getDefaultConnectionString(): string {
-    const envConnectionString = process.env.MONGODB_CONNECTION_STRING;
+    const envConnectionString = process.env.MONGODB_URI || process.env.MONGODB_CONNECTION_STRING;
     if (envConnectionString) {
       return envConnectionString;
     }
