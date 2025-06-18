@@ -61,6 +61,7 @@ import { StorageService } from '../services/storage.js';
 import { CacheManager } from '../services/cacheManager.js';
 import { ICacheManager } from '../types/storage.js';
 import { AnalysisRepository } from '../repositories/analysisRepository.js';
+import { ContextAwareRepository } from '../services/context/contextRepository.js';
 import { ReportGenerator } from '../services/reports/reportGenerator.js';
 import { TimezoneManager, mexicoTimezone } from '../utils/timezone.js';
 import { ConfigurationManager } from '../services/config/configurationManager.js';
@@ -113,6 +114,7 @@ export class MarketAnalysisEngine {
   private readonly tradingService: ITradingService;
   private readonly storageService: StorageService;
   private readonly analysisRepository: IAnalysisRepository;
+  private readonly contextAwareRepository: ContextAwareRepository;
   private readonly reportGenerator: IReportGenerator;
   private readonly timezoneManager: TimezoneManager;
   private readonly configurationManager: ConfigurationManager;
@@ -211,6 +213,9 @@ export class MarketAnalysisEngine {
       './storage' // Relative path that matches StorageService basePath
     );
     
+    // Initialize context-aware repository (TASK-027 FASE 1)
+    this.contextAwareRepository = new ContextAwareRepository();
+    
     // Initialize report generator
     this.reportGenerator = new ReportGenerator(
       this.analysisRepository,
@@ -285,10 +290,11 @@ export class MarketAnalysisEngine {
       this.analysisService as any     // Cast interface to concrete for now
     );
     
-    this.logger.info('Market Analysis Engine initialized with timezone support, Analysis Repository, Report Generator, Trap Detection, Wyckoff Basic/Advanced, Technical Analysis Suite, and Smart Money Concepts', {
+    this.logger.info('Market Analysis Engine initialized with timezone support, Context-Aware Repository (TASK-027), Report Generator, Trap Detection, Wyckoff Basic/Advanced, Technical Analysis Suite, and Smart Money Concepts', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
       repositoryEnabled: true,
+      contextAwareRepositoryEnabled: true, // TASK-027 FASE 1
       reportGeneratorEnabled: true,
       configurationManagerEnabled: true,
       trapDetectionEnabled: true,
@@ -474,15 +480,15 @@ export class MarketAnalysisEngine {
           analysis[analysisKeys[index]] = result;
         });
 
-        // Save to Analysis Repository
-        const analysisId = await this.analysisRepository.saveAnalysis(
-          symbol,
-          'technical_analysis' as AnalysisType,
-          analysis,
-          [`timeframe:${timeframe}`, `periods:${periods}`]
+        // Save to Context-Aware Repository (TASK-027 FASE 1)
+        const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_${timeframe}_${Date.now()}`,
+          'technical_analysis',
+          { ...analysis, symbol, timeframe },
+          { symbol, timeframe, tags: [`timeframe:${timeframe}`, `periods:${periods}`] }
         );
 
-        this.logger.info(`✅ Analysis saved with ID: ${analysisId}`);
+        this.logger.info(`✅ Analysis saved with context - ID: ${analysisId} (TASK-027 FASE 1)`);
 
         this.logger.info(`✅ COMPLETED: performTechnicalAnalysis for ${symbol}`);
         return this.createSuccessResponse(analysis);
@@ -604,15 +610,15 @@ export class MarketAnalysisEngine {
           summary
         };
 
-        // Save complete analysis to repository
-        const analysisId = await this.analysisRepository.saveAnalysis(
-          symbol,
-          'complete_analysis' as AnalysisType,
-          completeAnalysis,
-          investment ? [`investment:${investment}`] : []
+        // Save complete analysis to context-aware repository (TASK-027 FASE 1)
+        const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_complete_${Date.now()}`,
+          'complete_analysis',
+          { ...completeAnalysis, symbol },
+          { symbol, tags: investment ? [`investment:${investment}`] : [] }
         );
 
-        this.logger.info(`✅ Complete analysis saved with ID: ${analysisId}`);
+        this.logger.info(`✅ Complete analysis saved with context - ID: ${analysisId} (TASK-027 FASE 1)`);
 
         this.logger.info(`✅ COMPLETED: getCompleteAnalysis for ${symbol}`);
         return this.createSuccessResponse(completeAnalysis);
@@ -756,12 +762,12 @@ export class MarketAnalysisEngine {
       try {
         const result = await this.fibonacciService.analyzeFibonacci(symbol, timeframe, customConfig);
         
-        // Save to Analysis Repository
-        await this.analysisRepository.saveAnalysis(
-          symbol,
-          'fibonacci_analysis' as any,
-          result,
-          [`timeframe:${timeframe}`]
+        // Save to Context-Aware Repository (TASK-027 FASE 1)
+        await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_fibonacci_${timeframe}_${Date.now()}`,
+          'technical',
+          { ...result, symbol, timeframe },
+          { symbol, timeframe }
         );
         
         return result;
@@ -784,12 +790,12 @@ export class MarketAnalysisEngine {
       try {
         const result = await this.bollingerBandsService.analyzeBollingerBands(symbol, timeframe, customConfig);
         
-        // Save to Analysis Repository
-        await this.analysisRepository.saveAnalysis(
-          symbol,
-          'bollinger_analysis' as any,
-          result,
-          [`timeframe:${timeframe}`]
+        // Save to Context-Aware Repository (TASK-027 FASE 1)
+        await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_bollinger_${timeframe}_${Date.now()}`,
+          'technical',
+          { ...result, symbol, timeframe },
+          { symbol, timeframe }
         );
         
         return result;
@@ -812,12 +818,12 @@ export class MarketAnalysisEngine {
       try {
         const result = await this.elliottWaveService.analyzeElliottWave(symbol, timeframe, customConfig);
         
-        // Save to Analysis Repository
-        await this.analysisRepository.saveAnalysis(
-          symbol,
-          'elliott_wave_analysis' as any,
-          result,
-          [`timeframe:${timeframe}`]
+        // Save to Context-Aware Repository (TASK-027 FASE 1)
+        await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_elliott_${timeframe}_${Date.now()}`,
+          'technical',
+          { ...result, symbol, timeframe },
+          { symbol, timeframe }
         );
         
         return result;
@@ -844,12 +850,12 @@ export class MarketAnalysisEngine {
           customConfig
         );
         
-        // Save to Analysis Repository
-        await this.analysisRepository.saveAnalysis(
-          symbol,
-          'comprehensive_technical_analysis' as any,
-          result,
-          [`timeframe:${timeframe}`, `confluences:${result.confluences.length}`]
+        // Save to Context-Aware Repository (TASK-027 FASE 1)
+        await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_confluences_${timeframe}_${Date.now()}`,
+          'technical',
+          { ...result, symbol, timeframe },
+          { symbol, timeframe, confluences: result.confluences.length }
         );
         
         return result;
@@ -1093,12 +1099,12 @@ export class MarketAnalysisEngine {
           useMultiExchange
         );
         
-        // Save to Analysis Repository
-        await this.analysisRepository.saveAnalysis(
-          symbol,
-          'smart_money_analysis' as any,
-          result,
-          [`timeframe:${timeframe}`, `confluences:${result.confluences.length}`]
+        // Save to Context-Aware Repository (TASK-027 FASE 1)
+        await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_smc_${timeframe}_${Date.now()}`,
+          'smc',
+          { ...result, symbol, timeframe },
+          { symbol, timeframe, confluences: result.confluences.length }
         );
         
         return result;

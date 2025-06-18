@@ -30,6 +30,7 @@ import { OrderBlocksService } from './orderBlocks.js';
 import { FairValueGapsService } from './fairValueGaps.js';
 import { BreakOfStructureService } from './breakOfStructure.js';
 import { ExchangeAggregator } from '../../adapters/exchanges/common/ExchangeAggregator.js';
+import { ContextAwareRepository } from '../context/contextRepository.js';
 import { performance } from 'perf_hooks';
 import { randomUUID } from 'crypto';
 
@@ -44,6 +45,7 @@ export class SmartMoneyAnalysisService {
   private fvgService: FairValueGapsService;
   private bosService: BreakOfStructureService;
   private exchangeAggregator: ExchangeAggregator;
+  private contextAwareRepository: ContextAwareRepository;
   private config: SMCConfig;
   private performanceMetrics: PerformanceMetrics[] = [];
 
@@ -65,6 +67,9 @@ export class SmartMoneyAnalysisService {
       new Map(), // Empty adapters map for now
       {} // Default config
     );
+    
+    // Context-aware repository (TASK-027 FASE 2)
+    this.contextAwareRepository = new ContextAwareRepository();
     
     this.config = this.getDefaultConfig();
   }
@@ -192,6 +197,29 @@ export class SmartMoneyAnalysisService {
         timestamp: new Date().toISOString()
       };
 
+      // Save to Context-Aware Repository (TASK-027 FASE 2)
+      try {
+        const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_smc_confluence_${timeframe}_${Date.now()}`,
+          'smc',
+          { ...analysis, symbol, timeframe },
+          { 
+            symbol, 
+            timeframe, 
+            tags: [
+              `timeframe:${timeframe}`,
+              `confluences:${analysis.confluences.length}`,
+              `bias:${analysis.marketBias.direction}`,
+              `institutional:${analysis.institutionalActivity.score}`,
+              `zone:${analysis.premiumDiscountZones.currentZone}`
+            ]
+          }
+        );
+        console.log(`[SMC] Analysis saved with context - ID: ${analysisId} (TASK-027 FASE 2)`);
+      } catch (contextError) {
+        console.warn(`[SMC] Failed to save context for ${symbol}:`, contextError);
+      }
+
       this.recordPerformance('analyzeSmartMoneyConfluence', startTime, true);
       return analysis;
 
@@ -308,6 +336,30 @@ export class SmartMoneyAnalysisService {
         confidence: this.calculateSetupConfidence(totalScore, analysis),
         timestamp: new Date().toISOString()
       };
+
+      // Save to Context-Aware Repository (TASK-027 FASE 2)
+      try {
+        const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+          `${symbol}_smc_setup_${setupType}_${Date.now()}`,
+          'smc',
+          { ...validation, symbol, setupType },
+          { 
+            symbol, 
+            setupType,
+            tags: [
+              `type:setup_validation`,
+              `direction:${setupType}`,
+              `valid:${validation.isValid}`,
+              `score:${validation.setupScore}`,
+              `confidence:${validation.confidence}`,
+              `rr:${validation.riskManagement.riskRewardRatio}`
+            ]
+          }
+        );
+        console.log(`[SMC] Setup validation saved with context - ID: ${analysisId} (TASK-027 FASE 2)`);
+      } catch (contextError) {
+        console.warn(`[SMC] Failed to save setup validation context for ${symbol}:`, contextError);
+      }
 
       this.recordPerformance('validateSMCSetup', startTime, true);
       return validation;

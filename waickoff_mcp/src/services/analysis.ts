@@ -22,6 +22,7 @@ import {
 } from '../types/index.js';
 import { IMarketDataService } from '../types/index.js';
 import { ExchangeAggregator } from '../adapters/exchanges/common/ExchangeAggregator.js';
+import { ContextAwareRepository } from './context/contextRepository.js';
 import { Logger } from '../utils/logger.js';
 import { PerformanceMonitor } from '../utils/performance.js';
 import { MathUtils } from '../utils/math.js';
@@ -31,6 +32,7 @@ export class TechnicalAnalysisService implements IAnalysisService {
   private readonly performanceMonitor: PerformanceMonitor;
   private readonly mathUtils: MathUtils;
   private readonly exchangeAggregator: ExchangeAggregator;
+  private readonly contextAwareRepository: ContextAwareRepository;
 
   constructor(
     private marketDataService: IMarketDataService,
@@ -45,6 +47,9 @@ export class TechnicalAnalysisService implements IAnalysisService {
       new Map(), // Empty adapters map for now
       {} // Default config
     );
+    
+    // Context-aware repository (TASK-027 FASE 2)
+    this.contextAwareRepository = new ContextAwareRepository();
   }
 
   /**
@@ -189,6 +194,29 @@ export class TechnicalAnalysisService implements IAnalysisService {
           trend
         };
 
+        // Save to Context-Aware Repository (TASK-027 FASE 2)
+        try {
+          const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+            `${symbol}_volume_${interval}_${Date.now()}`,
+            'volume',
+            { ...analysis, symbol, interval },
+            { 
+              symbol, 
+              interval,
+              tags: [
+                `interval:${interval}`,
+                `trend:${analysis.trend}`,
+                `volume_ratio:${Math.round(currentVolume/avgVolume*100)}`,
+                `spikes:${analysis.volumeSpikes.length}`,
+                `vwap_position:${analysis.vwap.priceVsVwap}`
+              ]
+            }
+          );
+          this.logger.info(`Volume analysis saved with context - ID: ${analysisId} (TASK-027 FASE 2)`);
+        } catch (contextError) {
+          this.logger.warn(`Failed to save volume analysis context for ${symbol}:`, contextError);
+        }
+
         this.logger.info(`Volume analysis for ${symbol}: ${currentVolume.toFixed(0)} (${(currentVolume/avgVolume*100).toFixed(0)}% of avg)`);
         return analysis;
 
@@ -288,18 +316,44 @@ export class TechnicalAnalysisService implements IAnalysisService {
           strength,
           cumulativeDelta,
           divergence,
-          marketPressure,
-          // Add multi-exchange metrics if available
-          ...(multiExchangeData && {
-            washTradingFiltered: deltas.length - filteredDeltas.length,
-            institutionalFlow: this.calculateInstitutionalFlow(multiExchangeData),
-            crossExchangeConsistency: this.calculateCrossExchangeConsistency(multiExchangeData)
-          })
-        } as VolumeDelta & {
-          washTradingFiltered?: number;
-          institutionalFlow?: number;
-          crossExchangeConsistency?: number;
+          marketPressure
         };
+        
+        // Store multi-exchange metrics separately for context tags
+        const multiExchangeMetrics = multiExchangeData ? {
+          washTradingFiltered: deltas.length - filteredDeltas.length,
+          institutionalFlow: this.calculateInstitutionalFlow(multiExchangeData),
+          crossExchangeConsistency: this.calculateCrossExchangeConsistency(multiExchangeData)
+        } : null;
+
+        // Save to Context-Aware Repository (TASK-027 FASE 2)
+        try {
+          const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+            `${symbol}_volume_delta_${interval}_${Date.now()}`,
+            'volume_delta',
+            { ...analysis, symbol, interval },
+            { 
+              symbol, 
+              interval,
+              tags: [
+                `interval:${interval}`,
+                `bias:${bias}`,
+                `strength:${Math.round(strength)}`,
+                `cumulative:${Math.round(cumulativeDelta)}`,
+                `divergence:${divergence.detected}`,
+                `pressure:${marketPressure.trend}`,
+                ...(multiExchangeData ? [
+                  `multi_exchange:true`,
+                  `wash_filtered:${multiExchangeMetrics?.washTradingFiltered || 0}`,
+                  `institutional:${multiExchangeMetrics?.institutionalFlow || 0}`
+                ] : [])
+              ]
+            }
+          );
+          this.logger.info(`Volume delta analysis saved with context - ID: ${analysisId} (TASK-027 FASE 2)`);
+        } catch (contextError) {
+          this.logger.warn(`Failed to save volume delta analysis context for ${symbol}:`, contextError);
+        }
 
         this.logger.info(`Volume delta analysis for ${symbol}: ${bias} bias with ${strength.toFixed(1)}% strength`);
         return analysis;

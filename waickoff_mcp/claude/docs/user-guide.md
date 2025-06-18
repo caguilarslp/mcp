@@ -2,7 +2,32 @@
 
 ## 🎯 Guía Completa de Herramientas MCP
 
-Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.7.1, organizadas por categorías.
+Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.8.2, organizadas por categorías.
+
+**✨ NOVEDAD:** Sistema de Contexto Histórico ACTIVO - Todos los análisis ahora se guardan con contexto para generar insights más precisos.
+**✅ Última actualización:** TASK-027 FASE 2 - Fix errores de compilación TypeScript completado
+
+---
+
+## 🧾 Sistema de Contexto Histórico (✅ ACTIVO desde v1.8.1)
+
+El sistema wAIckoff MCP ahora tiene **memoria histórica** que mejora significativamente la calidad de los análisis.
+
+**Características principales:**
+- ✅ **Memoria automática**: Cada análisis se guarda con contexto histórico
+- ✅ **Patrones recurrentes**: Detecta patrones basados en análisis previos
+- ✅ **Insights contextuales**: Recomendaciones mejoradas con historial
+- ✅ **Continuidad entre sesiones**: El sistema "recuerda" análisis anteriores
+- ✅ **Compresión inteligente**: Optimiza storage manteniendo información clave
+
+**Métodos con contexto activo:**
+- Todos los análisis técnicos (`perform_technical_analysis`, `get_complete_analysis`)
+- Herramientas especializadas (Fibonacci, Bollinger, Elliott Wave, Confluencias)
+- Smart Money Concepts completo
+- Y más servicios en desarrollo (FASE 2-3)
+
+**Estado actual:** FASE 1 completada - Sistema base funcionando
+**Próximo:** FASE 2 - Herramientas MCP de consulta de contexto
 
 ---
 
@@ -1013,23 +1038,25 @@ invalidate_cache BTCUSDT
 5. Usa zonas Premium/Discount para timing de entradas
 6. Confirma actividad institucional antes de grandes posiciones
 
-### Para Trading General
-1. Usa `get_complete_analysis` para obtener una visión general rápida
+### Para Trading General (MEJORADO con Contexto Histórico)
+1. Usa `get_complete_analysis` para obtener una visión general rápida **con insights históricos**
 2. Comienza con `analyze_wyckoff_phase` para entender la estructura de mercado
 3. Combina `detect_bull_trap` y `detect_bear_trap` para evitar falsas señales
 4. Usa `find_wyckoff_events` para identificar springs y upthrusts como puntos de entrada
 5. Utiliza `analyze_volume_delta` para confirmar movimientos de precio
 6. Valida setups con `validate_wyckoff_setup` antes de entrar en posición
 7. Revisa `identify_support_resistance` antes de establecer niveles de grid
+8. **NUEVO**: Los análisis ahora incluyen contexto histórico automáticamente para mejor precisión
 
-### Para Análisis
-1. Comienza con `perform_technical_analysis` para análisis completo
+### Para Análisis (MEJORADO con Contexto Histórico)
+1. Comienza con `perform_technical_analysis` para análisis completo **con memoria histórica**
 2. Complementa con `analyze_wyckoff_phase` para estructura de mercado
 3. Usa `get_historical_summary` para contexto de largo plazo
 4. Combina `detect_trading_range` con `analyze_wyckoff_volume` para confirmar fases
 5. Identifica patrones con `identify_volume_anomalies`
 6. Usa `get_wyckoff_interpretation` para entender implicaciones de la fase actual
 7. Valida breakouts con `validate_breakout` antes de tomar decisiones
+8. **NUEVO**: Todos los análisis se enriquecen automáticamente con contexto de análisis previos
 
 ### Para Monitoreo
 1. Revisa `get_system_health` periódicamente
@@ -1042,10 +1069,17 @@ invalidate_cache BTCUSDT
 
 ## 📝 Notas Importantes
 
+### Sistema de Contexto Histórico (NOVEDAD v1.8.1)
+- ✨ **Memoria automática**: Cada análisis se enriquece con contexto histórico
+- ✨ **Patrones recurrentes**: El sistema detecta patrones basados en análisis previos
+- ✨ **Continuidad**: Los insights mejoran con el tiempo y uso
+- ✨ **Transparente**: Funciona automáticamente sin cambios en las APIs
+
+### General
 - Todas las herramientas funcionan sin API keys
 - Los datos son públicos de Bybit v5
 - Los tiempos están en UTC por defecto (configurable con timezone)
-- El sistema guarda automáticamente los análisis para referencia futura
+- El sistema guarda automáticamente los análisis para referencia futura **con contexto histórico**
 - La detección de trampas usa múltiples señales para mayor precisión
 - El análisis Wyckoff identifica 15 fases diferentes con eventos clave
 - Los springs y upthrusts se detectan automáticamente con scoring de significancia
@@ -1070,5 +1104,5 @@ Si encuentras problemas:
 
 ---
 
-*Versión: 1.7.1 - Actualizado: 13/06/2025*
-*Última actualización: Sistema 100% Operativo - Smart Money Concepts Completado*
+*Versión: 1.8.2 - Actualizado: 18/06/2025*
+*Última actualización: Sistema de Contexto Histórico ACTIVO - FASE 2 Fix compilación completada*

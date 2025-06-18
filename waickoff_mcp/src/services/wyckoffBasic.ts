@@ -16,6 +16,7 @@ import type {
 
 import { PerformanceMonitor } from '../utils/performance.js';
 import { FileLogger } from '../utils/fileLogger.js';
+import { ContextAwareRepository } from './context/contextRepository.js';
 import * as path from 'path';
 
 // ====================
@@ -208,6 +209,7 @@ export interface IWyckoffBasicService {
 export class WyckoffBasicService implements IWyckoffBasicService {
   private readonly logger: FileLogger;
   private readonly performanceMonitor: PerformanceMonitor;
+  private readonly contextAwareRepository: ContextAwareRepository;
 
   constructor(
     private readonly marketDataService: IMarketDataService,
@@ -220,6 +222,9 @@ export class WyckoffBasicService implements IWyckoffBasicService {
       enableRotation: true
     });
     this.performanceMonitor = new PerformanceMonitor();
+    
+    // Context-aware repository (TASK-027 FASE 2)
+    this.contextAwareRepository = new ContextAwareRepository();
   }
 
   /**
@@ -273,6 +278,32 @@ export class WyckoffBasicService implements IWyckoffBasicService {
           volumeCharacteristics: volumeContext,
           interpretation: phaseAnalysis.interpretation
         };
+
+        // Save to Context-Aware Repository (TASK-027 FASE 2)
+        try {
+          const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+            `${symbol}_wyckoff_${timeframe}_${Date.now()}`,
+            'wyckoff',
+            { ...analysis, symbol, timeframe },
+            { 
+              symbol, 
+              timeframe,
+              tags: [
+                `timeframe:${timeframe}`,
+                `phase:${analysis.currentPhase}`,
+                `confidence:${analysis.phaseConfidence}`,
+                `progress:${analysis.phaseProgress}`,
+                `bias:${analysis.interpretation.bias}`,
+                `strength:${analysis.interpretation.strength}`,
+                `events:${analysis.keyEvents.length}`,
+                `range:${analysis.tradingRange ? 'detected' : 'none'}`
+              ]
+            }
+          );
+          this.logger.info(`Wyckoff analysis saved with context - ID: ${analysisId} (TASK-027 FASE 2)`);
+        } catch (contextError) {
+          this.logger.warn(`Failed to save Wyckoff analysis context for ${symbol}:`, contextError);
+        }
 
         this.logger.info(`Wyckoff analysis complete for ${symbol}: ${phaseAnalysis.phase} (${phaseAnalysis.confidence}% confidence)`);
         return analysis;

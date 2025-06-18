@@ -27,6 +27,7 @@ import type {
 import { ExchangeAggregator } from '../adapters/exchanges/common/ExchangeAggregator.js';
 import { PerformanceMonitor } from '../utils/performance.js';
 import { FileLogger } from '../utils/fileLogger.js';
+import { ContextAwareRepository } from './context/contextRepository.js';
 import * as path from 'path';
 
 // ====================
@@ -490,6 +491,7 @@ export class WyckoffAdvancedService implements IWyckoffAdvancedService {
   private readonly logger: FileLogger;
   private readonly performanceMonitor: PerformanceMonitor;
   private readonly exchangeAggregator: ExchangeAggregator;
+  private readonly contextAwareRepository: ContextAwareRepository;
 
   constructor(
     private readonly marketDataService: IMarketDataService,
@@ -510,6 +512,9 @@ export class WyckoffAdvancedService implements IWyckoffAdvancedService {
       new Map(), // Empty adapters map for now
       {} // Default config
     );
+    
+    // Context-aware repository (TASK-027 FASE 2)
+    this.contextAwareRepository = new ContextAwareRepository();
   }
 
   /**
@@ -594,6 +599,32 @@ export class WyckoffAdvancedService implements IWyckoffAdvancedService {
           manipulationSigns,
           interpretation
         };
+
+        // Save to Context-Aware Repository (TASK-027 FASE 2)
+        try {
+          const analysisId = await this.contextAwareRepository.saveAnalysisWithContext(
+            `${symbol}_composite_man_${timeframe}_${Date.now()}`,
+            'wyckoff_advanced',
+            { ...analysis, symbol, timeframe },
+            { 
+              symbol, 
+              timeframe,
+              tags: [
+                `timeframe:${timeframe}`,
+                `type:composite_man`,
+                `manipulation_score:${manipulationScore}`,
+                `phase:${analysis.interpretation.phase}`,
+                `strength:${analysis.interpretation.strength}`,
+                `confidence:${analysis.interpretation.confidence}`,
+                `activity_level:${analysis.institutionalActivity.activityLevel}`,
+                `manipulation_signs:${manipulationSigns.length}`
+              ]
+            }
+          );
+          this.logger.info(`Composite Man analysis saved with context - ID: ${analysisId} (TASK-027 FASE 2)`);
+        } catch (contextError) {
+          this.logger.warn(`Failed to save Composite Man analysis context for ${symbol}:`, contextError);
+        }
 
         this.logger.info(`Composite Man analysis complete for ${symbol}: ${manipulationScore}% manipulation score`);
         return analysis;

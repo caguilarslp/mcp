@@ -12,11 +12,16 @@ import {
 } from '../../../types/index.js';
 import { Logger } from '../../../utils/logger.js';
 import { MarketAnalysisEngine } from '../../../core/engine.js';
+import { ContextAwareRepository } from '../../../services/context/contextRepository.js';
 
 export class SmartMoneyAnalysisHandlers {
   private readonly logger = new Logger('SmartMoneyAnalysisHandlers');
+  private readonly contextAwareRepository: ContextAwareRepository;
 
-  constructor(private readonly engine: MarketAnalysisEngine) {}
+  constructor(private readonly engine: MarketAnalysisEngine) {
+    // Context-aware repository (TASK-027 FASE 2)
+    this.contextAwareRepository = new ContextAwareRepository();
+  }
 
   /**
    * Create SmartMoneyAnalysisHandlers instance
@@ -55,6 +60,18 @@ export class SmartMoneyAnalysisHandlers {
         useMultiExchange
       );
       
+      // Get historical context for enhanced response (TASK-027 FASE 2)
+      let historicalContext = null;
+      try {
+        historicalContext = await this.contextAwareRepository.search(
+          { symbol, type: 'smc' },
+          { limit: 5 } // Last 5 SMC analyses
+        );
+        this.logger.info(`Retrieved ${historicalContext.length} historical SMC analyses for context`);
+      } catch (contextError) {
+        this.logger.warn(`Failed to retrieve historical context for ${symbol}:`, contextError);
+      }
+      
       return this.formatSuccessResponse({
         analysis,
         summary: {
@@ -80,7 +97,13 @@ export class SmartMoneyAnalysisHandlers {
             description: level.description
           })),
           tradingRecommendations: analysis.tradingRecommendations.filter((rec: any) => rec.confidence >= 70).slice(0, 3)
-        }
+        },
+        // Historical context for enhanced insights (TASK-027 FASE 2)
+        historicalContext: historicalContext ? {
+          previousAnalyses: historicalContext.length,
+          recentTrends: this.extractHistoricalTrends(historicalContext),
+          contextualInsights: this.generateContextualInsights(analysis, historicalContext)
+        } : null
       });
       
     } catch (error) {
@@ -259,5 +282,161 @@ export class SmartMoneyAnalysisHandlers {
         }, null, 2)
       }]
     };
+  }
+
+  // ====================
+  // HISTORICAL CONTEXT METHODS (TASK-027 FASE 2)
+  // ====================
+
+  /**
+   * Extract historical trends from previous analyses
+   */
+  private extractHistoricalTrends(historicalContext: any[]): any {
+    if (!historicalContext || historicalContext.length === 0) {
+      return null;
+    }
+
+    try {
+      const trends = {
+        biasEvolution: this.analyzeBiasEvolution(historicalContext),
+        confluenceGrowth: this.analyzeConfluenceGrowth(historicalContext),
+        institutionalActivity: this.analyzeInstitutionalTrend(historicalContext)
+      };
+
+      return trends;
+    } catch (error) {
+      this.logger.warn('Failed to extract historical trends:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Generate contextual insights based on current analysis and historical data
+   */
+  private generateContextualInsights(currentAnalysis: any, historicalContext: any[]): string[] {
+    const insights: string[] = [];
+
+    try {
+      // Compare current bias with historical trend
+      const biasEvolution = this.analyzeBiasEvolution(historicalContext);
+      if (biasEvolution && biasEvolution.trend !== 'stable') {
+        if (currentAnalysis.marketBias.direction === biasEvolution.dominantBias) {
+          insights.push(`Market bias ${currentAnalysis.marketBias.direction} aligns with recent ${biasEvolution.trend} trend`);
+        } else {
+          insights.push(`Market bias ${currentAnalysis.marketBias.direction} contrasts with recent ${biasEvolution.dominantBias} trend - potential reversal`);
+        }
+      }
+
+      // Analyze confluence development
+      const confluenceGrowth = this.analyzeConfluenceGrowth(historicalContext);
+      if (confluenceGrowth) {
+        if (currentAnalysis.confluences.length > confluenceGrowth.average) {
+          insights.push(`Current confluence count (${currentAnalysis.confluences.length}) above recent average (${confluenceGrowth.average.toFixed(1)})`);
+        } else if (currentAnalysis.confluences.length < confluenceGrowth.average * 0.7) {
+          insights.push(`Lower confluence activity detected - market may be transitioning`);
+        }
+      }
+
+      // Institutional activity comparison
+      const institutionalTrend = this.analyzeInstitutionalTrend(historicalContext);
+      if (institutionalTrend) {
+        if (currentAnalysis.institutionalActivity.score > institutionalTrend.average + 10) {
+          insights.push(`Increased institutional activity (+${(currentAnalysis.institutionalActivity.score - institutionalTrend.average).toFixed(0)} vs avg)`);
+        } else if (currentAnalysis.institutionalActivity.score < institutionalTrend.average - 10) {
+          insights.push(`Decreased institutional activity (-${(institutionalTrend.average - currentAnalysis.institutionalActivity.score).toFixed(0)} vs avg)`);
+        }
+      }
+
+      // If no insights, add generic context
+      if (insights.length === 0) {
+        insights.push(`Analysis based on ${historicalContext.length} previous SMC analyses`);
+      }
+
+    } catch (error) {
+      this.logger.warn('Failed to generate contextual insights:', error);
+      insights.push('Historical context available but analysis failed');
+    }
+
+    return insights;
+  }
+
+  /**
+   * Analyze bias evolution over time
+   */
+  private analyzeBiasEvolution(historicalContext: any[]): any {
+    try {
+      const biases = historicalContext
+        .map(ctx => ctx.data?.marketBias?.direction)
+        .filter(bias => bias);
+
+      if (biases.length === 0) return null;
+
+      const bullishCount = biases.filter(b => b === 'bullish').length;
+      const bearishCount = biases.filter(b => b === 'bearish').length;
+      const neutralCount = biases.filter(b => b === 'neutral').length;
+
+      const dominantBias = bullishCount > bearishCount && bullishCount > neutralCount ? 'bullish' :
+                          bearishCount > bullishCount && bearishCount > neutralCount ? 'bearish' : 'neutral';
+
+      // Simple trend detection (last 3 vs first 3)
+      const recent = biases.slice(-3);
+      const earlier = biases.slice(0, 3);
+      const recentBullish = recent.filter(b => b === 'bullish').length;
+      const earlierBullish = earlier.filter(b => b === 'bullish').length;
+
+      let trend = 'stable';
+      if (recentBullish > earlierBullish) trend = 'increasingly_bullish';
+      else if (recentBullish < earlierBullish) trend = 'increasingly_bearish';
+
+      return {
+        dominantBias,
+        trend,
+        distribution: { bullish: bullishCount, bearish: bearishCount, neutral: neutralCount }
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  /**
+   * Analyze confluence growth patterns
+   */
+  private analyzeConfluenceGrowth(historicalContext: any[]): any {
+    try {
+      const confluenceCounts = historicalContext
+        .map(ctx => ctx.data?.confluences?.length || 0)
+        .filter(count => count >= 0);
+
+      if (confluenceCounts.length === 0) return null;
+
+      const average = confluenceCounts.reduce((sum, count) => sum + count, 0) / confluenceCounts.length;
+      const max = Math.max(...confluenceCounts);
+      const min = Math.min(...confluenceCounts);
+
+      return { average, max, min, count: confluenceCounts.length };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  /**
+   * Analyze institutional activity trends
+   */
+  private analyzeInstitutionalTrend(historicalContext: any[]): any {
+    try {
+      const institutionalScores = historicalContext
+        .map(ctx => ctx.data?.institutionalActivity?.score || 0)
+        .filter(score => score >= 0);
+
+      if (institutionalScores.length === 0) return null;
+
+      const average = institutionalScores.reduce((sum, score) => sum + score, 0) / institutionalScores.length;
+      const max = Math.max(...institutionalScores);
+      const min = Math.min(...institutionalScores);
+
+      return { average, max, min, count: institutionalScores.length };
+    } catch (error) {
+      return null;
+    }
   }
 }
