@@ -18,9 +18,6 @@ Curso de quant sección métricas de rendimiento
 kpis y métricas para rendimiento, eso lo haremos en otro mcp
 cagr, sharpe, sortino, máximo rendimiento, ....
 
-
-orderflow
-https://github.com/fintools-ai/mcp-order-flow-server?tab=readme-ov-file
-https://mcp.so/server/mcp-order-flow-server/fintools-ai
-
+- conexión con api para ver mis trades
+- no veo contexto, debemos hacerlo inteligente no que cada petición mia sea una petición a bybit/binance y un reporte separado
 
