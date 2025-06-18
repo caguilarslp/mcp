@@ -5831,3 +5831,101 @@ task: <Task cancelling name='Task-1' coro=<main() done, defined at D:\projects\m
 2025-06-17 18:57:28 - src.manager - DEBUG - Not enough trades for indicators: 0 < 50
 2025-06-17 18:57:28 - src.manager - DEBUG - Processed batch of 1 trades for bybit:SOLUSDT
 2025-06-17 18:57:28 - src.manager - INFO - WADM Manager stopped
+2025-06-17 19:03:29 - __main__ - INFO - Starting WADM - wAIckoff Data Manager
+2025-06-17 19:03:29 - src.storage - INFO - Storage manager initialized
+2025-06-17 19:03:29 - src.manager - INFO - WADM Manager initialized
+2025-06-17 19:03:29 - src.manager - INFO - Starting WADM Manager...
+2025-06-17 19:03:29 - src.manager - INFO - Started 2 collectors
+2025-06-17 19:03:31 - src.collectors.base - INFO - binance: Connected to WebSocket
+2025-06-17 19:03:31 - src.collectors.base - INFO - binance: Subscribed to ['btcusdt', 'ethusdt', 'xrpusdt']
+2025-06-17 19:03:32 - src.collectors.base - INFO - bybit: Connected to WebSocket
+2025-06-17 19:03:32 - src.collectors.base - INFO - bybit: Subscribed to ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']
+2025-06-17 19:03:34 - src.manager - INFO - Processing 6 buffered trades for binance:XRPUSDT
+2025-06-17 19:03:34 - src.manager - INFO - Processing 19 buffered trades for bybit:ETHUSDT
+2025-06-17 19:03:34 - src.manager - INFO - Processing 6 buffered trades for bybit:SOLUSDT
+2025-06-17 19:03:34 - src.manager - INFO - Processing 39 buffered trades for binance:ETHUSDT
+2025-06-17 19:03:34 - src.manager - INFO - Processing 9 buffered trades for binance:BTCUSDT
+2025-06-17 19:03:34 - src.manager - INFO - Processing 1 buffered trades for bybit:BTCUSDT
+2025-06-17 19:03:38 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:03:38 - src.manager - INFO - Stopping WADM Manager...
+2025-06-17 19:03:38 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:03:38 - src.collectors.base - INFO - bybit: Collector stopped
+2025-06-17 19:03:38 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:03:38 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:03:45 - src.collectors.base - INFO - binance: Collector stopped
+2025-06-17 19:03:45 - src.manager - INFO - WADM Manager stopped
+2025-06-17 19:04:05 - __main__ - INFO - Starting WADM - wAIckoff Data Manager
+2025-06-17 19:04:05 - src.storage - INFO - Storage manager initialized
+2025-06-17 19:04:05 - src.manager - INFO - WADM Manager initialized
+2025-06-17 19:04:05 - src.manager - INFO - Starting WADM Manager...
+2025-06-17 19:04:05 - src.manager - INFO - Started 2 collectors
+2025-06-17 19:04:06 - src.collectors.base - INFO - binance: Connected to WebSocket
+2025-06-17 19:04:06 - src.collectors.base - INFO - binance: Subscribed to ['btcusdt', 'ethusdt', 'xrpusdt']
+2025-06-17 19:04:07 - src.collectors.base - INFO - bybit: Connected to WebSocket
+2025-06-17 19:04:07 - src.collectors.base - INFO - bybit: Subscribed to ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']
+2025-06-17 19:04:10 - src.manager - INFO - Processing 11 buffered trades for binance:BTCUSDT
+2025-06-17 19:04:10 - src.manager - INFO - Processing 21 buffered trades for binance:ETHUSDT
+2025-06-17 19:04:10 - src.manager - INFO - Processing 8 buffered trades for binance:XRPUSDT
+2025-06-17 19:04:10 - src.manager - INFO - Processing 1 buffered trades for bybit:ETHUSDT
+2025-06-17 19:04:10 - src.manager - INFO - Processing 1 buffered trades for bybit:SOLUSDT
+2025-06-17 19:04:10 - src.manager - INFO - Processing 2 buffered trades for bybit:BTCUSDT
+2025-06-17 19:04:15 - src.manager - INFO - Processing 17 buffered trades for binance:BTCUSDT
+2025-06-17 19:04:15 - src.manager - INFO - Processing 35 buffered trades for binance:ETHUSDT
+2025-06-17 19:04:15 - src.manager - INFO - Processing 13 buffered trades for bybit:ETHUSDT
+2025-06-17 19:04:15 - src.manager - INFO - Processing 6 buffered trades for bybit:SOLUSDT
+2025-06-17 19:04:15 - src.manager - INFO - Processing 1 buffered trades for bybit:BTCUSDT
+2025-06-17 19:04:16 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:04:16 - src.manager - INFO - Stopping WADM Manager...
+2025-06-17 19:04:16 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:04:16 - src.collectors.base - INFO - bybit: Collector stopped
+2025-06-17 19:04:16 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:04:16 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:04:24 - src.collectors.base - INFO - binance: Collector stopped
+2025-06-17 19:04:24 - src.manager - INFO - WADM Manager stopped
+2025-06-17 19:05:20 - __main__ - INFO - Starting WADM - wAIckoff Data Manager
+2025-06-17 19:05:20 - src.storage - INFO - Storage manager initialized
+2025-06-17 19:05:20 - src.manager - INFO - WADM Manager initialized
+2025-06-17 19:05:20 - src.manager - INFO - Starting WADM Manager...
+2025-06-17 19:05:20 - src.manager - INFO - Started 2 collectors
+2025-06-17 19:05:21 - src.collectors.base - INFO - binance: Connected to WebSocket
+2025-06-17 19:05:21 - src.collectors.base - INFO - binance: Subscribed to ['btcusdt', 'ethusdt', 'xrpusdt', 'hbarusdt']
+2025-06-17 19:05:22 - src.collectors.base - INFO - bybit: Connected to WebSocket
+2025-06-17 19:05:22 - src.collectors.base - INFO - bybit: Subscribed to ['BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'HBARUSDT']
+2025-06-17 19:05:25 - src.manager - INFO - Processing 8 buffered trades for binance:BTCUSDT
+2025-06-17 19:05:25 - src.manager - INFO - Processing 26 buffered trades for binance:ETHUSDT
+2025-06-17 19:05:25 - src.manager - INFO - Processing 10 buffered trades for binance:XRPUSDT
+2025-06-17 19:05:25 - src.manager - INFO - Processing 6 buffered trades for binance:HBARUSDT
+2025-06-17 19:05:25 - src.manager - INFO - Processing 4 buffered trades for bybit:XRPUSDT
+2025-06-17 19:05:25 - src.manager - INFO - Processing 10 buffered trades for bybit:ETHUSDT
+2025-06-17 19:05:26 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:26 - src.manager - INFO - Stopping WADM Manager...
+2025-06-17 19:05:26 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:26 - src.collectors.base - INFO - bybit: Collector stopped
+2025-06-17 19:05:26 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:27 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:27 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:36 - src.collectors.base - INFO - binance: Collector stopped
+2025-06-17 19:05:36 - src.manager - INFO - WADM Manager stopped
+2025-06-17 19:05:53 - __main__ - INFO - Starting WADM - wAIckoff Data Manager
+2025-06-17 19:05:53 - src.storage - INFO - Storage manager initialized
+2025-06-17 19:05:53 - src.manager - INFO - WADM Manager initialized
+2025-06-17 19:05:53 - src.manager - INFO - Starting WADM Manager...
+2025-06-17 19:05:53 - src.manager - INFO - Started 2 collectors
+2025-06-17 19:05:54 - src.collectors.base - INFO - binance: Connected to WebSocket
+2025-06-17 19:05:54 - src.collectors.base - INFO - binance: Subscribed to ['btcusdt', 'ethusdt', 'xrpusdt', 'hbarusdt']
+2025-06-17 19:05:55 - src.collectors.base - INFO - bybit: Connected to WebSocket
+2025-06-17 19:05:55 - src.collectors.base - INFO - bybit: Subscribed to ['BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'HBARUSDT']
+2025-06-17 19:05:58 - src.manager - INFO - Processing 1 buffered trades for binance:BTCUSDT
+2025-06-17 19:05:58 - src.manager - INFO - Processing 7 buffered trades for bybit:ETHUSDT
+2025-06-17 19:05:58 - src.manager - INFO - Processing 8 buffered trades for bybit:XRPUSDT
+2025-06-17 19:05:58 - src.manager - INFO - Processing 6 buffered trades for binance:XRPUSDT
+2025-06-17 19:05:58 - src.manager - INFO - Processing 10 buffered trades for binance:ETHUSDT
+2025-06-17 19:05:58 - src.manager - INFO - Processing 1 buffered trades for bybit:BTCUSDT
+2025-06-17 19:05:58 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:58 - src.manager - INFO - Stopping WADM Manager...
+2025-06-17 19:05:58 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:58 - src.collectors.base - INFO - bybit: Collector stopped
+2025-06-17 19:05:58 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:05:58 - __main__ - INFO - Shutdown signal received
+2025-06-17 19:06:07 - src.collectors.base - INFO - binance: Collector stopped
+2025-06-17 19:06:07 - src.manager - INFO - WADM Manager stopped

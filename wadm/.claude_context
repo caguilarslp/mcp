@@ -34,10 +34,22 @@ WADM (wAIckoff Data Manager) is a real-time market data collector and indicator 
 - `src/storage/` - MongoDB manager
 
 ### Next Session TODOs
-1. Debug why indicators aren't calculating
+1. Debug why indicators aren't calculating (TASK-001)
 2. Fix the MongoDB query for recent trades
 3. Test indicator calculations
-4. Add simple status API
+4. Start implementing high-priority indicators
+
+### Indicator Development Plan
+- 12 sophisticated indicators planned
+- Based on Smart Money Concepts and Wyckoff
+- Focus on institutional activity detection
+- See `claude/tasks/task-tracker.md` for full list
+
+### Storage Strategy
+- Tiered storage approach designed (ADR-001)
+- Hot/Warm/Cold/Archive tiers
+- 97% storage reduction possible
+- Implementation after indicators work
 
 ### Environment
 - MongoDB required (see .env for connection string)

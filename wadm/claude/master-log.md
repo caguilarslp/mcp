@@ -53,3 +53,40 @@
 - Indicators not being calculated despite having enough trades
 - Need to investigate the trade retrieval query from MongoDB
 - May need to adjust the time window or calculation logic
+
+## 2024-12-27 - Task Planning Session
+
+### Indicator Roadmap Created
+Created comprehensive task list for Smart Money and institutional analysis indicators:
+
+#### High Priority Indicators
+1. **Volume Profile Enhancement** - TPO, developing VA, session profiles
+2. **Order Flow Analysis** - Exhaustion, momentum, stop runs
+3. **VWAP** - Standard, anchored, session-based with bands
+4. **Market Structure** - Wyckoff phases, trend analysis, springs/upthrusts
+
+#### Medium Priority Indicators
+5. **Liquidity Map** - HVN/LVN, order blocks, liquidity pools
+6. **Smart Money Footprint** - Iceberg orders, absorption, VSA
+7. **Time-Based Volume** - CVD, rolling analysis, relative volume
+8. **Delta Divergence** - Price/delta divergence, momentum
+
+#### Low Priority Indicators
+9. **Footprint Charts** - Bid/ask imbalances, heat maps
+10. **Market Profile Letters** - Traditional TPO letters
+11. **Composite Indicators** - Combined metrics for confluence
+
+### Storage Strategy Considerations
+- Need to implement tiered storage (hot/warm/cold)
+- Data aggregation for older trades
+- Compression strategies
+- Efficient indexing for queries
+- Archival strategy for long-term data
+
+### Philosophy
+All indicators follow Smart Money Concepts and institutional analysis:
+- Focus on where large players accumulate/distribute
+- Identify liquidity zones and manipulation
+- Track institutional footprints
+- Detect accumulation/distribution patterns
+- Multi-timeframe confluence analysis
