@@ -1,6 +1,6 @@
 # ADR-001: Storage Strategy for Market Data
 
-**Date**: 2024-12-27  
+**Date**: 2025-06-17  
 **Status**: Proposed  
 **Context**: WADM Project
 

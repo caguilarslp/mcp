@@ -1,6 +1,6 @@
 # WADM Development Log
 
-## 2024-12-27
+## 2025-06-17
 
 ### Initial Setup - v0.1.0
 - Created project structure (src/, collectors/, indicators/, models/, storage/)
@@ -54,7 +54,7 @@
 - Need to investigate the trade retrieval query from MongoDB
 - May need to adjust the time window or calculation logic
 
-## 2024-12-27 - Task Planning Session
+## 2025-06-17 - Task Planning Session
 
 ### Indicator Roadmap Created
 Created comprehensive task list for Smart Money and institutional analysis indicators:
@@ -90,3 +90,80 @@ All indicators follow Smart Money Concepts and institutional analysis:
 - Track institutional footprints
 - Detect accumulation/distribution patterns
 - Multi-timeframe confluence analysis
+
+## 2025-06-17 - Visualization Strategy Session
+
+### Dashboard Planning (ADR-002)
+Analizadas opciones para panel de visualización:
+
+#### Opción Elegida: Lightweight Web
+- **Stack**: FastAPI + TradingView Lightweight Charts + Plotly.js
+- **Razón**: Simplicidad, rendimiento, profesional
+- **Sin frameworks pesados**: HTML/JS vanilla
+
+#### Componentes Planeados
+1. **Gráfico Principal**: TradingView Lightweight Charts
+   - Candlesticks con zoom/pan profesional
+   - Overlays de indicadores
+   - Gratis y open source
+
+2. **Volume Profile**: Plotly.js
+   - Histograma lateral
+   - POC, VAH, VAL destacados
+   - Heatmaps de liquidez
+
+3. **Footprint Charts**: D3.js (custom)
+   - Grid bid/ask por precio/tiempo
+   - Imbalances coloreados
+   - Control total de visualización
+
+4. **Order Flow**: Plotly.js
+   - Delta histogram
+   - CVD línea
+   - Absorption highlights
+
+#### Ventajas del Approach
+- Renderizado en cliente (ligero para servidor)
+- WebSockets ya implementados
+- Un solo contenedor Docker
+- Sin build process complejo
+- Estándar de la industria (TradingView)
+
+## 2025-06-17 - LLM Integration Strategy
+
+### Análisis con IA (ADR-003)
+Diseñada estrategia para integrar LLMs en análisis de mercado:
+
+#### Casos de Uso Principales
+1. **Análisis de Contexto**: Interpretar confluencia de indicadores
+2. **Detección de Patrones**: Identificar setups institucionales complejos
+3. **Alertas Inteligentes**: Notificaciones contextualizadas en lenguaje natural
+4. **Reportes Automáticos**: Resúmenes de sesión y análisis pre-market
+
+#### Arquitectura Multi-LLM Router
+- **Claude 3.5**: Detección de patrones Wyckoff (mejor razonamiento)
+- **GPT-4**: Narrativas de mercado (mejor redacción)
+- **Gemini**: Alertas rápidas (costo-eficiente)
+- **Llama 3 local**: Análisis frecuentes (privacidad y gratis)
+
+#### Ejemplos de Uso
+1. **Alerta de Spring**:
+   "Potential Wyckoff Spring at $45,230. Institutional absorption with 3.2x volume. Watch $45,500 for confirmation. 85% historical success."
+
+2. **Análisis de Sesión**:
+   "London showed accumulation. Smart money footprint at $45,100-$45,300. Unfinished business at $45,800. Monitor order flow above VWAP."
+
+3. **Confluencia Multi-timeframe**:
+   "Bullish confluence: 4H accumulation phase C, 1H spring confirmed, 15m absorption at support. Long on pullbacks to $45,400."
+
+#### Ventajas del Approach
+- Optimización costo/calidad por tarea
+- Redundancia ante fallos
+- Análisis local para privacidad
+- Narrativas profesionales automáticas
+- Detección de patrones imposibles manualmente
+
+#### Costos Estimados
+- ~$40/día para 1000 análisis completos
+- $0 para análisis locales frecuentes
+- ROI positivo con un solo trade mejorado

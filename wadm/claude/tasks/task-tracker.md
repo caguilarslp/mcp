@@ -176,6 +176,81 @@
 - [ ] Include MongoDB and Redis
 - [ ] Add health checks
 
+### TASK-016: Trading Dashboard
+**Status:** TODO  
+**Priority:** MEDIUM  
+**Time:** 2 weeks  
+**Description:** Web-based visualization dashboard
+- [ ] Setup static file serving in FastAPI
+- [ ] Implement TradingView Lightweight Charts
+- [ ] Add Plotly.js for Volume Profile
+- [ ] Create WebSocket data feed
+- [ ] Build responsive layout
+- [ ] Add indicator overlays
+- [ ] Implement footprint chart with D3.js
+- [ ] Multi-timeframe synchronization
+
+## AI/LLM Integration Tasks
+
+### TASK-017: LLM Integration Foundation
+**Status:** TODO  
+**Priority:** MEDIUM  
+**Time:** 1 week  
+**Description:** Basic LLM integration for market analysis
+- [ ] Create LLM abstraction layer
+- [ ] Implement context builder from indicators
+- [ ] Setup API integrations (OpenAI/Claude)
+- [ ] Create prompt templates library
+- [ ] Add response validation
+- [ ] Implement caching layer
+
+### TASK-018: Intelligent Alerts System
+**Status:** TODO  
+**Priority:** HIGH  
+**Time:** 3 days  
+**Description:** LLM-powered contextual alerts
+- [ ] Pattern detection alerts
+- [ ] Wyckoff phase transitions
+- [ ] Institutional activity alerts
+- [ ] Multi-timeframe confluence alerts
+- [ ] Natural language notifications
+- [ ] Priority scoring system
+
+### TASK-019: Market Analysis Reports
+**Status:** TODO  
+**Priority:** MEDIUM  
+**Time:** 1 week  
+**Description:** Automated market analysis reports
+- [ ] Session analysis reports
+- [ ] Pre-market preparation
+- [ ] Key levels with context
+- [ ] Institutional positioning summary
+- [ ] Risk assessment narratives
+- [ ] Multi-asset correlation analysis
+
+### TASK-020: Multi-LLM Router
+**Status:** TODO  
+**Priority:** LOW  
+**Time:** 1 week  
+**Description:** Optimize LLM usage with intelligent routing
+- [ ] Implement LLM router logic
+- [ ] Task-specific model selection
+- [ ] Cost optimization algorithms
+- [ ] Fallback mechanisms
+- [ ] Performance monitoring
+- [ ] A/B testing framework
+
+### TASK-021: Local LLM Integration
+**Status:** TODO  
+**Priority:** LOW  
+**Time:** 3 days  
+**Description:** Integrate local models for privacy/cost
+- [ ] Setup Ollama integration
+- [ ] Fine-tune for trading terminology
+- [ ] Create hybrid local/cloud pipeline
+- [ ] Implement privacy filters
+- [ ] Performance benchmarking
+
 ## Completed Tasks
 
 None yet - just started!

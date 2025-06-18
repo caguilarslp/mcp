@@ -32,13 +32,24 @@
 - **TASK-013**: Storage Optimization (4h) - HIGH
 - **TASK-014**: API Development (3h) - MEDIUM
 - **TASK-015**: Docker Support (2h) - LOW
+- **TASK-016**: Trading Dashboard (2 weeks) - MEDIUM
 
-**Infrastructure Total**: 9 hours
+**Infrastructure Total**: 9 hours + 2 weeks
+
+## AI/LLM Integration Tasks
+- **TASK-017**: LLM Foundation (1 week) - MEDIUM
+- **TASK-018**: Intelligent Alerts (3 days) - HIGH
+- **TASK-019**: Analysis Reports (1 week) - MEDIUM
+- **TASK-020**: Multi-LLM Router (1 week) - LOW
+- **TASK-021**: Local LLM (3 days) - LOW
+
+**AI Integration Total**: ~3.5 weeks
 
 ## Total Estimated Time
 - Indicators: 42 hours
-- Infrastructure: 9 hours
-- **Grand Total**: 51 hours
+- Infrastructure: 9 hours + 2 weeks
+- AI Integration: 3.5 weeks
+- **Grand Total**: ~51 hours + 5.5 weeks
 
 ## Recommended Execution Order
 1. Fix current system (TASK-001)
@@ -46,8 +57,11 @@
 3. Storage optimization (TASK-013)
 4. API development (TASK-014)
 5. Phase 2 indicators
-6. Phase 3 indicators
-7. Docker support
+6. LLM Foundation + Alerts (TASK-017, 018)
+7. Trading Dashboard (TASK-016)
+8. Phase 3 indicators
+9. Advanced LLM features
+10. Docker support
 
 ## Key Principles
 - All indicators follow Smart Money Concepts
