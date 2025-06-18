@@ -2,7 +2,7 @@
 Basic data models for WADM
 """
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Dict, Any, List
 from enum import Enum
 
@@ -24,6 +24,12 @@ class Trade:
     side: Side
     timestamp: datetime
     trade_id: str
+    
+    def __post_init__(self):
+        """Ensure timestamp is timezone-aware"""
+        if self.timestamp and self.timestamp.tzinfo is None:
+            # If naive datetime, assume UTC
+            self.timestamp = self.timestamp.replace(tzinfo=timezone.utc)
     
     def to_dict(self) -> Dict[str, Any]:
         return {

@@ -1,7 +1,7 @@
 """
 Binance WebSocket collector
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 import websockets
 from src.collectors.base import BaseCollector
@@ -54,7 +54,7 @@ class BinanceCollector(BaseCollector):
                 price=float(data["p"]),
                 quantity=float(data["q"]),
                 side=Side.BUY if data["m"] else Side.SELL,  # m=true means seller is maker
-                timestamp=datetime.fromtimestamp(data["T"] / 1000),
+                timestamp=datetime.fromtimestamp(data["T"] / 1000, tz=timezone.utc),
                 trade_id=str(data["a"])  # Binance uses 'a' for aggregated trade ID
             )
             return [trade]

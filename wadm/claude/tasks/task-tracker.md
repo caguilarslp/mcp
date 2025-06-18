@@ -15,6 +15,55 @@
 
 ## Indicator Development Tasks
 
+### TASK-022: Data Aggregation Service
+**Status:** TODO  
+**Priority:** HIGH  
+**Time:** 1 week  
+**Description:** Servicio de agregación temporal para análisis histórico
+- [ ] Crear AggregationService para timeframes estándar (5m, 15m, 1H, 2H, 4H, D, W)
+- [ ] Implementar cálculo de velas OHLCV desde trades raw
+- [ ] Agregar Volume Profile por período temporal
+- [ ] Calcular Order Flow agregado por vela
+- [ ] Crear índices MongoDB optimizados para queries temporales
+- [ ] Implementar caché de agregaciones frecuentes
+- [ ] Storage tiered automático (hot → warm → cold)
+- [ ] Compresión de datos históricos
+
+### TASK-023: FastMCP Server Implementation
+**Status:** TODO  
+**Priority:** HIGH  
+**Time:** 1 week  
+**Description:** Implementar servidor MCP 2.8.0 para integración con Claude Desktop
+- [ ] Setup FastAPI con soporte MCP 2.8.0 protocol
+- [ ] Implementar autenticación para MCP
+- [ ] Endpoints MCP-compliant:
+  - [ ] `/mcp/v1/resources` - Lista recursos disponibles
+  - [ ] `/mcp/v1/tools` - Herramientas de análisis
+  - [ ] `/mcp/v1/prompts` - Prompts predefinidos Wyckoff
+- [ ] Tools específicos:
+  - [ ] `get_market_structure` - Análisis de estructura
+  - [ ] `get_volume_profile` - Perfil de volumen histórico
+  - [ ] `get_order_flow` - Order flow agregado
+  - [ ] `analyze_wyckoff_phase` - Detección de fases
+  - [ ] `find_spring_patterns` - Búsqueda de springs/upthrusts
+- [ ] WebSocket support para updates en tiempo real
+- [ ] Rate limiting y caché
+- [ ] Documentación MCP para Claude Desktop
+
+### TASK-024: Historical Data API
+**Status:** TODO  
+**Priority:** HIGH  
+**Time:** 3 days  
+**Description:** API RESTful para datos históricos agregados
+- [ ] Endpoint: `GET /api/v1/klines/{symbol}/{timeframe}`
+- [ ] Query params: start_time, end_time, limit, indicators[]
+- [ ] Endpoint: `GET /api/v1/volume-profile/{symbol}/{timeframe}`
+- [ ] Endpoint: `GET /api/v1/order-flow/{symbol}/{timeframe}`
+- [ ] Respuesta optimizada con solo campos solicitados
+- [ ] Paginación para requests largos
+- [ ] Compresión gzip para respuestas grandes
+- [ ] CORS headers para acceso desde Claude Desktop
+
 ### TASK-002: Volume Profile Enhancement
 **Status:** TODO  
 **Priority:** HIGH  

@@ -1,7 +1,7 @@
 """
 Order Flow indicator calculator
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 from src.models import OrderFlow, Exchange
 from src.logger import get_logger
@@ -60,7 +60,7 @@ class OrderFlowCalculator:
         return OrderFlow(
             symbol=symbol,
             exchange=Exchange(exchange),
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             buy_volume=buy_volume,
             sell_volume=sell_volume,
             delta=delta,

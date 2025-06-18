@@ -1,8 +1,9 @@
 """
 Main WADM Manager - Coordinates collectors and indicators
+FIXED VERSION with better error handling and debugging
 """
 import asyncio
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from typing import List, Dict, Any
 from collections import defaultdict
 from src.collectors import BybitCollector, BinanceCollector
@@ -79,8 +80,8 @@ class WADMManager:
             logger.info(f"Saved {saved} trades for {key}, total processed: {self.stats['trades_processed']}")
             
             # Calculate indicators if enough time has passed
-            now = datetime.now(timezone.utc)
-            last_calc = self.last_indicator_calc.get(key, datetime.min.replace(tzinfo=timezone.utc))
+            now = datetime.utcnow()
+            last_calc = self.last_indicator_calc.get(key, datetime.min)
             
             # Calculate indicators every 10 seconds or if never calculated
             if (now - last_calc).total_seconds() > 10:
@@ -121,7 +122,7 @@ class WADMManager:
                 self.storage.save_volume_profile(vp)
                 self.stats["indicators_calculated"] += 1
                 self.stats["volume_profiles"] += 1
-                logger.info(f"[OK] Volume Profile calculated for {symbol}: POC={vp.poc:.2f}, VAH={vp.vah:.2f}, VAL={vp.val:.2f}")
+                logger.info(f"✓ Volume Profile calculated for {symbol}: POC={vp.poc:.2f}, VAH={vp.vah:.2f}, VAL={vp.val:.2f}")
             except Exception as e:
                 logger.error(f"Error calculating Volume Profile: {e}", exc_info=True)
             
@@ -131,7 +132,7 @@ class WADMManager:
                 prev_flow = self.storage.get_latest_order_flow(symbol, exchange)
                 
                 # Get trades for order flow window
-                window_start = datetime.now(timezone.utc) - timedelta(seconds=ORDER_FLOW_WINDOW)
+                window_start = datetime.utcnow() - timedelta(seconds=ORDER_FLOW_WINDOW)
                 window_trades = []
                 
                 for t in valid_trades:
@@ -143,9 +144,6 @@ class WADMManager:
                             ts = datetime.fromisoformat(ts.replace('Z', '+00:00'))
                         except:
                             continue
-                    elif isinstance(ts, datetime) and ts.tzinfo is None:
-                        # If naive datetime, assume UTC
-                        ts = ts.replace(tzinfo=timezone.utc)
                     
                     if ts and ts > window_start:
                         window_trades.append(t)
@@ -155,7 +153,7 @@ class WADMManager:
                     self.storage.save_order_flow(of)
                     self.stats["indicators_calculated"] += 1
                     self.stats["order_flows"] += 1
-                    logger.info(f"[OK] Order Flow calculated for {symbol}: Delta={of.delta:.2f}, Cumulative={of.cumulative_delta:.2f}")
+                    logger.info(f"✓ Order Flow calculated for {symbol}: Delta={of.delta:.2f}, Cumulative={of.cumulative_delta:.2f}")
                 else:
                     logger.debug(f"No trades in order flow window for {symbol}")
                     

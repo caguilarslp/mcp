@@ -1,7 +1,7 @@
 """
 Simple MongoDB storage manager
 """
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Any, Optional
 import pymongo
 from pymongo import MongoClient
@@ -54,7 +54,7 @@ class StorageManager:
     
     def get_recent_trades(self, symbol: str, exchange: str, minutes: int = 5) -> List[Dict[str, Any]]:
         """Get recent trades for analysis"""
-        since = datetime.utcnow() - timedelta(minutes=minutes)
+        since = datetime.now(timezone.utc) - timedelta(minutes=minutes)
         
         cursor = self.trades.find({
             "symbol": symbol,
@@ -107,11 +107,11 @@ class StorageManager:
         """Manual cleanup of old data (backup to TTL indexes)"""
         try:
             # Clean trades older than retention
-            trades_cutoff = datetime.utcnow() - timedelta(seconds=TRADES_RETENTION)
+            trades_cutoff = datetime.now(timezone.utc) - timedelta(seconds=TRADES_RETENTION)
             trades_result = self.trades.delete_many({"timestamp": {"$lt": trades_cutoff}})
             
             # Clean indicators older than retention
-            indicators_cutoff = datetime.utcnow() - timedelta(seconds=INDICATORS_RETENTION)
+            indicators_cutoff = datetime.now(timezone.utc) - timedelta(seconds=INDICATORS_RETENTION)
             vp_result = self.volume_profiles.delete_many({"timestamp": {"$lt": indicators_cutoff}})
             of_result = self.order_flows.delete_many({"timestamp": {"$lt": indicators_cutoff}})
             

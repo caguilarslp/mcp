@@ -1,7 +1,7 @@
 """
 Bybit WebSocket collector
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 import websockets
 from src.collectors.base import BaseCollector
@@ -48,7 +48,7 @@ class BybitCollector(BaseCollector):
                     price=float(trade_data["p"]),
                     quantity=float(trade_data["v"]),
                     side=Side.BUY if trade_data["S"] == "Buy" else Side.SELL,
-                    timestamp=datetime.fromtimestamp(int(trade_data["T"]) / 1000),
+                    timestamp=datetime.fromtimestamp(int(trade_data["T"]) / 1000, tz=timezone.utc),
                     trade_id=trade_data["i"]
                 )
                 trades.append(trade)

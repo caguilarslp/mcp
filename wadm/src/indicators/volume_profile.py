@@ -1,7 +1,7 @@
 """
 Volume Profile indicator calculator
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Tuple
 import numpy as np
 from src.models import VolumeProfile, Exchange
@@ -40,13 +40,16 @@ class VolumeProfileCalculator:
             mask = (prices >= bins[i]) & (prices < bins[i + 1])
             bin_volume = volumes[mask].sum()
             if bin_volume > 0:
-                volume_distribution[float(bin_centers[i])] = float(bin_volume)
+                # Convert float key to string for MongoDB compatibility
+                volume_distribution[str(float(bin_centers[i]))] = float(bin_volume)
         
         # Find POC (Point of Control) - price with highest volume
         if not volume_distribution:
             poc = float(np.median(prices))
         else:
-            poc = max(volume_distribution.keys(), key=lambda k: volume_distribution[k])
+            # Find key with max volume (keys are now strings)
+            poc_key = max(volume_distribution.keys(), key=lambda k: volume_distribution[k])
+            poc = float(poc_key)
         
         # Calculate Value Area (70% of volume)
         total_volume = volumes.sum()
@@ -57,7 +60,7 @@ class VolumeProfileCalculator:
         return VolumeProfile(
             symbol=symbol,
             exchange=Exchange(exchange),
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             poc=poc,
             vah=vah,
             val=val,
@@ -74,10 +77,10 @@ class VolumeProfileCalculator:
             return poc, poc
         
         target_volume = total_volume * 0.7
-        accumulated_volume = volume_dist.get(poc, 0)
+        accumulated_volume = volume_dist.get(str(poc), 0)
         
-        # Sort prices
-        sorted_prices = sorted(volume_dist.keys())
+        # Sort prices (convert string keys back to float for sorting)
+        sorted_prices = sorted([float(k) for k in volume_dist.keys()])
         poc_index = sorted_prices.index(poc)
         
         upper_index = poc_index
@@ -90,11 +93,11 @@ class VolumeProfileCalculator:
             
             # Check upper expansion
             if upper_index + 1 < len(sorted_prices):
-                upper_vol = volume_dist[sorted_prices[upper_index + 1]]
+                upper_vol = volume_dist[str(sorted_prices[upper_index + 1])]
             
             # Check lower expansion
             if lower_index - 1 >= 0:
-                lower_vol = volume_dist[sorted_prices[lower_index - 1]]
+                lower_vol = volume_dist[str(sorted_prices[lower_index - 1])]
             
             # Expand in direction with more volume
             if upper_vol >= lower_vol and upper_index + 1 < len(sorted_prices):

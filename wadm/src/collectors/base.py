@@ -4,7 +4,7 @@ Base WebSocket collector
 import asyncio
 import json
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional, Callable
 import websockets
 from websockets.client import WebSocketClientProtocol
