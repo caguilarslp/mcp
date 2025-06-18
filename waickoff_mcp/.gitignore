@@ -59,6 +59,7 @@ $RECYCLE.BIN/
 venv/
 env/
 __pycache__/
+*.pyc
 
 # API Keys y configuración sensible
 config/secrets.json
