@@ -1,0 +1,1519 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.11, pytest-8.4.0, pluggy-1.6.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: asyncio-1.0.0, anyio-4.9.0, mock-3.14.1, cov-6.2.1, Faker-37.4.0
+asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 131 items
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_with_orderbook ERROR [  0%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_price_movement FAILED [  1%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_fallback FAILED [  2%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_calculate_order_flow_basic ERROR [  3%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_calculate_order_flow_empty_trades PASSED [  3%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_price_level_calculation FAILED [  4%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_absorption_detection FAILED [  5%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_imbalance_detection FAILED [  6%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_delta_calculation FAILED [  6%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_market_efficiency_calculation FAILED [  7%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_tick_size_rounding PASSED [  8%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_tick_size_calculation PASSED [  9%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_delta_momentum_calculation FAILED [  9%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_error_handling FAILED [ 10%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_large_dataset_performance FAILED [ 11%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_profile_serialization ERROR [ 12%]
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowIntegration::test_realistic_trading_scenario FAILED [ 12%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_price_levels_empty_trades PASSED [ 13%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_price_levels_single_trade PASSED [ 14%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_price_levels_aggregation PASSED [ 15%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_poc_empty_levels PASSED [ 16%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_poc_single_level PASSED [ 16%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_poc_multiple_levels PASSED [ 17%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_value_area_empty_levels PASSED [ 18%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_value_area_single_level PASSED [ 19%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_calculate_value_area_multiple_levels PASSED [ 19%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_round_to_tick_exact_tick PASSED [ 20%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_round_to_tick_needs_rounding PASSED [ 21%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileCalculator::test_different_tick_sizes PASSED [ 22%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_calculator_creates_new PASSED [ 22%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_calculator_reuses_existing PASSED [ 23%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_tick_size_btc PASSED [ 24%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_tick_size_eth PASSED [ 25%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_tick_size_stablecoin PASSED [ 25%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_tick_size_default FAILED [ 26%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_volume_profile_no_trades PASSED [ 27%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_volume_profile_success PASSED [ 28%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_volume_profile_repository_error PASSED [ 29%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_real_time_profile_1h PASSED [ 29%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_real_time_profile_4h PASSED [ 30%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_real_time_profile_1d PASSED [ 31%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_historical_profiles PASSED [ 32%]
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_historical_profiles_empty_periods PASSED [ 32%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_initialization PASSED [ 33%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_build_subscription_message PASSED [ 34%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_get_ping_message PASSED [ 35%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_subscription_confirmation PASSED [ 35%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_pong_message PASSED [ 36%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_trade_message PASSED [ 37%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_trade_sell_side PASSED [ 38%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_orderbook_message PASSED [ 38%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_kline_message PASSED [ 39%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_invalid_message PASSED [ 40%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_parse_malformed_trade_data PASSED [ 41%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_get_supported_intervals PASSED [ 41%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_get_max_symbols_per_connection PASSED [ 42%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_symbol_formatting PASSED [ 43%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_statistics_tracking PASSED [ 44%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollector::test_reset_statistics PASSED [ 45%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollectorIntegration::test_symbol_management PASSED [ 45%]
+tests/infrastructure/collectors/test_bybit_collector.py::TestBybitCollectorIntegration::test_callback_integration PASSED [ 46%]
+tests/infrastructure/database/test_schemas.py::TestMongoSchemas::test_ttl_settings PASSED [ 47%]
+tests/infrastructure/database/test_schemas.py::TestMongoSchemas::test_create_schemas ERROR [ 48%]
+tests/infrastructure/database/test_schemas.py::TestDataManager::test_initialization ERROR [ 48%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_initialization PASSED [ 49%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_spot_url_selection PASSED [ 50%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_on_connect PASSED [ 51%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_process_trade_message PASSED [ 51%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_process_subscription_response PASSED [ 52%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_process_pong_message PASSED [ 53%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_create_ping_message PASSED [ 54%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_parse_trade PASSED [ 54%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_get_stats PASSED [ 55%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_error_handling_in_parse PASSED [ 56%]
+tests/infrastructure/websocket/test_bybit_collector.py::TestBybitCollector::test_repository_error_handling PASSED [ 57%]
+tests/test_config.py::TestSettings::test_default_settings FAILED         [ 58%]
+tests/test_config.py::TestSettings::test_mongodb_settings FAILED         [ 58%]
+tests/test_config.py::TestSettings::test_redis_settings FAILED           [ 59%]
+tests/test_config.py::TestSettings::test_settings_from_environment FAILED [ 60%]
+tests/test_config.py::TestSettings::test_exchange_settings FAILED        [ 61%]
+tests/test_config.py::TestSettings::test_get_settings_singleton FAILED   [ 61%]
+tests/test_config.py::TestSettings::test_test_environment_settings FAILED [ 62%]
+tests/test_config.py::TestSettings::test_log_level_validation FAILED     [ 63%]
+tests/test_config.py::TestSettings::test_database_url_construction FAILED [ 64%]
+tests/test_database_simple.py::test_ttl_settings PASSED                  [ 64%]
+tests/test_database_simple.py::test_decimal_conversion PASSED            [ 65%]
+tests/test_database_simple.py::test_float_to_decimal_conversion PASSED   [ 66%]
+tests/test_database_simple.py::test_mock_repository_operations PASSED    [ 67%]
+tests/test_database_simple.py::test_volume_analysis_calculation PASSED   [ 67%]
+tests/test_database_simple.py::test_price_level_distribution FAILED      [ 68%]
+tests/test_database_simple.py::test_time_range_validation PASSED         [ 69%]
+tests/test_entities.py::TestTrade::test_trade_creation FAILED            [ 70%]
+tests/test_entities.py::TestTrade::test_trade_volume_calculation FAILED  [ 70%]
+tests/test_entities.py::TestTrade::test_trade_invalid_price FAILED       [ 71%]
+tests/test_entities.py::TestTrade::test_trade_invalid_quantity FAILED    [ 72%]
+tests/test_entities.py::TestVolumeNode::test_volume_node_creation PASSED [ 73%]
+tests/test_entities.py::TestVolumeNode::test_volume_node_volume_validation FAILED [ 74%]
+tests/test_entities.py::TestVolumeProfile::test_volume_profile_creation FAILED [ 74%]
+tests/test_entities.py::TestVolumeProfile::test_volume_profile_vah_val FAILED [ 75%]
+tests/test_entities.py::TestOrderFlow::test_order_flow_creation FAILED   [ 76%]
+tests/test_entities.py::TestOrderFlow::test_order_flow_volume_validation FAILED [ 77%]
+tests/test_entities.py::TestOrderFlow::test_order_flow_delta_calculation FAILED [ 77%]
+tests/test_health.py::test_health_endpoint ERROR                         [ 78%]
+tests/test_health.py::test_ping_endpoint ERROR                           [ 79%]
+tests/test_health.py::test_health_head_endpoint ERROR                    [ 80%]
+tests/test_health.py::test_detailed_health_endpoint ERROR                [ 80%]
+tests/test_performance.py::TestPerformance::test_trade_creation_performance ERROR [ 81%]
+tests/test_performance.py::TestPerformance::test_volume_calculation_performance ERROR [ 82%]
+tests/test_performance.py::TestPerformance::test_volume_profile_creation_performance ERROR [ 83%]
+tests/test_performance.py::TestPerformance::test_poc_calculation_performance ERROR [ 83%]
+tests/test_performance.py::TestPerformance::test_vah_val_calculation_performance ERROR [ 84%]
+tests/test_performance.py::TestPerformance::test_async_trade_processing ERROR [ 85%]
+tests/test_performance.py::TestMemoryUsage::test_large_volume_profile_memory FAILED [ 86%]
+tests/test_performance.py::TestMemoryUsage::test_trade_list_memory_efficiency FAILED [ 87%]
+tests/test_utils.py::TestTimeframeConverter::test_validate_timeframe_valid PASSED [ 87%]
+tests/test_utils.py::TestTimeframeConverter::test_validate_timeframe_invalid PASSED [ 88%]
+tests/test_utils.py::TestTimeframeConverter::test_get_timeframe_seconds PASSED [ 89%]
+tests/test_utils.py::TestTimeframeConverter::test_get_timeframe_seconds_invalid PASSED [ 90%]
+tests/test_utils.py::TestTimeframeConverter::test_align_timestamp FAILED [ 90%]
+tests/test_utils.py::TestTimeframeConverter::test_align_timestamp_1h FAILED [ 91%]
+tests/test_utils.py::TestValidation::test_validate_symbol_valid PASSED   [ 92%]
+tests/test_utils.py::TestValidation::test_validate_symbol_invalid PASSED [ 93%]
+tests/test_utils.py::TestValidation::test_sanitize_symbol PASSED         [ 93%]
+tests/test_utils.py::TestValidation::test_validate_price_valid PASSED    [ 94%]
+tests/test_utils.py::TestValidation::test_validate_price_invalid PASSED  [ 95%]
+tests/test_utils.py::TestValidation::test_validate_quantity_valid PASSED [ 96%]
+tests/test_utils.py::TestValidation::test_validate_quantity_invalid PASSED [ 96%]
+tests/test_utils.py::TestFormatters::test_format_price PASSED            [ 97%]
+tests/test_utils.py::TestFormatters::test_format_volume PASSED           [ 98%]
+tests/test_utils.py::TestFormatters::test_format_percentage PASSED       [ 99%]
+tests/test_utils.py::TestFormatters::test_format_timestamp PASSED        [100%]/usr/local/lib/python3.12/site-packages/coverage/inorout.py:509: CoverageWarning: Module src/wadm was never imported. (module-not-imported)
+  self.warn(f"Module {pkg} was never imported.", slug="module-not-imported")
+/usr/local/lib/python3.12/site-packages/coverage/control.py:915: CoverageWarning: No data was collected. (no-data-collected)
+  self._warn("No data was collected.", slug="no-data-collected")
+
+WARNING: Failed to generate report: No data to report.
+
+/usr/local/lib/python3.12/site-packages/pytest_cov/plugin.py:358: CovReportWarning: Failed to generate report: No data to report.
+
+  warnings.warn(CovReportWarning(message), stacklevel=1)
+
+ERROR: Coverage failure: total of 0 is less than fail-under=80
+
+
+==================================== ERRORS ====================================
+_ ERROR at setup of TestOrderFlowCalculator.test_trade_classification_with_orderbook _
+tests/application/services/test_order_flow_calculator.py:89: in sample_orderbook
+    OrderBookLevel(price=Decimal('49999.50'), volume=Decimal('10.0')),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   pydantic_core._pydantic_core.ValidationError: 1 validation error for OrderBookLevel
+E   quantity
+E     Field required [type=missing, input_value={'price': Decimal('49999....olume': Decimal('10.0')}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+__ ERROR at setup of TestOrderFlowCalculator.test_calculate_order_flow_basic ___
+tests/application/services/test_order_flow_calculator.py:47: in sample_trades
+    TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_____ ERROR at setup of TestOrderFlowCalculator.test_profile_serialization _____
+tests/application/services/test_order_flow_calculator.py:47: in sample_trades
+    TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+____________ ERROR at setup of TestMongoSchemas.test_create_schemas ____________
+tests/infrastructure/database/test_schemas.py:86: in mock_db
+    db = pytest.MagicMock()
+         ^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pytest' has no attribute 'MagicMock'
+____________ ERROR at setup of TestDataManager.test_initialization _____________
+tests/infrastructure/database/test_schemas.py:104: in mock_mongodb_client
+    client = pytest.MagicMock()
+             ^^^^^^^^^^^^^^^^
+E   AttributeError: module 'pytest' has no attribute 'MagicMock'
+____________________ ERROR at setup of test_health_endpoint ____________________
+file /app/tests/test_health.py, line 9
+  def test_health_endpoint(client):
+E       fixture 'client' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_health.py:9
+_____________________ ERROR at setup of test_ping_endpoint _____________________
+file /app/tests/test_health.py, line 20
+  def test_ping_endpoint(client):
+E       fixture 'client' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_health.py:20
+_________________ ERROR at setup of test_health_head_endpoint __________________
+file /app/tests/test_health.py, line 27
+  def test_health_head_endpoint(client):
+E       fixture 'client' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_health.py:27
+_______________ ERROR at setup of test_detailed_health_endpoint ________________
+file /app/tests/test_health.py, line 33
+  @pytest.mark.asyncio
+  async def test_detailed_health_endpoint(async_client, mocker):
+      """Test detailed health endpoint with mocked dependencies."""
+      # Mock MongoDB health check
+      mock_mongodb = mocker.AsyncMock()
+      mock_mongodb.health_check.return_value = {
+          "status": "healthy",
+          "ping": True,
+          "version": "7.0.0"
+      }
+
+      # Mock Redis health check
+      mock_redis = mocker.AsyncMock()
+      mock_redis.health_check.return_value = {
+          "status": "healthy",
+          "ping": True,
+          "version": "7.0.0"
+      }
+
+      # Patch app state
+      mocker.patch.object(async_client._transport.app.state, 'mongodb', mock_mongodb)
+      mocker.patch.object(async_client._transport.app.state, 'redis', mock_redis)
+
+      response = await async_client.get("/health/detailed")
+      assert response.status_code == status.HTTP_200_OK
+
+      data = response.json()
+      assert data["status"] == "healthy"
+      assert "dependencies" in data
+      assert data["dependencies"]["mongodb"]["status"] == "healthy"
+      assert data["dependencies"]["redis"]["status"] == "healthy"
+E       fixture 'async_client' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_health.py:33
+______ ERROR at setup of TestPerformance.test_trade_creation_performance _______
+file /app/tests/test_performance.py, line 17
+      @pytest.mark.benchmark(group="trade_creation")
+      def test_trade_creation_performance(self, benchmark):
+E       fixture 'benchmark' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_performance.py:17
+____ ERROR at setup of TestPerformance.test_volume_calculation_performance _____
+file /app/tests/test_performance.py, line 34
+      @pytest.mark.benchmark(group="volume_calculation")
+      def test_volume_calculation_performance(self, benchmark):
+E       fixture 'benchmark' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_performance.py:34
+__ ERROR at setup of TestPerformance.test_volume_profile_creation_performance __
+file /app/tests/test_performance.py, line 57
+      @pytest.mark.benchmark(group="volume_profile")
+      def test_volume_profile_creation_performance(self, benchmark):
+E       fixture 'benchmark' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_performance.py:57
+______ ERROR at setup of TestPerformance.test_poc_calculation_performance ______
+file /app/tests/test_performance.py, line 89
+      @pytest.mark.benchmark(group="poc_calculation")
+      def test_poc_calculation_performance(self, benchmark):
+E       fixture 'benchmark' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_performance.py:89
+____ ERROR at setup of TestPerformance.test_vah_val_calculation_performance ____
+file /app/tests/test_performance.py, line 124
+      @pytest.mark.benchmark(group="vah_val_calculation")
+      def test_vah_val_calculation_performance(self, benchmark):
+E       fixture 'benchmark' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_performance.py:124
+________ ERROR at setup of TestPerformance.test_async_trade_processing _________
+file /app/tests/test_performance.py, line 162
+      @pytest.mark.asyncio
+      @pytest.mark.benchmark(group="async_processing")
+      async def test_async_trade_processing(self, benchmark):
+          """Benchmark async trade processing."""
+
+          async def process_trades():
+              tasks = []
+
+              async def process_single_trade(trade_data):
+                  # Simulate async processing
+                  await asyncio.sleep(0.001)  # 1ms delay
+                  return Trade(
+                      symbol=trade_data["symbol"],
+                      price=trade_data["price"],
+                      quantity=trade_data["quantity"],
+                      timestamp=trade_data["timestamp"],
+                      trade_type=trade_data["trade_type"],
+                      trade_id=trade_data["trade_id"]
+                  )
+
+              # Create 50 trade processing tasks
+              for i in range(50):
+                  trade_data = {
+                      "symbol": "BTCUSDT",
+                      "price": Decimal(f"{50000 + i}"),
+                      "quantity": Decimal("0.1"),
+                      "timestamp": datetime.now(timezone.utc),
+                      "trade_type": TradeType.BUY if i % 2 == 0 else TradeType.SELL,
+                      "trade_id": f"async_trade_{i}"
+                  }
+                  tasks.append(process_single_trade(trade_data))
+
+              results = await asyncio.gather(*tasks)
+              return results
+
+          # Note: pytest-benchmark doesn't directly support async functions
+          # This is a simplified version for demonstration
+          results = await process_trades()
+          assert len(results) == 50
+          assert all(isinstance(trade, Trade) for trade in results)
+E       fixture 'benchmark' not found
+>       available fixtures: _class_event_loop, _function_event_loop, _module_event_loop, _package_event_loop, _session_event_loop, _session_faker, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, class_mocker, cov, doctest_namespace, event_loop, event_loop_policy, faker, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, mock_settings, mocker, module_mocker, monkeypatch, no_cover, package_mocker, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, session_mocker, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+/app/tests/test_performance.py:162
+=================================== FAILURES ===================================
+_______ TestOrderFlowCalculator.test_trade_classification_price_movement _______
+tests/application/services/test_order_flow_calculator.py:142: in test_trade_classification_price_movement
+    trade = TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+__________ TestOrderFlowCalculator.test_trade_classification_fallback __________
+tests/application/services/test_order_flow_calculator.py:164: in test_trade_classification_fallback
+    trade = TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_____________ TestOrderFlowCalculator.test_price_level_calculation _____________
+tests/application/services/test_order_flow_calculator.py:218: in test_price_level_calculation
+    TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+______________ TestOrderFlowCalculator.test_absorption_detection _______________
+tests/application/services/test_order_flow_calculator.py:255: in test_absorption_detection
+    trades.append(TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_______________ TestOrderFlowCalculator.test_imbalance_detection _______________
+tests/application/services/test_order_flow_calculator.py:295: in test_imbalance_detection
+    trades.append(TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+________________ TestOrderFlowCalculator.test_delta_calculation ________________
+tests/application/services/test_order_flow_calculator.py:331: in test_delta_calculation
+    TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+__________ TestOrderFlowCalculator.test_market_efficiency_calculation __________
+tests/application/services/test_order_flow_calculator.py:376: in test_market_efficiency_calculation
+    TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+___________ TestOrderFlowCalculator.test_delta_momentum_calculation ____________
+tests/application/services/test_order_flow_calculator.py:468: in test_delta_momentum_calculation
+    trades.append(TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_________________ TestOrderFlowCalculator.test_error_handling __________________
+tests/application/services/test_order_flow_calculator.py:489: in test_error_handling
+    trade = TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+____________ TestOrderFlowCalculator.test_large_dataset_performance ____________
+tests/application/services/test_order_flow_calculator.py:516: in test_large_dataset_performance
+    trades.append(TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+___________ TestOrderFlowIntegration.test_realistic_trading_scenario ___________
+tests/application/services/test_order_flow_calculator.py:568: in test_realistic_trading_scenario
+    trades.append(TradeData(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   quantity
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_____________ TestVolumeProfileService.test_get_tick_size_default ______________
+tests/application/services/test_volume_profile_service.py:276: in test_get_tick_size_default
+    assert tick_size == Decimal("0.0001")
+E   AssertionError: assert Decimal('0.001') == Decimal('0.0001')
+E    +  where Decimal('0.0001') = Decimal('0.0001')
+______________________ TestSettings.test_default_settings ______________________
+tests/test_config.py:17: in test_default_settings
+    settings = Settings()
+               ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+______________________ TestSettings.test_mongodb_settings ______________________
+tests/test_config.py:28: in test_mongodb_settings
+    settings = Settings()
+               ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+_______________________ TestSettings.test_redis_settings _______________________
+tests/test_config.py:37: in test_redis_settings
+    settings = Settings()
+               ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+_________________ TestSettings.test_settings_from_environment __________________
+tests/test_config.py:52: in test_settings_from_environment
+    settings = Settings()
+               ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+_____________________ TestSettings.test_exchange_settings ______________________
+tests/test_config.py:62: in test_exchange_settings
+    settings = Settings()
+               ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+___________________ TestSettings.test_get_settings_singleton ___________________
+tests/test_config.py:71: in test_get_settings_singleton
+    settings1 = get_settings()
+                ^^^^^^^^^^^^^^
+src/core/config.py:108: in get_settings
+    return Settings()
+           ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+_________________ TestSettings.test_test_environment_settings __________________
+tests/test_config.py:82: in test_test_environment_settings
+    settings = get_settings()
+               ^^^^^^^^^^^^^^
+src/core/config.py:108: in get_settings
+    return Settings()
+           ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 5 validation errors for Settings
+E   ENVIRONMENT
+E     String should match pattern '^(development|staging|production)$' [type=string_pattern_mismatch, input_value='test', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+____________________ TestSettings.test_log_level_validation ____________________
+tests/test_config.py:88: in test_log_level_validation
+    settings = Settings()
+               ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 5 validation errors for Settings
+E   LOG_LEVEL
+E     String should match pattern '^(DEBUG|INFO|WARNING|ERROR|CRITICAL)$' [type=string_pattern_mismatch, input_value='INVALID', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+_________________ TestSettings.test_database_url_construction __________________
+tests/test_config.py:100: in test_database_url_construction
+    settings = Settings()
+               ^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/pydantic_settings/main.py:176: in __init__
+    super().__init__(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+E   AUTO_START_COLLECTORS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BYBIT_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   BINANCE_SYMBOLS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+E   COLLECTOR_STREAMS
+E     Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+E       For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+________________________ test_price_level_distribution _________________________
+tests/test_database_simple.py:164: in test_price_level_distribution
+    assert price_levels[50005.0] == 0.3
+E   assert 0.30000000000000004 == 0.3
+________________________ TestTrade.test_trade_creation _________________________
+tests/test_entities.py:17: in test_trade_creation
+    trade = Trade(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+___________________ TestTrade.test_trade_volume_calculation ____________________
+tests/test_entities.py:35: in test_trade_volume_calculation
+    trade = Trade(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+______________________ TestTrade.test_trade_invalid_price ______________________
+tests/test_entities.py:49: in test_trade_invalid_price
+    Trade(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+
+During handling of the above exception, another exception occurred:
+tests/test_entities.py:48: in test_trade_invalid_price
+    with pytest.raises(ValueError, match="Price must be positive"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E    Regex: 'Price must be positive'
+E    Input: "4 validation errors for Trade\nid\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexchange\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nside\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nis_buyer_maker\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+____________________ TestTrade.test_trade_invalid_quantity _____________________
+tests/test_entities.py:61: in test_trade_invalid_quantity
+    Trade(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+
+During handling of the above exception, another exception occurred:
+tests/test_entities.py:60: in test_trade_invalid_quantity
+    with pytest.raises(ValueError, match="Quantity must be positive"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E    Regex: 'Quantity must be positive'
+E    Input: "4 validation errors for Trade\nid\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexchange\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nside\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nis_buyer_maker\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+______________ TestVolumeNode.test_volume_node_volume_validation _______________
+tests/test_entities.py:93: in test_volume_node_volume_validation
+    with pytest.raises(ValueError, match="Total volume must equal sum"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE <class 'ValueError'>
+________________ TestVolumeProfile.test_volume_profile_creation ________________
+tests/test_entities.py:132: in test_volume_profile_creation
+    profile = VolumeProfile(
+E   pydantic_core._pydantic_core.ValidationError: 7 validation errors for VolumeProfile
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   price_levels
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   poc_price
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   vah_price
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   val_price
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   total_volume
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   value_area_volume
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+________________ TestVolumeProfile.test_volume_profile_vah_val _________________
+tests/test_entities.py:149: in test_volume_profile_vah_val
+    VolumeNode(Decimal("49900.0"), Decimal("200.0"), Decimal("100.0"), Decimal("100.0"), 10),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: BaseModel.__init__() takes 1 positional argument but 6 were given
+____________________ TestOrderFlow.test_order_flow_creation ____________________
+tests/test_entities.py:174: in test_order_flow_creation
+    order_flow = OrderFlow(
+E   pydantic_core._pydantic_core.ValidationError: 3 validation errors for OrderFlow
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   total_volume
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   absorption_events
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_______________ TestOrderFlow.test_order_flow_volume_validation ________________
+tests/test_entities.py:200: in test_order_flow_volume_validation
+    OrderFlow(
+E   pydantic_core._pydantic_core.ValidationError: 3 validation errors for OrderFlow
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   total_volume
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   absorption_events
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+
+During handling of the above exception, another exception occurred:
+tests/test_entities.py:199: in test_order_flow_volume_validation
+    with pytest.raises(ValueError, match="Total volume must equal sum"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E    Regex: 'Total volume must equal sum'
+E    Input: "3 validation errors for OrderFlow\nexchange\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\ntotal_volume\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nabsorption_events\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+_______________ TestOrderFlow.test_order_flow_delta_calculation ________________
+tests/test_entities.py:215: in test_order_flow_delta_calculation
+    order_flow = OrderFlow(
+E   pydantic_core._pydantic_core.ValidationError: 3 validation errors for OrderFlow
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   total_volume
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   absorption_events
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_______________ TestMemoryUsage.test_large_volume_profile_memory _______________
+tests/test_performance.py:228: in test_large_volume_profile_memory
+    profile = VolumeProfile(
+E   pydantic_core._pydantic_core.ValidationError: 7 validation errors for VolumeProfile
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   price_levels
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   poc_price
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   vah_price
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   val_price
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   total_volume
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   value_area_volume
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+______________ TestMemoryUsage.test_trade_list_memory_efficiency _______________
+tests/test_performance.py:253: in test_trade_list_memory_efficiency
+    trade = Trade(
+E   pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+E   id
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   exchange
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   side
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+E   is_buyer_maker
+E     Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+E       For further information visit https://errors.pydantic.dev/2.11/v/missing
+_________________ TestTimeframeConverter.test_align_timestamp __________________
+tests/test_utils.py:70: in test_align_timestamp
+    assert aligned == expected
+E   assert datetime.datetime(2025, 6, 17, 14, 20) == datetime.datetime(2025, 6, 17, 14, 20, tzinfo=datetime.timezone.utc)
+________________ TestTimeframeConverter.test_align_timestamp_1h ________________
+tests/test_utils.py:79: in test_align_timestamp_1h
+    assert aligned == expected
+E   assert datetime.datetime(2025, 6, 17, 14, 0) == datetime.datetime(2025, 6, 17, 14, 0, tzinfo=datetime.timezone.utc)
+=============================== warnings summary ===============================
+src/core/entities.py:37
+src/core/entities.py:37
+  /app/src/core/entities.py:37: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    @validator('timestamp', pre=True, allow_reuse=True)
+
+../usr/local/lib/python3.12/site-packages/pydantic/deprecated/class_validators.py:121
+../usr/local/lib/python3.12/site-packages/pydantic/deprecated/class_validators.py:121
+../usr/local/lib/python3.12/site-packages/pydantic/deprecated/class_validators.py:121
+../usr/local/lib/python3.12/site-packages/pydantic/deprecated/class_validators.py:121
+../usr/local/lib/python3.12/site-packages/pydantic/deprecated/class_validators.py:121
+../usr/local/lib/python3.12/site-packages/pydantic/deprecated/class_validators.py:121
+  /usr/local/lib/python3.12/site-packages/pydantic/deprecated/class_validators.py:121: PydanticDeprecatedSince20: `allow_reuse` is deprecated and will be ignored; it should no longer be necessary. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warn(_ALLOW_REUSE_WARNING_MESSAGE, DeprecationWarning)
+
+../usr/local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323: 17 warnings
+  /usr/local/lib/python3.12/site-packages/pydantic/_internal/_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+../usr/local/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:298: 86 warnings
+  /usr/local/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:298: PydanticDeprecatedSince20: `json_encoders` is deprecated. See https://docs.pydantic.dev/2.11/concepts/serialization/#custom-serializers for alternatives. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(
+
+src/core/entities.py:88
+src/core/entities.py:88
+  /app/src/core/entities.py:88: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    @validator('timestamp', pre=True, allow_reuse=True)
+
+src/core/entities.py:146
+src/core/entities.py:146
+  /app/src/core/entities.py:146: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    @validator('open_time', 'close_time', pre=True, allow_reuse=True)
+
+src/core/entities.py:169
+src/core/entities.py:169
+  /app/src/core/entities.py:169: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    @validator('volume')
+
+../usr/local/lib/python3.12/site-packages/pydantic/fields.py:1093: 15 warnings
+  /usr/local/lib/python3.12/site-packages/pydantic/fields.py:1093: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'example'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warn(
+
+src/infrastructure/collectors/base.py:12
+  /app/src/infrastructure/collectors/base.py:12: DeprecationWarning: websockets.exceptions.InvalidStatusCode is deprecated
+    from websockets.exceptions import ConnectionClosed, InvalidStatusCode
+
+../usr/local/lib/python3.12/site-packages/websockets/legacy/__init__.py:6
+  /usr/local/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+src/infrastructure/websocket/base/client.py:11
+  /app/src/infrastructure/websocket/base/client.py:11: DeprecationWarning: websockets.client.WebSocketClientProtocol is deprecated
+    from websockets.client import WebSocketClientProtocol
+
+tests/test_performance.py:17
+  /app/tests/test_performance.py:17: PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.benchmark(group="trade_creation")
+
+tests/test_performance.py:34
+  /app/tests/test_performance.py:34: PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.benchmark(group="volume_calculation")
+
+tests/test_performance.py:57
+  /app/tests/test_performance.py:57: PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.benchmark(group="volume_profile")
+
+tests/test_performance.py:89
+  /app/tests/test_performance.py:89: PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.benchmark(group="poc_calculation")
+
+tests/test_performance.py:124
+  /app/tests/test_performance.py:124: PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.benchmark(group="vah_val_calculation")
+
+tests/test_performance.py:163
+  /app/tests/test_performance.py:163: PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.benchmark(group="async_processing")
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_with_orderbook
+  /app/tests/application/services/test_order_flow_calculator.py:87: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_price_movement
+  /app/tests/application/services/test_order_flow_calculator.py:147: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_fallback
+  /app/tests/application/services/test_order_flow_calculator.py:169: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_calculate_order_flow_basic
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_profile_serialization
+  /app/tests/application/services/test_order_flow_calculator.py:45: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_price_level_calculation
+  /app/tests/application/services/test_order_flow_calculator.py:216: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_absorption_detection
+  /app/tests/application/services/test_order_flow_calculator.py:248: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_imbalance_detection
+  /app/tests/application/services/test_order_flow_calculator.py:287: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_delta_calculation
+  /app/tests/application/services/test_order_flow_calculator.py:326: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_market_efficiency_calculation
+  /app/tests/application/services/test_order_flow_calculator.py:372: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_delta_momentum_calculation
+  /app/tests/application/services/test_order_flow_calculator.py:456: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_error_handling
+  /app/tests/application/services/test_order_flow_calculator.py:494: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    timestamp=datetime.utcnow(),
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_large_dataset_performance
+  /app/tests/application/services/test_order_flow_calculator.py:511: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_order_flow_calculator.py::TestOrderFlowIntegration::test_realistic_trading_scenario
+  /app/tests/application/services/test_order_flow_calculator.py:558: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    base_time = datetime.utcnow()
+
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_real_time_profile_1h
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_real_time_profile_4h
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_calculate_real_time_profile_1d
+  /app/src/application/services/volume_profile_service.py:288: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow()
+
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_historical_profiles
+tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_historical_profiles_empty_periods
+  /app/src/application/services/volume_profile_service.py:329: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow()
+
+tests/test_database_simple.py::test_time_range_validation
+  /app/tests/test_database_simple.py:175: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.11-final-0 _______________
+
+FAIL Required test coverage of 80% not reached. Total coverage: 0.00%
+=========================== short test summary info ============================
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_price_movement - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...53561), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_fallback - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...68275), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_price_level_calculation - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...00676), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_absorption_detection - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...15839), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_imbalance_detection - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...0), 'trade_id': 'buy_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_delta_calculation - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...46299), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_market_efficiency_calculation - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...61564), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_delta_momentum_calculation - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...79452), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_error_handling - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...94530), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_large_dataset_performance - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...09297), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_order_flow_calculator.py::TestOrderFlowIntegration::test_realistic_trading_scenario - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...40132), 'trade_id': '0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/application/services/test_volume_profile_service.py::TestVolumeProfileService::test_get_tick_size_default - AssertionError: assert Decimal('0.001') == Decimal('0.0001')
+ +  where Decimal('0.0001') = Decimal('0.0001')
+FAILED tests/test_config.py::TestSettings::test_default_settings - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_mongodb_settings - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_redis_settings - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_settings_from_environment - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_exchange_settings - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_get_settings_singleton - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_test_environment_settings - pydantic_core._pydantic_core.ValidationError: 5 validation errors for Settings
+ENVIRONMENT
+  String should match pattern '^(development|staging|production)$' [type=string_pattern_mismatch, input_value='test', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_log_level_validation - pydantic_core._pydantic_core.ValidationError: 5 validation errors for Settings
+LOG_LEVEL
+  String should match pattern '^(DEBUG|INFO|WARNING|ERROR|CRITICAL)$' [type=string_pattern_mismatch, input_value='INVALID', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/string_pattern_mismatch
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_config.py::TestSettings::test_database_url_construction - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Settings
+AUTO_START_COLLECTORS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='true', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BYBIT_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,SOLUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+BINANCE_SYMBOLS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='BTCUSDT,ETHUSDT,XRPUSDT', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+COLLECTOR_STREAMS
+  Extra inputs are not permitted [type=extra_forbidden, input_value='trades,orderbook,klines', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden
+FAILED tests/test_database_simple.py::test_price_level_distribution - assert 0.30000000000000004 == 0.3
+FAILED tests/test_entities.py::TestTrade::test_trade_creation - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+exchange
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...>, 'trade_id': '123456'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/test_entities.py::TestTrade::test_trade_volume_calculation - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+exchange
+  Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'ETHUSDT', 'pr...>, 'trade_id': '789012'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/test_entities.py::TestTrade::test_trade_invalid_price - AssertionError: Regex pattern did not match.
+ Regex: 'Price must be positive'
+ Input: "4 validation errors for Trade\nid\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexchange\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nside\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nis_buyer_maker\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+FAILED tests/test_entities.py::TestTrade::test_trade_invalid_quantity - AssertionError: Regex pattern did not match.
+ Regex: 'Quantity must be positive'
+ Input: "4 validation errors for Trade\nid\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nexchange\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nside\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nis_buyer_maker\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr...uy'>, 'trade_id': '123'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+FAILED tests/test_entities.py::TestVolumeNode::test_volume_node_volume_validation - Failed: DID NOT RAISE <class 'ValueError'>
+FAILED tests/test_entities.py::TestVolumeProfile::test_volume_profile_creation - pydantic_core._pydantic_core.ValidationError: 7 validation errors for VolumeProfile
+exchange
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+price_levels
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+poc_price
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+vah_price
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+val_price
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+total_volume
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+value_area_volume
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...0.0'), trade_count=15)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/test_entities.py::TestVolumeProfile::test_volume_profile_vah_val - TypeError: BaseModel.__init__() takes 1 positional argument but 6 were given
+FAILED tests/test_entities.py::TestOrderFlow::test_order_flow_creation - pydantic_core._pydantic_core.ValidationError: 3 validation errors for OrderFlow
+exchange
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+total_volume
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+absorption_events
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/test_entities.py::TestOrderFlow::test_order_flow_volume_validation - AssertionError: Regex pattern did not match.
+ Regex: 'Total volume must equal sum'
+ Input: "3 validation errors for OrderFlow\nexchange\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\ntotal_volume\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing\nabsorption_events\n  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/missing"
+FAILED tests/test_entities.py::TestOrderFlow::test_order_flow_delta_calculation - pydantic_core._pydantic_core.ValidationError: 3 validation errors for OrderFlow
+exchange
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+total_volume
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+absorption_events
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti... 'imbalance_ratio': 1.5}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/test_performance.py::TestMemoryUsage::test_large_volume_profile_memory - pydantic_core._pydantic_core.ValidationError: 7 validation errors for VolumeProfile
+exchange
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+price_levels
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+poc_price
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+vah_price
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+val_price
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+total_volume
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+value_area_volume
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ti...9.6'), trade_count=10)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/test_performance.py::TestMemoryUsage::test_trade_list_memory_efficiency - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+exchange
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'pr..., 'trade_id': 'trade_0'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+FAILED tests/test_utils.py::TestTimeframeConverter::test_align_timestamp - assert datetime.datetime(2025, 6, 17, 14, 20) == datetime.datetime(2025, 6, 17, 14, 20, tzinfo=datetime.timezone.utc)
+FAILED tests/test_utils.py::TestTimeframeConverter::test_align_timestamp_1h - assert datetime.datetime(2025, 6, 17, 14, 0) == datetime.datetime(2025, 6, 17, 14, 0, tzinfo=datetime.timezone.utc)
+ERROR tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_trade_classification_with_orderbook - pydantic_core._pydantic_core.ValidationError: 1 validation error for OrderBookLevel
+quantity
+  Field required [type=missing, input_value={'price': Decimal('49999....olume': Decimal('10.0')}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+ERROR tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_calculate_order_flow_basic - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...82935), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+ERROR tests/application/services/test_order_flow_calculator.py::TestOrderFlowCalculator::test_profile_serialization - pydantic_core._pydantic_core.ValidationError: 4 validation errors for Trade
+id
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+quantity
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+side
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+is_buyer_maker
+  Field required [type=missing, input_value={'symbol': 'BTCUSDT', 'ex...24334), 'trade_id': '1'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+ERROR tests/infrastructure/database/test_schemas.py::TestMongoSchemas::test_create_schemas - AttributeError: module 'pytest' has no attribute 'MagicMock'
+ERROR tests/infrastructure/database/test_schemas.py::TestDataManager::test_initialization - AttributeError: module 'pytest' has no attribute 'MagicMock'
+ERROR tests/test_health.py::test_health_endpoint
+ERROR tests/test_health.py::test_ping_endpoint
+ERROR tests/test_health.py::test_health_head_endpoint
+ERROR tests/test_health.py::test_detailed_health_endpoint
+ERROR tests/test_performance.py::TestPerformance::test_trade_creation_performance
+ERROR tests/test_performance.py::TestPerformance::test_volume_calculation_performance
+ERROR tests/test_performance.py::TestPerformance::test_volume_profile_creation_performance
+ERROR tests/test_performance.py::TestPerformance::test_poc_calculation_performance
+ERROR tests/test_performance.py::TestPerformance::test_vah_val_calculation_performance
+ERROR tests/test_performance.py::TestPerformance::test_async_trade_processing
+============ 36 failed, 80 passed, 161 warnings, 15 errors in 5.27s ============

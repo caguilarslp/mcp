@@ -1,0 +1,47 @@
+# WADM - Production Requirements
+# Core dependencies without version pinning for flexibility
+
+# Core Framework
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+
+# Async & HTTP
+httpx
+websockets
+aiofiles
+anyio
+
+# Database & Cache
+motor  # Async MongoDB
+redis[hiredis]
+pymongo
+
+# Data Processing
+numpy
+pandas
+
+# Utilities
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+orjson  # Fast JSON
+msgpack  # Efficient serialization
+
+# Monitoring & Logging
+structlog
+rich
+
+# MCP Protocol
+fastmcp
+
+# Environment
+python-dotenv
+
+# Testing (basic)
+pytest
+pytest-asyncio
+pytest-cov
+pytest-mock
+factory-boy  # Test factories
