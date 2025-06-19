@@ -49,7 +49,7 @@
 - **Tiempo estimado:** 5-7 días total
 - **Estado:** PLANIFICACIÓN
 
-#### FASE 1: Estructura Base (1-2 días)
+#### FASE 1: Estructura Base 
 - **TASK-040.1:** Crear estructura de carpetas jerárquica
   - `/data/context/[SYMBOL]/` con archivos maestros
   - Tipos e interfaces para MasterContext
@@ -59,7 +59,7 @@
 - **TASK-040.3:** Herramientas MCP de contexto
   - get_master_context, update_context_levels, etc.
 
-#### FASE 2: Integración (2-3 días)
+#### FASE 2: Integración 
 - **TASK-040.4:** Modificar análisis existentes
   - Incluir lectura de contexto antes de análisis
   - Comparar con niveles históricos
@@ -69,7 +69,7 @@
 - **TASK-040.6:** Enriquecer reportes
   - Añadir sección "Contexto Histórico"
 
-#### FASE 3: Multi-Symbol Support (1-2 días)
+#### FASE 3: Multi-Symbol Support 
 - **TASK-040.7:** Gestión multi-símbolo
   - Sistema para añadir/remover símbolos
   - Templates por defecto

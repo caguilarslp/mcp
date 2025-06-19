@@ -126,5 +126,15 @@ docs/.docusaurus/
 *.rar
 *.7z
 
+# Development tools (non-production)
+dev-tools/
+
+# Temporary files and work in progress
+temp/
+temp_*/
+
+# Archived tasks and old documentation
+archived-tasks/
+
 # Optional: mantener estructura pero ignorar contenido
 !.gitkeep
