@@ -1,0 +1,160 @@
+{
+  "id": "BTCUSDT_elliott_240_1750292863827",
+  "type": "technical",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "240",
+    "currentPrice": 105077.5,
+    "currentSequence": {
+      "type": "corrective",
+      "waves": [
+        {
+          "number": 65,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 120,
+          "endIndex": 144,
+          "startPrice": 100403.7,
+          "endPrice": 110665.8,
+          "startTime": "2025-06-05T20:00:00.000Z",
+          "endTime": "2025-06-09T20:00:00.000Z",
+          "length": 10.220838475076125,
+          "duration": 24,
+          "confidence": 58.11381633524185
+        },
+        {
+          "number": 66,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 144,
+          "endIndex": 163,
+          "startPrice": 110665.8,
+          "endPrice": 102684.7,
+          "startTime": "2025-06-09T20:00:00.000Z",
+          "endTime": "2025-06-13T00:00:00.000Z",
+          "length": -7.211893828084201,
+          "duration": 19,
+          "confidence": 59.69988432926631
+        },
+        {
+          "number": 67,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 163,
+          "endIndex": 186,
+          "startPrice": 102684.7,
+          "endPrice": 108974.7,
+          "startTime": "2025-06-13T00:00:00.000Z",
+          "endTime": "2025-06-16T20:00:00.000Z",
+          "length": 6.125547428195242,
+          "duration": 23,
+          "confidence": 59.348380852090955
+        }
+      ],
+      "isComplete": true,
+      "degree": "minuette",
+      "startTime": "2025-06-05T20:00:00.000Z",
+      "endTime": "2025-06-16T20:00:00.000Z",
+      "validity": 100
+    },
+    "historicalSequences": [
+      {
+        "type": "corrective",
+        "waves": [
+          {
+            "number": 65,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 120,
+            "endIndex": 144,
+            "startPrice": 100403.7,
+            "endPrice": 110665.8,
+            "startTime": "2025-06-05T20:00:00.000Z",
+            "endTime": "2025-06-09T20:00:00.000Z",
+            "length": 10.220838475076125,
+            "duration": 24,
+            "confidence": 58.11381633524185
+          },
+          {
+            "number": 66,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 144,
+            "endIndex": 163,
+            "startPrice": 110665.8,
+            "endPrice": 102684.7,
+            "startTime": "2025-06-09T20:00:00.000Z",
+            "endTime": "2025-06-13T00:00:00.000Z",
+            "length": -7.211893828084201,
+            "duration": 19,
+            "confidence": 59.69988432926631
+          },
+          {
+            "number": 67,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 163,
+            "endIndex": 186,
+            "startPrice": 102684.7,
+            "endPrice": 108974.7,
+            "startTime": "2025-06-13T00:00:00.000Z",
+            "endTime": "2025-06-16T20:00:00.000Z",
+            "length": 6.125547428195242,
+            "duration": 23,
+            "confidence": 59.348380852090955
+          }
+        ],
+        "isComplete": true,
+        "degree": "minuette",
+        "startTime": "2025-06-05T20:00:00.000Z",
+        "endTime": "2025-06-16T20:00:00.000Z",
+        "validity": 100
+      }
+    ],
+    "currentWave": {
+      "wave": {
+        "number": 67,
+        "type": "corrective",
+        "subType": "zigzag",
+        "startIndex": 163,
+        "endIndex": 186,
+        "startPrice": 102684.7,
+        "endPrice": 108974.7,
+        "startTime": "2025-06-13T00:00:00.000Z",
+        "endTime": "2025-06-16T20:00:00.000Z",
+        "length": 6.125547428195242,
+        "duration": 23,
+        "confidence": 59.348380852090955
+      },
+      "position": "middle",
+      "nextExpected": "Corrective sequence complete, new impulse likely"
+    },
+    "projections": [],
+    "ruleValidation": {
+      "wave2Rule": true,
+      "wave3Rule": true,
+      "wave4Rule": true,
+      "alternationRule": true,
+      "channelRule": true,
+      "overallValidity": 100
+    },
+    "signals": {
+      "signal": "hold",
+      "strength": 50,
+      "reasoning": "",
+      "waveContext": "",
+      "riskLevel": "medium"
+    },
+    "analysisTime": "2025-06-19T00:27:43.827Z",
+    "confidence": 80,
+    "dataQuality": 0
+  },
+  "metadata": {
+    "id": "BTCUSDT_elliott_240_1750292863827",
+    "type": "technical",
+    "timestamp": "2025-06-19T00:27:43.827Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "240"
+  },
+  "timestamp": "2025-06-19T00:27:43.827Z"
+}

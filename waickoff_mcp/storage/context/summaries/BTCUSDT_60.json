@@ -3,10 +3,10 @@
   "timeframe_coverage": [
     "60"
   ],
-  "analysis_count": 20,
+  "analysis_count": 10,
   "date_range": {
-    "start": "2025-06-18T23:08:08.630Z",
-    "end": "2025-06-18T23:08:48.653Z"
+    "start": "2025-06-19T00:27:16.417Z",
+    "end": "2025-06-19T00:31:43.504Z"
   },
   "trend_summary": {
     "direction": "neutral",
@@ -31,8 +31,8 @@
     "key_points": []
   },
   "metadata": {
-    "total_size_bytes": 3960,
-    "compression_ratio": 1.98,
-    "last_updated": "2025-06-18T23:08:48.653Z"
+    "total_size_bytes": 1980,
+    "compression_ratio": 0.99,
+    "last_updated": "2025-06-19T00:31:43.505Z"
   }
 }

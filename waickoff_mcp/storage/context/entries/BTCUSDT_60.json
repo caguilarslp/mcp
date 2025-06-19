@@ -1,62 +1,14 @@
 [
   {
-    "id": "BTCUSDT_60_1750288095200",
+    "id": "BTCUSDT_60_1750293103521",
     "symbol": "BTCUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-18T23:08:15.200Z",
-    "type": "wyckoff",
+    "timestamp": "2025-06-19T00:31:43.521Z",
+    "type": "smc",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 196
-  },
-  {
-    "id": "BTCUSDT_60_1750288099299",
-    "symbol": "BTCUSDT",
-    "timeframe": "60",
-    "timestamp": "2025-06-18T23:08:19.299Z",
-    "type": "wyckoff",
-    "key_findings": [],
-    "key_metrics": {},
-    "recommendations": [],
-    "confidence": 0,
-    "size_bytes": 196
-  },
-  {
-    "id": "BTCUSDT_60_1750288125024",
-    "symbol": "BTCUSDT",
-    "timeframe": "60",
-    "timestamp": "2025-06-18T23:08:45.024Z",
-    "type": "wyckoff",
-    "key_findings": [],
-    "key_metrics": {},
-    "recommendations": [],
-    "confidence": 0,
-    "size_bytes": 196
-  },
-  {
-    "id": "BTCUSDT_60_1750288125602",
-    "symbol": "BTCUSDT",
-    "timeframe": "60",
-    "timestamp": "2025-06-18T23:08:45.602Z",
-    "type": "wyckoff",
-    "key_findings": [],
-    "key_metrics": {},
-    "recommendations": [],
-    "confidence": 0,
-    "size_bytes": 196
-  },
-  {
-    "id": "BTCUSDT_60_1750288139050",
-    "symbol": "BTCUSDT",
-    "timeframe": "60",
-    "timestamp": "2025-06-18T23:08:59.050Z",
-    "type": "wyckoff",
-    "key_findings": [],
-    "key_metrics": {},
-    "recommendations": [],
-    "confidence": 0,
-    "size_bytes": 196
+    "size_bytes": 192
   }
 ]

@@ -1,0 +1,74 @@
+{
+  "symbol": "BTCUSDT",
+  "last_updated": "2025-06-19T00:42:00Z",
+  "levels": {
+    "110665.80": {
+      "type": "resistance",
+      "category": "major",
+      "origin": "swing_high",
+      "first_identified": "2025-06-09",
+      "touches": [
+        {"date": "2025-06-09", "result": "rejected", "volume": "high"},
+        {"date": "2025-06-10", "result": "rejected", "volume": "medium"},
+        {"date": "2025-06-12", "result": "rejected", "volume": "low"}
+      ],
+      "strength_score": 95,
+      "notes": "All-time high, strong distribution zone"
+    },
+    "105335.10": {
+      "type": "support",
+      "category": "major",
+      "origin": "order_block",
+      "first_identified": "2025-06-15",
+      "touches": [
+        {"date": "2025-06-15", "result": "bounced", "volume": "high"},
+        {"date": "2025-06-17", "result": "bounced", "volume": "medium"},
+        {"date": "2025-06-18", "result": "bounced", "volume": "medium"},
+        {"date": "2025-06-19", "result": "testing", "volume": "low"}
+      ],
+      "strength_score": 90,
+      "notes": "Strong institutional order block, 4 successful bounces"
+    },
+    "102130.67": {
+      "type": "support",
+      "category": "major",
+      "origin": "fibonacci_0.236",
+      "first_identified": "2025-06-01",
+      "touches": [
+        {"date": "2025-06-05", "result": "bounced", "volume": "high"},
+        {"date": "2025-06-10", "result": "bounced", "volume": "medium"}
+      ],
+      "strength_score": 80,
+      "notes": "Key Fibonacci retracement level from April low to June high"
+    },
+    "108000.00": {
+      "type": "dual",
+      "category": "major",
+      "origin": "psychological",
+      "first_identified": "2025-05-20",
+      "touches": [
+        {"date": "2025-05-25", "result": "support_held", "volume": "high"},
+        {"date": "2025-06-07", "result": "resistance_held", "volume": "high"},
+        {"date": "2025-06-15", "result": "resistance_held", "volume": "medium"}
+      ],
+      "strength_score": 85,
+      "notes": "Psychological round number, flipped from support to resistance"
+    }
+  },
+  "invalidated_levels": [
+    {
+      "price": 106500.00,
+      "invalidated_date": "2025-06-11",
+      "reason": "Broken with high volume, no retest"
+    }
+  ],
+  "emerging_levels": [
+    {
+      "price": 104700.00,
+      "identified_date": "2025-06-18",
+      "touches": 1,
+      "potential_strength": 60,
+      "needs_confirmation": true
+    }
+  ]
+}

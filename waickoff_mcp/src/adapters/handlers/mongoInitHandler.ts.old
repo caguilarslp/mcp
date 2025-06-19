@@ -14,8 +14,7 @@ export async function handleForceMongoInit(request: Request): Promise<Response> 
     logger.info('Forcing MongoDB initialization check...');
     
     // Re-initialize the context manager
-    await globalContext.close();
-    await globalContext.initializeMongoDB();
+    const mongoAvailable = await globalContext.reinitializeMongoDB();
     
     // Check if MongoDB is now available
     const testWrite = await globalContext.addEntry({

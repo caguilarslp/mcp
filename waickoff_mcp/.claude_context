@@ -32,12 +32,31 @@ IMPORTANTE DEL USUARIO NO ELMINAR Y LEER ATENTAMENTE:
   - `src/services/context/contextAwareWrapper.ts`
   - `src/adapters/contextIntegration.ts`
 
-## 🎯 Próximas Tareas Priorizadas
-1. **Construir Contexto Histórico** - Ejecutar análisis iniciales
-2. **Testing con Contexto** - Validar resolución conflictos
-3. **TASK-033:** Testing Exhaustivo (4-5h)
-4. **TASK-028:** API Privada Bybit (7.5h)
-5. **TASK-008:** Integración Waickoff AI (2h)
+## 🎯 Roadmap Actualizado v2.0
+
+### Fase 1: Optimización de Contexto (5-7 días)
+1. **TASK-040:** Sistema de Contexto Jerárquico
+   - Estructura por símbolo con contexto maestro
+   - Acceso instantáneo (<100ms)
+   - Multi-symbol support integrado
+
+### Fase 2: Documentación y Testing (15-20 días)
+2. **TASK-041:** Prompt Sistema Completo v4.0
+   - Documentar todas las 117+ herramientas
+   - Workflows optimizados con contexto
+3. **TASK-042:** Testing Sistemático Completo
+   - 12 fases, 89 herramientas pendientes
+   - Sin atajos, una por una
+
+### Fase 3: Expansión (2-3 semanas)
+4. **TASK-043:** Integración wADM (Order Flow)
+   - WebSocket Bybit + Binance
+   - Volume profile + Order flow real-time
+   - Footprint charts + Delta analysis
+
+### Tareas Pendientes (baja prioridad)
+- TASK-028: API Privada Bybit
+- TASK-008: Integración Waickoff AI
 
 ## ✅ Sistema v1.9.0 Features
 - **Contexto Automático:** Cada análisis incluye 90 días historia

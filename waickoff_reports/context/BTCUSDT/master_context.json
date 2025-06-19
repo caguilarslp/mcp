@@ -1,0 +1,164 @@
+{
+  "symbol": "BTCUSDT",
+  "last_updated": "2025-06-19T00:40:00Z",
+  "version": "1.0.0",
+  "price_history": {
+    "current": 105045.80,
+    "1h_ago": 105077.50,
+    "24h_ago": 105000.00,
+    "7d_ago": 109943.20,
+    "30d_ago": 98500.00,
+    "ath": 110665.80,
+    "ath_date": "2025-06-09"
+  },
+  "key_levels": {
+    "major_resistance": [
+      {
+        "price": 110665.80,
+        "touches": 5,
+        "last_test": "2025-06-09",
+        "strength": 95,
+        "type": "ATH",
+        "validated": true
+      },
+      {
+        "price": 108000.00,
+        "touches": 3,
+        "last_test": "2025-06-15",
+        "strength": 85,
+        "type": "psychological",
+        "validated": true
+      },
+      {
+        "price": 105335.10,
+        "touches": 4,
+        "last_test": "2025-06-18",
+        "strength": 90,
+        "type": "technical",
+        "validated": true
+      }
+    ],
+    "major_support": [
+      {
+        "price": 102130.67,
+        "touches": 2,
+        "last_test": "2025-06-10",
+        "strength": 80,
+        "type": "fibonacci_0.236",
+        "validated": true
+      },
+      {
+        "price": 96850.46,
+        "touches": 1,
+        "last_test": "2025-05-20",
+        "strength": 75,
+        "type": "fibonacci_0.382",
+        "validated": false
+      },
+      {
+        "price": 92582.90,
+        "touches": 0,
+        "last_test": null,
+        "strength": 70,
+        "type": "fibonacci_0.500",
+        "validated": false
+      }
+    ]
+  },
+  "patterns": {
+    "active": [
+      {
+        "type": "elliott_corrective_abc",
+        "start_date": "2025-06-05",
+        "current_wave": "C",
+        "completion": 85,
+        "target_range": "102000-98000"
+      },
+      {
+        "type": "descending_triangle",
+        "start_date": "2025-06-10",
+        "completion": 60,
+        "breakout_target": 98000
+      }
+    ],
+    "completed_recent": [
+      {
+        "type": "bearish_fvg",
+        "date": "2025-06-09",
+        "result": "successful",
+        "profit_percent": 4.5
+      }
+    ],
+    "success_rates": {
+      "bullish_fvg_fill": 78,
+      "bearish_orderblock_respect": 82,
+      "fibonacci_bounce": 71,
+      "elliott_wave_completion": 68
+    }
+  },
+  "institutional_activity": {
+    "current_zone": "distribution",
+    "accumulation_zones": [
+      {
+        "range": "98000-102000",
+        "volume_profile": "high",
+        "last_active": "2025-05-15"
+      }
+    ],
+    "distribution_zones": [
+      {
+        "range": "108000-110665",
+        "volume_profile": "extreme",
+        "last_active": "2025-06-09"
+      }
+    ],
+    "smart_money_bias": "neutral_bearish",
+    "composite_man_phase": "distribution_test"
+  },
+  "momentum_metrics": {
+    "trend_strength": 45,
+    "trend_direction": "neutral",
+    "volatility_percentile": 20,
+    "volatility_trend": "decreasing",
+    "volume_vs_average": 32,
+    "volume_trend": "declining",
+    "rsi_4h": 48,
+    "momentum_divergence": false
+  },
+  "risk_metrics": {
+    "current_risk_level": "low",
+    "liquidation_clusters": [
+      {
+        "level": 103000,
+        "size": "medium",
+        "side": "long"
+      },
+      {
+        "level": 107500,
+        "size": "large",
+        "side": "short"
+      }
+    ],
+    "max_drawdown_7d": -4.5,
+    "volatility_expansion_risk": "low"
+  },
+  "trading_setups": {
+    "high_probability": [],
+    "medium_probability": [
+      {
+        "type": "support_bounce",
+        "entry": 105335,
+        "stop": 104800,
+        "target1": 106500,
+        "target2": 108000,
+        "risk_reward": "1:2.5",
+        "confidence": 65
+      }
+    ],
+    "alerts": [
+      "Approaching key support at 105335",
+      "Low volatility environment - wait for expansion",
+      "Volume declining - lack of conviction"
+    ]
+  }
+}

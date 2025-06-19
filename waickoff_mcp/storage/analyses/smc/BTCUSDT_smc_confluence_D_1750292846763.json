@@ -1,0 +1,764 @@
+{
+  "id": "BTCUSDT_smc_confluence_D_1750292846763",
+  "type": "smc",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "D",
+    "currentPrice": 105077.5,
+    "confluences": [
+      {
+        "id": "64c3ff81-1f79-481e-ade9-6aef17d67765",
+        "types": [
+          "breakOfStructure"
+        ],
+        "priceLevel": 54127.98003723563,
+        "strength": 91,
+        "zone": {
+          "upper": 54398.619937421805,
+          "lower": 53857.340137049454,
+          "midpoint": 54127.98003723563
+        },
+        "components": {
+          "structuralBreak": {
+            "id": "be621537-fca4-4820-8276-89233e5249fd",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T19:12:26.084Z",
+              "price": 54127.98003723563,
+              "volume": 2659512.7802505633,
+              "index": 79
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 4,
+              "strength": 66.06870437574673
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 55284.327771763885,
+              "normal": 56440.67550629213,
+              "aggressive": 57869.921306169046
+            },
+            "invalidationLevel": 51037.42159875611,
+            "probability": 81.9425653948171,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          }
+        },
+        "alignment": "bullish",
+        "validUntil": "2025-06-20T00:27:26.762Z",
+        "description": "Strong bullish confluence: breakOfStructure"
+      },
+      {
+        "id": "d31407a1-cc71-4ab3-8d2b-6a3a7348b9cf",
+        "types": [
+          "breakOfStructure"
+        ],
+        "priceLevel": 51869.20344896305,
+        "strength": 89,
+        "zone": {
+          "upper": 52128.54946620786,
+          "lower": 51609.857431718236,
+          "midpoint": 51869.20344896305
+        },
+        "components": {
+          "structuralBreak": {
+            "id": "5bd30aa4-6ac8-469f-a79a-0776c90b83d1",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T10:12:26.084Z",
+              "price": 51869.20344896305,
+              "volume": 1994396.413675524,
+              "index": 43
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 6,
+              "strength": 65.6701271232549
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 52898.78652687759,
+              "normal": 53928.369604792126,
+              "aggressive": 55200.9342890945
+            },
+            "invalidationLevel": 49692.15126306637,
+            "probability": 78.74647347010779,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          }
+        },
+        "alignment": "bullish",
+        "validUntil": "2025-06-20T00:27:26.762Z",
+        "description": "Strong bullish confluence: breakOfStructure"
+      }
+    ],
+    "premiumDiscountZones": {
+      "premium": {
+        "start": 52923.6935730198,
+        "end": 54127.98003723563
+      },
+      "discount": {
+        "start": 49310.8341803723,
+        "end": 50515.12064458813
+      },
+      "equilibrium": 51719.40710880396,
+      "currentZone": "premium"
+    },
+    "institutionalActivity": {
+      "score": 100,
+      "signals": [
+        "2 major structural breaks identified",
+        "2 strong SMC confluences detected"
+      ],
+      "footprint": {
+        "orderBlockActivity": 0,
+        "fvgCreation": 0,
+        "structuralManipulation": 100,
+        "confluenceStrength": 70
+      },
+      "interpretation": "High institutional activity detected - Smart money is actively positioning"
+    },
+    "marketBias": {
+      "direction": "bullish",
+      "strength": 100,
+      "confidence": 95,
+      "reasoning": [
+        "Overall bullish bias detected with integrated SMC analysis",
+        "Market structure confirms bullish trend",
+        "2 SMC confluences identified"
+      ],
+      "components": {
+        "orderBlockBias": "neutral",
+        "fvgBias": "neutral",
+        "structureBias": "bullish"
+      }
+    },
+    "tradingRecommendations": [
+      {
+        "action": "wait",
+        "reasoning": "Price in premium zone with bullish bias - wait for pullback",
+        "entryZone": {
+          "min": 0,
+          "max": 0
+        },
+        "targets": [],
+        "stopLoss": 0,
+        "confidence": 50,
+        "timeframe": "monitor"
+      }
+    ],
+    "keyLevels": [
+      {
+        "price": 51869.20344896305,
+        "type": "SMC confluence",
+        "strength": 89,
+        "description": "Strong bullish confluence: breakOfStructure"
+      },
+      {
+        "price": 52849.17782722797,
+        "type": "BOS level",
+        "strength": 77.4990202630105,
+        "description": "BOS bullish at 52849.17782722797"
+      },
+      {
+        "price": 53442.92186130979,
+        "type": "BOS level",
+        "strength": 78.92015363485822,
+        "description": "BOS bullish at 53442.92186130979"
+      },
+      {
+        "price": 54127.98003723563,
+        "type": "SMC confluence",
+        "strength": 91,
+        "description": "Strong bullish confluence: breakOfStructure"
+      }
+    ],
+    "statistics": {
+      "totalConfluences": 2,
+      "strongConfluences": 2,
+      "activeOrderBlocks": 0,
+      "openFVGs": 0,
+      "recentBOS": 5,
+      "overallConfidence": 90
+    },
+    "rawAnalysis": {
+      "orderBlocks": {
+        "symbol": "BTCUSDT",
+        "timeframe": "D",
+        "currentPrice": 105077.5,
+        "activeBlocks": [],
+        "breakerBlocks": [],
+        "nearestBlock": {},
+        "confluenceWithLevels": [],
+        "marketBias": "neutral",
+        "keyLevels": {
+          "strongSupport": [],
+          "strongResistance": []
+        },
+        "statistics": {
+          "totalBlocks": 19,
+          "freshBlocks": 0,
+          "mitigatedBlocks": 12,
+          "breakerBlocks": 0,
+          "avgRespectRate": 8
+        },
+        "tradingRecommendation": {
+          "action": "wait",
+          "confidence": 0,
+          "reason": "No active order blocks detected",
+          "targets": []
+        },
+        "timestamp": "2025-06-19T00:27:26.762Z"
+      },
+      "fairValueGaps": {
+        "symbol": "BTCUSDT",
+        "timeframe": "D",
+        "currentPrice": 105077.5,
+        "openGaps": [],
+        "filledGaps": [],
+        "statistics": {
+          "totalGapsDetected": 0,
+          "openGaps": 0,
+          "filledGaps": 0,
+          "avgFillTime": 0,
+          "fillRate": 0,
+          "avgGapSize": 0
+        },
+        "marketImbalance": {
+          "bullishGaps": 0,
+          "bearishGaps": 0,
+          "netImbalance": "neutral",
+          "strength": 0
+        },
+        "tradingOpportunities": [],
+        "timestamp": "2025-06-19T00:27:26.398Z"
+      },
+      "breakOfStructure": {
+        "symbol": "BTCUSDT",
+        "timeframe": "D",
+        "currentPrice": 51709.18785357501,
+        "trend": {
+          "shortTerm": "bullish",
+          "mediumTerm": "bullish",
+          "longTerm": "sideways",
+          "confidence": 75
+        },
+        "structurePoints": [
+          {
+            "timestamp": "2025-06-18T02:12:26.084Z",
+            "price": 51248.305549473305,
+            "type": "higher_high",
+            "strength": 78.19695182625543,
+            "volume": 2569855.4105478544,
+            "confirmed": true,
+            "index": 11
+          },
+          {
+            "timestamp": "2025-06-18T03:57:26.084Z",
+            "price": 49310.8341803723,
+            "type": "lower_low",
+            "strength": 50,
+            "volume": 1820418.7255561904,
+            "confirmed": true,
+            "index": 18
+          },
+          {
+            "timestamp": "2025-06-18T05:57:26.084Z",
+            "price": 51746.360922327185,
+            "type": "higher_high",
+            "strength": 68.16167470857772,
+            "volume": 2555505.2649511006,
+            "confirmed": true,
+            "index": 26
+          },
+          {
+            "timestamp": "2025-06-18T08:12:26.084Z",
+            "price": 49941.86056589585,
+            "type": "higher_low",
+            "strength": 66.32188195818647,
+            "volume": 2465368.937105098,
+            "confirmed": true,
+            "index": 35
+          },
+          {
+            "timestamp": "2025-06-18T10:12:26.084Z",
+            "price": 51869.20344896305,
+            "type": "higher_high",
+            "strength": 72.48824490035929,
+            "volume": 1994396.413675524,
+            "confirmed": true,
+            "index": 43
+          },
+          {
+            "timestamp": "2025-06-18T11:27:26.084Z",
+            "price": 50435.48182559356,
+            "type": "higher_low",
+            "strength": 71.16842571180206,
+            "volume": 2088745.2471508884,
+            "confirmed": true,
+            "index": 48
+          },
+          {
+            "timestamp": "2025-06-18T12:57:26.084Z",
+            "price": 52849.17782722797,
+            "type": "higher_high",
+            "strength": 54.996734210034944,
+            "volume": 2235045.4748675292,
+            "confirmed": true,
+            "index": 54
+          },
+          {
+            "timestamp": "2025-06-18T14:27:26.084Z",
+            "price": 50751.52204432591,
+            "type": "higher_low",
+            "strength": 66.4201048837206,
+            "volume": 2828978.3287305688,
+            "confirmed": true,
+            "index": 60
+          },
+          {
+            "timestamp": "2025-06-18T16:27:26.084Z",
+            "price": 53442.92186130979,
+            "type": "higher_high",
+            "strength": 59.7338454495274,
+            "volume": 1601330.5351227378,
+            "confirmed": true,
+            "index": 68
+          },
+          {
+            "timestamp": "2025-06-18T17:27:26.084Z",
+            "price": 51293.891054026244,
+            "type": "higher_low",
+            "strength": 83.124132959704,
+            "volume": 2654326.111304274,
+            "confirmed": true,
+            "index": 72
+          },
+          {
+            "timestamp": "2025-06-18T19:12:26.084Z",
+            "price": 54127.98003723563,
+            "type": "higher_high",
+            "strength": 69.80855131605699,
+            "volume": 2659512.7802505633,
+            "confirmed": true,
+            "index": 79
+          }
+        ],
+        "activeBreaks": [
+          {
+            "id": "69bebe60-e4bb-428f-a6d4-50ddf7864701",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T05:57:26.084Z",
+              "price": 51746.360922327185,
+              "volume": 2555505.2649511006,
+              "index": 26
+            },
+            "previousStructure": {
+              "pattern": "consolidation",
+              "duration": 1,
+              "strength": 64.09847591312771
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 52715.09660687769,
+              "normal": 53683.83229142819,
+              "aggressive": 54881.18959753261
+            },
+            "invalidationLevel": 49064.280009470436,
+            "probability": 75.44850241257332,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "5bd30aa4-6ac8-469f-a79a-0776c90b83d1",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T10:12:26.084Z",
+              "price": 51869.20344896305,
+              "volume": 1994396.413675524,
+              "index": 43
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 6,
+              "strength": 65.6701271232549
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 52898.78652687759,
+              "normal": 53928.369604792126,
+              "aggressive": 55200.9342890945
+            },
+            "invalidationLevel": 49692.15126306637,
+            "probability": 78.74647347010779,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "40a05636-61d0-4b89-a0af-dcf50d2d56cb",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T12:57:26.084Z",
+              "price": 52849.17782722797,
+              "volume": 2235045.4748675292,
+              "index": 54
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 5,
+              "strength": 69.53505681973138
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 53710.10530437264,
+              "normal": 54571.032781517315,
+              "aggressive": 55635.139143268134
+            },
+            "invalidationLevel": 50183.304416465595,
+            "probability": 77.4990202630105,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "3054c433-1112-4e11-ad3c-0f90c0b84ec7",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T16:27:26.084Z",
+              "price": 53442.92186130979,
+              "volume": 1601330.5351227378,
+              "index": 68
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 4,
+              "strength": 66.26837742647922
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 54433.767429294116,
+              "normal": 55424.61299727845,
+              "aggressive": 56649.298119307074
+            },
+            "invalidationLevel": 50497.76443410428,
+            "probability": 78.92015363485822,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "be621537-fca4-4820-8276-89233e5249fd",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T19:12:26.084Z",
+              "price": 54127.98003723563,
+              "volume": 2659512.7802505633,
+              "index": 79
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 4,
+              "strength": 66.06870437574673
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 55284.327771763885,
+              "normal": 56440.67550629213,
+              "aggressive": 57869.921306169046
+            },
+            "invalidationLevel": 51037.42159875611,
+            "probability": 81.9425653948171,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          }
+        ],
+        "recentBreaks": [
+          {
+            "id": "69bebe60-e4bb-428f-a6d4-50ddf7864701",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T05:57:26.084Z",
+              "price": 51746.360922327185,
+              "volume": 2555505.2649511006,
+              "index": 26
+            },
+            "previousStructure": {
+              "pattern": "consolidation",
+              "duration": 1,
+              "strength": 64.09847591312771
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 52715.09660687769,
+              "normal": 53683.83229142819,
+              "aggressive": 54881.18959753261
+            },
+            "invalidationLevel": 49064.280009470436,
+            "probability": 75.44850241257332,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "5bd30aa4-6ac8-469f-a79a-0776c90b83d1",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T10:12:26.084Z",
+              "price": 51869.20344896305,
+              "volume": 1994396.413675524,
+              "index": 43
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 6,
+              "strength": 65.6701271232549
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 52898.78652687759,
+              "normal": 53928.369604792126,
+              "aggressive": 55200.9342890945
+            },
+            "invalidationLevel": 49692.15126306637,
+            "probability": 78.74647347010779,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "40a05636-61d0-4b89-a0af-dcf50d2d56cb",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T12:57:26.084Z",
+              "price": 52849.17782722797,
+              "volume": 2235045.4748675292,
+              "index": 54
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 5,
+              "strength": 69.53505681973138
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 53710.10530437264,
+              "normal": 54571.032781517315,
+              "aggressive": 55635.139143268134
+            },
+            "invalidationLevel": 50183.304416465595,
+            "probability": 77.4990202630105,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "3054c433-1112-4e11-ad3c-0f90c0b84ec7",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T16:27:26.084Z",
+              "price": 53442.92186130979,
+              "volume": 1601330.5351227378,
+              "index": 68
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 4,
+              "strength": 66.26837742647922
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 54433.767429294116,
+              "normal": 55424.61299727845,
+              "aggressive": 56649.298119307074
+            },
+            "invalidationLevel": 50497.76443410428,
+            "probability": 78.92015363485822,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          },
+          {
+            "id": "be621537-fca4-4820-8276-89233e5249fd",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T19:12:26.084Z",
+              "price": 54127.98003723563,
+              "volume": 2659512.7802505633,
+              "index": 79
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 4,
+              "strength": 66.06870437574673
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 55284.327771763885,
+              "normal": 56440.67550629213,
+              "aggressive": 57869.921306169046
+            },
+            "invalidationLevel": 51037.42159875611,
+            "probability": 81.9425653948171,
+            "createdAt": "2025-06-19T00:27:26.084Z"
+          }
+        ],
+        "currentStructure": {
+          "type": "uptrend",
+          "strength": 75,
+          "duration": 20,
+          "keyLevels": [
+            52849.17782722797,
+            50751.52204432591,
+            53442.92186130979,
+            51293.891054026244,
+            54127.98003723563
+          ]
+        },
+        "marketBias": {
+          "direction": "bullish",
+          "strength": 100,
+          "confidence": 75,
+          "reasoning": [
+            "Recent breaks favor bullish bias"
+          ]
+        },
+        "nexteDecisionPoints": [],
+        "tradingOpportunities": [],
+        "timestamp": "2025-06-19T00:27:26.084Z"
+      }
+    },
+    "timestamp": "2025-06-19T00:27:26.763Z"
+  },
+  "metadata": {
+    "id": "BTCUSDT_smc_confluence_D_1750292846763",
+    "type": "smc",
+    "timestamp": "2025-06-19T00:27:26.763Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "D",
+    "tags": [
+      "timeframe:D",
+      "confluences:2",
+      "bias:bullish",
+      "institutional:100",
+      "zone:premium"
+    ]
+  },
+  "timestamp": "2025-06-19T00:27:26.763Z"
+}

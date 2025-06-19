@@ -1,0 +1,242 @@
+{
+  "id": "ETHUSDT_fibonacci_D_1750292966930",
+  "type": "technical",
+  "data": {
+    "symbol": "ETHUSDT",
+    "timeframe": "D",
+    "currentPrice": 2534.46,
+    "trend": "uptrend",
+    "swingHigh": {
+      "index": 78,
+      "timestamp": "2025-05-29T00:00:00.000Z",
+      "price": 2788.55,
+      "type": "high",
+      "strength": 12.014213434987742,
+      "volume": 174495.77586,
+      "confirmed": true
+    },
+    "swingLow": {
+      "index": 28,
+      "timestamp": "2025-04-09T00:00:00.000Z",
+      "price": 1384.84,
+      "type": "low",
+      "strength": 13.668086262744918,
+      "volume": 336015.32535,
+      "confirmed": true
+    },
+    "retracementLevels": [
+      {
+        "level": 0.236,
+        "price": 2457.27444,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -3.045443999905301
+      },
+      {
+        "level": 0.382,
+        "price": 2252.33278,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -11.13165013454542
+      },
+      {
+        "level": 0.5,
+        "price": 2086.695,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -17.667077010487436
+      },
+      {
+        "level": 0.618,
+        "price": 1921.0572200000001,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -24.20250388642945
+      },
+      {
+        "level": 0.786,
+        "price": 1685.2339399999998,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -33.507179438618095
+      }
+    ],
+    "extensionLevels": [
+      {
+        "level": 1,
+        "price": 2788.55,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 10.025409751978732
+      },
+      {
+        "level": 1.272,
+        "price": 3170.35912,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 25.09012255076032
+      },
+      {
+        "level": 1.414,
+        "price": 3369.6859400000003,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 32.95478879130072
+      },
+      {
+        "level": 1.618,
+        "price": 3656.0427800000007,
+        "label": "161.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 44.25332339038693
+      },
+      {
+        "level": 2,
+        "price": 4192.26,
+        "label": "200.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 65.41038327691106
+      },
+      {
+        "level": 2.618,
+        "price": 5059.752780000001,
+        "label": "261.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 99.63829691531927
+      }
+    ],
+    "keyLevels": [
+      {
+        "level": 0.236,
+        "price": 2457.27444,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -3.045443999905301
+      },
+      {
+        "level": 0.382,
+        "price": 2252.33278,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -11.13165013454542
+      },
+      {
+        "level": 0.5,
+        "price": 2086.695,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -17.667077010487436
+      },
+      {
+        "level": 0.618,
+        "price": 1921.0572200000001,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -24.20250388642945
+      },
+      {
+        "level": 0.786,
+        "price": 1685.2339399999998,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -33.507179438618095
+      },
+      {
+        "level": 1,
+        "price": 2788.55,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 10.025409751978732
+      },
+      {
+        "level": 1.272,
+        "price": 3170.35912,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 25.09012255076032
+      },
+      {
+        "level": 1.414,
+        "price": 3369.6859400000003,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": 32.95478879130072
+      }
+    ],
+    "currentPosition": {
+      "nearestLevel": {
+        "level": 0.236,
+        "price": 2457.27444,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": -3.045443999905301
+      },
+      "retracement": 18.10131722364307,
+      "nextTargets": [
+        {
+          "level": 0.236,
+          "price": 2457.27444,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -3.045443999905301
+        },
+        {
+          "level": 1,
+          "price": 2788.55,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 0,
+          "distance": 10.025409751978732
+        },
+        {
+          "level": 0.382,
+          "price": 2252.33278,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -11.13165013454542
+        },
+        {
+          "level": 0.5,
+          "price": 2086.695,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -17.667077010487436
+        }
+      ]
+    },
+    "analysisTime": "2025-06-19T00:29:26.930Z",
+    "confidence": 25.136459939546533,
+    "validity": 79
+  },
+  "metadata": {
+    "id": "ETHUSDT_fibonacci_D_1750292966930",
+    "type": "technical",
+    "timestamp": "2025-06-19T00:29:26.930Z",
+    "symbol": "ETHUSDT",
+    "timeframe": "D"
+  },
+  "timestamp": "2025-06-19T00:29:26.930Z"
+}

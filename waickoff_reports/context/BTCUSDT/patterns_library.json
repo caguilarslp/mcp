@@ -1,0 +1,102 @@
+{
+  "symbol": "BTCUSDT",
+  "last_updated": "2025-06-19T00:43:00Z",
+  "successful_patterns": [
+    {
+      "pattern_id": "P001",
+      "type": "bearish_orderblock_fvg_combo",
+      "timeframe": "4H",
+      "setup_date": "2025-06-09",
+      "entry": 110000,
+      "stop": 111000,
+      "target_achieved": 105000,
+      "profit_percent": 4.5,
+      "duration_hours": 96,
+      "key_characteristics": [
+        "FVG at resistance",
+        "Order block rejection",
+        "Volume spike on entry",
+        "RSI divergence"
+      ],
+      "market_context": {
+        "trend": "uptrend_exhaustion",
+        "volatility": "high",
+        "volume": "above_average"
+      },
+      "lessons": "FVG + Order Block at ATH = High probability short"
+    },
+    {
+      "pattern_id": "P002",
+      "type": "support_bounce_accumulation",
+      "timeframe": "1H",
+      "setup_date": "2025-06-15",
+      "entry": 105350,
+      "stop": 104800,
+      "target_achieved": 107200,
+      "profit_percent": 1.8,
+      "duration_hours": 24,
+      "key_characteristics": [
+        "Multiple touches of support",
+        "Decreasing volume on dips",
+        "Bullish divergence on RSI",
+        "Wyckoff spring pattern"
+      ],
+      "market_context": {
+        "trend": "ranging",
+        "volatility": "medium",
+        "volume": "below_average"
+      },
+      "lessons": "Accumulation at key support with spring = Reliable long"
+    }
+  ],
+  "failed_patterns": [
+    {
+      "pattern_id": "F001",
+      "type": "breakout_attempt",
+      "timeframe": "1H",
+      "setup_date": "2025-06-12",
+      "entry": 108500,
+      "stop": 107500,
+      "stop_hit": true,
+      "loss_percent": -0.9,
+      "failure_reasons": [
+        "Low volume on breakout",
+        "No retest of broken level",
+        "Against 4H trend",
+        "During low volatility period"
+      ],
+      "lessons": "Never trade breakouts in low volatility environments"
+    }
+  ],
+  "pattern_statistics": {
+    "total_patterns_traded": 15,
+    "successful": 11,
+    "failed": 4,
+    "win_rate": 73.3,
+    "average_win": 2.8,
+    "average_loss": -1.1,
+    "profit_factor": 2.54,
+    "best_performing": {
+      "type": "fvg_at_resistance",
+      "win_rate": 85,
+      "average_profit": 3.2
+    },
+    "worst_performing": {
+      "type": "low_volume_breakout",
+      "win_rate": 25,
+      "average_loss": -1.5
+    }
+  },
+  "pattern_rules": {
+    "high_probability_setups": [
+      "FVG + Order Block confluence at major levels",
+      "Wyckoff spring at established support",
+      "Elliott Wave 5 completion with divergence"
+    ],
+    "avoid_patterns": [
+      "Breakouts during volatility < 2%",
+      "Counter-trend trades without major confluence",
+      "Patterns during major news events"
+    ]
+  }
+}

@@ -1,9 +1,9 @@
 [
   {
-    "id": "BTCUSDT_240_1750292863832",
-    "symbol": "BTCUSDT",
+    "id": "ETHUSDT_240_1750292979988",
+    "symbol": "ETHUSDT",
     "timeframe": "240",
-    "timestamp": "2025-06-19T00:27:43.832Z",
+    "timestamp": "2025-06-19T00:29:39.988Z",
     "type": "technical",
     "key_findings": [],
     "key_metrics": {},
