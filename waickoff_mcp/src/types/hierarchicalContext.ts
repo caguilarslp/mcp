@@ -427,10 +427,10 @@ export const HIERARCHICAL_CONTEXT_CONSTANTS = {
     MONTHLY: 12   // meses
   },
   FILE_NAMES: {
-    MASTER: 'master.gz',
-    DAILY: 'daily.gz',
-    WEEKLY: 'weekly.gz',
-    MONTHLY: 'monthly.gz',
+    MASTER: 'master.json',
+    DAILY: 'daily.json',
+    WEEKLY: 'weekly.json',
+    MONTHLY: 'monthly.json',
     CONFIG: 'config.json'
   },
   DIRECTORIES: {

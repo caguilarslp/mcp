@@ -22,6 +22,7 @@ import { WyckoffAdvancedHandlers } from './handlers/wyckoffAdvancedHandlers.js';
 import { TechnicalAnalysisHandlers } from './handlers/technicalAnalysisHandlers.js';
 import { SmartMoneyConceptsHandlers } from './handlers/smartMoneyConceptsHandlers.js';
 import { contextHandlers } from './handlers/contextHandlers.js';
+import { HierarchicalContextHandlers } from './handlers/hierarchicalContextHandlers.js';
 import { AdvancedMultiExchangeHandlers } from './handlers/multiExchange/advancedMultiExchangeHandlers.js';
 import { BasicAnalysisHandlers } from './handlers/basicAnalysisHandlers.js';
 import { SupportResistanceHandlers } from './handlers/supportResistanceHandlers.js';
@@ -51,6 +52,7 @@ export class MCPHandlers {
   private readonly gridTradingHandlers: GridTradingHandlers;
   private readonly comprehensiveAnalysisHandlers: ComprehensiveAnalysisHandlers;
   private readonly systemHandlers: SystemHandlers;
+  private readonly hierarchicalContextHandlers: HierarchicalContextHandlers;
   private readonly hybridStorageHandlers?: HybridStorageHandlers;
 
   constructor(engine: MarketAnalysisEngine) {
@@ -89,6 +91,7 @@ export class MCPHandlers {
     this.gridTradingHandlers = new GridTradingHandlers(engine, this.logger);
     this.comprehensiveAnalysisHandlers = new ComprehensiveAnalysisHandlers(engine, this.logger);
     this.systemHandlers = new SystemHandlers(engine, this.logger);
+    this.hierarchicalContextHandlers = new HierarchicalContextHandlers(engine, this.logger);
     
     // Initialize Hybrid Storage Handlers if available (TASK-015)
     if (engine.hybridStorageService) {
@@ -108,7 +111,8 @@ export class MCPHandlers {
       gridTradingEnabled: true,
       comprehensiveAnalysisEnabled: true,
       systemHandlersEnabled: true,
-      totalHandlers: 74
+      hierarchicalContextHandlersEnabled: true,  // TASK-040.3
+      totalHandlers: 89
     });
   }
 
@@ -725,6 +729,66 @@ export class MCPHandlers {
 
   async handleAnalyzeCrossExchangeMarketStructure(args: any): Promise<MCPServerResponse> {
     return await this.advancedMultiExchangeHandlers.handleAnalyzeCrossExchangeMarketStructure(args);
+  }
+
+  // ====================
+  // HIERARCHICAL CONTEXT MANAGEMENT HANDLERS (TASK-040.3) - DELEGATED
+  // ====================
+
+  async handleGetMasterContext(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleGetMasterContext(args);
+  }
+
+  async handleInitializeSymbolContext(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleInitializeSymbolContext(args);
+  }
+
+  async handleUpdateContextLevels(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleUpdateContextLevels(args);
+  }
+
+  async handleQueryMasterContext(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleQueryMasterContext(args);
+  }
+
+  async handleCreateContextSnapshot(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleCreateContextSnapshot(args);
+  }
+
+  async handleGetContextSnapshots(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleGetContextSnapshots(args);
+  }
+
+  async handleOptimizeSymbolContext(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleOptimizeSymbolContext(args);
+  }
+
+  async handleValidateContextIntegrity(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleValidateContextIntegrity(args);
+  }
+
+  async handleGetSymbolConfig(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleGetSymbolConfig(args);
+  }
+
+  async handleUpdateSymbolConfig(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleUpdateSymbolConfig(args);
+  }
+
+  async handleGetSymbolList(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleGetSymbolList(args);
+  }
+
+  async handleRemoveSymbolContext(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleRemoveSymbolContext(args);
+  }
+
+  async handleCleanupOldContextData(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleCleanupOldContextData(args);
+  }
+
+  async handleGetHierarchicalPerformanceMetrics(args: any): Promise<MCPServerResponse> {
+    return await this.hierarchicalContextHandlers.handleGetHierarchicalPerformanceMetrics(args);
   }
 
   // ====================

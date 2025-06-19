@@ -179,6 +179,22 @@ export class HandlerRegistry {
     this.register('analyze_enhanced_arbitrage', (args) => this.mcpHandlers.handleAnalyzeEnhancedArbitrage(args));
     this.register('analyze_extended_dominance', (args) => this.mcpHandlers.handleAnalyzeExtendedDominance(args));
     this.register('analyze_cross_exchange_market_structure', (args) => this.mcpHandlers.handleAnalyzeCrossExchangeMarketStructure(args));
+    
+    // Hierarchical Context Management Tools (TASK-040.3)
+    this.register('get_master_context', (args) => this.mcpHandlers.handleGetMasterContext(args));
+    this.register('initialize_symbol_context', (args) => this.mcpHandlers.handleInitializeSymbolContext(args));
+    this.register('update_context_levels', (args) => this.mcpHandlers.handleUpdateContextLevels(args));
+    this.register('query_master_context', (args) => this.mcpHandlers.handleQueryMasterContext(args));
+    this.register('create_context_snapshot', (args) => this.mcpHandlers.handleCreateContextSnapshot(args));
+    this.register('get_context_snapshots', (args) => this.mcpHandlers.handleGetContextSnapshots(args));
+    this.register('optimize_symbol_context', (args) => this.mcpHandlers.handleOptimizeSymbolContext(args));
+    this.register('validate_context_integrity', (args) => this.mcpHandlers.handleValidateContextIntegrity(args));
+    this.register('get_symbol_config', (args) => this.mcpHandlers.handleGetSymbolConfig(args));
+    this.register('update_symbol_config', (args) => this.mcpHandlers.handleUpdateSymbolConfig(args));
+    this.register('get_symbol_list', (args) => this.mcpHandlers.handleGetSymbolList(args));
+    this.register('remove_symbol_context', (args) => this.mcpHandlers.handleRemoveSymbolContext(args));
+    this.register('cleanup_old_context_data', (args) => this.mcpHandlers.handleCleanupOldContextData(args));
+    this.register('get_hierarchical_performance_metrics', (args) => this.mcpHandlers.handleGetHierarchicalPerformanceMetrics(args));
   }
 
   private register(name: string, handler: ToolHandler): void {

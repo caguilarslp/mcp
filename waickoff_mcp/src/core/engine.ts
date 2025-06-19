@@ -72,6 +72,7 @@ import { HybridStorageService } from '../services/storage/hybridStorageService.j
 import { TrapDetectionService } from '../services/trapDetection.js';
 import { WyckoffBasicService, type IWyckoffBasicService } from '../services/wyckoffBasic.js';
 import { WyckoffAdvancedService, type IWyckoffAdvancedService } from '../services/wyckoffAdvanced.js';
+import { hierarchicalContextManager } from '../services/context/hierarchicalContextManager.js';
 
 // TASK-019: Import new technical analysis services
 import { FibonacciService, type FibonacciAnalysis } from '../services/fibonacci.js';
@@ -148,6 +149,9 @@ export class MarketAnalysisEngine {
   
   // TASK-026 FASE 4: Advanced Multi-Exchange Service
   public readonly advancedMultiExchangeService: AdvancedMultiExchangeService;
+  
+  // TASK-040.2: Hierarchical Context Manager
+  public readonly hierarchicalContextManager: typeof hierarchicalContextManager;
   
   // Hybrid storage service (TASK-015) - Optional
   public readonly hybridStorageService?: HybridStorageService;
@@ -299,7 +303,10 @@ export class MarketAnalysisEngine {
     // TASK-026 FASE 4: Initialize Advanced Multi-Exchange Service
     this.advancedMultiExchangeService = new AdvancedMultiExchangeService();
     
-    this.logger.info('Market Analysis Engine initialized with timezone support, Context-Aware Repository (TASK-027), Report Generator, Trap Detection, Wyckoff Basic/Advanced, Technical Analysis Suite, and Smart Money Concepts', {
+    // TASK-040.2: Initialize Hierarchical Context Manager
+    this.hierarchicalContextManager = hierarchicalContextManager;
+    
+    this.logger.info('Market Analysis Engine initialized with timezone support, Context-Aware Repository (TASK-027), Report Generator, Trap Detection, Wyckoff Basic/Advanced, Technical Analysis Suite, Smart Money Concepts, and Hierarchical Context Manager (TASK-040.2)', {
       timezone: this.timezoneConfig.userTimezone,
       currentTime: this.timezoneManager.getUserNow(),
       repositoryEnabled: true,
@@ -313,8 +320,16 @@ export class MarketAnalysisEngine {
       bollingerBandsEnabled: true,
       elliottWaveEnabled: true,
       technicalAnalysisIntegrationEnabled: true,
-      smartMoneyConceptsEnabled: true
+      smartMoneyConceptsEnabled: true,
+      hierarchicalContextManagerEnabled: true  // TASK-040.2
     });
+  }
+
+  /**
+   * Get hierarchical context manager (exposed for MCP handlers)
+   */
+  getHierarchicalContextManager(): typeof hierarchicalContextManager {
+    return this.hierarchicalContextManager;
   }
 
   // ====================

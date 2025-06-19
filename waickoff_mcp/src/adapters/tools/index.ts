@@ -24,6 +24,7 @@ import { wyckoffAdvancedTools } from './wyckoffAdvancedTools.js';
 import { technicalAnalysisTools } from './technicalAnalysisTools.js';
 import { smartMoneyConceptsTools } from './smartMoneyConceptsTools.js';
 import { contextTools } from './contextTools.js';
+import { hierarchicalContextTools } from './hierarchicalContextTools.js';
 import { multiExchangeTools } from './multiExchangeTools.js';
 import { advancedMultiExchangeTools } from './advancedMultiExchangeTools.js';
 
@@ -49,6 +50,7 @@ const allToolCategories = [
   { name: 'Wyckoff Advanced Analysis', tools: wyckoffAdvancedTools },
   { name: 'Technical Analysis Suite', tools: technicalAnalysisTools },
   { name: 'Context Management', tools: contextTools },
+  { name: 'Hierarchical Context Management', tools: hierarchicalContextTools },
   
   // Data Management
   { name: 'Analysis Repository', tools: repositoryTools },
