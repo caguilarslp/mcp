@@ -1,0 +1,58 @@
+{
+  "symbol": "XRPUSDT",
+  "version": "1.0.0",
+  "lastUpdated": "2025-06-18T00:00:00.000Z",
+  "dataIntegrity": {
+    "checksum": "empty_initial_xrp",
+    "lastValidation": "2025-06-18T00:00:00.000Z",
+    "entriesCount": 0
+  },
+  "levels": [],
+  "patterns": [],
+  "metrics": {
+    "symbol": "XRPUSDT",
+    "totalAnalyses": 0,
+    "avgVolatility": 0,
+    "dominantTrend": "sideways",
+    "trendConfidence": 0,
+    "avgTradingRange": {
+      "high": 0,
+      "low": 0,
+      "median": 0
+    },
+    "keyStatistics": {
+      "strongestSupport": 0,
+      "strongestResistance": 0,
+      "mostActiveTimeframe": "60",
+      "mostReliablePattern": "none",
+      "avgAnalysisConfidence": 0
+    },
+    "periodicMetrics": {
+      "daily": { "analyses": 0, "avgConfidence": 0 },
+      "weekly": { "analyses": 0, "avgConfidence": 0 },
+      "monthly": { "analyses": 0, "avgConfidence": 0 }
+    }
+  },
+  "snapshots": {
+    "daily": [],
+    "weekly": [],
+    "monthly": []
+  },
+  "config": {
+    "retentionPolicy": {
+      "dailyDays": 30,
+      "weeklyWeeks": 12,
+      "monthlyMonths": 12
+    },
+    "compressionSettings": {
+      "enabled": true,
+      "algorithm": "gzip",
+      "level": 6
+    },
+    "validationRules": {
+      "minConfidence": 60,
+      "maxAge": 2592000000,
+      "requireVolumeConfirmation": true
+    }
+  }
+}

@@ -1676,3 +1676,35 @@ export type StructuralBreak = StructuralBreakType;
 export type StructureShiftValidation = __deprecated_SM.StructureShiftValidation;
 export type BOSConfig = __deprecated_SM.BOSConfig;
 export type IBreakOfStructureService = __deprecated_SM.IBreakOfStructureService;
+
+// ====================
+// HIERARCHICAL CONTEXT TYPES RE-EXPORTS (TASK-040.1)
+// ====================
+
+export type {
+  MasterContextLevel,
+  MasterContextPattern,
+  MasterContextMetrics,
+  MasterContext,
+  MasterContextSnapshot,
+  SymbolContextConfig,
+  HierarchicalContextPath,
+  ContextUpdateRequest,
+  ContextUpdateResult,
+  ContextQueryRequest,
+  ContextQueryResult,
+  SymbolInitializationRequest,
+  SymbolInitializationResult,
+  ContextMaintenanceConfig,
+  ContextOptimizationResult,
+  IHierarchicalContextManager,
+  ContextPeriod,
+  LevelType,
+  LevelSignificance,
+  PatternType,
+  SymbolPriority,
+  HierarchicalContextError,
+  ContextIntegrityError
+} from './hierarchicalContext.js';
+
+export { HIERARCHICAL_CONTEXT_CONSTANTS } from './hierarchicalContext.js';

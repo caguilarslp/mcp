@@ -1,0 +1,18 @@
+{
+  "symbol": "ETHUSDT",
+  "enabled": true,
+  "autoUpdate": true,
+  "priority": "high",
+  "timeframes": ["5", "15", "60", "240", "D"],
+  "thresholds": {
+    "minVolumeForLevel": 500000,
+    "minConfidenceForPattern": 70,
+    "levelMergeDistance": 0.5
+  },
+  "customSettings": {
+    "isMajorPair": true,
+    "liquidityTier": "tier1",
+    "volatilityProfile": "medium",
+    "institutionalInterest": "high"
+  }
+}
