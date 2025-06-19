@@ -1,7 +1,7 @@
 /**
  * @fileoverview Tool Registry - Central Tool Management
  * @description Central registry for all MCP tools with O(1) lookup and validation
- * @version 1.6.3
+ * @version 1.6.4 - Added Context-Aware Analysis Tools (TASK-040.4)
  */
 
 import { ToolDefinition } from '../types/mcp.types.js';
@@ -25,6 +25,7 @@ import { technicalAnalysisTools } from './technicalAnalysisTools.js';
 import { smartMoneyConceptsTools } from './smartMoneyConceptsTools.js';
 import { contextTools } from './contextTools.js';
 import { hierarchicalContextTools } from './hierarchicalContextTools.js';
+import { contextAwareAnalysisTools } from './contextAwareAnalysisTools.js';
 import { multiExchangeTools } from './multiExchangeTools.js';
 import { advancedMultiExchangeTools } from './advancedMultiExchangeTools.js';
 
@@ -37,6 +38,9 @@ const allToolCategories = [
   { name: 'Market Data', tools: marketDataTools },
   { name: 'Technical Analysis', tools: analysisTools },
   { name: 'Grid Trading', tools: gridTradingTools },
+  
+  // Context-Aware Analysis (TASK-040.4)
+  { name: 'Context-Aware Analysis', tools: contextAwareAnalysisTools },
   
   // Multi-Exchange Features (TASK-026 FASE 2-4)
   { name: 'Multi-Exchange', tools: multiExchangeTools },
@@ -87,6 +91,7 @@ if (duplicateTools.length > 0) {
 }
 
 console.log(`✅ Tool Registry initialized: ${totalTools} tools across ${allToolCategories.length} categories`);
+console.log(`🆕 TASK-040.4: Context-Aware Analysis tools added (${contextAwareAnalysisTools.length} tools)`);
 
 // Export functions for external use
 export const getAllTools = (): ToolDefinition[] => 

@@ -1,7 +1,7 @@
 /**
  * @fileoverview Handler Registry - Tool to Handler Mapping
  * @description Maps tool names to their corresponding handler methods with validation
- * @version 1.6.3
+ * @version 1.6.4 - Added Context-Aware Analysis Tools (TASK-040.4)
  */
 
 import { MCPHandlers } from '../mcp-handlers.js';
@@ -31,6 +31,10 @@ export class HandlerRegistry {
     this.register('identify_support_resistance', (args) => this.mcpHandlers.handleIdentifySupportResistance(args));
     this.register('perform_technical_analysis', (args) => this.mcpHandlers.handlePerformTechnicalAnalysis(args));
     this.register('get_complete_analysis', (args) => this.mcpHandlers.handleGetCompleteAnalysis(args));
+
+    // Context-Aware Analysis Tools (TASK-040.4)
+    this.register('analyze_with_historical_context', (args) => this.mcpHandlers.handleAnalyzeWithHistoricalContext(args));
+    this.register('complete_analysis_with_context', (args) => this.mcpHandlers.handleCompleteAnalysisWithContext(args));
 
     // Grid Trading Tools
     this.register('suggest_grid_levels', (args) => this.mcpHandlers.handleSuggestGridLevels(args));

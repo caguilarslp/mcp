@@ -1,0 +1,501 @@
+
+> waickoff_mcp@1.9.0 build
+> tsc
+
+src/adapters/mcp-handlers.ts(841,38): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(842,5): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(844,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(850,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(850,35): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(850,41): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(851,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(851,74): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(854,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(854,34): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(854,40): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(855,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(855,73): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(858,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(858,32): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(858,38): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(859,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(859,71): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(862,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(862,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(862,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(863,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(863,76): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(866,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(866,33): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(866,39): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(867,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(867,72): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(870,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(870,36): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(870,42): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(871,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(871,75): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(874,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(874,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(874,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(875,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(875,76): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(878,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(878,35): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(878,41): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(879,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(879,74): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(882,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(882,34): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(882,40): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(883,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(883,73): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(890,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(890,34): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(890,40): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(891,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(891,71): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(894,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(894,34): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(894,40): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(895,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(895,71): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(898,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(898,34): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(898,40): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(899,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(899,71): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(902,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(902,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(902,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(903,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(903,74): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(906,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(906,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(906,48): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(907,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(907,79): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(910,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(910,36): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(910,42): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(911,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(911,73): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(914,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(914,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(914,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(915,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(915,75): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(922,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(922,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(922,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(923,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(923,75): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(926,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(926,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(926,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(927,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(927,74): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(930,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(930,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(930,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(931,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(931,73): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(934,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(934,40): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(934,46): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(935,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(935,76): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(938,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(938,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(938,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(939,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(939,80): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(942,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(942,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(942,47): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(943,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(943,77): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(946,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(946,40): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(946,46): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(947,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(947,76): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(954,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(954,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(954,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(955,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(955,85): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(958,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(958,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(958,47): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(959,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(959,82): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(962,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(962,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(962,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(963,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(963,79): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(966,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(966,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(966,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(967,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(967,85): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(974,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(974,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(974,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(975,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(975,78): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(978,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(978,48): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(978,54): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(979,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(979,80): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(982,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(982,47): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(982,53): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(983,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(983,79): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(986,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(986,50): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(986,56): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(987,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(987,82): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(990,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(990,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(990,47): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(991,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(991,80): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(994,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(994,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(994,48): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(995,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(995,81): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(998,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(998,51): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(998,57): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(999,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(999,83): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1006,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1006,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1006,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1007,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1007,79): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1010,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1010,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1010,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1011,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1011,80): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1014,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1014,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1014,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1015,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1015,80): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1018,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1018,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1018,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1019,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1019,79): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1022,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1022,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1022,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1023,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1023,79): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1030,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1030,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1030,48): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1031,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1031,84): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1034,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1034,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1034,48): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1035,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1035,84): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1038,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1038,42): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1038,48): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1039,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1039,84): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1046,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1046,47): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1046,53): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1047,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1047,111): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1048,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1048,94): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1049,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1049,66): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1052,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1052,36): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1052,42): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1053,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1053,111): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1054,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1054,94): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1055,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1055,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1058,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1058,36): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1058,42): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1059,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1059,111): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1060,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1060,94): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1061,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1061,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1068,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1068,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1068,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1069,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1069,60): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1072,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1072,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1072,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1073,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1073,61): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1076,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1076,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1076,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1077,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1077,60): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1080,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1080,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1080,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1081,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1081,67): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1084,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1084,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1084,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1085,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1085,61): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1088,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1088,34): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1088,40): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1089,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1089,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1092,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1092,35): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1092,41): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1093,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1093,57): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1100,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1100,35): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1100,41): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1101,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1101,113): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1102,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1105,6): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1106,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1106,48): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1109,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1109,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1109,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1110,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1110,113): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1111,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1114,6): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1115,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1115,51): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1118,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1118,48): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1118,54): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1119,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1119,113): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1120,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1123,6): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1124,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1124,61): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1131,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1131,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1131,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1132,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1132,96): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1133,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1133,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1134,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1134,32): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1135,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(1135,19): error TS1005: '{' expected.
+src/adapters/mcp-handlers.ts(1135,25): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1135,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1136,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1136,31): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1139,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1139,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1139,47): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1140,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1140,96): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1141,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1141,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1142,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1142,32): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1143,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(1143,19): error TS1005: '{' expected.
+src/adapters/mcp-handlers.ts(1143,25): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1143,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1144,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1144,31): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1147,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1147,45): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1147,51): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1148,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1148,96): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1149,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1149,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1150,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1150,32): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1151,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(1151,19): error TS1005: '{' expected.
+src/adapters/mcp-handlers.ts(1151,25): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1151,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1152,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1152,31): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1155,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1155,50): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1155,56): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1156,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1156,96): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1157,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1157,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1158,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1158,32): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1159,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(1159,19): error TS1005: '{' expected.
+src/adapters/mcp-handlers.ts(1159,25): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1159,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1160,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1160,31): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1163,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1163,40): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1163,46): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1164,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1164,96): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1165,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1165,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1166,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1166,32): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1167,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(1167,19): error TS1005: '{' expected.
+src/adapters/mcp-handlers.ts(1167,25): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1167,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1168,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1168,31): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1171,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1171,45): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1171,51): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1172,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1172,96): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1173,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1173,62): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1174,11): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1174,32): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1175,9): error TS1003: Identifier expected.
+src/adapters/mcp-handlers.ts(1175,19): error TS1005: '{' expected.
+src/adapters/mcp-handlers.ts(1175,25): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1175,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1176,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1176,31): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1183,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1183,45): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1183,51): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1184,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1184,90): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1187,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1187,45): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1187,51): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1188,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1188,90): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1191,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1191,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1191,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1192,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1192,89): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1195,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1195,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1195,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1196,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1196,89): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1199,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1199,55): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1199,61): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1200,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1200,100): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1207,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1207,36): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1207,42): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1208,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1208,79): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1211,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1211,43): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1211,49): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1212,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1212,86): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1215,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1215,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1215,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1216,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1216,82): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1219,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1219,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1219,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1220,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1220,81): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1223,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1223,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1223,47): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1224,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1224,84): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1227,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1227,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1227,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1228,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1228,82): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1231,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1231,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1231,47): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1232,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1232,84): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1235,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1235,44): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1235,50): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1236,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1236,87): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1239,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1239,35): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1239,41): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1240,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1240,78): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1243,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1243,38): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1243,44): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1244,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1244,81): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1247,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1247,33): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1247,39): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1248,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1248,76): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1251,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1251,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1251,45): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1252,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1252,82): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1255,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1255,41): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1255,47): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1256,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1256,84): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1259,3): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1259,53): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1259,59): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1260,12): error TS1005: ':' expected.
+src/adapters/mcp-handlers.ts(1260,96): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1267,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(1267,37): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1267,43): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1267,45): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1301,3): error TS1128: Declaration or statement expected.
+src/adapters/mcp-handlers.ts(1301,39): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1301,54): error TS1005: ',' expected.
+src/adapters/mcp-handlers.ts(1301,62): error TS1005: ';' expected.
+src/adapters/mcp-handlers.ts(1301,64): error TS1434: Unexpected keyword or identifier.
+src/adapters/mcp-handlers.ts(1310,1): error TS1128: Declaration or statement expected.

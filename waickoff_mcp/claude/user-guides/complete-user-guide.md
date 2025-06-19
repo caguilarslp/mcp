@@ -2,17 +2,293 @@
 
 ## 🎯 Guía Completa de Herramientas MCP
 
-Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.8.3, organizadas por categorías.
+Este documento describe todas las herramientas disponibles en el servidor wAIckoff MCP v1.10.1, organizadas por categorías.
 
-**✨ NOVEDAD:** Sistema de Contexto Histórico ACTIVO - Todos los análisis ahora se guardan con contexto para generar insights más precisos.
-**✅ Última actualización:** TASK-030 Fix TypeScript Modularización Wyckoff completado
-**🏗️ ESTADO:** Modularización Wyckoff lista para integración final
+**🎉 SISTEMA DE CONTEXTO JERÁRQUICO COMPLETADO:** Análisis contextual automático con memoria histórica inteligente implementado al 100%
+**✅ Última actualización:** TASK-040.4 Sistema de Análisis Contextual completado
+**🏗️ ESTADO:** Production Ready v1.10.1 con 119+ herramientas operativas
 
 ---
 
-## 🧾 Sistema de Contexto Histórico (✅ ACTIVO desde v1.8.1)
+## 🧠 Sistema de Análisis Contextual (✅ COMPLETADO v1.10.1)
 
-El sistema wAIckoff MCP ahora tiene **memoria histórica** que mejora significativamente la calidad de los análisis.
+El sistema wAIckoff MCP ahora incluye **análisis contextual completo** que combina análisis técnico tradicional con memoria histórica inteligente para generar insights más precisos y recomendaciones ajustadas por riesgo.
+
+### ✨ Características del Sistema Contextual
+- ✅ **Memoria histórica automática** - Análisis de 30+ días de historia por defecto
+- ✅ **Comparación inteligente** - Patrones actuales vs históricos
+- ✅ **Scoring de continuidad** - Medición matemática 0-100%
+- ✅ **Recomendaciones graduales** - 4 niveles de acción contextual
+- ✅ **Actualización automática** - Enriquece contexto tras cada análisis
+- ✅ **Acceso O(1)** - Estructura jerárquica optimizada por símbolo
+- ✅ **Fallbacks robustos** - Funciona sin contexto histórico disponible
+
+### 🆕 Nuevas Herramientas de Análisis Contextual
+
+#### `analyze_with_historical_context`
+**Análisis técnico mejorado con contexto histórico automático**
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (opcional): Marco temporal ('5', '15', '30', '60', '240'). Default: '60'
+- `periods` (opcional): Períodos a analizar. Default: 100
+- `includeHistoricalContext` (opcional): Incluir contexto histórico. Default: true
+- `contextLookbackDays` (opcional): Días de historia a analizar. Default: 30
+- `updateContextAfterAnalysis` (opcional): Actualizar contexto post-análisis. Default: true
+
+**Ejemplo:**
+```
+analyze_with_historical_context BTCUSDT timeframe=60 contextLookbackDays=45
+```
+
+**Respuesta incluye:**
+- `originalAnalysis` - Análisis técnico completo tradicional
+- `historicalContext` - Contexto histórico con niveles cercanos y patrones
+- `contextConfidence` - Score de continuidad histórica (0-100%)
+- `recommendations` - Recomendaciones ajustadas por contexto histórico
+
+#### `complete_analysis_with_context`
+**Análisis completo mejorado con contexto histórico + grid trading**
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `investment` (opcional): Monto de inversión para grid trading
+- `contextLookbackDays` (opcional): Días de contexto histórico. Default: 30
+
+**Ejemplo:**
+```
+complete_analysis_with_context ETHUSDT investment=1000 contextLookbackDays=60
+```
+
+**Respuesta incluye:**
+- Todo el análisis contextual anterior
+- Grid trading ajustado por niveles históricos
+- Análisis de riesgo mejorado con contexto temporal
+- Recomendaciones de posicionamiento basadas en historia
+
+### 📊 Interpretando el Análisis Contextual
+
+#### 🎯 Context Confidence Score (0-100%)
+
+| Rango | Interpretación | Acción Recomendada |
+|-------|----------------|-------------------|
+| 80-100% | **Alta continuidad** - Señales alineadas con historia | `consider_entry` |
+| 60-79% | **Continuidad moderada** - Señales generalmente alineadas | `monitor_closely` |
+| 40-59% | **Continuidad mixta** - Señales neutras o conflictivas | `monitor` |
+| 20-39% | **Baja continuidad** - Señales divergen de historia | `wait` |
+| 0-19% | **Divergencia alta** - Señales contrarias a historia | `reduce_exposure` |
+
+#### 🔍 Tipos de Alineación de Patrones
+- **Confirmed** ✅ - Patrones actuales confirman tendencia histórica
+- **Divergent** ⚠️ - Patrones actuales divergen de tendencia histórica
+- **Neutral** ➖ - Señales mixtas o poco claras
+
+#### 📈 Estados de Bias de Mercado
+- **Strengthening** 🔥 - Tendencia histórica se fortalece
+- **Aligned** ✅ - Tendencia actual alineada con historia
+- **Weakening** ⚠️ - Tendencia histórica se debilita
+- **Divergent** ❌ - Tendencia actual opuesta a historia
+
+### 🎯 Ejemplo de Respuesta Contextual
+
+```json
+{
+  "originalAnalysis": { /* análisis técnico tradicional */ },
+  "historicalContext": {
+    "summary": "3 historical levels nearby, strongest support at 43250.00. 2 patterns confirm historical trend. Market bias is strengthening with historical trend. High continuity with historical analysis",
+    "keyLevelsNearby": [
+      {
+        "level": 43250.00,
+        "type": "support", 
+        "strength": 85,
+        "touches": 7
+      }
+    ],
+    "continuityScore": 85
+  },
+  "contextConfidence": 85,
+  "recommendations": {
+    "action": "consider_entry",
+    "reason": "Current signals strengthen historical trend with high confidence. Multiple historical levels nearby suggest important price area",
+    "confidence": 85,
+    "riskAdjustment": "decrease"
+  }
+}
+```
+
+---
+
+## 🗂️ Sistema de Contexto Jerárquico (✅ COMPLETADO)
+
+Sistema optimizado que organiza el contexto por símbolo para acceso O(1) y escalabilidad multi-símbolo.
+
+### 🛠️ Herramientas de Gestión de Contexto Jerárquico
+
+#### `get_master_context`
+Obtiene contexto maestro completo para un símbolo específico.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+
+**Ejemplo:**
+```
+get_master_context BTCUSDT
+```
+
+#### `initialize_symbol_context`
+Inicializa estructura de contexto jerárquico para un nuevo símbolo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `priority` (opcional): Prioridad de análisis ('low', 'medium', 'high'). Default: 'medium'
+- `timeframes` (opcional): Timeframes a trackear. Default: ['15', '60', '240', 'D']
+- `autoUpdate` (opcional): Actualización automática. Default: true
+
+**Ejemplo:**
+```
+initialize_symbol_context ADAUSDT priority=high
+```
+
+#### `update_context_levels`
+Actualiza niveles de soporte/resistencia en contexto maestro.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `analysis` (requerido): Datos de análisis técnico
+- `confidence` (opcional): Nivel de confianza del análisis. Default: 60
+
+**Ejemplo:**
+```
+update_context_levels BTCUSDT analysis={...} confidence=80
+```
+
+#### `query_master_context`
+Consulta avanzada de contexto maestro con filtros.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `minConfidence` (opcional): Confianza mínima
+- `filters` (opcional): Filtros avanzados (rango de precios, fechas, significancia)
+
+**Ejemplo:**
+```
+query_master_context BTCUSDT minConfidence=70
+```
+
+#### `create_context_snapshot`
+Crea snapshot periódico del contexto maestro.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `period` (requerido): Tipo de snapshot ('daily', 'weekly', 'monthly')
+
+**Ejemplo:**
+```
+create_context_snapshot ETHUSDT period=weekly
+```
+
+#### `get_context_snapshots`
+Obtiene snapshots históricos del contexto.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `period` (requerido): Tipo de período
+- `limit` (opcional): Número máximo de snapshots. Default: 10
+
+**Ejemplo:**
+```
+get_context_snapshots BTCUSDT period=daily limit=5
+```
+
+#### `optimize_symbol_context`
+Optimiza contexto de un símbolo eliminando datos antiguos y mergeando niveles similares.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+
+**Ejemplo:**
+```
+optimize_symbol_context BTCUSDT
+```
+
+#### `validate_context_integrity`
+Valida integridad de datos del contexto maestro con verificación de checksum.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+
+**Ejemplo:**
+```
+validate_context_integrity ETHUSDT
+```
+
+#### `get_symbol_config`
+Obtiene configuración jerárquica de un símbolo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+
+**Ejemplo:**
+```
+get_symbol_config BTCUSDT
+```
+
+#### `update_symbol_config`
+Actualiza configuración jerárquica de un símbolo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `configUpdates` (requerido): Actualizaciones de configuración
+
+**Ejemplo:**
+```
+update_symbol_config BTCUSDT configUpdates={\"priority\":\"high\"}
+```
+
+#### `get_symbol_list`
+Obtiene lista de todos los símbolos con contexto jerárquico activo.
+
+**Ejemplo:**
+```
+get_symbol_list
+```
+
+#### `remove_symbol_context`
+Elimina contexto jerárquico de un símbolo con opción de archivado.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `archiveData` (opcional): Archivar datos antes de eliminar. Default: true
+
+**Ejemplo:**
+```
+remove_symbol_context ADAUSDT
+```
+
+#### `cleanup_old_context_data`
+Limpia datos antiguos de contexto basado en políticas de retención.
+
+**Parámetros:**
+- `symbol` (opcional): Símbolo específico a limpiar
+
+**Ejemplo:**
+```
+cleanup_old_context_data
+```
+
+#### `get_hierarchical_performance_metrics`
+Obtiene métricas de rendimiento del sistema de contexto jerárquico.
+
+**Ejemplo:**
+```
+get_hierarchical_performance_metrics
+```
+
+---
+
+## 🧾 Sistema de Contexto Histórico Legacy (✅ ACTIVO desde v1.8.1)
+
+El sistema wAIckoff MCP mantiene **memoria histórica** que mejora significativamente la calidad de los análisis.
 
 **Características principales:**
 - ✅ **Memoria automática**: Cada análisis se guarda con contexto histórico
@@ -25,57 +301,90 @@ El sistema wAIckoff MCP ahora tiene **memoria histórica** que mejora significat
 - Todos los análisis técnicos (`perform_technical_analysis`, `get_complete_analysis`)
 - Herramientas especializadas (Fibonacci, Bollinger, Elliott Wave, Confluencias)
 - Smart Money Concepts completo
-- Y más servicios en desarrollo (FASE 2-3)
+- Sistema jerárquico (TASK-040 completado)
 
-**Estado actual:** FASE 1-2 completadas - Sistema base funcionando + Fix compilación TypeScript
-**Próximo:** FASE 3-4 - Integración completa + Herramientas MCP de consulta de contexto
+### 🛠️ Herramientas de Contexto Legacy
+
+#### `get_analysis_context`
+Obtiene contexto histórico comprimido para un símbolo.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `format` (opcional): Formato de salida ('compressed', 'detailed', 'summary'). Default: 'compressed'
+
+**Ejemplo:**
+```
+get_analysis_context BTCUSDT format=detailed
+```
+
+#### `get_timeframe_context`
+Obtiene resumen de contexto para símbolo y timeframe específico.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (requerido): Marco temporal
+
+**Ejemplo:**
+```
+get_timeframe_context BTCUSDT timeframe=60
+```
+
+#### `add_analysis_context`
+Añade nuevo análisis al historial de contexto.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframe` (requerido): Marco temporal
+- `analysis` (requerido): Datos del análisis
+- `type` (opcional): Tipo de análisis. Default: 'technical'
+
+**Ejemplo:**
+```
+add_analysis_context BTCUSDT timeframe=60 analysis={...}
+```
+
+#### `get_multi_timeframe_context`
+Obtiene contexto a través de múltiples timeframes.
+
+**Parámetros:**
+- `symbol` (requerido): Par de trading
+- `timeframes` (opcional): Lista de timeframes. Default: ['5', '15', '60', '240', 'D']
+
+**Ejemplo:**
+```
+get_multi_timeframe_context BTCUSDT timeframes=[\"60\",\"240\",\"D\"]
+```
 
 ---
 
-## 🏗️ Modularización Wyckoff (✅ FASE 1-2 + Fix TypeScript COMPLETADAS)
+## 🏗️ Modularización Wyckoff (✅ COMPLETADO)
 
 El sistema Wyckoff ha sido completamente modularizado para mejorar mantenibilidad y escalabilidad.
 
 **Estado Actual:**
-- ✅ **FASE 1**: Separación de tipos y core completada
-- ✅ **FASE 2**: 6 módulos especializados implementados
-- ✅ **Fix TypeScript**: 8 errores de compilación resueltos
-- 🔄 **FASE 3 Pendiente**: Integración final en WyckoffBasicService (30 min)
+- ✅ **TODAS LAS FASES**: Separación, módulos, integración y testing completados
+- ✅ **0 errores TypeScript**: Sistema compilando correctamente
+- ✅ **Backward Compatibility**: Todas las APIs existentes funcionan igual
 
 **Arquitectura Modular Implementada:**
 ```
 src/services/wyckoff/
 ├── core/
 │   ├── types.ts (5.6KB)           # ✅ Tipos extraídos
-│   ├── WyckoffBasicService.ts (21KB) # ✅ Servicio simplificado
+│   ├── WyckoffBasicService.ts     # ✅ Servicio integrado
 │   └── index.ts                   # ✅ Exports del core
 ├── analyzers/
 │   ├── PhaseAnalyzer.ts (18.8KB)  # ✅ Clasificación fases Wyckoff
-│   ├── TradingRangeAnalyzer.ts (20KB) # ✅ Detección multi-método
-│   ├── VolumeAnalyzer.ts (12.5KB) # ✅ Análisis climax/dry-up
+│   ├── TradingRangeAnalyzer.ts    # ✅ Detección multi-método
+│   ├── VolumeAnalyzer.ts          # ✅ Análisis climax/dry-up
 │   └── index.ts                   # ✅ Exports analyzers
 ├── detectors/
-│   ├── SpringDetector.ts (13.7KB) # ✅ Detección springs avanzada
-│   ├── UpthrustDetector.ts (13.5KB) # ✅ Detección upthrusts
-│   ├── TestEventDetector.ts (12KB) # ✅ Test events con quality
+│   ├── SpringDetector.ts          # ✅ Detección springs avanzada
+│   ├── UpthrustDetector.ts        # ✅ Detección upthrusts
+│   ├── TestEventDetector.ts       # ✅ Test events con quality
 │   └── index.ts                   # ✅ Exports detectors
-├── utils/ (placeholders)          # 🔄 Pendiente FASE 3
 └── index.ts                       # ✅ Index principal
 ```
-
-**Beneficios Logrados:**
-- **Type Safety**: ✅ 0 errores TypeScript tras correcciones
-- **Mantenibilidad**: Responsabilidad única por módulo
-- **Testing**: Granular habilitado
-- **Arquitectura**: Profesional y escalable
-- **Backward Compatibility**: ✅ Preservada
-
-**Errores TypeScript Corregidos:**
-- Timestamp comparisons (string vs number) - 5 correcciones
-- Type inference en reduce() - 1 corrección
-- Total: 8 errores eliminados, compilación exitosa
-
-**Próximo Paso:** Integrar módulos especializados en WyckoffBasicService (30 min restantes)
 
 ---
 
@@ -98,13 +407,6 @@ El sistema wAIckoff MCP ahora incluye **infraestructura multi-exchange** que per
 - ✅ **Symbol Normalization**: Mapeo automático entre formatos
 - ✅ **Performance Metrics**: Tracking detallado de operaciones
 - ✅ **Factory Pattern**: Creación dinámica de adapters
-
-**Próximas Fases:**
-- **FASE 2**: Exchange Aggregator - Agregación inteligente de datos
-- **FASE 3**: Enhanced Analysis - Servicios SMC/Wyckoff con multi-exchange
-- **FASE 4**: Exclusive Features - Arbitraje, dominancia, manipulación
-
-**Estado Actual**: Sistema actual (single exchange) sigue funcionando sin cambios. Multi-exchange en desarrollo para FASE 2.
 
 ### `get_ticker`
 Obtiene precio actual y estadísticas de 24h para un par de trading.
@@ -200,7 +502,7 @@ identify_support_resistance BTCUSDT sensitivity=3
 ```
 
 ### `perform_technical_analysis`
-Análisis técnico completo incluyendo todos los indicadores.
+Análisis técnico completo incluyendo todos los indicadores **con contexto histórico automático**.
 
 **Parámetros:**
 - `symbol` (requerido): Par de trading
@@ -217,7 +519,7 @@ perform_technical_analysis BTCUSDT
 ```
 
 ### `get_complete_analysis`
-Análisis completo del mercado con resumen y recomendaciones.
+Análisis completo del mercado con resumen y recomendaciones **con contexto histórico automático**.
 
 **Parámetros:**
 - `symbol` (requerido): Par de trading
@@ -1068,7 +1370,24 @@ invalidate_cache BTCUSDT
 
 ---
 
-## 🔍 Consejos de Uso
+## 🔍 Consejos de Uso v1.10.1
+
+### 🧠 Para Análisis Contextual (NUEVO)
+1. **Usa las nuevas herramientas contextuales:**
+   - `analyze_with_historical_context` para análisis técnico mejorado
+   - `complete_analysis_with_context` para análisis completo con contexto
+2. **Interpreta el Context Confidence Score:**
+   - 80%+ = High continuity → considera entrada
+   - 60-79% = Moderate → monitorea de cerca
+   - 40-59% = Mixed signals → mantén posición neutral
+   - <40% = Divergent → espera o reduce exposición
+3. **Presta atención a los niveles históricos cercanos:**
+   - Múltiples niveles cercanos = área importante
+   - Fuerza (strength) del nivel indica probabilidad de reacción
+4. **Usa el riskAdjustment:**
+   - "decrease" = reduce riesgo en la entrada
+   - "maintain" = riesgo normal
+   - "increase" = incrementa precaución
 
 ### Para Análisis Técnico Avanzado
 1. Usa `calculate_fibonacci_levels` - detecta swings automáticamente, no necesitas especificarlos
@@ -1087,24 +1406,33 @@ invalidate_cache BTCUSDT
 6. Confirma actividad institucional antes de grandes posiciones
 
 ### Para Trading General (MEJORADO con Contexto Histórico)
-1. Usa `get_complete_analysis` para obtener una visión general rápida **con insights históricos**
-2. Comienza con `analyze_wyckoff_phase` para entender la estructura de mercado
-3. Combina `detect_bull_trap` y `detect_bear_trap` para evitar falsas señales
-4. Usa `find_wyckoff_events` para identificar springs y upthrusts como puntos de entrada
-5. Utiliza `analyze_volume_delta` para confirmar movimientos de precio
-6. Valida setups con `validate_wyckoff_setup` antes de entrar en posición
-7. Revisa `identify_support_resistance` antes de establecer niveles de grid
-8. **NUEVO**: Los análisis ahora incluyen contexto histórico automáticamente para mejor precisión
+1. **NUEVO**: Usa `analyze_with_historical_context` o `complete_analysis_with_context` para análisis mejorado
+2. Usa `get_complete_analysis` para obtener una visión general rápida **con insights históricos**
+3. Comienza con `analyze_wyckoff_phase` para entender la estructura de mercado
+4. Combina `detect_bull_trap` y `detect_bear_trap` para evitar falsas señales
+5. Usa `find_wyckoff_events` para identificar springs y upthrusts como puntos de entrada
+6. Utiliza `analyze_volume_delta` para confirmar movimientos de precio
+7. Valida setups con `validate_wyckoff_setup` antes de entrar en posición
+8. Revisa `identify_support_resistance` antes de establecer niveles de grid
+9. **NUEVO**: Los análisis ahora incluyen contexto histórico automáticamente para mejor precisión
+
+### Para Gestión de Contexto Jerárquico
+1. **Inicialización**: Usa `initialize_symbol_context` para nuevos símbolos
+2. **Consulta**: Usa `get_master_context` para acceso completo al contexto
+3. **Filtrado**: Usa `query_master_context` con filtros para buscar información específica
+4. **Mantenimiento**: Ejecuta `optimize_symbol_context` periódicamente
+5. **Monitoreo**: Revisa `get_hierarchical_performance_metrics` para métricas del sistema
 
 ### Para Análisis (MEJORADO con Contexto Histórico)
-1. Comienza con `perform_technical_analysis` para análisis completo **con memoria histórica**
-2. Complementa con `analyze_wyckoff_phase` para estructura de mercado
-3. Usa `get_historical_summary` para contexto de largo plazo
-4. Combina `detect_trading_range` con `analyze_wyckoff_volume` para confirmar fases
-5. Identifica patrones con `identify_volume_anomalies`
-6. Usa `get_wyckoff_interpretation` para entender implicaciones de la fase actual
-7. Valida breakouts con `validate_breakout` antes de tomar decisiones
-8. **NUEVO**: Todos los análisis se enriquecen automáticamente con contexto de análisis previos
+1. **NUEVO**: Comienza con análisis contextual para obtener comparación histórica automática
+2. Comienza con `perform_technical_analysis` para análisis completo **con memoria histórica**
+3. Complementa con `analyze_wyckoff_phase` para estructura de mercado
+4. Usa `get_historical_summary` para contexto de largo plazo
+5. Combina `detect_trading_range` con `analyze_wyckoff_volume` para confirmar fases
+6. Identifica patrones con `identify_volume_anomalies`
+7. Usa `get_wyckoff_interpretation` para entender implicaciones de la fase actual
+8. Valida breakouts con `validate_breakout` antes de tomar decisiones
+9. **NUEVO**: Todos los análisis se enriquecen automáticamente con contexto de análisis previos
 
 ### Para Monitoreo
 1. Revisa `get_system_health` periódicamente
@@ -1112,16 +1440,26 @@ invalidate_cache BTCUSDT
 3. Usa `get_trap_statistics` para evaluar efectividad
 4. Genera reportes diarios con `generate_daily_report`
 5. Mantén el rendimiento con `get_cache_stats`
+6. **NUEVO**: Monitorea `get_hierarchical_performance_metrics` para sistema contextual
 
 ---
 
 ## 📝 Notas Importantes
 
-### Sistema de Contexto Histórico (NOVEDAD v1.8.1)
+### 🧠 Sistema de Análisis Contextual (NOVEDAD v1.10.1)
+- ✨ **Análisis contextual automático**: Cada análisis se enriquece con contexto histórico inteligente
+- ✨ **Comparación de patrones**: Sistema compara automáticamente patrones actuales vs históricos
+- ✨ **Scoring matemático**: Continuidad histórica medida objetivamente (0-100%)
+- ✨ **Recomendaciones graduales**: 4 niveles de acción basados en contexto histórico
+- ✨ **Actualización automática**: Sistema aprende y mejora con cada análisis
+- ✨ **Acceso O(1)**: Estructura jerárquica optimizada para acceso ultra-rápido
+- ✨ **Robustez**: Funciona con o sin contexto histórico disponible
+
+### Sistema de Contexto Histórico (ACTIVO desde v1.8.1)
 - ✨ **Memoria automática**: Cada análisis se enriquece con contexto histórico
 - ✨ **Patrones recurrentes**: El sistema detecta patrones basados en análisis previos
 - ✨ **Continuidad**: Los insights mejoran con el tiempo y uso
-- ✨ **Transparente**: Funciona automáticamente sin cambios en las APIs
+- ✨ **Transparente**: Funciona automáticamente sin cambios en las APIs existentes
 
 ### General
 - Todas las herramientas funcionan sin API keys
@@ -1139,6 +1477,7 @@ invalidate_cache BTCUSDT
 - **Elliott Wave valida reglas estrictas** - Asegura patrones válidos según teoría clásica
 - **Bollinger Bands detecta squeezes** - Identifica compresión de volatilidad pre-movimiento
 - **Confluencias técnicas multi-indicador** - Combina Fibo + Elliott + Bollinger automáticamente
+- **NUEVO**: Análisis contextual compara automáticamente con historia para insights mejorados
 
 ---
 
@@ -1148,9 +1487,24 @@ Si encuentras problemas:
 1. Usa `get_debug_logs` para obtener información de depuración
 2. Revisa `get_system_health` para verificar el estado del sistema
 3. Consulta la documentación técnica en `/claude/docs/`
-4. Reporta issues en el repositorio del proyecto
+4. Revisa `get_hierarchical_performance_metrics` para estado del sistema contextual
+5. Reporta issues en el repositorio del proyecto
 
 ---
 
-*Versión: 1.8.2 - Actualizado: 18/06/2025*
-*Última actualización: Sistema de Contexto Histórico ACTIVO - FASE 2 Fix compilación completada*
+## 📊 Estadísticas del Sistema v1.10.1
+
+- **Total herramientas MCP**: 119+ operativas
+- **Nuevas herramientas contextuales**: 2 (analyze_with_historical_context, complete_analysis_with_context)
+- **Herramientas contexto jerárquico**: 14
+- **Smart Money Concepts**: 14 herramientas
+- **Wyckoff Analysis**: 14 herramientas (básico + avanzado)
+- **Análisis técnico avanzado**: 4 herramientas (Fibonacci, Bollinger, Elliott, Confluencias)
+- **Multi-Exchange**: 11 herramientas
+- **Detección de trampas**: 8 herramientas
+- **Sistema**: 31 herramientas (configuración, caché, reportes, debug)
+- **Compilación**: ✅ 0 errores TypeScript
+- **Estado**: Production Ready con análisis contextual automático
+
+*Versión: 1.10.1 - Actualizado: 19/06/2025*
+*Última actualización: Sistema de Análisis Contextual COMPLETADO - TASK-040 100% finalizado*

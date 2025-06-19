@@ -1,7 +1,7 @@
 /**
  * @fileoverview MCP Tool Handlers - Complete Modular Handler System
  * @description Unified handler system with proper modular architecture
- * @version 1.3.7
+ * @version 1.3.8
  */
 
 import { MarketAnalysisEngine } from '../core/engine.js';
@@ -85,7 +85,7 @@ export class MCPHandlers {
     );
     this.advancedMultiExchangeHandlers = new AdvancedMultiExchangeHandlers(engine, this.logger);
     
-    // Initialize new modular handlers (TASK-034 FASE 2)
+    // Initialize new modular handlers
     this.basicAnalysisHandlers = new BasicAnalysisHandlers(engine, this.logger);
     this.supportResistanceHandlers = new SupportResistanceHandlers(engine, this.logger);
     this.gridTradingHandlers = new GridTradingHandlers(engine, this.logger);
@@ -111,8 +111,8 @@ export class MCPHandlers {
       gridTradingEnabled: true,
       comprehensiveAnalysisEnabled: true,
       systemHandlersEnabled: true,
-      hierarchicalContextHandlersEnabled: true,  // TASK-040.3
-      totalHandlers: 89
+      hierarchicalContextHandlersEnabled: true,
+      totalHandlers: 121  // Updated count with TASK-040.4
     });
   }
 
@@ -162,6 +162,30 @@ export class MCPHandlers {
 
   async handleGetCompleteAnalysis(args: any): Promise<MCPServerResponse> {
     return await this.comprehensiveAnalysisHandlers.handleGetCompleteAnalysis(args);
+  }
+
+  // ====================
+  // CONTEXT-AWARE ANALYSIS HANDLERS (TASK-040.4)
+  // ====================
+
+  async handleAnalyzeWithHistoricalContext(args: any): Promise<MCPServerResponse> {
+    try {
+      const { ContextAwareAnalysisHandlers } = await import('./handlers/contextAwareAnalysisHandlers.js');
+      const handlers = new ContextAwareAnalysisHandlers(this.engine);
+      return await handlers.handleAnalyzeWithHistoricalContext(args);
+    } catch (error) {
+      return this.createErrorResponse('analyze_with_historical_context', error as Error);
+    }
+  }
+
+  async handleCompleteAnalysisWithContext(args: any): Promise<MCPServerResponse> {
+    try {
+      const { ContextAwareAnalysisHandlers } = await import('./handlers/contextAwareAnalysisHandlers.js');
+      const handlers = new ContextAwareAnalysisHandlers(this.engine);
+      return await handlers.handleCompleteAnalysisWithContext(args);
+    } catch (error) {
+      return this.createErrorResponse('complete_analysis_with_context', error as Error);
+    }
   }
 
   // ====================
