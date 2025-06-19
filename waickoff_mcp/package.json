@@ -1,7 +1,7 @@
 {
   "name": "waickoff_mcp",
-  "version": "1.9.0",
-  "description": "Waickoff AI Market Analysis MCP Server",
+  "version": "1.10.1",
+  "description": "Waickoff AI Market Analysis MCP Server with Contextual Analysis",
   "main": "build/index.js",
   "type": "module",
   "scripts": {
@@ -25,7 +25,11 @@
     "waickoff",
     "trading",
     "market-analysis",
-    "bybit"
+    "bybit",
+    "contextual-analysis",
+    "historical-context",
+    "smart-money-concepts",
+    "hierarchical-context"
   ],
   "author": "Waickoff MCP Team",
   "license": "MIT",

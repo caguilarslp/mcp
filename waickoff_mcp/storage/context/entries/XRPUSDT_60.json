@@ -1,9 +1,21 @@
 [
   {
-    "id": "XRPUSDT_60_1750288172559",
+    "id": "XRPUSDT_60_1750345934282",
     "symbol": "XRPUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-18T23:09:32.559Z",
+    "timestamp": "2025-06-19T15:12:14.282Z",
+    "type": "complete",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 197
+  },
+  {
+    "id": "XRPUSDT_60_1750345983639",
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-19T15:13:03.639Z",
     "type": "smc",
     "key_findings": [],
     "key_metrics": {},
@@ -12,27 +24,15 @@
     "size_bytes": 192
   },
   {
-    "id": "XRPUSDT_60_1750288172812",
+    "id": "XRPUSDT_60_1750347274309",
     "symbol": "XRPUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-18T23:09:32.812Z",
-    "type": "smc",
+    "timestamp": "2025-06-19T15:34:34.309Z",
+    "type": "complete",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 192
-  },
-  {
-    "id": "XRPUSDT_60_1750288172822",
-    "symbol": "XRPUSDT",
-    "timeframe": "60",
-    "timestamp": "2025-06-18T23:09:32.822Z",
-    "type": "smc",
-    "key_findings": [],
-    "key_metrics": {},
-    "recommendations": [],
-    "confidence": 0,
-    "size_bytes": 192
+    "size_bytes": 197
   }
 ]

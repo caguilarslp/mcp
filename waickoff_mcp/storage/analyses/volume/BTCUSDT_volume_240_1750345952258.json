@@ -1,0 +1,65 @@
+{
+  "id": "BTCUSDT_volume_240_1750345952258",
+  "type": "volume",
+  "data": {
+    "symbol": "BTCUSDT",
+    "interval": "240",
+    "avgVolume": 1629.4306179791668,
+    "currentVolume": 780.911757,
+    "maxVolume": 7103.886697,
+    "minVolume": 446.795322,
+    "volumeSpikes": [
+      {
+        "timestamp": "2025-06-12T16:00:00.000Z",
+        "volume": 2574.280428,
+        "multiplier": 1.5798650151748368,
+        "price": 106793.2
+      },
+      {
+        "timestamp": "2025-06-12T20:00:00.000Z",
+        "volume": 3850.567236,
+        "multiplier": 2.3631366647421324,
+        "price": 105660.2
+      },
+      {
+        "timestamp": "2025-06-13T00:00:00.000Z",
+        "volume": 7103.886697,
+        "multiplier": 4.359735614769716,
+        "price": 104295.8
+      },
+      {
+        "timestamp": "2025-06-13T04:00:00.000Z",
+        "volume": 2560.451739,
+        "multiplier": 1.5713781923255459,
+        "price": 104903.3
+      },
+      {
+        "timestamp": "2025-06-13T12:00:00.000Z",
+        "volume": 3278.323356,
+        "multiplier": 2.0119441231967294,
+        "price": 105437.7
+      }
+    ],
+    "vwap": {
+      "current": 105745.55056495544,
+      "priceVsVwap": "below",
+      "difference": -1.381382533025022
+    },
+    "trend": "decreasing"
+  },
+  "metadata": {
+    "id": "BTCUSDT_volume_240_1750345952258",
+    "type": "volume",
+    "timestamp": "2025-06-19T15:12:32.258Z",
+    "symbol": "BTCUSDT",
+    "interval": "240",
+    "tags": [
+      "interval:240",
+      "trend:decreasing",
+      "volume_ratio:48",
+      "spikes:5",
+      "vwap_position:below"
+    ]
+  },
+  "timestamp": "2025-06-19T15:12:32.258Z"
+}
