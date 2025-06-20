@@ -1,0 +1,40 @@
+{
+  "id": "HBARUSDT_volume_delta_5_1750432949378",
+  "type": "volume_delta",
+  "data": {
+    "symbol": "HBARUSDT",
+    "interval": "5",
+    "current": -31257.211282052507,
+    "average": -74465.00956031537,
+    "bias": "seller",
+    "strength": 177.14765679418895,
+    "cumulativeDelta": 478674.516501641,
+    "divergence": {
+      "detected": true,
+      "type": "Price down but delta up",
+      "signal": "bullish_reversal"
+    },
+    "marketPressure": {
+      "bullishCandles": 4,
+      "bearishCandles": 6,
+      "bullishPercent": 40,
+      "trend": "balanced"
+    }
+  },
+  "metadata": {
+    "id": "HBARUSDT_volume_delta_5_1750432949378",
+    "type": "volume_delta",
+    "timestamp": "2025-06-20T15:22:29.378Z",
+    "symbol": "HBARUSDT",
+    "interval": "5",
+    "tags": [
+      "interval:5",
+      "bias:seller",
+      "strength:177",
+      "cumulative:478675",
+      "divergence:true",
+      "pressure:balanced"
+    ]
+  },
+  "timestamp": "2025-06-20T15:22:29.378Z"
+}

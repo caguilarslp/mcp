@@ -1,0 +1,631 @@
+{
+  "id": "XRPUSDT_complete_1750432922067",
+  "type": "complete_analysis",
+  "data": {
+    "marketData": {
+      "ticker": {
+        "symbol": "XRPUSDT",
+        "lastPrice": 2.1385,
+        "price24hPcnt": -0.0056,
+        "highPrice24h": 2.18,
+        "lowPrice24h": 2.133,
+        "volume24h": 24741825.74,
+        "bid1Price": 2.1387,
+        "ask1Price": 2.1388,
+        "timestamp": "2025-06-20T15:22:00.595Z"
+      },
+      "orderbook": {
+        "symbol": "XRPUSDT",
+        "bids": [
+          {
+            "price": 2.1387,
+            "size": 5215.31
+          },
+          {
+            "price": 2.1386,
+            "size": 383.11
+          },
+          {
+            "price": 2.1385,
+            "size": 2872.1
+          },
+          {
+            "price": 2.1384,
+            "size": 1843.42
+          },
+          {
+            "price": 2.1383,
+            "size": 986.58
+          },
+          {
+            "price": 2.1382,
+            "size": 4637.22
+          },
+          {
+            "price": 2.1381,
+            "size": 8206.56
+          },
+          {
+            "price": 2.138,
+            "size": 4810.49
+          },
+          {
+            "price": 2.1379,
+            "size": 1811.26
+          },
+          {
+            "price": 2.1378,
+            "size": 3820.28
+          },
+          {
+            "price": 2.1377,
+            "size": 3194.68
+          },
+          {
+            "price": 2.1376,
+            "size": 2340.57
+          },
+          {
+            "price": 2.1375,
+            "size": 3173.52
+          },
+          {
+            "price": 2.1374,
+            "size": 5816.74
+          },
+          {
+            "price": 2.1373,
+            "size": 10175.93
+          },
+          {
+            "price": 2.1372,
+            "size": 5801.62
+          },
+          {
+            "price": 2.1371,
+            "size": 14309.04
+          },
+          {
+            "price": 2.137,
+            "size": 13493.6
+          },
+          {
+            "price": 2.1369,
+            "size": 10575.96
+          },
+          {
+            "price": 2.1368,
+            "size": 29598.6
+          },
+          {
+            "price": 2.1367,
+            "size": 2306.39
+          },
+          {
+            "price": 2.1366,
+            "size": 3588.69
+          },
+          {
+            "price": 2.1365,
+            "size": 9808.31
+          },
+          {
+            "price": 2.1364,
+            "size": 5499.72
+          },
+          {
+            "price": 2.1363,
+            "size": 431.02
+          }
+        ],
+        "asks": [
+          {
+            "price": 2.1388,
+            "size": 399.06
+          },
+          {
+            "price": 2.1389,
+            "size": 97.02
+          },
+          {
+            "price": 2.1391,
+            "size": 1176.89
+          },
+          {
+            "price": 2.1392,
+            "size": 653.82
+          },
+          {
+            "price": 2.1393,
+            "size": 887.41
+          },
+          {
+            "price": 2.1394,
+            "size": 1193.5
+          },
+          {
+            "price": 2.1395,
+            "size": 3014.99
+          },
+          {
+            "price": 2.1396,
+            "size": 820.9
+          },
+          {
+            "price": 2.1397,
+            "size": 2703.3
+          },
+          {
+            "price": 2.1398,
+            "size": 6829.83
+          },
+          {
+            "price": 2.1399,
+            "size": 3387.87
+          },
+          {
+            "price": 2.14,
+            "size": 2017.22
+          },
+          {
+            "price": 2.1401,
+            "size": 1022.45
+          },
+          {
+            "price": 2.1402,
+            "size": 3446.16
+          },
+          {
+            "price": 2.1403,
+            "size": 1133.53
+          },
+          {
+            "price": 2.1404,
+            "size": 1963.12
+          },
+          {
+            "price": 2.1405,
+            "size": 850.47
+          },
+          {
+            "price": 2.1406,
+            "size": 5005.96
+          },
+          {
+            "price": 2.1407,
+            "size": 20439.27
+          },
+          {
+            "price": 2.1408,
+            "size": 5745.54
+          },
+          {
+            "price": 2.1409,
+            "size": 1615.3
+          },
+          {
+            "price": 2.141,
+            "size": 3676.06
+          },
+          {
+            "price": 2.1411,
+            "size": 1582.9
+          },
+          {
+            "price": 2.1412,
+            "size": 1822.23
+          },
+          {
+            "price": 2.1413,
+            "size": 9678.99
+          }
+        ],
+        "timestamp": "2025-06-20T15:22:01.158Z",
+        "spread": 0.00009999999999976694
+      },
+      "recentKlines": [
+        {
+          "timestamp": "2025-06-19T16:00:00.000Z",
+          "open": 2.1455,
+          "high": 2.16,
+          "low": 2.1455,
+          "close": 2.1572,
+          "volume": 572647.2
+        },
+        {
+          "timestamp": "2025-06-19T17:00:00.000Z",
+          "open": 2.1572,
+          "high": 2.1735,
+          "low": 2.1572,
+          "close": 2.1689,
+          "volume": 1645459.57
+        },
+        {
+          "timestamp": "2025-06-19T18:00:00.000Z",
+          "open": 2.1689,
+          "high": 2.1772,
+          "low": 2.1665,
+          "close": 2.1721,
+          "volume": 986456.1
+        },
+        {
+          "timestamp": "2025-06-19T19:00:00.000Z",
+          "open": 2.1721,
+          "high": 2.1745,
+          "low": 2.1679,
+          "close": 2.1715,
+          "volume": 646493.39
+        },
+        {
+          "timestamp": "2025-06-19T20:00:00.000Z",
+          "open": 2.1715,
+          "high": 2.174,
+          "low": 2.1621,
+          "close": 2.1652,
+          "volume": 705959.78
+        },
+        {
+          "timestamp": "2025-06-19T21:00:00.000Z",
+          "open": 2.1652,
+          "high": 2.1675,
+          "low": 2.1602,
+          "close": 2.1622,
+          "volume": 650481.65
+        },
+        {
+          "timestamp": "2025-06-19T22:00:00.000Z",
+          "open": 2.1622,
+          "high": 2.1705,
+          "low": 2.1622,
+          "close": 2.1656,
+          "volume": 416775.41
+        },
+        {
+          "timestamp": "2025-06-19T23:00:00.000Z",
+          "open": 2.1656,
+          "high": 2.1681,
+          "low": 2.1613,
+          "close": 2.165,
+          "volume": 555754.68
+        },
+        {
+          "timestamp": "2025-06-20T00:00:00.000Z",
+          "open": 2.165,
+          "high": 2.1729,
+          "low": 2.1618,
+          "close": 2.1708,
+          "volume": 613733.83
+        },
+        {
+          "timestamp": "2025-06-20T01:00:00.000Z",
+          "open": 2.1708,
+          "high": 2.1718,
+          "low": 2.1573,
+          "close": 2.1672,
+          "volume": 621330.06
+        },
+        {
+          "timestamp": "2025-06-20T02:00:00.000Z",
+          "open": 2.1672,
+          "high": 2.1688,
+          "low": 2.1603,
+          "close": 2.1638,
+          "volume": 532341.4
+        },
+        {
+          "timestamp": "2025-06-20T03:00:00.000Z",
+          "open": 2.1638,
+          "high": 2.1638,
+          "low": 2.1551,
+          "close": 2.1551,
+          "volume": 755132.98
+        },
+        {
+          "timestamp": "2025-06-20T04:00:00.000Z",
+          "open": 2.1551,
+          "high": 2.1574,
+          "low": 2.1461,
+          "close": 2.1466,
+          "volume": 1329135.97
+        },
+        {
+          "timestamp": "2025-06-20T05:00:00.000Z",
+          "open": 2.1466,
+          "high": 2.152,
+          "low": 2.1398,
+          "close": 2.1512,
+          "volume": 1075712.93
+        },
+        {
+          "timestamp": "2025-06-20T06:00:00.000Z",
+          "open": 2.1512,
+          "high": 2.1547,
+          "low": 2.1443,
+          "close": 2.1449,
+          "volume": 1211388.71
+        },
+        {
+          "timestamp": "2025-06-20T07:00:00.000Z",
+          "open": 2.1449,
+          "high": 2.1687,
+          "low": 2.1409,
+          "close": 2.1671,
+          "volume": 1315296.1
+        },
+        {
+          "timestamp": "2025-06-20T08:00:00.000Z",
+          "open": 2.1671,
+          "high": 2.1766,
+          "low": 2.1615,
+          "close": 2.1677,
+          "volume": 1658095.18
+        },
+        {
+          "timestamp": "2025-06-20T09:00:00.000Z",
+          "open": 2.1677,
+          "high": 2.172,
+          "low": 2.1638,
+          "close": 2.1699,
+          "volume": 674600.22
+        },
+        {
+          "timestamp": "2025-06-20T10:00:00.000Z",
+          "open": 2.1699,
+          "high": 2.1748,
+          "low": 2.1647,
+          "close": 2.1719,
+          "volume": 680999.01
+        },
+        {
+          "timestamp": "2025-06-20T11:00:00.000Z",
+          "open": 2.1719,
+          "high": 2.1772,
+          "low": 2.1666,
+          "close": 2.1726,
+          "volume": 994706.94
+        },
+        {
+          "timestamp": "2025-06-20T12:00:00.000Z",
+          "open": 2.1726,
+          "high": 2.1774,
+          "low": 2.169,
+          "close": 2.1723,
+          "volume": 1109601.64
+        },
+        {
+          "timestamp": "2025-06-20T13:00:00.000Z",
+          "open": 2.1723,
+          "high": 2.18,
+          "low": 2.1596,
+          "close": 2.1644,
+          "volume": 1517586.2
+        },
+        {
+          "timestamp": "2025-06-20T14:00:00.000Z",
+          "open": 2.1644,
+          "high": 2.1665,
+          "low": 2.1338,
+          "close": 2.1354,
+          "volume": 2956933.59
+        },
+        {
+          "timestamp": "2025-06-20T15:00:00.000Z",
+          "open": 2.1354,
+          "high": 2.1431,
+          "low": 2.133,
+          "close": 2.1385,
+          "volume": 1016274.52
+        }
+      ]
+    },
+    "technicalAnalysis": {
+      "volatility": {
+        "symbol": "XRPUSDT",
+        "period": "1d",
+        "currentPrice": 2.1385,
+        "highestPrice": 2.18,
+        "lowestPrice": 2.133,
+        "volatilityPercent": 2.197802197802205,
+        "isGoodForGrid": false,
+        "recommendation": "wait",
+        "confidence": 50
+      },
+      "volume": {
+        "symbol": "XRPUSDT",
+        "interval": "60",
+        "avgVolume": 1050774.6191666664,
+        "currentVolume": 1016274.52,
+        "maxVolume": 2956933.59,
+        "minVolume": 416775.41,
+        "volumeSpikes": [
+          {
+            "timestamp": "2025-06-18T18:00:00.000Z",
+            "volume": 2578940.84,
+            "multiplier": 2.4543234990251954,
+            "price": 2.131
+          },
+          {
+            "timestamp": "2025-06-18T20:00:00.000Z",
+            "volume": 1605270.02,
+            "multiplier": 1.5277015553279019,
+            "price": 2.1731
+          },
+          {
+            "timestamp": "2025-06-19T00:00:00.000Z",
+            "volume": 2130165.96,
+            "multiplier": 2.0272339292791086,
+            "price": 2.176
+          },
+          {
+            "timestamp": "2025-06-19T17:00:00.000Z",
+            "volume": 1645459.57,
+            "multiplier": 1.5659491007738253,
+            "price": 2.1689
+          },
+          {
+            "timestamp": "2025-06-20T08:00:00.000Z",
+            "volume": 1658095.18,
+            "multiplier": 1.5779741437940125,
+            "price": 2.1677
+          }
+        ],
+        "vwap": {
+          "current": 2.1588056026292586,
+          "priceVsVwap": "below",
+          "difference": -0.9405943084698251
+        },
+        "trend": "increasing"
+      },
+      "volumeDelta": {
+        "symbol": "XRPUSDT",
+        "interval": "5",
+        "current": 47768.65888887872,
+        "average": -99606.76777691818,
+        "bias": "seller",
+        "strength": 131.28979075980146,
+        "cumulativeDelta": -720108.6422003084,
+        "divergence": {
+          "detected": true,
+          "type": "Price down but delta up",
+          "signal": "bullish_reversal"
+        },
+        "marketPressure": {
+          "bullishCandles": 3,
+          "bearishCandles": 7,
+          "bullishPercent": 30,
+          "trend": "strong_selling"
+        }
+      },
+      "supportResistance": {
+        "symbol": "XRPUSDT",
+        "interval": "60",
+        "currentPrice": 2.1385,
+        "resistances": [
+          {
+            "level": 2.2034,
+            "type": "resistance",
+            "strength": 91.5085084255948,
+            "touches": 2,
+            "volumeConfirmation": 1.8789094091233816,
+            "lastTouchTime": "2025-06-17T00:00:00.000Z",
+            "priceDistance": 3.034837502922597,
+            "confidence": "very_strong"
+          },
+          {
+            "level": 2.142,
+            "type": "resistance",
+            "strength": 76.34545015762006,
+            "touches": 4,
+            "volumeConfirmation": 0.46273854358219935,
+            "lastTouchTime": "2025-06-20T05:00:00.000Z",
+            "priceDistance": 0.16366612111292198,
+            "confidence": "very_strong"
+          },
+          {
+            "level": 2.1773,
+            "type": "resistance",
+            "strength": 74.76440460158688,
+            "touches": 3,
+            "volumeConfirmation": 0.4979370444552824,
+            "lastTouchTime": "2025-06-19T18:00:00.000Z",
+            "priceDistance": 1.8143558569090354,
+            "confidence": "strong"
+          }
+        ],
+        "supports": [
+          {
+            "level": 2.1181,
+            "type": "support",
+            "strength": 81.51899520496482,
+            "touches": 2,
+            "volumeConfirmation": 0.9547708949316949,
+            "lastTouchTime": "2025-06-18T19:00:00.000Z",
+            "priceDistance": 0.9539396773439315,
+            "confidence": "very_strong"
+          }
+        ],
+        "criticalLevel": {
+          "level": 2.142,
+          "type": "resistance",
+          "strength": 76.34545015762006,
+          "touches": 4,
+          "volumeConfirmation": 0.46273854358219935,
+          "lastTouchTime": "2025-06-20T05:00:00.000Z",
+          "priceDistance": 0.16366612111292198,
+          "confidence": "very_strong"
+        },
+        "gridConfig": {
+          "optimalLowerBound": 2.1181,
+          "optimalUpperBound": 2.2034,
+          "keyLevels": [
+            2.2034,
+            2.1181,
+            2.142,
+            2.1773
+          ],
+          "recommendedGridCount": 5,
+          "recommendation": "Strong S/R levels identified - Grid trading recommended"
+        },
+        "statistics": {
+          "totalPivotsFound": 12,
+          "priceRangeAnalyzed": {
+            "high": 2.3371,
+            "low": 2.1181
+          },
+          "avgVolume": 1864011.9905999994,
+          "periodsAnalyzed": 100,
+          "sensitivityUsed": 2
+        }
+      }
+    },
+    "gridSuggestion": {
+      "symbol": "XRPUSDT",
+      "currentPrice": 2.1385,
+      "suggestedRange": {
+        "lower": 2.0662,
+        "upper": 2.2286
+      },
+      "gridLevels": [
+        2.0662,
+        2.0824,
+        2.0987,
+        2.1149,
+        2.1312,
+        2.1474,
+        2.1636,
+        2.1799,
+        2.1961,
+        2.2124,
+        2.2286
+      ],
+      "investment": 500,
+      "pricePerGrid": 50,
+      "potentialProfit": "$-0.04/day estimated",
+      "volatility24h": 2.197802197802205,
+      "recommendation": "wait",
+      "confidence": 69
+    },
+    "summary": {
+      "recommendation": "wait",
+      "confidence": 50,
+      "keyPoints": [
+        "Low volatility (2.2%) - Limited trading opportunities",
+        "Strong selling pressure (131.3% bias)",
+        "Volume divergence detected - bullish reversal",
+        "Near strong resistance at $2.1420 (0.2% away)"
+      ],
+      "riskLevel": "low"
+    },
+    "symbol": "XRPUSDT"
+  },
+  "metadata": {
+    "id": "XRPUSDT_complete_1750432922067",
+    "type": "complete_analysis",
+    "timestamp": "2025-06-20T15:22:02.067Z",
+    "symbol": "XRPUSDT",
+    "tags": [
+      "investment:500"
+    ]
+  },
+  "timestamp": "2025-06-20T15:22:02.067Z"
+}

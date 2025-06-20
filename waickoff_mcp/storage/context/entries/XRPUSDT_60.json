@@ -1,9 +1,9 @@
 [
   {
-    "id": "XRPUSDT_60_1750345934282",
+    "id": "XRPUSDT_60_1750432922074",
     "symbol": "XRPUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-19T15:12:14.282Z",
+    "timestamp": "2025-06-20T15:22:02.074Z",
     "type": "complete",
     "key_findings": [],
     "key_metrics": {},
@@ -12,10 +12,10 @@
     "size_bytes": 197
   },
   {
-    "id": "XRPUSDT_60_1750345983639",
+    "id": "XRPUSDT_60_1750432937582",
     "symbol": "XRPUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-19T15:13:03.639Z",
+    "timestamp": "2025-06-20T15:22:17.582Z",
     "type": "smc",
     "key_findings": [],
     "key_metrics": {},
@@ -24,15 +24,15 @@
     "size_bytes": 192
   },
   {
-    "id": "XRPUSDT_60_1750347274309",
+    "id": "XRPUSDT_60_1750432967973",
     "symbol": "XRPUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-19T15:34:34.309Z",
-    "type": "complete",
+    "timestamp": "2025-06-20T15:22:47.973Z",
+    "type": "technical",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 197
+    "size_bytes": 198
   }
 ]

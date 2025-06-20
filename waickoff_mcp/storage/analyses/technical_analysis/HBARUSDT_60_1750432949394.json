@@ -1,0 +1,188 @@
+{
+  "id": "HBARUSDT_60_1750432949394",
+  "type": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "HBARUSDT",
+      "period": "1d",
+      "currentPrice": 0.14668,
+      "highestPrice": 0.15153,
+      "lowestPrice": 0.14464,
+      "volatilityPercent": 4.697300245432238,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    },
+    "volume": {
+      "symbol": "HBARUSDT",
+      "interval": "60",
+      "avgVolume": 1247717.2268749997,
+      "currentVolume": 590945.41,
+      "maxVolume": 3453298.17,
+      "minVolume": 526517.98,
+      "volumeSpikes": [
+        {
+          "timestamp": "2025-06-18T18:00:00.000Z",
+          "volume": 3453298.17,
+          "multiplier": 2.7676929480640746,
+          "price": 0.14423
+        },
+        {
+          "timestamp": "2025-06-18T19:00:00.000Z",
+          "volume": 2265326.69,
+          "multiplier": 1.8155769922914975,
+          "price": 0.14443
+        },
+        {
+          "timestamp": "2025-06-18T20:00:00.000Z",
+          "volume": 2228674.63,
+          "multiplier": 1.7862016985866909,
+          "price": 0.14802
+        },
+        {
+          "timestamp": "2025-06-19T00:00:00.000Z",
+          "volume": 2915687.59,
+          "multiplier": 2.3368176115533448,
+          "price": 0.14858
+        },
+        {
+          "timestamp": "2025-06-19T17:00:00.000Z",
+          "volume": 1881029.41,
+          "multiplier": 1.5075766924459137,
+          "price": 0.14663
+        }
+      ],
+      "vwap": {
+        "current": 0.147206084570744,
+        "priceVsVwap": "below",
+        "difference": -0.3573796370429004
+      },
+      "trend": "stable"
+    },
+    "volumeDelta": {
+      "symbol": "HBARUSDT",
+      "interval": "5",
+      "current": -31257.211282052507,
+      "average": -74465.00956031537,
+      "bias": "seller",
+      "strength": 177.14765679418895,
+      "cumulativeDelta": 478674.516501641,
+      "divergence": {
+        "detected": true,
+        "type": "Price down but delta up",
+        "signal": "bullish_reversal"
+      },
+      "marketPressure": {
+        "bullishCandles": 4,
+        "bearishCandles": 6,
+        "bullishPercent": 40,
+        "trend": "balanced"
+      }
+    },
+    "supportResistance": {
+      "symbol": "HBARUSDT",
+      "interval": "60",
+      "currentPrice": 0.14668,
+      "resistances": [
+        {
+          "level": 0.14962,
+          "type": "resistance",
+          "strength": 93.42938704455035,
+          "touches": 2,
+          "volumeConfirmation": 1.9382908731170552,
+          "lastTouchTime": "2025-06-17T00:00:00.000Z",
+          "priceDistance": 2.00436323970548,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 0.15214,
+          "type": "resistance",
+          "strength": 81.4033895605142,
+          "touches": 2,
+          "volumeConfirmation": 1.1733149720057527,
+          "lastTouchTime": "2025-06-18T04:00:00.000Z",
+          "priceDistance": 3.722388873738746,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 0.14821,
+          "type": "resistance",
+          "strength": 79.10522704588473,
+          "touches": 3,
+          "volumeConfirmation": 0.724817345587313,
+          "lastTouchTime": "2025-06-19T22:00:00.000Z",
+          "priceDistance": 1.0430869920916304,
+          "confidence": "very_strong"
+        }
+      ],
+      "supports": [
+        {
+          "level": 0.1438,
+          "type": "support",
+          "strength": 81.84114337719501,
+          "touches": 2,
+          "volumeConfirmation": 1.0435698260329955,
+          "lastTouchTime": "2025-06-18T19:00:00.000Z",
+          "priceDistance": 1.9634578674665897,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 0.14464,
+          "type": "support",
+          "strength": 72.52288714151241,
+          "touches": 2,
+          "volumeConfirmation": 0.28972995178675043,
+          "lastTouchTime": "2025-06-20T05:00:00.000Z",
+          "priceDistance": 1.39078265612218,
+          "confidence": "strong"
+        }
+      ],
+      "criticalLevel": {
+        "level": 0.14821,
+        "type": "resistance",
+        "strength": 79.10522704588473,
+        "touches": 3,
+        "volumeConfirmation": 0.724817345587313,
+        "lastTouchTime": "2025-06-19T22:00:00.000Z",
+        "priceDistance": 1.0430869920916304,
+        "confidence": "very_strong"
+      },
+      "gridConfig": {
+        "optimalLowerBound": 0.1438,
+        "optimalUpperBound": 0.14962,
+        "keyLevels": [
+          0.14962,
+          0.1438,
+          0.15214,
+          0.14821
+        ],
+        "recommendedGridCount": 5,
+        "recommendation": "Strong S/R levels identified - Grid trading recommended"
+      },
+      "statistics": {
+        "totalPivotsFound": 15,
+        "priceRangeAnalyzed": {
+          "high": 0.16335,
+          "low": 0.1438
+        },
+        "avgVolume": 1847538.2614999996,
+        "periodsAnalyzed": 100,
+        "sensitivityUsed": 2
+      }
+    },
+    "symbol": "HBARUSDT",
+    "timeframe": "60"
+  },
+  "metadata": {
+    "id": "HBARUSDT_60_1750432949394",
+    "type": "technical_analysis",
+    "timestamp": "2025-06-20T15:22:29.394Z",
+    "symbol": "HBARUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "timestamp": "2025-06-20T15:22:29.394Z"
+}
