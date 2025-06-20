@@ -1,14 +1,14 @@
 [
   {
-    "id": "HBARUSDT_60_1750448240696",
-    "symbol": "HBARUSDT",
+    "id": "XDCUSDT_60_1750448259248",
+    "symbol": "XDCUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-20T19:37:20.696Z",
+    "timestamp": "2025-06-20T19:37:39.248Z",
     "type": "smc",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 194
+    "size_bytes": 192
   }
 ]

@@ -1,9 +1,9 @@
 [
   {
-    "id": "HBARUSDT_60_1750448240696",
-    "symbol": "HBARUSDT",
+    "id": "ONDOUSDT_60_1750448278020",
+    "symbol": "ONDOUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-20T19:37:20.696Z",
+    "timestamp": "2025-06-20T19:37:58.020Z",
     "type": "smc",
     "key_findings": [],
     "key_metrics": {},

@@ -1,0 +1,215 @@
+{
+  "id": "ONDOUSDT_wyckoff_60_1750448273035",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "ONDOUSDT",
+    "timeframe": "60",
+    "analysisDate": "2025-06-20T19:37:53.035Z",
+    "currentPhase": "uncertain",
+    "phaseConfidence": 30,
+    "phaseProgress": 50,
+    "keyEvents": [
+      {
+        "timestamp": "2025-06-17T00:00:00.000Z",
+        "type": "test",
+        "price": 0.768,
+        "volume": 2723116.7,
+        "significance": 85,
+        "description": "Test of 0.7715: Price touched 0.7680 (0.454% from level) and bounced from support with good quality on 4.4x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.7715,
+        "testQuality": "good",
+        "volumeOnTest": 2723116.7,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-17T15:00:00.000Z",
+        "type": "test",
+        "price": 0.7576,
+        "volume": 1815406.16,
+        "significance": 75,
+        "description": "Test of 0.7560: Price touched 0.7576 (0.212% from level) and stalled near level with good quality on 2.9x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.756,
+        "testQuality": "good",
+        "volumeOnTest": 1815406.16,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-17T16:00:00.000Z",
+        "type": "test",
+        "price": 0.7296,
+        "volume": 1287176.87,
+        "significance": 75,
+        "description": "Test of 0.7320: Price touched 0.7296 (0.328% from level) and stalled near level with good quality on 2.1x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.732,
+        "testQuality": "good",
+        "volumeOnTest": 1287176.87,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-18T13:00:00.000Z",
+        "type": "test",
+        "price": 0.7203,
+        "volume": 934544.06,
+        "significance": 75,
+        "description": "Test of 0.7203: Price touched 0.7203 (0.000% from level) and stalled near level with good quality on 1.5x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.7203,
+        "testQuality": "good",
+        "volumeOnTest": 934544.06,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-18T21:00:00.000Z",
+        "type": "test",
+        "price": 0.785,
+        "volume": 2057852.99,
+        "significance": 75,
+        "description": "Test of 0.7863: Price touched 0.7850 (0.165% from level) and stalled near level with good quality on 3.3x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.7863,
+        "testQuality": "good",
+        "volumeOnTest": 2057852.99,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-20T07:00:00.000Z",
+        "type": "test",
+        "price": 0.7572,
+        "volume": 608455.25,
+        "significance": 95,
+        "description": "Test of 0.7560: Price touched 0.7572 (0.159% from level) and rejected at resistance with good quality on 1.0x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 0.756,
+        "testQuality": "good",
+        "volumeOnTest": 608455.25,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-20T14:00:00.000Z",
+        "type": "test",
+        "price": 0.7728,
+        "volume": 650956.33,
+        "significance": 90,
+        "description": "Test of 0.7715: Price touched 0.7728 (0.169% from level) and rejected at resistance with good quality on 1.0x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 0.7715,
+        "testQuality": "good",
+        "volumeOnTest": 650956.33,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-20T17:00:00.000Z",
+        "type": "test",
+        "price": 0.7215,
+        "volume": 1368829.56,
+        "significance": 75,
+        "description": "Test of 0.7203: Price touched 0.7215 (0.167% from level) and stalled near level with good quality on 2.2x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.7203,
+        "testQuality": "good",
+        "volumeOnTest": 1368829.56,
+        "resultingAction": "stall"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "stable",
+      "climaxEvents": [
+        {
+          "date": "2025-06-18T20:00:00.000Z",
+          "type": "buying_climax",
+          "volume": 1505188.05,
+          "priceAction": "4.03% rally on 2.7x volume",
+          "significance": 65
+        }
+      ],
+      "dryUpPeriods": [
+        {
+          "startDate": "2025-06-19T03:00:00.000Z",
+          "endDate": "2025-06-19T05:00:00.000Z",
+          "averageVolume": 320749.31,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-19T20:00:00.000Z",
+          "endDate": "2025-06-20T06:00:00.000Z",
+          "averageVolume": 219951.48272727273,
+          "significance": "major"
+        },
+        {
+          "startDate": "2025-06-20T09:00:00.000Z",
+          "endDate": "2025-06-20T11:00:00.000Z",
+          "averageVolume": 233739.84333333335,
+          "significance": "moderate"
+        }
+      ],
+      "avgVolumeInRange": 564970.2992222222,
+      "currentVolumeRank": 10,
+      "interpretation": "Volume trend: STABLE - Consistent participation levels | 1 climax event(s) detected (1 buying, 0 selling) | 3 dry-up period(s) detected - potential absorption | SIGNIFICANT: Major dry-up periods indicate institutional accumulation | Current volume at 10th percentile - LOW activity"
+    },
+    "interpretation": {
+      "bias": "uncertain",
+      "strength": "weak",
+      "implications": [
+        "Phase not clearly defined - market in transition",
+        "Monitor price and volume for pattern development"
+      ],
+      "nextExpectedEvents": [
+        "Watch for trading range development",
+        "Look for accumulation or distribution signs"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "ONDOUSDT_wyckoff_60_1750448273035",
+    "type": "wyckoff",
+    "timestamp": "2025-06-20T19:37:53.035Z",
+    "symbol": "ONDOUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "phase:uncertain",
+      "confidence:30",
+      "progress:50",
+      "bias:uncertain",
+      "strength:weak",
+      "events:8",
+      "range:none"
+    ]
+  },
+  "timestamp": "2025-06-20T19:37:53.035Z"
+}

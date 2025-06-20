@@ -1,0 +1,40 @@
+{
+  "id": "ONDOUSDT_volume_delta_5_1750448269341",
+  "type": "volume_delta",
+  "data": {
+    "symbol": "ONDOUSDT",
+    "interval": "5",
+    "current": 1516.0114285717493,
+    "average": -3211.7236771560556,
+    "bias": "seller",
+    "strength": 90.79436860133137,
+    "cumulativeDelta": -444715.79732937785,
+    "divergence": {
+      "detected": false,
+      "type": "No divergence",
+      "signal": "trend_confirmed"
+    },
+    "marketPressure": {
+      "bullishCandles": 5,
+      "bearishCandles": 5,
+      "bullishPercent": 50,
+      "trend": "balanced"
+    }
+  },
+  "metadata": {
+    "id": "ONDOUSDT_volume_delta_5_1750448269341",
+    "type": "volume_delta",
+    "timestamp": "2025-06-20T19:37:49.341Z",
+    "symbol": "ONDOUSDT",
+    "interval": "5",
+    "tags": [
+      "interval:5",
+      "bias:seller",
+      "strength:91",
+      "cumulative:-444716",
+      "divergence:false",
+      "pressure:balanced"
+    ]
+  },
+  "timestamp": "2025-06-20T19:37:49.341Z"
+}
