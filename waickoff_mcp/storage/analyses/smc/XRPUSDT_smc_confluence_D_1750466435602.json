@@ -1,0 +1,1219 @@
+{
+  "id": "XRPUSDT_smc_confluence_D_1750466435602",
+  "type": "smc",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "D",
+    "currentPrice": 2.1212,
+    "confluences": [
+      {
+        "id": "520c9ad5-dcb1-4b17-847a-c380ac831ebf",
+        "types": [
+          "orderBlock"
+        ],
+        "priceLevel": 2.4679,
+        "strength": 90,
+        "zone": {
+          "upper": 2.4802395,
+          "lower": 2.4555605000000003,
+          "midpoint": 2.4679
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1747267200000_24679",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.5717,
+              "low": 2.3531,
+              "open": 2.5506,
+              "close": 2.3852,
+              "volume": 62745132.96,
+              "timestamp": "2025-05-15T00:00:00.000Z",
+              "candleIndex": 82
+            },
+            "zone": {
+              "upper": 2.5506,
+              "lower": 2.3852,
+              "midpoint": 2.4679
+            },
+            "strength": 79,
+            "mitigated": false,
+            "respectCount": 8,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.1284
+            },
+            "volumeAtCreation": 62745132.96,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 47.16585611269495,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.274878274707466,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 63.743913735373305
+            },
+            "currentDistance": 16.344521968696977,
+            "priceAtCreation": 2.3852,
+            "marketStructure": {
+              "swingLow": 2.3531,
+              "structureBreak": false
+            }
+          }
+        },
+        "alignment": "bearish",
+        "validUntil": "2025-06-22T00:40:35.601Z",
+        "description": "Strong bearish confluence: orderBlock"
+      },
+      {
+        "id": "fd1beb07-3503-4a2c-8b94-ad861b30a09d",
+        "types": [
+          "orderBlock"
+        ],
+        "priceLevel": 2.49255,
+        "strength": 89,
+        "zone": {
+          "upper": 2.5050127499999997,
+          "lower": 2.48008725,
+          "midpoint": 2.49255
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1741305600000_24926",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.6213,
+              "low": 2.3437,
+              "open": 2.5998,
+              "close": 2.3853,
+              "volume": 139559948.88,
+              "timestamp": "2025-03-07T00:00:00.000Z",
+              "candleIndex": 13
+            },
+            "zone": {
+              "upper": 2.5998,
+              "lower": 2.3853,
+              "midpoint": 2.49255
+            },
+            "strength": 78,
+            "mitigated": false,
+            "respectCount": 28,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.536Z",
+            "subsequentMove": {
+              "magnitude": 1.587658284287498,
+              "candles": 15,
+              "maxPrice": 1.8986
+            },
+            "volumeAtCreation": 139559948.88,
+            "priceMovement": {
+              "distance": 1.587658284287498,
+              "percentage": 66.56010918071094,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.8356294496948746,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 141.78147248474374
+            },
+            "currentDistance": 17.506600037714502,
+            "priceAtCreation": 2.3853,
+            "marketStructure": {
+              "swingLow": 2.3437,
+              "structureBreak": false
+            }
+          }
+        },
+        "alignment": "bearish",
+        "validUntil": "2025-06-22T00:40:35.601Z",
+        "description": "Strong bearish confluence: orderBlock"
+      },
+      {
+        "id": "a8e78df7-2abd-4d58-8686-e13e537ca2d9",
+        "types": [
+          "orderBlock"
+        ],
+        "priceLevel": 2.1496500000000003,
+        "strength": 89,
+        "zone": {
+          "upper": 2.16039825,
+          "lower": 2.1389017500000005,
+          "midpoint": 2.1496500000000003
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bullish_1745280000000_21497",
+            "symbol": "XRPUSDT",
+            "type": "bullish",
+            "origin": {
+              "high": 2.251,
+              "low": 2.064,
+              "open": 2.0854,
+              "close": 2.2139,
+              "volume": 63645190.84,
+              "timestamp": "2025-04-22T00:00:00.000Z",
+              "candleIndex": 59
+            },
+            "zone": {
+              "upper": 2.2139,
+              "lower": 2.0854,
+              "midpoint": 2.1496500000000003
+            },
+            "strength": 77,
+            "mitigated": false,
+            "respectCount": 34,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.3616
+            },
+            "volumeAtCreation": 63645190.84,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 50.81530331089932,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.2931659758096818,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 64.6582987904841
+            },
+            "currentDistance": 1.341221949839728,
+            "priceAtCreation": 2.2139,
+            "marketStructure": {
+              "swingHigh": 2.251,
+              "structureBreak": false
+            }
+          }
+        },
+        "alignment": "bullish",
+        "validUntil": "2025-06-22T00:40:35.601Z",
+        "description": "Strong bullish confluence: orderBlock"
+      },
+      {
+        "id": "1eb0caeb-20bf-4299-bb56-cabf6647a8bb",
+        "types": [
+          "orderBlock"
+        ],
+        "priceLevel": 2.22705,
+        "strength": 89,
+        "zone": {
+          "upper": 2.23818525,
+          "lower": 2.21591475,
+          "midpoint": 2.22705
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bullish_1746662400000_22271",
+            "symbol": "XRPUSDT",
+            "type": "bullish",
+            "origin": {
+              "high": 2.33,
+              "low": 2.1178,
+              "open": 2.1265,
+              "close": 2.3276,
+              "volume": 78271645.64,
+              "timestamp": "2025-05-08T00:00:00.000Z",
+              "candleIndex": 75
+            },
+            "zone": {
+              "upper": 2.3276,
+              "lower": 2.1265,
+              "midpoint": 2.22705
+            },
+            "strength": 78,
+            "mitigated": false,
+            "respectCount": 33,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.6559
+            },
+            "volumeAtCreation": 78271645.64,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 48.33304691527754,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.5903515674379305,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 79.51757837189652
+            },
+            "currentDistance": 4.990099943428258,
+            "priceAtCreation": 2.3276,
+            "marketStructure": {
+              "swingHigh": 2.33,
+              "structureBreak": false
+            }
+          }
+        },
+        "alignment": "bullish",
+        "validUntil": "2025-06-22T00:40:35.601Z",
+        "description": "Strong bullish confluence: orderBlock"
+      },
+      {
+        "id": "11d75ff1-b002-4dac-9e4e-7dc946c322bc",
+        "types": [
+          "orderBlock"
+        ],
+        "priceLevel": 1.9245999999999999,
+        "strength": 88,
+        "zone": {
+          "upper": 1.9342229999999996,
+          "lower": 1.914977,
+          "midpoint": 1.9245999999999999
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bullish_1744156800000_19246",
+            "symbol": "XRPUSDT",
+            "type": "bullish",
+            "origin": {
+              "high": 2.0904,
+              "low": 1.7218,
+              "open": 1.7964,
+              "close": 2.0528,
+              "volume": 157153796.06,
+              "timestamp": "2025-04-09T00:00:00.000Z",
+              "candleIndex": 46
+            },
+            "zone": {
+              "upper": 2.0528,
+              "lower": 1.7964,
+              "midpoint": 1.9245999999999999
+            },
+            "strength": 76,
+            "mitigated": false,
+            "respectCount": 7,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.3014
+            },
+            "volumeAtCreation": 157153796.06,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 54.803195635229926,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 3.1931075915071547,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 159.65537957535773
+            },
+            "currentDistance": 9.268338676221012,
+            "priceAtCreation": 2.0528,
+            "marketStructure": {
+              "swingHigh": 2.0904,
+              "structureBreak": false
+            }
+          }
+        },
+        "alignment": "bullish",
+        "validUntil": "2025-06-22T00:40:35.601Z",
+        "description": "Strong bullish confluence: orderBlock"
+      },
+      {
+        "id": "8a68c687-0393-4d3a-9c7d-11e221640ee1",
+        "types": [
+          "orderBlock"
+        ],
+        "priceLevel": 2.6632,
+        "strength": 87,
+        "zone": {
+          "upper": 2.6765159999999995,
+          "lower": 2.6498839999999997,
+          "midpoint": 2.6632
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1740960000000_26632",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.9678,
+              "low": 2.2976,
+              "open": 2.9398,
+              "close": 2.3866,
+              "volume": 199909033.16,
+              "timestamp": "2025-03-03T00:00:00.000Z",
+              "candleIndex": 9
+            },
+            "zone": {
+              "upper": 2.9398,
+              "lower": 2.3866,
+              "midpoint": 2.6632
+            },
+            "strength": 73,
+            "mitigated": false,
+            "respectCount": 32,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.536Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 1.8986
+            },
+            "volumeAtCreation": 199909033.16,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 47.13818821754798,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 4.061823941881379,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 203.09119709406895
+            },
+            "currentDistance": 25.551574580426166,
+            "priceAtCreation": 2.3866,
+            "marketStructure": {
+              "swingLow": 2.2976,
+              "structureBreak": false
+            }
+          }
+        },
+        "alignment": "bearish",
+        "validUntil": "2025-06-22T00:40:35.601Z",
+        "description": "Strong bearish confluence: orderBlock"
+      }
+    ],
+    "premiumDiscountZones": {
+      "premium": {
+        "start": 49148.45077061823,
+        "end": 50033.79911568212
+      },
+      "discount": {
+        "start": 46492.40573542653,
+        "end": 47377.75408049043
+      },
+      "equilibrium": 48263.10242555433,
+      "currentZone": "discount"
+    },
+    "institutionalActivity": {
+      "score": 100,
+      "signals": [
+        "6 strong order blocks detected",
+        "1 minor structural breaks detected",
+        "6 strong SMC confluences detected"
+      ],
+      "footprint": {
+        "orderBlockActivity": 100,
+        "fvgCreation": 0,
+        "structuralManipulation": 20,
+        "confluenceStrength": 100
+      },
+      "interpretation": "High institutional activity detected - Smart money is actively positioning"
+    },
+    "marketBias": {
+      "direction": "bullish",
+      "strength": 66,
+      "confidence": 95,
+      "reasoning": [
+        "Overall bullish bias detected with integrated SMC analysis",
+        "Market structure confirms bullish trend",
+        "6 SMC confluences identified"
+      ],
+      "components": {
+        "orderBlockBias": "neutral",
+        "fvgBias": "neutral",
+        "structureBias": "bullish"
+      }
+    },
+    "tradingRecommendations": [
+      {
+        "action": "buy",
+        "reasoning": "Strong bullish bias with price in discount zone near bullish confluence",
+        "entryZone": {
+          "min": 2.1389017500000005,
+          "max": 2.1496500000000003
+        },
+        "targets": [
+          2.1496500000000003,
+          49148.45077061823,
+          50033.79911568212
+        ],
+        "stopLoss": 2.1175127325000003,
+        "confidence": 95,
+        "timeframe": "4h-1d"
+      }
+    ],
+    "keyLevels": [
+      {
+        "price": 1.9245999999999999,
+        "type": "SMC confluence",
+        "strength": 88,
+        "description": "Strong bullish confluence: orderBlock"
+      },
+      {
+        "price": 2.1496500000000003,
+        "type": "SMC confluence",
+        "strength": 89,
+        "description": "Strong bullish confluence: orderBlock"
+      },
+      {
+        "price": 2.22705,
+        "type": "SMC confluence",
+        "strength": 89,
+        "description": "Strong bullish confluence: orderBlock"
+      },
+      {
+        "price": 2.4679,
+        "type": "SMC confluence",
+        "strength": 90,
+        "description": "Strong bearish confluence: orderBlock"
+      },
+      {
+        "price": 2.49255,
+        "type": "SMC confluence",
+        "strength": 89,
+        "description": "Strong bearish confluence: orderBlock"
+      },
+      {
+        "price": 2.6632,
+        "type": "SMC confluence",
+        "strength": 87,
+        "description": "Strong bearish confluence: orderBlock"
+      },
+      {
+        "price": 50033.79911568212,
+        "type": "BOS level",
+        "strength": 76.51330236813644,
+        "description": "BOS bullish at 50033.79911568212"
+      }
+    ],
+    "statistics": {
+      "totalConfluences": 6,
+      "strongConfluences": 6,
+      "activeOrderBlocks": 6,
+      "openFVGs": 0,
+      "recentBOS": 1,
+      "overallConfidence": 95
+    },
+    "rawAnalysis": {
+      "orderBlocks": {
+        "symbol": "XRPUSDT",
+        "timeframe": "D",
+        "currentPrice": 2.1212,
+        "activeBlocks": [
+          {
+            "id": "ob_bearish_1740960000000_26632",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.9678,
+              "low": 2.2976,
+              "open": 2.9398,
+              "close": 2.3866,
+              "volume": 199909033.16,
+              "timestamp": "2025-03-03T00:00:00.000Z",
+              "candleIndex": 9
+            },
+            "zone": {
+              "upper": 2.9398,
+              "lower": 2.3866,
+              "midpoint": 2.6632
+            },
+            "strength": 73,
+            "mitigated": false,
+            "respectCount": 32,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.536Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 1.8986
+            },
+            "volumeAtCreation": 199909033.16,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 47.13818821754798,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 4.061823941881379,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 203.09119709406895
+            },
+            "currentDistance": 25.551574580426166,
+            "priceAtCreation": 2.3866,
+            "marketStructure": {
+              "swingLow": 2.2976,
+              "structureBreak": false
+            }
+          },
+          {
+            "id": "ob_bearish_1741305600000_24926",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.6213,
+              "low": 2.3437,
+              "open": 2.5998,
+              "close": 2.3853,
+              "volume": 139559948.88,
+              "timestamp": "2025-03-07T00:00:00.000Z",
+              "candleIndex": 13
+            },
+            "zone": {
+              "upper": 2.5998,
+              "lower": 2.3853,
+              "midpoint": 2.49255
+            },
+            "strength": 78,
+            "mitigated": false,
+            "respectCount": 28,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.536Z",
+            "subsequentMove": {
+              "magnitude": 1.587658284287498,
+              "candles": 15,
+              "maxPrice": 1.8986
+            },
+            "volumeAtCreation": 139559948.88,
+            "priceMovement": {
+              "distance": 1.587658284287498,
+              "percentage": 66.56010918071094,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.8356294496948746,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 141.78147248474374
+            },
+            "currentDistance": 17.506600037714502,
+            "priceAtCreation": 2.3853,
+            "marketStructure": {
+              "swingLow": 2.3437,
+              "structureBreak": false
+            }
+          },
+          {
+            "id": "ob_bullish_1744156800000_19246",
+            "symbol": "XRPUSDT",
+            "type": "bullish",
+            "origin": {
+              "high": 2.0904,
+              "low": 1.7218,
+              "open": 1.7964,
+              "close": 2.0528,
+              "volume": 157153796.06,
+              "timestamp": "2025-04-09T00:00:00.000Z",
+              "candleIndex": 46
+            },
+            "zone": {
+              "upper": 2.0528,
+              "lower": 1.7964,
+              "midpoint": 1.9245999999999999
+            },
+            "strength": 76,
+            "mitigated": false,
+            "respectCount": 7,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.3014
+            },
+            "volumeAtCreation": 157153796.06,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 54.803195635229926,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 3.1931075915071547,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 159.65537957535773
+            },
+            "currentDistance": 9.268338676221012,
+            "priceAtCreation": 2.0528,
+            "marketStructure": {
+              "swingHigh": 2.0904,
+              "structureBreak": false
+            }
+          },
+          {
+            "id": "ob_bullish_1745280000000_21497",
+            "symbol": "XRPUSDT",
+            "type": "bullish",
+            "origin": {
+              "high": 2.251,
+              "low": 2.064,
+              "open": 2.0854,
+              "close": 2.2139,
+              "volume": 63645190.84,
+              "timestamp": "2025-04-22T00:00:00.000Z",
+              "candleIndex": 59
+            },
+            "zone": {
+              "upper": 2.2139,
+              "lower": 2.0854,
+              "midpoint": 2.1496500000000003
+            },
+            "strength": 77,
+            "mitigated": false,
+            "respectCount": 34,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.3616
+            },
+            "volumeAtCreation": 63645190.84,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 50.81530331089932,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.2931659758096818,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 64.6582987904841
+            },
+            "currentDistance": 1.341221949839728,
+            "priceAtCreation": 2.2139,
+            "marketStructure": {
+              "swingHigh": 2.251,
+              "structureBreak": false
+            }
+          },
+          {
+            "id": "ob_bullish_1746662400000_22271",
+            "symbol": "XRPUSDT",
+            "type": "bullish",
+            "origin": {
+              "high": 2.33,
+              "low": 2.1178,
+              "open": 2.1265,
+              "close": 2.3276,
+              "volume": 78271645.64,
+              "timestamp": "2025-05-08T00:00:00.000Z",
+              "candleIndex": 75
+            },
+            "zone": {
+              "upper": 2.3276,
+              "lower": 2.1265,
+              "midpoint": 2.22705
+            },
+            "strength": 78,
+            "mitigated": false,
+            "respectCount": 33,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.6559
+            },
+            "volumeAtCreation": 78271645.64,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 48.33304691527754,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.5903515674379305,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 79.51757837189652
+            },
+            "currentDistance": 4.990099943428258,
+            "priceAtCreation": 2.3276,
+            "marketStructure": {
+              "swingHigh": 2.33,
+              "structureBreak": false
+            }
+          },
+          {
+            "id": "ob_bearish_1747267200000_24679",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.5717,
+              "low": 2.3531,
+              "open": 2.5506,
+              "close": 2.3852,
+              "volume": 62745132.96,
+              "timestamp": "2025-05-15T00:00:00.000Z",
+              "candleIndex": 82
+            },
+            "zone": {
+              "upper": 2.5506,
+              "lower": 2.3852,
+              "midpoint": 2.4679
+            },
+            "strength": 79,
+            "mitigated": false,
+            "respectCount": 8,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.1284
+            },
+            "volumeAtCreation": 62745132.96,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 47.16585611269495,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.274878274707466,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 63.743913735373305
+            },
+            "currentDistance": 16.344521968696977,
+            "priceAtCreation": 2.3852,
+            "marketStructure": {
+              "swingLow": 2.3531,
+              "structureBreak": false
+            }
+          }
+        ],
+        "breakerBlocks": [],
+        "strongestBlock": {
+          "id": "ob_bearish_1747267200000_24679",
+          "symbol": "XRPUSDT",
+          "type": "bearish",
+          "origin": {
+            "high": 2.5717,
+            "low": 2.3531,
+            "open": 2.5506,
+            "close": 2.3852,
+            "volume": 62745132.96,
+            "timestamp": "2025-05-15T00:00:00.000Z",
+            "candleIndex": 82
+          },
+          "zone": {
+            "upper": 2.5506,
+            "lower": 2.3852,
+            "midpoint": 2.4679
+          },
+          "strength": 79,
+          "mitigated": false,
+          "respectCount": 8,
+          "validity": "tested",
+          "createdAt": "2025-06-21T00:40:35.537Z",
+          "subsequentMove": {
+            "magnitude": 1.125,
+            "candles": 15,
+            "maxPrice": 2.1284
+          },
+          "volumeAtCreation": 62745132.96,
+          "priceMovement": {
+            "distance": 1.125,
+            "percentage": 47.16585611269495,
+            "timeToTarget": 900
+          },
+          "institutionalSignals": {
+            "volumeMultiplier": 1.274878274707466,
+            "orderFlowImbalance": 0,
+            "absorptionLevel": 63.743913735373305
+          },
+          "currentDistance": 16.344521968696977,
+          "priceAtCreation": 2.3852,
+          "marketStructure": {
+            "swingLow": 2.3531,
+            "structureBreak": false
+          }
+        },
+        "nearestBlock": {
+          "bullish": {
+            "id": "ob_bullish_1745280000000_21497",
+            "symbol": "XRPUSDT",
+            "type": "bullish",
+            "origin": {
+              "high": 2.251,
+              "low": 2.064,
+              "open": 2.0854,
+              "close": 2.2139,
+              "volume": 63645190.84,
+              "timestamp": "2025-04-22T00:00:00.000Z",
+              "candleIndex": 59
+            },
+            "zone": {
+              "upper": 2.2139,
+              "lower": 2.0854,
+              "midpoint": 2.1496500000000003
+            },
+            "strength": 77,
+            "mitigated": false,
+            "respectCount": 34,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.3616
+            },
+            "volumeAtCreation": 63645190.84,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 50.81530331089932,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.2931659758096818,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 64.6582987904841
+            },
+            "currentDistance": 1.341221949839728,
+            "priceAtCreation": 2.2139,
+            "marketStructure": {
+              "swingHigh": 2.251,
+              "structureBreak": false
+            }
+          },
+          "bearish": {
+            "id": "ob_bearish_1747267200000_24679",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.5717,
+              "low": 2.3531,
+              "open": 2.5506,
+              "close": 2.3852,
+              "volume": 62745132.96,
+              "timestamp": "2025-05-15T00:00:00.000Z",
+              "candleIndex": 82
+            },
+            "zone": {
+              "upper": 2.5506,
+              "lower": 2.3852,
+              "midpoint": 2.4679
+            },
+            "strength": 79,
+            "mitigated": false,
+            "respectCount": 8,
+            "validity": "tested",
+            "createdAt": "2025-06-21T00:40:35.537Z",
+            "subsequentMove": {
+              "magnitude": 1.125,
+              "candles": 15,
+              "maxPrice": 2.1284
+            },
+            "volumeAtCreation": 62745132.96,
+            "priceMovement": {
+              "distance": 1.125,
+              "percentage": 47.16585611269495,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.274878274707466,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 63.743913735373305
+            },
+            "currentDistance": 16.344521968696977,
+            "priceAtCreation": 2.3852,
+            "marketStructure": {
+              "swingLow": 2.3531,
+              "structureBreak": false
+            }
+          }
+        },
+        "confluenceWithLevels": [],
+        "marketBias": "neutral",
+        "keyLevels": {
+          "strongSupport": [],
+          "strongResistance": []
+        },
+        "statistics": {
+          "totalBlocks": 23,
+          "freshBlocks": 0,
+          "mitigatedBlocks": 17,
+          "breakerBlocks": 0,
+          "avgRespectRate": 10.83
+        },
+        "tradingRecommendation": {
+          "action": "monitor",
+          "confidence": 50,
+          "reason": "Standard monitoring of order blocks",
+          "targets": []
+        },
+        "timestamp": "2025-06-21T00:40:35.538Z"
+      },
+      "fairValueGaps": {
+        "symbol": "XRPUSDT",
+        "timeframe": "D",
+        "currentPrice": 2.1212,
+        "openGaps": [],
+        "filledGaps": [],
+        "statistics": {
+          "totalGapsDetected": 0,
+          "openGaps": 0,
+          "filledGaps": 0,
+          "avgFillTime": 0,
+          "fillRate": 0,
+          "avgGapSize": 0
+        },
+        "marketImbalance": {
+          "bullishGaps": 0,
+          "bearishGaps": 0,
+          "netImbalance": "neutral",
+          "strength": 0
+        },
+        "tradingOpportunities": [],
+        "timestamp": "2025-06-21T00:40:35.600Z"
+      },
+      "breakOfStructure": {
+        "symbol": "XRPUSDT",
+        "timeframe": "D",
+        "currentPrice": 47939.04360622152,
+        "trend": {
+          "shortTerm": "bullish",
+          "mediumTerm": "bullish",
+          "longTerm": "sideways",
+          "confidence": 75
+        },
+        "structurePoints": [
+          {
+            "timestamp": "2025-06-20T02:40:34.884Z",
+            "price": 46492.40573542653,
+            "type": "lower_low",
+            "strength": 50,
+            "volume": 1723686.4121952178,
+            "confirmed": true,
+            "index": 12
+          },
+          {
+            "timestamp": "2025-06-20T05:25:34.884Z",
+            "price": 46807.40091730927,
+            "type": "higher_low",
+            "strength": 78.18624525863135,
+            "volume": 2556336.3779263375,
+            "confirmed": true,
+            "index": 23
+          },
+          {
+            "timestamp": "2025-06-20T07:10:34.884Z",
+            "price": 49529.316700852825,
+            "type": "higher_high",
+            "strength": 62.35693229094814,
+            "volume": 1823091.3130549742,
+            "confirmed": true,
+            "index": 30
+          },
+          {
+            "timestamp": "2025-06-20T08:55:34.884Z",
+            "price": 49577.56760543072,
+            "type": "higher_high",
+            "strength": 54.471421862555694,
+            "volume": 1147645.2051158817,
+            "confirmed": true,
+            "index": 37
+          },
+          {
+            "timestamp": "2025-06-20T09:10:34.884Z",
+            "price": 48324.16865314105,
+            "type": "higher_low",
+            "strength": 50,
+            "volume": 1416919.83771892,
+            "confirmed": true,
+            "index": 38
+          },
+          {
+            "timestamp": "2025-06-20T11:10:34.884Z",
+            "price": 50033.79911568212,
+            "type": "higher_high",
+            "strength": 58.377674560454764,
+            "volume": 1403008.766453405,
+            "confirmed": true,
+            "index": 46
+          },
+          {
+            "timestamp": "2025-06-20T12:40:34.884Z",
+            "price": 48049.973960012016,
+            "type": "lower_low",
+            "strength": 50,
+            "volume": 1250356.6324468728,
+            "confirmed": true,
+            "index": 52
+          },
+          {
+            "timestamp": "2025-06-20T13:25:34.884Z",
+            "price": 49687.82621690756,
+            "type": "lower_high",
+            "strength": 56.521090655158844,
+            "volume": 1362500.0213629357,
+            "confirmed": true,
+            "index": 55
+          },
+          {
+            "timestamp": "2025-06-20T14:25:34.884Z",
+            "price": 48140.49927364451,
+            "type": "higher_low",
+            "strength": 69.19131545847246,
+            "volume": 2284682.437183067,
+            "confirmed": true,
+            "index": 59
+          },
+          {
+            "timestamp": "2025-06-20T16:40:34.884Z",
+            "price": 48145.60109967382,
+            "type": "higher_low",
+            "strength": 61.44807024888151,
+            "volume": 1113405.3144620077,
+            "confirmed": true,
+            "index": 68
+          },
+          {
+            "timestamp": "2025-06-20T17:25:34.884Z",
+            "price": 50031.92973783532,
+            "type": "higher_high",
+            "strength": 50.11779123202839,
+            "volume": 1340786.4172045863,
+            "confirmed": true,
+            "index": 71
+          },
+          {
+            "timestamp": "2025-06-20T19:10:34.884Z",
+            "price": 47094.460674877606,
+            "type": "lower_low",
+            "strength": 52.32706098382156,
+            "volume": 1316419.3457558681,
+            "confirmed": true,
+            "index": 78
+          },
+          {
+            "timestamp": "2025-06-20T22:25:34.884Z",
+            "price": 49424.273346521135,
+            "type": "lower_high",
+            "strength": 51.18600689827549,
+            "volume": 1155267.9676513153,
+            "confirmed": true,
+            "index": 91
+          }
+        ],
+        "activeBreaks": [
+          {
+            "id": "488f5338-602b-4b2d-8dcb-78695177a066",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-20T11:10:34.884Z",
+              "price": 50033.79911568212,
+              "volume": 1403008.766453405,
+              "index": 46
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 3,
+              "strength": 61.25364985303379
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 50704.393389083976,
+              "normal": 51374.98766248583,
+              "aggressive": 52203.84218441052
+            },
+            "invalidationLevel": 48082.547809875345,
+            "probability": 76.51330236813644,
+            "createdAt": "2025-06-21T00:40:34.886Z"
+          }
+        ],
+        "recentBreaks": [
+          {
+            "id": "488f5338-602b-4b2d-8dcb-78695177a066",
+            "type": "BOS",
+            "direction": "bullish",
+            "breakPoint": {
+              "timestamp": "2025-06-20T11:10:34.884Z",
+              "price": 50033.79911568212,
+              "volume": 1403008.766453405,
+              "index": 46
+            },
+            "previousStructure": {
+              "pattern": "higher_highs",
+              "duration": 3,
+              "strength": 61.25364985303379
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 50704.393389083976,
+              "normal": 51374.98766248583,
+              "aggressive": 52203.84218441052
+            },
+            "invalidationLevel": 48082.547809875345,
+            "probability": 76.51330236813644,
+            "createdAt": "2025-06-21T00:40:34.886Z"
+          }
+        ],
+        "currentStructure": {
+          "type": "uptrend",
+          "strength": 75,
+          "duration": 20,
+          "keyLevels": [
+            48140.49927364451,
+            48145.60109967382,
+            50031.92973783532,
+            47094.460674877606,
+            49424.273346521135
+          ]
+        },
+        "marketBias": {
+          "direction": "bullish",
+          "strength": 75,
+          "confidence": 75,
+          "reasoning": [
+            "Recent breaks favor bullish bias"
+          ]
+        },
+        "nexteDecisionPoints": [],
+        "tradingOpportunities": [],
+        "timestamp": "2025-06-21T00:40:34.886Z"
+      }
+    },
+    "timestamp": "2025-06-21T00:40:35.602Z"
+  },
+  "metadata": {
+    "id": "XRPUSDT_smc_confluence_D_1750466435602",
+    "type": "smc",
+    "timestamp": "2025-06-21T00:40:35.602Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "D",
+    "tags": [
+      "timeframe:D",
+      "confluences:6",
+      "bias:bullish",
+      "institutional:100",
+      "zone:discount"
+    ]
+  },
+  "timestamp": "2025-06-21T00:40:35.602Z"
+}

@@ -58,5 +58,15 @@ async def main():
             await manager.stop()
 
 if __name__ == "__main__":
+    print("🚀 WADM v0.1.0 - Smart Money Analysis System")
+    print("📊 Multi-Exchange Data Collection:")
+    print("   • Bybit (Retail crypto-native)")  
+    print("   • Binance (Retail global)")
+    print("   • Coinbase Pro (Institutional US)")
+    print("   • Kraken (Institutional EU)")
+    print("\n⚡ TASK-001 Fixed: Indicators calculating properly")
+    print("🎯 TASK-025 Phase 1: Institutional data integration")
+    print("\nPress Ctrl+C to stop\n")
+    
     # Run the async main function
     asyncio.run(main())

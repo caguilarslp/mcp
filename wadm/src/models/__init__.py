@@ -9,6 +9,8 @@ from enum import Enum
 class Exchange(str, Enum):
     BYBIT = "bybit"
     BINANCE = "binance"
+    COINBASE = "coinbase"
+    KRAKEN = "kraken"
 
 class Side(str, Enum):
     BUY = "buy"

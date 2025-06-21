@@ -1,0 +1,65 @@
+{
+  "id": "XRPUSDT_volume_60_1750466362457",
+  "type": "volume",
+  "data": {
+    "symbol": "XRPUSDT",
+    "interval": "60",
+    "avgVolume": 1116736.1233333335,
+    "currentVolume": 445252.19,
+    "maxVolume": 4808194.4,
+    "minVolume": 416775.41,
+    "volumeSpikes": [
+      {
+        "timestamp": "2025-06-20T14:00:00.000Z",
+        "volume": 2956933.59,
+        "multiplier": 2.647835534480501,
+        "price": 2.1354
+      },
+      {
+        "timestamp": "2025-06-20T15:00:00.000Z",
+        "volume": 2516708.56,
+        "multiplier": 2.2536286839973476,
+        "price": 2.1337
+      },
+      {
+        "timestamp": "2025-06-20T16:00:00.000Z",
+        "volume": 2357357.93,
+        "multiplier": 2.1109355027968006,
+        "price": 2.1216
+      },
+      {
+        "timestamp": "2025-06-20T17:00:00.000Z",
+        "volume": 4808194.4,
+        "multiplier": 4.305577924396386,
+        "price": 2.1178
+      },
+      {
+        "timestamp": "2025-06-20T18:00:00.000Z",
+        "volume": 2491701.45,
+        "multiplier": 2.231235649978392,
+        "price": 2.1257
+      }
+    ],
+    "vwap": {
+      "current": 2.148185424171965,
+      "priceVsVwap": "below",
+      "difference": -1.2329207653093435
+    },
+    "trend": "decreasing"
+  },
+  "metadata": {
+    "id": "XRPUSDT_volume_60_1750466362457",
+    "type": "volume",
+    "timestamp": "2025-06-21T00:39:22.457Z",
+    "symbol": "XRPUSDT",
+    "interval": "60",
+    "tags": [
+      "interval:60",
+      "trend:decreasing",
+      "volume_ratio:40",
+      "spikes:5",
+      "vwap_position:below"
+    ]
+  },
+  "timestamp": "2025-06-21T00:39:22.457Z"
+}

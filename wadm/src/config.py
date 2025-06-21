@@ -25,6 +25,8 @@ MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017/wadm")
 # Symbols to collect
 BYBIT_SYMBOLS = os.getenv("BYBIT_SYMBOLS", "BTCUSDT,ETHUSDT,XRPUSDT,HBARUSDT").split(",")
 BINANCE_SYMBOLS = os.getenv("BINANCE_SYMBOLS", "BTCUSDT,ETHUSDT,XRPUSDT,HBARUSDT").split(",")
+COINBASE_SYMBOLS = os.getenv("COINBASE_SYMBOLS", "BTCUSDT,ETHUSDT,XRPUSDT").split(",")  # HBAR not available
+KRAKEN_SYMBOLS = os.getenv("KRAKEN_SYMBOLS", "BTCUSDT,ETHUSDT,XRPUSDT").split(",")  # HBAR not available
 
 # WebSocket URLs
 BYBIT_WS_URL = "wss://stream.bybit.com/v5/public/spot"

@@ -1,5 +1,14 @@
-# Python
+# Ignore Python bytecode files and cache directories
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore temporary or backup files
+*.tmp
+*.bak
+*.swp
+
 *.py[cod]
 *$py.class
 *.so

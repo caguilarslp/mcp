@@ -1,0 +1,29 @@
+
+USDT
+https://tether.to/en/transparency/?tab=usdt
+
+listado general está en Tether Tokens in Circulation
+después hay unas pestañas current balances y bridges que son interesantes
+
+
+USDC
+https://www.circle.com/transparency
+pestaña usdc y eurc 
+
+
+RLUSD
+https://ripple.com/solutions/stablecoin/transparency/
+
+
+
+Ejemplo de Wallets Comunes que Reciben Minting
+Binance: 0x28C6c06298d514Db089934071355E5743bf21d60 (Ethereum)
+
+Coinbase: 0x71660c4005ba85c37ccec55d0c4493e66fe775d3 (Ethereum)
+
+Kraken: 0x2910543af39aba0cd09dbb2d50200b3e800a63d2
+
+Circle Treasury: 0x55fe002aeff02f77364de339a1292923a15844b8
+
+
+
