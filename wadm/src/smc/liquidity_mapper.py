@@ -25,6 +25,8 @@ from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Any, Optional, Tuple
 from enum import Enum
 import statistics
+import numpy as np
+from collections import defaultdict
 from ..models import Trade, Exchange
 from ..logger import get_logger
 
@@ -302,32 +304,518 @@ class LiquidityMapper:
     
     async def _detect_volume_nodes(self, trade_data: Dict[str, List[Dict]], symbol: str) -> List[LiquidityZone]:
         """Detect High Volume Nodes (HVN) and Low Volume Nodes (LVN)"""
-        # Placeholder implementation - would include full volume profile analysis
-        return []
+        zones = []
+        
+        # Combine all trades
+        all_trades = []
+        for exchange, trades in trade_data.items():
+            all_trades.extend(trades)
+        
+        if not all_trades:
+            return zones
+        
+        # Sort by price for volume profile
+        all_trades.sort(key=lambda x: x['price'])
+        
+        # Create price buckets
+        min_price = min(t['price'] for t in all_trades)
+        max_price = max(t['price'] for t in all_trades)
+        price_range = max_price - min_price
+        
+        if price_range == 0:
+            return zones
+        
+        # Create 100 price levels
+        num_levels = 100
+        level_size = price_range / num_levels
+        
+        # Aggregate volume by price level
+        volume_by_level = defaultdict(lambda: {'total': 0, 'institutional': 0, 'buy': 0, 'sell': 0, 'trades': []})
+        
+        for trade in all_trades:
+            level = int((trade['price'] - min_price) / level_size)
+            level_price = min_price + (level * level_size) + (level_size / 2)
+            
+            volume_by_level[level_price]['total'] += trade['quantity']
+            if trade['is_institutional']:
+                volume_by_level[level_price]['institutional'] += trade['quantity']
+            
+            if trade['side'] == 'buy':
+                volume_by_level[level_price]['buy'] += trade['quantity']
+            else:
+                volume_by_level[level_price]['sell'] += trade['quantity']
+            
+            volume_by_level[level_price]['trades'].append(trade)
+        
+        # Calculate volume percentiles
+        volumes = [data['total'] for data in volume_by_level.values()]
+        if not volumes:
+            return zones
+        
+        hvn_threshold = np.percentile(volumes, self.hvn_percentile)
+        lvn_threshold = np.percentile(volumes, self.lvn_percentile)
+        
+        # Create zones
+        zone_id = 0
+        for price, data in volume_by_level.items():
+            if data['total'] < self.min_volume_threshold:
+                continue
+            
+            # Determine zone type
+            if data['total'] >= hvn_threshold:
+                zone_type = LiquidityType.HVN
+                strength = LiquidityStrength.STRONG if data['total'] >= np.percentile(volumes, 85) else LiquidityStrength.MODERATE
+            elif data['total'] <= lvn_threshold:
+                zone_type = LiquidityType.LVN
+                strength = LiquidityStrength.MODERATE
+            else:
+                continue
+            
+            # Calculate metrics
+            institutional_ratio = data['institutional'] / data['total'] if data['total'] > 0 else 0
+            order_flow_bias = (data['buy'] - data['sell']) / data['total'] if data['total'] > 0 else 0
+            
+            # Determine direction
+            if order_flow_bias > 0.2:
+                direction = LiquidityDirection.BULLISH
+            elif order_flow_bias < -0.2:
+                direction = LiquidityDirection.BEARISH
+            else:
+                direction = LiquidityDirection.NEUTRAL
+            
+            # Calculate zone bounds
+            zone_width = level_size
+            upper_bound = price + (zone_width / 2)
+            lower_bound = price - (zone_width / 2)
+            
+            # Create zone
+            zone = LiquidityZone(
+                id=f"VN_{symbol}_{zone_id}",
+                type=zone_type,
+                strength=strength,
+                direction=direction,
+                price=price,
+                upper_bound=upper_bound,
+                lower_bound=lower_bound,
+                width=zone_width,
+                width_pct=(zone_width / price) * 100,
+                total_volume=data['total'],
+                institutional_volume=data['institutional'],
+                retail_volume=data['total'] - data['institutional'],
+                institutional_ratio=institutional_ratio,
+                formation_start=min(t['timestamp'] for t in data['trades']),
+                last_activity=max(t['timestamp'] for t in data['trades']),
+                formation_duration=max(t['timestamp'] for t in data['trades']) - min(t['timestamp'] for t in data['trades']),
+                touches=1,
+                bounces=0,
+                breaks=0,
+                respect_rate=0.0,
+                order_flow_bias=order_flow_bias,
+                absorption_detected=False,
+                iceberg_activity=False,
+                sweep_vulnerability=30.0 if zone_type == LiquidityType.LVN else 10.0,
+                exchanges_confirming=list(set(t['exchange'] for t in data['trades'])),
+                cross_exchange_validated=len(set(t['exchange'] for t in data['trades'])) >= 2,
+                coinbase_dominance=sum(1 for t in data['trades'] if t['exchange'] == 'coinbase') / len(data['trades']),
+                avg_reaction_size=0.0,
+                max_reaction_size=0.0,
+                time_to_reaction=timedelta(minutes=0),
+                symbol=symbol
+            )
+            
+            zones.append(zone)
+            zone_id += 1
+        
+        return zones
     
     async def _detect_order_block_liquidity(self, trade_data: Dict[str, List[Dict]], symbol: str) -> List[LiquidityZone]:
         """Detect unmitigated order block liquidity zones"""
-        # Placeholder implementation - would detect order blocks
-        return []
+        zones = []
+        
+        # Focus on institutional exchanges
+        institutional_trades = []
+        for exchange in ['coinbase', 'kraken']:
+            if exchange in trade_data:
+                institutional_trades.extend(trade_data[exchange])
+        
+        if not institutional_trades:
+            return zones
+        
+        # Sort by timestamp
+        institutional_trades.sort(key=lambda x: x['timestamp'])
+        
+        # Look for large institutional orders
+        avg_size = statistics.mean(t['quantity'] for t in institutional_trades)
+        large_threshold = avg_size * 3  # 3x average size
+        
+        zone_id = 0
+        for i, trade in enumerate(institutional_trades):
+            if trade['quantity'] < large_threshold:
+                continue
+            
+            # Found large institutional order
+            price = trade['price']
+            
+            # Look for cluster of trades around this price
+            cluster_trades = []
+            price_tolerance = price * 0.001  # 0.1%
+            
+            for j in range(max(0, i-20), min(len(institutional_trades), i+20)):
+                if abs(institutional_trades[j]['price'] - price) <= price_tolerance:
+                    cluster_trades.append(institutional_trades[j])
+            
+            if len(cluster_trades) < 3:
+                continue
+            
+            # Calculate zone metrics
+            total_volume = sum(t['quantity'] for t in cluster_trades)
+            institutional_volume = sum(t['quantity'] for t in cluster_trades if t['is_institutional'])
+            
+            # Determine zone bounds
+            prices = [t['price'] for t in cluster_trades]
+            upper_bound = max(prices)
+            lower_bound = min(prices)
+            zone_price = (upper_bound + lower_bound) / 2
+            zone_width = upper_bound - lower_bound
+            
+            # Calculate order flow
+            buy_volume = sum(t['quantity'] for t in cluster_trades if t['side'] == 'buy')
+            sell_volume = sum(t['quantity'] for t in cluster_trades if t['side'] == 'sell')
+            order_flow_bias = (buy_volume - sell_volume) / total_volume if total_volume > 0 else 0
+            
+            # Determine direction based on initiating trade
+            if trade['side'] == 'buy':
+                direction = LiquidityDirection.BULLISH
+            else:
+                direction = LiquidityDirection.BEARISH
+            
+            # Create order block zone
+            zone = LiquidityZone(
+                id=f"OB_{symbol}_{zone_id}",
+                type=LiquidityType.ORDER_BLOCK,
+                strength=LiquidityStrength.STRONG,
+                direction=direction,
+                price=zone_price,
+                upper_bound=upper_bound,
+                lower_bound=lower_bound,
+                width=zone_width,
+                width_pct=(zone_width / zone_price) * 100,
+                total_volume=total_volume,
+                institutional_volume=institutional_volume,
+                retail_volume=total_volume - institutional_volume,
+                institutional_ratio=institutional_volume / total_volume if total_volume > 0 else 0,
+                formation_start=min(t['timestamp'] for t in cluster_trades),
+                last_activity=max(t['timestamp'] for t in cluster_trades),
+                formation_duration=max(t['timestamp'] for t in cluster_trades) - min(t['timestamp'] for t in cluster_trades),
+                touches=1,
+                bounces=0,
+                breaks=0,
+                respect_rate=0.0,
+                order_flow_bias=order_flow_bias,
+                absorption_detected=True,  # Large orders indicate absorption
+                iceberg_activity=total_volume > avg_size * 5,
+                sweep_vulnerability=20.0,  # Order blocks are moderately vulnerable
+                exchanges_confirming=list(set(t['exchange'] for t in cluster_trades)),
+                cross_exchange_validated=len(set(t['exchange'] for t in cluster_trades)) >= 2,
+                coinbase_dominance=sum(1 for t in cluster_trades if t['exchange'] == 'coinbase') / len(cluster_trades),
+                avg_reaction_size=0.0,
+                max_reaction_size=0.0,
+                time_to_reaction=timedelta(minutes=0),
+                symbol=symbol
+            )
+            
+            zones.append(zone)
+            zone_id += 1
+        
+        return zones
     
     async def _identify_sweep_zones(self, trade_data: Dict[str, List[Dict]], symbol: str) -> List[LiquidityZone]:
         """Identify liquidity sweep zones (stop hunts)"""
-        # Placeholder implementation - would detect sweep zones
-        return []
+        zones = []
+        
+        # Combine all trades
+        all_trades = []
+        for exchange, trades in trade_data.items():
+            all_trades.extend(trades)
+        
+        if not all_trades:
+            return zones
+        
+        # Sort by timestamp
+        all_trades.sort(key=lambda x: x['timestamp'])
+        
+        # Look for rapid price moves with high volume
+        zone_id = 0
+        window_size = 50  # Look at 50 trades at a time
+        
+        for i in range(0, len(all_trades) - window_size):
+            window_trades = all_trades[i:i+window_size]
+            
+            # Calculate price range and volume
+            prices = [t['price'] for t in window_trades]
+            min_price = min(prices)
+            max_price = max(prices)
+            price_range = max_price - min_price
+            price_range_pct = (price_range / min_price) * 100
+            
+            # Look for significant moves (>0.5%)
+            if price_range_pct < 0.5:
+                continue
+            
+            # Calculate volume metrics
+            total_volume = sum(t['quantity'] for t in window_trades)
+            avg_volume = statistics.mean(t['quantity'] for t in all_trades)
+            
+            # Check if volume is abnormal
+            if total_volume < avg_volume * window_size * 1.5:
+                continue
+            
+            # Identify sweep direction
+            first_half_avg = statistics.mean(prices[:len(prices)//2])
+            second_half_avg = statistics.mean(prices[len(prices)//2:])
+            
+            if second_half_avg > first_half_avg:
+                # Upward sweep (bear trap)
+                sweep_price = max_price
+                direction = LiquidityDirection.BEARISH  # Sweeps upward to grab buy stops
+            else:
+                # Downward sweep (bull trap)
+                sweep_price = min_price
+                direction = LiquidityDirection.BULLISH  # Sweeps downward to grab sell stops
+            
+            # Calculate zone properties
+            zone_width = price_range * 0.2  # 20% of the move
+            upper_bound = sweep_price + (zone_width / 2)
+            lower_bound = sweep_price - (zone_width / 2)
+            
+            # Create sweep zone
+            zone = LiquidityZone(
+                id=f"SW_{symbol}_{zone_id}",
+                type=LiquidityType.SWEEP_ZONE,
+                strength=LiquidityStrength.MODERATE,
+                direction=direction,
+                price=sweep_price,
+                upper_bound=upper_bound,
+                lower_bound=lower_bound,
+                width=zone_width,
+                width_pct=(zone_width / sweep_price) * 100,
+                total_volume=total_volume,
+                institutional_volume=sum(t['quantity'] for t in window_trades if t['is_institutional']),
+                retail_volume=sum(t['quantity'] for t in window_trades if not t['is_institutional']),
+                institutional_ratio=sum(t['quantity'] for t in window_trades if t['is_institutional']) / total_volume,
+                formation_start=window_trades[0]['timestamp'],
+                last_activity=window_trades[-1]['timestamp'],
+                formation_duration=window_trades[-1]['timestamp'] - window_trades[0]['timestamp'],
+                touches=1,
+                bounces=0,
+                breaks=1,  # Sweep implies a break
+                respect_rate=0.0,
+                order_flow_bias=0.0,
+                absorption_detected=False,
+                iceberg_activity=False,
+                sweep_vulnerability=80.0,  # High vulnerability - already swept
+                exchanges_confirming=list(set(t['exchange'] for t in window_trades)),
+                cross_exchange_validated=len(set(t['exchange'] for t in window_trades)) >= 2,
+                coinbase_dominance=sum(1 for t in window_trades if t['exchange'] == 'coinbase') / len(window_trades),
+                avg_reaction_size=price_range_pct,
+                max_reaction_size=price_range_pct,
+                time_to_reaction=timedelta(seconds=0),
+                symbol=symbol
+            )
+            
+            zones.append(zone)
+            zone_id += 1
+        
+        return zones
     
     async def _detect_injection_zones(self, trade_data: Dict[str, List[Dict]], symbol: str) -> List[LiquidityZone]:
         """Detect liquidity injection zones (fresh institutional capital)"""
-        # Placeholder implementation - would detect injection zones
-        return []
+        zones = []
+        
+        # Focus on institutional exchanges
+        institutional_trades = []
+        for exchange in ['coinbase', 'kraken']:
+            if exchange in trade_data:
+                institutional_trades.extend(trade_data[exchange])
+        
+        if not institutional_trades:
+            return zones
+        
+        # Sort by timestamp
+        institutional_trades.sort(key=lambda x: x['timestamp'])
+        
+        # Look for sudden increases in institutional volume
+        window_minutes = 30
+        zone_id = 0
+        
+        # Group trades by time windows
+        time_windows = defaultdict(list)
+        for trade in institutional_trades:
+            window_key = trade['timestamp'].replace(second=0, microsecond=0)
+            window_key = window_key.replace(minute=(window_key.minute // window_minutes) * window_minutes)
+            time_windows[window_key].append(trade)
+        
+        # Calculate average volume per window
+        window_volumes = {k: sum(t['quantity'] for t in v) for k, v in time_windows.items()}
+        if not window_volumes:
+            return zones
+        
+        avg_window_volume = statistics.mean(window_volumes.values())
+        
+        # Look for injection events
+        for window_time, trades in time_windows.items():
+            window_volume = sum(t['quantity'] for t in trades)
+            
+            # Check for significant volume increase (3x average)
+            if window_volume < avg_window_volume * 3:
+                continue
+            
+            # Calculate zone properties
+            prices = [t['price'] for t in trades]
+            avg_price = statistics.mean(prices)
+            price_std = statistics.stdev(prices) if len(prices) > 1 else avg_price * 0.001
+            
+            upper_bound = avg_price + price_std
+            lower_bound = avg_price - price_std
+            zone_width = upper_bound - lower_bound
+            
+            # Calculate order flow
+            buy_volume = sum(t['quantity'] for t in trades if t['side'] == 'buy')
+            sell_volume = sum(t['quantity'] for t in trades if t['side'] == 'sell')
+            order_flow_bias = (buy_volume - sell_volume) / window_volume if window_volume > 0 else 0
+            
+            # Determine direction
+            if order_flow_bias > 0.3:
+                direction = LiquidityDirection.BULLISH
+            elif order_flow_bias < -0.3:
+                direction = LiquidityDirection.BEARISH
+            else:
+                direction = LiquidityDirection.NEUTRAL
+            
+            # Create injection zone
+            zone = LiquidityZone(
+                id=f"INJ_{symbol}_{zone_id}",
+                type=LiquidityType.INJECTION_ZONE,
+                strength=LiquidityStrength.VERY_STRONG,
+                direction=direction,
+                price=avg_price,
+                upper_bound=upper_bound,
+                lower_bound=lower_bound,
+                width=zone_width,
+                width_pct=(zone_width / avg_price) * 100,
+                total_volume=window_volume,
+                institutional_volume=window_volume,  # All from institutional exchanges
+                retail_volume=0,
+                institutional_ratio=1.0,
+                formation_start=window_time,
+                last_activity=window_time + timedelta(minutes=window_minutes),
+                formation_duration=timedelta(minutes=window_minutes),
+                touches=1,
+                bounces=0,
+                breaks=0,
+                respect_rate=0.0,
+                order_flow_bias=order_flow_bias,
+                absorption_detected=True,
+                iceberg_activity=window_volume > avg_window_volume * 5,
+                sweep_vulnerability=5.0,  # Very low - fresh institutional positioning
+                exchanges_confirming=list(set(t['exchange'] for t in trades)),
+                cross_exchange_validated=len(set(t['exchange'] for t in trades)) >= 2,
+                coinbase_dominance=sum(1 for t in trades if t['exchange'] == 'coinbase') / len(trades),
+                avg_reaction_size=0.0,
+                max_reaction_size=0.0,
+                time_to_reaction=timedelta(minutes=0),
+                symbol=symbol
+            )
+            
+            zones.append(zone)
+            zone_id += 1
+        
+        return zones
     
     async def _apply_institutional_validation(self, zones: List[LiquidityZone], trade_data: Dict[str, List[Dict]]) -> List[LiquidityZone]:
         """Apply institutional validation to liquidity zones"""
-        # Placeholder implementation
-        return zones
+        validated_zones = []
+        
+        for zone in zones:
+            # Skip if already has high institutional ratio
+            if zone.institutional_ratio >= self.min_institutional_ratio:
+                validated_zones.append(zone)
+                continue
+            
+            # Check for institutional activity near zone
+            institutional_activity = 0
+            total_activity = 0
+            
+            for exchange in ['coinbase', 'kraken']:
+                if exchange not in trade_data:
+                    continue
+                
+                for trade in trade_data[exchange]:
+                    # Check if trade is near zone
+                    if zone.lower_bound <= trade['price'] <= zone.upper_bound:
+                        institutional_activity += trade['quantity']
+                        total_activity += trade['quantity']
+            
+            # Recalculate institutional ratio
+            if total_activity > 0:
+                zone.institutional_ratio = institutional_activity / total_activity
+                
+                # Update validation status
+                if zone.institutional_ratio >= self.min_institutional_ratio:
+                    zone.cross_exchange_validated = True
+                    validated_zones.append(zone)
+            
+        return validated_zones
     
     async def _calculate_confluence_scores(self, zones: List[LiquidityZone]) -> List[LiquidityZone]:
         """Calculate confluence scores for liquidity zones"""
-        # Placeholder implementation
+        for zone in zones:
+            score = 0.0
+            
+            # Base score by type
+            type_scores = {
+                LiquidityType.INJECTION_ZONE: 30,
+                LiquidityType.ORDER_BLOCK: 25,
+                LiquidityType.HVN: 20,
+                LiquidityType.SWEEP_ZONE: 15,
+                LiquidityType.LVN: 10
+            }
+            score += type_scores.get(zone.type, 0)
+            
+            # Strength multiplier
+            strength_multipliers = {
+                LiquidityStrength.VERY_STRONG: 1.5,
+                LiquidityStrength.STRONG: 1.2,
+                LiquidityStrength.MODERATE: 1.0,
+                LiquidityStrength.WEAK: 0.5
+            }
+            score *= strength_multipliers.get(zone.strength, 1.0)
+            
+            # Institutional validation bonus
+            if zone.institutional_ratio >= 0.5:
+                score += 20
+            elif zone.institutional_ratio >= 0.3:
+                score += 10
+            
+            # Cross-exchange validation bonus
+            if zone.cross_exchange_validated:
+                score += 15
+            
+            # Coinbase dominance bonus (institutional US flow)
+            if zone.coinbase_dominance >= 0.5:
+                score += 10
+            
+            # Absorption detection bonus
+            if zone.absorption_detected:
+                score += 10
+            
+            # Iceberg activity bonus
+            if zone.iceberg_activity:
+                score += 5
+            
+            # Normalize to 0-100
+            zone.confluence_score = min(100, max(0, score))
+        
         return zones
     
     def _update_active_zones(self, symbol: str, new_zones: List[LiquidityZone]):
@@ -390,6 +878,8 @@ class LiquidityMapper:
         hvn_zones = [z for z in active_zones if z.type == LiquidityType.HVN]
         lvn_zones = [z for z in active_zones if z.type == LiquidityType.LVN]
         order_block_zones = [z for z in active_zones if z.type == LiquidityType.ORDER_BLOCK]
+        sweep_zones = [z for z in active_zones if z.type == LiquidityType.SWEEP_ZONE]
+        injection_zones = [z for z in active_zones if z.type == LiquidityType.INJECTION_ZONE]
         
         # Find zones above and below current price
         zones_above = [z for z in active_zones if z.price > current_price]
@@ -398,6 +888,17 @@ class LiquidityMapper:
         # Get nearest zones
         nearby_zones = self.get_zones_near_price(symbol, current_price, max_distance_pct=3.0)
         
+        # Determine bias
+        bullish_zones = len([z for z in active_zones if z.direction == LiquidityDirection.BULLISH])
+        bearish_zones = len([z for z in active_zones if z.direction == LiquidityDirection.BEARISH])
+        
+        if bullish_zones > bearish_zones * 1.5:
+            liquidity_bias = "bullish"
+        elif bearish_zones > bullish_zones * 1.5:
+            liquidity_bias = "bearish"
+        else:
+            liquidity_bias = "neutral"
+        
         return {
             'symbol': symbol,
             'current_price': current_price,
@@ -405,9 +906,12 @@ class LiquidityMapper:
             'hvn_count': len(hvn_zones),
             'lvn_count': len(lvn_zones),
             'order_block_count': len(order_block_zones),
+            'sweep_count': len(sweep_zones),
+            'injection_count': len(injection_zones),
             'zones_above': len(zones_above),
             'zones_below': len(zones_below),
             'nearby_zones_count': len(nearby_zones),
+            'liquidity_bias': liquidity_bias,
             'key_zones': [self._zone_to_summary(zone) for zone in nearby_zones[:5]],
             'liquidity_analysis': self._generate_liquidity_narrative(active_zones, nearby_zones, current_price)
         }
@@ -420,9 +924,10 @@ class LiquidityMapper:
             'strength': zone.strength.value,
             'direction': zone.direction.value,
             'price': zone.price,
-            'institutional_ratio': zone.institutional_ratio,
-            'confluence_score': zone.confluence_score,
-            'cross_exchange_validated': zone.cross_exchange_validated
+            'institutional_ratio': round(zone.institutional_ratio, 2),
+            'confluence_score': round(zone.confluence_score, 1),
+            'cross_exchange_validated': zone.cross_exchange_validated,
+            'distance_pct': round(zone.get_distance_from_price(zone.price), 2)
         }
     
     def _generate_liquidity_narrative(self, zones: List[LiquidityZone], nearby_zones: List[LiquidityZone], current_price: float) -> str:
@@ -432,12 +937,29 @@ class LiquidityMapper:
         
         institutional_count = len([z for z in zones if z.is_institutional])
         strong_count = len([z for z in zones if z.is_strong])
+        injection_count = len([z for z in zones if z.type == LiquidityType.INJECTION_ZONE])
         
         narrative = f"Detected {len(zones)} liquidity zones: {institutional_count} institutional, {strong_count} strong. "
+        
+        if injection_count > 0:
+            narrative += f"{injection_count} fresh liquidity injection zone(s) indicate new institutional positioning. "
         
         if nearby_zones:
             nearest = nearby_zones[0]
             distance = nearest.get_distance_from_price(current_price)
-            narrative += f"Nearest zone: {nearest.type.value} at {nearest.price:.2f} ({distance:.1f}% away). "
+            
+            if nearest.type == LiquidityType.ORDER_BLOCK:
+                narrative += f"Nearest unmitigated order block at {nearest.price:.2f} ({distance:.1f}% away). "
+            elif nearest.type == LiquidityType.HVN:
+                narrative += f"High volume node at {nearest.price:.2f} may act as {nearest.direction.value} magnet. "
+            elif nearest.type == LiquidityType.SWEEP_ZONE:
+                narrative += f"Recent sweep zone at {nearest.price:.2f} indicates stop hunting activity. "
+        
+        # Add institutional insight
+        inst_zones = [z for z in zones if z.is_institutional]
+        if inst_zones:
+            avg_inst_ratio = statistics.mean(z.institutional_ratio for z in inst_zones)
+            if avg_inst_ratio > 0.5:
+                narrative += f"High institutional participation ({avg_inst_ratio:.0%}) suggests smart money interest. "
         
         return narrative

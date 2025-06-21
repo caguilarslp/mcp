@@ -1,542 +1,606 @@
 """
-Enhanced Market Structure Analysis with Institutional Validation
+Market Structure Analysis with Break of Structure Detection
 
-Traditional Structure Analysis: 65% accuracy (price patterns only)
-Our Enhanced Structure Analysis: 90-95% accuracy (institutional confirmation)
-
-Key Enhancements:
-1. Multi-exchange structure validation (eliminates false breaks)
-2. Institutional volume confirmation during structure shifts
-3. Coinbase Pro dominance tracking (institutional leading indicator)
-4. Smart Money flow analysis during breaks
-5. False break detection using institutional divergence
-
-Structure Types:
-- Break of Structure (BOS): Continuation of trend
-- Change of Character (CHoCH): Potential trend reversal
-- Market Structure Break (MSB): Major trend shift
-- Institutional Confirmation: Only real moves, not retail stop hunts
+Real implementation - NO PLACEHOLDERS
+Detects swing highs/lows, BOS, CHoCH with institutional confirmation
 """
 
 import asyncio
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Any, Optional, Tuple
 from enum import Enum
-import statistics
-from ..models import Trade, Exchange
+import numpy as np
 from ..logger import get_logger
-from .structure_models import (
-    TrendDirection, StructureType, StructureStrength,
-    SwingPoint, StructureBreak
-)
 
 logger = get_logger(__name__)
 
+class SwingType(str, Enum):
+    """Swing point types"""
+    HIGH = "high"
+    LOW = "low"
+
+class StructureBreakType(str, Enum):
+    """Structure break types"""
+    BOS = "break_of_structure"  # Continuation
+    CHOCH = "change_of_character"  # Reversal
+
+class TrendDirection(str, Enum):
+    """Market trend direction"""
+    BULLISH = "bullish"
+    BEARISH = "bearish"
+    RANGING = "ranging"
+
+@dataclass
+class SwingPoint:
+    """Market structure swing point"""
+    type: SwingType
+    price: float
+    timestamp: datetime
+    strength: int  # Number of candles used to confirm
+    volume: float
+    institutional_ratio: float
+
+@dataclass
+class StructureBreak:
+    """Break of market structure"""
+    id: str
+    type: StructureBreakType
+    direction: TrendDirection
+    break_price: float
+    break_time: datetime
+    previous_swing: SwingPoint
+    confirmation_volume: float
+    institutional_confirmation: bool
+    exchanges_confirmed: List[str]
+    strength_score: float  # 0-100
+
+@dataclass
+class MarketStructure:
+    """Complete market structure analysis"""
+    symbol: str
+    timestamp: datetime
+    trend: TrendDirection
+    trend_strength: float  # 0-100
+    
+    # Swing points
+    swing_highs: List[SwingPoint]
+    swing_lows: List[SwingPoint]
+    current_swing_high: Optional[SwingPoint]
+    current_swing_low: Optional[SwingPoint]
+    
+    # Structure breaks
+    structure_breaks: List[StructureBreak]
+    last_bos: Optional[StructureBreak]
+    last_choch: Optional[StructureBreak]
+    
+    # Institutional metrics
+    institutional_bias: str  # bullish/bearish/neutral
+    smart_money_trend: TrendDirection
+    divergence_detected: bool
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary"""
+        return {
+            "symbol": self.symbol,
+            "timestamp": self.timestamp,
+            "trend": self.trend.value,
+            "trend_strength": self.trend_strength,
+            "swing_highs_count": len(self.swing_highs),
+            "swing_lows_count": len(self.swing_lows),
+            "current_swing_high": self.current_swing_high.price if self.current_swing_high else None,
+            "current_swing_low": self.current_swing_low.price if self.current_swing_low else None,
+            "structure_breaks_count": len(self.structure_breaks),
+            "last_bos": self.last_bos.type.value if self.last_bos else None,
+            "last_choch": self.last_choch.type.value if self.last_choch else None,
+            "institutional_bias": self.institutional_bias,
+            "smart_money_trend": self.smart_money_trend.value,
+            "divergence_detected": self.divergence_detected
+        }
+
 class StructureAnalyzer:
-    """Enhanced Market Structure Analyzer with Institutional Validation"""
+    """Market structure analyzer with institutional validation"""
     
     def __init__(self, storage_manager=None):
         self.storage = storage_manager
-        self.active_structures: Dict[str, List[StructureBreak]] = {}
-        self.swing_cache: Dict[str, List[SwingPoint]] = {}
+        self.swing_strength = 5  # Candles on each side for swing
+        self.min_swing_size = 0.1  # Minimum 0.1% move for valid swing
+        self.lookback_periods = 100
         
-        # Configuration
-        self.min_swing_size_pct = 0.5          # Minimum swing size (0.5% of price)
-        self.swing_confirmation_candles = 3     # Candles needed to confirm swing
-        self.volume_spike_threshold = 2.0       # Volume multiplier for spike detection
-        self.min_institutional_ratio = 0.25     # Minimum institutional participation
-        self.min_structure_significance = 60.0  # Minimum significance score
-        self.structure_expiry_hours = 72        # Hours after which structures expire
-        self.max_structures_per_symbol = 20     # Maximum active structures per symbol
+        # Cache
+        self.market_structures: Dict[str, MarketStructure] = {}
         
         logger.info("StructureAnalyzer initialized with institutional validation")
     
-    async def analyze_market_structure(self, symbol: str, lookback_hours: int = 48) -> Dict[str, Any]:
+    async def analyze_market_structure(self, symbol: str, timeframe: str = "15min") -> MarketStructure:
         """
-        Perform comprehensive market structure analysis
+        Analyze complete market structure
         
         Args:
-            symbol: Trading pair (e.g., "BTCUSDT")
-            lookback_hours: Hours to look back for analysis
+            symbol: Trading pair
+            timeframe: Analysis timeframe
             
         Returns:
-            Complete market structure analysis with institutional validation
+            Complete market structure analysis
         """
         try:
-            logger.info(f"Analyzing market structure for {symbol} (lookback: {lookback_hours}h)")
+            # Get multi-exchange candles
+            candles = await self._get_candles(symbol, timeframe)
             
-            # Get multi-exchange data
-            candle_data = await self._get_multi_exchange_candles(symbol, lookback_hours)
+            if len(candles) < self.swing_strength * 2 + 1:
+                logger.debug(f"Not enough candles for structure analysis: {len(candles)}")
+                return self._empty_structure(symbol)
             
-            if not candle_data:
-                logger.warning(f"No candle data available for {symbol}")
-                return self._empty_analysis(symbol)
+            # Detect swing points
+            swing_highs, swing_lows = self._detect_swings(candles)
             
-            # Identify swing points
-            swing_points = await self._identify_swing_points(candle_data, symbol)
-            
-            # Detect structure breaks with institutional validation
-            structure_breaks = await self._detect_structure_breaks(swing_points, candle_data, symbol)
-            
-            # Apply institutional validation
-            validated_breaks = await self._apply_institutional_validation(structure_breaks, candle_data)
-            
-            # Calculate structure significance
-            significant_breaks = await self._calculate_structure_significance(validated_breaks)
-            
-            # Update caches
-            self.swing_cache[symbol] = swing_points
-            self._update_active_structures(symbol, significant_breaks)
-            
-            # Generate comprehensive analysis
-            analysis = self._generate_structure_analysis(
-                symbol, swing_points, significant_breaks, candle_data
+            # Detect structure breaks
+            structure_breaks = self._detect_structure_breaks(
+                candles, swing_highs, swing_lows, symbol
             )
             
-            logger.info(f"Structure analysis complete for {symbol}: {analysis['current_trend']} trend, "
-                       f"{len(significant_breaks)} significant breaks")
+            # Determine trend
+            trend, trend_strength = self._determine_trend(
+                swing_highs, swing_lows, structure_breaks
+            )
             
-            return analysis
+            # Analyze institutional bias
+            inst_bias = self._analyze_institutional_bias(candles, structure_breaks)
             
-        except Exception as e:
-            logger.error(f"Error analyzing market structure for {symbol}: {e}", exc_info=True)
-            return self._empty_analysis(symbol)
-    
-    def _empty_analysis(self, symbol: str) -> Dict[str, Any]:
-        """Return empty analysis structure"""
-        return {
-            'symbol': symbol,
-            'timestamp': datetime.now(timezone.utc),
-            'current_trend': TrendDirection.UNKNOWN.value,
-            'market_bias': 'neutral',
-            'trend_strength': 0.0,
-            'institutional_bias': 'neutral',
-            'swing_count': 0,
-            'confirmed_swings': 0,
-            'structure_breaks': 0,
-            'significant_breaks': 0,
-            'key_levels': [],
-            'next_targets': [],
-            'invalidation_levels': [],
-            'last_significant_break': None,
-            'analysis': 'Insufficient data for structure analysis'
-        }
-    
-    async def _get_multi_exchange_candles(self, symbol: str, lookback_hours: int) -> Dict[str, List[Dict]]:
-        """Get candlestick data from all exchanges"""
-        # Placeholder implementation
-        return {}
-    
-    async def _identify_swing_points(self, candle_data: Dict[str, List[Dict]], symbol: str) -> List[SwingPoint]:
-        """Identify swing highs and lows across all exchanges"""
-        # Placeholder implementation
-        return []
-    
-    async def _detect_structure_breaks(self, swing_points: List[SwingPoint], candle_data: Dict[str, List[Dict]], symbol: str) -> List[StructureBreak]:
-        """Detect structure breaks with institutional validation"""
-        # Placeholder implementation
-        return []
-    
-    async def _apply_institutional_validation(self, structure_breaks: List[StructureBreak], candle_data: Dict[str, List[Dict]]) -> List[StructureBreak]:
-        """Apply institutional validation to structure breaks"""
-        # Placeholder implementation
-        return structure_breaks
-    
-    async def _calculate_structure_significance(self, structure_breaks: List[StructureBreak]) -> List[StructureBreak]:
-        """Calculate significance scores for structure breaks"""
-        # Placeholder implementation
-        return structure_breaks
-    
-    def _update_active_structures(self, symbol: str, new_breaks: List[StructureBreak]):
-        """Update active structures for a symbol"""
-        if symbol not in self.active_structures:
-            self.active_structures[symbol] = []
-        
-        # Add new breaks
-        self.active_structures[symbol].extend(new_breaks)
-        
-        # Remove expired structures
-        cutoff_time = datetime.now(timezone.utc) - timedelta(hours=self.structure_expiry_hours)
-        self.active_structures[symbol] = [
-            s for s in self.active_structures[symbol]
-            if s.break_time > cutoff_time
-        ]
-        
-        # Limit number of active structures
-        if len(self.active_structures[symbol]) > self.max_structures_per_symbol:
-            self.active_structures[symbol].sort(key=lambda x: x.structure_significance, reverse=True)
-            self.active_structures[symbol] = self.active_structures[symbol][:self.max_structures_per_symbol]
-    
-    def _generate_structure_analysis(self, symbol: str, swing_points: List[SwingPoint], 
-                                   structure_breaks: List[StructureBreak], 
-                                   candle_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
-        """Generate comprehensive structure analysis"""
-        
-        # Current trend analysis
-        current_trend = self._analyze_trend_direction(swing_points)
-        
-        # Market bias
-        market_bias = self._determine_market_bias(structure_breaks, swing_points)
-        
-        # Key levels
-        key_levels = self._identify_key_levels(swing_points)
-        
-        # Trend strength
-        trend_strength = self._calculate_trend_strength(swing_points, structure_breaks)
-        
-        # Institutional bias
-        institutional_bias = self._calculate_institutional_bias(structure_breaks)
-        
-        # Next targets
-        next_targets = self._calculate_next_targets(swing_points, current_trend)
-        
-        # Invalidation levels
-        invalidation_levels = self._calculate_invalidation_levels(swing_points, current_trend)
-        
-        return {
-            'symbol': symbol,
-            'timestamp': datetime.now(timezone.utc),
-            'current_trend': current_trend.value,
-            'market_bias': market_bias,
-            'trend_strength': trend_strength,
-            'institutional_bias': institutional_bias,
-            'swing_count': len(swing_points),
-            'confirmed_swings': len([s for s in swing_points if s.confirmed]),
-            'structure_breaks': len(structure_breaks),
-            'significant_breaks': len([b for b in structure_breaks if b.structure_significance >= 70]),
-            'key_levels': key_levels[:5],  # Top 5 key levels
-            'next_targets': next_targets[:3],  # Top 3 targets
-            'invalidation_levels': invalidation_levels,
-            'last_significant_break': structure_breaks[-1].to_dict() if structure_breaks else None,
-            'analysis': self._generate_narrative(current_trend, market_bias, structure_breaks, key_levels)
-        }
-    
-    def _generate_narrative(self, trend: TrendDirection, bias: str, 
-                          breaks: List[StructureBreak], levels: List[Dict]) -> str:
-        """Generate narrative analysis"""
-        
-        if not breaks:
-            return f"Market showing {trend.value} structure with no significant breaks detected. Limited institutional activity."
-        
-        recent_break = breaks[-1]
-        break_type = "bullish" if "bullish" in recent_break.type.value else "bearish"
-        
-        narrative = f"Market in {trend.value} structure with {bias} bias. "
-        narrative += f"Last significant {break_type} break at {recent_break.break_price:.2f} "
-        
-        if recent_break.institutional_ratio > 0.5:
-            narrative += "with strong institutional confirmation. "
-        elif recent_break.coinbase_leading:
-            narrative += "led by institutional exchange (Coinbase). "
-        
-        if levels:
-            narrative += f"Key level at {levels[0]['price']:.2f} ({levels[0]['type']}) "
-            narrative += f"tested {levels[0]['touches']} times. "
-        
-        return narrative
-    
-    def _analyze_trend_direction(self, swing_points: List[SwingPoint]) -> TrendDirection:
-        """Analyze current trend direction based on swing points"""
-        if len(swing_points) < 4:
-            return TrendDirection.UNKNOWN
-        
-        # Get recent swing points (last 8)
-        recent_swings = swing_points[-8:]
-        
-        # Separate highs and lows
-        recent_highs = [s for s in recent_swings if s.is_high and s.confirmed]
-        recent_lows = [s for s in recent_swings if not s.is_high and s.confirmed]
-        
-        if len(recent_highs) < 2 or len(recent_lows) < 2:
-            return TrendDirection.UNKNOWN
-        
-        # Sort by timestamp
-        recent_highs.sort(key=lambda x: x.timestamp)
-        recent_lows.sort(key=lambda x: x.timestamp)
-        
-        # Check for Higher Highs and Higher Lows (bullish trend)
-        hh_count = 0
-        for i in range(1, len(recent_highs)):
-            if recent_highs[i].price > recent_highs[i-1].price:
-                hh_count += 1
-        
-        hl_count = 0
-        for i in range(1, len(recent_lows)):
-            if recent_lows[i].price > recent_lows[i-1].price:
-                hl_count += 1
-        
-        # Check for Lower Lows and Lower Highs (bearish trend)
-        ll_count = 0
-        for i in range(1, len(recent_lows)):
-            if recent_lows[i].price < recent_lows[i-1].price:
-                ll_count += 1
-        
-        lh_count = 0
-        for i in range(1, len(recent_highs)):
-            if recent_highs[i].price < recent_highs[i-1].price:
-                lh_count += 1
-        
-        # Determine trend
-        bullish_signals = hh_count + hl_count
-        bearish_signals = ll_count + lh_count
-        
-        if bullish_signals > bearish_signals and bullish_signals >= 2:
-            return TrendDirection.BULLISH
-        elif bearish_signals > bullish_signals and bearish_signals >= 2:
-            return TrendDirection.BEARISH
-        else:
-            return TrendDirection.SIDEWAYS
-    
-    def _determine_market_bias(self, structure_breaks: List[StructureBreak], 
-                             swing_points: List[SwingPoint]) -> str:
-        """Determine overall market bias"""
-        
-        if not structure_breaks:
-            return "neutral"
-        
-        # Weight recent breaks more heavily
-        recent_breaks = structure_breaks[-5:]
-        
-        bullish_score = 0
-        bearish_score = 0
-        
-        for break_item in recent_breaks:
-            weight = break_item.structure_significance / 100.0
+            # Find current swings
+            current_high = swing_highs[-1] if swing_highs else None
+            current_low = swing_lows[-1] if swing_lows else None
             
-            if break_item.type in [StructureType.BOS_BULLISH, StructureType.CHOCH_BULLISH, StructureType.MSB_BULLISH]:
-                bullish_score += weight
-            else:
-                bearish_score += weight
-        
-        if bullish_score > bearish_score * 1.2:
-            return "bullish"
-        elif bearish_score > bullish_score * 1.2:
-            return "bearish"
-        else:
-            return "neutral"
-    
-    def _identify_key_levels(self, swing_points: List[SwingPoint]) -> List[Dict[str, Any]]:
-        """Identify key support/resistance levels"""
-        
-        key_levels = []
-        confirmed_swings = [s for s in swing_points if s.confirmed]
-        
-        # Group swings by price level (cluster analysis)
-        price_clusters = {}
-        tolerance_pct = 0.5  # 0.5% tolerance for clustering
-        
-        for swing in confirmed_swings:
-            clustered = False
-            for level, swings in price_clusters.items():
-                if abs(swing.price - level) / level * 100 <= tolerance_pct:
-                    swings.append(swing)
-                    clustered = True
+            # Get last breaks
+            last_bos = None
+            last_choch = None
+            for sb in reversed(structure_breaks):
+                if not last_bos and sb.type == StructureBreakType.BOS:
+                    last_bos = sb
+                if not last_choch and sb.type == StructureBreakType.CHOCH:
+                    last_choch = sb
+                if last_bos and last_choch:
                     break
             
-            if not clustered:
-                price_clusters[swing.price] = [swing]
-        
-        # Convert clusters to key levels
-        for level_price, swings in price_clusters.items():
-            if len(swings) >= 2:  # At least 2 touches to be significant
-                total_volume = sum(s.volume for s in swings)
-                institutional_volume = sum(s.institutional_volume for s in swings)
-                
-                key_levels.append({
-                    'price': level_price,
-                    'touches': len(swings),
-                    'total_volume': total_volume,
-                    'institutional_volume': institutional_volume,
-                    'institutional_ratio': institutional_volume / total_volume if total_volume > 0 else 0,
-                    'last_touch': max(s.timestamp for s in swings),
-                    'type': 'resistance' if any(s.is_high for s in swings) else 'support'
+            # Check for divergence
+            divergence = self._check_divergence(candles, trend, inst_bias)
+            
+            # Create structure
+            structure = MarketStructure(
+                symbol=symbol,
+                timestamp=datetime.now(timezone.utc),
+                trend=trend,
+                trend_strength=trend_strength,
+                swing_highs=swing_highs,
+                swing_lows=swing_lows,
+                current_swing_high=current_high,
+                current_swing_low=current_low,
+                structure_breaks=structure_breaks,
+                last_bos=last_bos,
+                last_choch=last_choch,
+                institutional_bias=inst_bias,
+                smart_money_trend=self._get_smart_money_trend(inst_bias, trend),
+                divergence_detected=divergence
+            )
+            
+            # Cache and save
+            self.market_structures[symbol] = structure
+            
+            if self.storage:
+                self.storage.save_smc_analysis({
+                    "type": "market_structure",
+                    "symbol": symbol,
+                    "timestamp": structure.timestamp,
+                    "data": structure.to_dict()
                 })
-        
-        # Sort by significance (touches * volume)
-        key_levels.sort(key=lambda x: x['touches'] * x['total_volume'], reverse=True)
-        
-        return key_levels[:10]  # Top 10 key levels
-    
-    def _calculate_trend_strength(self, swing_points: List[SwingPoint], 
-                                structure_breaks: List[StructureBreak]) -> float:
-        """Calculate trend strength (0-100)"""
-        
-        if not swing_points or not structure_breaks:
-            return 0.0
-        
-        # Recent swing consistency
-        recent_swings = swing_points[-6:]
-        trend_direction = self._analyze_trend_direction(swing_points)
-        
-        consistency_score = 0.0
-        if trend_direction == TrendDirection.BULLISH:
-            highs = [s for s in recent_swings if s.is_high]
-            lows = [s for s in recent_swings if not s.is_high]
             
-            if len(highs) >= 2 and len(lows) >= 2:
-                hh_count = sum(1 for i in range(1, len(highs)) if highs[i].price > highs[i-1].price)
-                hl_count = sum(1 for i in range(1, len(lows)) if lows[i].price > lows[i-1].price)
-                consistency_score = (hh_count + hl_count) / (len(highs) + len(lows) - 2) * 50
-        
-        elif trend_direction == TrendDirection.BEARISH:
-            highs = [s for s in recent_swings if s.is_high]
-            lows = [s for s in recent_swings if not s.is_high]
+            # Log summary
+            logger.info(f"[Structure] {symbol}: {trend.value} trend (strength={trend_strength:.1f}%), "
+                       f"{len(structure_breaks)} breaks, institutional_bias={inst_bias}")
             
-            if len(highs) >= 2 and len(lows) >= 2:
-                lh_count = sum(1 for i in range(1, len(highs)) if highs[i].price < highs[i-1].price)
-                ll_count = sum(1 for i in range(1, len(lows)) if lows[i].price < lows[i-1].price)
-                consistency_score = (lh_count + ll_count) / (len(highs) + len(lows) - 2) * 50
-        
-        # Institutional confirmation
-        recent_breaks = structure_breaks[-3:]
-        avg_institutional_ratio = statistics.mean([b.institutional_ratio for b in recent_breaks]) if recent_breaks else 0
-        institutional_score = avg_institutional_ratio * 50
-        
-        return min(consistency_score + institutional_score, 100.0)
-    
-    def _calculate_institutional_bias(self, structure_breaks: List[StructureBreak]) -> str:
-        """Calculate institutional bias based on recent structure breaks"""
-        
-        if not structure_breaks:
-            return "neutral"
-        
-        recent_breaks = structure_breaks[-3:]
-        
-        # Weight by institutional ratio and significance
-        bullish_weight = 0.0
-        bearish_weight = 0.0
-        
-        for break_item in recent_breaks:
-            weight = break_item.institutional_ratio * break_item.structure_significance / 100
+            return structure
             
-            if break_item.type in [StructureType.BOS_BULLISH, StructureType.CHOCH_BULLISH, StructureType.MSB_BULLISH]:
-                bullish_weight += weight
-            else:
-                bearish_weight += weight
-        
-        if bullish_weight > bearish_weight * 1.5:
-            return "bullish"
-        elif bearish_weight > bullish_weight * 1.5:
-            return "bearish"
-        else:
-            return "neutral"
+        except Exception as e:
+            logger.error(f"Error analyzing structure for {symbol}: {e}", exc_info=True)
+            return self._empty_structure(symbol)
     
-    def _calculate_next_targets(self, swing_points: List[SwingPoint], trend: TrendDirection) -> List[Dict[str, Any]]:
-        """Calculate next price targets based on structure"""
-        
-        targets = []
-        
-        if len(swing_points) < 4:
-            return targets
-        
-        recent_swings = swing_points[-4:]
-        
-        if trend == TrendDirection.BULLISH:
-            # Calculate bullish targets
-            highs = [s for s in recent_swings if s.is_high]
-            lows = [s for s in recent_swings if not s.is_high]
-            
-            if len(highs) >= 2 and len(lows) >= 2:
-                last_high = max(highs, key=lambda x: x.price)
-                last_low = max(lows, key=lambda x: x.timestamp)
-                
-                # Extension targets
-                swing_size = last_high.price - last_low.price
-                
-                targets.extend([
-                    {'price': last_high.price + swing_size * 0.618, 'type': 'fibonacci_61.8', 'probability': 70},
-                    {'price': last_high.price + swing_size * 1.0, 'type': 'measured_move', 'probability': 60},
-                    {'price': last_high.price + swing_size * 1.618, 'type': 'fibonacci_161.8', 'probability': 45}
-                ])
-        
-        elif trend == TrendDirection.BEARISH:
-            # Calculate bearish targets
-            highs = [s for s in recent_swings if s.is_high]
-            lows = [s for s in recent_swings if not s.is_high]
-            
-            if len(highs) >= 2 and len(lows) >= 2:
-                last_low = min(lows, key=lambda x: x.price)
-                last_high = max(highs, key=lambda x: x.timestamp)
-                
-                # Extension targets
-                swing_size = last_high.price - last_low.price
-                
-                targets.extend([
-                    {'price': last_low.price - swing_size * 0.618, 'type': 'fibonacci_61.8', 'probability': 70},
-                    {'price': last_low.price - swing_size * 1.0, 'type': 'measured_move', 'probability': 60},
-                    {'price': last_low.price - swing_size * 1.618, 'type': 'fibonacci_161.8', 'probability': 45}
-                ])
-        
-        return targets
+    def _empty_structure(self, symbol: str) -> MarketStructure:
+        """Return empty structure when no data available"""
+        return MarketStructure(
+            symbol=symbol,
+            timestamp=datetime.now(timezone.utc),
+            trend=TrendDirection.RANGING,
+            trend_strength=0.0,
+            swing_highs=[],
+            swing_lows=[],
+            current_swing_high=None,
+            current_swing_low=None,
+            structure_breaks=[],
+            last_bos=None,
+            last_choch=None,
+            institutional_bias="neutral",
+            smart_money_trend=TrendDirection.RANGING,
+            divergence_detected=False
+        )
     
-    def _calculate_invalidation_levels(self, swing_points: List[SwingPoint], trend: TrendDirection) -> List[Dict[str, Any]]:
-        """Calculate invalidation levels for current structure"""
-        
-        invalidation_levels = []
-        
-        if len(swing_points) < 2:
-            return invalidation_levels
-        
-        recent_swings = swing_points[-4:]
-        
-        if trend == TrendDirection.BULLISH:
-            # Last significant low is invalidation
-            lows = [s for s in recent_swings if not s.is_high]
-            if lows:
-                last_low = max(lows, key=lambda x: x.timestamp)
-                invalidation_levels.append({
-                    'price': last_low.price,
-                    'type': 'trend_invalidation',
-                    'description': 'Break below last higher low invalidates bullish structure'
-                })
-        
-        elif trend == TrendDirection.BEARISH:
-            # Last significant high is invalidation
-            highs = [s for s in recent_swings if s.is_high]
-            if highs:
-                last_high = max(highs, key=lambda x: x.timestamp)
-                invalidation_levels.append({
-                    'price': last_high.price,
-                    'type': 'trend_invalidation',
-                    'description': 'Break above last lower high invalidates bearish structure'
-                })
-        
-        return invalidation_levels
-    
-    def get_active_structure_breaks(self, symbol: str, min_significance: float = 60.0) -> List[StructureBreak]:
-        """Get active structure breaks for a symbol"""
-        if symbol not in self.active_structures:
+    async def _get_candles(self, symbol: str, timeframe: str) -> List[Dict[str, Any]]:
+        """Get candles from storage"""
+        if not self.storage:
             return []
         
-        return [
-            s for s in self.active_structures[symbol]
-            if s.structure_significance >= min_significance and not s.false_break
-        ]
+        # Get timeframe in minutes
+        tf_minutes = {
+            "1min": 1, "5min": 5, "15min": 15, "30min": 30,
+            "1h": 60, "4h": 240, "1d": 1440
+        }.get(timeframe, 15)
+        
+        # Get trades and build candles
+        all_candles = []
+        
+        for exchange in ["bybit", "binance", "coinbase", "kraken"]:
+            trades = self.storage.get_recent_trades(
+                symbol, exchange,
+                minutes=tf_minutes * self.lookback_periods
+            )
+            
+            if trades:
+                candles = self._trades_to_candles(trades, tf_minutes)
+                for candle in candles:
+                    candle['exchange'] = exchange
+                    candle['is_institutional'] = exchange in ['coinbase', 'kraken']
+                all_candles.extend(candles)
+        
+        # Sort and merge
+        all_candles.sort(key=lambda x: x['timestamp'])
+        return self._merge_candles(all_candles, tf_minutes)
     
-    def get_structure_summary(self, symbol: str) -> Dict[str, Any]:
-        """Get structure summary for a symbol"""
-        active_breaks = self.get_active_structure_breaks(symbol)
-        swing_points = self.swing_cache.get(symbol, [])
+    def _trades_to_candles(self, trades: List[Dict], tf_minutes: int) -> List[Dict]:
+        """Convert trades to candles"""
+        if not trades:
+            return []
         
-        if not active_breaks and not swing_points:
-            return {
-                'symbol': symbol,
-                'status': 'insufficient_data',
-                'message': 'No structure data available'
-            }
+        candles = {}
         
-        current_trend = self._analyze_trend_direction(swing_points)
-        market_bias = self._determine_market_bias(active_breaks, swing_points)
+        for trade in trades:
+            trade_time = trade['timestamp']
+            if isinstance(trade_time, str):
+                trade_time = datetime.fromisoformat(trade_time.replace('Z', '+00:00'))
+            
+            # Round to candle period
+            period = trade_time.replace(
+                minute=(trade_time.minute // tf_minutes) * tf_minutes,
+                second=0, microsecond=0
+            )
+            
+            if period not in candles:
+                candles[period] = {
+                    'timestamp': period,
+                    'open': float(trade['price']),
+                    'high': float(trade['price']),
+                    'low': float(trade['price']),
+                    'close': float(trade['price']),
+                    'volume': 0.0,
+                    'buy_volume': 0.0,
+                    'trades': 0
+                }
+            
+            candle = candles[period]
+            price = float(trade['price'])
+            volume = float(trade['quantity'])
+            
+            candle['high'] = max(candle['high'], price)
+            candle['low'] = min(candle['low'], price)
+            candle['close'] = price
+            candle['volume'] += volume
+            candle['trades'] += 1
+            
+            if trade.get('side', '').lower() == 'buy':
+                candle['buy_volume'] += volume
         
-        return {
-            'symbol': symbol,
-            'current_trend': current_trend.value,
-            'market_bias': market_bias,
-            'active_breaks_count': len(active_breaks),
-            'trend_strength': self._calculate_trend_strength(swing_points, active_breaks),
-            'institutional_bias': self._calculate_institutional_bias(active_breaks),
-            'last_significant_break': active_breaks[-1].to_dict() if active_breaks else None,
-            'key_levels_count': len(self._identify_key_levels(swing_points)),
-            'analysis_timestamp': datetime.now(timezone.utc)
-        }
+        return sorted(candles.values(), key=lambda x: x['timestamp'])
+    
+    def _merge_candles(self, candles: List[Dict], tf_minutes: int) -> List[Dict]:
+        """Merge candles from multiple exchanges"""
+        merged = {}
+        
+        for candle in candles:
+            period = candle['timestamp']
+            
+            if period not in merged:
+                merged[period] = {
+                    'timestamp': period,
+                    'open': candle['open'],
+                    'high': candle['high'],
+                    'low': candle['low'],
+                    'close': candle['close'],
+                    'volume': 0.0,
+                    'buy_volume': 0.0,
+                    'institutional_volume': 0.0,
+                    'retail_volume': 0.0,
+                    'trades': 0,
+                    'exchanges': []
+                }
+            
+            m = merged[period]
+            m['high'] = max(m['high'], candle['high'])
+            m['low'] = min(m['low'], candle['low'])
+            m['close'] = candle['close']  # Use latest
+            m['volume'] += candle['volume']
+            m['buy_volume'] += candle.get('buy_volume', 0)
+            m['trades'] += candle['trades']
+            
+            if candle['exchange'] not in m['exchanges']:
+                m['exchanges'].append(candle['exchange'])
+            
+            if candle.get('is_institutional'):
+                m['institutional_volume'] += candle['volume']
+            else:
+                m['retail_volume'] += candle['volume']
+        
+        return sorted(merged.values(), key=lambda x: x['timestamp'])
+    
+    def _detect_swings(self, candles: List[Dict]) -> Tuple[List[SwingPoint], List[SwingPoint]]:
+        """Detect swing highs and lows"""
+        swing_highs = []
+        swing_lows = []
+        
+        if len(candles) < self.swing_strength * 2 + 1:
+            return swing_highs, swing_lows
+        
+        for i in range(self.swing_strength, len(candles) - self.swing_strength):
+            current = candles[i]
+            
+            # Check for swing high
+            is_swing_high = True
+            for j in range(1, self.swing_strength + 1):
+                if candles[i-j]['high'] >= current['high'] or candles[i+j]['high'] >= current['high']:
+                    is_swing_high = False
+                    break
+            
+            if is_swing_high:
+                # Check minimum swing size
+                avg_price = np.mean([c['close'] for c in candles[max(0, i-10):i]])
+                swing_size_pct = abs(current['high'] - avg_price) / avg_price * 100
+                
+                if swing_size_pct >= self.min_swing_size:
+                    swing_highs.append(SwingPoint(
+                        type=SwingType.HIGH,
+                        price=current['high'],
+                        timestamp=current['timestamp'],
+                        strength=self.swing_strength,
+                        volume=current['volume'],
+                        institutional_ratio=current['institutional_volume'] / current['volume'] if current['volume'] > 0 else 0
+                    ))
+            
+            # Check for swing low
+            is_swing_low = True
+            for j in range(1, self.swing_strength + 1):
+                if candles[i-j]['low'] <= current['low'] or candles[i+j]['low'] <= current['low']:
+                    is_swing_low = False
+                    break
+            
+            if is_swing_low:
+                # Check minimum swing size
+                avg_price = np.mean([c['close'] for c in candles[max(0, i-10):i]])
+                swing_size_pct = abs(current['low'] - avg_price) / avg_price * 100
+                
+                if swing_size_pct >= self.min_swing_size:
+                    swing_lows.append(SwingPoint(
+                        type=SwingType.LOW,
+                        price=current['low'],
+                        timestamp=current['timestamp'],
+                        strength=self.swing_strength,
+                        volume=current['volume'],
+                        institutional_ratio=current['institutional_volume'] / current['volume'] if current['volume'] > 0 else 0
+                    ))
+        
+        return swing_highs, swing_lows
+    
+    def _detect_structure_breaks(self, candles: List[Dict], 
+                                swing_highs: List[SwingPoint],
+                                swing_lows: List[SwingPoint],
+                                symbol: str) -> List[StructureBreak]:
+        """Detect BOS and CHoCH"""
+        breaks = []
+        
+        # Combine and sort swings
+        all_swings = swing_highs + swing_lows
+        all_swings.sort(key=lambda x: x.timestamp)
+        
+        if len(all_swings) < 3:
+            return breaks
+        
+        # Track current trend
+        current_trend = TrendDirection.RANGING
+        
+        for i in range(2, len(all_swings)):
+            prev_prev = all_swings[i-2]
+            prev = all_swings[i-1]
+            current = all_swings[i]
+            
+            # Find candle where break occurred
+            break_candle = None
+            for candle in candles:
+                if prev.timestamp < candle['timestamp'] <= current.timestamp:
+                    # Check if price broke structure
+                    if current.type == SwingType.HIGH and prev.type == SwingType.HIGH:
+                        if candle['high'] > prev.price:
+                            break_candle = candle
+                            break
+                    elif current.type == SwingType.LOW and prev.type == SwingType.LOW:
+                        if candle['low'] < prev.price:
+                            break_candle = candle
+                            break
+            
+            if not break_candle:
+                continue
+            
+            # Determine break type
+            break_type = None
+            new_trend = current_trend
+            
+            # Bullish structure
+            if current.type == SwingType.HIGH and current.price > prev.price:
+                if prev_prev.type == SwingType.LOW and prev.type == SwingType.HIGH:
+                    if current_trend == TrendDirection.BULLISH:
+                        break_type = StructureBreakType.BOS  # Continuation
+                    else:
+                        break_type = StructureBreakType.CHOCH  # Change
+                        new_trend = TrendDirection.BULLISH
+            
+            # Bearish structure
+            elif current.type == SwingType.LOW and current.price < prev.price:
+                if prev_prev.type == SwingType.HIGH and prev.type == SwingType.LOW:
+                    if current_trend == TrendDirection.BEARISH:
+                        break_type = StructureBreakType.BOS  # Continuation
+                    else:
+                        break_type = StructureBreakType.CHOCH  # Change
+                        new_trend = TrendDirection.BEARISH
+            
+            if break_type:
+                # Calculate strength
+                vol_ratio = break_candle['volume'] / np.mean([c['volume'] for c in candles[-20:]])
+                inst_ratio = break_candle['institutional_volume'] / break_candle['volume'] if break_candle['volume'] > 0 else 0
+                
+                strength_score = min(100, (
+                    vol_ratio * 20 +  # Volume importance
+                    inst_ratio * 50 +  # Institutional importance
+                    len(break_candle['exchanges']) * 10  # Multi-exchange confirmation
+                ))
+                
+                breaks.append(StructureBreak(
+                    id=f"SB_{symbol}_{break_candle['timestamp'].isoformat()}",
+                    type=break_type,
+                    direction=new_trend,
+                    break_price=break_candle['close'],
+                    break_time=break_candle['timestamp'],
+                    previous_swing=prev,
+                    confirmation_volume=break_candle['volume'],
+                    institutional_confirmation=inst_ratio > 0.3,
+                    exchanges_confirmed=break_candle['exchanges'],
+                    strength_score=strength_score
+                ))
+                
+                current_trend = new_trend
+        
+        return breaks
+    
+    def _determine_trend(self, swing_highs: List[SwingPoint],
+                        swing_lows: List[SwingPoint],
+                        breaks: List[StructureBreak]) -> Tuple[TrendDirection, float]:
+        """Determine current trend and strength"""
+        if not breaks:
+            return TrendDirection.RANGING, 0.0
+        
+        # Get recent breaks
+        recent_breaks = breaks[-5:]
+        
+        # Count break types
+        bullish_breaks = sum(1 for b in recent_breaks if b.direction == TrendDirection.BULLISH)
+        bearish_breaks = sum(1 for b in recent_breaks if b.direction == TrendDirection.BEARISH)
+        
+        # Average strength
+        avg_strength = np.mean([b.strength_score for b in recent_breaks])
+        
+        if bullish_breaks > bearish_breaks:
+            return TrendDirection.BULLISH, avg_strength
+        elif bearish_breaks > bullish_breaks:
+            return TrendDirection.BEARISH, avg_strength
+        else:
+            return TrendDirection.RANGING, avg_strength * 0.5
+    
+    def _analyze_institutional_bias(self, candles: List[Dict],
+                                   breaks: List[StructureBreak]) -> str:
+        """Analyze institutional bias"""
+        if not candles or not breaks:
+            return "neutral"
+        
+        # Recent institutional volume ratio
+        recent_candles = candles[-20:]
+        total_inst = sum(c['institutional_volume'] for c in recent_candles)
+        total_retail = sum(c['retail_volume'] for c in recent_candles)
+        
+        if total_inst + total_retail == 0:
+            return "neutral"
+        
+        inst_ratio = total_inst / (total_inst + total_retail)
+        
+        # Recent break confirmation
+        recent_breaks = breaks[-3:]
+        inst_confirmed = sum(1 for b in recent_breaks if b.institutional_confirmation)
+        
+        # Determine bias
+        if inst_ratio > 0.4 and inst_confirmed >= 2:
+            # Check direction of institutional breaks
+            inst_bullish = sum(1 for b in recent_breaks 
+                             if b.institutional_confirmation and b.direction == TrendDirection.BULLISH)
+            inst_bearish = sum(1 for b in recent_breaks
+                             if b.institutional_confirmation and b.direction == TrendDirection.BEARISH)
+            
+            if inst_bullish > inst_bearish:
+                return "bullish"
+            elif inst_bearish > inst_bullish:
+                return "bearish"
+        
+        return "neutral"
+    
+    def _check_divergence(self, candles: List[Dict], trend: TrendDirection,
+                         inst_bias: str) -> bool:
+        """Check for divergence between price and institutional activity"""
+        # Simple divergence check
+        if trend == TrendDirection.BULLISH and inst_bias == "bearish":
+            return True
+        elif trend == TrendDirection.BEARISH and inst_bias == "bullish":
+            return True
+        
+        return False
+    
+    def _get_smart_money_trend(self, inst_bias: str, price_trend: TrendDirection) -> TrendDirection:
+        """Determine smart money trend"""
+        if inst_bias == "bullish":
+            return TrendDirection.BULLISH
+        elif inst_bias == "bearish":
+            return TrendDirection.BEARISH
+        else:
+            return price_trend
+    
+    def validate_structure_break(self, sb: StructureBreak, current_price: float) -> bool:
+        """Validate if structure break is still valid"""
+        # Check if price has invalidated the break
+        if sb.direction == TrendDirection.BULLISH:
+            # Bullish break invalid if price goes below break level
+            return current_price > sb.break_price * 0.99  # 1% tolerance
+        else:
+            # Bearish break invalid if price goes above break level
+            return current_price < sb.break_price * 1.01  # 1% tolerance
+    
+    def get_key_levels(self, symbol: str) -> List[Dict[str, Any]]:
+        """Get key structure levels"""
+        structure = self.market_structures.get(symbol)
+        if not structure:
+            return []
+        
+        levels = []
+        
+        # Add swing highs as resistance
+        for sh in structure.swing_highs[-5:]:
+            levels.append({
+                'price': sh.price,
+                'type': 'resistance',
+                'strength': sh.institutional_ratio * 100,
+                'timestamp': sh.timestamp
+            })
+        
+        # Add swing lows as support
+        for sl in structure.swing_lows[-5:]:
+            levels.append({
+                'price': sl.price,
+                'type': 'support',
+                'strength': sl.institutional_ratio * 100,
+                'timestamp': sl.timestamp
+            })
+        
+        # Sort by price
+        levels.sort(key=lambda x: x['price'])
+        
+        return levels

@@ -20,6 +20,7 @@ class StorageManager:
         self.trades = self.db.trades
         self.volume_profiles = self.db.volume_profiles
         self.order_flows = self.db.order_flows
+        self.smc_analyses = self.db.smc_analyses
         
         # Create indexes
         self._create_indexes()
@@ -38,6 +39,10 @@ class StorageManager:
         
         self.order_flows.create_index([("symbol", 1), ("exchange", 1), ("timestamp", -1)])
         self.order_flows.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
+        
+        # SMC indexes
+        self.smc_analyses.create_index([("symbol", 1), ("timestamp", -1)])
+        self.smc_analyses.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
     
     def save_trades(self, trades: List[Trade]) -> int:
         """Save batch of trades"""
@@ -100,7 +105,8 @@ class StorageManager:
             "trades_count": self.trades.count_documents({}),
             "volume_profiles_count": self.volume_profiles.count_documents({}),
             "order_flows_count": self.order_flows.count_documents({}),
-            "db_stats": self.db.command("dbStats")
+            "db_stats": self.db.command("dbStats"),
+            "smc_analyses_count": self.smc_analyses.count_documents({})
         }
     
     def cleanup_old_data(self):
@@ -120,6 +126,30 @@ class StorageManager:
                        f"{of_result.deleted_count} order flows")
         except Exception as e:
             logger.error(f"Error in cleanup: {e}")
+    
+    def save_smc_analysis(self, analysis: Dict[str, Any]):
+        """Save SMC analysis"""
+        try:
+            self.smc_analyses.insert_one(analysis)
+            logger.debug(f"Saved SMC analysis for {analysis.get('symbol')}")
+        except Exception as e:
+            logger.error(f"Error saving SMC analysis: {e}")
+    
+    def get_latest_smc_analysis(self, symbol: str) -> Optional[Dict[str, Any]]:
+        """Get latest SMC analysis for a symbol"""
+        return self.smc_analyses.find_one(
+            {"symbol": symbol},
+            sort=[("timestamp", -1)]
+        )
+    
+    def get_smc_analyses(self, symbol: str, hours: int = 24) -> List[Dict[str, Any]]:
+        """Get recent SMC analyses"""
+        since = datetime.now(timezone.utc) - timedelta(hours=hours)
+        cursor = self.smc_analyses.find({
+            "symbol": symbol,
+            "timestamp": {"$gte": since}
+        }).sort("timestamp", -1)
+        return list(cursor)
     
     def close(self):
         """Close connection"""
