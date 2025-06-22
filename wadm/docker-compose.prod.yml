@@ -1,0 +1,203 @@
+# WADM Docker Compose - Production Configuration
+# Production deployment: docker-compose -f docker-compose.prod.yml up -d
+
+version: '3.8'
+
+services:
+  # MongoDB 7 - Production Database
+  mongodb:
+    image: mongo:7
+    container_name: wadm-mongodb-prod
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-wadm_prod}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: wadm_production
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+      - mongodb_backups:/backups
+      - ./scripts/mongo-init-prod.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+
+  # Redis 7 - Production Cache
+  redis:
+    image: redis:7-alpine
+    container_name: wadm-redis-prod
+    restart: always
+    volumes:
+      - redis_data:/data
+      - ./scripts/redis-prod.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+
+  # WADM Application - Production API
+  wadm-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: wadm-api-prod
+    restart: always
+    environment:
+      # Database Configuration
+      MONGODB_URL: mongodb://${MONGO_USERNAME:-wadm_prod}:${MONGO_PASSWORD}@mongodb:27017/wadm_production
+      REDIS_URL: redis://redis:6379/0
+      
+      # API Configuration
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      API_DEBUG: "false"
+      API_RELOAD: "false"
+      
+      # Application Configuration
+      LOG_LEVEL: WARNING
+      ENVIRONMENT: production
+      
+      # Exchange Configuration
+      BYBIT_WS_URL: wss://stream.bybit.com/v5/public/spot
+      BINANCE_WS_URL: wss://stream.binance.com:9443/ws
+      COINBASE_WS_URL: wss://ws-feed.exchange.coinbase.com
+      KRAKEN_WS_URL: wss://ws.kraken.com
+      
+      # Security
+      API_MASTER_KEY: ${API_MASTER_KEY}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-"https://wadm.yourdomain.com"}
+      
+      # Performance
+      WORKERS: 4
+      MAX_CONNECTIONS: 1000
+    volumes:
+      - wadm_logs:/app/logs:rw
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/system/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '2.0'
+        reservations:
+          memory: 512M
+          cpus: '1.0'
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+
+  # Nginx - Production Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: wadm-nginx-prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx-prod.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/wadm-prod.conf:/etc/nginx/conf.d/wadm.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    depends_on:
+      wadm-api:
+        condition: service_healthy
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.5'
+        reservations:
+          memory: 128M
+          cpus: '0.25'
+
+  # Log Aggregation (Optional)
+  logrotate:
+    image: alpine:latest
+    container_name: wadm-logrotate
+    restart: always
+    volumes:
+      - wadm_logs:/logs
+      - nginx_logs:/nginx_logs
+      - ./scripts/logrotate.sh:/usr/local/bin/logrotate.sh:ro
+    command: sh -c "while true; do sleep 86400; /usr/local/bin/logrotate.sh; done"
+    networks:
+      - wadm-network
+    profiles:
+      - logging
+
+# Networks
+networks:
+  wadm-network:
+    driver: bridge
+    name: wadm-network-prod
+
+# Persistent Volumes
+volumes:
+  mongodb_data:
+    name: wadm_mongodb_data_prod
+  mongodb_config:
+    name: wadm_mongodb_config_prod
+  mongodb_backups:
+    name: wadm_mongodb_backups_prod
+  redis_data:
+    name: wadm_redis_data_prod
+  wadm_logs:
+    name: wadm_logs_prod
+  nginx_logs:
+    name: wadm_nginx_logs_prod
+
+# Metadata
+x-production-info:
+  description: "WADM Production Environment"
+  version: "0.1.0"
+  security: "Enhanced security, resource limits, proper logging"
+  monitoring: "Health checks, log rotation, backup volumes"
+  scaling: "Ready for horizontal scaling with load balancer"

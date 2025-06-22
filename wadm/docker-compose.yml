@@ -1,0 +1,149 @@
+# WADM Docker Compose - Development Configuration
+# Quick setup: docker-compose up -d
+# Logs: docker-compose logs -f wadm-api
+
+version: '3.8'
+
+services:
+  # MongoDB 7 - Primary Database
+  mongodb:
+    image: mongo:7
+    container_name: wadm-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: wadm
+      MONGO_INITDB_ROOT_PASSWORD: wadm_secure_pass_2025
+      MONGO_INITDB_DATABASE: wadm
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Redis 7 - Caching and Session Storage
+  redis:
+    image: redis:7-alpine
+    container_name: wadm-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./scripts/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # WADM Application - Main API Server
+  wadm-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wadm-api
+    restart: unless-stopped
+    environment:
+      # Database Configuration
+      MONGODB_URL: mongodb://wadm:wadm_secure_pass_2025@mongodb:27017/wadm
+      REDIS_URL: redis://redis:6379/0
+      
+      # API Configuration
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      API_DEBUG: "true"
+      API_RELOAD: "true"
+      
+      # Application Configuration
+      LOG_LEVEL: INFO
+      ENVIRONMENT: development
+      
+      # Exchange Configuration
+      BYBIT_WS_URL: wss://stream.bybit.com/v5/public/spot
+      BINANCE_WS_URL: wss://stream.binance.com:9443/ws
+      COINBASE_WS_URL: wss://ws-feed.exchange.coinbase.com
+      KRAKEN_WS_URL: wss://ws.kraken.com
+      
+      # Security
+      API_MASTER_KEY: wadm_dev_master_key_2025
+      ALLOWED_ORIGINS: "http://localhost:3000,http://localhost:8080"
+    ports:
+      - "8000:8000"
+      - "5678:5678"  # Debug port
+    volumes:
+      # Development: mount source code for hot reload
+      - .:/app
+      - wadm_logs:/app/logs
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - wadm-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/system/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Nginx - Reverse Proxy (Optional for development)
+  nginx:
+    image: nginx:alpine
+    container_name: wadm-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/wadm.conf:/etc/nginx/conf.d/wadm.conf:ro
+      - nginx_logs:/var/log/nginx
+    depends_on:
+      - wadm-api
+    networks:
+      - wadm-network
+    profiles:
+      - production  # Only start with --profile production
+
+# Networks
+networks:
+  wadm-network:
+    driver: bridge
+    name: wadm-network
+
+# Persistent Volumes
+volumes:
+  mongodb_data:
+    name: wadm_mongodb_data
+  mongodb_config:
+    name: wadm_mongodb_config
+  redis_data:
+    name: wadm_redis_data
+  wadm_logs:
+    name: wadm_logs
+  nginx_logs:
+    name: wadm_nginx_logs
+
+# Metadata
+x-environment-info:
+  description: "WADM Development Environment"
+  version: "0.1.0"
+  services: "MongoDB 7, Redis 7, WADM API, Nginx (optional)"
+  quick_start: "docker-compose up -d"
+  api_url: "http://localhost:8000"
+  docs_url: "http://localhost:8000/api/docs"
