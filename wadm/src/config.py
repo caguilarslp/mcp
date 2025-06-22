@@ -20,21 +20,8 @@ ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 # Database
-# Try authenticated connection first, fallback to unauthenticated
-MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017/wadm")
-
-# Try to detect if MongoDB needs auth
-try:
-    from pymongo import MongoClient
-    # Quick test with short timeout
-    test_client = MongoClient("mongodb://localhost:27017/", serverSelectionTimeoutMS=1000)
-    test_client.server_info()
-    test_client.close()
-    # If successful without auth, use simple connection
-    MONGODB_URL = "mongodb://localhost:27017/wadm"
-except:
-    # Keep the authenticated URL from environment
-    pass
+# Simple MongoDB connection for development (no auth)
+MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://mongodb:27017/wadm")
 
 # Symbols to collect - Updated 2025-06-21
 # All exchanges track the same 19 symbols
@@ -116,6 +103,9 @@ class Config:
     # Database
     MONGODB_URL = MONGODB_URL
     MONGO_DB = "wadm"
+    
+    # Symbols - Create dict format from base symbols
+    SYMBOLS = {symbol: symbol for symbol in BASE_SYMBOLS}
     
     # Symbols
     BASE_SYMBOLS = BASE_SYMBOLS

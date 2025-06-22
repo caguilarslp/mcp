@@ -29,17 +29,38 @@ class CacheManager:
         # Try to import and connect to Redis
         try:
             import redis
-            self.redis_client = redis.Redis(
-                host='localhost',
-                port=6379,
-                decode_responses=True,
-                socket_connect_timeout=2,
-                socket_timeout=2
-            )
+            import os
+            
+            # Get Redis URL from environment (Docker or local)
+            redis_url = os.getenv('REDIS_URL', 'redis://redis:6379/0')
+            
+            # Parse Redis URL for connection
+            if redis_url.startswith('redis://'):
+                # Use from_url for full URL parsing
+                self.redis_client = redis.from_url(
+                    redis_url,
+                    decode_responses=True,
+                    socket_connect_timeout=3,
+                    socket_timeout=3,
+                    retry_on_timeout=True
+                )
+            else:
+                # Fallback to host:port parsing
+                host = os.getenv('REDIS_HOST', 'redis')
+                port = int(os.getenv('REDIS_PORT', '6379'))
+                
+                self.redis_client = redis.Redis(
+                    host=host,
+                    port=port,
+                    decode_responses=True,
+                    socket_connect_timeout=3,
+                    socket_timeout=3
+                )
+            
             # Test connection
             self.redis_client.ping()
             self.redis_available = True
-            logger.info("Redis cache available")
+            logger.info(f"Redis cache available at {redis_url}")
         except Exception as e:
             logger.info(f"Redis not available, using in-memory cache: {e}")
             self.redis_client = None
@@ -158,6 +179,14 @@ class CacheManager:
         """Cache orderbook data"""
         key = self._generate_key("orderbook", symbol=symbol, exchange=exchange, **kwargs)
         return await self.set(key, data, ttl)
+    
+    async def get_cached_response(self, cache_key: str) -> Optional[Any]:
+        """Get cached response by key"""
+        return await self.get(cache_key)
+    
+    async def cache_response(self, cache_key: str, data: Any, ttl: int = 300) -> bool:
+        """Cache response data"""
+        return await self.set(cache_key, data, ttl)
     
     def get_stats(self) -> dict:
         """Get cache statistics"""

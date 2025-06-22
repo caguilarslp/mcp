@@ -38,7 +38,18 @@ def main():
     logger.info(f"Environment: {os.getenv('ENVIRONMENT', 'development')}")
     
     # Run server
-    if workers > 1 and not reload:
+    if reload:
+        # Development mode with reload
+        uvicorn.run(
+            "src.api:create_app",
+            factory=True,
+            host=host,
+            port=port,
+            log_level=log_level.lower(),
+            access_log=True,
+            reload=True
+        )
+    elif workers > 1:
         # Production mode with multiple workers
         uvicorn.run(
             "src.api:create_app",
@@ -50,14 +61,13 @@ def main():
             access_log=True
         )
     else:
-        # Development mode or single worker
+        # Single worker mode (Docker development)
         uvicorn.run(
             app,
             host=host,
             port=port,
             log_level=log_level.lower(),
-            access_log=True,
-            reload=reload
+            access_log=True
         )
 
 if __name__ == "__main__":

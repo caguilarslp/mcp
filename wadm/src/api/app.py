@@ -13,7 +13,7 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from src.api.routers import auth, market_data, indicators, smc, system
+from src.api.routers import auth, market_data, system, indicators
 from src.api.middleware import RateLimitMiddleware, LoggingMiddleware
 from src.api.config import APIConfig
 from src.storage.mongo_manager import MongoManager
@@ -121,8 +121,7 @@ def create_app() -> FastAPI:
     # Include routers
     app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
     app.include_router(market_data.router, prefix="/api/v1/market", tags=["Market Data"])
-    app.include_router(indicators.router, prefix="/api/v1/indicators", tags=["Indicators"])
-    app.include_router(smc.router, prefix="/api/v1/smc", tags=["Smart Money Concepts"])
+    app.include_router(indicators.router, tags=["Indicators"])
     app.include_router(system.router, prefix="/api/v1/system", tags=["System"])
     
     # Root endpoint
@@ -143,7 +142,6 @@ def create_app() -> FastAPI:
                 "auth": "/api/v1/auth",
                 "market": "/api/v1/market",
                 "indicators": "/api/v1/indicators",
-                "smc": "/api/v1/smc",
                 "system": "/api/v1/system"
             }
         }

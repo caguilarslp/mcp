@@ -1,25 +1,14 @@
-# WADM Docker Compose - Development Configuration
-# Quick setup: docker-compose up -d
-# Logs: docker-compose logs -f wadm-api
-
-version: '3.8'
-
 services:
-  # MongoDB 7 - Primary Database
+  # MongoDB 7 - Primary Database (No Auth for Development)
   mongodb:
     image: mongo:7
     container_name: wadm-mongodb
     restart: unless-stopped
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: wadm
-      MONGO_INITDB_ROOT_PASSWORD: wadm_secure_pass_2025
-      MONGO_INITDB_DATABASE: wadm
     ports:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
-      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - wadm-network
     healthcheck:
@@ -57,8 +46,8 @@ services:
     container_name: wadm-api
     restart: unless-stopped
     environment:
-      # Database Configuration
-      MONGODB_URL: mongodb://wadm:wadm_secure_pass_2025@mongodb:27017/wadm
+      # Database Configuration (No Auth for Development)
+      MONGODB_URL: mongodb://mongodb:27017/wadm
       REDIS_URL: redis://redis:6379/0
       
       # API Configuration

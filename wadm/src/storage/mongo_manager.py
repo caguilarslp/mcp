@@ -30,6 +30,19 @@ class MongoManager:
         
         try:
             if MONGODB_AVAILABLE:
+                # Try simple connection first
+                from pymongo import MongoClient
+                import os
+                
+                # Use simple MongoDB URL for development
+                mongo_url = os.getenv("MONGODB_URL", "mongodb://mongodb:27017/wadm")
+                
+                # Quick connection test
+                test_client = MongoClient(mongo_url, serverSelectionTimeoutMS=5000)
+                test_client.server_info()
+                test_client.close()
+                
+                # If test passed, create storage
                 self.storage = StorageManager()
                 self.client = self.storage.client
                 self.db = self.storage.db
@@ -140,6 +153,116 @@ class MongoManager:
                 "smc_analyses_count": 0,
                 "db_stats": {"storageSize": 0}
             }
+    
+    async def get_latest_volume_profile(self, symbol: str, exchange: Optional[str] = None) -> Optional[Any]:
+        """Get latest volume profile for symbol"""
+        if not self.connected:
+            return None
+        
+        query = {"symbol": symbol}
+        if exchange:
+            query["exchange"] = exchange
+        
+        result = self.volume_profiles.find_one(query, sort=[("timestamp", -1)])
+        if result:
+            # Convert to object with attributes for API compatibility
+            class VolumeProfile:
+                def __init__(self, data):
+                    self.timestamp = data.get('timestamp')
+                    self.poc = data.get('poc')
+                    self.vah = data.get('vah')
+                    self.val = data.get('val')
+                    self.total_volume = data.get('total_volume')
+                    self.volume_nodes = data.get('volume_nodes', [])
+            
+            return VolumeProfile(result)
+        return None
+    
+    async def get_latest_order_flow(self, symbol: str, exchange: Optional[str] = None) -> Optional[Any]:
+        """Get latest order flow for symbol"""
+        if not self.connected:
+            return None
+        
+        query = {"symbol": symbol}
+        if exchange:
+            query["exchange"] = exchange
+        
+        result = self.order_flows.find_one(query, sort=[("timestamp", -1)])
+        if result:
+            # Convert to object with attributes for API compatibility
+            class OrderFlow:
+                def __init__(self, data):
+                    self.timestamp = data.get('timestamp')
+                    self.delta = data.get('delta')
+                    self.cumulative_delta = data.get('cumulative_delta')
+                    self.buy_volume = data.get('buy_volume')
+                    self.sell_volume = data.get('sell_volume')
+                    self.absorption_events = data.get('absorption_events')
+                    self.momentum_score = data.get('momentum_score', 0.0)
+            
+            return OrderFlow(result)
+        return None
+    
+    async def get_volume_profiles(self, symbol: str, start_time: datetime, end_time: datetime, limit: int = 100) -> List[Any]:
+        """Get volume profiles in time range"""
+        if not self.connected:
+            return []
+        
+        query = {
+            "symbol": symbol,
+            "timestamp": {
+                "$gte": start_time,
+                "$lte": end_time
+            }
+        }
+        
+        cursor = self.volume_profiles.find(query).sort("timestamp", -1).limit(limit)
+        results = []
+        
+        for doc in cursor:
+            class VolumeProfile:
+                def __init__(self, data):
+                    self.timestamp = data.get('timestamp')
+                    self.poc = data.get('poc')
+                    self.vah = data.get('vah')
+                    self.val = data.get('val')
+                    self.total_volume = data.get('total_volume')
+                    self.volume_nodes = data.get('volume_nodes', [])
+            
+            results.append(VolumeProfile(doc))
+        
+        return results
+    
+    async def get_order_flows(self, symbol: str, start_time: datetime, end_time: datetime, limit: int = 100) -> List[Any]:
+        """Get order flows in time range"""
+        if not self.connected:
+            return []
+        
+        query = {
+            "symbol": symbol,
+            "timestamp": {
+                "$gte": start_time,
+                "$lte": end_time
+            }
+        }
+        
+        cursor = self.order_flows.find(query).sort("timestamp", -1).limit(limit)
+        results = []
+        
+        for doc in cursor:
+            class OrderFlow:
+                def __init__(self, data):
+                    self.timestamp = data.get('timestamp')
+                    self.delta = data.get('delta')
+                    self.cumulative_delta = data.get('cumulative_delta')
+                    self.buy_volume = data.get('buy_volume')
+                    self.sell_volume = data.get('sell_volume')
+                    self.absorption_events = data.get('absorption_events')
+                    self.momentum_score = data.get('momentum_score', 0.0)
+            
+            results.append(OrderFlow(doc))
+        
+        return results
     
     def close(self):
         """Close connection"""

@@ -28,21 +28,32 @@ class StorageManager:
         logger.info("Storage manager initialized")
     
     def _create_indexes(self):
-        """Create necessary indexes"""
-        # Trades indexes
-        self.trades.create_index([("symbol", 1), ("exchange", 1), ("timestamp", -1)])
-        self.trades.create_index([("timestamp", 1)], expireAfterSeconds=TRADES_RETENTION)
-        
-        # Indicators indexes
-        self.volume_profiles.create_index([("symbol", 1), ("exchange", 1), ("timestamp", -1)])
-        self.volume_profiles.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
-        
-        self.order_flows.create_index([("symbol", 1), ("exchange", 1), ("timestamp", -1)])
-        self.order_flows.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
-        
-        # SMC indexes
-        self.smc_analyses.create_index([("symbol", 1), ("timestamp", -1)])
-        self.smc_analyses.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
+        """Create necessary indexes with error handling"""
+        try:
+            # Trades indexes - basic indexing without TTL for now
+            self.trades.create_index([("symbol", 1), ("exchange", 1), ("timestamp", -1)])
+            
+            # Indicators indexes - basic indexing
+            self.volume_profiles.create_index([("symbol", 1), ("exchange", 1), ("timestamp", -1)])
+            self.order_flows.create_index([("symbol", 1), ("exchange", 1), ("timestamp", -1)])
+            
+            # SMC indexes
+            self.smc_analyses.create_index([("symbol", 1), ("timestamp", -1)])
+            
+            logger.info("Basic indexes created successfully")
+            
+            # Try to create TTL indexes separately
+            try:
+                self.trades.create_index([("timestamp", 1)], expireAfterSeconds=TRADES_RETENTION)
+                self.volume_profiles.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
+                self.order_flows.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
+                self.smc_analyses.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
+                logger.info("TTL indexes created successfully")
+            except Exception as ttl_error:
+                logger.warning(f"TTL indexes failed (will use manual cleanup): {ttl_error}")
+                
+        except Exception as e:
+            logger.warning(f"Index creation failed: {e}. Continuing without indexes.")
     
     def save_trades(self, trades: List[Trade]) -> int:
         """Save batch of trades"""
