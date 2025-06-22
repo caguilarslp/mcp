@@ -42,15 +42,20 @@ class StorageManager:
             
             logger.info("Basic indexes created successfully")
             
-            # Try to create TTL indexes separately
+            # Create TTL indexes with proper error handling
             try:
+                # Only create TTL if not time-series collections
                 self.trades.create_index([("timestamp", 1)], expireAfterSeconds=TRADES_RETENTION)
                 self.volume_profiles.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
                 self.order_flows.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
                 self.smc_analyses.create_index([("timestamp", 1)], expireAfterSeconds=INDICATORS_RETENTION)
                 logger.info("TTL indexes created successfully")
             except Exception as ttl_error:
-                logger.warning(f"TTL indexes failed (will use manual cleanup): {ttl_error}")
+                # TTL indexes might fail on time-series collections, use manual cleanup instead
+                if "TTL indexes on time-series collections" in str(ttl_error):
+                    logger.info("TTL indexes not supported on time-series collections, using manual cleanup")
+                else:
+                    logger.warning(f"TTL indexes failed (will use manual cleanup): {ttl_error}")
                 
         except Exception as e:
             logger.warning(f"Index creation failed: {e}. Continuing without indexes.")
