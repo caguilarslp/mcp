@@ -24,7 +24,11 @@ from ..models.indicators import (
 from ..models.auth import APIKeyVerifyResponse, PermissionLevel
 from ..routers.auth import verify_api_key
 from ..cache import cache_manager
+<<<<<<< HEAD
 from ..services import VolumeProfileService, OrderFlowService, SMCService
+=======
+from ..services import VolumeProfileService, OrderFlowService
+>>>>>>> 3c28353e1868a6017abac60c769e5554b5214d94
 from ...storage.mongo_manager import MongoManager
 from ...config import Config
 import logging
@@ -41,8 +45,11 @@ router = APIRouter(
 storage = MongoManager()
 vp_service = VolumeProfileService(storage, cache_manager)
 of_service = OrderFlowService(storage, cache_manager)
+<<<<<<< HEAD
 smc_service = SMCService(storage, cache_manager)
 
+=======
+>>>>>>> 3c28353e1868a6017abac60c769e5554b5214d94
 
 @router.get("/status", response_model=IndicatorStatus)
 async def get_indicators_status():
