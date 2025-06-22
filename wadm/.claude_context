@@ -10,14 +10,19 @@ IMPORTANTÍSIMO LEER PRIMERO:
  - NO CREARÁS SCRIPTS DE PRUEBAS, NI PARA INICIOS DE DOCKER, NI NADA. EL USUARIO TE AYUDARÁ CON LAS PRUEBAS.
 ###########################################
 
+# WAIckoff Project Status - v0.2.0
 
-
-# WADM Project Status - v0.1.0
-
-## Current Focus
+## 🎯 Current Focus
 ✅ TASK-031 Phase 2: Real Indicator Services COMPLETED! 🚀
-Status: Volume Profile & Order Flow with production-ready calculations
-Next: Phase 3 - SMC Integration & Advanced Features
+📋 Business Model Defined: Session-based with Claude Sonnet 4
+🔄 Next: TASK-031 Phase 3 (API Key Management) + Dashboard MVP
+
+## 🆕 Major Update: WAIckoff Business Model
+- **Domain**: waickoff.com (Wyckoff + AI)
+- **Model**: Session-based pricing ($1/session)
+- **Tech**: Claude Sonnet 4 API integration
+- **Stack**: SMC + Wyckoff + Technical Indicators
+- **Packages**: $5 (5 sessions) to $80 (200 sessions)
 
 ## Recent Updates (2025-06-22)
 - ✅ TASK-029: FastAPI base setup COMPLETADO
@@ -25,70 +30,81 @@ Next: Phase 3 - SMC Integration & Advanced Features
 - ✅ TASK-048: Docker Infrastructure COMPLETADO (2h vs 4h estimado) 🐳
 - ✅ TASK-031 Phase 1: API Infrastructure COMPLETADO
 - ✅ TASK-031 Phase 2: Real Indicator Services COMPLETADO 🎯
-- ✅ Production-ready Docker stack con MongoDB 7 + Redis 7
-- ✅ Setup time: 10 minutos → 30 segundos (95% improvement)
-- ✅ Hot reload development environment
-- ✅ Volume Profile & Order Flow con cálculos reales (NO MOCKS)
-- ✅ Multi-timeframe analysis y advanced analytics
+- ✅ Business Model Refinement: Session-based pricing defined
+- ✅ Architecture Decision: Monolith first approach (no microservices)
+- ✅ Roadmap Update: Wyckoff-first with 119 MCP tools integration
 
-## Active Tasks
-- TASK-031 Phase 3: API Key Management + SMC Integration (próxima prioridad)
-- TASK-032: Frontend Base Setup
-- TASK-033: TradingView Chart Integration
-See `claude/tasks/task-tracker.md` for complete list
+## Architecture Decision
+**Monolith First Approach** (KISS principle):
+- Single API at api.waickoff.com handles everything
+- AI/Claude integration dentro de la API
+- Frontend at app.waickoff.com consume la API
+- No microservicios hasta que sea necesario (>10k users)
+
+## WAIckoff Vision
+🎯 Chat inteligente con Claude Sonnet 4
+📊 Análisis Wyckoff + SMC + Indicadores técnicos
+💰 Modelo de sesiones transparente ($1/sesión)
+🚀 119 herramientas del MCP integradas
+🌐 Multi-exchange validation (4 exchanges)
+
+## Active Development Phases
+
+### Phase 1: Wyckoff Foundation (Current)
+- TASK-060: Wyckoff MCP Integration Core
+- TASK-061: Composite Man Tracker
+- TASK-064: Dashboard MVP con Vite + Mantine
+
+### Phase 2: Complete Integration
+- TASK-065: Advanced Wyckoff MCP Tools
+- TASK-066: Technical Indicators Suite
+- TASK-067: Multi-Exchange Analysis
+
+### Phase 3: Intelligent Chat
+- TASK-069: Chat Interface Foundation
+- TASK-070: Claude Sonnet 4 Integration
+- TASK-071: Natural Language Commands
 
 ## Latest Achievements
-- ✅ Volume Profile Service: Real-time calculations con strength scoring
-- ✅ Order Flow Service: Advanced analytics con momentum & exhaustion detection
-- ✅ Multi-timeframe Analysis: Confluence scoring entre timeframes
-- ✅ TTL Index Warning: MongoDB optimization fix applied
-- ✅ Service Architecture: Modular async services con cache integration
-- ⚠️ Auth System: Master key working, need API key generation
+- ✅ Volume Profile Service: Real-time calculations
+- ✅ Order Flow Service: Advanced analytics
+- ✅ 4 Exchanges: Bybit, Binance, Coinbase Pro, Kraken
+- ✅ SMC System: 85-90% accuracy con validación institucional
+- ✅ Docker Stack: Setup en 30 segundos
 
-## Issues Resueltos
-- ✅ B001: Fixed - Indicators calculating correctly
-- ✅ Import errors: Fixed
-- ✅ MongoDB connection: Working
-
-## Next Steps
-1. TASK-031 Phase 3: API Key Management + SMC Integration
-2. TASK-032: Setup base del Frontend
-3. TASK-033: TradingView Chart Integration
-4. TASK-037: WebSocket streaming
-5. Comenzar dashboard visual
+## Tech Stack Decision
+- **Frontend**: app.waickoff.com (Vite + React + Mantine)
+- **API**: api.waickoff.com (FastAPI + Claude integration)
+- **Database**: MongoDB + Redis
+- **AI**: Claude Sonnet 4 API (dentro de la API)
 
 ## Quick Commands
 ```bash
-# Docker Development (RECOMMENDED) 🐳
-scripts\wadm-dev.bat start              # Start complete stack (30s)
+# Docker Development 🐳
+scripts\wadm-dev.bat start              # Start complete stack
 scripts\wadm-dev.bat status             # Check all services
 scripts\wadm-dev.bat logs               # View API logs
-python test_task_031_phase2.py          # Test Phase 2 services
 
-# PowerShell Testing Commands
-curl -H "X-API-Key: wadm-master-key-2024" `
-  "http://localhost:8000/api/v1/indicators/volume-profile/BTCUSDT?mode=realtime"
-  
-curl -H "X-API-Key: wadm-master-key-2024" `
-  "http://localhost:8000/api/v1/indicators/order-flow/BTCUSDT?mode=analysis"
-
-# Legacy Local Development
-python main.py                          # Run collectors
-python api_server.py                    # Start API
+# API Testing
+curl -H "X-API-Key: wadm-master-key-2024" \
+  "http://localhost:8000/api/v1/indicators/volume-profile/BTCUSDT"
 
 # URLs
 http://localhost:8000                   # API Base
 http://localhost:8000/api/docs          # Swagger UI
-http://localhost:27017                  # MongoDB
-redis://localhost:6379                  # Redis
+http://localhost:3000                   # Frontend (próximamente)
 ```
 
-## Recent Decisions
-- D001: Credit model (50/200/1000 queries)
-- D002: Focus on utility tokens
-- D003: Non-realtime deep analysis
-- D004: Simple auth (no OAuth initially)
-- D005: 15 total indicators planned
-- D006: Daily task system
+## Business Model Summary
+- **Pricing**: $1 per session (24h or 100k tokens)
+- **Packages**: $5-$80 (mejor valor en bulk)
+- **Margin**: 55% en precio base
+- **Target**: $15k MRR en mes 1
 
-See `claude/docs/DECISIONS.md` for details.
+## Next Immediate Actions
+1. Complete TASK-031 Phase 3 (API Key Management)
+2. Start TASK-064 (Dashboard MVP)
+3. Begin TASK-060 (Wyckoff MCP Integration)
+
+See `claude/tasks/task-tracker.md` for complete task list.
+See `claude/docs/WAICKOFF-SESSION-MODEL.md` for business details.
