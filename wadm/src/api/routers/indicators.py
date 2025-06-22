@@ -15,11 +15,16 @@ from ..models.indicators import (
     OrderFlowResponse,
     SMCAnalysisResponse,
     SMCSignalsResponse,
-    IndicatorStatus
+    IndicatorStatus,
+    OrderBlock,
+    FairValueGap,
+    StructureBreak,
+    TradingSignal
 )
+from ..models.auth import APIKeyVerifyResponse, PermissionLevel
 from ..routers.auth import verify_api_key
 from ..cache import cache_manager
-from ..services import VolumeProfileService, OrderFlowService
+from ..services import VolumeProfileService, OrderFlowService, SMCService
 from ...storage.mongo_manager import MongoManager
 from ...config import Config
 import logging
@@ -36,6 +41,8 @@ router = APIRouter(
 storage = MongoManager()
 vp_service = VolumeProfileService(storage, cache_manager)
 of_service = OrderFlowService(storage, cache_manager)
+smc_service = SMCService(storage, cache_manager)
+
 
 @router.get("/status", response_model=IndicatorStatus)
 async def get_indicators_status():
@@ -203,14 +210,218 @@ async def get_order_flow(
         raise HTTPException(status_code=500, detail=f"Error retrieving order flow: {str(e)}")
 
 
-# Placeholder endpoints for SMC (will be implemented in Phase 3)
-@router.get("/smc/{symbol}/analysis")
-async def get_smc_analysis_placeholder(symbol: str):
-    """SMC Analysis endpoint - Phase 3 implementation"""
-    return {"message": "SMC Analysis endpoint - Coming in Phase 3", "symbol": symbol}
+@router.get("/smc/{symbol}/analysis", response_model=SMCAnalysisResponse)
+async def get_smc_analysis(
+    symbol: str,
+    timeframe: str = Query("15m", description="Analysis timeframe (5m, 15m, 1h, 4h)"),
+    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+):
+    """
+    Get comprehensive Smart Money Concepts analysis for a symbol
+    
+    Returns:
+    - Order blocks with institutional validation
+    - Fair value gaps with fill probability
+    - Market structure breaks (BOS/CHoCH)
+    - Liquidity zones and institutional positioning
+    - Overall confluence score and market bias
+    """
+    
+    # Validate symbol
+    if symbol not in Config.SYMBOLS:
+        raise HTTPException(status_code=404, detail=f"Symbol {symbol} not found")
+    
+    try:
+        # Get comprehensive SMC analysis
+        analysis = await smc_service.get_comprehensive_analysis(symbol, timeframe)
+        
+        # Convert to response model
+        response = SMCAnalysisResponse(
+            symbol=symbol,
+            timeframe=timeframe,
+            timestamp=datetime.fromisoformat(analysis["timestamp"]),
+            order_blocks=[
+                OrderBlock(
+                    id=ob.get("id", str(i)),
+                    price_high=ob.get("top", 0),
+                    price_low=ob.get("bottom", 0),
+                    timestamp=datetime.fromisoformat(ob.get("timestamp", datetime.now(timezone.utc).isoformat())),
+                    block_type=ob.get("type", "unknown"),
+                    strength=ob.get("strength", 50),
+                    volume=ob.get("volume", 0),
+                    status="active" if ob.get("active", True) else "mitigated"
+                )
+                for i, ob in enumerate(analysis.get("order_blocks", []))
+            ],
+            fair_value_gaps=[
+                FairValueGap(
+                    id=fvg.get("id", str(i)),
+                    price_high=fvg.get("high", 0),
+                    price_low=fvg.get("low", 0),
+                    timestamp=datetime.fromisoformat(fvg.get("timestamp", datetime.now(timezone.utc).isoformat())),
+                    gap_type=fvg.get("type", "unknown"),
+                    fill_probability=fvg.get("fill_probability", 50),
+                    status="open" if not fvg.get("filled", False) else "filled"
+                )
+                for i, fvg in enumerate(analysis.get("fair_value_gaps", []))
+            ],
+            structure_breaks=[
+                StructureBreak(
+                    id=str(i),
+                    break_type=sb.get("type", "unknown"),
+                    price=sb.get("price", 0),
+                    timestamp=datetime.fromisoformat(sb.get("timestamp", datetime.now(timezone.utc).isoformat())),
+                    timeframe=timeframe,
+                    confirmation=sb.get("confirmed", False),
+                    volume=sb.get("volume", 0)
+                )
+                for i, sb in enumerate(analysis.get("structure_breaks", []))
+            ],
+            confluence_score=analysis.get("confluence_score", 50),
+            market_bias=analysis.get("market_bias", "neutral"),
+            institutional_activity=analysis.get("institutional_metrics", {}),
+            metadata={
+                "trades_analyzed": analysis.get("trades_analyzed", 0),
+                "calculation_time": analysis.get("calculation_time", 0),
+                "exchanges_analyzed": analysis.get("exchanges", ["bybit", "binance", "coinbase", "kraken"]),
+                "wyckoff_phase": analysis.get("wyckoff_phase", "unknown")
+            }
+        )
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Error getting SMC analysis for {symbol}: {e}")
+        raise HTTPException(status_code=500, detail=f"Error in SMC analysis: {str(e)}")
 
 
-@router.get("/smc/{symbol}/signals")
-async def get_smc_signals_placeholder(symbol: str):
-    """SMC Signals endpoint - Phase 3 implementation"""
-    return {"message": "SMC Signals endpoint - Coming in Phase 3", "symbol": symbol}
+@router.get("/smc/{symbol}/signals", response_model=SMCSignalsResponse)
+async def get_smc_signals(
+    symbol: str,
+    signal_type: Optional[str] = Query(None, enum=["long", "short"], description="Filter by signal type"),
+    min_confidence: float = Query(70.0, ge=0, le=100, description="Minimum confidence score"),
+    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+):
+    """
+    Get actionable trading signals from Smart Money Concepts analysis
+    
+    Returns high-probability trading signals with:
+    - Entry, stop loss, and take profit levels
+    - Risk/reward ratios
+    - Confidence scores
+    - Supporting confluence factors
+    - Position sizing suggestions
+    """
+    
+    # Validate symbol
+    if symbol not in Config.SYMBOLS:
+        raise HTTPException(status_code=404, detail=f"Symbol {symbol} not found")
+    
+    try:
+        # Get trading signals
+        signals_data = await smc_service.get_trading_signals(symbol, signal_type)
+        
+        # Filter by confidence
+        filtered_signals = [
+            s for s in signals_data.get("signals", [])
+            if s.get("confidence", 0) >= min_confidence
+        ]
+        
+        # Convert to response model
+        response = SMCSignalsResponse(
+            symbol=symbol,
+            timestamp=datetime.fromisoformat(signals_data["timestamp"]),
+            active_signals=[
+                TradingSignal(
+                    id=sig.get("id", str(i)),
+                    signal_type=sig.get("type", "unknown"),
+                    entry_price=sig.get("entry", 0),
+                    stop_loss=sig.get("stop_loss", 0),
+                    take_profit=sig.get("take_profits", []),
+                    confidence=sig.get("confidence", 50),
+                    risk_reward=sig.get("risk_reward", 1.0),
+                    confluence_factors=sig.get("factors", []),
+                    position_size=sig.get("position_size"),
+                    timestamp=datetime.fromisoformat(sig.get("timestamp", datetime.now(timezone.utc).isoformat())),
+                    expiry=datetime.fromisoformat(sig["expiry"]) if sig.get("expiry") else None
+                )
+                for i, sig in enumerate(filtered_signals)
+            ],
+            signal_count=len(filtered_signals),
+            average_confidence=sum(s.get("confidence", 0) for s in filtered_signals) / len(filtered_signals) if filtered_signals else 0,
+            market_conditions=signals_data.get("summary", {}),
+            risk_assessment={
+                "market_volatility": signals_data.get("volatility", "normal"),
+                "recommended_risk_per_trade": 1.0 if signals_data.get("summary", {}).get("market_bias") != "neutral" else 0.5,
+                "max_concurrent_positions": 3 if len(filtered_signals) > 5 else len(filtered_signals),
+                "overall_market_risk": "low" if signals_data.get("summary", {}).get("institutional_bias") == signals_data.get("summary", {}).get("market_bias") else "medium"
+            },
+            metadata={
+                "analysis_depth": signals_data.get("analysis_depth", "comprehensive"),
+                "signal_generation_method": "smc_institutional_confluence",
+                "filters_applied": {"min_confidence": min_confidence, "signal_type": signal_type},
+                "recommendations": signals_data.get("recommendations", [])
+            }
+        )
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Error getting SMC signals for {symbol}: {e}")
+        raise HTTPException(status_code=500, detail=f"Error generating signals: {str(e)}")
+
+
+@router.get("/smc/{symbol}/structure")
+async def get_market_structure(
+    symbol: str,
+    include_levels: bool = Query(True, description="Include key support/resistance levels"),
+    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+):
+    """
+    Get detailed market structure analysis
+    
+    Returns:
+    - Current market trend and phase
+    - Recent structure breaks
+    - Key support and resistance levels
+    - Momentum analysis
+    - Institutional alignment
+    """
+    
+    # Validate symbol
+    if symbol not in Config.SYMBOLS:
+        raise HTTPException(status_code=404, detail=f"Symbol {symbol} not found")
+    
+    try:
+        structure = await smc_service.get_market_structure(symbol, include_levels)
+        return JSONResponse(content=structure)
+        
+    except Exception as e:
+        logger.error(f"Error getting market structure for {symbol}: {e}")
+        raise HTTPException(status_code=500, detail=f"Error analyzing structure: {str(e)}")
+
+
+@router.get("/smc/{symbol}/confluence")
+async def get_confluence_analysis(
+    symbol: str,
+    min_score: int = Query(70, ge=0, le=100, description="Minimum confluence score"),
+    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+):
+    """
+    Get multi-factor confluence analysis
+    
+    Combines Volume Profile, Order Flow, and SMC indicators to identify
+    high-probability trading zones with multiple confirming factors.
+    """
+    
+    # Validate symbol
+    if symbol not in Config.SYMBOLS:
+        raise HTTPException(status_code=404, detail=f"Symbol {symbol} not found")
+    
+    try:
+        confluence = await smc_service.get_confluence_analysis(symbol, min_score)
+        return JSONResponse(content=confluence)
+        
+    except Exception as e:
+        logger.error(f"Error getting confluence analysis for {symbol}: {e}")
+        raise HTTPException(status_code=500, detail=f"Error in confluence analysis: {str(e)}")

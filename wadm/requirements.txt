@@ -3,6 +3,7 @@ python-dotenv
 pymongo
 websockets
 numpy
+motor
 
 # API dependencies  
 fastapi

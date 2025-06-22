@@ -73,10 +73,25 @@ class MongoManager:
                     return []
                     
                 def insert_one(self, *args, **kwargs):
-                    return None
+                    class MockInsertResult:
+                        inserted_id = "mock_id"
+                    return MockInsertResult()
                     
                 def insert_many(self, *args, **kwargs):
                     return None
+                
+                def create_index(self, *args, **kwargs):
+                    return None
+                
+                def update_one(self, *args, **kwargs):
+                    class MockUpdateResult:
+                        modified_count = 0
+                    return MockUpdateResult()
+                
+                def update_many(self, *args, **kwargs):
+                    class MockUpdateResult:
+                        modified_count = 0
+                    return MockUpdateResult()
             
             class MockCursor:
                 def sort(self, *args, **kwargs):
@@ -263,6 +278,37 @@ class MongoManager:
             results.append(OrderFlow(doc))
         
         return results
+    
+    async def get_trades_range(self, symbol: str, start_time: datetime, end_time: datetime, limit: int = 10000) -> List[Dict[str, Any]]:
+        """Get trades in a time range for SMC analysis"""
+        if not self.connected:
+            return []
+        
+        query = {
+            "symbol": symbol,
+            "timestamp": {
+                "$gte": start_time,
+                "$lte": end_time
+            }
+        }
+        
+        cursor = self.trades.find(query).sort("timestamp", 1).limit(limit)
+        trades = []
+        
+        for doc in cursor:
+            # Convert MongoDB document to Trade-like dict
+            trade = {
+                "id": str(doc.get("_id", "")),
+                "symbol": doc.get("symbol"),
+                "price": float(doc.get("price", 0)),
+                "size": float(doc.get("size", 0)),
+                "side": doc.get("side"),
+                "timestamp": doc.get("timestamp"),
+                "exchange": doc.get("exchange")
+            }
+            trades.append(trade)
+        
+        return trades
     
     def close(self):
         """Close connection"""
