@@ -94,7 +94,7 @@ class VolumeProfile:
 
 @dataclass
 class OrderFlow:
-    """Order flow indicator"""
+    """Order flow indicator with enhanced metrics"""
     symbol: str
     exchange: Exchange
     timestamp: datetime
@@ -102,9 +102,18 @@ class OrderFlow:
     sell_volume: float
     delta: float  # buy_volume - sell_volume
     cumulative_delta: float
-    imbalance_ratio: float  # buy_volume / sell_volume if sell_volume > 0
+    imbalance_ratio: float  # normalized 0-1 (buy_volume / total_volume)
     large_trades_count: int
     absorption_detected: bool
+    momentum_score: float = 50.0  # 0-100 score
+    institutional_volume: float = 0.0  # Volume from large trades
+    vwap_delta: float = 0.0  # Delta above/below VWAP
+    absorption_events: List[Dict[str, Any]] = None  # Detailed absorption events
+    
+    def __post_init__(self):
+        """Initialize optional fields"""
+        if self.absorption_events is None:
+            self.absorption_events = []
     
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -117,5 +126,9 @@ class OrderFlow:
             "cumulative_delta": self.cumulative_delta,
             "imbalance_ratio": self.imbalance_ratio,
             "large_trades_count": self.large_trades_count,
-            "absorption_detected": self.absorption_detected
+            "absorption_detected": self.absorption_detected,
+            "momentum_score": self.momentum_score,
+            "institutional_volume": self.institutional_volume,
+            "vwap_delta": self.vwap_delta,
+            "absorption_events": self.absorption_events or []
         }

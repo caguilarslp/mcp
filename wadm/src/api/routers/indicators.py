@@ -1,6 +1,6 @@
 """
 WADM Indicators API Router
-Endpoints for technical indicators and Smart Money Concepts
+Endpoints for technical indicators with real calculation services
 """
 
 from datetime import datetime, timedelta
@@ -19,6 +19,7 @@ from ..models.indicators import (
 )
 from ..routers.auth import verify_api_key
 from ..cache import cache_manager
+from ..services import VolumeProfileService, OrderFlowService
 from ...storage.mongo_manager import MongoManager
 from ...config import Config
 import logging
@@ -31,8 +32,10 @@ router = APIRouter(
     dependencies=[Depends(verify_api_key)]
 )
 
-# Initialize storage
+# Initialize storage and services
 storage = MongoManager()
+vp_service = VolumeProfileService(storage, cache_manager)
+of_service = OrderFlowService(storage, cache_manager)
 
 @router.get("/status", response_model=IndicatorStatus)
 async def get_indicators_status():
@@ -65,68 +68,60 @@ async def get_indicators_status():
 async def get_volume_profile(
     symbol: str,
     timeframe: str = Query("1h", description="Timeframe for analysis"),
-    start_time: Optional[datetime] = Query(None, description="Start time for historical data"),
-    end_time: Optional[datetime] = Query(None, description="End time for historical data"),
-    limit: int = Query(100, ge=1, le=1000, description="Maximum number of records")
+    exchange: Optional[str] = Query(None, description="Specific exchange"),
+    mode: str = Query("latest", description="Data mode: latest, historical, or realtime")
 ):
-    """Get Volume Profile data for a symbol"""
+    """Get Volume Profile data for a symbol with real calculations"""
     
     # Validate symbol
     if symbol not in Config.SYMBOLS:
         raise HTTPException(status_code=404, detail=f"Symbol {symbol} not found")
     
-    # Check cache first
-    cache_key = f"volume_profile:{symbol}:{timeframe}:{start_time}:{end_time}:{limit}"
-    cached_data = await cache_manager.get_cached_response(cache_key)
-    if cached_data:
-        return JSONResponse(content=cached_data)
-    
     try:
-        # Set default time range if not provided
-        if not end_time:
-            end_time = datetime.utcnow()
-        if not start_time:
-            start_time = end_time - timedelta(hours=24)
+        if mode == "latest":
+            # Get latest stored volume profile
+            data = await vp_service.get_latest(symbol, exchange)
+            if not data:
+                # Fallback to realtime calculation
+                data = await vp_service.calculate_realtime(symbol, exchange or "bybit", 60)
         
-        # Get volume profile data from storage
-        volume_profiles = await storage.get_volume_profiles(
-            symbol=symbol,
-            start_time=start_time,
-            end_time=end_time,
-            limit=limit
-        )
+        elif mode == "realtime":
+            # Calculate from recent trades
+            minutes = {"15m": 15, "1h": 60, "4h": 240, "1d": 1440}.get(timeframe, 60)
+            data = await vp_service.calculate_realtime(symbol, exchange or "bybit", minutes)
         
-        if not volume_profiles:
-            raise HTTPException(status_code=404, detail=f"No volume profile data found for {symbol}")
+        elif mode == "multi-timeframe":
+            # Get multiple timeframes
+            data = await vp_service.get_multi_timeframe(symbol, exchange)
         
-        # Get the latest volume profile for response
-        latest_vp = volume_profiles[0]
+        else:
+            raise HTTPException(status_code=400, detail="Mode must be: latest, realtime, or multi-timeframe")
         
+        if not data:
+            raise HTTPException(status_code=404, detail=f"No volume profile data available for {symbol}")
+        
+        # Convert to response model format
         response_data = VolumeProfileResponse(
             symbol=symbol,
             timeframe=timeframe,
-            timestamp=latest_vp.timestamp,
-            poc=latest_vp.poc,
-            vah=latest_vp.vah,
-            val=latest_vp.val,
-            total_volume=latest_vp.total_volume,
-            volume_nodes=latest_vp.volume_nodes,
+            timestamp=datetime.fromisoformat(data["timestamp"].replace("Z", "+00:00")),
+            poc=data["poc"],
+            vah=data["vah"],
+            val=data["val"],
+            total_volume=data["total_volume"],
+            volume_nodes=data.get("volume_nodes", []),
             session_data={
-                "session_count": len(volume_profiles),
-                "time_range": {
-                    "start": start_time.isoformat(),
-                    "end": end_time.isoformat()
-                }
+                "profile_strength": data.get("profile_strength", 50.0),
+                "value_area_percentage": data.get("value_area_percentage", 70.0),
+                "trades_count": data.get("trades_count", 0)
             },
             metadata={
-                "data_points": len(volume_profiles),
-                "latest_update": latest_vp.timestamp.isoformat(),
-                "calculation_method": "trade_based"
+                "calculation_method": "real_time_trades",
+                "exchange": data.get("exchange", exchange),
+                "time_period_minutes": data.get("time_period_minutes", 60),
+                "data_quality": "high" if data.get("trades_count", 0) > 100 else "medium"
             }
         )
-        
-        # Cache the response
-        await cache_manager.cache_response(cache_key, response_data.dict(), ttl=120)
         
         return response_data
         
@@ -138,67 +133,68 @@ async def get_volume_profile(
 @router.get("/order-flow/{symbol}", response_model=OrderFlowResponse)
 async def get_order_flow(
     symbol: str,
-    timeframe: str = Query("1h", description="Timeframe for analysis"),
-    start_time: Optional[datetime] = Query(None, description="Start time for historical data"),
-    end_time: Optional[datetime] = Query(None, description="End time for historical data"),
-    limit: int = Query(100, ge=1, le=1000, description="Maximum number of records")
+    timeframe: str = Query("15m", description="Timeframe for analysis"),
+    exchange: Optional[str] = Query(None, description="Specific exchange"),
+    mode: str = Query("latest", description="Data mode: latest, realtime, or analysis")
 ):
-    """Get Order Flow data for a symbol"""
+    """Get Order Flow data for a symbol with real calculations"""
     
     # Validate symbol
     if symbol not in Config.SYMBOLS:
         raise HTTPException(status_code=404, detail=f"Symbol {symbol} not found")
     
-    # Check cache first
-    cache_key = f"order_flow:{symbol}:{timeframe}:{start_time}:{end_time}:{limit}"
-    cached_data = await cache_manager.get_cached_response(cache_key)
-    if cached_data:
-        return JSONResponse(content=cached_data)
-    
     try:
-        # Set default time range if not provided
-        if not end_time:
-            end_time = datetime.utcnow()
-        if not start_time:
-            start_time = end_time - timedelta(hours=24)
+        if mode == "latest":
+            # Get latest stored order flow
+            data = await of_service.get_latest(symbol, exchange)
+            if not data:
+                # Fallback to realtime calculation
+                data = await of_service.calculate_realtime(symbol, exchange or "bybit", 15)
         
-        # Get order flow data from storage
-        order_flows = await storage.get_order_flows(
-            symbol=symbol,
-            start_time=start_time,
-            end_time=end_time,
-            limit=limit
-        )
+        elif mode == "realtime":
+            # Calculate from recent trades
+            minutes = {"5m": 5, "15m": 15, "1h": 60, "4h": 240}.get(timeframe, 15)
+            data = await of_service.calculate_realtime(symbol, exchange or "bybit", minutes)
         
-        if not order_flows:
-            raise HTTPException(status_code=404, detail=f"No order flow data found for {symbol}")
+        elif mode == "analysis":
+            # Get comprehensive flow analysis
+            data = await of_service.get_flow_analysis(symbol, exchange)
+            
+            # For analysis mode, return more detailed response
+            return JSONResponse(content={
+                "symbol": symbol,
+                "mode": "comprehensive_analysis",
+                "data": data
+            })
         
-        # Get the latest order flow for response
-        latest_of = order_flows[0]
+        else:
+            raise HTTPException(status_code=400, detail="Mode must be: latest, realtime, or analysis")
         
+        if not data:
+            raise HTTPException(status_code=404, detail=f"No order flow data available for {symbol}")
+        
+        # Convert to response model format
         response_data = OrderFlowResponse(
             symbol=symbol,
             timeframe=timeframe,
-            timestamp=latest_of.timestamp,
-            delta=latest_of.delta,
-            cumulative_delta=latest_of.cumulative_delta,
-            buy_volume=latest_of.buy_volume,
-            sell_volume=latest_of.sell_volume,
-            absorption_events=latest_of.absorption_events or [],
-            momentum_score=getattr(latest_of, 'momentum_score', 0.0),
+            timestamp=datetime.fromisoformat(data["timestamp"].replace("Z", "+00:00")),
+            delta=data["delta"],
+            cumulative_delta=data["cumulative_delta"],
+            buy_volume=data["buy_volume"],
+            sell_volume=data["sell_volume"],
+            absorption_events=data.get("absorption_events", []),
+            momentum_score=data.get("momentum_score", 50.0),
             metadata={
-                "data_points": len(order_flows),
-                "latest_update": latest_of.timestamp.isoformat(),
-                "calculation_method": "trade_based",
-                "time_range": {
-                    "start": start_time.isoformat(),
-                    "end": end_time.isoformat()
-                }
+                "calculation_method": "real_time_trades",
+                "exchange": data.get("exchange", exchange),
+                "trades_count": data.get("trades_count", 0),
+                "time_period_minutes": data.get("time_period_minutes", 15),
+                "flow_strength": data.get("flow_strength", 50.0),
+                "market_bias": data.get("market_bias", "neutral"),
+                "institutional_volume": data.get("institutional_volume", 0.0),
+                "exhaustion_signals": data.get("exhaustion_signals", [])
             }
         )
-        
-        # Cache the response
-        await cache_manager.cache_response(cache_key, response_data.dict(), ttl=120)
         
         return response_data
         
