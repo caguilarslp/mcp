@@ -13,6 +13,7 @@ from pydantic import BaseModel
 
 from src.api.routers.auth import verify_api_key
 from src.storage.mongo_manager import MongoManager
+from src.api.cache import cache_manager
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -202,12 +203,38 @@ async def full_status(api_key: str = Depends(verify_api_key)):
 async def clear_cache(api_key: str = Depends(verify_api_key)):
     """
     Clear application cache
-    TODO: Implement when Redis is added
     """
-    return {
-        "status": "success",
-        "message": "Cache cleared (not implemented yet)"
-    }
+    try:
+        success = await cache_manager.clear()
+        return {
+            "status": "success" if success else "failed",
+            "message": "Cache cleared successfully" if success else "Failed to clear cache"
+        }
+    except Exception as e:
+        logger.error(f"Cache clear error: {e}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+
+@router.get("/cache/stats")
+async def cache_statistics(api_key: str = Depends(verify_api_key)):
+    """
+    Get cache performance statistics
+    """
+    try:
+        stats = cache_manager.get_stats()
+        return {
+            "status": "success",
+            "cache_stats": stats
+        }
+    except Exception as e:
+        logger.error(f"Cache stats error: {e}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
 
 
 @router.get("/logs/recent")

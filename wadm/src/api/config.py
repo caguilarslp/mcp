@@ -34,9 +34,15 @@ class APIConfig:
     WS_HEARTBEAT_INTERVAL: int = 30  # seconds
     WS_MAX_CONNECTIONS: int = 100
     
-    # Cache settings (future Redis integration)
+    # Cache settings
     CACHE_TTL: int = 300  # 5 minutes default
     CACHE_ENABLED: bool = True
+    REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379")
+    CACHE_TTL_CANDLES: int = 60  # 1 minute for candles
+    CACHE_TTL_MARKET_STATS: int = 30  # 30 seconds for market stats
+    CACHE_TTL_ORDERBOOK: int = 10  # 10 seconds for orderbook
+    CACHE_TTL_INDICATORS: int = 120  # 2 minutes for indicators
+    CACHE_PREFIX: str = "wadm:api:"
     
     # Response settings
     PRETTY_JSON: bool = os.getenv("WADM_API_PRETTY_JSON", "false").lower() == "true"
