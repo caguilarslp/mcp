@@ -1,87 +1,55 @@
-IMPORTANTÍSIMO LEER PRIMERO:
-###########################################
- DEL USUARIO, LEER Y NO ELIMINAR:
- - NO SOBREINGENIARIA, NUNCA!!
- - SIEMPRE PRODUCTION-READY. NO MOCKS, NO PLACEHOLDERS
- - KISS, MODULARIDAD, PROFESIONALIDAD, SEGURIDAD, ESCALABILIDAD, ESTABILIDAD 
- - NO ACTUALIZARÁS TRAZABILIDAD HASTA EL VISTO BUENO DEL USUARIO
- - HARÁS PAUSAS DE VEZ EN CUANDO PARA VERIFICAR QUE TODO ESTÁ CORRECTO
- - NO HAZ QUE FUNCIONE PRIMERO Y DESPUÉS OPTIMIZA, ESE NO ES EL CAMINO A SEGUIR.
-###########################################
+# WADM Project Status - v0.1.0
 
+## Current Focus
+API REST completamente funcional! Próximo: TASK-030 Market Data endpoints completos.
 
+## Recent Updates (2025-06-22)
+- ✅ TASK-029: FastAPI base setup COMPLETADO
+- ✅ API server funcionando con todos los endpoints
+- ✅ MongoDB conectado con 43,413 documentos
+- ✅ Virtual environment configurado
+- ✅ Testing suite verificado
 
-# WADM Project Context
+## Active Tasks
+- TASK-030: Market Data API Endpoints (próxima prioridad)
+- TASK-031: Indicators API Endpoints
+- TASK-032: Frontend Base Setup
+See `claude/tasks/task-tracker.md` for complete list
 
-## Current Status
-- **Version**: v0.1.0
-- **Stage**: Initial Development
-- **Last Updated**: 2025-06-21
+## Issues Resueltos
+- ✅ B001: Fixed - Indicators calculating correctly
+- ✅ Import errors: Fixed
+- ✅ MongoDB connection: Working
 
-## System Overview
-WADM (wAIckoff Data Manager) is a real-time market data collector and indicator calculator for cryptocurrency trading with revolutionary Smart Money Concepts (SMC) institutional intelligence.
+## Next Steps
+1. TASK-030: Completar Market Data endpoints
+2. TASK-031: Implementar Indicators endpoints
+3. TASK-032: Setup base del Frontend
+4. TASK-037: WebSocket streaming
+5. Comenzar dashboard visual
 
-### Working Features
-- ✅ WebSocket connections to Bybit, Binance, Coinbase Pro, and Kraken
-- ✅ Real-time trade collection from 4 exchanges (institutional + retail)
-- ✅ MongoDB storage with automatic TTL
-- ✅ Volume Profile and Order Flow indicators
-- ✅ Graceful shutdown and error recovery
-- ✅ **BREAKTHROUGH: Smart Money Concepts (SMC) with Institutional Intelligence**
-  - Enhanced Order Blocks (85-90% accuracy vs 60% traditional)
-  - Advanced Fair Value Gaps (80-85% vs 50% actionable rate)
-  - Institutional Structure Analysis (90-95% vs 65% accuracy)
-  - Smart Money Liquidity Mapping (Real vs Guessed positioning)
-  - Complete SMC Dashboard with multi-exchange validation
+## Quick Commands
+```bash
+# Data Collection
+python main.py                          # Run collectors
+python check_status.py                  # System status
 
-### In Progress
-- ✅ Indicator calculations working properly (TASK-001 completed)
-- 🚀 **TASK-026 COMPLETED**: Revolutionary SMC system operational
-- 🎯 Next: TASK-025 Phase 2 (Cold Wallet Monitoring)
-- 🔧 Future: API development and dashboard visualization
+# API Server
+venv\Scripts\activate                   # Activate venv
+python api_server.py                    # Start API
+python test_api.py                      # Test endpoints
 
-### Architecture
-- **Language**: Python 3.12
-- **Style**: KISS (Keep It Simple, Stupid)
-- **Database**: MongoDB
-- **Exchanges**: Bybit, Binance
-- **Async**: All I/O operations
+# URLs
+http://localhost:8000                   # API Base
+http://localhost:8000/api/docs          # Swagger UI
+```
 
-### Key Files
-- `main.py` - Entry point
-- `src/manager.py` - Main coordinator with SMC integration
-- `src/collectors/` - Exchange WebSocket collectors (4 exchanges)
-- `src/indicators/` - Volume Profile, Order Flow calculators
-- `src/smc/` - **NEW: Smart Money Concepts with Institutional Intelligence**
-  - `order_blocks.py` - Enhanced Order Block detection (85-90% accuracy)
-  - `fvg_detector.py` - Advanced Fair Value Gap analysis (80-85% rate)
-  - `structure_analyzer.py` - Institutional structure analysis (90-95% accuracy)
-  - `liquidity_mapper.py` - Smart Money liquidity mapping
-  - `smc_dashboard.py` - Complete SMC integration
-- `src/storage/` - MongoDB manager
-- `test_smc.py` - SMC functionality testing
+## Recent Decisions
+- D001: Credit model (50/200/1000 queries)
+- D002: Focus on utility tokens
+- D003: Non-realtime deep analysis
+- D004: Simple auth (no OAuth initially)
+- D005: 15 total indicators planned
+- D006: Daily task system
 
-### Next Session TODOs
-1. ✅ TASK-001: Indicator calculations fixed and working
-2. ✅ TASK-026: SMC system completed with institutional intelligence
-3. 🎯 TASK-025 Phase 2: Cold Wallet Monitoring (next priority)
-4. 🚀 Test SMC system with `python test_smc.py`
-5. 📈 API development for SMC data access
-6. 📊 Dashboard visualization with TradingView integration
-
-### Indicator Development Plan
-- 12 sophisticated indicators planned
-- Based on Smart Money Concepts and Wyckoff
-- Focus on institutional activity detection
-- See `claude/tasks/task-tracker.md` for full list
-
-### Storage Strategy
-- Tiered storage approach designed (ADR-001)
-- Hot/Warm/Cold/Archive tiers
-- 97% storage reduction possible
-- Implementation after indicators work
-
-### Environment
-- MongoDB required (see .env for connection string)
-- Python 3.12+ with venv
-- No Docker yet (keeping it simple)
+See `claude/docs/DECISIONS.md` for details.

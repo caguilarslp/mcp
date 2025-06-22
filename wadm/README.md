@@ -20,12 +20,23 @@
 
 ## Quick Start
 
-1. Install dependencies:
+1. Create and activate virtual environment:
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Linux/Mac
+python3 -m venv venv
+source venv/bin/activate
+```
+
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Start MongoDB:
+3. Start MongoDB:
 ```bash
 # Using Docker
 docker run -d -p 27017:27017 --name wadm-mongo \
@@ -34,18 +45,30 @@ docker run -d -p 27017:27017 --name wadm-mongo \
   mongo:latest
 ```
 
-3. Run the system:
+4. Run the data collection system:
 ```bash
 python main.py
 ```
 
-4. Test SMC functionality:
+5. **NEW** Start the API server:
 ```bash
-python test_smc.py
+python api_server.py
 ```
 
-5. Check status:
+6. Access the API:
+- Swagger Docs: http://localhost:8000/api/docs
+- Health Check: http://localhost:8000/api/v1/system/health
+- API Documentation: See `docs/API_README.md`
+
+7. Test the system:
 ```bash
+# Test SMC functionality
+python test_smc.py
+
+# Test API endpoints
+python test_api.py
+
+# Check system status
 python check_status.py
 ```
 
@@ -56,6 +79,9 @@ python check_status.py
 - MongoDB storage with automatic TTL
 - Volume Profile and Order Flow indicators
 - Robust error handling and recovery
+- **NEW**: RESTful API with Swagger documentation
+- **NEW**: Authentication and rate limiting
+- **NEW**: Market data and system monitoring endpoints
 
 ### 🏆 SMC Components (TASK-026 COMPLETED)
 - **Enhanced Order Blocks** with institutional validation
@@ -71,19 +97,26 @@ wadm/
 ├── src/
 │   ├── collectors/     # 4 Exchange WebSocket collectors
 │   ├── indicators/     # Volume Profile, Order Flow
-│   ├── smc/           # 🏆 Smart Money Concepts (NEW)
+│   ├── smc/           # 🏆 Smart Money Concepts
 │   │   ├── order_blocks.py      # Enhanced Order Block detection
 │   │   ├── fvg_detector.py      # Advanced Fair Value Gap analysis
 │   │   ├── structure_analyzer.py # Institutional structure analysis
 │   │   ├── liquidity_mapper.py  # Smart Money liquidity mapping
 │   │   └── smc_dashboard.py     # Complete SMC integration
+│   ├── api/           # 🆕 FastAPI REST API
+│   │   ├── routers/    # API endpoints
+│   │   ├── models/     # Pydantic models
+│   │   ├── middleware/ # Rate limiting, auth
+│   │   └── app.py      # FastAPI application
 │   ├── models/        # Data models
 │   ├── storage/       # MongoDB manager
-│   └── manager.py     # Main coordinator with SMC integration
-├── claude/           # Development tracking system
+│   └── manager.py     # Main coordinator
+├── claude/           # Development tracking
+├── docs/            # Documentation
 ├── logs/            # Application logs
-├── test_smc.py      # SMC functionality testing
-└── main.py         # Entry point
+├── api_server.py    # 🆕 API server runner
+├── test_api.py      # 🆕 API test suite
+└── main.py         # Data collection entry point
 ```
 
 ## SMC System Architecture
@@ -151,6 +184,8 @@ tail -f logs/wadm.log
 - **TASK-001**: ✅ Indicator calculations fixed
 - **TASK-026**: ✅ Revolutionary SMC implementation completed
 - **TASK-025**: ✅ Phase 1 institutional data integration
+- **TASK-029**: ✅ FastAPI base setup completed
+- **Active**: TASK-030 Market Data API endpoints
 - **Next**: Phase 2 Cold Wallet Monitoring
 
 ## Development Tracking
