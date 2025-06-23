@@ -1,0 +1,269 @@
+{
+  "id": "BTCUSDT_wyckoff_D_1750278587219",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "D",
+    "analysisDate": "2025-06-18T20:29:47.219Z",
+    "currentPhase": "distribution_phase_a",
+    "phaseConfidence": 40,
+    "phaseProgress": 10,
+    "tradingRange": {
+      "startDate": "2025-05-10T00:00:00.000Z",
+      "endDate": "2025-06-18T00:00:00.000Z",
+      "support": 100403.7,
+      "resistance": 111999,
+      "duration": 40,
+      "width": 11.548677986966618,
+      "volumeProfile": {
+        "averageVolume": 9898.038182249998,
+        "volumeTrend": "stable",
+        "significantEvents": []
+      },
+      "strength": "moderate",
+      "type": "distribution"
+    },
+    "keyEvents": [
+      {
+        "timestamp": "2025-04-02T00:00:00.000Z",
+        "type": "test",
+        "price": 88526.9,
+        "volume": 14844.891704,
+        "significance": 90,
+        "description": "Test of 88773.5000: Price touched 88526.9000 (0.278% from level) and bounced from support with good quality on 1.5x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 88773.5,
+        "testQuality": "good",
+        "volumeOnTest": 14844.891704,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-04-07T00:00:00.000Z",
+        "type": "test",
+        "price": 74500,
+        "volume": 27462.121395,
+        "significance": 85,
+        "description": "Test of 74500.0000: Price touched 74500.0000 (0.000% from level) and rejected at resistance with good quality on 2.7x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 74500,
+        "testQuality": "good",
+        "volumeOnTest": 27462.121395,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-04-21T00:00:00.000Z",
+        "type": "test",
+        "price": 88474.1,
+        "volume": 12746.858437,
+        "significance": 90,
+        "description": "Test of 88773.5000: Price touched 88474.1000 (0.337% from level) and bounced from support with good quality on 1.3x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 88773.5,
+        "testQuality": "good",
+        "volumeOnTest": 12746.858437,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-05-08T00:00:00.000Z",
+        "type": "spring",
+        "price": 96880.5,
+        "volume": 20572.560672,
+        "significance": 72,
+        "description": "Deep spring: 3.51% penetration below support with rapid recovery (6.3% speed) on low volume (NaNx avg) - excellent quality",
+        "context": {
+          "phaseAtTime": "accumulation_phase_c",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "low"
+        },
+        "penetrationDepth": 3.5090340296224114,
+        "recoverySpeed": 6.2939394408575575,
+        "volumeOnPenetration": 20572.560672,
+        "volumeOnRecovery": 18005.4964195,
+        "isSuccessful": false
+      },
+      {
+        "timestamp": "2025-05-09T00:00:00.000Z",
+        "type": "test",
+        "price": 102978.1,
+        "volume": 15438.432167,
+        "significance": 85,
+        "description": "Test of 103083.5000: Price touched 102978.1000 (0.102% from level) and bounced from support with good quality on 1.5x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 103083.5,
+        "testQuality": "good",
+        "volumeOnTest": 15438.432167,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-05-18T00:00:00.000Z",
+        "type": "test",
+        "price": 103093.2,
+        "volume": 9789.062084,
+        "significance": 95,
+        "description": "Test of 103083.5000: Price touched 103093.2000 (0.009% from level) and rejected at resistance with good quality on 1.0x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 103083.5,
+        "testQuality": "good",
+        "volumeOnTest": 9789.062084,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-05-23T00:00:00.000Z",
+        "type": "test",
+        "price": 111797.7,
+        "volume": 13427.314896,
+        "significance": 90,
+        "description": "Test of 111999.0000: Price touched 111797.7000 (0.180% from level) and bounced from support with good quality on 1.3x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 111999,
+        "testQuality": "good",
+        "volumeOnTest": 13427.314896,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-05-30T00:00:00.000Z",
+        "type": "test",
+        "price": 106333.22,
+        "volume": 11832.476247,
+        "significance": 90,
+        "description": "Test of 106799.0000: Price touched 106333.2200 (0.436% from level) and bounced from support with good quality on 1.2x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 106799,
+        "testQuality": "good",
+        "volumeOnTest": 11832.476247,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-08T00:00:00.000Z",
+        "type": "test",
+        "price": 105724.9,
+        "volume": 3542.694151,
+        "significance": 100,
+        "description": "Test of 105847.1000: Price touched 105724.9000 (0.115% from level) and bounced from support with good quality on 0.4x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "low"
+        },
+        "levelTested": 105847.1,
+        "testQuality": "good",
+        "volumeOnTest": 3542.694151,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-13T00:00:00.000Z",
+        "type": "test",
+        "price": 102684.7,
+        "volume": 18323.666685,
+        "significance": 85,
+        "description": "Test of 103083.5000: Price touched 102684.7000 (0.387% from level) and bounced from support with good quality on 1.8x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 103083.5,
+        "testQuality": "good",
+        "volumeOnTest": 18323.666685,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-16T00:00:00.000Z",
+        "type": "test",
+        "price": 106799.9,
+        "volume": 9829.67188,
+        "significance": 95,
+        "description": "Test of 106799.0000: Price touched 106799.9000 (0.001% from level) and rejected at resistance with good quality on 1.0x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_resistance",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 106799,
+        "testQuality": "good",
+        "volumeOnTest": 9829.67188,
+        "resultingAction": "bounce"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "decreasing",
+      "climaxEvents": [],
+      "dryUpPeriods": [
+        {
+          "startDate": "2025-03-21T00:00:00.000Z",
+          "endDate": "2025-03-23T00:00:00.000Z",
+          "averageVolume": 3705.2823879999996,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-04-18T00:00:00.000Z",
+          "endDate": "2025-04-20T00:00:00.000Z",
+          "averageVolume": 4336.583565333333,
+          "significance": "moderate"
+        }
+      ],
+      "avgVolumeInRange": 9801.733425177776,
+      "currentVolumeRank": 33,
+      "interpretation": "Volume trend: DECREASING - Declining participation, potential exhaustion or absorption | No significant climax events - orderly price movement | 2 dry-up period(s) detected - potential absorption"
+    },
+    "interpretation": {
+      "bias": "distribution",
+      "strength": "weak",
+      "implications": [
+        "Preliminary supply detected - smart money beginning to distribute",
+        "Buying climax may have occurred at high prices",
+        "Strong hands selling to weak hands"
+      ],
+      "nextExpectedEvents": [
+        "Automatic reaction from buying climax",
+        "Secondary rally with less enthusiasm"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "BTCUSDT_wyckoff_D_1750278587219",
+    "type": "wyckoff",
+    "timestamp": "2025-06-18T20:29:47.219Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "D",
+    "tags": [
+      "timeframe:D",
+      "phase:distribution_phase_a",
+      "confidence:40",
+      "progress:10",
+      "bias:distribution",
+      "strength:weak",
+      "events:11",
+      "range:detected"
+    ]
+  },
+  "timestamp": "2025-06-18T20:29:47.219Z"
+}

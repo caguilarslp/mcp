@@ -1,0 +1,14 @@
+[
+  {
+    "id": "BTCUSDT_240_1750292863832",
+    "symbol": "BTCUSDT",
+    "timeframe": "240",
+    "timestamp": "2025-06-19T00:27:43.832Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 200
+  }
+]

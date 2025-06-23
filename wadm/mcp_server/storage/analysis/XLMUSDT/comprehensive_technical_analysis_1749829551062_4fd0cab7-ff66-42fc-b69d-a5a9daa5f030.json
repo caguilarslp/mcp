@@ -1,0 +1,1799 @@
+{
+  "id": "4fd0cab7-ff66-42fc-b69d-a5a9daa5f030",
+  "timestamp": 1749829551062,
+  "symbol": "XLMUSDT",
+  "analysisType": "comprehensive_technical_analysis",
+  "data": {
+    "symbol": "XLMUSDT",
+    "timeframe": "60",
+    "currentPrice": 0.2604,
+    "fibonacci": {
+      "symbol": "XLMUSDT",
+      "timeframe": "60",
+      "currentPrice": 0.2604,
+      "trend": "downtrend",
+      "swingHigh": {
+        "index": 49,
+        "timestamp": "2025-06-11T13:00:00.000Z",
+        "price": 0.2853,
+        "type": "high",
+        "strength": 15.064263500992297,
+        "volume": 1909034.1,
+        "confirmed": true
+      },
+      "swingLow": {
+        "index": 86,
+        "timestamp": "2025-06-13T02:00:00.000Z",
+        "price": 0.2532,
+        "type": "low",
+        "strength": 9.165131595559217,
+        "volume": 2126450.4,
+        "confirmed": true
+      },
+      "retracementLevels": [
+        {
+          "level": 0.236,
+          "price": 0.2777244,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 6.652995391705054
+        },
+        {
+          "level": 0.382,
+          "price": 0.2730378,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 22.61635342061976,
+          "distance": 4.853225806451603
+        },
+        {
+          "level": 0.5,
+          "price": 0.26925,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 3.3986175115207256
+        },
+        {
+          "level": 0.618,
+          "price": 0.2654622,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 1.9440092165898468
+        },
+        {
+          "level": 0.786,
+          "price": 0.2600694,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -0.12695852534562757
+        }
+      ],
+      "extensionLevels": [
+        {
+          "level": 1,
+          "price": 0.2532,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 76.66152105073391,
+          "distance": -2.7649769585253607
+        },
+        {
+          "level": 1.272,
+          "price": 0.24446879999999999,
+          "label": "127.2%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -6.117972350230428
+        },
+        {
+          "level": 1.414,
+          "price": 0.23991059999999997,
+          "label": "141.4%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -7.868433179723519
+        },
+        {
+          "level": 1.618,
+          "price": 0.23336219999999996,
+          "label": "161.8%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -10.383179723502325
+        },
+        {
+          "level": 2,
+          "price": 0.22109999999999996,
+          "label": "200.0%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -15.092165898617532
+        },
+        {
+          "level": 2.618,
+          "price": 0.20126219999999995,
+          "label": "261.8%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -22.710368663594497
+        }
+      ],
+      "keyLevels": [
+        {
+          "level": 1,
+          "price": 0.2532,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 76.66152105073391,
+          "distance": -2.7649769585253607
+        },
+        {
+          "level": 0.382,
+          "price": 0.2730378,
+          "label": "38.2%",
+          "type": "retracement",
+          "strength": 22.61635342061976,
+          "distance": 4.853225806451603
+        },
+        {
+          "level": 0.236,
+          "price": 0.2777244,
+          "label": "23.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 6.652995391705054
+        },
+        {
+          "level": 0.5,
+          "price": 0.26925,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 3.3986175115207256
+        },
+        {
+          "level": 0.618,
+          "price": 0.2654622,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 1.9440092165898468
+        },
+        {
+          "level": 0.786,
+          "price": 0.2600694,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -0.12695852534562757
+        },
+        {
+          "level": 1.272,
+          "price": 0.24446879999999999,
+          "label": "127.2%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -6.117972350230428
+        },
+        {
+          "level": 1.414,
+          "price": 0.23991059999999997,
+          "label": "141.4%",
+          "type": "extension",
+          "strength": 0,
+          "distance": -7.868433179723519
+        }
+      ],
+      "currentPosition": {
+        "nearestLevel": {
+          "level": 0.786,
+          "price": 0.2600694,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": -0.12695852534562757
+        },
+        "retracement": 77.57009345794381,
+        "nextTargets": [
+          {
+            "level": 0.786,
+            "price": 0.2600694,
+            "label": "78.6%",
+            "type": "retracement",
+            "strength": 0,
+            "distance": -0.12695852534562757
+          },
+          {
+            "level": 0.618,
+            "price": 0.2654622,
+            "label": "61.8%",
+            "type": "retracement",
+            "strength": 0,
+            "distance": 1.9440092165898468
+          },
+          {
+            "level": 1,
+            "price": 0.2532,
+            "label": "100.0%",
+            "type": "extension",
+            "strength": 76.66152105073391,
+            "distance": -2.7649769585253607
+          },
+          {
+            "level": 0.5,
+            "price": 0.26925,
+            "label": "50.0%",
+            "type": "retracement",
+            "strength": 0,
+            "distance": 3.3986175115207256
+          }
+        ]
+      },
+      "analysisTime": "2025-06-13T15:45:50.573Z",
+      "confidence": 29.809772742877986,
+      "validity": 87
+    },
+    "bollingerBands": {
+      "symbol": "XLMUSDT",
+      "timeframe": "60",
+      "currentPrice": 0.2604,
+      "currentBands": {
+        "upper": 0.2683081228757731,
+        "middle": 0.26012500000000005,
+        "lower": 0.251941877124227,
+        "bandwidth": 6.291685055856262,
+        "position": 51.68028761253319
+      },
+      "bandHistory": [
+        {
+          "upper": 0.28355484636431955,
+          "middle": 0.28087,
+          "lower": 0.27818515363568047,
+          "bandwidth": 1.911807145170034,
+          "position": 80.35555444925954
+        },
+        {
+          "upper": 0.2836109447062067,
+          "middle": 0.28107,
+          "lower": 0.2785290552937933,
+          "bandwidth": 1.8080511660488092,
+          "position": 78.13914046431168
+        },
+        {
+          "upper": 0.28358844795694066,
+          "middle": 0.281165,
+          "lower": 0.27874155204305934,
+          "bandwidth": 1.7238617587115472,
+          "position": 52.78528778828036
+        },
+        {
+          "upper": 0.28359260127994707,
+          "middle": 0.28115499999999993,
+          "lower": 0.2787173987200528,
+          "bandwidth": 1.7339910582754234,
+          "position": 30.411070344928593
+        },
+        {
+          "upper": 0.2836688993800454,
+          "middle": 0.28107999999999994,
+          "lower": 0.27849110061995447,
+          "bandwidth": 1.842108566988383,
+          "position": 11.759811616063109
+        },
+        {
+          "upper": 0.28380828431330135,
+          "middle": 0.2809749999999999,
+          "lower": 0.2781417156866985,
+          "bandwidth": 2.0167518913080755,
+          "position": 4.558037329485871
+        },
+        {
+          "upper": 0.2837930420224775,
+          "middle": 0.28098499999999993,
+          "lower": 0.27817695797752234,
+          "bandwidth": 1.9987131145631165,
+          "position": 19.996887751109387
+        },
+        {
+          "upper": 0.28395727600327425,
+          "middle": 0.28093,
+          "lower": 0.2779027239967258,
+          "bandwidth": 2.155181720196659,
+          "position": 0
+        },
+        {
+          "upper": 0.28433846445663463,
+          "middle": 0.28078999999999993,
+          "lower": 0.2772415355433652,
+          "bandwidth": 2.5274863468319415,
+          "position": 0
+        },
+        {
+          "upper": 0.2845353291002143,
+          "middle": 0.280585,
+          "lower": 0.27663467089978566,
+          "bandwidth": 2.8157806726762384,
+          "position": 2.0925990723831
+        },
+        {
+          "upper": 0.2846156070989798,
+          "middle": 0.28041499999999997,
+          "lower": 0.2762143929010201,
+          "bandwidth": 2.9959931522777654,
+          "position": 12.922026190494194
+        },
+        {
+          "upper": 0.28464909492996016,
+          "middle": 0.2802299999999999,
+          "lower": 0.2758109050700397,
+          "bandwidth": 3.1539056703138377,
+          "position": 15.7169618663613
+        },
+        {
+          "upper": 0.2844503190786003,
+          "middle": 0.279945,
+          "lower": 0.2754396809213997,
+          "bandwidth": 3.2187173041849655,
+          "position": 16.206611042674123
+        },
+        {
+          "upper": 0.28423691008205093,
+          "middle": 0.279655,
+          "lower": 0.27507308991794904,
+          "bandwidth": 3.27683043897012,
+          "position": 16.662375021636148
+        },
+        {
+          "upper": 0.28383842956945965,
+          "middle": 0.27935,
+          "lower": 0.2748615704305403,
+          "bandwidth": 3.2134809876210215,
+          "position": 21.59362801021987
+        },
+        {
+          "upper": 0.28365884363525423,
+          "middle": 0.27919499999999997,
+          "lower": 0.2747311563647457,
+          "bandwidth": 3.1976529918188086,
+          "position": 35.49456358896152
+        },
+        {
+          "upper": 0.283161539767858,
+          "middle": 0.27891499999999997,
+          "lower": 0.2746684602321419,
+          "bandwidth": 3.045042229968305,
+          "position": 28.629659685072955
+        },
+        {
+          "upper": 0.2829580201464737,
+          "middle": 0.27859,
+          "lower": 0.2742219798535263,
+          "bandwidth": 3.1358054104409305,
+          "position": 10.050550558729997
+        },
+        {
+          "upper": 0.282613840885139,
+          "middle": 0.27829,
+          "lower": 0.27396615911486094,
+          "bandwidth": 3.107435326557937,
+          "position": 18.893397427673055
+        },
+        {
+          "upper": 0.2822112813155139,
+          "middle": 0.278045,
+          "lower": 0.2738787186844861,
+          "bandwidth": 2.9968395874868365,
+          "position": 30.25817419151992
+        },
+        {
+          "upper": 0.281551648179706,
+          "middle": 0.27764500000000003,
+          "lower": 0.27373835182029405,
+          "bandwidth": 2.814131844409937,
+          "position": 9.748103037055383
+        },
+        {
+          "upper": 0.28090636186684315,
+          "middle": 0.27716999999999997,
+          "lower": 0.2734336381331568,
+          "bandwidth": 2.6960795662179704,
+          "position": 0
+        },
+        {
+          "upper": 0.2802145117990621,
+          "middle": 0.276835,
+          "lower": 0.2734554882009379,
+          "bandwidth": 2.441535065336461,
+          "position": 16.933093699802164
+        },
+        {
+          "upper": 0.27968499599999747,
+          "middle": 0.27656000000000003,
+          "lower": 0.2734350040000026,
+          "bandwidth": 2.2599045415081265,
+          "position": 20.239961907126386
+        },
+        {
+          "upper": 0.279316619691472,
+          "middle": 0.27636,
+          "lower": 0.273403380308528,
+          "bandwidth": 2.139687141027634,
+          "position": 28.691882428533123
+        },
+        {
+          "upper": 0.279247451580657,
+          "middle": 0.276085,
+          "lower": 0.27292254841934305,
+          "bandwidth": 2.290926041369127,
+          "position": 0
+        },
+        {
+          "upper": 0.278697154656794,
+          "middle": 0.275865,
+          "lower": 0.27303284534320604,
+          "bandwidth": 2.0532903099660946,
+          "position": 32.96350099234279
+        },
+        {
+          "upper": 0.2784926264783962,
+          "middle": 0.27575,
+          "lower": 0.2730073735216038,
+          "bandwidth": 1.9892123143399325,
+          "position": 39.97311510822974
+        },
+        {
+          "upper": 0.27849738655784456,
+          "middle": 0.275605,
+          "lower": 0.2727126134421554,
+          "bandwidth": 2.0989362006092582,
+          "position": 13.61136456171631
+        },
+        {
+          "upper": 0.2789028861231387,
+          "middle": 0.27528499999999995,
+          "lower": 0.2716671138768612,
+          "bandwidth": 2.628465861299189,
+          "position": 0
+        },
+        {
+          "upper": 0.2794655582188125,
+          "middle": 0.27483,
+          "lower": 0.2701944417811875,
+          "bandwidth": 3.373400443046616,
+          "position": 0
+        },
+        {
+          "upper": 0.27965065409820705,
+          "middle": 0.27439500000000006,
+          "lower": 0.26913934590179306,
+          "bandwidth": 3.830721476854167,
+          "position": 0
+        },
+        {
+          "upper": 0.27979129045595935,
+          "middle": 0.2739400000000001,
+          "lower": 0.2680887095440408,
+          "bandwidth": 4.271950394947272,
+          "position": 0
+        },
+        {
+          "upper": 0.2798750292739378,
+          "middle": 0.27347000000000005,
+          "lower": 0.2670649707260623,
+          "bandwidth": 4.684264653481382,
+          "position": 1.054087875032455
+        },
+        {
+          "upper": 0.2817289622313096,
+          "middle": 0.272515,
+          "lower": 0.2633010377686904,
+          "bandwidth": 6.762168857721301,
+          "position": 0
+        },
+        {
+          "upper": 0.28261859709054393,
+          "middle": 0.27145500000000006,
+          "lower": 0.2602914029094562,
+          "bandwidth": 8.225007526510009,
+          "position": 0
+        },
+        {
+          "upper": 0.2833117999136256,
+          "middle": 0.270345,
+          "lower": 0.2573782000863744,
+          "bandwidth": 9.59277953254219,
+          "position": 0
+        },
+        {
+          "upper": 0.28329347671908717,
+          "middle": 0.26949999999999996,
+          "lower": 0.25570652328091276,
+          "bandwidth": 10.23634635924839,
+          "position": 9.038608502658336
+        },
+        {
+          "upper": 0.28310446973938896,
+          "middle": 0.26856,
+          "lower": 0.2540155302606111,
+          "bandwidth": 10.831449016524383,
+          "position": 9.572262823195501
+        },
+        {
+          "upper": 0.28251540759403637,
+          "middle": 0.26758,
+          "lower": 0.2526445924059636,
+          "bandwidth": 11.16332132000627,
+          "position": 13.911262775632597
+        },
+        {
+          "upper": 0.2819051418199171,
+          "middle": 0.26674499999999995,
+          "lower": 0.2515848581800828,
+          "bandwidth": 11.366767377020864,
+          "position": 20.49829709294611
+        },
+        {
+          "upper": 0.28130065443624713,
+          "middle": 0.26602,
+          "lower": 0.2507393455637528,
+          "bandwidth": 11.488350076119957,
+          "position": 25.393724033959497
+        },
+        {
+          "upper": 0.2802676513818785,
+          "middle": 0.26525999999999994,
+          "lower": 0.2502523486181214,
+          "bandwidth": 11.315427416028458,
+          "position": 30.476625386315405
+        },
+        {
+          "upper": 0.27908961800320864,
+          "middle": 0.26442999999999994,
+          "lower": 0.24977038199679125,
+          "bandwidth": 11.087711684157394,
+          "position": 28.41007863023976
+        },
+        {
+          "upper": 0.2776007163140005,
+          "middle": 0.26364,
+          "lower": 0.24967928368599948,
+          "bandwidth": 10.590742159005098,
+          "position": 34.456384964832885
+        },
+        {
+          "upper": 0.27636428943511954,
+          "middle": 0.262995,
+          "lower": 0.2496257105648804,
+          "bandwidth": 10.166953314792732,
+          "position": 38.79895594102242
+        },
+        {
+          "upper": 0.27449054886756596,
+          "middle": 0.262215,
+          "lower": 0.24993945113243402,
+          "bandwidth": 9.362964641661213,
+          "position": 38.12680381362855
+        },
+        {
+          "upper": 0.2721935660473534,
+          "middle": 0.26138500000000003,
+          "lower": 0.25057643395264667,
+          "bandwidth": 8.270226713356436,
+          "position": 37.11669990358256
+        },
+        {
+          "upper": 0.2699557823894891,
+          "middle": 0.260625,
+          "lower": 0.2512942176105109,
+          "bandwidth": 7.160312625027599,
+          "position": 37.54123768538917
+        },
+        {
+          "upper": 0.2683081228757731,
+          "middle": 0.26012500000000005,
+          "lower": 0.251941877124227,
+          "bandwidth": 6.291685055856262,
+          "position": 51.68028761253319
+        }
+      ],
+      "squeeze": {
+        "isActive": false,
+        "duration": 0,
+        "intensity": 0,
+        "breakoutProbability": 0,
+        "expectedDirection": "unknown"
+      },
+      "walk": {
+        "isWalking": false,
+        "direction": "none",
+        "duration": 0,
+        "strength": "weak",
+        "integrityBreaches": 0
+      },
+      "divergence": {
+        "type": "none",
+        "strength": 0,
+        "periods": 0,
+        "confirmation": false
+      },
+      "pattern": {
+        "type": "consolidation",
+        "confidence": 40,
+        "description": "No clear Bollinger pattern detected. Market in consolidation.",
+        "actionable": false
+      },
+      "volatility": {
+        "current": 84,
+        "trend": "contracting",
+        "extremes": {
+          "isAtLow": false,
+          "isAtHigh": true
+        }
+      },
+      "signals": {
+        "signal": "hold",
+        "strength": 20,
+        "reasoning": "No clear Bollinger signals. Maintain current position.",
+        "confluence": []
+      },
+      "analysisTime": "2025-06-13T15:45:50.871Z",
+      "period": 20,
+      "standardDeviation": 2,
+      "confidence": 90.5
+    },
+    "elliottWave": {
+      "symbol": "XLMUSDT",
+      "timeframe": "60",
+      "currentPrice": 0.2604,
+      "currentSequence": {
+        "type": "impulsive",
+        "waves": [],
+        "isComplete": false,
+        "degree": "minuette",
+        "startTime": "2025-06-13T15:45:51.058Z",
+        "validity": 0
+      },
+      "historicalSequences": [],
+      "currentWave": {
+        "wave": null,
+        "position": "uncertain",
+        "nextExpected": "Waiting for initial wave formation"
+      },
+      "projections": [],
+      "ruleValidation": {
+        "wave2Rule": true,
+        "wave3Rule": true,
+        "wave4Rule": true,
+        "alternationRule": true,
+        "channelRule": true,
+        "overallValidity": 0
+      },
+      "signals": {
+        "signal": "hold",
+        "strength": 30,
+        "reasoning": "Insufficient Elliott Wave structure or low validity",
+        "waveContext": "Pattern not clear",
+        "riskLevel": "high"
+      },
+      "analysisTime": "2025-06-13T15:45:51.059Z",
+      "confidence": 0,
+      "dataQuality": 100
+    },
+    "confluences": [
+      {
+        "level": 0.2532,
+        "indicators": [
+          "Fibonacci",
+          "Support/Resistance"
+        ],
+        "strength": 100,
+        "type": "support",
+        "distance": -2.7649769585253607,
+        "actionable": true,
+        "cluster": {
+          "averagePrice": 0.2532,
+          "priceRange": {
+            "min": 0.2532,
+            "max": 0.2532
+          },
+          "indicators": [
+            "Fibonacci",
+            "Support/Resistance"
+          ],
+          "levels": [
+            {
+              "price": 0.2532,
+              "indicator": "Fibonacci",
+              "type": "target",
+              "strength": 76.66152105073391,
+              "timeframe": "60",
+              "source": "fib_ext_100.0%",
+              "metadata": {
+                "fibLevel": 1,
+                "label": "100.0%",
+                "levelType": "extension"
+              }
+            },
+            {
+              "price": 0.2532,
+              "indicator": "Fibonacci",
+              "type": "support",
+              "strength": 96.66152105073391,
+              "timeframe": "60",
+              "source": "fib_key_100.0%",
+              "metadata": {
+                "fibLevel": 1,
+                "label": "100.0%",
+                "levelType": "key"
+              }
+            },
+            {
+              "price": 0.2532,
+              "indicator": "Support/Resistance",
+              "type": "support",
+              "strength": 76.66152122434502,
+              "timeframe": "60",
+              "source": "sr_support_0",
+              "metadata": {
+                "levelType": "support",
+                "touches": 1,
+                "volume": 0
+              }
+            }
+          ],
+          "strength": 100,
+          "type": "support",
+          "distance": -2.7649769585253607
+        }
+      },
+      {
+        "level": 0.26010959277108436,
+        "indicators": [
+          "Fibonacci",
+          "Bollinger Bands"
+        ],
+        "strength": 92.2862439466084,
+        "type": "support",
+        "distance": -0.11152351340847032,
+        "actionable": true,
+        "cluster": {
+          "averagePrice": 0.26010959277108436,
+          "priceRange": {
+            "min": 0.2600694,
+            "max": 0.26012500000000005
+          },
+          "indicators": [
+            "Fibonacci",
+            "Bollinger Bands"
+          ],
+          "levels": [
+            {
+              "price": 0.2600694,
+              "indicator": "Fibonacci",
+              "type": "support",
+              "strength": 20,
+              "timeframe": "60",
+              "source": "fib_key_78.6%",
+              "metadata": {
+                "fibLevel": 0.786,
+                "label": "78.6%",
+                "levelType": "key"
+              }
+            },
+            {
+              "price": 0.26012500000000005,
+              "indicator": "Bollinger Bands",
+              "type": "support",
+              "strength": 50,
+              "timeframe": "60",
+              "source": "bb_middle",
+              "metadata": {
+                "bandType": "middle",
+                "bandwidth": 6.291685055856262,
+                "position": 51.68028761253319,
+                "walking": false
+              }
+            }
+          ],
+          "strength": 92.2862439466084,
+          "type": "support",
+          "distance": -0.11152351340847032
+        }
+      },
+      {
+        "level": 0.26851058244453213,
+        "indicators": [
+          "Bollinger Bands",
+          "Fibonacci"
+        ],
+        "strength": 88.99221600261711,
+        "type": "resistance",
+        "distance": 3.1146629971321467,
+        "actionable": true,
+        "cluster": {
+          "averagePrice": 0.26851058244453213,
+          "priceRange": {
+            "min": 0.2683081228757731,
+            "max": 0.26925
+          },
+          "indicators": [
+            "Bollinger Bands",
+            "Fibonacci"
+          ],
+          "levels": [
+            {
+              "price": 0.2683081228757731,
+              "indicator": "Bollinger Bands",
+              "type": "resistance",
+              "strength": 70,
+              "timeframe": "60",
+              "source": "bb_upper",
+              "metadata": {
+                "bandType": "upper",
+                "bandwidth": 6.291685055856262,
+                "position": 51.68028761253319,
+                "squeeze": false
+              }
+            },
+            {
+              "price": 0.26925,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 20,
+              "timeframe": "60",
+              "source": "fib_key_50.0%",
+              "metadata": {
+                "fibLevel": 0.5,
+                "label": "50.0%",
+                "levelType": "key"
+              }
+            }
+          ],
+          "strength": 88.99221600261711,
+          "type": "resistance",
+          "distance": 3.1146629971321467
+        }
+      },
+      {
+        "level": 0.2725223512059396,
+        "indicators": [
+          "Support/Resistance",
+          "Fibonacci"
+        ],
+        "strength": 89.0505087614306,
+        "type": "resistance",
+        "distance": 4.655280801052063,
+        "actionable": true,
+        "cluster": {
+          "averagePrice": 0.2725223512059396,
+          "priceRange": {
+            "min": 0.2721,
+            "max": 0.2730378
+          },
+          "indicators": [
+            "Support/Resistance",
+            "Fibonacci"
+          ],
+          "levels": [
+            {
+              "price": 0.2721,
+              "indicator": "Support/Resistance",
+              "type": "resistance",
+              "strength": 72.24237634600125,
+              "timeframe": "60",
+              "source": "sr_resistance_2",
+              "metadata": {
+                "levelType": "resistance",
+                "touches": 2,
+                "volume": 0
+              }
+            },
+            {
+              "price": 0.2730378,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 22.61635342061976,
+              "timeframe": "60",
+              "source": "fib_ret_38.2%",
+              "metadata": {
+                "fibLevel": 0.382,
+                "label": "38.2%",
+                "levelType": "retracement"
+              }
+            },
+            {
+              "price": 0.2730378,
+              "indicator": "Fibonacci",
+              "type": "resistance",
+              "strength": 42.61635342061976,
+              "timeframe": "60",
+              "source": "fib_key_38.2%",
+              "metadata": {
+                "fibLevel": 0.382,
+                "label": "38.2%",
+                "levelType": "key"
+              }
+            }
+          ],
+          "strength": 89.0505087614306,
+          "type": "resistance",
+          "distance": 4.655280801052063
+        }
+      }
+    ],
+    "confluenceMetrics": {
+      "totalLevelsCollected": 10,
+      "clustersFormed": 4,
+      "confluencesFound": 4,
+      "actionableConfluences": 4,
+      "keyConfluences": [
+        {
+          "level": 0.2532,
+          "indicators": [
+            "Fibonacci",
+            "Support/Resistance"
+          ],
+          "strength": 100,
+          "type": "support",
+          "distance": -2.7649769585253607,
+          "actionable": true,
+          "cluster": {
+            "averagePrice": 0.2532,
+            "priceRange": {
+              "min": 0.2532,
+              "max": 0.2532
+            },
+            "indicators": [
+              "Fibonacci",
+              "Support/Resistance"
+            ],
+            "levels": [
+              {
+                "price": 0.2532,
+                "indicator": "Fibonacci",
+                "type": "target",
+                "strength": 76.66152105073391,
+                "timeframe": "60",
+                "source": "fib_ext_100.0%",
+                "metadata": {
+                  "fibLevel": 1,
+                  "label": "100.0%",
+                  "levelType": "extension"
+                }
+              },
+              {
+                "price": 0.2532,
+                "indicator": "Fibonacci",
+                "type": "support",
+                "strength": 96.66152105073391,
+                "timeframe": "60",
+                "source": "fib_key_100.0%",
+                "metadata": {
+                  "fibLevel": 1,
+                  "label": "100.0%",
+                  "levelType": "key"
+                }
+              },
+              {
+                "price": 0.2532,
+                "indicator": "Support/Resistance",
+                "type": "support",
+                "strength": 76.66152122434502,
+                "timeframe": "60",
+                "source": "sr_support_0",
+                "metadata": {
+                  "levelType": "support",
+                  "touches": 1,
+                  "volume": 0
+                }
+              }
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -2.7649769585253607
+          }
+        },
+        {
+          "level": 0.26010959277108436,
+          "indicators": [
+            "Fibonacci",
+            "Bollinger Bands"
+          ],
+          "strength": 92.2862439466084,
+          "type": "support",
+          "distance": -0.11152351340847032,
+          "actionable": true,
+          "cluster": {
+            "averagePrice": 0.26010959277108436,
+            "priceRange": {
+              "min": 0.2600694,
+              "max": 0.26012500000000005
+            },
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands"
+            ],
+            "levels": [
+              {
+                "price": 0.2600694,
+                "indicator": "Fibonacci",
+                "type": "support",
+                "strength": 20,
+                "timeframe": "60",
+                "source": "fib_key_78.6%",
+                "metadata": {
+                  "fibLevel": 0.786,
+                  "label": "78.6%",
+                  "levelType": "key"
+                }
+              },
+              {
+                "price": 0.26012500000000005,
+                "indicator": "Bollinger Bands",
+                "type": "support",
+                "strength": 50,
+                "timeframe": "60",
+                "source": "bb_middle",
+                "metadata": {
+                  "bandType": "middle",
+                  "bandwidth": 6.291685055856262,
+                  "position": 51.68028761253319,
+                  "walking": false
+                }
+              }
+            ],
+            "strength": 92.2862439466084,
+            "type": "support",
+            "distance": -0.11152351340847032
+          }
+        },
+        {
+          "level": 0.26851058244453213,
+          "indicators": [
+            "Bollinger Bands",
+            "Fibonacci"
+          ],
+          "strength": 88.99221600261711,
+          "type": "resistance",
+          "distance": 3.1146629971321467,
+          "actionable": true,
+          "cluster": {
+            "averagePrice": 0.26851058244453213,
+            "priceRange": {
+              "min": 0.2683081228757731,
+              "max": 0.26925
+            },
+            "indicators": [
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "levels": [
+              {
+                "price": 0.2683081228757731,
+                "indicator": "Bollinger Bands",
+                "type": "resistance",
+                "strength": 70,
+                "timeframe": "60",
+                "source": "bb_upper",
+                "metadata": {
+                  "bandType": "upper",
+                  "bandwidth": 6.291685055856262,
+                  "position": 51.68028761253319,
+                  "squeeze": false
+                }
+              },
+              {
+                "price": 0.26925,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 20,
+                "timeframe": "60",
+                "source": "fib_key_50.0%",
+                "metadata": {
+                  "fibLevel": 0.5,
+                  "label": "50.0%",
+                  "levelType": "key"
+                }
+              }
+            ],
+            "strength": 88.99221600261711,
+            "type": "resistance",
+            "distance": 3.1146629971321467
+          }
+        },
+        {
+          "level": 0.2725223512059396,
+          "indicators": [
+            "Support/Resistance",
+            "Fibonacci"
+          ],
+          "strength": 89.0505087614306,
+          "type": "resistance",
+          "distance": 4.655280801052063,
+          "actionable": true,
+          "cluster": {
+            "averagePrice": 0.2725223512059396,
+            "priceRange": {
+              "min": 0.2721,
+              "max": 0.2730378
+            },
+            "indicators": [
+              "Support/Resistance",
+              "Fibonacci"
+            ],
+            "levels": [
+              {
+                "price": 0.2721,
+                "indicator": "Support/Resistance",
+                "type": "resistance",
+                "strength": 72.24237634600125,
+                "timeframe": "60",
+                "source": "sr_resistance_2",
+                "metadata": {
+                  "levelType": "resistance",
+                  "touches": 2,
+                  "volume": 0
+                }
+              },
+              {
+                "price": 0.2730378,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 22.61635342061976,
+                "timeframe": "60",
+                "source": "fib_ret_38.2%",
+                "metadata": {
+                  "fibLevel": 0.382,
+                  "label": "38.2%",
+                  "levelType": "retracement"
+                }
+              },
+              {
+                "price": 0.2730378,
+                "indicator": "Fibonacci",
+                "type": "resistance",
+                "strength": 42.61635342061976,
+                "timeframe": "60",
+                "source": "fib_key_38.2%",
+                "metadata": {
+                  "fibLevel": 0.382,
+                  "label": "38.2%",
+                  "levelType": "key"
+                }
+              }
+            ],
+            "strength": 89.0505087614306,
+            "type": "resistance",
+            "distance": 4.655280801052063
+          }
+        }
+      ]
+    },
+    "signals": {
+      "immediate": {
+        "signal": "buy",
+        "strength": 100,
+        "timeframe": "short",
+        "confluence": [
+          {
+            "level": 0.26010959277108436,
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands"
+            ],
+            "strength": 92.2862439466084,
+            "type": "support",
+            "distance": -0.11152351340847032,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.26010959277108436,
+              "priceRange": {
+                "min": 0.2600694,
+                "max": 0.26012500000000005
+              },
+              "indicators": [
+                "Fibonacci",
+                "Bollinger Bands"
+              ],
+              "levels": [
+                {
+                  "price": 0.2600694,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_78.6%",
+                  "metadata": {
+                    "fibLevel": 0.786,
+                    "label": "78.6%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 0.26012500000000005,
+                  "indicator": "Bollinger Bands",
+                  "type": "support",
+                  "strength": 50,
+                  "timeframe": "60",
+                  "source": "bb_middle",
+                  "metadata": {
+                    "bandType": "middle",
+                    "bandwidth": 6.291685055856262,
+                    "position": 51.68028761253319,
+                    "walking": false
+                  }
+                }
+              ],
+              "strength": 92.2862439466084,
+              "type": "support",
+              "distance": -0.11152351340847032
+            }
+          },
+          {
+            "level": 0.2532,
+            "indicators": [
+              "Fibonacci",
+              "Support/Resistance"
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -2.7649769585253607,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.2532,
+              "priceRange": {
+                "min": 0.2532,
+                "max": 0.2532
+              },
+              "indicators": [
+                "Fibonacci",
+                "Support/Resistance"
+              ],
+              "levels": [
+                {
+                  "price": 0.2532,
+                  "indicator": "Fibonacci",
+                  "type": "target",
+                  "strength": 76.66152105073391,
+                  "timeframe": "60",
+                  "source": "fib_ext_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "extension"
+                  }
+                },
+                {
+                  "price": 0.2532,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 96.66152105073391,
+                  "timeframe": "60",
+                  "source": "fib_key_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 0.2532,
+                  "indicator": "Support/Resistance",
+                  "type": "support",
+                  "strength": 76.66152122434502,
+                  "timeframe": "60",
+                  "source": "sr_support_0",
+                  "metadata": {
+                    "levelType": "support",
+                    "touches": 1,
+                    "volume": 0
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "support",
+              "distance": -2.7649769585253607
+            }
+          },
+          {
+            "level": 0.26851058244453213,
+            "indicators": [
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "strength": 88.99221600261711,
+            "type": "resistance",
+            "distance": 3.1146629971321467,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.26851058244453213,
+              "priceRange": {
+                "min": 0.2683081228757731,
+                "max": 0.26925
+              },
+              "indicators": [
+                "Bollinger Bands",
+                "Fibonacci"
+              ],
+              "levels": [
+                {
+                  "price": 0.2683081228757731,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_upper",
+                  "metadata": {
+                    "bandType": "upper",
+                    "bandwidth": 6.291685055856262,
+                    "position": 51.68028761253319,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 0.26925,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 88.99221600261711,
+              "type": "resistance",
+              "distance": 3.1146629971321467
+            }
+          }
+        ],
+        "reasoning": [
+          "Near strong support at 0.2601",
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 100
+      },
+      "shortTerm": {
+        "signal": "buy",
+        "strength": 100,
+        "timeframe": "medium",
+        "confluence": [
+          {
+            "level": 0.26010959277108436,
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands"
+            ],
+            "strength": 92.2862439466084,
+            "type": "support",
+            "distance": -0.11152351340847032,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.26010959277108436,
+              "priceRange": {
+                "min": 0.2600694,
+                "max": 0.26012500000000005
+              },
+              "indicators": [
+                "Fibonacci",
+                "Bollinger Bands"
+              ],
+              "levels": [
+                {
+                  "price": 0.2600694,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_78.6%",
+                  "metadata": {
+                    "fibLevel": 0.786,
+                    "label": "78.6%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 0.26012500000000005,
+                  "indicator": "Bollinger Bands",
+                  "type": "support",
+                  "strength": 50,
+                  "timeframe": "60",
+                  "source": "bb_middle",
+                  "metadata": {
+                    "bandType": "middle",
+                    "bandwidth": 6.291685055856262,
+                    "position": 51.68028761253319,
+                    "walking": false
+                  }
+                }
+              ],
+              "strength": 92.2862439466084,
+              "type": "support",
+              "distance": -0.11152351340847032
+            }
+          },
+          {
+            "level": 0.2532,
+            "indicators": [
+              "Fibonacci",
+              "Support/Resistance"
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -2.7649769585253607,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.2532,
+              "priceRange": {
+                "min": 0.2532,
+                "max": 0.2532
+              },
+              "indicators": [
+                "Fibonacci",
+                "Support/Resistance"
+              ],
+              "levels": [
+                {
+                  "price": 0.2532,
+                  "indicator": "Fibonacci",
+                  "type": "target",
+                  "strength": 76.66152105073391,
+                  "timeframe": "60",
+                  "source": "fib_ext_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "extension"
+                  }
+                },
+                {
+                  "price": 0.2532,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 96.66152105073391,
+                  "timeframe": "60",
+                  "source": "fib_key_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 0.2532,
+                  "indicator": "Support/Resistance",
+                  "type": "support",
+                  "strength": 76.66152122434502,
+                  "timeframe": "60",
+                  "source": "sr_support_0",
+                  "metadata": {
+                    "levelType": "support",
+                    "touches": 1,
+                    "volume": 0
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "support",
+              "distance": -2.7649769585253607
+            }
+          },
+          {
+            "level": 0.26851058244453213,
+            "indicators": [
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "strength": 88.99221600261711,
+            "type": "resistance",
+            "distance": 3.1146629971321467,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.26851058244453213,
+              "priceRange": {
+                "min": 0.2683081228757731,
+                "max": 0.26925
+              },
+              "indicators": [
+                "Bollinger Bands",
+                "Fibonacci"
+              ],
+              "levels": [
+                {
+                  "price": 0.2683081228757731,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_upper",
+                  "metadata": {
+                    "bandType": "upper",
+                    "bandwidth": 6.291685055856262,
+                    "position": 51.68028761253319,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 0.26925,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 88.99221600261711,
+              "type": "resistance",
+              "distance": 3.1146629971321467
+            }
+          }
+        ],
+        "reasoning": [
+          "Near strong support at 0.2601",
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 100
+      },
+      "mediumTerm": {
+        "signal": "buy",
+        "strength": 100,
+        "timeframe": "long",
+        "confluence": [
+          {
+            "level": 0.26010959277108436,
+            "indicators": [
+              "Fibonacci",
+              "Bollinger Bands"
+            ],
+            "strength": 92.2862439466084,
+            "type": "support",
+            "distance": -0.11152351340847032,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.26010959277108436,
+              "priceRange": {
+                "min": 0.2600694,
+                "max": 0.26012500000000005
+              },
+              "indicators": [
+                "Fibonacci",
+                "Bollinger Bands"
+              ],
+              "levels": [
+                {
+                  "price": 0.2600694,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_78.6%",
+                  "metadata": {
+                    "fibLevel": 0.786,
+                    "label": "78.6%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 0.26012500000000005,
+                  "indicator": "Bollinger Bands",
+                  "type": "support",
+                  "strength": 50,
+                  "timeframe": "60",
+                  "source": "bb_middle",
+                  "metadata": {
+                    "bandType": "middle",
+                    "bandwidth": 6.291685055856262,
+                    "position": 51.68028761253319,
+                    "walking": false
+                  }
+                }
+              ],
+              "strength": 92.2862439466084,
+              "type": "support",
+              "distance": -0.11152351340847032
+            }
+          },
+          {
+            "level": 0.2532,
+            "indicators": [
+              "Fibonacci",
+              "Support/Resistance"
+            ],
+            "strength": 100,
+            "type": "support",
+            "distance": -2.7649769585253607,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.2532,
+              "priceRange": {
+                "min": 0.2532,
+                "max": 0.2532
+              },
+              "indicators": [
+                "Fibonacci",
+                "Support/Resistance"
+              ],
+              "levels": [
+                {
+                  "price": 0.2532,
+                  "indicator": "Fibonacci",
+                  "type": "target",
+                  "strength": 76.66152105073391,
+                  "timeframe": "60",
+                  "source": "fib_ext_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "extension"
+                  }
+                },
+                {
+                  "price": 0.2532,
+                  "indicator": "Fibonacci",
+                  "type": "support",
+                  "strength": 96.66152105073391,
+                  "timeframe": "60",
+                  "source": "fib_key_100.0%",
+                  "metadata": {
+                    "fibLevel": 1,
+                    "label": "100.0%",
+                    "levelType": "key"
+                  }
+                },
+                {
+                  "price": 0.2532,
+                  "indicator": "Support/Resistance",
+                  "type": "support",
+                  "strength": 76.66152122434502,
+                  "timeframe": "60",
+                  "source": "sr_support_0",
+                  "metadata": {
+                    "levelType": "support",
+                    "touches": 1,
+                    "volume": 0
+                  }
+                }
+              ],
+              "strength": 100,
+              "type": "support",
+              "distance": -2.7649769585253607
+            }
+          },
+          {
+            "level": 0.26851058244453213,
+            "indicators": [
+              "Bollinger Bands",
+              "Fibonacci"
+            ],
+            "strength": 88.99221600261711,
+            "type": "resistance",
+            "distance": 3.1146629971321467,
+            "actionable": true,
+            "cluster": {
+              "averagePrice": 0.26851058244453213,
+              "priceRange": {
+                "min": 0.2683081228757731,
+                "max": 0.26925
+              },
+              "indicators": [
+                "Bollinger Bands",
+                "Fibonacci"
+              ],
+              "levels": [
+                {
+                  "price": 0.2683081228757731,
+                  "indicator": "Bollinger Bands",
+                  "type": "resistance",
+                  "strength": 70,
+                  "timeframe": "60",
+                  "source": "bb_upper",
+                  "metadata": {
+                    "bandType": "upper",
+                    "bandwidth": 6.291685055856262,
+                    "position": 51.68028761253319,
+                    "squeeze": false
+                  }
+                },
+                {
+                  "price": 0.26925,
+                  "indicator": "Fibonacci",
+                  "type": "resistance",
+                  "strength": 20,
+                  "timeframe": "60",
+                  "source": "fib_key_50.0%",
+                  "metadata": {
+                    "fibLevel": 0.5,
+                    "label": "50.0%",
+                    "levelType": "key"
+                  }
+                }
+              ],
+              "strength": 88.99221600261711,
+              "type": "resistance",
+              "distance": 3.1146629971321467
+            }
+          }
+        ],
+        "reasoning": [
+          "Near strong support at 0.2601",
+          "Downtrend market structure"
+        ],
+        "riskLevel": "medium",
+        "confidence": 100
+      }
+    },
+    "marketStructure": {
+      "trend": "downtrend",
+      "phase": "markup",
+      "volatility": "very_high",
+      "momentum": "bearish"
+    },
+    "keyLevels": {
+      "immediateSupport": [],
+      "immediateResistance": [],
+      "targets": {
+        "conservative": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        },
+        "normal": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        },
+        "optimistic": {
+          "price": 0,
+          "timeframe": "1d",
+          "probability": 0
+        }
+      },
+      "stopLoss": {
+        "tight": 0,
+        "normal": 0,
+        "wide": 0
+      }
+    },
+    "riskAssessment": {
+      "overall": "medium",
+      "factors": [],
+      "opportunities": [],
+      "warnings": []
+    },
+    "analysisTime": "2025-06-13T15:45:51.061Z",
+    "confidence": 70,
+    "dataQuality": 80,
+    "recommendedTimeframe": "1h"
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-13T15:45:51.062Z",
+    "tags": [
+      "timeframe:60",
+      "confluences:4"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

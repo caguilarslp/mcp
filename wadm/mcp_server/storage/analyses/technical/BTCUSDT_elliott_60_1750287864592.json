@@ -1,0 +1,50 @@
+{
+  "id": "BTCUSDT_elliott_60_1750287864592",
+  "type": "technical",
+  "data": {
+    "symbol": "BTCUSDT",
+    "timeframe": "60",
+    "currentPrice": 104900.8,
+    "currentSequence": {
+      "type": "impulsive",
+      "waves": [],
+      "isComplete": false,
+      "degree": "minuette",
+      "startTime": "2025-06-18T23:04:24.591Z",
+      "validity": 0
+    },
+    "historicalSequences": [],
+    "currentWave": {
+      "wave": null,
+      "position": "uncertain",
+      "nextExpected": "Waiting for initial wave formation"
+    },
+    "projections": [],
+    "ruleValidation": {
+      "wave2Rule": true,
+      "wave3Rule": true,
+      "wave4Rule": true,
+      "alternationRule": true,
+      "channelRule": true,
+      "overallValidity": 0
+    },
+    "signals": {
+      "signal": "hold",
+      "strength": 30,
+      "reasoning": "Insufficient Elliott Wave structure or low validity",
+      "waveContext": "Pattern not clear",
+      "riskLevel": "high"
+    },
+    "analysisTime": "2025-06-18T23:04:24.592Z",
+    "confidence": 0,
+    "dataQuality": 100
+  },
+  "metadata": {
+    "id": "BTCUSDT_elliott_60_1750287864592",
+    "type": "technical",
+    "timestamp": "2025-06-18T23:04:24.592Z",
+    "symbol": "BTCUSDT",
+    "timeframe": "60"
+  },
+  "timestamp": "2025-06-18T23:04:24.592Z"
+}

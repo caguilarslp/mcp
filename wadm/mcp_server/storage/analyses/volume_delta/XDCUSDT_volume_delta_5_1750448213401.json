@@ -1,0 +1,40 @@
+{
+  "id": "XDCUSDT_volume_delta_5_1750448213401",
+  "type": "volume_delta",
+  "data": {
+    "symbol": "XDCUSDT",
+    "interval": "5",
+    "current": 0,
+    "average": -9601.69499999995,
+    "bias": "seller",
+    "strength": null,
+    "cumulativeDelta": -295489.5240520219,
+    "divergence": {
+      "detected": true,
+      "type": "Price down but delta up",
+      "signal": "bullish_reversal"
+    },
+    "marketPressure": {
+      "bullishCandles": 3,
+      "bearishCandles": 7,
+      "bullishPercent": 30,
+      "trend": "strong_selling"
+    }
+  },
+  "metadata": {
+    "id": "XDCUSDT_volume_delta_5_1750448213401",
+    "type": "volume_delta",
+    "timestamp": "2025-06-20T19:36:53.401Z",
+    "symbol": "XDCUSDT",
+    "interval": "5",
+    "tags": [
+      "interval:5",
+      "bias:seller",
+      "strength:Infinity",
+      "cumulative:-295490",
+      "divergence:true",
+      "pressure:strong_selling"
+    ]
+  },
+  "timestamp": "2025-06-20T19:36:53.401Z"
+}

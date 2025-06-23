@@ -1,0 +1,632 @@
+{
+  "id": "BTCUSDT_complete_1750345927738",
+  "type": "complete_analysis",
+  "data": {
+    "marketData": {
+      "ticker": {
+        "symbol": "BTCUSDT",
+        "lastPrice": 104217.3,
+        "price24hPcnt": -0.0015,
+        "highPrice24h": 105230.3,
+        "lowPrice24h": 103485.5,
+        "volume24h": 6713.655897,
+        "bid1Price": 104217.3,
+        "ask1Price": 104217.4,
+        "timestamp": "2025-06-19T15:12:05.789Z"
+      },
+      "orderbook": {
+        "symbol": "BTCUSDT",
+        "bids": [
+          {
+            "price": 104217.3,
+            "size": 0.840875
+          },
+          {
+            "price": 104217.1,
+            "size": 0.004796
+          },
+          {
+            "price": 104217,
+            "size": 0.000147
+          },
+          {
+            "price": 104216.4,
+            "size": 0.0015
+          },
+          {
+            "price": 104215.5,
+            "size": 0.000147
+          },
+          {
+            "price": 104215.4,
+            "size": 0.000106
+          },
+          {
+            "price": 104214.8,
+            "size": 0.004001
+          },
+          {
+            "price": 104214,
+            "size": 0.000147
+          },
+          {
+            "price": 104213.5,
+            "size": 0.021459
+          },
+          {
+            "price": 104213.4,
+            "size": 0.07153
+          },
+          {
+            "price": 104213.3,
+            "size": 0.079542
+          },
+          {
+            "price": 104213.1,
+            "size": 0.002877
+          },
+          {
+            "price": 104213,
+            "size": 0.003877
+          },
+          {
+            "price": 104212.7,
+            "size": 0.397844
+          },
+          {
+            "price": 104212.6,
+            "size": 0.38171
+          },
+          {
+            "price": 104212.5,
+            "size": 0.096076
+          },
+          {
+            "price": 104212,
+            "size": 0.000106
+          },
+          {
+            "price": 104211.8,
+            "size": 0.281359
+          },
+          {
+            "price": 104211.3,
+            "size": 0.160332
+          },
+          {
+            "price": 104211.1,
+            "size": 0.066165
+          },
+          {
+            "price": 104211,
+            "size": 0.000147
+          },
+          {
+            "price": 104210.7,
+            "size": 0.380952
+          },
+          {
+            "price": 104210.1,
+            "size": 0.233203
+          },
+          {
+            "price": 104209.5,
+            "size": 0.009757
+          },
+          {
+            "price": 104209,
+            "size": 0.06
+          }
+        ],
+        "asks": [
+          {
+            "price": 104217.4,
+            "size": 0.157689
+          },
+          {
+            "price": 104220.8,
+            "size": 0.000147
+          },
+          {
+            "price": 104222.2,
+            "size": 0.000147
+          },
+          {
+            "price": 104222.3,
+            "size": 0.004796
+          },
+          {
+            "price": 104222.5,
+            "size": 0.01487
+          },
+          {
+            "price": 104222.6,
+            "size": 0.049567
+          },
+          {
+            "price": 104223.7,
+            "size": 0.001001
+          },
+          {
+            "price": 104223.8,
+            "size": 0.000147
+          },
+          {
+            "price": 104223.9,
+            "size": 0.000053
+          },
+          {
+            "price": 104224.6,
+            "size": 0.000053
+          },
+          {
+            "price": 104225.2,
+            "size": 0.000147
+          },
+          {
+            "price": 104225.7,
+            "size": 0.066
+          },
+          {
+            "price": 104226,
+            "size": 0.073881
+          },
+          {
+            "price": 104226.4,
+            "size": 0.00958
+          },
+          {
+            "price": 104226.8,
+            "size": 0.000147
+          },
+          {
+            "price": 104227.3,
+            "size": 0.000053
+          },
+          {
+            "price": 104227.4,
+            "size": 0.173884
+          },
+          {
+            "price": 104227.5,
+            "size": 0.123116
+          },
+          {
+            "price": 104227.8,
+            "size": 0.454797
+          },
+          {
+            "price": 104228,
+            "size": 0.000053
+          },
+          {
+            "price": 104228.2,
+            "size": 0.000147
+          },
+          {
+            "price": 104228.4,
+            "size": 0.0015
+          },
+          {
+            "price": 104228.9,
+            "size": 0.001
+          },
+          {
+            "price": 104229.2,
+            "size": 0.134431
+          },
+          {
+            "price": 104229.3,
+            "size": 0.0015
+          }
+        ],
+        "timestamp": "2025-06-19T15:12:06.808Z",
+        "spread": 0.09999999999126885
+      },
+      "recentKlines": [
+        {
+          "timestamp": "2025-06-18T16:00:00.000Z",
+          "open": 104795.8,
+          "high": 104841,
+          "low": 104334.8,
+          "close": 104413.6,
+          "volume": 359.870193
+        },
+        {
+          "timestamp": "2025-06-18T17:00:00.000Z",
+          "open": 104413.6,
+          "high": 104518.2,
+          "low": 103613,
+          "close": 104341.7,
+          "volume": 502.276172
+        },
+        {
+          "timestamp": "2025-06-18T18:00:00.000Z",
+          "open": 104341.7,
+          "high": 104716.1,
+          "low": 103571,
+          "close": 103620,
+          "volume": 914.230843
+        },
+        {
+          "timestamp": "2025-06-18T19:00:00.000Z",
+          "open": 103620,
+          "high": 104423.7,
+          "low": 103485.5,
+          "close": 103807.9,
+          "volume": 778.580799
+        },
+        {
+          "timestamp": "2025-06-18T20:00:00.000Z",
+          "open": 103807.9,
+          "high": 104984.9,
+          "low": 103645.6,
+          "close": 104817.4,
+          "volume": 354.42703
+        },
+        {
+          "timestamp": "2025-06-18T21:00:00.000Z",
+          "open": 104817.4,
+          "high": 105135.2,
+          "low": 104366.3,
+          "close": 105083.6,
+          "volume": 307.935209
+        },
+        {
+          "timestamp": "2025-06-18T22:00:00.000Z",
+          "open": 105083.6,
+          "high": 105141.2,
+          "low": 104800,
+          "close": 104823,
+          "volume": 169.437912
+        },
+        {
+          "timestamp": "2025-06-18T23:00:00.000Z",
+          "open": 104823,
+          "high": 104967.4,
+          "low": 104625,
+          "close": 104886.4,
+          "volume": 117.819623
+        },
+        {
+          "timestamp": "2025-06-19T00:00:00.000Z",
+          "open": 104886.4,
+          "high": 105230.3,
+          "low": 104684.2,
+          "close": 104948.2,
+          "volume": 344.999328
+        },
+        {
+          "timestamp": "2025-06-19T01:00:00.000Z",
+          "open": 104948.2,
+          "high": 104972.9,
+          "low": 104461.6,
+          "close": 104605.1,
+          "volume": 276.482693
+        },
+        {
+          "timestamp": "2025-06-19T02:00:00.000Z",
+          "open": 104605.1,
+          "high": 105000,
+          "low": 104449.6,
+          "close": 104718.5,
+          "volume": 178.389721
+        },
+        {
+          "timestamp": "2025-06-19T03:00:00.000Z",
+          "open": 104718.5,
+          "high": 105106.5,
+          "low": 104718.4,
+          "close": 105090.5,
+          "volume": 164.283006
+        },
+        {
+          "timestamp": "2025-06-19T04:00:00.000Z",
+          "open": 105090.5,
+          "high": 105102.8,
+          "low": 104793.2,
+          "close": 105072.8,
+          "volume": 188.52936
+        },
+        {
+          "timestamp": "2025-06-19T05:00:00.000Z",
+          "open": 105072.8,
+          "high": 105224.7,
+          "low": 104828.1,
+          "close": 104889,
+          "volume": 151.009056
+        },
+        {
+          "timestamp": "2025-06-19T06:00:00.000Z",
+          "open": 104889,
+          "high": 104988,
+          "low": 104619.6,
+          "close": 104698.5,
+          "volume": 126.537828
+        },
+        {
+          "timestamp": "2025-06-19T07:00:00.000Z",
+          "open": 104698.5,
+          "high": 104853.7,
+          "low": 104608,
+          "close": 104634.3,
+          "volume": 112.498068
+        },
+        {
+          "timestamp": "2025-06-19T08:00:00.000Z",
+          "open": 104634.3,
+          "high": 104987,
+          "low": 104616,
+          "close": 104733.2,
+          "volume": 150.804975
+        },
+        {
+          "timestamp": "2025-06-19T09:00:00.000Z",
+          "open": 104733.2,
+          "high": 105036.2,
+          "low": 104715.4,
+          "close": 104999.7,
+          "volume": 124.238574
+        },
+        {
+          "timestamp": "2025-06-19T10:00:00.000Z",
+          "open": 104999.7,
+          "high": 105072.8,
+          "low": 104842.5,
+          "close": 104910.6,
+          "volume": 118.822114
+        },
+        {
+          "timestamp": "2025-06-19T11:00:00.000Z",
+          "open": 104910.6,
+          "high": 104910.6,
+          "low": 104715,
+          "close": 104766.5,
+          "volume": 103.201047
+        },
+        {
+          "timestamp": "2025-06-19T12:00:00.000Z",
+          "open": 104766.5,
+          "high": 104910.7,
+          "low": 104661.2,
+          "close": 104749.6,
+          "volume": 127.597242
+        },
+        {
+          "timestamp": "2025-06-19T13:00:00.000Z",
+          "open": 104749.6,
+          "high": 104788.3,
+          "low": 104237.6,
+          "close": 104282.4,
+          "volume": 304.113984
+        },
+        {
+          "timestamp": "2025-06-19T14:00:00.000Z",
+          "open": 104282.4,
+          "high": 104686.6,
+          "low": 104102.9,
+          "close": 104143.5,
+          "volume": 286.39565
+        },
+        {
+          "timestamp": "2025-06-19T15:00:00.000Z",
+          "open": 104143.5,
+          "high": 104319,
+          "low": 104143.5,
+          "close": 104217.4,
+          "volume": 61.366868
+        }
+      ]
+    },
+    "technicalAnalysis": {
+      "volatility": {
+        "symbol": "BTCUSDT",
+        "period": "1d",
+        "currentPrice": 104217.4,
+        "highestPrice": 105230.3,
+        "lowestPrice": 103485.5,
+        "volatilityPercent": 1.6741926012354973,
+        "isGoodForGrid": false,
+        "recommendation": "wait",
+        "confidence": 50
+      },
+      "volume": {
+        "symbol": "BTCUSDT",
+        "interval": "60",
+        "avgVolume": 333.7756671875,
+        "currentVolume": 61.366868,
+        "maxVolume": 961.670304,
+        "minVolume": 61.366868,
+        "volumeSpikes": [
+          {
+            "timestamp": "2025-06-17T16:00:00.000Z",
+            "volume": 961.670304,
+            "multiplier": 2.8811875715906434,
+            "price": 103620
+          },
+          {
+            "timestamp": "2025-06-17T17:00:00.000Z",
+            "volume": 808.045881,
+            "multiplier": 2.4209250716472286,
+            "price": 103804.5
+          },
+          {
+            "timestamp": "2025-06-17T19:00:00.000Z",
+            "volume": 627.879018,
+            "multiplier": 1.8811407772493076,
+            "price": 104676.8
+          },
+          {
+            "timestamp": "2025-06-18T13:00:00.000Z",
+            "volume": 704.527424,
+            "multiplier": 2.1107812619672734,
+            "price": 104442.8
+          },
+          {
+            "timestamp": "2025-06-18T14:00:00.000Z",
+            "volume": 952.397979,
+            "multiplier": 2.8534074608410145,
+            "price": 104615.7
+          }
+        ],
+        "vwap": {
+          "current": 104499.52146366617,
+          "priceVsVwap": "below",
+          "difference": -0.2699739287937956
+        },
+        "trend": "increasing"
+      },
+      "volumeDelta": {
+        "symbol": "BTCUSDT",
+        "interval": "5",
+        "current": 5.749708835014838,
+        "average": -4.9579330193423505,
+        "bias": "seller",
+        "strength": 56.90552372488929,
+        "cumulativeDelta": -95.21248097986964,
+        "divergence": {
+          "detected": true,
+          "type": "Price down but delta up",
+          "signal": "bullish_reversal"
+        },
+        "marketPressure": {
+          "bullishCandles": 3,
+          "bearishCandles": 7,
+          "bullishPercent": 30,
+          "trend": "strong_selling"
+        }
+      },
+      "supportResistance": {
+        "symbol": "BTCUSDT",
+        "interval": "60",
+        "currentPrice": 104217.4,
+        "resistances": [
+          {
+            "level": 106500.8,
+            "type": "resistance",
+            "strength": 85.83334105407073,
+            "touches": 2,
+            "volumeConfirmation": 1.3771836064516947,
+            "lastTouchTime": "2025-06-17T00:00:00.000Z",
+            "priceDistance": 2.1909968968713565,
+            "confidence": "very_strong"
+          },
+          {
+            "level": 105335.1,
+            "type": "resistance",
+            "strength": 75.31791552311971,
+            "touches": 6,
+            "volumeConfirmation": 0.44047564444406967,
+            "lastTouchTime": "2025-06-19T10:00:00.000Z",
+            "priceDistance": 1.0724696643746743,
+            "confidence": "very_strong"
+          },
+          {
+            "level": 104492.7,
+            "type": "resistance",
+            "strength": 74.59073230580358,
+            "touches": 3,
+            "volumeConfirmation": 0.34644274192022906,
+            "lastTouchTime": "2025-06-19T07:00:00.000Z",
+            "priceDistance": 0.2641593438331823,
+            "confidence": "strong"
+          }
+        ],
+        "supports": [
+          {
+            "level": 103362.1,
+            "type": "support",
+            "strength": 91.58211110009923,
+            "touches": 2,
+            "volumeConfirmation": 1.54963659141601,
+            "lastTouchTime": "2025-06-18T19:00:00.000Z",
+            "priceDistance": 0.8206882919742657,
+            "confidence": "very_strong"
+          }
+        ],
+        "criticalLevel": {
+          "level": 104492.7,
+          "type": "resistance",
+          "strength": 74.59073230580358,
+          "touches": 3,
+          "volumeConfirmation": 0.34644274192022906,
+          "lastTouchTime": "2025-06-19T07:00:00.000Z",
+          "priceDistance": 0.2641593438331823,
+          "confidence": "strong"
+        },
+        "gridConfig": {
+          "optimalLowerBound": 103362.1,
+          "optimalUpperBound": 106500.8,
+          "keyLevels": [
+            103362.1,
+            106500.8,
+            105335.1,
+            104492.7
+          ],
+          "recommendedGridCount": 5,
+          "recommendation": "Strong S/R levels identified - Grid trading recommended"
+        },
+        "statistics": {
+          "totalPivotsFound": 15,
+          "priceRangeAnalyzed": {
+            "high": 108974.7,
+            "low": 103362.1
+          },
+          "avgVolume": 365.6679177900003,
+          "periodsAnalyzed": 100,
+          "sensitivityUsed": 2
+        }
+      }
+    },
+    "gridSuggestion": {
+      "symbol": "BTCUSDT",
+      "currentPrice": 104217.3,
+      "suggestedRange": {
+        "lower": 100748.701,
+        "upper": 108257.219
+      },
+      "gridLevels": [
+        100748.701,
+        101499.5528,
+        102250.4046,
+        103001.2564,
+        103752.1082,
+        104502.96,
+        105253.8118,
+        106004.6636,
+        106755.5154,
+        107506.3672,
+        108257.219
+      ],
+      "investment": 5000,
+      "pricePerGrid": 500,
+      "potentialProfit": "$-0.28/day estimated",
+      "volatility24h": 1.6741926012354973,
+      "recommendation": "wait",
+      "confidence": 69
+    },
+    "summary": {
+      "recommendation": "wait",
+      "confidence": 50,
+      "keyPoints": [
+        "Low volatility (1.7%) - Limited trading opportunities",
+        "Low volume activity (18% of average)",
+        "Strong selling pressure (56.9% bias)",
+        "Volume divergence detected - bullish reversal",
+        "Near strong resistance at $104492.7000 (0.3% away)"
+      ],
+      "riskLevel": "low"
+    },
+    "symbol": "BTCUSDT"
+  },
+  "metadata": {
+    "id": "BTCUSDT_complete_1750345927738",
+    "type": "complete_analysis",
+    "timestamp": "2025-06-19T15:12:07.738Z",
+    "symbol": "BTCUSDT",
+    "tags": [
+      "investment:5000"
+    ]
+  },
+  "timestamp": "2025-06-19T15:12:07.738Z"
+}

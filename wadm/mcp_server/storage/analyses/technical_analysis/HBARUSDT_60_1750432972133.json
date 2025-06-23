@@ -1,0 +1,31 @@
+{
+  "id": "HBARUSDT_60_1750432972133",
+  "type": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "HBARUSDT",
+      "period": "1d",
+      "currentPrice": 0.14668,
+      "highestPrice": 0.15153,
+      "lowestPrice": 0.14464,
+      "volatilityPercent": 4.697300245432238,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    },
+    "symbol": "HBARUSDT",
+    "timeframe": "60"
+  },
+  "metadata": {
+    "id": "HBARUSDT_60_1750432972133",
+    "type": "technical_analysis",
+    "timestamp": "2025-06-20T15:22:52.133Z",
+    "symbol": "HBARUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "timestamp": "2025-06-20T15:22:52.133Z"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "804a6fc3-d4b9-4652-aefe-806c3a28d6a6",
+  "timestamp": 1749600813517,
+  "symbol": "ICPUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "ICPUSDT",
+      "period": "1d",
+      "currentPrice": 6.165,
+      "highestPrice": 6.241,
+      "lowestPrice": 5.88,
+      "volatilityPercent": 5.855636658556363,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-11T00:13:33.517Z",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

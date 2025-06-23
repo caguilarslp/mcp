@@ -1,0 +1,242 @@
+{
+  "id": "XRPUSDT_fibonacci_60_1750278024442",
+  "type": "technical",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "currentPrice": 2.1466,
+    "trend": "downtrend",
+    "swingHigh": {
+      "index": 51,
+      "timestamp": "2025-06-16T20:00:00.000Z",
+      "price": 2.3371,
+      "type": "high",
+      "strength": 7.2434452257318505,
+      "volume": 4655715.19,
+      "confirmed": true
+    },
+    "swingLow": {
+      "index": 92,
+      "timestamp": "2025-06-18T13:00:00.000Z",
+      "price": 2.1181,
+      "type": "low",
+      "strength": 8.676840413391599,
+      "volume": 3565707.02,
+      "confirmed": true
+    },
+    "retracementLevels": [
+      {
+        "level": 0.236,
+        "price": 2.285416,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 6.4667846827541355
+      },
+      {
+        "level": 0.382,
+        "price": 2.253442,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 4.9772663747321495
+      },
+      {
+        "level": 0.5,
+        "price": 2.2276,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 3.773409112084224
+      },
+      {
+        "level": 0.618,
+        "price": 2.201758,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 79.23735192714287,
+        "distance": 2.56955184943632
+      },
+      {
+        "level": 0.786,
+        "price": 2.164966,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 0.8555855771918536
+      }
+    ],
+    "extensionLevels": [
+      {
+        "level": 1,
+        "price": 2.1181,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 68.45306067132579,
+        "distance": -1.3276809838814754
+      },
+      {
+        "level": 1.272,
+        "price": 2.058532,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -4.102673996086827
+      },
+      {
+        "level": 1.414,
+        "price": 2.027434,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -5.551383583341093
+      },
+      {
+        "level": 1.618,
+        "price": 1.9827580000000002,
+        "label": "161.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -7.6326283424950905
+      },
+      {
+        "level": 2,
+        "price": 1.8991000000000002,
+        "label": "200.0%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -11.529861175812895
+      },
+      {
+        "level": 2.618,
+        "price": 1.7637580000000004,
+        "label": "261.8%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -17.83480853442651
+      }
+    ],
+    "keyLevels": [
+      {
+        "level": 0.618,
+        "price": 2.201758,
+        "label": "61.8%",
+        "type": "retracement",
+        "strength": 79.23735192714287,
+        "distance": 2.56955184943632
+      },
+      {
+        "level": 1,
+        "price": 2.1181,
+        "label": "100.0%",
+        "type": "extension",
+        "strength": 68.45306067132579,
+        "distance": -1.3276809838814754
+      },
+      {
+        "level": 0.236,
+        "price": 2.285416,
+        "label": "23.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 6.4667846827541355
+      },
+      {
+        "level": 0.382,
+        "price": 2.253442,
+        "label": "38.2%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 4.9772663747321495
+      },
+      {
+        "level": 0.5,
+        "price": 2.2276,
+        "label": "50.0%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 3.773409112084224
+      },
+      {
+        "level": 0.786,
+        "price": 2.164966,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 0.8555855771918536
+      },
+      {
+        "level": 1.272,
+        "price": 2.058532,
+        "label": "127.2%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -4.102673996086827
+      },
+      {
+        "level": 1.414,
+        "price": 2.027434,
+        "label": "141.4%",
+        "type": "extension",
+        "strength": 0,
+        "distance": -5.551383583341093
+      }
+    ],
+    "currentPosition": {
+      "nearestLevel": {
+        "level": 0.786,
+        "price": 2.164966,
+        "label": "78.6%",
+        "type": "retracement",
+        "strength": 0,
+        "distance": 0.8555855771918536
+      },
+      "retracement": 86.98630136986311,
+      "nextTargets": [
+        {
+          "level": 0.786,
+          "price": 2.164966,
+          "label": "78.6%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 0.8555855771918536
+        },
+        {
+          "level": 1,
+          "price": 2.1181,
+          "label": "100.0%",
+          "type": "extension",
+          "strength": 68.45306067132579,
+          "distance": -1.3276809838814754
+        },
+        {
+          "level": 0.618,
+          "price": 2.201758,
+          "label": "61.8%",
+          "type": "retracement",
+          "strength": 79.23735192714287,
+          "distance": 2.56955184943632
+        },
+        {
+          "level": 0.5,
+          "price": 2.2276,
+          "label": "50.0%",
+          "type": "retracement",
+          "strength": 0,
+          "distance": 3.773409112084224
+        }
+      ]
+    },
+    "analysisTime": "2025-06-18T20:20:24.441Z",
+    "confidence": 30.568577757748123,
+    "validity": 93
+  },
+  "metadata": {
+    "id": "XRPUSDT_fibonacci_60_1750278024442",
+    "type": "technical",
+    "timestamp": "2025-06-18T20:20:24.442Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "60"
+  },
+  "timestamp": "2025-06-18T20:20:24.442Z"
+}

@@ -1,0 +1,18 @@
+{
+  "symbol": "XRPUSDT",
+  "enabled": true,
+  "autoUpdate": true,
+  "priority": "medium",
+  "timeframes": ["15", "60", "240", "D"],
+  "thresholds": {
+    "minVolumeForLevel": 200000,
+    "minConfidenceForPattern": 65,
+    "levelMergeDistance": 0.8
+  },
+  "customSettings": {
+    "isMajorPair": false,
+    "liquidityTier": "tier2",
+    "volatilityProfile": "high",
+    "institutionalInterest": "medium"
+  }
+}

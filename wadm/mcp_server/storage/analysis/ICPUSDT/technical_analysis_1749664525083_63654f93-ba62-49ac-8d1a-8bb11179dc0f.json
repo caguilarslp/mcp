@@ -1,0 +1,133 @@
+{
+  "id": "63654f93-ba62-49ac-8d1a-8bb11179dc0f",
+  "timestamp": 1749664525083,
+  "symbol": "ICPUSDT",
+  "analysisType": "technical_analysis",
+  "data": {
+    "supportResistance": {
+      "symbol": "ICPUSDT",
+      "interval": "60",
+      "currentPrice": 6.088,
+      "resistances": [
+        {
+          "level": 6.161,
+          "type": "resistance",
+          "strength": 74.09012459577687,
+          "touches": 1,
+          "volumeConfirmation": 1.7662904118050153,
+          "lastTouchTime": "2025-06-10T13:00:00.000Z",
+          "priceDistance": 1.1990801576872454,
+          "confidence": "strong"
+        },
+        {
+          "level": 6.241,
+          "type": "resistance",
+          "strength": 61.63721526609575,
+          "touches": 1,
+          "volumeConfirmation": 1.045922708500533,
+          "lastTouchTime": "2025-06-10T05:00:00.000Z",
+          "priceDistance": 2.5131406044677984,
+          "confidence": "strong"
+        },
+        {
+          "level": 6.2,
+          "type": "resistance",
+          "strength": 60.64032419473715,
+          "touches": 1,
+          "volumeConfirmation": 0.8873440162560687,
+          "lastTouchTime": "2025-06-10T22:00:00.000Z",
+          "priceDistance": 1.8396846254927743,
+          "confidence": "strong"
+        }
+      ],
+      "supports": [
+        {
+          "level": 6.065,
+          "type": "support",
+          "strength": 80.07226391835022,
+          "touches": 2,
+          "volumeConfirmation": 0.7131249591384937,
+          "lastTouchTime": "2025-06-11T12:00:00.000Z",
+          "priceDistance": 0.3777923784494035,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 5.88,
+          "type": "support",
+          "strength": 75.25329141475945,
+          "touches": 1,
+          "volumeConfirmation": 4.253946219659261,
+          "lastTouchTime": "2025-06-10T10:00:00.000Z",
+          "priceDistance": 3.4165571616294383,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 5.704,
+          "type": "support",
+          "strength": 70.61235843184224,
+          "touches": 1,
+          "volumeConfirmation": 2.0356568608039862,
+          "lastTouchTime": "2025-06-08T16:00:00.000Z",
+          "priceDistance": 6.307490144546654,
+          "confidence": "strong"
+        }
+      ],
+      "criticalLevel": {
+        "level": 6.065,
+        "type": "support",
+        "strength": 80.07226391835022,
+        "touches": 2,
+        "volumeConfirmation": 0.7131249591384937,
+        "lastTouchTime": "2025-06-11T12:00:00.000Z",
+        "priceDistance": 0.3777923784494035,
+        "confidence": "very_strong"
+      },
+      "gridConfig": {
+        "optimalLowerBound": 6.065,
+        "optimalUpperBound": 6.161,
+        "keyLevels": [
+          6.065,
+          5.88,
+          6.161,
+          5.704
+        ],
+        "recommendedGridCount": 5,
+        "recommendation": "Strong S/R levels identified - Grid trading recommended"
+      },
+      "statistics": {
+        "totalPivotsFound": 12,
+        "priceRangeAnalyzed": {
+          "high": 6.319,
+          "low": 5.098
+        },
+        "avgVolume": 52599.93289999999,
+        "periodsAnalyzed": 100,
+        "sensitivityUsed": 2
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-11T17:55:25.083Z",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "summary": {
+    "price": 6.088,
+    "trend": "neutral",
+    "keyLevels": [
+      6.065,
+      5.88,
+      5.704,
+      6.161,
+      6.241,
+      6.2
+    ],
+    "patterns": [],
+    "signals": []
+  }
+}

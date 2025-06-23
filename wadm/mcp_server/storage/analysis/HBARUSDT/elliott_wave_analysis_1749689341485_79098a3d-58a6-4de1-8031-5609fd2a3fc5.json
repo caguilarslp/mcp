@@ -1,0 +1,60 @@
+{
+  "id": "79098a3d-58a6-4de1-8031-5609fd2a3fc5",
+  "timestamp": 1749689341485,
+  "symbol": "HBARUSDT",
+  "analysisType": "elliott_wave_analysis",
+  "data": {
+    "symbol": "HBARUSDT",
+    "timeframe": "120",
+    "currentPrice": 0.17292,
+    "currentSequence": {
+      "type": "impulsive",
+      "waves": [],
+      "isComplete": false,
+      "degree": "minuette",
+      "startTime": "2025-06-12T00:49:01.485Z",
+      "validity": 50
+    },
+    "historicalSequences": [],
+    "currentWave": {
+      "wave": null,
+      "position": "uncertain",
+      "nextExpected": "Analysis in progress"
+    },
+    "projections": [],
+    "ruleValidation": {
+      "wave2Rule": true,
+      "wave3Rule": true,
+      "wave4Rule": true,
+      "alternationRule": true,
+      "channelRule": true,
+      "overallValidity": 80
+    },
+    "signals": {
+      "signal": "hold",
+      "strength": 50,
+      "reasoning": "Elliott Wave analysis in progress",
+      "waveContext": "Determining wave position",
+      "riskLevel": "medium"
+    },
+    "analysisTime": "2025-06-12T00:49:01.485Z",
+    "confidence": 70,
+    "dataQuality": 80
+  },
+  "metadata": {
+    "version": "1.3.6",
+    "source": "waickoff_mcp",
+    "engine": "MarketAnalysisEngine",
+    "savedAt": "2025-06-12T00:49:01.485Z",
+    "tags": [
+      "timeframe:120"
+    ]
+  },
+  "summary": {
+    "price": 0,
+    "trend": "neutral",
+    "keyLevels": [],
+    "patterns": [],
+    "signals": []
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "ETHUSDT_volume_240_1750292955082",
+  "type": "volume",
+  "data": {
+    "symbol": "ETHUSDT",
+    "interval": "240",
+    "avgVolume": 25297.5352202,
+    "currentVolume": 1741.4059,
+    "maxVolume": 145433.3106,
+    "minVolume": 1741.4059,
+    "volumeSpikes": [
+      {
+        "timestamp": "2025-06-04T12:00:00.000Z",
+        "volume": 42590.75533,
+        "multiplier": 1.6835930836452169,
+        "price": 2668.33
+      },
+      {
+        "timestamp": "2025-06-05T12:00:00.000Z",
+        "volume": 46158.06478,
+        "multiplier": 1.8246071950576013,
+        "price": 2589.36
+      },
+      {
+        "timestamp": "2025-06-05T16:00:00.000Z",
+        "volume": 40109.25732,
+        "multiplier": 1.5855006019706175,
+        "price": 2528.83
+      },
+      {
+        "timestamp": "2025-06-05T20:00:00.000Z",
+        "volume": 71201.9749,
+        "multiplier": 2.814581510816337,
+        "price": 2414.16
+      },
+      {
+        "timestamp": "2025-06-09T20:00:00.000Z",
+        "volume": 48994.53175,
+        "multiplier": 1.936731437412054,
+        "price": 2680.26
+      }
+    ],
+    "vwap": {
+      "current": 2599.8093106412334,
+      "priceVsVwap": "below",
+      "difference": -2.5386212123748026
+    },
+    "trend": "decreasing"
+  },
+  "metadata": {
+    "id": "ETHUSDT_volume_240_1750292955082",
+    "type": "volume",
+    "timestamp": "2025-06-19T00:29:15.082Z",
+    "symbol": "ETHUSDT",
+    "interval": "240",
+    "tags": [
+      "interval:240",
+      "trend:decreasing",
+      "volume_ratio:7",
+      "spikes:5",
+      "vwap_position:below"
+    ]
+  },
+  "timestamp": "2025-06-19T00:29:15.082Z"
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "XRPUSDT_W_1750466376775",
+    "symbol": "XRPUSDT",
+    "timeframe": "W",
+    "timestamp": "2025-06-21T00:39:36.775Z",
+    "type": "wyckoff",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 194
+  },
+  {
+    "id": "XRPUSDT_W_1750466376895",
+    "symbol": "XRPUSDT",
+    "timeframe": "W",
+    "timestamp": "2025-06-21T00:39:36.895Z",
+    "type": "wyckoff",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 194
+  },
+  {
+    "id": "XRPUSDT_W_1750466444843",
+    "symbol": "XRPUSDT",
+    "timeframe": "W",
+    "timestamp": "2025-06-21T00:40:44.843Z",
+    "type": "wyckoff",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 194
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TESTUSDT_60_1750275905962",
+    "symbol": "TESTUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-18T19:45:05.962Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 200
+  }
+]

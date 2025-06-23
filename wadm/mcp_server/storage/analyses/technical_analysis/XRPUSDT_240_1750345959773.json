@@ -1,0 +1,198 @@
+{
+  "id": "XRPUSDT_240_1750345959773",
+  "type": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "XRPUSDT",
+      "period": "1d",
+      "currentPrice": 2.1506,
+      "highestPrice": 2.1857,
+      "lowestPrice": 2.1271,
+      "volatilityPercent": 2.724820980191584,
+      "isGoodForGrid": false,
+      "recommendation": "wait",
+      "confidence": 50
+    },
+    "volume": {
+      "symbol": "XRPUSDT",
+      "interval": "240",
+      "avgVolume": 7045209.884166668,
+      "currentVolume": 2930857.85,
+      "maxVolume": 29614078.66,
+      "minVolume": 2515275.25,
+      "volumeSpikes": [
+        {
+          "timestamp": "2025-06-13T00:00:00.000Z",
+          "volume": 29614078.66,
+          "multiplier": 4.203434552965466,
+          "price": 2.1252
+        },
+        {
+          "timestamp": "2025-06-16T12:00:00.000Z",
+          "volume": 17631496.76,
+          "multiplier": 2.502621930345162,
+          "price": 2.2899
+        },
+        {
+          "timestamp": "2025-06-16T16:00:00.000Z",
+          "volume": 17183841.49,
+          "multiplier": 2.4390815564797843,
+          "price": 2.3359
+        },
+        {
+          "timestamp": "2025-06-16T20:00:00.000Z",
+          "volume": 19191084.05,
+          "multiplier": 2.7239903942577843,
+          "price": 2.2378
+        },
+        {
+          "timestamp": "2025-06-17T00:00:00.000Z",
+          "volume": 12667979.42,
+          "multiplier": 1.7980982296169608,
+          "price": 2.2493
+        }
+      ],
+      "vwap": {
+        "current": 2.1921862344987426,
+        "priceVsVwap": "below",
+        "difference": -1.8650894643580096
+      },
+      "trend": "decreasing"
+    },
+    "volumeDelta": {
+      "symbol": "XRPUSDT",
+      "interval": "5",
+      "current": 15468.84,
+      "average": -48186.43781809298,
+      "bias": "seller",
+      "strength": 311.50647248334707,
+      "cumulativeDelta": -627236.4954025511,
+      "divergence": {
+        "detected": true,
+        "type": "Price down but delta up",
+        "signal": "bullish_reversal"
+      },
+      "marketPressure": {
+        "bullishCandles": 3,
+        "bearishCandles": 7,
+        "bullishPercent": 30,
+        "trend": "strong_selling"
+      }
+    },
+    "supportResistance": {
+      "symbol": "XRPUSDT",
+      "interval": "240",
+      "currentPrice": 2.1513,
+      "resistances": [
+        {
+          "level": 2.3294,
+          "type": "resistance",
+          "strength": 80.89756146054604,
+          "touches": 3,
+          "volumeConfirmation": 1.4651153912648147,
+          "lastTouchTime": "2025-06-16T20:00:00.000Z",
+          "priceDistance": 8.278715195463215,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 2.2267,
+          "type": "resistance",
+          "strength": 65.38215158799719,
+          "touches": 2,
+          "volumeConfirmation": 0.5924672744002338,
+          "lastTouchTime": "2025-06-09T04:00:00.000Z",
+          "priceDistance": 3.504857528006328,
+          "confidence": "strong"
+        },
+        {
+          "level": 2.2598,
+          "type": "resistance",
+          "strength": 50.024197401254064,
+          "touches": 1,
+          "volumeConfirmation": 0.9467631360158999,
+          "lastTouchTime": "2025-06-10T12:00:00.000Z",
+          "priceDistance": 5.0434620926881335,
+          "confidence": "strong"
+        }
+      ],
+      "supports": [
+        {
+          "level": 2.1093,
+          "type": "support",
+          "strength": 79.14209505798206,
+          "touches": 2,
+          "volumeConfirmation": 0.8152127007416919,
+          "lastTouchTime": "2025-06-18T12:00:00.000Z",
+          "priceDistance": 1.9523079068470142,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 2.0826,
+          "type": "support",
+          "strength": 70.17279452036107,
+          "touches": 1,
+          "volumeConfirmation": 3.2156685238004745,
+          "lastTouchTime": "2025-06-13T00:00:00.000Z",
+          "priceDistance": 3.19341793334264,
+          "confidence": "strong"
+        },
+        {
+          "level": 2.0591,
+          "type": "support",
+          "strength": 65.71421930925487,
+          "touches": 1,
+          "volumeConfirmation": 3.128584850770726,
+          "lastTouchTime": "2025-06-05T20:00:00.000Z",
+          "priceDistance": 4.285780690745133,
+          "confidence": "strong"
+        }
+      ],
+      "criticalLevel": {
+        "level": 2.1093,
+        "type": "support",
+        "strength": 79.14209505798206,
+        "touches": 2,
+        "volumeConfirmation": 0.8152127007416919,
+        "lastTouchTime": "2025-06-18T12:00:00.000Z",
+        "priceDistance": 1.9523079068470142,
+        "confidence": "very_strong"
+      },
+      "gridConfig": {
+        "optimalLowerBound": 2.1093,
+        "optimalUpperBound": 2.3294,
+        "keyLevels": [
+          2.3294,
+          2.1093,
+          2.0826,
+          2.0591
+        ],
+        "recommendedGridCount": 10,
+        "recommendation": "Strong S/R levels identified - Grid trading recommended"
+      },
+      "statistics": {
+        "totalPivotsFound": 15,
+        "priceRangeAnalyzed": {
+          "high": 2.3381,
+          "low": 2.0591
+        },
+        "avgVolume": 6578076.4317,
+        "periodsAnalyzed": 100,
+        "sensitivityUsed": 2
+      }
+    },
+    "symbol": "XRPUSDT",
+    "timeframe": "240"
+  },
+  "metadata": {
+    "id": "XRPUSDT_240_1750345959773",
+    "type": "technical_analysis",
+    "timestamp": "2025-06-19T15:12:39.773Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "240",
+    "tags": [
+      "timeframe:240",
+      "periods:100"
+    ]
+  },
+  "timestamp": "2025-06-19T15:12:39.773Z"
+}

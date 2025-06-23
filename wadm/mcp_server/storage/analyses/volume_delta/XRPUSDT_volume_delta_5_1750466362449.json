@@ -1,0 +1,40 @@
+{
+  "id": "XRPUSDT_volume_delta_5_1750466362449",
+  "type": "volume_delta",
+  "data": {
+    "symbol": "XRPUSDT",
+    "interval": "5",
+    "current": 30518.5,
+    "average": 946.6852863924735,
+    "bias": "buyer",
+    "strength": 3.1020046410946587,
+    "cumulativeDelta": -204113.20116235237,
+    "divergence": {
+      "detected": false,
+      "type": "No divergence",
+      "signal": "trend_confirmed"
+    },
+    "marketPressure": {
+      "bullishCandles": 5,
+      "bearishCandles": 5,
+      "bullishPercent": 50,
+      "trend": "balanced"
+    }
+  },
+  "metadata": {
+    "id": "XRPUSDT_volume_delta_5_1750466362449",
+    "type": "volume_delta",
+    "timestamp": "2025-06-21T00:39:22.449Z",
+    "symbol": "XRPUSDT",
+    "interval": "5",
+    "tags": [
+      "interval:5",
+      "bias:buyer",
+      "strength:3",
+      "cumulative:-204113",
+      "divergence:false",
+      "pressure:balanced"
+    ]
+  },
+  "timestamp": "2025-06-21T00:39:22.449Z"
+}

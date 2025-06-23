@@ -1,0 +1,166 @@
+{
+  "id": "ICPUSDT_60_1750448287593",
+  "type": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "ICPUSDT",
+      "period": "1d",
+      "currentPrice": 4.957,
+      "highestPrice": 5.225,
+      "lowestPrice": 4.822,
+      "volatilityPercent": 8.129917288682663,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    },
+    "volume": {
+      "symbol": "ICPUSDT",
+      "interval": "60",
+      "avgVolume": 22001.30520833333,
+      "currentVolume": 5050.92,
+      "maxVolume": 91327.86,
+      "minVolume": 5050.92,
+      "volumeSpikes": [
+        {
+          "timestamp": "2025-06-19T01:00:00.000Z",
+          "volume": 91327.86,
+          "multiplier": 4.151020093362833,
+          "price": 5.065
+        },
+        {
+          "timestamp": "2025-06-19T13:00:00.000Z",
+          "volume": 49446.8,
+          "multiplier": 2.24744848234146,
+          "price": 5.007
+        },
+        {
+          "timestamp": "2025-06-20T08:00:00.000Z",
+          "volume": 34274.65,
+          "multiplier": 1.557846213006397,
+          "price": 5.081
+        },
+        {
+          "timestamp": "2025-06-20T13:00:00.000Z",
+          "volume": 44107.05,
+          "multiplier": 2.004746972161169,
+          "price": 5.134
+        },
+        {
+          "timestamp": "2025-06-20T14:00:00.000Z",
+          "volume": 39396.87,
+          "multiplier": 1.7906605824947983,
+          "price": 5.011
+        }
+      ],
+      "vwap": {
+        "current": 5.0489016103321775,
+        "priceVsVwap": "below",
+        "difference": -1.8202297732264843
+      },
+      "trend": "stable"
+    },
+    "volumeDelta": {
+      "symbol": "ICPUSDT",
+      "interval": "5",
+      "current": -1519.591666666824,
+      "average": -73.79290277779445,
+      "bias": "seller",
+      "strength": 4.046750649998873,
+      "cumulativeDelta": -11324.70840842016,
+      "divergence": {
+        "detected": false,
+        "type": "No divergence",
+        "signal": "trend_confirmed"
+      },
+      "marketPressure": {
+        "bullishCandles": 5,
+        "bearishCandles": 5,
+        "bullishPercent": 50,
+        "trend": "balanced"
+      }
+    },
+    "supportResistance": {
+      "symbol": "ICPUSDT",
+      "interval": "60",
+      "currentPrice": 4.957,
+      "resistances": [
+        {
+          "level": 4.986,
+          "type": "resistance",
+          "strength": 77.53017035464673,
+          "touches": 4,
+          "volumeConfirmation": 0.581667440027415,
+          "lastTouchTime": "2025-06-20T05:00:00.000Z",
+          "priceDistance": 0.5850312689126471,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 5.073,
+          "type": "resistance",
+          "strength": 74.10259518399522,
+          "touches": 3,
+          "volumeConfirmation": 0.6229464602109565,
+          "lastTouchTime": "2025-06-17T22:00:00.000Z",
+          "priceDistance": 2.3401250756506062,
+          "confidence": "strong"
+        },
+        {
+          "level": 5.316,
+          "type": "resistance",
+          "strength": 70.98123971718351,
+          "touches": 1,
+          "volumeConfirmation": 2.6476420599064845,
+          "lastTouchTime": "2025-06-19T01:00:00.000Z",
+          "priceDistance": 7.242283639297963,
+          "confidence": "strong"
+        }
+      ],
+      "supports": [],
+      "criticalLevel": {
+        "level": 4.986,
+        "type": "resistance",
+        "strength": 77.53017035464673,
+        "touches": 4,
+        "volumeConfirmation": 0.581667440027415,
+        "lastTouchTime": "2025-06-20T05:00:00.000Z",
+        "priceDistance": 0.5850312689126471,
+        "confidence": "very_strong"
+      },
+      "gridConfig": {
+        "optimalLowerBound": 4.709149999999999,
+        "optimalUpperBound": 4.986,
+        "keyLevels": [
+          4.986,
+          5.073,
+          5.316
+        ],
+        "recommendedGridCount": 6,
+        "recommendation": "Strong S/R levels identified - Grid trading recommended"
+      },
+      "statistics": {
+        "totalPivotsFound": 12,
+        "priceRangeAnalyzed": {
+          "high": 5.747,
+          "low": 4.822
+        },
+        "avgVolume": 24638.596999999994,
+        "periodsAnalyzed": 100,
+        "sensitivityUsed": 2
+      }
+    },
+    "symbol": "ICPUSDT",
+    "timeframe": "60"
+  },
+  "metadata": {
+    "id": "ICPUSDT_60_1750448287593",
+    "type": "technical_analysis",
+    "timestamp": "2025-06-20T19:38:07.593Z",
+    "symbol": "ICPUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "timestamp": "2025-06-20T19:38:07.593Z"
+}

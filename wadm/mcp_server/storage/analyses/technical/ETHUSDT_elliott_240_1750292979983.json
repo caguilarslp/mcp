@@ -1,0 +1,160 @@
+{
+  "id": "ETHUSDT_elliott_240_1750292979983",
+  "type": "technical",
+  "data": {
+    "symbol": "ETHUSDT",
+    "timeframe": "240",
+    "currentPrice": 2535.26,
+    "currentSequence": {
+      "type": "corrective",
+      "waves": [
+        {
+          "number": 65,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 12,
+          "endIndex": 37,
+          "startPrice": 2320,
+          "endPrice": 2733.58,
+          "startTime": "2025-05-18T20:00:00.000Z",
+          "endTime": "2025-05-23T00:00:00.000Z",
+          "length": 17.826724137931034,
+          "duration": 25,
+          "confidence": 57.18234969190158
+        },
+        {
+          "number": 66,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 37,
+          "endIndex": 51,
+          "startPrice": 2733.58,
+          "endPrice": 2462.7,
+          "startTime": "2025-05-23T00:00:00.000Z",
+          "endTime": "2025-05-25T08:00:00.000Z",
+          "length": -9.909349644056515,
+          "duration": 14,
+          "confidence": 53.047104894372026
+        },
+        {
+          "number": 67,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 51,
+          "endIndex": 73,
+          "startPrice": 2462.7,
+          "endPrice": 2788.55,
+          "startTime": "2025-05-25T08:00:00.000Z",
+          "endTime": "2025-05-29T00:00:00.000Z",
+          "length": 13.23141267714299,
+          "duration": 22,
+          "confidence": 55.085590993851476
+        }
+      ],
+      "isComplete": true,
+      "degree": "minute",
+      "startTime": "2025-05-18T20:00:00.000Z",
+      "endTime": "2025-05-29T00:00:00.000Z",
+      "validity": 100
+    },
+    "historicalSequences": [
+      {
+        "type": "corrective",
+        "waves": [
+          {
+            "number": 65,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 12,
+            "endIndex": 37,
+            "startPrice": 2320,
+            "endPrice": 2733.58,
+            "startTime": "2025-05-18T20:00:00.000Z",
+            "endTime": "2025-05-23T00:00:00.000Z",
+            "length": 17.826724137931034,
+            "duration": 25,
+            "confidence": 57.18234969190158
+          },
+          {
+            "number": 66,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 37,
+            "endIndex": 51,
+            "startPrice": 2733.58,
+            "endPrice": 2462.7,
+            "startTime": "2025-05-23T00:00:00.000Z",
+            "endTime": "2025-05-25T08:00:00.000Z",
+            "length": -9.909349644056515,
+            "duration": 14,
+            "confidence": 53.047104894372026
+          },
+          {
+            "number": 67,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 51,
+            "endIndex": 73,
+            "startPrice": 2462.7,
+            "endPrice": 2788.55,
+            "startTime": "2025-05-25T08:00:00.000Z",
+            "endTime": "2025-05-29T00:00:00.000Z",
+            "length": 13.23141267714299,
+            "duration": 22,
+            "confidence": 55.085590993851476
+          }
+        ],
+        "isComplete": true,
+        "degree": "minute",
+        "startTime": "2025-05-18T20:00:00.000Z",
+        "endTime": "2025-05-29T00:00:00.000Z",
+        "validity": 100
+      }
+    ],
+    "currentWave": {
+      "wave": {
+        "number": 67,
+        "type": "corrective",
+        "subType": "zigzag",
+        "startIndex": 51,
+        "endIndex": 73,
+        "startPrice": 2462.7,
+        "endPrice": 2788.55,
+        "startTime": "2025-05-25T08:00:00.000Z",
+        "endTime": "2025-05-29T00:00:00.000Z",
+        "length": 13.23141267714299,
+        "duration": 22,
+        "confidence": 55.085590993851476
+      },
+      "position": "beginning",
+      "nextExpected": "Corrective sequence complete, new impulse likely"
+    },
+    "projections": [],
+    "ruleValidation": {
+      "wave2Rule": true,
+      "wave3Rule": true,
+      "wave4Rule": true,
+      "alternationRule": true,
+      "channelRule": true,
+      "overallValidity": 100
+    },
+    "signals": {
+      "signal": "hold",
+      "strength": 50,
+      "reasoning": "",
+      "waveContext": "",
+      "riskLevel": "medium"
+    },
+    "analysisTime": "2025-06-19T00:29:39.983Z",
+    "confidence": 80,
+    "dataQuality": 0
+  },
+  "metadata": {
+    "id": "ETHUSDT_elliott_240_1750292979983",
+    "type": "technical",
+    "timestamp": "2025-06-19T00:29:39.983Z",
+    "symbol": "ETHUSDT",
+    "timeframe": "240"
+  },
+  "timestamp": "2025-06-19T00:29:39.983Z"
+}

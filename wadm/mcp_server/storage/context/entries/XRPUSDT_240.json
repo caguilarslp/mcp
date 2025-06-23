@@ -1,0 +1,14 @@
+[
+  {
+    "id": "XRPUSDT_240_1750466374505",
+    "symbol": "XRPUSDT",
+    "timeframe": "240",
+    "timestamp": "2025-06-21T00:39:34.505Z",
+    "type": "wyckoff",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 198
+  }
+]

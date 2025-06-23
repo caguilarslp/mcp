@@ -1,0 +1,38 @@
+{
+  "symbol": "XRPUSDT",
+  "timeframe_coverage": [
+    "60"
+  ],
+  "analysis_count": 10,
+  "date_range": {
+    "start": "2025-06-21T00:39:22.489Z",
+    "end": "2025-06-21T00:39:36.835Z"
+  },
+  "trend_summary": {
+    "direction": "neutral",
+    "strength": 0,
+    "consistency": 0
+  },
+  "key_levels": {
+    "support": [],
+    "resistance": [],
+    "pivot": 0
+  },
+  "volume_profile": {
+    "avg_volume": 0,
+    "volume_trend": "stable",
+    "key_volume_nodes": []
+  },
+  "pattern_frequency": {},
+  "confluences": [],
+  "recommendations_summary": {
+    "bias": "neutral",
+    "confidence": 0,
+    "key_points": []
+  },
+  "metadata": {
+    "total_size_bytes": 1980,
+    "compression_ratio": 0.99,
+    "last_updated": "2025-06-21T00:39:36.836Z"
+  }
+}

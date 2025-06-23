@@ -1,0 +1,31 @@
+{
+  "id": "XRPUSDT_60_1750432967968",
+  "type": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "XRPUSDT",
+      "period": "1d",
+      "currentPrice": 2.1385,
+      "highestPrice": 2.18,
+      "lowestPrice": 2.133,
+      "volatilityPercent": 2.197802197802205,
+      "isGoodForGrid": false,
+      "recommendation": "wait",
+      "confidence": 50
+    },
+    "symbol": "XRPUSDT",
+    "timeframe": "60"
+  },
+  "metadata": {
+    "id": "XRPUSDT_60_1750432967968",
+    "type": "technical_analysis",
+    "timestamp": "2025-06-20T15:22:47.968Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "timestamp": "2025-06-20T15:22:47.968Z"
+}

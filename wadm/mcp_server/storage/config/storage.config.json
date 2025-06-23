@@ -1,0 +1,7 @@
+{
+  "basePath": "./storage",
+  "maxFileSize": 10485760,
+  "maxTotalSize": 1073741824,
+  "compressionEnabled": false,
+  "autoCleanupDays": 30
+}

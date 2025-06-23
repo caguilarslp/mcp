@@ -1,0 +1,148 @@
+{
+  "id": "HBARUSDT_wyckoff_60_1750276699642",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "HBARUSDT",
+    "timeframe": "60",
+    "analysisDate": "2025-06-18T19:58:19.642Z",
+    "currentPhase": "uncertain",
+    "phaseConfidence": 30,
+    "phaseProgress": 50,
+    "keyEvents": [
+      {
+        "timestamp": "2025-06-14T18:00:00.000Z",
+        "type": "test",
+        "price": 0.15196,
+        "volume": 1745991.34,
+        "significance": 50,
+        "description": "Test of 0.1512: Price touched 0.1520 (0.483% from level) and stalled near level with poor quality on 0.9x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 0.15123,
+        "testQuality": "poor",
+        "volumeOnTest": 1745991.34,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-17T00:00:00.000Z",
+        "type": "test",
+        "price": 0.15006,
+        "volume": 7111298.75,
+        "significance": 85,
+        "description": "Test of 0.1501: Price touched 0.1501 (0.000% from level) and rejected at resistance with good quality on 3.8x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.15006,
+        "testQuality": "good",
+        "volumeOnTest": 7111298.75,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-17T10:00:00.000Z",
+        "type": "test",
+        "price": 0.15235,
+        "volume": 3535732.94,
+        "significance": 75,
+        "description": "Test of 0.1521: Price touched 0.1524 (0.138% from level) and stalled near level with good quality on 1.9x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.15214,
+        "testQuality": "good",
+        "volumeOnTest": 3535732.94,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-18T13:00:00.000Z",
+        "type": "test",
+        "price": 0.1438,
+        "volume": 3133171.82,
+        "significance": 75,
+        "description": "Test of 0.1438: Price touched 0.1438 (0.000% from level) and stalled near level with good quality on 1.7x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 0.1438,
+        "testQuality": "good",
+        "volumeOnTest": 3133171.82,
+        "resultingAction": "stall"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "increasing",
+      "climaxEvents": [
+        {
+          "date": "2025-06-16T22:00:00.000Z",
+          "type": "selling_climax",
+          "volume": 4893585.27,
+          "priceAction": "-1.96% decline on 2.8x volume",
+          "significance": 50
+        },
+        {
+          "date": "2025-06-16T23:00:00.000Z",
+          "type": "selling_climax",
+          "volume": 5001038.33,
+          "priceAction": "-1.90% decline on 2.9x volume",
+          "significance": 50
+        }
+      ],
+      "dryUpPeriods": [
+        {
+          "startDate": "2025-06-14T21:00:00.000Z",
+          "endDate": "2025-06-14T23:00:00.000Z",
+          "averageVolume": 639231.19,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-15T07:00:00.000Z",
+          "endDate": "2025-06-15T12:00:00.000Z",
+          "averageVolume": 826011.0766666667,
+          "significance": "moderate"
+        }
+      ],
+      "avgVolumeInRange": 1722053.6004444438,
+      "currentVolumeRank": 75,
+      "interpretation": "Volume trend: INCREASING - Rising participation and institutional activity | 2 climax event(s) detected (0 buying, 2 selling) | 2 dry-up period(s) detected - potential absorption"
+    },
+    "interpretation": {
+      "bias": "uncertain",
+      "strength": "moderate",
+      "implications": [
+        "Phase not clearly defined - market in transition",
+        "Monitor price and volume for pattern development"
+      ],
+      "nextExpectedEvents": [
+        "Watch for trading range development",
+        "Look for accumulation or distribution signs"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "HBARUSDT_wyckoff_60_1750276699642",
+    "type": "wyckoff",
+    "timestamp": "2025-06-18T19:58:19.642Z",
+    "symbol": "HBARUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "phase:uncertain",
+      "confidence:30",
+      "progress:50",
+      "bias:uncertain",
+      "strength:moderate",
+      "events:4",
+      "range:none"
+    ]
+  },
+  "timestamp": "2025-06-18T19:58:19.642Z"
+}

@@ -1,0 +1,3107 @@
+{
+  "id": "XRPUSDT_smc_confluence_60_1750278019626",
+  "type": "smc",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "currentPrice": 2.1466,
+    "confluences": [
+      {
+        "id": "36cddeb7-315c-42b6-b6cf-9d91dbf4995d",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.3153,
+        "strength": 100,
+        "zone": {
+          "upper": 2.339238,
+          "lower": 2.2914849999999998,
+          "midpoint": 2.3153
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750104000000_23276",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3371,
+              "low": 2.3092,
+              "open": 2.3359,
+              "close": 2.3193,
+              "volume": 4655715.19,
+              "timestamp": "2025-06-16T20:00:00.000Z",
+              "candleIndex": 71
+            },
+            "zone": {
+              "upper": 2.3359,
+              "lower": 2.3193,
+              "midpoint": 2.3276000000000003
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 9.333333333333242,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4655715.19,
+            "priceMovement": {
+              "distance": 9.333333333333242,
+              "percentage": 402.42027048390645,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.447842811902819,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 122.39214059514094
+            },
+            "currentDistance": 8.431938880089469,
+            "priceAtCreation": 2.3193,
+            "marketStructure": {
+              "swingLow": 2.3092,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bullish_1750089600000_23104_57",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T15:00:00.000Z",
+                "open": 2.2806,
+                "high": 2.298,
+                "low": 2.2769,
+                "close": 2.2899,
+                "volume": 4269180.78
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T16:00:00.000Z",
+                "open": 2.2899,
+                "high": 2.3276,
+                "low": 2.2899,
+                "close": 2.3104,
+                "volume": 6712509.5
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T17:00:00.000Z",
+                "open": 2.3104,
+                "high": 2.3221,
+                "low": 2.308,
+                "close": 2.308,
+                "volume": 3235147.8
+              },
+              "timestamp": "2025-06-16T16:00:00.000Z",
+              "candleIndex": 57
+            },
+            "gap": {
+              "upper": 2.308,
+              "lower": 2.298,
+              "size": 0.009999999999999787,
+              "sizePercent": 0.4328254847645337,
+              "midpoint": 2.303
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": true,
+              "volumeProfile": 3.5292468415372253,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 17.9999999999984,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-16T18:00:00.000Z",
+                  "price": 2.3062,
+                  "fillPercentage": 17.9999999999984
+                }
+              ],
+              "firstTouch": "2025-06-16T18:00:00.000Z"
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 100,
+                "trend": 59,
+                "volume": 100,
+                "age": 69
+              }
+            },
+            "targetZones": {
+              "conservative": 2.3005,
+              "normal": 2.303,
+              "complete": 2.298
+            },
+            "createdAt": "2025-06-16T16:00:00.000Z",
+            "expirationTime": "2025-06-23T16:00:00.000Z"
+          }
+        },
+        "alignment": "mixed",
+        "validUntil": "2025-06-19T20:20:19.625Z",
+        "description": "Strong mixed confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "5e6dac56-2070-412d-91a4-1d501ba3aacf",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.305425,
+        "strength": 100,
+        "zone": {
+          "upper": 2.31938925,
+          "lower": 2.2914849999999998,
+          "midpoint": 2.305425
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750107600000_23079",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3248,
+              "low": 2.2926,
+              "open": 2.3193,
+              "close": 2.2964,
+              "volume": 4142907.69,
+              "timestamp": "2025-06-16T21:00:00.000Z",
+              "candleIndex": 72
+            },
+            "zone": {
+              "upper": 2.3193,
+              "lower": 2.2964,
+              "midpoint": 2.30785
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 8.050772626931494,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4142907.69,
+            "priceMovement": {
+              "distance": 8.050772626931494,
+              "percentage": 350.58233003533763,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.178223193533325,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 108.91115967666624
+            },
+            "currentDistance": 7.51187925090843,
+            "priceAtCreation": 2.2964,
+            "marketStructure": {
+              "swingLow": 2.2926,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bullish_1750089600000_23104_57",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T15:00:00.000Z",
+                "open": 2.2806,
+                "high": 2.298,
+                "low": 2.2769,
+                "close": 2.2899,
+                "volume": 4269180.78
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T16:00:00.000Z",
+                "open": 2.2899,
+                "high": 2.3276,
+                "low": 2.2899,
+                "close": 2.3104,
+                "volume": 6712509.5
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T17:00:00.000Z",
+                "open": 2.3104,
+                "high": 2.3221,
+                "low": 2.308,
+                "close": 2.308,
+                "volume": 3235147.8
+              },
+              "timestamp": "2025-06-16T16:00:00.000Z",
+              "candleIndex": 57
+            },
+            "gap": {
+              "upper": 2.308,
+              "lower": 2.298,
+              "size": 0.009999999999999787,
+              "sizePercent": 0.4328254847645337,
+              "midpoint": 2.303
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": true,
+              "volumeProfile": 3.5292468415372253,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 17.9999999999984,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-16T18:00:00.000Z",
+                  "price": 2.3062,
+                  "fillPercentage": 17.9999999999984
+                }
+              ],
+              "firstTouch": "2025-06-16T18:00:00.000Z"
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 100,
+                "trend": 59,
+                "volume": 100,
+                "age": 69
+              }
+            },
+            "targetZones": {
+              "conservative": 2.3005,
+              "normal": 2.303,
+              "complete": 2.298
+            },
+            "createdAt": "2025-06-16T16:00:00.000Z",
+            "expirationTime": "2025-06-23T16:00:00.000Z"
+          }
+        },
+        "alignment": "mixed",
+        "validUntil": "2025-06-19T20:20:19.625Z",
+        "description": "Strong mixed confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "3c026480-9e14-4b40-ba34-219100d96822",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.297575,
+        "strength": 100,
+        "zone": {
+          "upper": 2.31938925,
+          "lower": 2.2758635000000003,
+          "midpoint": 2.297575
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750107600000_23079",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3248,
+              "low": 2.2926,
+              "open": 2.3193,
+              "close": 2.2964,
+              "volume": 4142907.69,
+              "timestamp": "2025-06-16T21:00:00.000Z",
+              "candleIndex": 72
+            },
+            "zone": {
+              "upper": 2.3193,
+              "lower": 2.2964,
+              "midpoint": 2.30785
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 8.050772626931494,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4142907.69,
+            "priceMovement": {
+              "distance": 8.050772626931494,
+              "percentage": 350.58233003533763,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.178223193533325,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 108.91115967666624
+            },
+            "currentDistance": 7.51187925090843,
+            "priceAtCreation": 2.2964,
+            "marketStructure": {
+              "swingLow": 2.2926,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bearish_1750111200000_22751_63",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T21:00:00.000Z",
+                "open": 2.3193,
+                "high": 2.3248,
+                "low": 2.2926,
+                "close": 2.2964,
+                "volume": 4142907.69
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T22:00:00.000Z",
+                "open": 2.2964,
+                "high": 2.3115,
+                "low": 2.2609,
+                "close": 2.2751,
+                "volume": 5875766.35
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T23:00:00.000Z",
+                "open": 2.2751,
+                "high": 2.282,
+                "low": 2.2287,
+                "close": 2.2378,
+                "volume": 4516694.82
+              },
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 63
+            },
+            "gap": {
+              "upper": 2.2926,
+              "lower": 2.282,
+              "size": 0.010600000000000165,
+              "sizePercent": 0.4659135862159977,
+              "midpoint": 2.2873
+            },
+            "context": {
+              "trendDirection": "down",
+              "impulsiveMove": true,
+              "volumeProfile": 3.089311059052983,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 0,
+              "partialFills": []
+            },
+            "probability": {
+              "fill": 86,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 95,
+                "trend": 70,
+                "volume": 100,
+                "age": 72
+              }
+            },
+            "targetZones": {
+              "conservative": 2.28995,
+              "normal": 2.2873,
+              "complete": 2.2926
+            },
+            "createdAt": "2025-06-16T22:00:00.000Z",
+            "expirationTime": "2025-06-23T22:00:00.000Z"
+          }
+        },
+        "alignment": "bearish",
+        "validUntil": "2025-06-19T20:20:19.625Z",
+        "description": "Strong bearish confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "07a3ac46-debf-4860-91b5-24be34acb739",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.278375,
+        "strength": 100,
+        "zone": {
+          "upper": 2.29717875,
+          "lower": 2.259645,
+          "midpoint": 2.278375
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750111200000_22858",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3115,
+              "low": 2.2609,
+              "open": 2.2964,
+              "close": 2.2751,
+              "volume": 5875766.35,
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 73
+            },
+            "zone": {
+              "upper": 2.2964,
+              "lower": 2.2751,
+              "midpoint": 2.28575
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 5.601545253863063,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 5875766.35,
+            "priceMovement": {
+              "distance": 5.601545253863063,
+              "percentage": 246.21094694136798,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 3.089311059052983,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 154.46555295264915
+            },
+            "currentDistance": 6.482344172179276,
+            "priceAtCreation": 2.2751,
+            "marketStructure": {
+              "swingLow": 2.2609,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bullish_1750082400000_22806_55",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T13:00:00.000Z",
+                "open": 2.2482,
+                "high": 2.2651,
+                "low": 2.2479,
+                "close": 2.2592,
+                "volume": 2629249.13
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T14:00:00.000Z",
+                "open": 2.2592,
+                "high": 2.2925,
+                "low": 2.2465,
+                "close": 2.2806,
+                "volume": 4813224.08
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T15:00:00.000Z",
+                "open": 2.2806,
+                "high": 2.298,
+                "low": 2.2769,
+                "close": 2.2899,
+                "volume": 4269180.78
+              },
+              "timestamp": "2025-06-16T14:00:00.000Z",
+              "candleIndex": 55
+            },
+            "gap": {
+              "upper": 2.2769,
+              "lower": 2.2651,
+              "size": 0.011800000000000033,
+              "sizePercent": 0.517407699728143,
+              "midpoint": 2.271
+            },
+            "context": {
+              "trendDirection": "up",
+              "impulsiveMove": true,
+              "volumeProfile": 2.530656512583098,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 0,
+              "partialFills": []
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 88,
+              "factors": {
+                "size": 95,
+                "trend": 70,
+                "volume": 100,
+                "age": 68
+              }
+            },
+            "targetZones": {
+              "conservative": 2.2680499999999997,
+              "normal": 2.271,
+              "complete": 2.2651
+            },
+            "createdAt": "2025-06-16T14:00:00.000Z",
+            "expirationTime": "2025-06-23T14:00:00.000Z"
+          }
+        },
+        "alignment": "mixed",
+        "validUntil": "2025-06-19T20:20:19.626Z",
+        "description": "Strong mixed confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "9305ae7f-f360-490b-8474-675194b6c800",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.294375,
+        "strength": 100,
+        "zone": {
+          "upper": 2.3145149999999997,
+          "lower": 2.2743212500000003,
+          "midpoint": 2.294375
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750111200000_22858",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3115,
+              "low": 2.2609,
+              "open": 2.2964,
+              "close": 2.2751,
+              "volume": 5875766.35,
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 73
+            },
+            "zone": {
+              "upper": 2.2964,
+              "lower": 2.2751,
+              "midpoint": 2.28575
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 5.601545253863063,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 5875766.35,
+            "priceMovement": {
+              "distance": 5.601545253863063,
+              "percentage": 246.21094694136798,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 3.089311059052983,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 154.46555295264915
+            },
+            "currentDistance": 6.482344172179276,
+            "priceAtCreation": 2.2751,
+            "marketStructure": {
+              "swingLow": 2.2609,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bullish_1750089600000_23104_57",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T15:00:00.000Z",
+                "open": 2.2806,
+                "high": 2.298,
+                "low": 2.2769,
+                "close": 2.2899,
+                "volume": 4269180.78
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T16:00:00.000Z",
+                "open": 2.2899,
+                "high": 2.3276,
+                "low": 2.2899,
+                "close": 2.3104,
+                "volume": 6712509.5
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T17:00:00.000Z",
+                "open": 2.3104,
+                "high": 2.3221,
+                "low": 2.308,
+                "close": 2.308,
+                "volume": 3235147.8
+              },
+              "timestamp": "2025-06-16T16:00:00.000Z",
+              "candleIndex": 57
+            },
+            "gap": {
+              "upper": 2.308,
+              "lower": 2.298,
+              "size": 0.009999999999999787,
+              "sizePercent": 0.4328254847645337,
+              "midpoint": 2.303
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": true,
+              "volumeProfile": 3.5292468415372253,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 17.9999999999984,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-16T18:00:00.000Z",
+                  "price": 2.3062,
+                  "fillPercentage": 17.9999999999984
+                }
+              ],
+              "firstTouch": "2025-06-16T18:00:00.000Z"
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 100,
+                "trend": 59,
+                "volume": 100,
+                "age": 69
+              }
+            },
+            "targetZones": {
+              "conservative": 2.3005,
+              "normal": 2.303,
+              "complete": 2.298
+            },
+            "createdAt": "2025-06-16T16:00:00.000Z",
+            "expirationTime": "2025-06-23T16:00:00.000Z"
+          }
+        },
+        "alignment": "mixed",
+        "validUntil": "2025-06-19T20:20:19.626Z",
+        "description": "Strong mixed confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "9b7ae166-799e-420c-a95d-58bb55024b56",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.286525,
+        "strength": 100,
+        "zone": {
+          "upper": 2.2987365,
+          "lower": 2.2743212500000003,
+          "midpoint": 2.286525
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750111200000_22858",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3115,
+              "low": 2.2609,
+              "open": 2.2964,
+              "close": 2.2751,
+              "volume": 5875766.35,
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 73
+            },
+            "zone": {
+              "upper": 2.2964,
+              "lower": 2.2751,
+              "midpoint": 2.28575
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 5.601545253863063,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 5875766.35,
+            "priceMovement": {
+              "distance": 5.601545253863063,
+              "percentage": 246.21094694136798,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 3.089311059052983,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 154.46555295264915
+            },
+            "currentDistance": 6.482344172179276,
+            "priceAtCreation": 2.2751,
+            "marketStructure": {
+              "swingLow": 2.2609,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bearish_1750111200000_22751_63",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T21:00:00.000Z",
+                "open": 2.3193,
+                "high": 2.3248,
+                "low": 2.2926,
+                "close": 2.2964,
+                "volume": 4142907.69
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T22:00:00.000Z",
+                "open": 2.2964,
+                "high": 2.3115,
+                "low": 2.2609,
+                "close": 2.2751,
+                "volume": 5875766.35
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T23:00:00.000Z",
+                "open": 2.2751,
+                "high": 2.282,
+                "low": 2.2287,
+                "close": 2.2378,
+                "volume": 4516694.82
+              },
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 63
+            },
+            "gap": {
+              "upper": 2.2926,
+              "lower": 2.282,
+              "size": 0.010600000000000165,
+              "sizePercent": 0.4659135862159977,
+              "midpoint": 2.2873
+            },
+            "context": {
+              "trendDirection": "down",
+              "impulsiveMove": true,
+              "volumeProfile": 3.089311059052983,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 0,
+              "partialFills": []
+            },
+            "probability": {
+              "fill": 86,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 95,
+                "trend": 70,
+                "volume": 100,
+                "age": 72
+              }
+            },
+            "targetZones": {
+              "conservative": 2.28995,
+              "normal": 2.2873,
+              "complete": 2.2926
+            },
+            "createdAt": "2025-06-16T22:00:00.000Z",
+            "expirationTime": "2025-06-23T22:00:00.000Z"
+          }
+        },
+        "alignment": "bearish",
+        "validUntil": "2025-06-19T20:20:19.626Z",
+        "description": "Strong bearish confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "b54b71f0-a6c5-40de-9eb6-72be637a8eb6",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.263725,
+        "strength": 100,
+        "zone": {
+          "upper": 2.2823549999999995,
+          "lower": 2.2451677500000002,
+          "midpoint": 2.263725
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750114800000_22565",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.282,
+              "low": 2.2287,
+              "open": 2.2751,
+              "close": 2.2378,
+              "volume": 4516694.82,
+              "timestamp": "2025-06-16T23:00:00.000Z",
+              "candleIndex": 74
+            },
+            "zone": {
+              "upper": 2.2751,
+              "lower": 2.2378,
+              "midpoint": 2.25645
+            },
+            "strength": 96,
+            "mitigated": false,
+            "respectCount": 9,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 3.1136865342162876,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4516694.82,
+            "priceMovement": {
+              "distance": 3.1136865342162876,
+              "percentage": 139.1405190015322,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.3747498499141857,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 118.73749249570929
+            },
+            "currentDistance": 5.117394950153742,
+            "priceAtCreation": 2.2378,
+            "marketStructure": {
+              "swingLow": 2.2287,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bullish_1750082400000_22806_55",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T13:00:00.000Z",
+                "open": 2.2482,
+                "high": 2.2651,
+                "low": 2.2479,
+                "close": 2.2592,
+                "volume": 2629249.13
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T14:00:00.000Z",
+                "open": 2.2592,
+                "high": 2.2925,
+                "low": 2.2465,
+                "close": 2.2806,
+                "volume": 4813224.08
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T15:00:00.000Z",
+                "open": 2.2806,
+                "high": 2.298,
+                "low": 2.2769,
+                "close": 2.2899,
+                "volume": 4269180.78
+              },
+              "timestamp": "2025-06-16T14:00:00.000Z",
+              "candleIndex": 55
+            },
+            "gap": {
+              "upper": 2.2769,
+              "lower": 2.2651,
+              "size": 0.011800000000000033,
+              "sizePercent": 0.517407699728143,
+              "midpoint": 2.271
+            },
+            "context": {
+              "trendDirection": "up",
+              "impulsiveMove": true,
+              "volumeProfile": 2.530656512583098,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 0,
+              "partialFills": []
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 88,
+              "factors": {
+                "size": 95,
+                "trend": 70,
+                "volume": 100,
+                "age": 68
+              }
+            },
+            "targetZones": {
+              "conservative": 2.2680499999999997,
+              "normal": 2.271,
+              "complete": 2.2651
+            },
+            "createdAt": "2025-06-16T14:00:00.000Z",
+            "expirationTime": "2025-06-23T14:00:00.000Z"
+          }
+        },
+        "alignment": "mixed",
+        "validUntil": "2025-06-19T20:20:19.626Z",
+        "description": "Strong mixed confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "3e635f51-6937-40b3-94ca-8f39f44f973b",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.271875,
+        "strength": 100,
+        "zone": {
+          "upper": 2.2987365,
+          "lower": 2.2451677500000002,
+          "midpoint": 2.271875
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750114800000_22565",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.282,
+              "low": 2.2287,
+              "open": 2.2751,
+              "close": 2.2378,
+              "volume": 4516694.82,
+              "timestamp": "2025-06-16T23:00:00.000Z",
+              "candleIndex": 74
+            },
+            "zone": {
+              "upper": 2.2751,
+              "lower": 2.2378,
+              "midpoint": 2.25645
+            },
+            "strength": 96,
+            "mitigated": false,
+            "respectCount": 9,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 3.1136865342162876,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4516694.82,
+            "priceMovement": {
+              "distance": 3.1136865342162876,
+              "percentage": 139.1405190015322,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.3747498499141857,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 118.73749249570929
+            },
+            "currentDistance": 5.117394950153742,
+            "priceAtCreation": 2.2378,
+            "marketStructure": {
+              "swingLow": 2.2287,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bearish_1750111200000_22751_63",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T21:00:00.000Z",
+                "open": 2.3193,
+                "high": 2.3248,
+                "low": 2.2926,
+                "close": 2.2964,
+                "volume": 4142907.69
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T22:00:00.000Z",
+                "open": 2.2964,
+                "high": 2.3115,
+                "low": 2.2609,
+                "close": 2.2751,
+                "volume": 5875766.35
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T23:00:00.000Z",
+                "open": 2.2751,
+                "high": 2.282,
+                "low": 2.2287,
+                "close": 2.2378,
+                "volume": 4516694.82
+              },
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 63
+            },
+            "gap": {
+              "upper": 2.2926,
+              "lower": 2.282,
+              "size": 0.010600000000000165,
+              "sizePercent": 0.4659135862159977,
+              "midpoint": 2.2873
+            },
+            "context": {
+              "trendDirection": "down",
+              "impulsiveMove": true,
+              "volumeProfile": 3.089311059052983,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 0,
+              "partialFills": []
+            },
+            "probability": {
+              "fill": 86,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 95,
+                "trend": 70,
+                "volume": 100,
+                "age": 72
+              }
+            },
+            "targetZones": {
+              "conservative": 2.28995,
+              "normal": 2.2873,
+              "complete": 2.2926
+            },
+            "createdAt": "2025-06-16T22:00:00.000Z",
+            "expirationTime": "2025-06-23T22:00:00.000Z"
+          }
+        },
+        "alignment": "bearish",
+        "validUntil": "2025-06-19T20:20:19.626Z",
+        "description": "Strong bearish confluence: orderBlock + fairValueGap"
+      },
+      {
+        "id": "90ad7a44-b273-4b31-92db-5c691373cdaa",
+        "types": [
+          "orderBlock",
+          "fairValueGap"
+        ],
+        "priceLevel": 2.257075,
+        "strength": 100,
+        "zone": {
+          "upper": 2.2689884999999994,
+          "lower": 2.2451677500000002,
+          "midpoint": 2.257075
+        },
+        "components": {
+          "orderBlock": {
+            "id": "ob_bearish_1750114800000_22565",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.282,
+              "low": 2.2287,
+              "open": 2.2751,
+              "close": 2.2378,
+              "volume": 4516694.82,
+              "timestamp": "2025-06-16T23:00:00.000Z",
+              "candleIndex": 74
+            },
+            "zone": {
+              "upper": 2.2751,
+              "lower": 2.2378,
+              "midpoint": 2.25645
+            },
+            "strength": 96,
+            "mitigated": false,
+            "respectCount": 9,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 3.1136865342162876,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4516694.82,
+            "priceMovement": {
+              "distance": 3.1136865342162876,
+              "percentage": 139.1405190015322,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.3747498499141857,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 118.73749249570929
+            },
+            "currentDistance": 5.117394950153742,
+            "priceAtCreation": 2.2378,
+            "marketStructure": {
+              "swingLow": 2.2287,
+              "structureBreak": true
+            }
+          },
+          "fairValueGap": {
+            "id": "fvg_bearish_1750114800000_22378_64",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T22:00:00.000Z",
+                "open": 2.2964,
+                "high": 2.3115,
+                "low": 2.2609,
+                "close": 2.2751,
+                "volume": 5875766.35
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T23:00:00.000Z",
+                "open": 2.2751,
+                "high": 2.282,
+                "low": 2.2287,
+                "close": 2.2378,
+                "volume": 4516694.82
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-17T00:00:00.000Z",
+                "open": 2.2378,
+                "high": 2.2545,
+                "low": 2.2016,
+                "close": 2.2537,
+                "volume": 7650057.36
+              },
+              "timestamp": "2025-06-16T23:00:00.000Z",
+              "candleIndex": 64
+            },
+            "gap": {
+              "upper": 2.2609,
+              "lower": 2.2545,
+              "size": 0.006399999999999739,
+              "sizePercent": 0.2859951738314299,
+              "midpoint": 2.2577
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": true,
+              "volumeProfile": 2.3747498499141857,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "partially_filled",
+            "filling": {
+              "fillProgress": 37.4999999999974,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-17T01:00:00.000Z",
+                  "price": 2.2569,
+                  "fillPercentage": 37.4999999999974
+                }
+              ],
+              "firstTouch": "2025-06-17T01:00:00.000Z"
+            },
+            "probability": {
+              "fill": 86,
+              "timeToFill": 3,
+              "confidence": 84,
+              "factors": {
+                "size": 100,
+                "trend": 69,
+                "volume": 95,
+                "age": 73
+              }
+            },
+            "targetZones": {
+              "conservative": 2.2592999999999996,
+              "normal": 2.2577,
+              "complete": 2.2609
+            },
+            "createdAt": "2025-06-16T23:00:00.000Z",
+            "expirationTime": "2025-06-23T23:00:00.000Z"
+          }
+        },
+        "alignment": "bearish",
+        "validUntil": "2025-06-19T20:20:19.626Z",
+        "description": "Strong bearish confluence: orderBlock + fairValueGap"
+      }
+    ],
+    "premiumDiscountZones": {
+      "premium": {
+        "start": 48819.969596092546,
+        "end": 50007.104799844405
+      },
+      "discount": {
+        "start": 45258.56398483697,
+        "end": 46445.69918858883
+      },
+      "equilibrium": 47632.83439234069,
+      "currentZone": "discount"
+    },
+    "institutionalActivity": {
+      "score": 100,
+      "signals": [
+        "6 strong order blocks detected",
+        "1 major structural breaks identified",
+        "9 strong SMC confluences detected"
+      ],
+      "footprint": {
+        "orderBlockActivity": 100,
+        "fvgCreation": 0,
+        "structuralManipulation": 100,
+        "confluenceStrength": 100
+      },
+      "interpretation": "High institutional activity detected - Smart money is actively positioning"
+    },
+    "marketBias": {
+      "direction": "bearish",
+      "strength": 100,
+      "confidence": 95,
+      "reasoning": [
+        "Overall bearish bias detected with integrated SMC analysis",
+        "Order blocks support bearish bias",
+        "Market structure confirms bearish trend",
+        "9 SMC confluences identified"
+      ],
+      "components": {
+        "orderBlockBias": "bearish",
+        "fvgBias": "neutral",
+        "structureBias": "bearish"
+      }
+    },
+    "tradingRecommendations": [
+      {
+        "action": "wait",
+        "reasoning": "Price in discount zone with bearish bias - wait for rally",
+        "entryZone": {
+          "min": 0,
+          "max": 0
+        },
+        "targets": [],
+        "stopLoss": 0,
+        "confidence": 50,
+        "timeframe": "monitor"
+      }
+    ],
+    "keyLevels": [
+      {
+        "price": 2.1755,
+        "type": "bearish order block",
+        "strength": 98,
+        "description": "Strong bearish OB with 7 tests"
+      },
+      {
+        "price": 2.2052500000000004,
+        "type": "bearish order block",
+        "strength": 84,
+        "description": "Strong bearish OB with 2 tests"
+      },
+      {
+        "price": 2.257075,
+        "type": "SMC confluence",
+        "strength": 100,
+        "description": "Strong bearish confluence: orderBlock + fairValueGap"
+      },
+      {
+        "price": 2.271875,
+        "type": "SMC confluence",
+        "strength": 100,
+        "description": "Strong bearish confluence: orderBlock + fairValueGap"
+      },
+      {
+        "price": 2.286525,
+        "type": "SMC confluence",
+        "strength": 100,
+        "description": "Strong bearish confluence: orderBlock + fairValueGap"
+      },
+      {
+        "price": 2.305425,
+        "type": "SMC confluence",
+        "strength": 100,
+        "description": "Strong mixed confluence: orderBlock + fairValueGap"
+      },
+      {
+        "price": 2.3276000000000003,
+        "type": "bearish order block",
+        "strength": 81,
+        "description": "Strong bearish OB with 1 tests"
+      },
+      {
+        "price": 45258.56398483697,
+        "type": "BOS level",
+        "strength": 72.88595539776045,
+        "description": "BOS bearish at 45258.56398483697"
+      },
+      {
+        "price": 46193.67163063891,
+        "type": "BOS level",
+        "strength": 77.47575449024593,
+        "description": "BOS bearish at 46193.67163063891"
+      },
+      {
+        "price": 46784.46240077114,
+        "type": "BOS level",
+        "strength": 73.86534929306828,
+        "description": "BOS bearish at 46784.46240077114"
+      },
+      {
+        "price": 47317.63297103674,
+        "type": "BOS level",
+        "strength": 70,
+        "description": "BOS bearish at 47317.63297103674"
+      }
+    ],
+    "statistics": {
+      "totalConfluences": 9,
+      "strongConfluences": 9,
+      "activeOrderBlocks": 6,
+      "openFVGs": 4,
+      "recentBOS": 4,
+      "overallConfidence": 95
+    },
+    "rawAnalysis": {
+      "orderBlocks": {
+        "symbol": "XRPUSDT",
+        "timeframe": "60",
+        "currentPrice": 2.1466,
+        "activeBlocks": [
+          {
+            "id": "ob_bearish_1750104000000_23276",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3371,
+              "low": 2.3092,
+              "open": 2.3359,
+              "close": 2.3193,
+              "volume": 4655715.19,
+              "timestamp": "2025-06-16T20:00:00.000Z",
+              "candleIndex": 71
+            },
+            "zone": {
+              "upper": 2.3359,
+              "lower": 2.3193,
+              "midpoint": 2.3276000000000003
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 9.333333333333242,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4655715.19,
+            "priceMovement": {
+              "distance": 9.333333333333242,
+              "percentage": 402.42027048390645,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.447842811902819,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 122.39214059514094
+            },
+            "currentDistance": 8.431938880089469,
+            "priceAtCreation": 2.3193,
+            "marketStructure": {
+              "swingLow": 2.3092,
+              "structureBreak": true
+            }
+          },
+          {
+            "id": "ob_bearish_1750107600000_23079",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3248,
+              "low": 2.2926,
+              "open": 2.3193,
+              "close": 2.2964,
+              "volume": 4142907.69,
+              "timestamp": "2025-06-16T21:00:00.000Z",
+              "candleIndex": 72
+            },
+            "zone": {
+              "upper": 2.3193,
+              "lower": 2.2964,
+              "midpoint": 2.30785
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 8.050772626931494,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4142907.69,
+            "priceMovement": {
+              "distance": 8.050772626931494,
+              "percentage": 350.58233003533763,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.178223193533325,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 108.91115967666624
+            },
+            "currentDistance": 7.51187925090843,
+            "priceAtCreation": 2.2964,
+            "marketStructure": {
+              "swingLow": 2.2926,
+              "structureBreak": true
+            }
+          },
+          {
+            "id": "ob_bearish_1750111200000_22858",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.3115,
+              "low": 2.2609,
+              "open": 2.2964,
+              "close": 2.2751,
+              "volume": 5875766.35,
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 73
+            },
+            "zone": {
+              "upper": 2.2964,
+              "lower": 2.2751,
+              "midpoint": 2.28575
+            },
+            "strength": 81,
+            "mitigated": false,
+            "respectCount": 1,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 5.601545253863063,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 5875766.35,
+            "priceMovement": {
+              "distance": 5.601545253863063,
+              "percentage": 246.21094694136798,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 3.089311059052983,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 154.46555295264915
+            },
+            "currentDistance": 6.482344172179276,
+            "priceAtCreation": 2.2751,
+            "marketStructure": {
+              "swingLow": 2.2609,
+              "structureBreak": true
+            }
+          },
+          {
+            "id": "ob_bearish_1750114800000_22565",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.282,
+              "low": 2.2287,
+              "open": 2.2751,
+              "close": 2.2378,
+              "volume": 4516694.82,
+              "timestamp": "2025-06-16T23:00:00.000Z",
+              "candleIndex": 74
+            },
+            "zone": {
+              "upper": 2.2751,
+              "lower": 2.2378,
+              "midpoint": 2.25645
+            },
+            "strength": 96,
+            "mitigated": false,
+            "respectCount": 9,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 3.1136865342162876,
+              "candles": 15,
+              "maxPrice": 2.1884
+            },
+            "volumeAtCreation": 4516694.82,
+            "priceMovement": {
+              "distance": 3.1136865342162876,
+              "percentage": 139.1405190015322,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 2.3747498499141857,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 118.73749249570929
+            },
+            "currentDistance": 5.117394950153742,
+            "priceAtCreation": 2.2378,
+            "marketStructure": {
+              "swingLow": 2.2287,
+              "structureBreak": true
+            }
+          },
+          {
+            "id": "ob_bearish_1750168800000_22053",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.2213,
+              "low": 2.1924,
+              "open": 2.2158,
+              "close": 2.1947,
+              "volume": 2308420.15,
+              "timestamp": "2025-06-17T14:00:00.000Z",
+              "candleIndex": 89
+            },
+            "zone": {
+              "upper": 2.2158,
+              "lower": 2.1947,
+              "midpoint": 2.2052500000000004
+            },
+            "strength": 84,
+            "mitigated": false,
+            "respectCount": 2,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 3.8940397350993163,
+              "candles": 15,
+              "maxPrice": 2.142
+            },
+            "volumeAtCreation": 2308420.15,
+            "priceMovement": {
+              "distance": 3.8940397350993163,
+              "percentage": 177.42924933245163,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.2137017494468183,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 60.68508747234092
+            },
+            "currentDistance": 2.7322277089350853,
+            "priceAtCreation": 2.1947,
+            "marketStructure": {
+              "swingLow": 2.1924,
+              "structureBreak": true
+            }
+          },
+          {
+            "id": "ob_bearish_1750190400000_21755",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.1908,
+              "low": 2.1671,
+              "open": 2.183,
+              "close": 2.168,
+              "volume": 2695736.2,
+              "timestamp": "2025-06-17T20:00:00.000Z",
+              "candleIndex": 95
+            },
+            "zone": {
+              "upper": 2.183,
+              "lower": 2.168,
+              "midpoint": 2.1755
+            },
+            "strength": 98,
+            "mitigated": false,
+            "respectCount": 7,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 3.2759381898454585,
+              "candles": 15,
+              "maxPrice": 2.1247
+            },
+            "volumeAtCreation": 2695736.2,
+            "priceMovement": {
+              "distance": 3.2759381898454585,
+              "percentage": 151.10416004822224,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.4173415277054822,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 70.8670763852741
+            },
+            "currentDistance": 1.3463151029535148,
+            "priceAtCreation": 2.168,
+            "marketStructure": {
+              "swingLow": 2.1671,
+              "structureBreak": true
+            }
+          }
+        ],
+        "breakerBlocks": [],
+        "strongestBlock": {
+          "id": "ob_bearish_1750190400000_21755",
+          "symbol": "XRPUSDT",
+          "type": "bearish",
+          "origin": {
+            "high": 2.1908,
+            "low": 2.1671,
+            "open": 2.183,
+            "close": 2.168,
+            "volume": 2695736.2,
+            "timestamp": "2025-06-17T20:00:00.000Z",
+            "candleIndex": 95
+          },
+          "zone": {
+            "upper": 2.183,
+            "lower": 2.168,
+            "midpoint": 2.1755
+          },
+          "strength": 98,
+          "mitigated": false,
+          "respectCount": 7,
+          "validity": "tested",
+          "createdAt": "2025-06-18T20:20:19.625Z",
+          "subsequentMove": {
+            "magnitude": 3.2759381898454585,
+            "candles": 15,
+            "maxPrice": 2.1247
+          },
+          "volumeAtCreation": 2695736.2,
+          "priceMovement": {
+            "distance": 3.2759381898454585,
+            "percentage": 151.10416004822224,
+            "timeToTarget": 900
+          },
+          "institutionalSignals": {
+            "volumeMultiplier": 1.4173415277054822,
+            "orderFlowImbalance": 0,
+            "absorptionLevel": 70.8670763852741
+          },
+          "currentDistance": 1.3463151029535148,
+          "priceAtCreation": 2.168,
+          "marketStructure": {
+            "swingLow": 2.1671,
+            "structureBreak": true
+          }
+        },
+        "nearestBlock": {
+          "bearish": {
+            "id": "ob_bearish_1750190400000_21755",
+            "symbol": "XRPUSDT",
+            "type": "bearish",
+            "origin": {
+              "high": 2.1908,
+              "low": 2.1671,
+              "open": 2.183,
+              "close": 2.168,
+              "volume": 2695736.2,
+              "timestamp": "2025-06-17T20:00:00.000Z",
+              "candleIndex": 95
+            },
+            "zone": {
+              "upper": 2.183,
+              "lower": 2.168,
+              "midpoint": 2.1755
+            },
+            "strength": 98,
+            "mitigated": false,
+            "respectCount": 7,
+            "validity": "tested",
+            "createdAt": "2025-06-18T20:20:19.625Z",
+            "subsequentMove": {
+              "magnitude": 3.2759381898454585,
+              "candles": 15,
+              "maxPrice": 2.1247
+            },
+            "volumeAtCreation": 2695736.2,
+            "priceMovement": {
+              "distance": 3.2759381898454585,
+              "percentage": 151.10416004822224,
+              "timeToTarget": 900
+            },
+            "institutionalSignals": {
+              "volumeMultiplier": 1.4173415277054822,
+              "orderFlowImbalance": 0,
+              "absorptionLevel": 70.8670763852741
+            },
+            "currentDistance": 1.3463151029535148,
+            "priceAtCreation": 2.168,
+            "marketStructure": {
+              "swingLow": 2.1671,
+              "structureBreak": true
+            }
+          }
+        },
+        "confluenceWithLevels": [],
+        "marketBias": "bearish",
+        "keyLevels": {
+          "strongSupport": [],
+          "strongResistance": [
+            2.183,
+            2.2158,
+            2.2751,
+            2.2964,
+            2.3193,
+            2.3359
+          ]
+        },
+        "statistics": {
+          "totalBlocks": 13,
+          "freshBlocks": 0,
+          "mitigatedBlocks": 7,
+          "breakerBlocks": 0,
+          "avgRespectRate": 4.38
+        },
+        "tradingRecommendation": {
+          "action": "sell",
+          "confidence": 90,
+          "reason": "Strong bearish order block alignment with market bias",
+          "targets": [
+            2.1463200000000002,
+            2.1246400000000003
+          ],
+          "stopLoss": 2.1939149999999996
+        },
+        "timestamp": "2025-06-18T20:20:19.625Z"
+      },
+      "fairValueGaps": {
+        "symbol": "XRPUSDT",
+        "timeframe": "60",
+        "currentPrice": 2.1466,
+        "openGaps": [
+          {
+            "id": "fvg_bullish_1750082400000_22806_55",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T13:00:00.000Z",
+                "open": 2.2482,
+                "high": 2.2651,
+                "low": 2.2479,
+                "close": 2.2592,
+                "volume": 2629249.13
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T14:00:00.000Z",
+                "open": 2.2592,
+                "high": 2.2925,
+                "low": 2.2465,
+                "close": 2.2806,
+                "volume": 4813224.08
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T15:00:00.000Z",
+                "open": 2.2806,
+                "high": 2.298,
+                "low": 2.2769,
+                "close": 2.2899,
+                "volume": 4269180.78
+              },
+              "timestamp": "2025-06-16T14:00:00.000Z",
+              "candleIndex": 55
+            },
+            "gap": {
+              "upper": 2.2769,
+              "lower": 2.2651,
+              "size": 0.011800000000000033,
+              "sizePercent": 0.517407699728143,
+              "midpoint": 2.271
+            },
+            "context": {
+              "trendDirection": "up",
+              "impulsiveMove": true,
+              "volumeProfile": 2.530656512583098,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 0,
+              "partialFills": []
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 88,
+              "factors": {
+                "size": 95,
+                "trend": 70,
+                "volume": 100,
+                "age": 68
+              }
+            },
+            "targetZones": {
+              "conservative": 2.2680499999999997,
+              "normal": 2.271,
+              "complete": 2.2651
+            },
+            "createdAt": "2025-06-16T14:00:00.000Z",
+            "expirationTime": "2025-06-23T14:00:00.000Z"
+          },
+          {
+            "id": "fvg_bullish_1750089600000_23104_57",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T15:00:00.000Z",
+                "open": 2.2806,
+                "high": 2.298,
+                "low": 2.2769,
+                "close": 2.2899,
+                "volume": 4269180.78
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T16:00:00.000Z",
+                "open": 2.2899,
+                "high": 2.3276,
+                "low": 2.2899,
+                "close": 2.3104,
+                "volume": 6712509.5
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T17:00:00.000Z",
+                "open": 2.3104,
+                "high": 2.3221,
+                "low": 2.308,
+                "close": 2.308,
+                "volume": 3235147.8
+              },
+              "timestamp": "2025-06-16T16:00:00.000Z",
+              "candleIndex": 57
+            },
+            "gap": {
+              "upper": 2.308,
+              "lower": 2.298,
+              "size": 0.009999999999999787,
+              "sizePercent": 0.4328254847645337,
+              "midpoint": 2.303
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": true,
+              "volumeProfile": 3.5292468415372253,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 17.9999999999984,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-16T18:00:00.000Z",
+                  "price": 2.3062,
+                  "fillPercentage": 17.9999999999984
+                }
+              ],
+              "firstTouch": "2025-06-16T18:00:00.000Z"
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 100,
+                "trend": 59,
+                "volume": 100,
+                "age": 69
+              }
+            },
+            "targetZones": {
+              "conservative": 2.3005,
+              "normal": 2.303,
+              "complete": 2.298
+            },
+            "createdAt": "2025-06-16T16:00:00.000Z",
+            "expirationTime": "2025-06-23T16:00:00.000Z"
+          },
+          {
+            "id": "fvg_bearish_1750111200000_22751_63",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T21:00:00.000Z",
+                "open": 2.3193,
+                "high": 2.3248,
+                "low": 2.2926,
+                "close": 2.2964,
+                "volume": 4142907.69
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T22:00:00.000Z",
+                "open": 2.2964,
+                "high": 2.3115,
+                "low": 2.2609,
+                "close": 2.2751,
+                "volume": 5875766.35
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T23:00:00.000Z",
+                "open": 2.2751,
+                "high": 2.282,
+                "low": 2.2287,
+                "close": 2.2378,
+                "volume": 4516694.82
+              },
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "candleIndex": 63
+            },
+            "gap": {
+              "upper": 2.2926,
+              "lower": 2.282,
+              "size": 0.010600000000000165,
+              "sizePercent": 0.4659135862159977,
+              "midpoint": 2.2873
+            },
+            "context": {
+              "trendDirection": "down",
+              "impulsiveMove": true,
+              "volumeProfile": 3.089311059052983,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "open",
+            "filling": {
+              "fillProgress": 0,
+              "partialFills": []
+            },
+            "probability": {
+              "fill": 86,
+              "timeToFill": 3,
+              "confidence": 95,
+              "factors": {
+                "size": 95,
+                "trend": 70,
+                "volume": 100,
+                "age": 72
+              }
+            },
+            "targetZones": {
+              "conservative": 2.28995,
+              "normal": 2.2873,
+              "complete": 2.2926
+            },
+            "createdAt": "2025-06-16T22:00:00.000Z",
+            "expirationTime": "2025-06-23T22:00:00.000Z"
+          },
+          {
+            "id": "fvg_bearish_1750114800000_22378_64",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T22:00:00.000Z",
+                "open": 2.2964,
+                "high": 2.3115,
+                "low": 2.2609,
+                "close": 2.2751,
+                "volume": 5875766.35
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T23:00:00.000Z",
+                "open": 2.2751,
+                "high": 2.282,
+                "low": 2.2287,
+                "close": 2.2378,
+                "volume": 4516694.82
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-17T00:00:00.000Z",
+                "open": 2.2378,
+                "high": 2.2545,
+                "low": 2.2016,
+                "close": 2.2537,
+                "volume": 7650057.36
+              },
+              "timestamp": "2025-06-16T23:00:00.000Z",
+              "candleIndex": 64
+            },
+            "gap": {
+              "upper": 2.2609,
+              "lower": 2.2545,
+              "size": 0.006399999999999739,
+              "sizePercent": 0.2859951738314299,
+              "midpoint": 2.2577
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": true,
+              "volumeProfile": 2.3747498499141857,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "partially_filled",
+            "filling": {
+              "fillProgress": 37.4999999999974,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-17T01:00:00.000Z",
+                  "price": 2.2569,
+                  "fillPercentage": 37.4999999999974
+                }
+              ],
+              "firstTouch": "2025-06-17T01:00:00.000Z"
+            },
+            "probability": {
+              "fill": 86,
+              "timeToFill": 3,
+              "confidence": 84,
+              "factors": {
+                "size": 100,
+                "trend": 69,
+                "volume": 95,
+                "age": 73
+              }
+            },
+            "targetZones": {
+              "conservative": 2.2592999999999996,
+              "normal": 2.2577,
+              "complete": 2.2609
+            },
+            "createdAt": "2025-06-16T23:00:00.000Z",
+            "expirationTime": "2025-06-23T23:00:00.000Z"
+          }
+        ],
+        "filledGaps": [
+          {
+            "id": "fvg_bearish_1749916800000_21247_9",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-14T15:00:00.000Z",
+                "open": 2.1645,
+                "high": 2.1682,
+                "low": 2.145,
+                "close": 2.1494,
+                "volume": 1652170.4
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-14T16:00:00.000Z",
+                "open": 2.1494,
+                "high": 2.1518,
+                "low": 2.117,
+                "close": 2.1247,
+                "volume": 2553456.35
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-14T17:00:00.000Z",
+                "open": 2.1247,
+                "high": 2.1401,
+                "low": 2.1224,
+                "close": 2.1302,
+                "volume": 1415247.89
+              },
+              "timestamp": "2025-06-14T16:00:00.000Z",
+              "candleIndex": 9
+            },
+            "gap": {
+              "upper": 2.145,
+              "lower": 2.1401,
+              "size": 0.0049000000000001265,
+              "sizePercent": 0.23062079352379758,
+              "midpoint": 2.14255
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": true,
+              "volumeProfile": 1.342534823710964,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "filled",
+            "filling": {
+              "fillProgress": 85.71428571428312,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-14T18:00:00.000Z",
+                  "price": 2.1402,
+                  "fillPercentage": 2.040816326534866
+                },
+                {
+                  "timestamp": "2025-06-14T21:00:00.000Z",
+                  "price": 2.1434,
+                  "fillPercentage": 67.34693877551464
+                },
+                {
+                  "timestamp": "2025-06-14T22:00:00.000Z",
+                  "price": 2.1437,
+                  "fillPercentage": 73.46938775510111
+                },
+                {
+                  "timestamp": "2025-06-18T11:00:00.000Z",
+                  "price": 2.1443,
+                  "fillPercentage": 85.71428571428312
+                }
+              ],
+              "firstTouch": "2025-06-14T18:00:00.000Z",
+              "fullFillTime": "2025-06-18T11:00:00.000Z"
+            },
+            "probability": {
+              "fill": 75,
+              "timeToFill": 4,
+              "confidence": 59,
+              "factors": {
+                "size": 100,
+                "trend": 93,
+                "volume": 54,
+                "age": 40
+              }
+            },
+            "targetZones": {
+              "conservative": 2.1437749999999998,
+              "normal": 2.14255,
+              "complete": 2.145
+            },
+            "createdAt": "2025-06-14T16:00:00.000Z",
+            "expirationTime": "2025-06-21T16:00:00.000Z"
+          },
+          {
+            "id": "fvg_bullish_1750057200000_22031_48",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T06:00:00.000Z",
+                "open": 2.1816,
+                "high": 2.1873,
+                "low": 2.1768,
+                "close": 2.1812,
+                "volume": 1479364.27
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T07:00:00.000Z",
+                "open": 2.1812,
+                "high": 2.204,
+                "low": 2.1812,
+                "close": 2.2031,
+                "volume": 2411224.51
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T08:00:00.000Z",
+                "open": 2.2031,
+                "high": 2.2067,
+                "low": 2.1938,
+                "close": 2.2015,
+                "volume": 1050066.34
+              },
+              "timestamp": "2025-06-16T07:00:00.000Z",
+              "candleIndex": 48
+            },
+            "gap": {
+              "upper": 2.1938,
+              "lower": 2.1873,
+              "size": 0.00649999999999995,
+              "sizePercent": 0.2950388089510213,
+              "midpoint": 2.19055
+            },
+            "context": {
+              "trendDirection": "sideways",
+              "impulsiveMove": false,
+              "volumeProfile": 1.267753362010831,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "filled",
+            "filling": {
+              "fillProgress": 83.07692307692139,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-17T11:00:00.000Z",
+                  "price": 2.1884,
+                  "fillPercentage": 83.07692307692139
+                }
+              ],
+              "firstTouch": "2025-06-17T11:00:00.000Z",
+              "fullFillTime": "2025-06-17T11:00:00.000Z"
+            },
+            "probability": {
+              "fill": 78,
+              "timeToFill": 4,
+              "confidence": 57,
+              "factors": {
+                "size": 100,
+                "trend": 92,
+                "volume": 51,
+                "age": 63
+              }
+            },
+            "targetZones": {
+              "conservative": 2.1889250000000002,
+              "normal": 2.19055,
+              "complete": 2.1873
+            },
+            "createdAt": "2025-06-16T07:00:00.000Z",
+            "expirationTime": "2025-06-23T07:00:00.000Z"
+          },
+          {
+            "id": "fvg_bullish_1750071600000_22454_52",
+            "type": "bullish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-16T10:00:00.000Z",
+                "open": 2.1993,
+                "high": 2.2102,
+                "low": 2.1974,
+                "close": 2.2096,
+                "volume": 1125910.31
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-16T11:00:00.000Z",
+                "open": 2.2096,
+                "high": 2.2493,
+                "low": 2.2066,
+                "close": 2.2454,
+                "volume": 3756440.54
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-16T12:00:00.000Z",
+                "open": 2.2454,
+                "high": 2.2733,
+                "low": 2.2445,
+                "close": 2.2482,
+                "volume": 5919842.77
+              },
+              "timestamp": "2025-06-16T11:00:00.000Z",
+              "candleIndex": 52
+            },
+            "gap": {
+              "upper": 2.2445,
+              "lower": 2.2102,
+              "size": 0.0343,
+              "sizePercent": 1.5275674712746057,
+              "midpoint": 2.22735
+            },
+            "context": {
+              "trendDirection": "up",
+              "impulsiveMove": true,
+              "volumeProfile": 1.9750297427835877,
+              "atr": 0.017671428571428654,
+              "significance": "medium"
+            },
+            "status": "filled",
+            "filling": {
+              "fillProgress": 85.42274052478164,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-16T23:00:00.000Z",
+                  "price": 2.2287,
+                  "fillPercentage": 46.064139941691074
+                },
+                {
+                  "timestamp": "2025-06-17T02:00:00.000Z",
+                  "price": 2.2286,
+                  "fillPercentage": 46.35568513119476
+                },
+                {
+                  "timestamp": "2025-06-17T07:00:00.000Z",
+                  "price": 2.2259,
+                  "fillPercentage": 54.22740524781262
+                },
+                {
+                  "timestamp": "2025-06-17T08:00:00.000Z",
+                  "price": 2.2152,
+                  "fillPercentage": 85.42274052478164
+                }
+              ],
+              "firstTouch": "2025-06-16T23:00:00.000Z",
+              "fullFillTime": "2025-06-17T08:00:00.000Z"
+            },
+            "probability": {
+              "fill": 88,
+              "timeToFill": 7,
+              "confidence": 95,
+              "factors": {
+                "size": 100,
+                "trend": 100,
+                "volume": 79,
+                "age": 66
+              }
+            },
+            "targetZones": {
+              "conservative": 2.218775,
+              "normal": 2.22735,
+              "complete": 2.2102
+            },
+            "createdAt": "2025-06-16T11:00:00.000Z",
+            "expirationTime": "2025-06-23T11:00:00.000Z"
+          },
+          {
+            "id": "fvg_bearish_1750168800000_21947_79",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-17T13:00:00.000Z",
+                "open": 2.2067,
+                "high": 2.2248,
+                "low": 2.2055,
+                "close": 2.2158,
+                "volume": 2134435.93
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-17T14:00:00.000Z",
+                "open": 2.2158,
+                "high": 2.2213,
+                "low": 2.1924,
+                "close": 2.1947,
+                "volume": 2308420.15
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-17T15:00:00.000Z",
+                "open": 2.1947,
+                "high": 2.1948,
+                "low": 2.1634,
+                "close": 2.1794,
+                "volume": 4569603.11
+              },
+              "timestamp": "2025-06-17T14:00:00.000Z",
+              "candleIndex": 79
+            },
+            "gap": {
+              "upper": 2.2055,
+              "lower": 2.1948,
+              "size": 0.010699999999999932,
+              "sizePercent": 0.48753816011299633,
+              "midpoint": 2.20015
+            },
+            "context": {
+              "trendDirection": "down",
+              "impulsiveMove": true,
+              "volumeProfile": 1.2137017494468183,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "filled",
+            "filling": {
+              "fillProgress": 80.37383177570089,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-17T19:00:00.000Z",
+                  "price": 2.2034,
+                  "fillPercentage": 80.37383177570089
+                }
+              ],
+              "firstTouch": "2025-06-17T19:00:00.000Z",
+              "fullFillTime": "2025-06-17T19:00:00.000Z"
+            },
+            "probability": {
+              "fill": 84,
+              "timeToFill": 3,
+              "confidence": 55,
+              "factors": {
+                "size": 100,
+                "trend": 100,
+                "volume": 49,
+                "age": 82
+              }
+            },
+            "targetZones": {
+              "conservative": 2.202825,
+              "normal": 2.20015,
+              "complete": 2.2055
+            },
+            "createdAt": "2025-06-17T14:00:00.000Z",
+            "expirationTime": "2025-06-24T14:00:00.000Z"
+          },
+          {
+            "id": "fvg_bearish_1750172400000_21794_80",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-17T14:00:00.000Z",
+                "open": 2.2158,
+                "high": 2.2213,
+                "low": 2.1924,
+                "close": 2.1947,
+                "volume": 2308420.15
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-17T15:00:00.000Z",
+                "open": 2.1947,
+                "high": 2.1948,
+                "low": 2.1634,
+                "close": 2.1794,
+                "volume": 4569603.11
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-17T16:00:00.000Z",
+                "open": 2.1794,
+                "high": 2.1837,
+                "low": 2.148,
+                "close": 2.149,
+                "volume": 3814442.67
+              },
+              "timestamp": "2025-06-17T15:00:00.000Z",
+              "candleIndex": 80
+            },
+            "gap": {
+              "upper": 2.1924,
+              "lower": 2.1837,
+              "size": 0.008700000000000152,
+              "sizePercent": 0.3991924382857738,
+              "midpoint": 2.18805
+            },
+            "context": {
+              "trendDirection": "down",
+              "impulsiveMove": true,
+              "volumeProfile": 2.402567526056564,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "filled",
+            "filling": {
+              "fillProgress": 81.6091954022961,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-17T20:00:00.000Z",
+                  "price": 2.1908,
+                  "fillPercentage": 81.6091954022961
+                }
+              ],
+              "firstTouch": "2025-06-17T20:00:00.000Z",
+              "fullFillTime": "2025-06-17T20:00:00.000Z"
+            },
+            "probability": {
+              "fill": 95,
+              "timeToFill": 3,
+              "confidence": 85,
+              "factors": {
+                "size": 100,
+                "trend": 100,
+                "volume": 96,
+                "age": 83
+              }
+            },
+            "targetZones": {
+              "conservative": 2.190225,
+              "normal": 2.18805,
+              "complete": 2.1924
+            },
+            "createdAt": "2025-06-17T15:00:00.000Z",
+            "expirationTime": "2025-06-24T15:00:00.000Z"
+          },
+          {
+            "id": "fvg_bearish_1750194000000_21567_86",
+            "type": "bearish",
+            "formation": {
+              "beforeCandle": {
+                "timestamp": "2025-06-17T20:00:00.000Z",
+                "open": 2.183,
+                "high": 2.1908,
+                "low": 2.1671,
+                "close": 2.168,
+                "volume": 2695736.2
+              },
+              "gapCandle": {
+                "timestamp": "2025-06-17T21:00:00.000Z",
+                "open": 2.168,
+                "high": 2.1729,
+                "low": 2.1514,
+                "close": 2.1567,
+                "volume": 2794119.05
+              },
+              "afterCandle": {
+                "timestamp": "2025-06-17T22:00:00.000Z",
+                "open": 2.1567,
+                "high": 2.1598,
+                "low": 2.1441,
+                "close": 2.1455,
+                "volume": 1064337.78
+              },
+              "timestamp": "2025-06-17T21:00:00.000Z",
+              "candleIndex": 86
+            },
+            "gap": {
+              "upper": 2.1671,
+              "lower": 2.1598,
+              "size": 0.007299999999999862,
+              "sizePercent": 0.338480085315522,
+              "midpoint": 2.16345
+            },
+            "context": {
+              "trendDirection": "down",
+              "impulsiveMove": false,
+              "volumeProfile": 1.4690684358944284,
+              "atr": 0.017671428571428654,
+              "significance": "low"
+            },
+            "status": "filled",
+            "filling": {
+              "fillProgress": 86.30136986301495,
+              "partialFills": [
+                {
+                  "timestamp": "2025-06-17T23:00:00.000Z",
+                  "price": 2.1661,
+                  "fillPercentage": 86.30136986301495
+                }
+              ],
+              "firstTouch": "2025-06-17T23:00:00.000Z",
+              "fullFillTime": "2025-06-17T23:00:00.000Z"
+            },
+            "probability": {
+              "fill": 87,
+              "timeToFill": 3,
+              "confidence": 62,
+              "factors": {
+                "size": 100,
+                "trend": 100,
+                "volume": 59,
+                "age": 86
+              }
+            },
+            "targetZones": {
+              "conservative": 2.1652750000000003,
+              "normal": 2.16345,
+              "complete": 2.1671
+            },
+            "createdAt": "2025-06-17T21:00:00.000Z",
+            "expirationTime": "2025-06-24T21:00:00.000Z"
+          }
+        ],
+        "nearestGap": {
+          "id": "fvg_bearish_1750114800000_22378_64",
+          "type": "bearish",
+          "formation": {
+            "beforeCandle": {
+              "timestamp": "2025-06-16T22:00:00.000Z",
+              "open": 2.2964,
+              "high": 2.3115,
+              "low": 2.2609,
+              "close": 2.2751,
+              "volume": 5875766.35
+            },
+            "gapCandle": {
+              "timestamp": "2025-06-16T23:00:00.000Z",
+              "open": 2.2751,
+              "high": 2.282,
+              "low": 2.2287,
+              "close": 2.2378,
+              "volume": 4516694.82
+            },
+            "afterCandle": {
+              "timestamp": "2025-06-17T00:00:00.000Z",
+              "open": 2.2378,
+              "high": 2.2545,
+              "low": 2.2016,
+              "close": 2.2537,
+              "volume": 7650057.36
+            },
+            "timestamp": "2025-06-16T23:00:00.000Z",
+            "candleIndex": 64
+          },
+          "gap": {
+            "upper": 2.2609,
+            "lower": 2.2545,
+            "size": 0.006399999999999739,
+            "sizePercent": 0.2859951738314299,
+            "midpoint": 2.2577
+          },
+          "context": {
+            "trendDirection": "sideways",
+            "impulsiveMove": true,
+            "volumeProfile": 2.3747498499141857,
+            "atr": 0.017671428571428654,
+            "significance": "low"
+          },
+          "status": "partially_filled",
+          "filling": {
+            "fillProgress": 37.4999999999974,
+            "partialFills": [
+              {
+                "timestamp": "2025-06-17T01:00:00.000Z",
+                "price": 2.2569,
+                "fillPercentage": 37.4999999999974
+              }
+            ],
+            "firstTouch": "2025-06-17T01:00:00.000Z"
+          },
+          "probability": {
+            "fill": 86,
+            "timeToFill": 3,
+            "confidence": 84,
+            "factors": {
+              "size": 100,
+              "trend": 69,
+              "volume": 95,
+              "age": 73
+            }
+          },
+          "targetZones": {
+            "conservative": 2.2592999999999996,
+            "normal": 2.2577,
+            "complete": 2.2609
+          },
+          "createdAt": "2025-06-16T23:00:00.000Z",
+          "expirationTime": "2025-06-23T23:00:00.000Z"
+        },
+        "statistics": {
+          "totalGapsDetected": 10,
+          "openGaps": 4,
+          "filledGaps": 6,
+          "avgFillTime": 16.333333333333332,
+          "fillRate": 60,
+          "avgGapSize": 0.4980579702003821
+        },
+        "marketImbalance": {
+          "bullishGaps": 2,
+          "bearishGaps": 2,
+          "netImbalance": "neutral",
+          "strength": 0
+        },
+        "tradingOpportunities": [],
+        "timestamp": "2025-06-18T20:20:19.568Z"
+      },
+      "breakOfStructure": {
+        "symbol": "XRPUSDT",
+        "timeframe": "60",
+        "currentPrice": 47052.58471817712,
+        "trend": {
+          "shortTerm": "bullish",
+          "mediumTerm": "bullish",
+          "longTerm": "sideways",
+          "confidence": 75
+        },
+        "structurePoints": [
+          {
+            "timestamp": "2025-06-15T04:20:18.112Z",
+            "price": 48702.393872516004,
+            "type": "lower_low",
+            "strength": 65.90310272643084,
+            "volume": 1744438.4886667156,
+            "confirmed": true,
+            "index": 12
+          },
+          {
+            "timestamp": "2025-06-15T10:20:18.112Z",
+            "price": 50007.104799844405,
+            "type": "higher_high",
+            "strength": 69.75298321969072,
+            "volume": 2630538.665718425,
+            "confirmed": true,
+            "index": 18
+          },
+          {
+            "timestamp": "2025-06-15T17:20:18.112Z",
+            "price": 47317.63297103674,
+            "type": "lower_low",
+            "strength": 50,
+            "volume": 1469879.1689139607,
+            "confirmed": true,
+            "index": 25
+          },
+          {
+            "timestamp": "2025-06-16T00:20:18.112Z",
+            "price": 46784.46240077114,
+            "type": "lower_low",
+            "strength": 62.88449764356093,
+            "volume": 1076136.4618972458,
+            "confirmed": true,
+            "index": 32
+          },
+          {
+            "timestamp": "2025-06-16T10:20:18.112Z",
+            "price": 48842.02169074754,
+            "type": "lower_high",
+            "strength": 73.95070480191613,
+            "volume": 2808149.655229166,
+            "confirmed": true,
+            "index": 42
+          },
+          {
+            "timestamp": "2025-06-16T23:20:18.112Z",
+            "price": 46890.477003365806,
+            "type": "higher_low",
+            "strength": 70,
+            "volume": 1605279.7590438956,
+            "confirmed": true,
+            "index": 55
+          },
+          {
+            "timestamp": "2025-06-17T02:20:18.112Z",
+            "price": 48430.81606551636,
+            "type": "lower_high",
+            "strength": 69.26237839443073,
+            "volume": 2649146.996742009,
+            "confirmed": true,
+            "index": 58
+          },
+          {
+            "timestamp": "2025-06-17T11:20:18.112Z",
+            "price": 46193.67163063891,
+            "type": "lower_low",
+            "strength": 68.25251496748645,
+            "volume": 2686637.436520766,
+            "confirmed": true,
+            "index": 67
+          },
+          {
+            "timestamp": "2025-06-18T00:20:18.112Z",
+            "price": 45258.56398483697,
+            "type": "lower_low",
+            "strength": 52.95318465920148,
+            "volume": 2044815.8067794614,
+            "confirmed": true,
+            "index": 80
+          },
+          {
+            "timestamp": "2025-06-18T04:20:18.112Z",
+            "price": 47106.44261471818,
+            "type": "lower_high",
+            "strength": 81.99836162250801,
+            "volume": 2399500.0791205484,
+            "confirmed": true,
+            "index": 84
+          },
+          {
+            "timestamp": "2025-06-18T08:20:18.112Z",
+            "price": 45281.19566202606,
+            "type": "higher_low",
+            "strength": 54.131113421206734,
+            "volume": 1534787.2586528438,
+            "confirmed": true,
+            "index": 88
+          }
+        ],
+        "activeBreaks": [
+          {
+            "id": "8ef5ab91-8bfe-4f7b-84ce-64a0455ee730",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-15T17:20:18.112Z",
+              "price": 47317.63297103674,
+              "volume": 1469879.1689139607,
+              "index": 25
+            },
+            "previousStructure": {
+              "pattern": "consolidation",
+              "duration": 6,
+              "strength": 67.82804297306078
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 46665.27750737254,
+              "normal": 46012.92204370834,
+              "aggressive": 45206.61069061939
+            },
+            "invalidationLevel": 50257.14032384362,
+            "probability": 70,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          },
+          {
+            "id": "b17e833c-904c-46f9-a0cc-e52601ba93a0",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-16T00:20:18.112Z",
+              "price": 46784.46240077114,
+              "volume": 1076136.4618972458,
+              "index": 32
+            },
+            "previousStructure": {
+              "pattern": "lower_lows",
+              "duration": 13,
+              "strength": 61.885361982040514
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 45785.916711737125,
+              "normal": 44787.37102270311,
+              "aggressive": 43553.16855105707
+            },
+            "invalidationLevel": 50257.14032384362,
+            "probability": 73.86534929306828,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          },
+          {
+            "id": "a794921b-23bb-4f17-bccb-ccdb6630eeba",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-17T11:20:18.112Z",
+              "price": 46193.67163063891,
+              "volume": 2686637.436520766,
+              "index": 67
+            },
+            "previousStructure": {
+              "pattern": "consolidation",
+              "duration": 26,
+              "strength": 69.02439520997694
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 45268.764457387464,
+              "normal": 44343.857284136015,
+              "aggressive": 43200.672017997225
+            },
+            "invalidationLevel": 48672.97014584394,
+            "probability": 77.47575449024593,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          },
+          {
+            "id": "31ccd2cb-6b61-4237-a6dc-5ba800682654",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T00:20:18.112Z",
+              "price": 45258.56398483697,
+              "volume": 2044815.8067794614,
+              "index": 80
+            },
+            "previousStructure": {
+              "pattern": "lower_lows",
+              "duration": 25,
+              "strength": 70.36639954095833
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 44303.72595410201,
+              "normal": 43348.88792336706,
+              "aggressive": 42168.70811737865
+            },
+            "invalidationLevel": 48672.97014584394,
+            "probability": 72.88595539776045,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          }
+        ],
+        "recentBreaks": [
+          {
+            "id": "8ef5ab91-8bfe-4f7b-84ce-64a0455ee730",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-15T17:20:18.112Z",
+              "price": 47317.63297103674,
+              "volume": 1469879.1689139607,
+              "index": 25
+            },
+            "previousStructure": {
+              "pattern": "consolidation",
+              "duration": 6,
+              "strength": 67.82804297306078
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 46665.27750737254,
+              "normal": 46012.92204370834,
+              "aggressive": 45206.61069061939
+            },
+            "invalidationLevel": 50257.14032384362,
+            "probability": 70,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          },
+          {
+            "id": "b17e833c-904c-46f9-a0cc-e52601ba93a0",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-16T00:20:18.112Z",
+              "price": 46784.46240077114,
+              "volume": 1076136.4618972458,
+              "index": 32
+            },
+            "previousStructure": {
+              "pattern": "lower_lows",
+              "duration": 13,
+              "strength": 61.885361982040514
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 45785.916711737125,
+              "normal": 44787.37102270311,
+              "aggressive": 43553.16855105707
+            },
+            "invalidationLevel": 50257.14032384362,
+            "probability": 73.86534929306828,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          },
+          {
+            "id": "a794921b-23bb-4f17-bccb-ccdb6630eeba",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-17T11:20:18.112Z",
+              "price": 46193.67163063891,
+              "volume": 2686637.436520766,
+              "index": 67
+            },
+            "previousStructure": {
+              "pattern": "consolidation",
+              "duration": 26,
+              "strength": 69.02439520997694
+            },
+            "significance": "major",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 45268.764457387464,
+              "normal": 44343.857284136015,
+              "aggressive": 43200.672017997225
+            },
+            "invalidationLevel": 48672.97014584394,
+            "probability": 77.47575449024593,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          },
+          {
+            "id": "31ccd2cb-6b61-4237-a6dc-5ba800682654",
+            "type": "BOS",
+            "direction": "bearish",
+            "breakPoint": {
+              "timestamp": "2025-06-18T00:20:18.112Z",
+              "price": 45258.56398483697,
+              "volume": 2044815.8067794614,
+              "index": 80
+            },
+            "previousStructure": {
+              "pattern": "lower_lows",
+              "duration": 25,
+              "strength": 70.36639954095833
+            },
+            "significance": "minor",
+            "confirmation": {
+              "volumeConfirmed": false,
+              "followThrough": false
+            },
+            "institutionalFootprint": {
+              "orderBlockPresent": false,
+              "fvgPresent": false,
+              "liquidityGrab": false,
+              "absorptionDetected": false
+            },
+            "targets": {
+              "conservative": 44303.72595410201,
+              "normal": 43348.88792336706,
+              "aggressive": 42168.70811737865
+            },
+            "invalidationLevel": 48672.97014584394,
+            "probability": 72.88595539776045,
+            "createdAt": "2025-06-18T20:20:18.113Z"
+          }
+        ],
+        "currentStructure": {
+          "type": "uptrend",
+          "strength": 75,
+          "duration": 20,
+          "keyLevels": [
+            48430.81606551636,
+            46193.67163063891,
+            45258.56398483697,
+            47106.44261471818,
+            45281.19566202606
+          ]
+        },
+        "marketBias": {
+          "direction": "bearish",
+          "strength": 100,
+          "confidence": 75,
+          "reasoning": [
+            "Recent breaks favor bearish bias"
+          ]
+        },
+        "nexteDecisionPoints": [],
+        "tradingOpportunities": [],
+        "timestamp": "2025-06-18T20:20:18.113Z"
+      }
+    },
+    "timestamp": "2025-06-18T20:20:19.626Z"
+  },
+  "metadata": {
+    "id": "XRPUSDT_smc_confluence_60_1750278019626",
+    "type": "smc",
+    "timestamp": "2025-06-18T20:20:19.626Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "confluences:9",
+      "bias:bearish",
+      "institutional:100",
+      "zone:discount"
+    ]
+  },
+  "timestamp": "2025-06-18T20:20:19.626Z"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "BTCUSDT_volume_delta_5_1750293081414",
+  "type": "volume_delta",
+  "data": {
+    "symbol": "BTCUSDT",
+    "interval": "5",
+    "current": 1.272894386874049,
+    "average": 1.8634052319696082,
+    "bias": "buyer",
+    "strength": 44.246041682665265,
+    "cumulativeDelta": 105.20774211684709,
+    "divergence": {
+      "detected": false,
+      "type": "No divergence",
+      "signal": "trend_confirmed"
+    },
+    "marketPressure": {
+      "bullishCandles": 7,
+      "bearishCandles": 3,
+      "bullishPercent": 70,
+      "trend": "strong_buying"
+    }
+  },
+  "metadata": {
+    "id": "BTCUSDT_volume_delta_5_1750293081414",
+    "type": "volume_delta",
+    "timestamp": "2025-06-19T00:31:21.414Z",
+    "symbol": "BTCUSDT",
+    "interval": "5",
+    "tags": [
+      "interval:5",
+      "bias:buyer",
+      "strength:44",
+      "cumulative:105",
+      "divergence:false",
+      "pressure:strong_buying"
+    ]
+  },
+  "timestamp": "2025-06-19T00:31:21.414Z"
+}

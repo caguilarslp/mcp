@@ -1,0 +1,88 @@
+{
+  "id": "XRPUSDT_composite_man_240_1750466374500",
+  "type": "wyckoff_advanced",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "240",
+    "analysisDate": "2025-06-21T00:39:34.500Z",
+    "manipulationScore": 35,
+    "institutionalActivity": {
+      "absorptionRate": 0.5,
+      "distributionRate": 0.3,
+      "netPosition": "accumulating",
+      "activityLevel": "moderate",
+      "volumeFootprint": {
+        "largeTransactionRatio": 0.3,
+        "absorptionEvents": [],
+        "distributionEvents": [],
+        "volumeAnomalies": [],
+        "orderFlowImbalance": 0
+      },
+      "priceActionSigns": []
+    },
+    "marketCharacteristics": {
+      "volatilityProfile": {
+        "currentLevel": "normal",
+        "trend": "stable",
+        "compressionPhases": [],
+        "expansionPhases": []
+      },
+      "trendCharacter": {
+        "overallDirection": "sideways",
+        "strength": 50,
+        "maturity": "middle",
+        "pullbackCharacter": "healthy",
+        "breakoutProbability": 60
+      },
+      "rangeCharacter": {
+        "isActive": true,
+        "quality": "good",
+        "maturity": "developing",
+        "expansionProbability": 70,
+        "direction": "up"
+      },
+      "timeFactors": {
+        "cyclePosition": "middle",
+        "timeElapsed": 20,
+        "timeRemaining": 15,
+        "criticalTimeWindows": []
+      },
+      "seasonalityFactors": {
+        "historicalBias": "neutral",
+        "strength": 30,
+        "timeframe": "weekly",
+        "notes": []
+      }
+    },
+    "manipulationSigns": [],
+    "interpretation": {
+      "phase": "accumulation",
+      "strength": "weak",
+      "confidence": 35,
+      "implications": [
+        "Institutional accumulation detected"
+      ],
+      "expectedMoves": [
+        "Eventual markup phase"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "XRPUSDT_composite_man_240_1750466374500",
+    "type": "wyckoff_advanced",
+    "timestamp": "2025-06-21T00:39:34.500Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "240",
+    "tags": [
+      "timeframe:240",
+      "type:composite_man",
+      "manipulation_score:35",
+      "phase:accumulation",
+      "strength:weak",
+      "confidence:35",
+      "activity_level:moderate",
+      "manipulation_signs:0"
+    ]
+  },
+  "timestamp": "2025-06-21T00:39:34.500Z"
+}

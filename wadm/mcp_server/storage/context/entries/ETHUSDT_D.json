@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ETHUSDT_D_1750292966938",
+    "symbol": "ETHUSDT",
+    "timeframe": "D",
+    "timestamp": "2025-06-19T00:29:26.938Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 196
+  }
+]

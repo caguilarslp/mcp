@@ -1,0 +1,137 @@
+{
+  "id": "ICPUSDT_wyckoff_60_1750448292376",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "ICPUSDT",
+    "timeframe": "60",
+    "analysisDate": "2025-06-20T19:38:12.376Z",
+    "currentPhase": "uncertain",
+    "phaseConfidence": 30,
+    "phaseProgress": 50,
+    "keyEvents": [
+      {
+        "timestamp": "2025-06-17T00:00:00.000Z",
+        "type": "test",
+        "price": 5.341,
+        "volume": 43327.62,
+        "significance": 85,
+        "description": "Test of 5.3160: Price touched 5.3410 (0.470% from level) and rejected at resistance with good quality on 1.8x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 5.316,
+        "testQuality": "good",
+        "volumeOnTest": 43327.62,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-18T13:00:00.000Z",
+        "type": "test",
+        "price": 4.998,
+        "volume": 42758.7,
+        "significance": 75,
+        "description": "Test of 4.9860: Price touched 4.9980 (0.241% from level) and stalled near level with good quality on 1.7x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 4.986,
+        "testQuality": "good",
+        "volumeOnTest": 42758.7,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-18T19:00:00.000Z",
+        "type": "test",
+        "price": 5.077,
+        "volume": 24110.65,
+        "significance": 95,
+        "description": "Test of 5.0730: Price touched 5.0770 (0.079% from level) and rejected at resistance with good quality on 1.0x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "normal"
+        },
+        "levelTested": 5.073,
+        "testQuality": "good",
+        "volumeOnTest": 24110.65,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-19T01:00:00.000Z",
+        "type": "test",
+        "price": 5.316,
+        "volume": 91327.86,
+        "significance": 75,
+        "description": "Test of 5.3160: Price touched 5.3160 (0.000% from level) and stalled near level with good quality on 3.7x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 5.316,
+        "testQuality": "good",
+        "volumeOnTest": 91327.86,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-20T14:00:00.000Z",
+        "type": "test",
+        "price": 5.001,
+        "volume": 39396.87,
+        "significance": 75,
+        "description": "Test of 4.9860: Price touched 5.0010 (0.301% from level) and stalled near level with good quality on 1.6x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 4.986,
+        "testQuality": "good",
+        "volumeOnTest": 39396.87,
+        "resultingAction": "stall"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "stable",
+      "climaxEvents": [],
+      "dryUpPeriods": [],
+      "avgVolumeInRange": 23589.317444444452,
+      "currentVolumeRank": 0,
+      "interpretation": "Volume trend: STABLE - Consistent participation levels | No significant climax events - orderly price movement | Current volume at 0th percentile - LOW activity"
+    },
+    "interpretation": {
+      "bias": "uncertain",
+      "strength": "weak",
+      "implications": [
+        "Phase not clearly defined - market in transition",
+        "Monitor price and volume for pattern development"
+      ],
+      "nextExpectedEvents": [
+        "Watch for trading range development",
+        "Look for accumulation or distribution signs"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "ICPUSDT_wyckoff_60_1750448292376",
+    "type": "wyckoff",
+    "timestamp": "2025-06-20T19:38:12.376Z",
+    "symbol": "ICPUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "phase:uncertain",
+      "confidence:30",
+      "progress:50",
+      "bias:uncertain",
+      "strength:weak",
+      "events:5",
+      "range:none"
+    ]
+  },
+  "timestamp": "2025-06-20T19:38:12.376Z"
+}
