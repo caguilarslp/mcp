@@ -6,9 +6,9 @@ import logging
 
 from ..dependencies import require_active_session, get_api_key
 from ..services.mcp import MCPClient, MCPToolCall, MCPResponse, MCPError
-from ..services.session import SessionService
+from ..services.session_service import SessionService
 from ..models.session import SessionUsage, SessionResponse
-from ..models.auth import APIKeyInDB
+from ..models.auth import APIKeyInfo
 from src.storage.mongo_manager import MongoManager
 
 
@@ -37,7 +37,7 @@ def get_mongo_manager() -> Optional[MongoManager]:
 async def call_mcp_tool(
     request: MCPToolCall,
     session: SessionResponse = Depends(require_active_session),
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> MCPResponse:
     """Call an MCP analysis tool.
     
@@ -56,7 +56,7 @@ async def call_mcp_tool(
         response = await mcp_client.call_tool(
             tool_name=request.tool,
             params=request.params,
-            session_id=session.session_id
+            session_id=session.id
         )
         
         # Update session usage
@@ -82,7 +82,7 @@ async def call_mcp_tool(
 @router.get("/tools")
 async def list_mcp_tools(
     category: Optional[str] = Query(None, description="Filter by category"),
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> List[dict]:
     """Get list of available MCP analysis tools."""
     try:
@@ -101,7 +101,7 @@ async def list_mcp_tools(
 
 @router.get("/health")
 async def check_mcp_health(
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> dict:
     """Check MCP server health status."""
     try:
@@ -126,7 +126,7 @@ async def analyze_wyckoff(
     symbol: str,
     timeframe: str = Query("60", description="Timeframe (15, 30, 60, 240, D)"),
     session: SessionResponse = Depends(require_active_session),
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> MCPResponse:
     """Perform complete Wyckoff analysis for a symbol."""
     request = MCPToolCall(
@@ -142,7 +142,7 @@ async def analyze_smart_money(
     symbol: str,
     timeframe: str = Query("60", description="Timeframe"),
     session: SessionResponse = Depends(require_active_session),
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> MCPResponse:
     """Perform Smart Money Concepts analysis."""
     request = MCPToolCall(
@@ -158,7 +158,7 @@ async def complete_analysis(
     symbol: str,
     investment: Optional[float] = Query(None, description="Investment amount for grid suggestions"),
     session: SessionResponse = Depends(require_active_session),
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> MCPResponse:
     """Perform complete market analysis with all indicators."""
     params = {"symbol": symbol.upper()}
@@ -179,7 +179,7 @@ async def technical_analysis(
     timeframe: str = Query("60", description="Timeframe"),
     periods: int = Query(100, description="Number of periods"),
     session: SessionResponse = Depends(require_active_session),
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> MCPResponse:
     """Perform comprehensive technical analysis."""
     request = MCPToolCall(
@@ -198,7 +198,7 @@ async def technical_analysis(
 async def get_analysis_context(
     symbol: str,
     session: SessionResponse = Depends(require_active_session),
-    api_key: APIKeyInDB = Depends(get_api_key)
+    api_key: APIKeyInfo = Depends(get_api_key)
 ) -> MCPResponse:
     """Get 3-month historical context for a symbol."""
     request = MCPToolCall(

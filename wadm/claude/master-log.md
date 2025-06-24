@@ -490,3 +490,73 @@ echo '{"jsonrpc":"2.0","method":"tools/list","id":1}' | node build/index.js
 
 ### Lección Aprendida
 NUNCA usar mocks en producción. Siempre implementar funcionalidad real desde el inicio, aunque tome más tiempo. Los mocks son deuda técnica que se paga con intereses.
+
+### API Import Errors Fix
+**Date**: 2025-06-24
+**Issue**: Múltiples errores de importación al iniciar la API después de agregar MCP router
+
+#### Errores Encontrados y Solucionados
+1. **`get_api_key` missing**
+   - Error: `ImportError: cannot import name 'get_api_key' from 'src.api.dependencies'`
+   - Fix: Creada función `get_api_key()` en dependencies.py
+   
+2. **Wrong session type**
+   - Error: `SessionUsage` usado donde debería ser `SessionResponse`
+   - Fix: Cambiado tipo de parámetro en todos los endpoints MCP
+   
+3. **Missing method**
+   - Error: `track_endpoint_usage()` no existía en SessionService
+   - Fix: Añadido método wrapper que llama a `track_usage()`
+   
+4. **Circular imports**
+   - Error: Import circular con `get_mongo_manager`
+   - Fix: Creada instancia local en mcp.py para evitar circular import
+   
+5. **Wrong model name**
+   - Error: `ImportError: cannot import name 'APIKeyInDB' from 'src.api.models.auth'`
+   - Fix: Cambiado a `APIKeyInfo` que es el modelo correcto
+   
+#### Result
+✅ API ahora arranca sin errores de importación
+⚠️ Pero sigue usando MOCKS (ver BUG-002)
+
+## 2025-06-24 - Project Cleanup
+
+### Limpieza de Archivos Innecesarios
+**Action**: Movidos todos los archivos .bat y .py de test de la raíz a `claude/debug/`
+**Reason**: Mantener la raíz del proyecto limpia y organizada
+
+#### Archivos Movidos (24 archivos)
+- Todos los `test_*.py` → `claude/debug/`
+- Todos los `*.bat` de setup/test → `claude/debug/`
+- Scripts de instalación y verificación → `claude/debug/`
+
+#### Actualización de .claude_context
+Añadidas nuevas reglas:
+- NO CREAR ARCHIVOS .BAT O .PY EN LA RAÍZ (a menos que se pida explícitamente)
+- EL USUARIO SE ENCARGA DE DOCKER - no crear scripts para esto
+
+#### Resultado
+✅ Raíz del proyecto limpia - solo archivos esenciales
+✅ Scripts de debug organizados en `claude/debug/`
+✅ Estructura más profesional y mantenible
+
+### TASK-080 MCP Integration - Final Fix
+**Status**: API FUNCIONANDO ✅
+**Issue**: Último error de import corregido
+
+#### Fix Final
+- Error: `ModuleNotFoundError: No module named 'src.api.services.session'`
+- Causa: Import incorrecto (ya estaba corregido pero Docker usaba caché)
+- Solución: Reiniciar contenedor Docker para recargar módulos Python
+
+#### Estado Actual de TASK-080
+- ✅ Estructura de endpoints MCP creada correctamente
+- ✅ Integración con sesiones funcionando
+- ✅ API arrancando sin errores
+- ⚠️ PERO: Sigue usando respuestas MOCK (ver BUG-002)
+
+#### Próximos Pasos
+1. **BUG-002**: Implementar comunicación REAL con MCP Server (4 horas)
+2. **TASK-064**: Dashboard MVP para visualización
+3. **TASK-081**: Indicadores únicos no disponibles en MCP

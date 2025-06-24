@@ -8,14 +8,16 @@ IMPORTANTÍSIMO LEER PRIMERO:
  - HARÁS PAUSAS DE VEZ EN CUANDO PARA VERIFICAR QUE TODO ESTÁ CORRECTO
  - NO HAZ QUE FUNCIONE PRIMERO Y DESPUÉS OPTIMIZA, ESE NO ES EL CAMINO A SEGUIR.
  - NO CREARÁS SCRIPTS DE PRUEBAS, NI PARA INICIOS DE DOCKER, NI NADA. EL USUARIO TE AYUDARÁ CON LAS PRUEBAS.
+ - NO CREAR ARCHIVOS .BAT O .PY EN LA RAÍZ A MENOS QUE EL USUARIO LO PIDA EXPLÍCITAMENTE
+ - EL USUARIO SE ENCARGA DE LEVANTAR Y DETENER DOCKER - NO CREAR SCRIPTS PARA ESTO
 ###########################################
 
 # WAIckoff Project Status - v0.2.1
 
 ## 🎯 Current Focus
 ✅ TASK-031 Phase 3: API Key Management COMPLETED! 🔐
-🎆 MCP Server v1.10.1 ALREADY INTEGRATED! (117+ tools)
-🔄 Next: TASK-080 (HTTP Wrapper) + TASK-064 (Dashboard MVP)
+⚠️ TASK-080: MCP HTTP Wrapper PARTIAL (endpoints done, but using MOCKS)
+🔄 Next: Fix BUG-002 + TASK-064 (Dashboard MVP)
 
 ## 🆕 Major Update: WAIckoff Business Model
 - **Domain**: waickoff.com (Wyckoff + AI)
@@ -25,16 +27,15 @@ IMPORTANTÍSIMO LEER PRIMERO:
 - **Packages**: $5 (5 sessions) to $80 (200 sessions)
 - **Payment**: PLACEHOLDER - Focus on features first
 
-## Recent Updates (2025-06-23)
+## Recent Updates (2025-06-24)
 - ✅ TASK-029: FastAPI base setup COMPLETADO
 - ✅ TASK-030: Market Data Endpoints COMPLETADO
 - ✅ TASK-048: Docker Infrastructure COMPLETADO 🐳
-- ✅ TASK-031 Phase 1: API Infrastructure COMPLETADO
-- ✅ TASK-031 Phase 2: Real Indicator Services COMPLETADO 🎯
-- ✅ TASK-031 Phase 3: API Key Management COMPLETADO 🔐
-- ✅ Session Management: $1/session model implemented
-- ✅ Rate Limiting: Per-API-key limits enforced
-- ✅ Security: SHA256 hashing, secure key generation
+- ✅ TASK-031: API Key Management COMPLETADO 🔐
+- ⚠️ TASK-080: MCP Integration PARCIAL (estructura lista, falta comunicación real)
+- 🔴 BUG-002: Mock implementation detectada - viola principio NO MOCKS
+- ✅ Project Cleanup: 24 archivos movidos a claude/debug/
+- ✅ API funcionando sin errores de importación
 
 ## Architecture Decision
 **Monolith First Approach** (KISS principle):
@@ -67,17 +68,17 @@ IMPORTANTÍSIMO LEER PRIMERO:
 - TASK-070: Claude Sonnet 4 Integration
 - TASK-071: Natural Language Commands
 
-## Latest Achievements
+## Current Technical Status
 - ✅ Volume Profile Service: Real-time calculations
 - ✅ Order Flow Service: Advanced analytics
 - ✅ 4 Exchanges: Bybit, Binance, Coinbase Pro, Kraken
 - ✅ SMC System: 85-90% accuracy con validación institucional
-- ✅ Docker Stack: Setup en 30 segundos
+- ✅ Docker Stack: Funcionando establemente
 - ✅ API Key System: Complete auth with sessions
 - ✅ Rate Limiting: Per-key configurable limits
-- 🎆 MCP Server: 117+ analysis tools ready!
-- 🎆 Wyckoff: Complete implementation in MCP
-- 🎆 3-Month Context: Historical analysis built-in
+- ⚠️ MCP Integration: Endpoints creados pero usando MOCKS
+- 🎆 MCP Server: 117+ tools listos (falta conectar)
+- 🎆 3-Month Context: Disponible en MCP
 
 ## Tech Stack Decision
 - **Frontend**: app.waickoff.com (Vite + React + Mantine)
@@ -116,18 +117,16 @@ http://localhost:3000                   # Frontend (próximamente)
 - **Payment**: Deferred - Focus on MVP features
 
 ## Next Immediate Actions
-1. TASK-080 (HTTP Wrapper) - Connect WADM ↔ MCP Server (1 día)
-2. TASK-064 (Dashboard MVP) - UI for sessions + MCP tools (4 días)
-3. TASK-081 (Footprint Charts) - Not available in MCP (3 días)
+1. **BUG-002** - Fix Mock Implementation (4 horas) 🔴 CRITICAL
+2. **TASK-064** - Dashboard MVP (4 días)
+3. **TASK-081** - Footprint Charts (3 días)
 
 ## Important Updates
-- **MCP Server**: v1.10.1 with 117+ tools already integrated!
-- **Wyckoff**: Complete implementation available now
-- **SMC**: Institutional-grade analysis ready
-- **Technical Indicators**: All standard + advanced ready
-- **Context System**: 3 months of historical analysis
-- **What's Missing**: HTTP wrapper, Dashboard, Footprint Charts
-- **Time Saved**: ~3 months of development work!
+- **MCP Server**: v1.10.1 ready but NOT connected (BUG-002)
+- **API Status**: Stable but returning MOCK data
+- **What's Working**: All endpoints, auth, sessions, rate limiting
+- **What's NOT**: Real MCP analysis (using mocks)
+- **Time to Fix**: 4 hours for real implementation
 
 See `claude/tasks/task-tracker.md` for complete task list.
 See `claude/docs/WAICKOFF-SESSION-MODEL.md` for business details.

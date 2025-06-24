@@ -7,7 +7,7 @@ import logging
 from typing import Optional
 
 from fastapi import Depends, HTTPException, Header
-from src.api.models.auth import APIKeyVerifyResponse, APIKeyInDB
+from src.api.models.auth import APIKeyVerifyResponse, APIKeyInfo
 from src.api.models.session import SessionResponse
 from src.api.services.session_service import SessionService
 from src.api.routers.auth import verify_api_key, get_mongo_manager
@@ -80,7 +80,7 @@ async def optional_session(
 
 async def get_api_key(
     x_api_key: str = Header(..., description="API Key for authentication")
-) -> APIKeyInDB:
+) -> APIKeyInfo:
     """
     Get API key from header and verify it.
     Returns the API key object if valid.
@@ -88,20 +88,20 @@ async def get_api_key(
     # Use the existing verify_api_key function
     verification = await verify_api_key(x_api_key=x_api_key)
     
-    # For master key, return a mock APIKeyInDB object
+    # For master key, return a mock APIKeyInfo object
     if verification.key_id == "master":
         from datetime import datetime, timezone
-        return APIKeyInDB(
+        return APIKeyInfo(
             id="master",
-            api_key="master-key",  # Don't expose real key
             name="Master Key",
-            user_id="system",
             permissions=["admin"],
-            is_active=True,
             created_at=datetime.now(timezone.utc),
-            last_used_at=datetime.now(timezone.utc),
+            last_used=datetime.now(timezone.utc),
+            expires_at=None,
+            active=True,
             rate_limit_per_minute=1000,
-            rate_limit_per_hour=60000
+            rate_limit_per_hour=60000,
+            usage_count=0
         )
     
     # Get the actual API key from database
@@ -111,16 +111,16 @@ async def get_api_key(
     if not key_doc:
         raise HTTPException(status_code=401, detail="Invalid API key")
     
-    # Convert to APIKeyInDB model
-    return APIKeyInDB(
+    # Convert to APIKeyInfo model
+    return APIKeyInfo(
         id=str(key_doc["_id"]),
-        api_key="hidden",  # Don't expose the actual key
         name=key_doc["name"],
-        user_id=key_doc.get("user_id", "unknown"),
         permissions=key_doc.get("permissions", ["read"]),
-        is_active=key_doc.get("is_active", True),
         created_at=key_doc["created_at"],
-        last_used_at=key_doc.get("last_used_at"),
+        last_used=key_doc.get("last_used_at"),
+        expires_at=key_doc.get("expires_at"),
+        active=key_doc.get("is_active", True),
         rate_limit_per_minute=key_doc.get("rate_limit_per_minute", 60),
-        rate_limit_per_hour=key_doc.get("rate_limit_per_hour", 3600)
+        rate_limit_per_hour=key_doc.get("rate_limit_per_hour", 3600),
+        usage_count=key_doc.get("usage_count", 0)
     )

@@ -5,6 +5,7 @@
 2. **Session Type**: Changed from `SessionUsage` to `SessionResponse` - FIXED  
 3. **Missing Method**: Added `track_endpoint_usage` to SessionService - FIXED
 4. **MongoDB Manager**: Added local instance to avoid circular imports - FIXED
+5. **Model Name Error**: Changed `APIKeyInDB` to `APIKeyInfo` (correct model name) - FIXED
 
 ## ⚠️ Still Needs Fixing (BUG-002)
 The MCP integration is currently using MOCK responses instead of real MCP communication.
