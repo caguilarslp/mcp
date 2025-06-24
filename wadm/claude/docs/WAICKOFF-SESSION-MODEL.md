@@ -4,17 +4,23 @@
 
 **Domain**: waickoff.com  
 **Tagline**: "Wyckoff + AI + SMC = Trading Intelligence"  
-**Core Value**: Sesiones de análisis con Claude Sonnet 4 a precio justo
+**Core Value**: Sesiones de análisis con AI PREMIUM a precio justo
+
+### 🔥 UPDATE: Premium AI Strategy
+**Cambio Estratégico**: Usar modelos TOP TIER (Claude Opus 4, GPT-4 Turbo)
+**Justificación**: Calidad > Precio. Un buen trade paga 1000x el costo del AI
+**Nuevo Costo**: $0.50-$1.00 por sesión (vs $0.30 anterior)
 
 ## 💰 Modelo de Sesiones con Sonnet 4
 
-### Cálculo de Costos Base
+### Cálculo de Costos Base (ACTUALIZADO)
 
-**Claude Sonnet 4 API Pricing** (Anthropic):
-- Input: $3 per million tokens
-- Output: $15 per million tokens
-- Promedio por sesión de trading: ~50K tokens total
-- **Costo real por sesión: ~$0.30**
+**Premium AI Pricing** (Multi-Model):
+- Claude Opus 4: $15/$75 per million tokens (in/out)
+- GPT-4 Turbo: $10/$30 per million tokens (in/out)
+- Promedio por sesión completa: ~100K tokens total
+- Multi-model consensus para señales críticas
+- **Costo real por sesión: $0.50 - $1.00**
 
 ### 📊 Estructura de Precios por Sesión
 
@@ -68,10 +74,15 @@
 
 **Unit Economics por sesión $1**:
 - Revenue: $1.00
-- Costo Sonnet 4: $0.30
+- Costo Premium AI: $0.75 (promedio)
 - Infraestructura: $0.10
 - Payment fees: $0.05
-- **Profit neto: $0.55 (55% margen)**
+- **Profit neto: $0.10 (10% margen)**
+
+**NOTA**: Margen reducido pero justificado por:
+- Calidad superior de análisis
+- Mayor retención de usuarios
+- Precio premium justificable ($2-3 futuro)
 
 **Con paquetes grandes**:
 - Institutional ($0.40/sesión)
@@ -161,8 +172,9 @@ Risk/Reward: 1:8.5
 1. **Cash flow inmediato**: Pago por adelantado
 2. **No churn mensual**: Sesiones prepagadas
 3. **Upsell natural**: De $5 → $10 → $20 → $40
-4. **Márgenes saludables**: 25-55% neto
-5. **Escalable**: Costos variables con uso
+4. **Márgenes ajustados**: 10-25% (calidad > margen)
+5. **Pricing power**: Podemos subir a $2-3 con la calidad
+6. **Diferenciación clara**: "Powered by Claude Opus 4 + GPT-4"
 
 ## 🚀 Go-to-Market Strategy
 
@@ -215,7 +227,7 @@ Risk/Reward: 1:8.5
 
 ## 🎯 Diferenciadores Clave
 
-1. **"Powered by Claude Sonnet 4"** - Credibilidad instantánea
+1. **"Powered by Claude Opus 4 + GPT-4 Turbo"** - Máxima credibilidad
 2. **Wyckoff + AI** - Único en el mercado
 3. **Todo incluido** - No hay upsells ocultos
 4. **Sesiones perpetuas** - No expiran nunca
@@ -236,7 +248,9 @@ WAIckoff: $10 = 12 sesiones con Sonnet 4
 
 ## 🔥 Hook de Marketing
 
-**"¿Por qué pagar $100+/mes por herramientas cuando puedes tener a Claude Sonnet 4 analizando tus trades por $1?"**
+**"¿Por qué pagar $100+/mes por herramientas cuando puedes tener a Claude Opus 4 + GPT-4 Turbo analizando tus trades por $1?"**
+
+**"Usamos los modelos más caros porque tu éxito vale más que nuestro ahorro"**
 
 Este modelo es:
 - **Simple**: 1 sesión = 1 dólar (fácil de entender)

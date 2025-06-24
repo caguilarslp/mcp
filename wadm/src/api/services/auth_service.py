@@ -76,7 +76,9 @@ class AuthService:
             "last_used": None,
             "expires_at": key_data.expires_at,
             "active": True,
-            "usage_count": 0
+            "usage_count": 0,
+            "rate_limit_per_minute": key_data.rate_limit_per_minute,
+            "rate_limit_per_hour": key_data.rate_limit_per_hour
         }
         
         try:
@@ -126,12 +128,29 @@ class AuthService:
             }
         )
         
+        
+        # Get active session ID if any
+        session_id = None
+        if doc.get("expires_at") is None or doc["expires_at"] > datetime.now(timezone.utc):
+            # Try to get active session for this key
+            from src.api.services.session_service import SessionService
+            try:
+                session_service = SessionService(self.mongo)
+                active_session = await session_service.get_active_session(str(doc["_id"]))
+                if active_session:
+                    session_id = active_session.id
+            except Exception as e:
+                logger.debug(f"Could not get active session: {e}")
+        
         # Return verification result
         return APIKeyVerifyResponse(
             valid=True,
             key_id=str(doc["_id"]),
             permissions=[PermissionLevel(p) for p in doc.get("permissions", ["read"])],
-            expires_at=doc.get("expires_at")
+            expires_at=doc.get("expires_at"),
+            rate_limit_per_minute=doc.get("rate_limit_per_minute", 60),
+            rate_limit_per_hour=doc.get("rate_limit_per_hour", 1000),
+            session_id=session_id
         )
     
     async def list_api_keys(self, skip: int = 0, limit: int = 100) -> APIKeyList:
@@ -157,7 +176,10 @@ class AuthService:
                 created_at=doc["created_at"],
                 last_used=doc.get("last_used"),
                 expires_at=doc.get("expires_at"),
-                active=doc.get("active", True)
+                active=doc.get("active", True),
+                rate_limit_per_minute=doc.get("rate_limit_per_minute", 60),
+                rate_limit_per_hour=doc.get("rate_limit_per_hour", 1000),
+                usage_count=doc.get("usage_count", 0)
             ))
         
         return APIKeyList(keys=keys, total=total)
@@ -184,7 +206,10 @@ class AuthService:
                 created_at=doc["created_at"],
                 last_used=doc.get("last_used"),
                 expires_at=doc.get("expires_at"),
-                active=doc.get("active", True)
+                active=doc.get("active", True),
+                rate_limit_per_minute=doc.get("rate_limit_per_minute", 60),
+                rate_limit_per_hour=doc.get("rate_limit_per_hour", 1000),
+                usage_count=doc.get("usage_count", 0)
             )
         except Exception as e:
             logger.error(f"Error getting API key: {e}")

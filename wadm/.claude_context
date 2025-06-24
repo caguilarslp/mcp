@@ -10,12 +10,12 @@ IMPORTANTÍSIMO LEER PRIMERO:
  - NO CREARÁS SCRIPTS DE PRUEBAS, NI PARA INICIOS DE DOCKER, NI NADA. EL USUARIO TE AYUDARÁ CON LAS PRUEBAS.
 ###########################################
 
-# WAIckoff Project Status - v0.2.0
+# WAIckoff Project Status - v0.2.1
 
 ## 🎯 Current Focus
-✅ TASK-031 Phase 2: Real Indicator Services COMPLETED! 🚀
-📋 Business Model Defined: Session-based with Claude Sonnet 4
-🔄 Next: TASK-031 Phase 3 (API Key Management) + Dashboard MVP
+✅ TASK-031 Phase 3: API Key Management COMPLETED! 🔐
+📋 Business Model: Session-based ($1/session) - Payments deferred
+🔄 Next: TASK-064 (Dashboard MVP) + TASK-060 (Wyckoff MCP)
 
 ## 🆕 Major Update: WAIckoff Business Model
 - **Domain**: waickoff.com (Wyckoff + AI)
@@ -23,16 +23,18 @@ IMPORTANTÍSIMO LEER PRIMERO:
 - **Tech**: Claude Sonnet 4 API integration
 - **Stack**: SMC + Wyckoff + Technical Indicators
 - **Packages**: $5 (5 sessions) to $80 (200 sessions)
+- **Payment**: PLACEHOLDER - Focus on features first
 
-## Recent Updates (2025-06-22)
+## Recent Updates (2025-06-23)
 - ✅ TASK-029: FastAPI base setup COMPLETADO
-- ✅ TASK-030: Market Data Endpoints COMPLETADO (90min vs 6h estimado)
-- ✅ TASK-048: Docker Infrastructure COMPLETADO (2h vs 4h estimado) 🐳
+- ✅ TASK-030: Market Data Endpoints COMPLETADO
+- ✅ TASK-048: Docker Infrastructure COMPLETADO 🐳
 - ✅ TASK-031 Phase 1: API Infrastructure COMPLETADO
 - ✅ TASK-031 Phase 2: Real Indicator Services COMPLETADO 🎯
-- ✅ Business Model Refinement: Session-based pricing defined
-- ✅ Architecture Decision: Monolith first approach (no microservices)
-- ✅ Roadmap Update: Wyckoff-first with 119 MCP tools integration
+- ✅ TASK-031 Phase 3: API Key Management COMPLETADO 🔐
+- ✅ Session Management: $1/session model implemented
+- ✅ Rate Limiting: Per-API-key limits enforced
+- ✅ Security: SHA256 hashing, secure key generation
 
 ## Architecture Decision
 **Monolith First Approach** (KISS principle):
@@ -71,6 +73,8 @@ IMPORTANTÍSIMO LEER PRIMERO:
 - ✅ 4 Exchanges: Bybit, Binance, Coinbase Pro, Kraken
 - ✅ SMC System: 85-90% accuracy con validación institucional
 - ✅ Docker Stack: Setup en 30 segundos
+- ✅ API Key System: Complete auth with sessions
+- ✅ Rate Limiting: Per-key configurable limits
 
 ## Tech Stack Decision
 - **Frontend**: app.waickoff.com (Vite + React + Mantine)
@@ -89,6 +93,12 @@ scripts\wadm-dev.bat logs               # View API logs
 curl -H "X-API-Key: wadm-master-key-2024" \
   "http://localhost:8000/api/v1/indicators/volume-profile/BTCUSDT"
 
+# Create API Key
+curl -X POST http://localhost:8000/api/v1/auth/keys \
+  -H "X-API-Key: wadm-master-key-2024" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Test Key", "permissions": ["read"]}'
+
 # URLs
 http://localhost:8000                   # API Base
 http://localhost:8000/api/docs          # Swagger UI
@@ -100,11 +110,17 @@ http://localhost:3000                   # Frontend (próximamente)
 - **Packages**: $5-$80 (mejor valor en bulk)
 - **Margin**: 55% en precio base
 - **Target**: $15k MRR en mes 1
+- **Payment**: Deferred - Focus on MVP features
 
 ## Next Immediate Actions
-1. Complete TASK-031 Phase 3 (API Key Management)
-2. Start TASK-064 (Dashboard MVP)
-3. Begin TASK-060 (Wyckoff MCP Integration)
+1. Start TASK-064 (Dashboard MVP) - UI for session management
+2. Begin TASK-060 (Wyckoff MCP Integration) - Core analysis features  
+3. Payment integration deferred until MVP validation
+
+## Important Placeholders
+- Payment processing: `/api/v1/sessions/quota/add` is MOCK
+- Token calculation: Basic estimation (needs refinement)
+- Stripe/PayPal: To be integrated after MVP validation
 
 See `claude/tasks/task-tracker.md` for complete task list.
 See `claude/docs/WAICKOFF-SESSION-MODEL.md` for business details.

@@ -13,8 +13,9 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from src.api.routers import auth, market_data, system, indicators
-from src.api.middleware import RateLimitMiddleware, LoggingMiddleware
+from src.api.routers import auth, market_data, system, indicators, sessions
+from src.api.middleware import LoggingMiddleware
+from src.api.middleware.rate_limit import EnhancedRateLimitMiddleware
 from src.api.config import APIConfig
 from src.storage.mongo_manager import MongoManager
 from src.config import Config
@@ -76,7 +77,9 @@ def create_app() -> FastAPI:
     
     # Custom middleware
     app.add_middleware(LoggingMiddleware)
-    app.add_middleware(RateLimitMiddleware, calls=config.RATE_LIMIT_CALLS, period=config.RATE_LIMIT_PERIOD)
+    app.add_middleware(EnhancedRateLimitMiddleware, 
+                      default_calls_per_minute=config.RATE_LIMIT_CALLS,
+                      default_calls_per_hour=config.RATE_LIMIT_CALLS * 60)
     
     # Exception handlers
     @app.exception_handler(StarletteHTTPException)
@@ -120,6 +123,7 @@ def create_app() -> FastAPI:
     
     # Include routers
     app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
+    app.include_router(sessions.router, prefix="/api/v1/sessions", tags=["Sessions"])
     app.include_router(market_data.router, prefix="/api/v1/market", tags=["Market Data"])
     app.include_router(indicators.router, tags=["Indicators"])
     app.include_router(system.router, prefix="/api/v1/system", tags=["System"])
@@ -140,6 +144,7 @@ def create_app() -> FastAPI:
             "version": "1.0.0",
             "endpoints": {
                 "auth": "/api/v1/auth",
+                "sessions": "/api/v1/sessions",
                 "market": "/api/v1/market",
                 "indicators": "/api/v1/indicators",
                 "system": "/api/v1/system"

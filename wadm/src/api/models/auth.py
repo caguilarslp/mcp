@@ -19,6 +19,8 @@ class APIKeyCreate(BaseModel):
     name: str = Field(..., min_length=3, max_length=50, description="Descriptive name for the API key")
     permissions: List[PermissionLevel] = Field(default=[PermissionLevel.READ], description="Permission levels")
     expires_at: Optional[datetime] = Field(None, description="Optional expiration date")
+    rate_limit_per_minute: int = Field(60, ge=1, le=1000, description="Requests per minute limit")
+    rate_limit_per_hour: int = Field(1000, ge=1, le=10000, description="Requests per hour limit")
 
 
 class APIKeyResponse(BaseModel):
@@ -45,6 +47,9 @@ class APIKeyInfo(BaseModel):
     last_used: Optional[datetime] = Field(None, description="Last usage timestamp")
     expires_at: Optional[datetime] = Field(None, description="Expiration date if set")
     active: bool = Field(True, description="Whether the key is active")
+    rate_limit_per_minute: int = Field(60, description="Requests per minute limit")
+    rate_limit_per_hour: int = Field(1000, description="Requests per hour limit")
+    usage_count: int = Field(0, description="Total API calls made")
     
     class Config:
         json_encoders = {
@@ -64,6 +69,9 @@ class APIKeyVerifyResponse(BaseModel):
     key_id: Optional[str] = Field(None, description="Key ID if valid")
     permissions: Optional[List[PermissionLevel]] = Field(None, description="Permissions if valid")
     expires_at: Optional[datetime] = Field(None, description="Expiration date if set")
+    rate_limit_per_minute: Optional[int] = Field(None, description="Requests per minute limit")
+    rate_limit_per_hour: Optional[int] = Field(None, description="Requests per hour limit")
+    session_id: Optional[str] = Field(None, description="Current active session ID")
     
     class Config:
         json_encoders = {

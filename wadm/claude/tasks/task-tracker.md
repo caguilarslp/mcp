@@ -6,8 +6,23 @@
 **Architecture**: WADM como hub central de datos + MCP TypeScript dockerizado
 **Philosophy**: Indicadores institucionales > Indicadores retail
 **MCP Already Has**: Bollinger, Elliott, Fibonacci (no duplicar)
+**AI Strategy Update**: Usar modelos POTENTES (Claude Opus, GPT-4 Turbo) - Calidad > Precio
 
 ---
+
+## ✅ COMPLETED TASKS
+
+### TASK-031: API Key Management System
+**Status:** COMPLETED ✅
+**Completed:** 2025-06-23
+**Time:** 1 día
+**Description:** Sistema completo de gestión de API Keys y sesiones
+- [x] API Key creation and management
+- [x] Session-based billing ($1/session)
+- [x] Rate limiting per API key
+- [x] Token usage tracking
+- [x] Integration with all indicators
+- [x] Payment integration PLACEHOLDER (deferred)
 
 ## 📋 PHASE 0: Critical Infrastructure (1 semana) 🆕
 
@@ -190,17 +205,20 @@
 
 ## 📋 PHASE 3: Intelligent Analysis & LLM (2 semanas)
 
-### TASK-090: Footprint-Aware Claude Integration
+### TASK-090: Premium AI Integration (Claude Opus 4 + GPT-4 Turbo)
 **Status:** TODO  
 **Priority:** CRITICAL 🔥  
-**Time:** 2 días  
-**Description:** Claude especializado en footprint analysis
-- [ ] Prompts para interpretar footprint
-- [ ] Iceberg order explanation
-- [ ] Absorption pattern narratives
-- [ ] Liquidation cascade warnings
-- [ ] Institutional positioning from footprint
-- [ ] Wyckoff + Footprint synthesis
+**Time:** 3 días  
+**Description:** Integración con modelos TOP TIER para máxima calidad
+- [ ] Claude Opus 4 para análisis profundo Wyckoff
+- [ ] GPT-4 Turbo para narrativas de mercado
+- [ ] Prompts especializados para footprint analysis
+- [ ] Iceberg order explanation con contexto institucional
+- [ ] Absorption pattern narratives profesionales
+- [ ] Liquidation cascade warnings en tiempo real
+- [ ] Multi-model consensus para señales críticas
+- [ ] **Costo estimado**: $0.50-$1.00 por análisis completo
+- [ ] **Justificación**: Un buen trade paga 1000x el costo del análisis
 
 ### TASK-091: Market Regime from Footprint
 **Status:** TODO  
@@ -328,8 +346,11 @@ Del análisis del MCP, estas herramientas YA están disponibles:
 
 ## 🎯 Next Steps Refinados
 
-1. **TASK-080**: Dockerizar MCP (1 día) - Para usar TODO lo que ya existe
-2. **TASK-081**: Footprint + Market Profile (3 días) - Core institucional
-3. **TASK-082**: Web scraping setup (3 días) - Datos únicos
+1. **TASK-064**: Dashboard MVP (4 días) - UI para gestión de sesiones
+2. **TASK-060**: Wyckoff MCP Integration (3 días) - Core analysis features
+3. **TASK-080**: Dockerizar MCP (1 día) - Para usar TODO lo que ya existe
+4. **TASK-081**: Footprint + Market Profile (3 días) - Core institucional
+
+**Nota**: Payment integration aplazado hasta validar MVP con usuarios reales.
 
 La estrategia es clara: usar el MCP para todo lo que ya tiene, y construir en WADM solo lo que falta para análisis institucional profesional.

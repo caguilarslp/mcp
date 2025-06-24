@@ -22,13 +22,11 @@ from ..models.indicators import (
     TradingSignal
 )
 from ..models.auth import APIKeyVerifyResponse, PermissionLevel
+from ..models.session import SessionResponse
 from ..routers.auth import verify_api_key
+from ..dependencies import require_active_session
 from ..cache import cache_manager
-<<<<<<< HEAD
 from ..services import VolumeProfileService, OrderFlowService, SMCService
-=======
-from ..services import VolumeProfileService, OrderFlowService
->>>>>>> 3c28353e1868a6017abac60c769e5554b5214d94
 from ...storage.mongo_manager import MongoManager
 from ...config import Config
 import logging
@@ -37,22 +35,20 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/api/v1/indicators",
-    tags=["indicators"],
-    dependencies=[Depends(verify_api_key)]
+    tags=["indicators"]
 )
 
 # Initialize storage and services
 storage = MongoManager()
 vp_service = VolumeProfileService(storage, cache_manager)
 of_service = OrderFlowService(storage, cache_manager)
-<<<<<<< HEAD
 smc_service = SMCService(storage, cache_manager)
 
-=======
->>>>>>> 3c28353e1868a6017abac60c769e5554b5214d94
 
 @router.get("/status", response_model=IndicatorStatus)
-async def get_indicators_status():
+async def get_indicators_status(
+    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+):
     """Get status of all indicators system"""
     try:
         # Check available symbols
@@ -83,9 +79,14 @@ async def get_volume_profile(
     symbol: str,
     timeframe: str = Query("1h", description="Timeframe for analysis"),
     exchange: Optional[str] = Query(None, description="Specific exchange"),
-    mode: str = Query("latest", description="Data mode: latest, historical, or realtime")
+    mode: str = Query("latest", description="Data mode: latest, historical, or realtime"),
+    session: SessionResponse = Depends(require_active_session)
 ):
-    """Get Volume Profile data for a symbol with real calculations"""
+    """
+    Get Volume Profile data for a symbol with real calculations
+    
+    **Requires active session** ($1 per 24h or 100k tokens)
+    """
     
     # Validate symbol
     if symbol not in Config.SYMBOLS:
@@ -133,7 +134,8 @@ async def get_volume_profile(
                 "calculation_method": "real_time_trades",
                 "exchange": data.get("exchange", exchange),
                 "time_period_minutes": data.get("time_period_minutes", 60),
-                "data_quality": "high" if data.get("trades_count", 0) > 100 else "medium"
+                "data_quality": "high" if data.get("trades_count", 0) > 100 else "medium",
+                "session_id": session.id
             }
         )
         
@@ -149,9 +151,14 @@ async def get_order_flow(
     symbol: str,
     timeframe: str = Query("15m", description="Timeframe for analysis"),
     exchange: Optional[str] = Query(None, description="Specific exchange"),
-    mode: str = Query("latest", description="Data mode: latest, realtime, or analysis")
+    mode: str = Query("latest", description="Data mode: latest, realtime, or analysis"),
+    session: SessionResponse = Depends(require_active_session)
 ):
-    """Get Order Flow data for a symbol with real calculations"""
+    """
+    Get Order Flow data for a symbol with real calculations
+    
+    **Requires active session** ($1 per 24h or 100k tokens)
+    """
     
     # Validate symbol
     if symbol not in Config.SYMBOLS:
@@ -178,7 +185,8 @@ async def get_order_flow(
             return JSONResponse(content={
                 "symbol": symbol,
                 "mode": "comprehensive_analysis",
-                "data": data
+                "data": data,
+                "session_id": session.id
             })
         
         else:
@@ -206,7 +214,8 @@ async def get_order_flow(
                 "flow_strength": data.get("flow_strength", 50.0),
                 "market_bias": data.get("market_bias", "neutral"),
                 "institutional_volume": data.get("institutional_volume", 0.0),
-                "exhaustion_signals": data.get("exhaustion_signals", [])
+                "exhaustion_signals": data.get("exhaustion_signals", []),
+                "session_id": session.id
             }
         )
         
@@ -221,10 +230,12 @@ async def get_order_flow(
 async def get_smc_analysis(
     symbol: str,
     timeframe: str = Query("15m", description="Analysis timeframe (5m, 15m, 1h, 4h)"),
-    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+    session: SessionResponse = Depends(require_active_session)
 ):
     """
     Get comprehensive Smart Money Concepts analysis for a symbol
+    
+    **Requires active session** ($1 per 24h or 100k tokens)
     
     Returns:
     - Order blocks with institutional validation
@@ -291,7 +302,8 @@ async def get_smc_analysis(
                 "trades_analyzed": analysis.get("trades_analyzed", 0),
                 "calculation_time": analysis.get("calculation_time", 0),
                 "exchanges_analyzed": analysis.get("exchanges", ["bybit", "binance", "coinbase", "kraken"]),
-                "wyckoff_phase": analysis.get("wyckoff_phase", "unknown")
+                "wyckoff_phase": analysis.get("wyckoff_phase", "unknown"),
+                "session_id": session.id
             }
         )
         
@@ -307,10 +319,12 @@ async def get_smc_signals(
     symbol: str,
     signal_type: Optional[str] = Query(None, enum=["long", "short"], description="Filter by signal type"),
     min_confidence: float = Query(70.0, ge=0, le=100, description="Minimum confidence score"),
-    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+    session: SessionResponse = Depends(require_active_session)
 ):
     """
     Get actionable trading signals from Smart Money Concepts analysis
+    
+    **Requires active session** ($1 per 24h or 100k tokens)
     
     Returns high-probability trading signals with:
     - Entry, stop loss, and take profit levels
@@ -367,7 +381,8 @@ async def get_smc_signals(
                 "analysis_depth": signals_data.get("analysis_depth", "comprehensive"),
                 "signal_generation_method": "smc_institutional_confluence",
                 "filters_applied": {"min_confidence": min_confidence, "signal_type": signal_type},
-                "recommendations": signals_data.get("recommendations", [])
+                "recommendations": signals_data.get("recommendations", []),
+                "session_id": session.id
             }
         )
         
@@ -382,10 +397,12 @@ async def get_smc_signals(
 async def get_market_structure(
     symbol: str,
     include_levels: bool = Query(True, description="Include key support/resistance levels"),
-    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+    session: SessionResponse = Depends(require_active_session)
 ):
     """
     Get detailed market structure analysis
+    
+    **Requires active session** ($1 per 24h or 100k tokens)
     
     Returns:
     - Current market trend and phase
@@ -401,6 +418,7 @@ async def get_market_structure(
     
     try:
         structure = await smc_service.get_market_structure(symbol, include_levels)
+        structure["session_id"] = session.id
         return JSONResponse(content=structure)
         
     except Exception as e:
@@ -412,10 +430,12 @@ async def get_market_structure(
 async def get_confluence_analysis(
     symbol: str,
     min_score: int = Query(70, ge=0, le=100, description="Minimum confluence score"),
-    verification: APIKeyVerifyResponse = Depends(verify_api_key)
+    session: SessionResponse = Depends(require_active_session)
 ):
     """
     Get multi-factor confluence analysis
+    
+    **Requires active session** ($1 per 24h or 100k tokens)
     
     Combines Volume Profile, Order Flow, and SMC indicators to identify
     high-probability trading zones with multiple confirming factors.
@@ -427,6 +447,7 @@ async def get_confluence_analysis(
     
     try:
         confluence = await smc_service.get_confluence_analysis(symbol, min_score)
+        confluence["session_id"] = session.id
         return JSONResponse(content=confluence)
         
     except Exception as e:

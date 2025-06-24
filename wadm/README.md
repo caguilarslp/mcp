@@ -1,5 +1,5 @@
-# 🚀 WADM - wAIckoff Data Manager
-## Smart Money Analysis System with Institutional Intelligence
+# 🚀 WAIckoff - Wyckoff + AI + Smart Money
+## Premium AI-Powered Trading Intelligence Platform
 
 ### 🎯 Quick Start (30 seconds)
 
@@ -21,13 +21,20 @@ scripts\wadm-dev.bat start
 # 📚 Docs: http://localhost:8000/api/docs
 ```
 
-### 🏗️ What is WADM?
+### 🏗️ What is WAIckoff?
 
-WADM is the **world's first Smart Money Concepts (SMC) system that knows where institutional money actually is**, not just where it might be. By combining traditional SMC analysis with real institutional data sources, WADM achieves 85-90% accuracy vs 60-70% of traditional SMC systems.
+WAIckoff is the **world's first premium AI-powered trading platform** that combines Wyckoff methodology, Smart Money Concepts, and institutional-grade analysis using Claude Opus 4 and GPT-4 Turbo.
 
-#### Core Philosophy: Wyckoff + Institutional Data = Superior Intelligence
-- **Traditional SMC**: Guess where Smart Money might be
-- **WADM SMC**: **KNOW** where Smart Money IS (institutional data validation)
+#### Core Philosophy: Premium AI + Institutional Data = Unmatched Trading Intelligence
+- **Traditional Tools**: Basic indicators, simple AI, guess where Smart Money might be
+- **WAIckoff**: Claude Opus 4 + GPT-4 Turbo analyzing real institutional data
+- **Result**: 85-90% accuracy with narrative explanations you can trust
+
+#### 🎆 Business Model
+- **Session-Based**: $1 per session (24h or 100k tokens)
+- **Premium AI**: Claude Opus 4 + GPT-4 Turbo (not cheap models)
+- **All Inclusive**: Wyckoff + SMC + Technical indicators + AI insights
+- **No Subscriptions**: Buy sessions as needed, bulk discounts available
 
 ### 🔥 Key Features
 
@@ -43,11 +50,13 @@ WADM is the **world's first Smart Money Concepts (SMC) system that knows where i
 - **Stablecoin Flows**: USDT/USDC minting correlation analysis (coming soon)
 - **Multi-Exchange Validation**: Real moves vs wash trading detection
 
-#### Advanced Indicators
+#### Advanced Indicators + Premium AI
 - **Volume Profile**: Enhanced with TPO and institutional activity
 - **Order Flow**: Exhaustion, momentum, stop runs detection
 - **VWAP**: Standard, anchored, session-based with bands
 - **Market Structure**: Wyckoff phases, trend analysis, springs/upthrusts
+- **AI Analysis**: Claude Opus 4 interprets all data in plain English
+- **Multi-Model Consensus**: Critical signals validated by multiple AIs
 
 ### 🛠️ Architecture
 
@@ -66,7 +75,7 @@ Exchange WebSockets → Trade Collection → Indicator Calculation → SMC Analy
 MongoDB Storage ← Redis Cache ← API Layer ← WebSocket Streaming
 ```
 
-### 📊 Current Status (v0.1.0)
+### 📊 Current Status (v0.2.1)
 
 #### ✅ Completed Features
 - **Data Collection**: 4 exchanges, 19 symbols, real-time trades
@@ -75,12 +84,14 @@ MongoDB Storage ← Redis Cache ← API Layer ← WebSocket Streaming
 - **API Infrastructure**: 15+ endpoints, WebSocket streaming
 - **Docker Stack**: Production-ready containerization
 - **Cache System**: Hybrid Redis + memory fallback
+- **Session Management**: $1/session billing system implemented
+- **API Key System**: Complete authentication with rate limiting
 
 #### 🔄 In Development
-- **Frontend Dashboard**: TradingView charts integration
-- **LLM Integration**: Claude 3.5 for contextual analysis
-- **Cold Wallet Monitoring**: Institutional positioning tracking
-- **Advanced Indicators**: 12 additional smart money indicators
+- **Frontend Dashboard**: TradingView charts integration (TASK-064)
+- **Premium AI Integration**: Claude Opus 4 + GPT-4 Turbo (TASK-090)
+- **Wyckoff MCP Integration**: 119 analysis tools (TASK-060)
+- **Payment Integration**: Stripe/PayPal (deferred until MVP validation)
 
 ### 🐳 Docker Architecture
 
@@ -269,4 +280,6 @@ python scripts/test-docker.py
 # 4. Start developing!
 ```
 
-**WADM - The Smart Money Intelligence Revolution** 🚀
+**WAIckoff - Premium AI Trading Intelligence** 🚀
+
+*"We use the most expensive AI models because your success is worth more than our savings"*
