@@ -1,0 +1,643 @@
+{
+  "id": "ONDOUSDT_complete_1750789440515",
+  "type": "complete_analysis",
+  "data": {
+    "marketData": {
+      "ticker": {
+        "symbol": "ONDOUSDT",
+        "lastPrice": 0.7718,
+        "price24hPcnt": 0.1174,
+        "highPrice24h": 0.7946,
+        "lowPrice24h": 0.6885,
+        "volume24h": 24510553.54,
+        "bid1Price": 0.7718,
+        "ask1Price": 0.7719,
+        "timestamp": "2025-06-24T18:23:58.338Z"
+      },
+      "orderbook": {
+        "symbol": "ONDOUSDT",
+        "bids": [
+          {
+            "price": 0.7718,
+            "size": 446.98
+          },
+          {
+            "price": 0.7717,
+            "size": 953.78
+          },
+          {
+            "price": 0.7716,
+            "size": 1627.34
+          },
+          {
+            "price": 0.7715,
+            "size": 3731.61
+          },
+          {
+            "price": 0.7714,
+            "size": 4120.24
+          },
+          {
+            "price": 0.7713,
+            "size": 2873.54
+          },
+          {
+            "price": 0.7712,
+            "size": 2081.7
+          },
+          {
+            "price": 0.7711,
+            "size": 4349.32
+          },
+          {
+            "price": 0.771,
+            "size": 7147.36
+          },
+          {
+            "price": 0.7709,
+            "size": 10099.77
+          },
+          {
+            "price": 0.7708,
+            "size": 17046.76
+          },
+          {
+            "price": 0.7707,
+            "size": 5583.8
+          },
+          {
+            "price": 0.7706,
+            "size": 2861.75
+          },
+          {
+            "price": 0.7705,
+            "size": 11841.32
+          },
+          {
+            "price": 0.7704,
+            "size": 22424.35
+          },
+          {
+            "price": 0.7703,
+            "size": 16226.16
+          },
+          {
+            "price": 0.7702,
+            "size": 26540.4
+          },
+          {
+            "price": 0.7701,
+            "size": 10160.29
+          },
+          {
+            "price": 0.77,
+            "size": 2651.59
+          },
+          {
+            "price": 0.7699,
+            "size": 3029.92
+          },
+          {
+            "price": 0.7698,
+            "size": 11362.33
+          },
+          {
+            "price": 0.7697,
+            "size": 2793.88
+          },
+          {
+            "price": 0.7696,
+            "size": 3009.27
+          },
+          {
+            "price": 0.7695,
+            "size": 1139.15
+          },
+          {
+            "price": 0.7694,
+            "size": 2882
+          }
+        ],
+        "asks": [
+          {
+            "price": 0.7719,
+            "size": 161.52
+          },
+          {
+            "price": 0.772,
+            "size": 5828.31
+          },
+          {
+            "price": 0.7721,
+            "size": 1381.28
+          },
+          {
+            "price": 0.7722,
+            "size": 3108.61
+          },
+          {
+            "price": 0.7723,
+            "size": 4920.54
+          },
+          {
+            "price": 0.7724,
+            "size": 17145.55
+          },
+          {
+            "price": 0.7725,
+            "size": 8973.24
+          },
+          {
+            "price": 0.7726,
+            "size": 10380.72
+          },
+          {
+            "price": 0.7727,
+            "size": 30032.14
+          },
+          {
+            "price": 0.7728,
+            "size": 12763.76
+          },
+          {
+            "price": 0.7729,
+            "size": 9493.99
+          },
+          {
+            "price": 0.773,
+            "size": 14952.27
+          },
+          {
+            "price": 0.7731,
+            "size": 16991.8
+          },
+          {
+            "price": 0.7732,
+            "size": 3491.28
+          },
+          {
+            "price": 0.7733,
+            "size": 7286.59
+          },
+          {
+            "price": 0.7734,
+            "size": 4929.76
+          },
+          {
+            "price": 0.7735,
+            "size": 11936.95
+          },
+          {
+            "price": 0.7736,
+            "size": 925.09
+          },
+          {
+            "price": 0.7737,
+            "size": 619.09
+          },
+          {
+            "price": 0.7738,
+            "size": 1006.39
+          },
+          {
+            "price": 0.7739,
+            "size": 628.72
+          },
+          {
+            "price": 0.774,
+            "size": 2170.1
+          },
+          {
+            "price": 0.7741,
+            "size": 15775.08
+          },
+          {
+            "price": 0.7742,
+            "size": 3330.02
+          },
+          {
+            "price": 0.7743,
+            "size": 627.26
+          }
+        ],
+        "timestamp": "2025-06-24T18:24:00.036Z",
+        "spread": 0.00009999999999998899
+      },
+      "recentKlines": [
+        {
+          "timestamp": "2025-06-23T19:00:00.000Z",
+          "open": 0.6928,
+          "high": 0.7025,
+          "low": 0.6922,
+          "close": 0.7001,
+          "volume": 1030363.72
+        },
+        {
+          "timestamp": "2025-06-23T20:00:00.000Z",
+          "open": 0.7001,
+          "high": 0.7291,
+          "low": 0.6988,
+          "close": 0.7218,
+          "volume": 2908057.59
+        },
+        {
+          "timestamp": "2025-06-23T21:00:00.000Z",
+          "open": 0.7218,
+          "high": 0.7247,
+          "low": 0.7136,
+          "close": 0.714,
+          "volume": 1187105.7
+        },
+        {
+          "timestamp": "2025-06-23T22:00:00.000Z",
+          "open": 0.714,
+          "high": 0.7738,
+          "low": 0.714,
+          "close": 0.7586,
+          "volume": 4742341.59
+        },
+        {
+          "timestamp": "2025-06-23T23:00:00.000Z",
+          "open": 0.7586,
+          "high": 0.7604,
+          "low": 0.7526,
+          "close": 0.7552,
+          "volume": 976695.81
+        },
+        {
+          "timestamp": "2025-06-24T00:00:00.000Z",
+          "open": 0.7552,
+          "high": 0.7599,
+          "low": 0.7456,
+          "close": 0.7511,
+          "volume": 684348.1
+        },
+        {
+          "timestamp": "2025-06-24T01:00:00.000Z",
+          "open": 0.7511,
+          "high": 0.7607,
+          "low": 0.7494,
+          "close": 0.7602,
+          "volume": 571638.99
+        },
+        {
+          "timestamp": "2025-06-24T02:00:00.000Z",
+          "open": 0.7602,
+          "high": 0.7603,
+          "low": 0.7479,
+          "close": 0.7492,
+          "volume": 590019.97
+        },
+        {
+          "timestamp": "2025-06-24T03:00:00.000Z",
+          "open": 0.7492,
+          "high": 0.7551,
+          "low": 0.7471,
+          "close": 0.7504,
+          "volume": 479776.41
+        },
+        {
+          "timestamp": "2025-06-24T04:00:00.000Z",
+          "open": 0.7504,
+          "high": 0.7593,
+          "low": 0.7499,
+          "close": 0.759,
+          "volume": 547012.61
+        },
+        {
+          "timestamp": "2025-06-24T05:00:00.000Z",
+          "open": 0.759,
+          "high": 0.7787,
+          "low": 0.7583,
+          "close": 0.7782,
+          "volume": 857628.96
+        },
+        {
+          "timestamp": "2025-06-24T06:00:00.000Z",
+          "open": 0.7782,
+          "high": 0.7861,
+          "low": 0.7722,
+          "close": 0.7843,
+          "volume": 908144.4
+        },
+        {
+          "timestamp": "2025-06-24T07:00:00.000Z",
+          "open": 0.7843,
+          "high": 0.7893,
+          "low": 0.7681,
+          "close": 0.7683,
+          "volume": 1275728.62
+        },
+        {
+          "timestamp": "2025-06-24T08:00:00.000Z",
+          "open": 0.7683,
+          "high": 0.7703,
+          "low": 0.7584,
+          "close": 0.7639,
+          "volume": 957919.54
+        },
+        {
+          "timestamp": "2025-06-24T09:00:00.000Z",
+          "open": 0.7639,
+          "high": 0.7771,
+          "low": 0.7618,
+          "close": 0.7707,
+          "volume": 657454.24
+        },
+        {
+          "timestamp": "2025-06-24T10:00:00.000Z",
+          "open": 0.7707,
+          "high": 0.7779,
+          "low": 0.7689,
+          "close": 0.7734,
+          "volume": 416434.29
+        },
+        {
+          "timestamp": "2025-06-24T11:00:00.000Z",
+          "open": 0.7734,
+          "high": 0.7762,
+          "low": 0.7641,
+          "close": 0.7703,
+          "volume": 713785.09
+        },
+        {
+          "timestamp": "2025-06-24T12:00:00.000Z",
+          "open": 0.7703,
+          "high": 0.773,
+          "low": 0.766,
+          "close": 0.7705,
+          "volume": 379585.55
+        },
+        {
+          "timestamp": "2025-06-24T13:00:00.000Z",
+          "open": 0.7705,
+          "high": 0.7743,
+          "low": 0.7637,
+          "close": 0.7683,
+          "volume": 774887.2
+        },
+        {
+          "timestamp": "2025-06-24T14:00:00.000Z",
+          "open": 0.7683,
+          "high": 0.7825,
+          "low": 0.7681,
+          "close": 0.778,
+          "volume": 1010731.71
+        },
+        {
+          "timestamp": "2025-06-24T15:00:00.000Z",
+          "open": 0.778,
+          "high": 0.7818,
+          "low": 0.77,
+          "close": 0.7769,
+          "volume": 456295.4
+        },
+        {
+          "timestamp": "2025-06-24T16:00:00.000Z",
+          "open": 0.7769,
+          "high": 0.7939,
+          "low": 0.7725,
+          "close": 0.7935,
+          "volume": 827455.28
+        },
+        {
+          "timestamp": "2025-06-24T17:00:00.000Z",
+          "open": 0.7935,
+          "high": 0.7946,
+          "low": 0.7737,
+          "close": 0.7788,
+          "volume": 803926
+        },
+        {
+          "timestamp": "2025-06-24T18:00:00.000Z",
+          "open": 0.7788,
+          "high": 0.7805,
+          "low": 0.7693,
+          "close": 0.7718,
+          "volume": 211501.28
+        }
+      ]
+    },
+    "technicalAnalysis": {
+      "volatility": {
+        "symbol": "ONDOUSDT",
+        "period": "1d",
+        "currentPrice": 0.7718,
+        "highestPrice": 0.7946,
+        "lowestPrice": 0.6922,
+        "volatilityPercent": 13.267685928997142,
+        "isGoodForGrid": true,
+        "recommendation": "proceed",
+        "confidence": 100
+      },
+      "volume": {
+        "symbol": "ONDOUSDT",
+        "interval": "60",
+        "avgVolume": 1058258.0589583332,
+        "currentVolume": 211501.28,
+        "maxVolume": 4742341.59,
+        "minVolume": 211501.28,
+        "volumeSpikes": [
+          {
+            "timestamp": "2025-06-22T22:00:00.000Z",
+            "volume": 1589002.22,
+            "multiplier": 1.5015262171157855,
+            "price": 0.6678
+          },
+          {
+            "timestamp": "2025-06-23T07:00:00.000Z",
+            "volume": 3527538.34,
+            "multiplier": 3.33334417833041,
+            "price": 0.6824
+          },
+          {
+            "timestamp": "2025-06-23T08:00:00.000Z",
+            "volume": 2157094.61,
+            "multiplier": 2.0383446095589157,
+            "price": 0.6792
+          },
+          {
+            "timestamp": "2025-06-23T16:00:00.000Z",
+            "volume": 2028203.34,
+            "multiplier": 1.916548920020893,
+            "price": 0.6573
+          },
+          {
+            "timestamp": "2025-06-23T17:00:00.000Z",
+            "volume": 1598293.07,
+            "multiplier": 1.5103055974581807,
+            "price": 0.6792
+          }
+        ],
+        "vwap": {
+          "current": 0.7107691227894697,
+          "priceVsVwap": "above",
+          "difference": 8.586596583009944
+        },
+        "trend": "increasing"
+      },
+      "volumeDelta": {
+        "symbol": "ONDOUSDT",
+        "interval": "5",
+        "current": 9983.55600000054,
+        "average": -7209.429425166121,
+        "bias": "seller",
+        "strength": 52.956230343061016,
+        "cumulativeDelta": 332594.67520285514,
+        "divergence": {
+          "detected": false,
+          "type": "No divergence",
+          "signal": "trend_confirmed"
+        },
+        "marketPressure": {
+          "bullishCandles": 4,
+          "bearishCandles": 6,
+          "bullishPercent": 40,
+          "trend": "balanced"
+        }
+      },
+      "supportResistance": {
+        "symbol": "ONDOUSDT",
+        "interval": "60",
+        "currentPrice": 0.7718,
+        "resistances": [
+          {
+            "level": 0.7738,
+            "type": "resistance",
+            "strength": 78.89086087956963,
+            "touches": 1,
+            "volumeConfirmation": 4.070477656662035,
+            "lastTouchTime": "2025-06-23T22:00:00.000Z",
+            "priceDistance": 0.2591344908007258,
+            "confidence": "very_strong"
+          },
+          {
+            "level": 0.7893,
+            "type": "resistance",
+            "strength": 63.68244459478328,
+            "touches": 1,
+            "volumeConfirmation": 1.0949917345946165,
+            "lastTouchTime": "2025-06-24T07:00:00.000Z",
+            "priceDistance": 2.2674267945063433,
+            "confidence": "strong"
+          }
+        ],
+        "supports": [
+          {
+            "level": 0.6915,
+            "type": "support",
+            "strength": 68.12074556472123,
+            "touches": 1,
+            "volumeConfirmation": 3.0277797842033314,
+            "lastTouchTime": "2025-06-23T07:00:00.000Z",
+            "priceDistance": 10.404249805649137,
+            "confidence": "strong"
+          },
+          {
+            "level": 0.7451,
+            "type": "support",
+            "strength": 65.92409760545988,
+            "touches": 2,
+            "volumeConfirmation": 0.1850142902630576,
+            "lastTouchTime": "2025-06-21T09:00:00.000Z",
+            "priceDistance": 3.459445452189694,
+            "confidence": "strong"
+          },
+          {
+            "level": 0.6346,
+            "type": "support",
+            "strength": 60.04003596810726,
+            "touches": 1,
+            "volumeConfirmation": 2.160391537255213,
+            "lastTouchTime": "2025-06-22T14:00:00.000Z",
+            "priceDistance": 17.776626068929772,
+            "confidence": "strong"
+          }
+        ],
+        "criticalLevel": {
+          "level": 0.7738,
+          "type": "resistance",
+          "strength": 78.89086087956963,
+          "touches": 1,
+          "volumeConfirmation": 4.070477656662035,
+          "lastTouchTime": "2025-06-23T22:00:00.000Z",
+          "priceDistance": 0.2591344908007258,
+          "confidence": "very_strong"
+        },
+        "gridConfig": {
+          "optimalLowerBound": 0.6915,
+          "optimalUpperBound": 0.7738,
+          "keyLevels": [
+            0.7738,
+            0.6915,
+            0.7451,
+            0.7893
+          ],
+          "recommendedGridCount": 11,
+          "recommendation": "Strong S/R levels identified - Grid trading recommended"
+        },
+        "statistics": {
+          "totalPivotsFound": 15,
+          "priceRangeAnalyzed": {
+            "high": 0.7946,
+            "low": 0.6216
+          },
+          "avgVolume": 832184.1159000002,
+          "periodsAnalyzed": 100,
+          "sensitivityUsed": 2
+        }
+      }
+    },
+    "gridSuggestion": {
+      "symbol": "ONDOUSDT",
+      "currentPrice": 0.7718,
+      "suggestedRange": {
+        "lower": 0.6905,
+        "upper": 0.8218
+      },
+      "gridLevels": [
+        0.6905,
+        0.7036,
+        0.7168,
+        0.7299,
+        0.743,
+        0.7562,
+        0.7693,
+        0.7824,
+        0.7955,
+        0.8087,
+        0.8218
+      ],
+      "investment": 330,
+      "pricePerGrid": 33,
+      "potentialProfit": "$-0.14/day estimated",
+      "volatility24h": 13.267685928997142,
+      "recommendation": "recommended",
+      "confidence": 84
+    },
+    "summary": {
+      "recommendation": "sell",
+      "confidence": 67,
+      "keyPoints": [
+        "Volatility at 13.3% - Good for grid trading",
+        "Low volume activity (20% of average)",
+        "Price 8.6% above VWAP - Potential resistance",
+        "Strong selling pressure (53.0% bias)",
+        "Near strong resistance at $0.7738 (0.3% away)",
+        "Grid trading recommended with 84% confidence"
+      ],
+      "riskLevel": "medium"
+    },
+    "symbol": "ONDOUSDT"
+  },
+  "metadata": {
+    "id": "ONDOUSDT_complete_1750789440515",
+    "type": "complete_analysis",
+    "timestamp": "2025-06-24T18:24:00.515Z",
+    "symbol": "ONDOUSDT",
+    "tags": [
+      "investment:330"
+    ]
+  },
+  "timestamp": "2025-06-24T18:24:00.515Z"
+}

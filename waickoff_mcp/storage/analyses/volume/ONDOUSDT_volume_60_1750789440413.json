@@ -1,0 +1,65 @@
+{
+  "id": "ONDOUSDT_volume_60_1750789440413",
+  "type": "volume",
+  "data": {
+    "symbol": "ONDOUSDT",
+    "interval": "60",
+    "avgVolume": 1058258.0589583332,
+    "currentVolume": 211501.28,
+    "maxVolume": 4742341.59,
+    "minVolume": 211501.28,
+    "volumeSpikes": [
+      {
+        "timestamp": "2025-06-22T22:00:00.000Z",
+        "volume": 1589002.22,
+        "multiplier": 1.5015262171157855,
+        "price": 0.6678
+      },
+      {
+        "timestamp": "2025-06-23T07:00:00.000Z",
+        "volume": 3527538.34,
+        "multiplier": 3.33334417833041,
+        "price": 0.6824
+      },
+      {
+        "timestamp": "2025-06-23T08:00:00.000Z",
+        "volume": 2157094.61,
+        "multiplier": 2.0383446095589157,
+        "price": 0.6792
+      },
+      {
+        "timestamp": "2025-06-23T16:00:00.000Z",
+        "volume": 2028203.34,
+        "multiplier": 1.916548920020893,
+        "price": 0.6573
+      },
+      {
+        "timestamp": "2025-06-23T17:00:00.000Z",
+        "volume": 1598293.07,
+        "multiplier": 1.5103055974581807,
+        "price": 0.6792
+      }
+    ],
+    "vwap": {
+      "current": 0.7107691227894697,
+      "priceVsVwap": "above",
+      "difference": 8.586596583009944
+    },
+    "trend": "increasing"
+  },
+  "metadata": {
+    "id": "ONDOUSDT_volume_60_1750789440413",
+    "type": "volume",
+    "timestamp": "2025-06-24T18:24:00.413Z",
+    "symbol": "ONDOUSDT",
+    "interval": "60",
+    "tags": [
+      "interval:60",
+      "trend:increasing",
+      "volume_ratio:20",
+      "spikes:5",
+      "vwap_position:above"
+    ]
+  },
+  "timestamp": "2025-06-24T18:24:00.413Z"
+}

@@ -1,0 +1,211 @@
+{
+  "id": "XRPUSDT_wyckoff_60_1750789098622",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "analysisDate": "2025-06-24T18:18:18.622Z",
+    "currentPhase": "accumulation_phase_b",
+    "phaseConfidence": 50,
+    "phaseProgress": 30,
+    "tradingRange": {
+      "startDate": "2025-06-23T03:00:00.000Z",
+      "endDate": "2025-06-24T18:00:00.000Z",
+      "support": 1.9612,
+      "resistance": 2.2106,
+      "duration": 40,
+      "width": 12.71670405873954,
+      "volumeProfile": {
+        "averageVolume": 2321252.085249999,
+        "volumeTrend": "stable",
+        "significantEvents": []
+      },
+      "strength": "moderate",
+      "type": "consolidation"
+    },
+    "keyEvents": [
+      {
+        "timestamp": "2025-06-20T20:00:00.000Z",
+        "type": "test",
+        "price": 2.1478,
+        "volume": 970560.11,
+        "significance": 50,
+        "description": "Test of 2.1478: Price touched 2.1478 (0.000% from level) and stalled near level with poor quality on 0.4x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "low"
+        },
+        "levelTested": 2.1478,
+        "testQuality": "poor",
+        "volumeOnTest": 970560.11,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-21T21:00:00.000Z",
+        "type": "test",
+        "price": 2.0376,
+        "volume": 10693181.59,
+        "significance": 75,
+        "description": "Test of 2.0327: Price touched 2.0376 (0.241% from level) and stalled near level with good quality on 4.6x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 2.0327,
+        "testQuality": "good",
+        "volumeOnTest": 10693181.59,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-22T22:00:00.000Z",
+        "type": "spring",
+        "price": 1.9429,
+        "volume": 5957882.36,
+        "significance": 87,
+        "description": "Shallow spring: 0.93% penetration below support with rapid recovery (3.8% speed) on low volume (NaNx avg) - excellent quality",
+        "context": {
+          "phaseAtTime": "accumulation_phase_c",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "low"
+        },
+        "penetrationDepth": 0.9331021823373435,
+        "recoverySpeed": 3.824180348962881,
+        "volumeOnPenetration": 5957882.36,
+        "volumeOnRecovery": 4929693.955,
+        "isSuccessful": false
+      },
+      {
+        "timestamp": "2025-06-23T22:00:00.000Z",
+        "type": "test",
+        "price": 2.1703,
+        "volume": 8248368.45,
+        "significance": 75,
+        "description": "Test of 2.1703: Price touched 2.1703 (0.000% from level) and stalled near level with good quality on 3.5x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 2.1703,
+        "testQuality": "good",
+        "volumeOnTest": 8248368.45,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-24T05:00:00.000Z",
+        "type": "test",
+        "price": 2.1493,
+        "volume": 4473705.35,
+        "significance": 85,
+        "description": "Test of 2.1478: Price touched 2.1493 (0.070% from level) and rejected at resistance with good quality on 1.9x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "above_resistance",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 2.1478,
+        "testQuality": "good",
+        "volumeOnTest": 4473705.35,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-24T05:00:00.000Z",
+        "type": "test",
+        "price": 2.2055,
+        "volume": 4473705.35,
+        "significance": 75,
+        "description": "Test of 2.2106: Price touched 2.2055 (0.231% from level) and stalled near level with good quality on 1.9x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 2.2106,
+        "testQuality": "good",
+        "volumeOnTest": 4473705.35,
+        "resultingAction": "stall"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "stable",
+      "climaxEvents": [
+        {
+          "date": "2025-06-22T13:00:00.000Z",
+          "type": "selling_climax",
+          "volume": 13930008.77,
+          "priceAction": "-3.00% decline on 7.0x volume",
+          "significance": 85
+        },
+        {
+          "date": "2025-06-23T22:00:00.000Z",
+          "type": "buying_climax",
+          "volume": 8248368.45,
+          "priceAction": "3.27% rally on 4.1x volume",
+          "significance": 85
+        }
+      ],
+      "dryUpPeriods": [
+        {
+          "startDate": "2025-06-20T19:00:00.000Z",
+          "endDate": "2025-06-21T09:00:00.000Z",
+          "averageVolume": 648559.5173333333,
+          "significance": "major"
+        },
+        {
+          "startDate": "2025-06-21T11:00:00.000Z",
+          "endDate": "2025-06-21T17:00:00.000Z",
+          "averageVolume": 756192.0071428571,
+          "significance": "major"
+        },
+        {
+          "startDate": "2025-06-22T03:00:00.000Z",
+          "endDate": "2025-06-22T06:00:00.000Z",
+          "averageVolume": 994786.545,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-23T01:00:00.000Z",
+          "endDate": "2025-06-23T04:00:00.000Z",
+          "averageVolume": 942289.9600000001,
+          "significance": "moderate"
+        }
+      ],
+      "avgVolumeInRange": 1991533.522444445,
+      "currentVolumeRank": 0,
+      "interpretation": "Volume trend: STABLE - Consistent participation levels | 2 climax event(s) detected (1 buying, 1 selling) | SIGNIFICANT: Recent buying climax suggests institutional activity | 4 dry-up period(s) detected - potential absorption | SIGNIFICANT: Major dry-up periods indicate institutional accumulation | Current volume at 0th percentile - LOW activity"
+    },
+    "interpretation": {
+      "bias": "accumulation",
+      "strength": "strong",
+      "implications": [
+        "Building cause phase - smart money testing supply",
+        "Multiple tests of support show absorption of supply",
+        "Trading range developing as accumulation progresses"
+      ],
+      "nextExpectedEvents": [
+        "Spring event or successful test of support",
+        "Signs of strength on rallies from support"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "XRPUSDT_wyckoff_60_1750789098622",
+    "type": "wyckoff",
+    "timestamp": "2025-06-24T18:18:18.622Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "phase:accumulation_phase_b",
+      "confidence:50",
+      "progress:30",
+      "bias:accumulation",
+      "strength:strong",
+      "events:6",
+      "range:detected"
+    ]
+  },
+  "timestamp": "2025-06-24T18:18:18.622Z"
+}

@@ -1,14 +1,38 @@
 [
   {
-    "id": "HBARUSDT_60_1750448240696",
+    "id": "HBARUSDT_60_1750789432224",
     "symbol": "HBARUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-20T19:37:20.696Z",
-    "type": "smc",
+    "timestamp": "2025-06-24T18:23:52.224Z",
+    "type": "technical",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 194
+    "size_bytes": 200
+  },
+  {
+    "id": "HBARUSDT_60_1750789432225",
+    "symbol": "HBARUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-24T18:23:52.225Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 200
+  },
+  {
+    "id": "HBARUSDT_60_1750789460107",
+    "symbol": "HBARUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-24T18:24:20.107Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 200
   }
 ]

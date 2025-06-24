@@ -1,0 +1,159 @@
+{
+  "id": "XRPUSDT_wyckoff_15_1750789097683",
+  "type": "wyckoff",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "15",
+    "analysisDate": "2025-06-24T18:18:17.683Z",
+    "currentPhase": "uncertain",
+    "phaseConfidence": 30,
+    "phaseProgress": 50,
+    "keyEvents": [
+      {
+        "timestamp": "2025-06-23T21:45:00.000Z",
+        "type": "test",
+        "price": 2.0918,
+        "volume": 195466.33,
+        "significance": 100,
+        "description": "Test of 2.0992: Price touched 2.0918 (0.353% from level) and bounced from support with good quality on 0.3x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "low"
+        },
+        "levelTested": 2.0992,
+        "testQuality": "good",
+        "volumeOnTest": 195466.33,
+        "resultingAction": "bounce"
+      },
+      {
+        "timestamp": "2025-06-23T22:15:00.000Z",
+        "type": "test",
+        "price": 2.1686,
+        "volume": 3350365.08,
+        "significance": 75,
+        "description": "Test of 2.1703: Price touched 2.1686 (0.078% from level) and stalled near level with good quality on 5.5x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 2.1703,
+        "testQuality": "good",
+        "volumeOnTest": 3350365.08,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-23T22:30:00.000Z",
+        "type": "test",
+        "price": 2.1376,
+        "volume": 1682914.69,
+        "significance": 75,
+        "description": "Test of 2.1422: Price touched 2.1376 (0.215% from level) and stalled near level with good quality on 2.8x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "at_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 2.1422,
+        "testQuality": "good",
+        "volumeOnTest": 1682914.69,
+        "resultingAction": "stall"
+      },
+      {
+        "timestamp": "2025-06-24T06:00:00.000Z",
+        "type": "test",
+        "price": 2.2106,
+        "volume": 1062522.28,
+        "significance": 75,
+        "description": "Test of 2.2106: Price touched 2.2106 (0.000% from level) and stalled near level with good quality on 1.7x average volume",
+        "context": {
+          "phaseAtTime": "uncertain",
+          "relativeToRange": "below_support",
+          "volumeCharacter": "high"
+        },
+        "levelTested": 2.2106,
+        "testQuality": "good",
+        "volumeOnTest": 1062522.28,
+        "resultingAction": "stall"
+      }
+    ],
+    "volumeCharacteristics": {
+      "overallTrend": "stable",
+      "climaxEvents": [
+        {
+          "date": "2025-06-23T22:00:00.000Z",
+          "type": "buying_climax",
+          "volume": 2001794.61,
+          "priceAction": "2.13% rally on 3.7x volume",
+          "significance": 65
+        }
+      ],
+      "dryUpPeriods": [
+        {
+          "startDate": "2025-06-24T03:30:00.000Z",
+          "endDate": "2025-06-24T05:00:00.000Z",
+          "averageVolume": 274321.5942857143,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-24T10:15:00.000Z",
+          "endDate": "2025-06-24T10:45:00.000Z",
+          "averageVolume": 255382.70333333334,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-24T11:45:00.000Z",
+          "endDate": "2025-06-24T12:15:00.000Z",
+          "averageVolume": 259103.7233333333,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-24T15:15:00.000Z",
+          "endDate": "2025-06-24T16:15:00.000Z",
+          "averageVolume": 285126.292,
+          "significance": "moderate"
+        },
+        {
+          "startDate": "2025-06-24T17:30:00.000Z",
+          "endDate": "2025-06-24T18:15:00.000Z",
+          "averageVolume": 198961.25,
+          "significance": "moderate"
+        }
+      ],
+      "avgVolumeInRange": 545640.8536666668,
+      "currentVolumeRank": 0,
+      "interpretation": "Volume trend: STABLE - Consistent participation levels | 1 climax event(s) detected (1 buying, 0 selling) | 5 dry-up period(s) detected - potential absorption | Current volume at 0th percentile - LOW activity"
+    },
+    "interpretation": {
+      "bias": "uncertain",
+      "strength": "weak",
+      "implications": [
+        "Phase not clearly defined - market in transition",
+        "Monitor price and volume for pattern development"
+      ],
+      "nextExpectedEvents": [
+        "Watch for trading range development",
+        "Look for accumulation or distribution signs"
+      ]
+    }
+  },
+  "metadata": {
+    "id": "XRPUSDT_wyckoff_15_1750789097683",
+    "type": "wyckoff",
+    "timestamp": "2025-06-24T18:18:17.684Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "15",
+    "tags": [
+      "timeframe:15",
+      "phase:uncertain",
+      "confidence:30",
+      "progress:50",
+      "bias:uncertain",
+      "strength:weak",
+      "events:4",
+      "range:none"
+    ]
+  },
+  "timestamp": "2025-06-24T18:18:17.684Z"
+}

@@ -1,14 +1,38 @@
 [
   {
-    "id": "ICPUSDT_60_1750448298939",
+    "id": "ICPUSDT_60_1750789450156",
     "symbol": "ICPUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-20T19:38:18.939Z",
-    "type": "smc",
+    "timestamp": "2025-06-24T18:24:10.156Z",
+    "type": "technical",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 192
+    "size_bytes": 198
+  },
+  {
+    "id": "ICPUSDT_60_1750789450158",
+    "symbol": "ICPUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-24T18:24:10.158Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 198
+  },
+  {
+    "id": "ICPUSDT_60_1750789472400",
+    "symbol": "ICPUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-24T18:24:32.400Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 198
   }
 ]

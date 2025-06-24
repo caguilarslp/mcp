@@ -1,0 +1,642 @@
+{
+  "id": "ICPUSDT_complete_1750789450257",
+  "type": "complete_analysis",
+  "data": {
+    "marketData": {
+      "ticker": {
+        "symbol": "ICPUSDT",
+        "lastPrice": 4.924,
+        "price24hPcnt": 0.0463,
+        "highPrice24h": 5.057,
+        "lowPrice24h": 4.673,
+        "volume24h": 531351.94,
+        "bid1Price": 4.924,
+        "ask1Price": 4.925,
+        "timestamp": "2025-06-24T18:24:07.712Z"
+      },
+      "orderbook": {
+        "symbol": "ICPUSDT",
+        "bids": [
+          {
+            "price": 4.924,
+            "size": 27.55
+          },
+          {
+            "price": 4.923,
+            "size": 178.3
+          },
+          {
+            "price": 4.922,
+            "size": 225.8
+          },
+          {
+            "price": 4.921,
+            "size": 447.17
+          },
+          {
+            "price": 4.92,
+            "size": 72.11
+          },
+          {
+            "price": 4.919,
+            "size": 148.52
+          },
+          {
+            "price": 4.918,
+            "size": 232.36
+          },
+          {
+            "price": 4.917,
+            "size": 569.32
+          },
+          {
+            "price": 4.916,
+            "size": 719.05
+          },
+          {
+            "price": 4.915,
+            "size": 579.24
+          },
+          {
+            "price": 4.914,
+            "size": 276.29
+          },
+          {
+            "price": 4.913,
+            "size": 647.62
+          },
+          {
+            "price": 4.912,
+            "size": 1063.29
+          },
+          {
+            "price": 4.911,
+            "size": 395.72
+          },
+          {
+            "price": 4.91,
+            "size": 807.93
+          },
+          {
+            "price": 4.909,
+            "size": 27.55
+          },
+          {
+            "price": 4.908,
+            "size": 397.66
+          },
+          {
+            "price": 4.907,
+            "size": 824.2
+          },
+          {
+            "price": 4.906,
+            "size": 147.5
+          },
+          {
+            "price": 4.905,
+            "size": 127.51
+          },
+          {
+            "price": 4.903,
+            "size": 27.55
+          },
+          {
+            "price": 4.902,
+            "size": 247.46
+          },
+          {
+            "price": 4.901,
+            "size": 34.76
+          },
+          {
+            "price": 4.9,
+            "size": 143.34
+          },
+          {
+            "price": 4.899,
+            "size": 129.61
+          }
+        ],
+        "asks": [
+          {
+            "price": 4.925,
+            "size": 28.57
+          },
+          {
+            "price": 4.926,
+            "size": 27.55
+          },
+          {
+            "price": 4.927,
+            "size": 74.56
+          },
+          {
+            "price": 4.928,
+            "size": 172.33
+          },
+          {
+            "price": 4.929,
+            "size": 612.21
+          },
+          {
+            "price": 4.93,
+            "size": 973.65
+          },
+          {
+            "price": 4.931,
+            "size": 406.44
+          },
+          {
+            "price": 4.932,
+            "size": 933.83
+          },
+          {
+            "price": 4.933,
+            "size": 517.98
+          },
+          {
+            "price": 4.934,
+            "size": 375.2
+          },
+          {
+            "price": 4.935,
+            "size": 482.71
+          },
+          {
+            "price": 4.936,
+            "size": 347.61
+          },
+          {
+            "price": 4.937,
+            "size": 295.36
+          },
+          {
+            "price": 4.938,
+            "size": 390.59
+          },
+          {
+            "price": 4.939,
+            "size": 446.95
+          },
+          {
+            "price": 4.94,
+            "size": 127.51
+          },
+          {
+            "price": 4.942,
+            "size": 27.55
+          },
+          {
+            "price": 4.943,
+            "size": 247.46
+          },
+          {
+            "price": 4.945,
+            "size": 38.3
+          },
+          {
+            "price": 4.946,
+            "size": 127.51
+          },
+          {
+            "price": 4.947,
+            "size": 147.5
+          },
+          {
+            "price": 4.948,
+            "size": 27.55
+          },
+          {
+            "price": 4.949,
+            "size": 127.51
+          },
+          {
+            "price": 4.95,
+            "size": 27.55
+          },
+          {
+            "price": 4.951,
+            "size": 147.5
+          }
+        ],
+        "timestamp": "2025-06-24T18:24:09.759Z",
+        "spread": 0.0009999999999994458
+      },
+      "recentKlines": [
+        {
+          "timestamp": "2025-06-23T19:00:00.000Z",
+          "open": 4.704,
+          "high": 4.722,
+          "low": 4.673,
+          "close": 4.714,
+          "volume": 24450.94
+        },
+        {
+          "timestamp": "2025-06-23T20:00:00.000Z",
+          "open": 4.714,
+          "high": 4.817,
+          "low": 4.708,
+          "close": 4.793,
+          "volume": 42914.01
+        },
+        {
+          "timestamp": "2025-06-23T21:00:00.000Z",
+          "open": 4.793,
+          "high": 4.848,
+          "low": 4.771,
+          "close": 4.793,
+          "volume": 26937.93
+        },
+        {
+          "timestamp": "2025-06-23T22:00:00.000Z",
+          "open": 4.793,
+          "high": 4.981,
+          "low": 4.782,
+          "close": 4.965,
+          "volume": 61991.2
+        },
+        {
+          "timestamp": "2025-06-23T23:00:00.000Z",
+          "open": 4.965,
+          "high": 4.992,
+          "low": 4.956,
+          "close": 4.962,
+          "volume": 16877.97
+        },
+        {
+          "timestamp": "2025-06-24T00:00:00.000Z",
+          "open": 4.962,
+          "high": 4.976,
+          "low": 4.906,
+          "close": 4.93,
+          "volume": 17993.58
+        },
+        {
+          "timestamp": "2025-06-24T01:00:00.000Z",
+          "open": 4.93,
+          "high": 4.95,
+          "low": 4.914,
+          "close": 4.948,
+          "volume": 18885.28
+        },
+        {
+          "timestamp": "2025-06-24T02:00:00.000Z",
+          "open": 4.948,
+          "high": 4.948,
+          "low": 4.901,
+          "close": 4.917,
+          "volume": 26312.3
+        },
+        {
+          "timestamp": "2025-06-24T03:00:00.000Z",
+          "open": 4.917,
+          "high": 4.926,
+          "low": 4.889,
+          "close": 4.91,
+          "volume": 15804.14
+        },
+        {
+          "timestamp": "2025-06-24T04:00:00.000Z",
+          "open": 4.91,
+          "high": 4.927,
+          "low": 4.894,
+          "close": 4.922,
+          "volume": 17807.2
+        },
+        {
+          "timestamp": "2025-06-24T05:00:00.000Z",
+          "open": 4.922,
+          "high": 5.014,
+          "low": 4.912,
+          "close": 5.014,
+          "volume": 21131.99
+        },
+        {
+          "timestamp": "2025-06-24T06:00:00.000Z",
+          "open": 5.014,
+          "high": 5.043,
+          "low": 4.99,
+          "close": 5.034,
+          "volume": 40741.42
+        },
+        {
+          "timestamp": "2025-06-24T07:00:00.000Z",
+          "open": 5.034,
+          "high": 5.057,
+          "low": 4.963,
+          "close": 4.966,
+          "volume": 32238.85
+        },
+        {
+          "timestamp": "2025-06-24T08:00:00.000Z",
+          "open": 4.966,
+          "high": 4.97,
+          "low": 4.911,
+          "close": 4.928,
+          "volume": 15172.89
+        },
+        {
+          "timestamp": "2025-06-24T09:00:00.000Z",
+          "open": 4.928,
+          "high": 4.984,
+          "low": 4.912,
+          "close": 4.938,
+          "volume": 9385.32
+        },
+        {
+          "timestamp": "2025-06-24T10:00:00.000Z",
+          "open": 4.938,
+          "high": 4.953,
+          "low": 4.925,
+          "close": 4.948,
+          "volume": 5486.57
+        },
+        {
+          "timestamp": "2025-06-24T11:00:00.000Z",
+          "open": 4.948,
+          "high": 4.967,
+          "low": 4.924,
+          "close": 4.949,
+          "volume": 18012.85
+        },
+        {
+          "timestamp": "2025-06-24T12:00:00.000Z",
+          "open": 4.949,
+          "high": 4.976,
+          "low": 4.939,
+          "close": 4.95,
+          "volume": 13380.52
+        },
+        {
+          "timestamp": "2025-06-24T13:00:00.000Z",
+          "open": 4.95,
+          "high": 4.961,
+          "low": 4.913,
+          "close": 4.948,
+          "volume": 20189.3
+        },
+        {
+          "timestamp": "2025-06-24T14:00:00.000Z",
+          "open": 4.948,
+          "high": 4.999,
+          "low": 4.939,
+          "close": 4.942,
+          "volume": 14585.27
+        },
+        {
+          "timestamp": "2025-06-24T15:00:00.000Z",
+          "open": 4.942,
+          "high": 4.956,
+          "low": 4.886,
+          "close": 4.909,
+          "volume": 19812.84
+        },
+        {
+          "timestamp": "2025-06-24T16:00:00.000Z",
+          "open": 4.909,
+          "high": 5.003,
+          "low": 4.895,
+          "close": 5.001,
+          "volume": 20762.28
+        },
+        {
+          "timestamp": "2025-06-24T17:00:00.000Z",
+          "open": 5.001,
+          "high": 5.003,
+          "low": 4.928,
+          "close": 4.949,
+          "volume": 16575.24
+        },
+        {
+          "timestamp": "2025-06-24T18:00:00.000Z",
+          "open": 4.949,
+          "high": 4.957,
+          "low": 4.909,
+          "close": 4.924,
+          "volume": 4690.93
+        }
+      ]
+    },
+    "technicalAnalysis": {
+      "volatility": {
+        "symbol": "ICPUSDT",
+        "period": "1d",
+        "currentPrice": 4.924,
+        "highestPrice": 5.057,
+        "lowestPrice": 4.673,
+        "volatilityPercent": 7.798537774167349,
+        "isGoodForGrid": true,
+        "recommendation": "proceed",
+        "confidence": 100
+      },
+      "volume": {
+        "symbol": "ICPUSDT",
+        "interval": "60",
+        "avgVolume": 23831.10375,
+        "currentVolume": 4690.93,
+        "maxVolume": 156825.69,
+        "minVolume": 4690.93,
+        "volumeSpikes": [
+          {
+            "timestamp": "2025-06-23T06:00:00.000Z",
+            "volume": 156825.69,
+            "multiplier": 6.580714500057515,
+            "price": 4.573
+          },
+          {
+            "timestamp": "2025-06-23T13:00:00.000Z",
+            "volume": 36698.9,
+            "multiplier": 1.5399580474739867,
+            "price": 4.638
+          },
+          {
+            "timestamp": "2025-06-23T20:00:00.000Z",
+            "volume": 42914.01,
+            "multiplier": 1.800756291029953,
+            "price": 4.793
+          },
+          {
+            "timestamp": "2025-06-23T22:00:00.000Z",
+            "volume": 61991.2,
+            "multiplier": 2.6012727169634347,
+            "price": 4.965
+          },
+          {
+            "timestamp": "2025-06-24T06:00:00.000Z",
+            "volume": 40741.42,
+            "multiplier": 1.709590140154545,
+            "price": 5.034
+          }
+        ],
+        "vwap": {
+          "current": 4.724893528501242,
+          "priceVsVwap": "above",
+          "difference": 4.213988533238256
+        },
+        "trend": "increasing"
+      },
+      "volumeDelta": {
+        "symbol": "ICPUSDT",
+        "interval": "5",
+        "current": 437.1640000001553,
+        "average": 37.1324955876957,
+        "bias": "buyer",
+        "strength": 3.3975803668825155,
+        "cumulativeDelta": 692.1759840855838,
+        "divergence": {
+          "detected": false,
+          "type": "No divergence",
+          "signal": "trend_confirmed"
+        },
+        "marketPressure": {
+          "bullishCandles": 6,
+          "bearishCandles": 4,
+          "bullishPercent": 60,
+          "trend": "balanced"
+        }
+      },
+      "supportResistance": {
+        "symbol": "ICPUSDT",
+        "interval": "60",
+        "currentPrice": 4.924,
+        "resistances": [
+          {
+            "level": 5.016,
+            "type": "resistance",
+            "strength": 74.29722353033966,
+            "touches": 2,
+            "volumeConfirmation": 0.4649382275822619,
+            "lastTouchTime": "2025-06-23T23:00:00.000Z",
+            "priceDistance": 1.8683996750609186,
+            "confidence": "strong"
+          },
+          {
+            "level": 5.057,
+            "type": "resistance",
+            "strength": 61.58343809855633,
+            "touches": 1,
+            "volumeConfirmation": 0.9839740683697715,
+            "lastTouchTime": "2025-06-24T07:00:00.000Z",
+            "priceDistance": 2.7010560519902516,
+            "confidence": "strong"
+          }
+        ],
+        "supports": [
+          {
+            "level": 4.631,
+            "type": "support",
+            "strength": 75.67588235354322,
+            "touches": 2,
+            "volumeConfirmation": 0.9539852902068806,
+            "lastTouchTime": "2025-06-22T02:00:00.000Z",
+            "priceDistance": 5.950446791226647,
+            "confidence": "very_strong"
+          },
+          {
+            "level": 4.871,
+            "type": "support",
+            "strength": 73.18058701266982,
+            "touches": 2,
+            "volumeConfirmation": 0.326582082447236,
+            "lastTouchTime": "2025-06-24T03:00:00.000Z",
+            "priceDistance": 1.0763606823720537,
+            "confidence": "strong"
+          },
+          {
+            "level": 4.835,
+            "type": "support",
+            "strength": 61.18614981002948,
+            "touches": 1,
+            "volumeConfirmation": 1.0506937966930932,
+            "lastTouchTime": "2025-06-22T00:00:00.000Z",
+            "priceDistance": 1.807473598700252,
+            "confidence": "strong"
+          }
+        ],
+        "criticalLevel": {
+          "level": 4.871,
+          "type": "support",
+          "strength": 73.18058701266982,
+          "touches": 2,
+          "volumeConfirmation": 0.326582082447236,
+          "lastTouchTime": "2025-06-24T03:00:00.000Z",
+          "priceDistance": 1.0763606823720537,
+          "confidence": "strong"
+        },
+        "gridConfig": {
+          "optimalLowerBound": 4.631,
+          "optimalUpperBound": 5.016,
+          "keyLevels": [
+            4.631,
+            5.016,
+            4.871,
+            5.057
+          ],
+          "recommendedGridCount": 8,
+          "recommendation": "Strong S/R levels identified - Grid trading recommended"
+        },
+        "statistics": {
+          "totalPivotsFound": 13,
+          "priceRangeAnalyzed": {
+            "high": 5.057,
+            "low": 4.317
+          },
+          "avgVolume": 23402.801699999996,
+          "periodsAnalyzed": 100,
+          "sensitivityUsed": 2
+        }
+      }
+    },
+    "gridSuggestion": {
+      "symbol": "ICPUSDT",
+      "currentPrice": 4.924,
+      "suggestedRange": {
+        "lower": 4.6225,
+        "upper": 5.1451
+      },
+      "gridLevels": [
+        4.6225,
+        4.6748,
+        4.727,
+        4.7793,
+        4.8315,
+        4.8838,
+        4.9361,
+        4.9883,
+        5.0406,
+        5.0928,
+        5.1451
+      ],
+      "investment": 330,
+      "pricePerGrid": 33,
+      "potentialProfit": "$-0.08/day estimated",
+      "volatility24h": 7.798537774167349,
+      "recommendation": "recommended",
+      "confidence": 89
+    },
+    "summary": {
+      "recommendation": "wait",
+      "confidence": 50,
+      "keyPoints": [
+        "Volatility at 7.8% - Good for grid trading",
+        "Low volume activity (20% of average)",
+        "Price 4.2% above VWAP - Potential resistance",
+        "Near strong support at $4.8710 (1.1% away)",
+        "Grid trading recommended with 89% confidence"
+      ],
+      "riskLevel": "medium"
+    },
+    "symbol": "ICPUSDT"
+  },
+  "metadata": {
+    "id": "ICPUSDT_complete_1750789450257",
+    "type": "complete_analysis",
+    "timestamp": "2025-06-24T18:24:10.257Z",
+    "symbol": "ICPUSDT",
+    "tags": [
+      "investment:330"
+    ]
+  },
+  "timestamp": "2025-06-24T18:24:10.257Z"
+}

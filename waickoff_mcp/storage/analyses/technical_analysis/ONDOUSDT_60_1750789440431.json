@@ -1,0 +1,188 @@
+{
+  "id": "ONDOUSDT_60_1750789440431",
+  "type": "technical_analysis",
+  "data": {
+    "volatility": {
+      "symbol": "ONDOUSDT",
+      "period": "1d",
+      "currentPrice": 0.7718,
+      "highestPrice": 0.7946,
+      "lowestPrice": 0.6922,
+      "volatilityPercent": 13.267685928997142,
+      "isGoodForGrid": true,
+      "recommendation": "proceed",
+      "confidence": 100
+    },
+    "volume": {
+      "symbol": "ONDOUSDT",
+      "interval": "60",
+      "avgVolume": 1058258.0589583332,
+      "currentVolume": 211501.28,
+      "maxVolume": 4742341.59,
+      "minVolume": 211501.28,
+      "volumeSpikes": [
+        {
+          "timestamp": "2025-06-22T22:00:00.000Z",
+          "volume": 1589002.22,
+          "multiplier": 1.5015262171157855,
+          "price": 0.6678
+        },
+        {
+          "timestamp": "2025-06-23T07:00:00.000Z",
+          "volume": 3527538.34,
+          "multiplier": 3.33334417833041,
+          "price": 0.6824
+        },
+        {
+          "timestamp": "2025-06-23T08:00:00.000Z",
+          "volume": 2157094.61,
+          "multiplier": 2.0383446095589157,
+          "price": 0.6792
+        },
+        {
+          "timestamp": "2025-06-23T16:00:00.000Z",
+          "volume": 2028203.34,
+          "multiplier": 1.916548920020893,
+          "price": 0.6573
+        },
+        {
+          "timestamp": "2025-06-23T17:00:00.000Z",
+          "volume": 1598293.07,
+          "multiplier": 1.5103055974581807,
+          "price": 0.6792
+        }
+      ],
+      "vwap": {
+        "current": 0.7107691227894697,
+        "priceVsVwap": "above",
+        "difference": 8.586596583009944
+      },
+      "trend": "increasing"
+    },
+    "volumeDelta": {
+      "symbol": "ONDOUSDT",
+      "interval": "5",
+      "current": 9983.55600000054,
+      "average": -7209.429425166121,
+      "bias": "seller",
+      "strength": 52.956230343061016,
+      "cumulativeDelta": 332594.67520285514,
+      "divergence": {
+        "detected": false,
+        "type": "No divergence",
+        "signal": "trend_confirmed"
+      },
+      "marketPressure": {
+        "bullishCandles": 4,
+        "bearishCandles": 6,
+        "bullishPercent": 40,
+        "trend": "balanced"
+      }
+    },
+    "supportResistance": {
+      "symbol": "ONDOUSDT",
+      "interval": "60",
+      "currentPrice": 0.7718,
+      "resistances": [
+        {
+          "level": 0.7738,
+          "type": "resistance",
+          "strength": 78.89086087956963,
+          "touches": 1,
+          "volumeConfirmation": 4.070477656662035,
+          "lastTouchTime": "2025-06-23T22:00:00.000Z",
+          "priceDistance": 0.2591344908007258,
+          "confidence": "very_strong"
+        },
+        {
+          "level": 0.7893,
+          "type": "resistance",
+          "strength": 63.68244459478328,
+          "touches": 1,
+          "volumeConfirmation": 1.0949917345946165,
+          "lastTouchTime": "2025-06-24T07:00:00.000Z",
+          "priceDistance": 2.2674267945063433,
+          "confidence": "strong"
+        }
+      ],
+      "supports": [
+        {
+          "level": 0.6915,
+          "type": "support",
+          "strength": 68.12074556472123,
+          "touches": 1,
+          "volumeConfirmation": 3.0277797842033314,
+          "lastTouchTime": "2025-06-23T07:00:00.000Z",
+          "priceDistance": 10.404249805649137,
+          "confidence": "strong"
+        },
+        {
+          "level": 0.7451,
+          "type": "support",
+          "strength": 65.92409760545988,
+          "touches": 2,
+          "volumeConfirmation": 0.1850142902630576,
+          "lastTouchTime": "2025-06-21T09:00:00.000Z",
+          "priceDistance": 3.459445452189694,
+          "confidence": "strong"
+        },
+        {
+          "level": 0.6346,
+          "type": "support",
+          "strength": 60.04003596810726,
+          "touches": 1,
+          "volumeConfirmation": 2.160391537255213,
+          "lastTouchTime": "2025-06-22T14:00:00.000Z",
+          "priceDistance": 17.776626068929772,
+          "confidence": "strong"
+        }
+      ],
+      "criticalLevel": {
+        "level": 0.7738,
+        "type": "resistance",
+        "strength": 78.89086087956963,
+        "touches": 1,
+        "volumeConfirmation": 4.070477656662035,
+        "lastTouchTime": "2025-06-23T22:00:00.000Z",
+        "priceDistance": 0.2591344908007258,
+        "confidence": "very_strong"
+      },
+      "gridConfig": {
+        "optimalLowerBound": 0.6915,
+        "optimalUpperBound": 0.7738,
+        "keyLevels": [
+          0.7738,
+          0.6915,
+          0.7451,
+          0.7893
+        ],
+        "recommendedGridCount": 11,
+        "recommendation": "Strong S/R levels identified - Grid trading recommended"
+      },
+      "statistics": {
+        "totalPivotsFound": 15,
+        "priceRangeAnalyzed": {
+          "high": 0.7946,
+          "low": 0.6216
+        },
+        "avgVolume": 832184.1159000002,
+        "periodsAnalyzed": 100,
+        "sensitivityUsed": 2
+      }
+    },
+    "symbol": "ONDOUSDT",
+    "timeframe": "60"
+  },
+  "metadata": {
+    "id": "ONDOUSDT_60_1750789440431",
+    "type": "technical_analysis",
+    "timestamp": "2025-06-24T18:24:00.431Z",
+    "symbol": "ONDOUSDT",
+    "timeframe": "60",
+    "tags": [
+      "timeframe:60",
+      "periods:100"
+    ]
+  },
+  "timestamp": "2025-06-24T18:24:00.431Z"
+}

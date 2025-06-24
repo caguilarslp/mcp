@@ -5,8 +5,8 @@
   ],
   "analysis_count": 10,
   "date_range": {
-    "start": "2025-06-21T00:39:22.489Z",
-    "end": "2025-06-21T00:39:36.835Z"
+    "start": "2025-06-24T18:18:09.695Z",
+    "end": "2025-06-24T18:18:19.735Z"
   },
   "trend_summary": {
     "direction": "neutral",
@@ -33,6 +33,6 @@
   "metadata": {
     "total_size_bytes": 1980,
     "compression_ratio": 0.99,
-    "last_updated": "2025-06-21T00:39:36.836Z"
+    "last_updated": "2025-06-24T18:18:19.736Z"
   }
 }

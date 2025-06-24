@@ -1,14 +1,38 @@
 [
   {
-    "id": "ONDOUSDT_60_1750448278020",
+    "id": "ONDOUSDT_60_1750789440415",
     "symbol": "ONDOUSDT",
     "timeframe": "60",
-    "timestamp": "2025-06-20T19:37:58.020Z",
-    "type": "smc",
+    "timestamp": "2025-06-24T18:24:00.415Z",
+    "type": "technical",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 194
+    "size_bytes": 200
+  },
+  {
+    "id": "ONDOUSDT_60_1750789440421",
+    "symbol": "ONDOUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-24T18:24:00.422Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 200
+  },
+  {
+    "id": "ONDOUSDT_60_1750789467141",
+    "symbol": "ONDOUSDT",
+    "timeframe": "60",
+    "timestamp": "2025-06-24T18:24:27.141Z",
+    "type": "technical",
+    "key_findings": [],
+    "key_metrics": {},
+    "recommendations": [],
+    "confidence": 0,
+    "size_bytes": 200
   }
 ]

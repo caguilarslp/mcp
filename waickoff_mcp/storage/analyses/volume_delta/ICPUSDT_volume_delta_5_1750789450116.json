@@ -1,0 +1,40 @@
+{
+  "id": "ICPUSDT_volume_delta_5_1750789450116",
+  "type": "volume_delta",
+  "data": {
+    "symbol": "ICPUSDT",
+    "interval": "5",
+    "current": 437.1640000001553,
+    "average": 37.1324955876957,
+    "bias": "buyer",
+    "strength": 3.3975803668825155,
+    "cumulativeDelta": 692.1759840855838,
+    "divergence": {
+      "detected": false,
+      "type": "No divergence",
+      "signal": "trend_confirmed"
+    },
+    "marketPressure": {
+      "bullishCandles": 6,
+      "bearishCandles": 4,
+      "bullishPercent": 60,
+      "trend": "balanced"
+    }
+  },
+  "metadata": {
+    "id": "ICPUSDT_volume_delta_5_1750789450116",
+    "type": "volume_delta",
+    "timestamp": "2025-06-24T18:24:10.116Z",
+    "symbol": "ICPUSDT",
+    "interval": "5",
+    "tags": [
+      "interval:5",
+      "bias:buyer",
+      "strength:3",
+      "cumulative:692",
+      "divergence:false",
+      "pressure:balanced"
+    ]
+  },
+  "timestamp": "2025-06-24T18:24:10.116Z"
+}

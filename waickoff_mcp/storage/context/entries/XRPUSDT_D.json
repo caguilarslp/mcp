@@ -1,14 +1,14 @@
 [
   {
-    "id": "XRPUSDT_D_1750466435619",
+    "id": "XRPUSDT_D_1750789101167",
     "symbol": "XRPUSDT",
     "timeframe": "D",
-    "timestamp": "2025-06-21T00:40:35.619Z",
-    "type": "smc",
+    "timestamp": "2025-06-24T18:18:21.167Z",
+    "type": "wyckoff",
     "key_findings": [],
     "key_metrics": {},
     "recommendations": [],
     "confidence": 0,
-    "size_bytes": 190
+    "size_bytes": 194
   }
 ]

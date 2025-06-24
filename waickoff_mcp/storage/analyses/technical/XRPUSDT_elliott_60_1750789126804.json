@@ -1,0 +1,160 @@
+{
+  "id": "XRPUSDT_elliott_60_1750789126804",
+  "type": "technical",
+  "data": {
+    "symbol": "XRPUSDT",
+    "timeframe": "60",
+    "currentPrice": 2.1867,
+    "currentSequence": {
+      "type": "corrective",
+      "waves": [
+        {
+          "number": 65,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 50,
+          "endIndex": 61,
+          "startPrice": 2.1181,
+          "endPrice": 2.1857,
+          "startTime": "2025-06-18T13:00:00.000Z",
+          "endTime": "2025-06-19T00:00:00.000Z",
+          "length": 3.191539587366041,
+          "duration": 11,
+          "confidence": 46.49841917489066
+        },
+        {
+          "number": 66,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 61,
+          "endIndex": 76,
+          "startPrice": 2.1857,
+          "endPrice": 2.1441,
+          "startTime": "2025-06-19T00:00:00.000Z",
+          "endTime": "2025-06-19T15:00:00.000Z",
+          "length": -1.9032804135974881,
+          "duration": 15,
+          "confidence": 29.985964436548628
+        },
+        {
+          "number": 67,
+          "type": "corrective",
+          "subType": "zigzag",
+          "startIndex": 76,
+          "endIndex": 98,
+          "startPrice": 2.1441,
+          "endPrice": 2.18,
+          "startTime": "2025-06-19T15:00:00.000Z",
+          "endTime": "2025-06-20T13:00:00.000Z",
+          "length": 1.6743622032554577,
+          "duration": 22,
+          "confidence": 26.896892431203426
+        }
+      ],
+      "isComplete": true,
+      "degree": "subminuette",
+      "startTime": "2025-06-18T13:00:00.000Z",
+      "endTime": "2025-06-20T13:00:00.000Z",
+      "validity": 100
+    },
+    "historicalSequences": [
+      {
+        "type": "corrective",
+        "waves": [
+          {
+            "number": 65,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 50,
+            "endIndex": 61,
+            "startPrice": 2.1181,
+            "endPrice": 2.1857,
+            "startTime": "2025-06-18T13:00:00.000Z",
+            "endTime": "2025-06-19T00:00:00.000Z",
+            "length": 3.191539587366041,
+            "duration": 11,
+            "confidence": 46.49841917489066
+          },
+          {
+            "number": 66,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 61,
+            "endIndex": 76,
+            "startPrice": 2.1857,
+            "endPrice": 2.1441,
+            "startTime": "2025-06-19T00:00:00.000Z",
+            "endTime": "2025-06-19T15:00:00.000Z",
+            "length": -1.9032804135974881,
+            "duration": 15,
+            "confidence": 29.985964436548628
+          },
+          {
+            "number": 67,
+            "type": "corrective",
+            "subType": "zigzag",
+            "startIndex": 76,
+            "endIndex": 98,
+            "startPrice": 2.1441,
+            "endPrice": 2.18,
+            "startTime": "2025-06-19T15:00:00.000Z",
+            "endTime": "2025-06-20T13:00:00.000Z",
+            "length": 1.6743622032554577,
+            "duration": 22,
+            "confidence": 26.896892431203426
+          }
+        ],
+        "isComplete": true,
+        "degree": "subminuette",
+        "startTime": "2025-06-18T13:00:00.000Z",
+        "endTime": "2025-06-20T13:00:00.000Z",
+        "validity": 100
+      }
+    ],
+    "currentWave": {
+      "wave": {
+        "number": 67,
+        "type": "corrective",
+        "subType": "zigzag",
+        "startIndex": 76,
+        "endIndex": 98,
+        "startPrice": 2.1441,
+        "endPrice": 2.18,
+        "startTime": "2025-06-19T15:00:00.000Z",
+        "endTime": "2025-06-20T13:00:00.000Z",
+        "length": 1.6743622032554577,
+        "duration": 22,
+        "confidence": 26.896892431203426
+      },
+      "position": "uncertain",
+      "nextExpected": "Corrective sequence complete, new impulse likely"
+    },
+    "projections": [],
+    "ruleValidation": {
+      "wave2Rule": true,
+      "wave3Rule": true,
+      "wave4Rule": true,
+      "alternationRule": true,
+      "channelRule": true,
+      "overallValidity": 100
+    },
+    "signals": {
+      "signal": "hold",
+      "strength": 50,
+      "reasoning": "",
+      "waveContext": "",
+      "riskLevel": "medium"
+    },
+    "analysisTime": "2025-06-24T18:18:46.804Z",
+    "confidence": 70,
+    "dataQuality": 100
+  },
+  "metadata": {
+    "id": "XRPUSDT_elliott_60_1750789126804",
+    "type": "technical",
+    "timestamp": "2025-06-24T18:18:46.804Z",
+    "symbol": "XRPUSDT",
+    "timeframe": "60"
+  },
+  "timestamp": "2025-06-24T18:18:46.804Z"
+}

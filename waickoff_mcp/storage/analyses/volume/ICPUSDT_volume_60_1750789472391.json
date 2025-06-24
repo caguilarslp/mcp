@@ -1,0 +1,65 @@
+{
+  "id": "ICPUSDT_volume_60_1750789472391",
+  "type": "volume",
+  "data": {
+    "symbol": "ICPUSDT",
+    "interval": "60",
+    "avgVolume": 23831.10375,
+    "currentVolume": 4690.93,
+    "maxVolume": 156825.69,
+    "minVolume": 4690.93,
+    "volumeSpikes": [
+      {
+        "timestamp": "2025-06-23T06:00:00.000Z",
+        "volume": 156825.69,
+        "multiplier": 6.580714500057515,
+        "price": 4.573
+      },
+      {
+        "timestamp": "2025-06-23T13:00:00.000Z",
+        "volume": 36698.9,
+        "multiplier": 1.5399580474739867,
+        "price": 4.638
+      },
+      {
+        "timestamp": "2025-06-23T20:00:00.000Z",
+        "volume": 42914.01,
+        "multiplier": 1.800756291029953,
+        "price": 4.793
+      },
+      {
+        "timestamp": "2025-06-23T22:00:00.000Z",
+        "volume": 61991.2,
+        "multiplier": 2.6012727169634347,
+        "price": 4.965
+      },
+      {
+        "timestamp": "2025-06-24T06:00:00.000Z",
+        "volume": 40741.42,
+        "multiplier": 1.709590140154545,
+        "price": 5.034
+      }
+    ],
+    "vwap": {
+      "current": 4.724893528501242,
+      "priceVsVwap": "above",
+      "difference": 4.213988533238256
+    },
+    "trend": "increasing"
+  },
+  "metadata": {
+    "id": "ICPUSDT_volume_60_1750789472391",
+    "type": "volume",
+    "timestamp": "2025-06-24T18:24:32.391Z",
+    "symbol": "ICPUSDT",
+    "interval": "60",
+    "tags": [
+      "interval:60",
+      "trend:increasing",
+      "volume_ratio:20",
+      "spikes:5",
+      "vwap_position:above"
+    ]
+  },
+  "timestamp": "2025-06-24T18:24:32.391Z"
+}
