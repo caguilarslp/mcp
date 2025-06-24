@@ -346,3 +346,147 @@ Diseñada estrategia para integrar LLMs en análisis de mercado:
 1. **TASK-064**: Dashboard MVP para gestión visual
 2. **TASK-060**: Integración Wyckoff MCP
 3. **Focus**: Features de análisis antes que pagos
+
+## 2025-06-23 - MCP Server Integration Discovery
+
+### WAIckoff MCP Server Already Integrated!
+**Status**: DESCUBRIMIENTO MAYOR 🎉
+**Version**: v1.10.1
+
+#### Lo que ya tenemos
+1. **117+ Herramientas MCP** completamente funcionales
+   - Wyckoff analysis completo (15+ tools)
+   - Technical indicators (20+ tools)
+   - Smart Money Concepts (20+ tools)
+   - Multi-exchange analysis (10+ tools)
+   - Context system con 3 meses de historia
+
+2. **Impacto en Tareas**
+   - TASK-065: ✅ COMPLETADA (Advanced Wyckoff ya en MCP)
+   - TASK-066: ✅ COMPLETADA (Technical indicators ya en MCP)
+   - TASK-067: ✅ COMPLETADA (Multi-exchange ya en MCP)
+   - TASK-060: 80% completada (solo falta HTTP wrapper)
+
+3. **Nueva Realidad**
+   - No necesitamos reconstruir indicadores
+   - 3 meses de desarrollo ya hecho
+   - Production-ready analysis engine
+   - Solo falta integrarlo con WADM API
+
+#### Cambios en Prioridades
+1. **TASK-080 Renombrada**: HTTP Wrapper for MCP (no Docker, ya está listo)
+2. **Focus en**: Dashboard + AI Premium + Features únicas
+3. **Time saved**: ~3 meses de desarrollo
+
+#### Lo que realmente falta
+- HTTP wrapper (1 día)
+- Dashboard UI (4 días)  
+- Footprint Charts (no en MCP)
+- Market Profile TPO (no en MCP)
+- Web scraping (datos externos)
+- Premium AI integration
+
+## 2025-06-24 - TASK-080 HTTP Wrapper Implementation
+
+### ⚠️ CRITICAL: Mock Implementation Violation
+**Status**: PARCIALMENTE IMPLEMENTADO con VIOLACIÓN DE PRINCIPIOS
+**Issue**: Se implementó con MOCKS en lugar de funcionalidad real
+
+#### Lo que se hizo (INCORRECTO)
+1. **MCPHTTPClient con Mock Responses** ❌
+   - `client_http.py` devuelve datos simulados
+   - Viola principio fundamental: NO MOCKS
+   - No conecta realmente con MCP Server
+
+2. **Endpoints Creados** ✅
+   - Estructura correcta de rutas
+   - Integración con sesiones funcionando
+   - API bien documentada
+
+#### Solución REAL Requerida
+
+##### Opción 1: Subprocess Direct (Python) - RECOMENDADA
+```python
+# Actualizar client.py para usar correctamente:
+import subprocess
+import json
+
+async def _execute_mcp_direct(self, tool_name: str, params: dict):
+    """Execute MCP tool using stdio protocol."""
+    # Crear mensaje MCP formato correcto
+    message = {
+        "jsonrpc": "2.0",
+        "method": "tools/call",
+        "params": {
+            "name": tool_name,
+            "arguments": params
+        },
+        "id": 1
+    }
+    
+    # Ejecutar MCP server
+    process = await asyncio.create_subprocess_exec(
+        "node",
+        str(self.mcp_path / "build" / "index.js"),
+        stdin=asyncio.subprocess.PIPE,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+        env={**os.environ, "NODE_ENV": "production"}
+    )
+    
+    # Enviar y recibir
+    stdout, stderr = await process.communicate(
+        json.dumps(message).encode() + b"\n"
+    )
+    
+    # Parsear respuesta JSON-RPC
+    response = json.loads(stdout.decode())
+    return response.get("result", {})
+```
+
+##### Opción 2: MCP SDK Integration (TypeScript)
+Crear wrapper minimalista en `mcp_server/src/stdio-wrapper.ts`:
+```typescript
+import { readLine } from 'readline';
+import { MCPServer } from './index';
+
+const rl = readLine.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.on('line', async (line) => {
+  const request = JSON.parse(line);
+  const result = await mcpServer.handleRequest(request);
+  console.log(JSON.stringify(result));
+});
+```
+
+#### Pasos para Corregir
+1. **Eliminar todo código mock de `client_http.py`**
+2. **Implementar comunicación REAL con MCP via stdio**
+3. **Probar con herramientas reales del MCP**
+4. **Verificar respuestas auténticas**
+
+#### Archivos a Modificar
+- `src/api/services/mcp/client.py` - Implementar comunicación real
+- `src/api/services/mcp/__init__.py` - Usar client.py en vez de client_http.py
+- Eliminar `client_http.py` o renombrar a `client_mock.py` como referencia
+
+#### Testing Real
+```bash
+# Primero compilar MCP
+cd mcp_server
+npm run build
+
+# Luego probar comunicación directa
+echo '{"jsonrpc":"2.0","method":"tools/list","id":1}' | node build/index.js
+```
+
+#### Tiempo Estimado para Corrección
+- 2-3 horas para implementación correcta
+- 1 hora para testing completo
+- Total: 4 horas
+
+### Lección Aprendida
+NUNCA usar mocks en producción. Siempre implementar funcionalidad real desde el inicio, aunque tome más tiempo. Los mocks son deuda técnica que se paga con intereses.

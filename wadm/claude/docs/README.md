@@ -2,6 +2,9 @@
 
 ## 📁 Documentation Structure
 
+### 🎆 BREAKING UPDATE: MCP Server Integration
+- **[MCP-SERVER-INTEGRATION-STATUS.md](MCP-SERVER-INTEGRATION-STATUS.md)** - MCP v1.10.1 already integrated! 🎉
+
 ### 🎯 Core Strategy Documents
 - **[AI-PREMIUM-STRATEGY.md](AI-PREMIUM-STRATEGY.md)** - Premium AI models strategy (Claude Opus 4 + GPT-4)
 - **[WAICKOFF-SESSION-MODEL.md](WAICKOFF-SESSION-MODEL.md)** - Business model and pricing ($1/session)
@@ -54,6 +57,13 @@
 - **[TASK-026-PROMPT.md](TASK-026-PROMPT.md)** - Historical task prompt
 
 ## 📌 Key Updates (2025-06-23)
+
+### 🎆 MCP Server Already Integrated!
+- WAIckoff MCP Server v1.10.1 is already in the project
+- 117+ analysis tools ready to use
+- Wyckoff, SMC, Technical indicators all complete
+- 3-month context system operational
+- See: [MCP-SERVER-INTEGRATION-STATUS.md](MCP-SERVER-INTEGRATION-STATUS.md)
 
 ### 🔥 Premium AI Strategy
 - Switched from Claude Sonnet 4 to Claude Opus 4 + GPT-4 Turbo

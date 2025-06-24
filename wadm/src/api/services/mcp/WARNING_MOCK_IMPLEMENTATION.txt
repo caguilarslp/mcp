@@ -1,0 +1,19 @@
+"""
+⚠️ CRITICAL WARNING: MOCK IMPLEMENTATION ⚠️
+
+This file contains MOCK responses and violates the project's NO MOCKS principle.
+DO NOT USE IN PRODUCTION.
+
+This implementation was created incorrectly and needs to be replaced with real MCP communication.
+See BUG-002-mcp-mock-implementation.md for details on how to fix this.
+
+The correct implementation should:
+1. Use subprocess to communicate with MCP Server via stdio protocol
+2. Send proper JSON-RPC messages
+3. Return real analysis results from the 117+ MCP tools
+
+This file should be:
+- Deleted and replaced with real implementation
+- OR renamed to client_mock.py and kept only as reference
+- Never used in production code
+"""

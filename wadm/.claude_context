@@ -14,8 +14,8 @@ IMPORTANTÍSIMO LEER PRIMERO:
 
 ## 🎯 Current Focus
 ✅ TASK-031 Phase 3: API Key Management COMPLETED! 🔐
-📋 Business Model: Session-based ($1/session) - Payments deferred
-🔄 Next: TASK-064 (Dashboard MVP) + TASK-060 (Wyckoff MCP)
+🎆 MCP Server v1.10.1 ALREADY INTEGRATED! (117+ tools)
+🔄 Next: TASK-080 (HTTP Wrapper) + TASK-064 (Dashboard MVP)
 
 ## 🆕 Major Update: WAIckoff Business Model
 - **Domain**: waickoff.com (Wyckoff + AI)
@@ -75,6 +75,9 @@ IMPORTANTÍSIMO LEER PRIMERO:
 - ✅ Docker Stack: Setup en 30 segundos
 - ✅ API Key System: Complete auth with sessions
 - ✅ Rate Limiting: Per-key configurable limits
+- 🎆 MCP Server: 117+ analysis tools ready!
+- 🎆 Wyckoff: Complete implementation in MCP
+- 🎆 3-Month Context: Historical analysis built-in
 
 ## Tech Stack Decision
 - **Frontend**: app.waickoff.com (Vite + React + Mantine)
@@ -113,14 +116,18 @@ http://localhost:3000                   # Frontend (próximamente)
 - **Payment**: Deferred - Focus on MVP features
 
 ## Next Immediate Actions
-1. Start TASK-064 (Dashboard MVP) - UI for session management
-2. Begin TASK-060 (Wyckoff MCP Integration) - Core analysis features  
-3. Payment integration deferred until MVP validation
+1. TASK-080 (HTTP Wrapper) - Connect WADM ↔ MCP Server (1 día)
+2. TASK-064 (Dashboard MVP) - UI for sessions + MCP tools (4 días)
+3. TASK-081 (Footprint Charts) - Not available in MCP (3 días)
 
-## Important Placeholders
-- Payment processing: `/api/v1/sessions/quota/add` is MOCK
-- Token calculation: Basic estimation (needs refinement)
-- Stripe/PayPal: To be integrated after MVP validation
+## Important Updates
+- **MCP Server**: v1.10.1 with 117+ tools already integrated!
+- **Wyckoff**: Complete implementation available now
+- **SMC**: Institutional-grade analysis ready
+- **Technical Indicators**: All standard + advanced ready
+- **Context System**: 3 months of historical analysis
+- **What's Missing**: HTTP wrapper, Dashboard, Footprint Charts
+- **Time Saved**: ~3 months of development work!
 
 See `claude/tasks/task-tracker.md` for complete task list.
 See `claude/docs/WAICKOFF-SESSION-MODEL.md` for business details.

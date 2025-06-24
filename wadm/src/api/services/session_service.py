@@ -100,6 +100,23 @@ class SessionService:
             last_activity=None
         )
     
+    async def track_endpoint_usage(self, session_id: str, endpoint: str, tokens_used: int) -> bool:
+        """Track endpoint usage for a session (simplified version of track_usage)."""
+        if not self.mongo:
+            return False
+            
+        usage = SessionUsage(
+            session_id=session_id,
+            endpoint=endpoint,
+            tokens_used=tokens_used,
+            request_data={},
+            response_size=0,
+            duration_ms=0,
+            timestamp=datetime.now(timezone.utc)
+        )
+        
+        return await self.track_usage(session_id, usage)
+    
     async def get_active_session(self, api_key_id: str) -> Optional[SessionResponse]:
         """Get the current active session for an API key."""
         if not self.mongo:
