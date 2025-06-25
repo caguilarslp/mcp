@@ -60,7 +60,7 @@ node_modules/
 
 # Keep empty directories
 !logs/.gitkeep
-!claude/logs/.gitkeep
-!claude/tasks/.gitkeep
-!claude/adr/.gitkeep
-!claude/bugs/.gitkeep
+!trdocs/logs/.gitkeep
+!trdocs/tasks/.gitkeep
+!trdocs/adr/.gitkeep
+!trdocs/bugs/.gitkeep

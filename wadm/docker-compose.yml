@@ -8,11 +8,9 @@ services:
       - "3000:80"
     environment:
       - REACT_APP_API_URL=http://localhost:8000
-      - REACT_APP_MCP_URL=http://localhost:8001
       - REACT_APP_WS_URL=ws://localhost:8000
     depends_on:
       - backend
-      - mcp-server
     networks:
       - wadm-network
 
@@ -25,13 +23,11 @@ services:
       - "8000:8000"
     environment:
       - DATABASE_URL=mongodb://wadm:wadm_secure_2024@mongo:27017/wadm?authSource=admin
-      - MCP_SERVER_URL=http://mcp-server:8001
       - REDIS_URL=redis://:wadm_redis_2024@redis:6379
       - CORS_ORIGINS=http://localhost:3000
     depends_on:
       - mongo
       - redis
-      - mcp-server
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
@@ -57,26 +53,9 @@ services:
       - wadm-network
     command: ["python", "main.py"]
 
-  # MCP Server with 133 Tools
-  mcp-server:
-    build:
-      context: .
-      dockerfile: Dockerfile.mcp
-    ports:
-      - "8001:8001"
-    environment:
-      - NODE_ENV=production
-      - LOG_LEVEL=info
-      - CACHE_TTL=300
-      - MAX_CONCURRENT_REQUESTS=10
-      - MONGODB_URI=mongodb://wadm:wadm_secure_2024@mongo:27017/wadm?authSource=admin
-      - REDIS_URL=redis://:wadm_redis_2024@redis:6379
-    volumes:
-      - ./mcp_server/storage:/app/storage
-      - ./mcp_server/logs:/app/logs
-      - ./mcp_server/reports:/app/reports
-    networks:
-      - wadm-network
+  # MCP Server ELIMINADO - Funcionalidad migrada al Backend API
+  # Razón: Problema persistente MongoDB + Arquitectura duplicada
+  # Todas las 133 herramientas se migrarán gradualmente al Backend API
 
   # MongoDB Database
   mongo:
@@ -130,10 +109,11 @@ networks:
 
 # Metadata
 x-environment-info:
-  description: "WADM Development Environment with MCP Server"
-  version: "0.1.0"
-  services: "MongoDB 7, Redis 7, MCP Server, WADM API, Nginx (optional)"
+  description: "WADM Unified Development Environment"
+  version: "0.2.0"
+  services: "MongoDB 7, Redis 7, WADM API (133 tools integrated), Frontend"
+  architecture: "Simplified 2-service architecture (eliminated MCP Server)"
   quick_start: "docker-compose up -d"
   api_url: "http://localhost:8000"
   docs_url: "http://localhost:8000/api/docs"
-  mcp_health: "http://localhost:8000/api/v1/mcp/health"
+  frontend_url: "http://localhost:3000"

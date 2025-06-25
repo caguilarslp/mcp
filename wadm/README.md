@@ -75,7 +75,7 @@ Exchange WebSockets → Trade Collection → Indicator Calculation → SMC Analy
 MongoDB Storage ← Redis Cache ← API Layer ← WebSocket Streaming
 ```
 
-### 📊 Current Status (v0.2.1)
+### 📊 Current Status (v0.2.0)
 
 #### ✅ Completed Features
 - **Data Collection**: 4 exchanges, 19 symbols, real-time trades
@@ -95,13 +95,20 @@ MongoDB Storage ← Redis Cache ← API Layer ← WebSocket Streaming
 
 ### 🐳 Docker Architecture
 
-#### Services
+#### Services (Unified Architecture v0.2.0)
 ```yaml
-wadm-api:     # Python 3.12 + FastAPI + WADM Core
-mongodb:      # MongoDB 7 with authentication
+backend:      # Python 3.12 + FastAPI + 133 Tools (migrated from MCP)
+frontend:     # React + TradingView Charts Dashboard
+collectors:   # WebSocket data collection from 4 exchanges
+mongodb:      # MongoDB 7 with authentication (unified storage)
 redis:        # Redis 7 with persistence  
-nginx:        # Reverse proxy (production ready)
 ```
+
+**Architecture Change (2025-06-25):**
+- ❌ **MCP Server eliminated** - Persistent MongoDB connection issues
+- ✅ **133 tools migrating** to Backend API (TypeScript → Python)
+- ✅ **Simplified deployment** - 2 services instead of 3
+- ✅ **Unified storage** - Single MongoDB connection string
 
 #### Development Commands
 ```bash
@@ -166,13 +173,13 @@ GET  /api/v1/smc/signals/{symbol}                # Trading signals
 #### Quick References
 - **[Docker Setup Guide](docs/DOCKER_SETUP.md)**: Complete containerization guide
 - **[API Documentation](http://localhost:8000/api/docs)**: Interactive Swagger UI
-- **[Task Tracker](claude/tasks/task-tracker.md)**: Development roadmap
-- **[Master Log](claude/master-log.md)**: Development history
+- **[Task Tracker](trdocs/tasks/task-tracker.md)**: Development roadmap
+- **[Master Log](trdocs/master-log.md)**: Development history
 
 #### Development Guides
 - **[Configuration](src/config.py)**: Environment variables and settings
-- **[Architecture Decisions](claude/adr/)**: Technical decision records
-- **[Bug Tracking](claude/bugs/)**: Known issues and resolutions
+- **[Architecture Decisions](trdocs/adr/)**: Technical decision records
+- **[Bug Tracking](trdocs/bugs/)**: Known issues and resolutions
 
 ### 🎯 Roadmap
 
@@ -256,7 +263,7 @@ curl http://localhost:8000/api/v1/system/cache/stats
 #### Documentation
 - **Setup Issues**: See [Docker Setup Guide](docs/DOCKER_SETUP.md)
 - **API Reference**: http://localhost:8000/api/docs
-- **Architecture**: Check [ADR documents](claude/adr/)
+- **Architecture**: Check [ADR documents](trdocs/adr/)
 
 #### Troubleshooting
 - **Logs**: `scripts\wadm-dev.bat logs`

@@ -1,5 +1,9 @@
 IMPORTANTÍSIMO LEER PRIMERO:
 ###########################################
+ NUEVO SISTEMA TRAZABILIDAD (2025-06-25):
+ - trace_ctx.md (antes .claude_context)
+ - trdocs/ (antes claude/)
+ 
  DEL USUARIO, LEER Y NO ELIMINAR:
  - NO SOBREINGENIARIA, NUNCA!!
  - SIEMPRE PRODUCTION-READY. NO MOCKS, NO PLACEHOLDERS
@@ -13,7 +17,8 @@ IMPORTANTÍSIMO LEER PRIMERO:
  - NO CREES UN ARCHIVO TEST, Y OTRO SI FALLA, Y OTRO, ..., USA EL MISMO Y MODIFICALO
 ###########################################
 
-# WADM - wAIckoff Data Manager v0.1.0
+# WADM - wAIckoff Data Manager v0.2.0
+## 📋 Sistema de Trazabilidad: trace_ctx.md + trdocs/
 
 ## ✅ ESTADO ACTUALIZADO (2025-06-25)
 
@@ -24,19 +29,21 @@ IMPORTANTÍSIMO LEER PRIMERO:
 ✅ **Resource management** (máximo 10 concurrent)
 ✅ **Funcionando en producción** (confirmado en logs)
 
-### ARQUITECTURA ACTUAL (3 componentes):
-1. **Backend API** (`:8000`) - FastAPI + Collectors + timeframes dinámicos
-2. **MCP Server** (`:8001`) - 133 herramientas de análisis
-3. **Frontend** (`:3000`) - React Dashboard (en desarrollo)
+### ARQUITECTURA NUEVA (2 componentes):
+1. **Backend API** (`:8000`) - FastAPI + Collectors + 133 herramientas migradas
+2. **Frontend** (`:3000`) - React Dashboard (en desarrollo)
 
-### PRÓXIMO: FASE 1 - **UNIFICAR MONGODB**
-- Backend calcula indicadores con timeframes completos
-- MCP Server tiene 133 herramientas más avanzadas
-- Dos sistemas MongoDB separados = datos fragmentados
-- Frontend debe consultar 2 endpoints diferentes
+### ARQUITECTURA ELIMINADA:
+❌ **MCP Server** (`:8001`) - Problema persistente MongoDB, arquitectura duplicada
 
-### SOLUCIÓN EN PROGRESO: **UNIFICACIÓN**
-Ver `/claude/architecture/` para detalles completos
+### ✅ FASE 1 COMPLETADA: **DECISIÓN ARQUITECTÓNICA**
+- ❌ **MCP Server eliminado** - problema persistente de conexión MongoDB
+- ✅ **Migración completa al Backend API** - arquitectura unificada
+- ✅ **133 herramientas MCP → Python** - un solo servicio
+- ✅ **Un solo MongoDB, un solo endpoint** - simplicidad total
+
+### 🚀 PRÓXIMO: FASE 2 - **MIGRACIÓN HERRAMIENTAS**
+Ver `/trdocs/architecture/MCP_ELIMINATION_STRATEGY.md` para detalles
 
 ## 📊 INDICADORES
 
@@ -69,10 +76,10 @@ Ver `/claude/architecture/` para detalles completos
 2. 🔄 Unificar MongoDB (mismo connection string) - **PRÓXIMO**
 
 ### Esta semana:
-1. Unificar MongoDB (Fase 1) - **MAÑANA**
-2. Implementar indicadores faltantes (Fase 2)
-3. Migrar MCP engine al backend (Fase 3-4)
-4. Eliminar arquitectura duplicada (Fase 5)
+1. ✅ **Eliminar MCP Server** (Fase 1) - **COMPLETADO**
+2. 🔄 **Migrar indicadores críticos** (Fase 2) - **EN CURSO**
+3. 🔄 **Migrar herramientas avanzadas** (Fase 3) - Bollinger, RSI, MACD, SMC
+4. ✅ **Arquitectura unificada** (Fase 4) - **OBJETIVO ALCANZADO**
 
 ### Resultado final:
 - Un solo backend con todo
@@ -109,7 +116,7 @@ wadm/
 │   └── manager.py    # Coordinador principal
 ├── mcp_server/       # 133 herramientas (a migrar)
 ├── app/              # Frontend React
-└── claude/
+└── trdocs/
     ├── architecture/ # NUEVA ARQUITECTURA
     └── daily/        # Logs diarios
 ```
@@ -137,4 +144,5 @@ wadm/
 ---
 
 **✅ FASE 0 COMPLETADA**: Sistema timeframes dinámico funcionando en producción
-**🔄 SIGUIENTE PASO**: Fase 1 - Unificar MongoDB entre Backend y MCP Server
+**✅ FASE 1 COMPLETADA**: MCP Server eliminado - Arquitectura unificada
+**🔄 SIGUIENTE PASO**: Fase 2 - Migrar indicadores críticos (Bollinger, RSI, MACD)

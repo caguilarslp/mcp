@@ -2,6 +2,42 @@
 
 ## Recent Progress
 
+### 2025-06-25 | ARQUITECTURA UNIFICADA: MCP Server Eliminado ✅
+**Status:** DECISIÓN ARQUITECTÓNICA CRÍTICA COMPLETADA  
+**Achievement:** Eliminación completa MCP Server y simplificación arquitectura  
+**Reason:** Problema persistente conexión MongoDB + Arquitectura duplicada
+
+**Cambios Realizados:**
+- ❌ **MCP Server eliminado** - 133 herramientas serán migradas al Backend API
+- ✅ **docker-compose.yml actualizado** - Arquitectura de 2 servicios (era 3)
+- ✅ **Documentación completa** - Strategy y sesión documentadas
+- ✅ **Plan migración definido** - 4 fases para migrar 133 herramientas
+
+**Nueva Arquitectura:**
+```
+ANTES (3 servicios):
+Frontend → Backend API → MongoDB
+        → MCP Server → Files/Mock
+
+DESPUÉS (2 servicios):
+Frontend → Backend API (+ 133 tools) → MongoDB
+```
+
+**Business Impact:**
+- Eliminación latencia API → MCP (~50ms)
+- Arquitectura más simple y confiable
+- Un solo connection string MongoDB
+- Deployment simplificado
+- Maintenance reducido (solo Python vs Python+TypeScript)
+
+**Files Created/Modified:**
+- `trdocs/architecture/MCP_ELIMINATION_STRATEGY.md` (estrategia completa)
+- `trdocs/sessions/SESSION_2025_06_25_MCP_ELIMINATION.md` (documentación sesión)
+- `docker-compose.yml` (MCP server eliminado)
+- `trace_ctx.md` (nueva estrategia)
+
+**Next:** FASE 2 - Migrar indicadores críticos (Bollinger, RSI, MACD, VWAP)
+
 ### 2025-06-24 | TASK-064 FASE II: Autenticación Completa ✅
 **Status:** COMPLETADO  
 **Achievement:** Sistema de autenticación profesional user-friendly  

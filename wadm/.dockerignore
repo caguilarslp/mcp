@@ -40,4 +40,4 @@ htmlcov/
 docs/_build/
 
 # Claude files (keep for reference, not needed in Docker)
-claude/
+trdocs/
