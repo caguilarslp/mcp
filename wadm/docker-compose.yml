@@ -38,6 +38,32 @@ services:
       retries: 3
       start_period: 20s
 
+  # MCP Server - Market Analysis Engine with HTTP Wrapper
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mcp
+    container_name: wadm-mcp-server
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://mongodb:27017/wadm
+      # Add debug logging
+      LOG_LEVEL: debug
+    networks:
+      - wadm-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+    # Optional: Override command for debugging
+    # command: ["sh", "-c", "./diagnose.sh && python http_wrapper.py"]
+
   # WADM Application - Main API Server
   wadm-api:
     build:
@@ -49,6 +75,9 @@ services:
       # Database Configuration (No Auth for Development)
       MONGODB_URL: mongodb://mongodb:27017/wadm
       REDIS_URL: redis://redis:6379/0
+      
+      # MCP Server Configuration
+      MCP_SERVER_URL: http://mcp-server:3000
       
       # API Configuration
       API_HOST: 0.0.0.0
@@ -68,6 +97,7 @@ services:
       
       # Security
       API_MASTER_KEY: wadm_dev_master_key_2025
+      WADM_MASTER_API_KEY: wadm_dev_master_key_2025  # This is what the code expects
       ALLOWED_ORIGINS: "http://localhost:3000,http://localhost:8080"
     ports:
       - "8000:8000"
@@ -80,6 +110,8 @@ services:
       mongodb:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      mcp-server:
         condition: service_healthy
     networks:
       - wadm-network
@@ -130,9 +162,10 @@ volumes:
 
 # Metadata
 x-environment-info:
-  description: "WADM Development Environment"
+  description: "WADM Development Environment with MCP Server"
   version: "0.1.0"
-  services: "MongoDB 7, Redis 7, WADM API, Nginx (optional)"
+  services: "MongoDB 7, Redis 7, MCP Server, WADM API, Nginx (optional)"
   quick_start: "docker-compose up -d"
   api_url: "http://localhost:8000"
   docs_url: "http://localhost:8000/api/docs"
+  mcp_health: "http://localhost:8000/api/v1/mcp/health"

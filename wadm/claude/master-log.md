@@ -491,34 +491,43 @@ echo '{"jsonrpc":"2.0","method":"tools/list","id":1}' | node build/index.js
 ### Lección Aprendida
 NUNCA usar mocks en producción. Siempre implementar funcionalidad real desde el inicio, aunque tome más tiempo. Los mocks son deuda técnica que se paga con intereses.
 
-### API Import Errors Fix
-**Date**: 2025-06-24
-**Issue**: Múltiples errores de importación al iniciar la API después de agregar MCP router
+### TASK-080 MCP Integration - Partial Implementation with Architecture Fix
+**Status**: PARCIALMENTE COMPLETADO
+**Issue**: BUG-002 - Implementación con mocks violaba principios del proyecto
 
-#### Errores Encontrados y Solucionados
-1. **`get_api_key` missing**
-   - Error: `ImportError: cannot import name 'get_api_key' from 'src.api.dependencies'`
-   - Fix: Creada función `get_api_key()` en dependencies.py
-   
-2. **Wrong session type**
-   - Error: `SessionUsage` usado donde debería ser `SessionResponse`
-   - Fix: Cambiado tipo de parámetro en todos los endpoints MCP
-   
-3. **Missing method**
-   - Error: `track_endpoint_usage()` no existía en SessionService
-   - Fix: Añadido método wrapper que llama a `track_usage()`
-   
-4. **Circular imports**
-   - Error: Import circular con `get_mongo_manager`
-   - Fix: Creada instancia local en mcp.py para evitar circular import
-   
-5. **Wrong model name**
-   - Error: `ImportError: cannot import name 'APIKeyInDB' from 'src.api.models.auth'`
-   - Fix: Cambiado a `APIKeyInfo` que es el modelo correcto
-   
-#### Result
-✅ API ahora arranca sin errores de importación
-⚠️ Pero sigue usando MOCKS (ver BUG-002)
+#### Trabajo Realizado
+1. **Arquitectura Correcta Diseñada**
+   - Contenedor separado para MCP Server
+   - HTTP Wrapper para exponer MCP via REST
+   - Cliente httpx en la API
+   - Comunicación real sin mocks
+
+2. **Archivos Creados**
+   - `Dockerfile.mcp` - Multi-stage build para MCP
+   - `mcp_server/http_wrapper.py` - FastAPI wrapper
+   - `src/api/services/mcp/client.py` - Cliente HTTP real
+   - `.dockerignore` - Excluir artifacts
+   - Documentación completa en `claude/docs/`
+
+3. **Problema Pendiente**
+   - Conflicto TypeScript 5.8.3 vs typedoc 0.25.0
+   - Solución: `npm install --legacy-peer-deps`
+   - Build del contenedor MCP pendiente
+
+#### Arquitectura Final
+```
+wadm-api (FastAPI) --HTTP--> mcp-server (Node.js + HTTP Wrapper)
+                                  |
+                                  v
+                            MCP Process (stdio)
+                            119+ analysis tools
+```
+
+#### Next Steps
+- Resolver conflicto de build
+- Probar comunicación real
+- Verificar las 119+ herramientas
+- Performance testing
 
 ## 2025-06-24 - Project Cleanup
 

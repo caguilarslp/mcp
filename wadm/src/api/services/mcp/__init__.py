@@ -1,6 +1,15 @@
-"""MCP Server Integration Service."""
+"""MCP Service Package.
 
-from .client_http import MCPHTTPClient as MCPClient  # Use HTTP client by default
-from .models import MCPToolCall, MCPResponse, MCPError
+This package provides integration with the MCP (Model Context Protocol) Server.
+"""
 
-__all__ = ['MCPClient', 'MCPToolCall', 'MCPResponse', 'MCPError']
+from .client import MCPClient
+from .models import MCPResponse, MCPError, MCPHealthStatus, MCPToolInfo
+
+__all__ = [
+    "MCPClient",
+    "MCPResponse", 
+    "MCPError",
+    "MCPHealthStatus",
+    "MCPToolInfo"
+]

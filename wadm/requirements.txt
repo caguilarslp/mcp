@@ -12,9 +12,13 @@ pydantic
 psutil
 redis
 
+# MCP Client
+fastmcp>=2.0.0
+
 # HTTP client for testing
 aiohttp
 requests
+httpx
 
 # Logging
 python-json-logger
@@ -22,4 +26,3 @@ python-json-logger
 # Development tools
 pytest
 pytest-asyncio
-httpx

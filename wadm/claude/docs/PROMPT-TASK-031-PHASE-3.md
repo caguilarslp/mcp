@@ -20,10 +20,10 @@ scripts\wadm-dev.bat start
 python test_task_031_phase2.py
 
 # Test API endpoints
-curl -H "X-API-Key: wadm-master-key-2024" `
+curl -H "X-API-Key: wadm_dev_master_key_2025" `
   "http://localhost:8000/api/v1/indicators/volume-profile/BTCUSDT?mode=realtime"
   
-curl -H "X-API-Key: wadm-master-key-2024" `
+curl -H "X-API-Key: wadm_dev_master_key_2025" `
   "http://localhost:8000/api/v1/indicators/order-flow/BTCUSDT?mode=analysis"
 ```
 

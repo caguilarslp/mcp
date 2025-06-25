@@ -5,7 +5,8 @@ from typing import List, Optional
 import logging
 
 from ..dependencies import require_active_session, get_api_key
-from ..services.mcp import MCPClient, MCPToolCall, MCPResponse, MCPError
+from ..services.mcp import MCPClient, MCPResponse, MCPError
+from ..models.mcp import MCPToolCall
 from ..services.session_service import SessionService
 from ..models.session import SessionUsage, SessionResponse
 from ..models.auth import APIKeyInfo

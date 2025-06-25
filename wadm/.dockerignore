@@ -1,123 +1,43 @@
-# Docker ignore patterns for WADM
-# Reduce build context size and improve build speed
+# Node modules and build artifacts
+mcp_server/node_modules/
+mcp_server/build/
+mcp_server/.npm/
+mcp_server/npm-debug.log*
 
-# Git and version control
-.git/
-.gitignore
-.gitattributes
+# TypeScript cache
+mcp_server/*.tsbuildinfo
 
-# Python cache and bytecode
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual environments
-venv/
 env/
-ENV/
-env.bak/
-venv.bak/
-.venv/
+venv/
+.env
 
-# IDE and editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# Logs (will be created in container)
+# Logs
 logs/
 *.log
 
-# Temporary files
-tmp/
-temp/
-.tmp/
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Documentation and markdown (not needed in container)
-*.md
-docs/
-claude/docs/
-README*
-
-# Test files
-test_*.py
-*_test.py
-tests/
-pytest.ini
-.pytest_cache/
-
-# Coverage reports
-htmlcov/
+# Test coverage
+coverage/
 .coverage
-.coverage.*
-coverage.xml
-*.cover
+htmlcov/
 
-# Environment files (handled separately)
-.env
-.env.*
+# Documentation
+docs/_build/
 
-# Database files (will be in volumes)
-*.db
-*.sqlite3
-
-# Docker files (don't copy themselves)
-Dockerfile*
-docker-compose*.yml
-.dockerignore
-
-# Claude development files
+# Claude files (keep for reference, not needed in Docker)
 claude/
-.claude_context
-
-# Backup files
-*.bak
-*.backup
-*.old
-
-# Windows specific
-desktop.ini
-
-# Node.js (if any)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Jupyter notebooks
-.ipynb_checkpoints/
-*.ipynb
-
-# Local configuration
-config.local.*
-settings.local.*

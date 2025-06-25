@@ -86,7 +86,7 @@ async def get_api_key(
     Returns the API key object if valid.
     """
     # Use the existing verify_api_key function
-    verification = await verify_api_key(x_api_key=x_api_key)
+    verification = await verify_api_key(x_api_key)
     
     # For master key, return a mock APIKeyInfo object
     if verification.key_id == "master":

@@ -10,7 +10,7 @@ async def test_mcp_integration():
     """Test the MCP integration endpoints."""
     
     base_url = "http://localhost:8000"
-    api_key = "wadm-master-key-2024"  # Master key for testing
+    api_key = "wadm_dev_master_key_2025"  # Master key for testing
     
     headers = {
         "X-API-Key": api_key,

@@ -1,0 +1,78 @@
+wadm-mcp-server  | INFO:     Started server process [1]
+wadm-mcp-server  | INFO:     Waiting for application startup.
+wadm-mcp-server  | INFO:__main__:Starting MCP HTTP Wrapper...
+wadm-mcp-server  | INFO:__main__:Starting MCP Server process...
+wadm-mcp-server  | INFO:__main__:MCP Server started with PID: 8
+wadm-mcp-server  | INFO:__main__:MCP HTTP Wrapper started successfully
+wadm-mcp-server  | INFO:     Application startup complete.
+wadm-mcp-server  | INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.033Z] [INFO] [ConfigurationManager] FileLogger initialized successfully 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:59134 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.043Z] [INFO] [ConfigurationManager] FileLogger config: dir=/app/logs, size=10MB, files=5, rotation=true 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:59138 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.043Z] [INFO] [ConfigurationManager] Configuration Manager initialized {
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:37386 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP:   configDir: '/home/mcp/.waickoff',
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting value: line 1 column 3 (char 2)
+wadm-mcp-server  | INFO:     127.0.0.1:37398 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP:   configFile: '/home/mcp/.waickoff/user.config.json'
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting value: line 1 column 3 (char 2)
+wadm-mcp-server  | INFO:     127.0.0.1:59648 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: }
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting value: line 1 column 1 (char 0)
+wadm-mcp-server  | INFO:     127.0.0.1:59662 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.045Z] [INFO] [EnvironmentConfig] FileLogger initialized successfully 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:53112 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.045Z] [INFO] [EnvironmentConfig] FileLogger config: dir=/app/logs, size=10MB, files=5, rotation=true 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:54554 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.046Z] [INFO] [EnvironmentConfig] Loaded 14 environment variables from .env file 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:54568 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.046Z] [INFO] [EnvironmentConfig] Environment Configuration initialized { envFile: '/app/.env', envFileExists: true }
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:41942 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.046Z] [INFO] [CacheManager] FileLogger initialized successfully 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:41956 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.046Z] [INFO] [CacheManager] FileLogger config: dir=/app/logs, size=10MB, files=5, rotation=true 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:55066 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.047Z] [INFO] [CacheManager] Cache Manager initialized with config: { maxEntries: 1000, defaultTTL: 300000, cleanupInterval: 60000 }
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:55082 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.048Z] [INFO] [StorageConfigService] Storage base path: /app/storage 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:39000 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: [2025-06-25T00:07:11.174Z] [INFO] [StorageConfigService] Storage base path: /app/storage 
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting ',' delimiter: line 1 column 6 (char 5)
+wadm-mcp-server  | INFO:     127.0.0.1:39014 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: ✅ Tool Registry initialized: 133 tools across 21 categories
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting value: line 1 column 1 (char 0)
+wadm-mcp-server  | INFO:     127.0.0.1:53408 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | ERROR:__main__:Invalid JSON from MCP: 🆕 TASK-040.4: Context-Aware Analysis tools added (2 tools)
+wadm-mcp-server  | 
+wadm-mcp-server  | ERROR:__main__:Health check failed: Invalid JSON response from MCP Server: Expecting value: line 1 column 1 (char 0)
+wadm-mcp-server  | INFO:     127.0.0.1:53418 - "GET /health HTTP/1.1" 503 Service Unavailable
+wadm-mcp-server  | INFO:     127.0.0.1:51740 - "GET /health HTTP/1.1" 200 OK
+wadm-mcp-server  | INFO:     127.0.0.1:34782 - "GET /health HTTP/1.1" 200 OK

@@ -143,11 +143,11 @@ src/api/services/
 ### PowerShell Testing
 ```powershell
 # Volume Profile - Realtime
-curl -H "X-API-Key: wadm-master-key-2024" `
+curl -H "X-API-Key: wadm_dev_master_key_2025" `
   "http://localhost:8000/api/v1/indicators/volume-profile/BTCUSDT?mode=realtime"
 
 # Order Flow - Analysis
-curl -H "X-API-Key: wadm-master-key-2024" `
+curl -H "X-API-Key: wadm_dev_master_key_2025" `
   "http://localhost:8000/api/v1/indicators/order-flow/BTCUSDT?mode=analysis"
 
 # Test services

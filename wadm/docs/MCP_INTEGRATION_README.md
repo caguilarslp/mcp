@@ -32,7 +32,7 @@ All MCP endpoints require an active session:
 ### 1. Get Market Data
 ```bash
 curl -X POST http://localhost:8000/api/v1/mcp/call \
-  -H "X-API-Key: wadm-master-key-2024" \
+  -H "X-API-Key: wadm_dev_master_key_2025" \
   -H "Content-Type: application/json" \
   -d '{
     "tool": "get_ticker",
@@ -43,13 +43,13 @@ curl -X POST http://localhost:8000/api/v1/mcp/call \
 ### 2. Wyckoff Analysis
 ```bash
 curl -X POST http://localhost:8000/api/v1/mcp/analyze/wyckoff/BTCUSDT?timeframe=60 \
-  -H "X-API-Key: wadm-master-key-2024"
+  -H "X-API-Key: wadm_dev_master_key_2025"
 ```
 
 ### 3. Complete Analysis with Grid Suggestions
 ```bash
 curl -X POST http://localhost:8000/api/v1/mcp/call \
-  -H "X-API-Key: wadm-master-key-2024" \
+  -H "X-API-Key: wadm_dev_master_key_2025" \
   -H "Content-Type: application/json" \
   -d '{
     "tool": "get_complete_analysis",

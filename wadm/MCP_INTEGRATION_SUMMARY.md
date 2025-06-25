@@ -85,7 +85,7 @@ Once BUG-002 is fixed:
 ```bash
 # Test real MCP integration
 curl -X POST http://localhost:8000/api/v1/mcp/call \
-  -H "X-API-Key: wadm-master-key-2024" \
+  -H "X-API-Key: wadm_dev_master_key_2025" \
   -H "Content-Type: application/json" \
   -d '{
     "tool": "analyze_wyckoff_phase",

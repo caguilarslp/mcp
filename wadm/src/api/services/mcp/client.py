@@ -1,14 +1,14 @@
-"""MCP Server Client using subprocess for direct communication."""
+"""MCP Client using FastMCP for communication with MCP Server.
 
-import asyncio
-import json
-import subprocess
+This client communicates with the MCP Server running in a separate Docker container
+via HTTP wrapper. NO MOCKS, NO PLACEHOLDERS - REAL COMMUNICATION.
+"""
+
 import os
-import time
-from typing import Dict, Any, Optional, List
-from pathlib import Path
-from datetime import datetime
+import httpx
 import logging
+from typing import Dict, Any, Optional, List
+from datetime import datetime
 
 from .models import MCPResponse, MCPError, MCPHealthStatus, MCPToolInfo
 
@@ -17,318 +17,211 @@ logger = logging.getLogger(__name__)
 
 
 class MCPClient:
-    """Client for communicating with MCP Server via subprocess."""
+    """Client for communicating with MCP Server via HTTP wrapper.
     
-    def __init__(self, mcp_server_path: Optional[str] = None):
+    The MCP Server runs in a separate Docker container with an HTTP wrapper
+    that bridges HTTP requests to the MCP stdio protocol.
+    """
+    
+    def __init__(self, base_url: Optional[str] = None):
         """Initialize MCP Client.
         
         Args:
-            mcp_server_path: Path to MCP server directory. If None, uses relative path.
+            base_url: Base URL of MCP Server. Defaults to MCP_SERVER_URL env var.
         """
-        if mcp_server_path:
-            self.mcp_path = Path(mcp_server_path)
-        else:
-            # Assume MCP server is in wadm/mcp_server
-            self.mcp_path = Path(__file__).parent.parent.parent.parent.parent / "mcp_server"
-            
-        self.build_path = self.mcp_path / "build"
-        self.index_js = self.build_path / "index.js"
+        self.base_url = base_url or os.getenv("MCP_SERVER_URL", "http://mcp-server:3000")
+        self.timeout = httpx.Timeout(60.0, connect=10.0)  # 60s timeout for complex analyses
+        self._client = httpx.AsyncClient(base_url=self.base_url, timeout=self.timeout)
         
-        # Verify paths exist
-        if not self.mcp_path.exists():
-            raise MCPError(f"MCP server path not found: {self.mcp_path}")
-            
-        # Cache for tool information
-        self._tools_cache: Optional[List[MCPToolInfo]] = None
-        self._cache_time: Optional[datetime] = None
-        self._cache_ttl = 3600  # 1 hour cache
-        
+        logger.info(f"MCP Client initialized with server at: {self.base_url}")
+    
     async def call_tool(self, tool_name: str, params: Dict[str, Any], session_id: Optional[str] = None) -> MCPResponse:
-        """Call an MCP tool and return the response.
+        """Call an MCP tool via HTTP wrapper.
         
-        Args:
-            tool_name: Name of the tool to execute
-            params: Parameters for the tool
-            session_id: Optional session ID for tracking
-            
-        Returns:
-            MCPResponse with tool execution results
+        This communicates with the real MCP Server that has 119+ analysis tools.
         """
-        start_time = time.time()
+        start_time = datetime.utcnow()
         
         try:
-            # Build the MCP server if needed
-            await self._ensure_built()
+            # Prepare request for MCP server
+            if tool_name == "tools/list":
+                # Special case for listing tools
+                request_data = {
+                    "method": "tools/list",
+                    "params": None
+                }
+            else:
+                # Tool call with proper MCP structure
+                request_data = {
+                    "method": "tools/call",
+                    "params": {
+                        "name": tool_name,
+                        "arguments": params
+                    }
+                }
             
-            # Prepare the tool call format
-            tool_call = {
-                "tool": tool_name,
-                "params": params
-            }
+            # Call MCP server via HTTP wrapper
+            response = await self._client.post(
+                "/mcp/call",
+                json=request_data
+            )
+            response.raise_for_status()
             
-            # Execute via subprocess with stdin/stdout communication
-            result = await self._execute_mcp_command(tool_call)
+            result = response.json()
+            
+            if not result.get("success"):
+                raise MCPError(
+                    code=-32603,
+                    message=result.get("error", "Unknown error from MCP server")
+                )
+            
+            # Extract actual result
+            mcp_result = result.get("result", {})
             
             # Calculate execution time
-            execution_time_ms = int((time.time() - start_time) * 1000)
+            execution_time_ms = int((datetime.utcnow() - start_time).total_seconds() * 1000)
             
-            # Estimate tokens (simple approximation)
-            tokens_used = self._estimate_tokens(result)
+            # Estimate token usage (rough estimate: 1 token per 4 characters)
+            import json
+            result_str = json.dumps(mcp_result)
+            tokens_used = len(result_str) // 4
             
             return MCPResponse(
                 success=True,
-                data=result,
+                data=mcp_result,
                 session_id=session_id,
                 tokens_used=tokens_used,
                 execution_time_ms=execution_time_ms,
                 tool=tool_name
             )
             
-        except Exception as e:
-            logger.error(f"MCP tool call failed: {tool_name}", exc_info=True)
-            execution_time_ms = int((time.time() - start_time) * 1000)
-            
+        except httpx.HTTPStatusError as e:
+            logger.error(f"HTTP error calling MCP tool {tool_name}: {e}")
             return MCPResponse(
                 success=False,
-                error=str(e),
+                error=MCPError(
+                    code=e.response.status_code,
+                    message=f"HTTP {e.response.status_code}: {e.response.text}"
+                ),
                 session_id=session_id,
-                execution_time_ms=execution_time_ms,
+                tokens_used=0,
+                execution_time_ms=int((datetime.utcnow() - start_time).total_seconds() * 1000),
+                tool=tool_name
+            )
+            
+        except Exception as e:
+            logger.error(f"Error calling MCP tool {tool_name}: {e}")
+            return MCPResponse(
+                success=False,
+                error=MCPError(
+                    code=-32603,
+                    message=str(e)
+                ),
+                session_id=session_id,
+                tokens_used=0,
+                execution_time_ms=int((datetime.utcnow() - start_time).total_seconds() * 1000),
                 tool=tool_name
             )
     
-    async def _execute_mcp_command(self, tool_call: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute MCP command via subprocess with proper JSON communication."""
-        
-        # Create a temporary stdin input for the MCP server
-        input_data = json.dumps({
-            "method": "tools/call",
-            "params": tool_call
-        })
-        
-        # Use node to run the built index.js
-        cmd = ["node", str(self.index_js)]
-        
-        # Run the subprocess
-        process = await asyncio.create_subprocess_exec(
-            *cmd,
-            stdin=asyncio.subprocess.PIPE,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-            cwd=str(self.mcp_path),
-            env={**os.environ, "NODE_ENV": "production"}
-        )
-        
-        # Send input and get output
-        stdout, stderr = await process.communicate(input_data.encode())
-        
-        if process.returncode != 0:
-            error_msg = stderr.decode() if stderr else "Unknown error"
-            raise MCPError(f"MCP execution failed: {error_msg}", tool=tool_call["tool"])
-        
-        # Parse the output
-        try:
-            # MCP server outputs JSON Lines format - get the last line with the result
-            output_lines = stdout.decode().strip().split('\n')
-            for line in reversed(output_lines):
-                if line.strip():
-                    try:
-                        result = json.loads(line)
-                        if "result" in result:
-                            return result["result"]
-                        elif "content" in result:
-                            return result["content"]
-                        elif isinstance(result, dict) and len(result) > 0:
-                            return result
-                    except json.JSONDecodeError:
-                        continue
-                        
-            # If no valid JSON found, return raw output
-            return {"raw_output": stdout.decode()}
-            
-        except Exception as e:
-            raise MCPError(f"Failed to parse MCP output: {e}", tool=tool_call["tool"])
-    
-    async def _ensure_built(self):
-        """Ensure MCP server is built."""
-        if not self.index_js.exists():
-            logger.info("Building MCP server...")
-            
-            # Run npm build
-            process = await asyncio.create_subprocess_exec(
-                "npm", "run", "build",
-                cwd=str(self.mcp_path),
-                stdout=asyncio.subprocess.PIPE,
-                stderr=asyncio.subprocess.PIPE
-            )
-            
-            stdout, stderr = await process.communicate()
-            
-            if process.returncode != 0:
-                error_msg = stderr.decode() if stderr else "Build failed"
-                raise MCPError(f"Failed to build MCP server: {error_msg}")
-                
-            logger.info("MCP server built successfully")
-    
     async def get_health(self) -> MCPHealthStatus:
-        """Check MCP server health status."""
+        """Check MCP server health via HTTP wrapper."""
         try:
-            # Check if build exists
-            build_exists = self.index_js.exists()
+            response = await self._client.get("/health")
+            response.raise_for_status()
             
-            # Try a simple tool call to verify it works
-            if build_exists:
-                result = await self.call_tool("get_system_health", {})
-                process_running = result.success
-            else:
-                process_running = False
-                
-            # Get tool count from cache or fresh
-            tools = await self.list_tools()
+            data = response.json()
             
             return MCPHealthStatus(
-                healthy=build_exists and process_running,
-                version="1.10.1",  # From package.json
-                tools_count=len(tools),
-                process_running=process_running
+                healthy=data.get("status") == "healthy",
+                version="1.10.1",  # From MCP server package.json
+                tools_count=data.get("tools_count", 0),
+                process_running=data.get("mcp_running", False)
             )
             
         except Exception as e:
-            logger.error("Health check failed", exc_info=True)
+            logger.error(f"Health check failed: {e}")
             return MCPHealthStatus(
                 healthy=False,
                 version="unknown",
                 tools_count=0,
-                process_running=False
+                process_running=False,
+                error=str(e)
             )
     
     async def list_tools(self) -> List[MCPToolInfo]:
-        """Get list of available MCP tools."""
-        # Check cache first
-        if self._tools_cache and self._cache_time:
-            cache_age = (datetime.utcnow() - self._cache_time).total_seconds()
-            if cache_age < self._cache_ttl:
-                return self._tools_cache
-        
-        # For now, return a hardcoded list of main tools
-        # In production, this would query the MCP server
-        tools = [
-            # Market Data
-            MCPToolInfo(
-                name="get_ticker",
-                description="Get current price and 24h statistics",
-                parameters={"symbol": "string", "category": "string"},
-                category="market_data"
-            ),
-            MCPToolInfo(
-                name="get_orderbook", 
-                description="Get order book depth",
-                parameters={"symbol": "string", "limit": "number"},
-                category="market_data"
-            ),
-            MCPToolInfo(
-                name="get_market_data",
-                description="Get comprehensive market data",
-                parameters={"symbol": "string"},
-                category="market_data"
-            ),
+        """Get list of available tools from MCP Server."""
+        try:
+            response = await self._client.get("/mcp/tools")
+            response.raise_for_status()
             
-            # Technical Analysis
-            MCPToolInfo(
-                name="perform_technical_analysis",
-                description="Comprehensive technical analysis",
-                parameters={"symbol": "string", "timeframe": "string", "periods": "number"},
-                category="technical"
-            ),
-            MCPToolInfo(
-                name="calculate_fibonacci_levels",
-                description="Calculate Fibonacci retracement and extension",
-                parameters={"symbol": "string", "timeframe": "string"},
-                category="technical"
-            ),
-            MCPToolInfo(
-                name="analyze_bollinger_bands",
-                description="Bollinger Bands analysis with squeeze detection",
-                parameters={"symbol": "string", "timeframe": "string", "period": "number"},
-                category="technical"
-            ),
+            data = response.json()
+            tools_data = data.get("tools", [])
             
-            # Wyckoff Analysis
-            MCPToolInfo(
-                name="analyze_wyckoff_phase",
-                description="Detect current Wyckoff phase",
-                parameters={"symbol": "string", "timeframe": "string", "lookback": "number"},
-                category="wyckoff"
-            ),
-            MCPToolInfo(
-                name="find_wyckoff_events",
-                description="Find springs, upthrusts, and tests",
-                parameters={"symbol": "string", "timeframe": "string"},
-                category="wyckoff"
-            ),
-            MCPToolInfo(
-                name="analyze_composite_man",
-                description="Detect institutional manipulation patterns",
-                parameters={"symbol": "string", "timeframe": "string"},
-                category="wyckoff"
-            ),
+            tools = []
+            for tool_data in tools_data:
+                # Extract parameters from inputSchema
+                input_schema = tool_data.get("inputSchema", {})
+                parameters = input_schema.get("properties", {})
+                
+                # Create simplified parameter description
+                param_desc = {}
+                for param_name, param_info in parameters.items():
+                    param_type = param_info.get("type", "unknown")
+                    param_desc[param_name] = f"{param_type}"
+                    if param_info.get("default") is not None:
+                        param_desc[param_name] += f" (default: {param_info['default']})"
+                    elif param_name in input_schema.get("required", []):
+                        param_desc[param_name] += " (required)"
+                    else:
+                        param_desc[param_name] += " (optional)"
+                
+                tools.append(MCPToolInfo(
+                    name=tool_data.get("name", ""),
+                    description=tool_data.get("description", ""),
+                    parameters=param_desc,
+                    category=self._categorize_tool(tool_data.get("name", ""))
+                ))
             
-            # Smart Money Concepts
-            MCPToolInfo(
-                name="detect_order_blocks",
-                description="Identify institutional order blocks",
-                parameters={"symbol": "string", "timeframe": "string"},
-                category="smc"
-            ),
-            MCPToolInfo(
-                name="find_fair_value_gaps",
-                description="Detect FVG imbalances",
-                parameters={"symbol": "string", "timeframe": "string"},
-                category="smc"
-            ),
-            MCPToolInfo(
-                name="analyze_smart_money_confluence",
-                description="Complete SMC analysis with confluences",
-                parameters={"symbol": "string", "timeframe": "string"},
-                category="smc"
-            ),
+            logger.info(f"Listed {len(tools)} MCP tools from server")
+            return tools
             
-            # Volume Analysis
-            MCPToolInfo(
-                name="analyze_volume",
-                description="Volume patterns with VWAP",
-                parameters={"symbol": "string", "interval": "string", "periods": "number"},
-                category="volume"
-            ),
-            MCPToolInfo(
-                name="analyze_volume_delta",
-                description="Calculate volume delta",
-                parameters={"symbol": "string", "interval": "string"},
-                category="volume"
-            ),
-            
-            # Complete Analysis
-            MCPToolInfo(
-                name="get_complete_analysis",
-                description="Complete market analysis with recommendations",
-                parameters={"symbol": "string", "investment": "number"},
-                category="complete"
-            ),
-            MCPToolInfo(
-                name="complete_analysis_with_context",
-                description="Analysis with 3-month historical context",
-                parameters={"symbol": "string", "timeframe": "string"},
-                category="complete"
-            ),
-        ]
-        
-        # Update cache
-        self._tools_cache = tools
-        self._cache_time = datetime.utcnow()
-        
-        return tools
+        except Exception as e:
+            logger.error(f"Failed to list tools: {e}")
+            return []
     
-    def _estimate_tokens(self, data: Any) -> int:
-        """Estimate token usage from response data."""
-        # Simple estimation: 1 token ≈ 4 characters
-        json_str = json.dumps(data) if isinstance(data, dict) else str(data)
-        return len(json_str) // 4
+    def _categorize_tool(self, tool_name: str) -> str:
+        """Categorize tool based on name."""
+        name_lower = tool_name.lower()
+        
+        if "wyckoff" in name_lower:
+            return "wyckoff"
+        elif "smart_money" in name_lower or "smc" in name_lower or "_order_block" in name_lower or "fair_value" in name_lower:
+            return "smc"
+        elif "volume" in name_lower:
+            return "volume"
+        elif "technical" in name_lower or "fibonacci" in name_lower or "bollinger" in name_lower or "elliott" in name_lower:
+            return "technical"
+        elif "multi_exchange" in name_lower or "aggregated" in name_lower or "exchange" in name_lower:
+            return "multi_exchange"
+        elif "support" in name_lower or "resistance" in name_lower:
+            return "levels"
+        elif "grid" in name_lower:
+            return "trading"
+        elif "volatility" in name_lower:
+            return "volatility"
+        elif "context" in name_lower or "master_context" in name_lower:
+            return "context"
+        elif "historical" in name_lower:
+            return "historical"
+        elif "trap" in name_lower:
+            return "traps"
+        elif "liquidation" in name_lower or "cascade" in name_lower:
+            return "risk"
+        elif "get_" in name_lower or "market_data" in name_lower:
+            return "market_data"
+        else:
+            return "other"
+    
+    async def close(self):
+        """Close HTTP client."""
+        await self._client.aclose()

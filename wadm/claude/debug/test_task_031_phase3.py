@@ -11,7 +11,7 @@ from datetime import datetime
 BASE_URL = "http://localhost:8000/api/v1"
 
 # Master key for testing
-MASTER_KEY = "wadm-master-key-2024"
+MASTER_KEY = "wadm_dev_master_key_2025"
 
 
 async def test_api_key_management():

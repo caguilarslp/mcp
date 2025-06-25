@@ -1,246 +1,283 @@
-# WAIckoff Integration Architecture Decision
+# MCP Integration Architecture
 
-## 🎯 Análisis de Opciones: LangChain vs FastMCP vs Direct Integration
+## Overview
+This document describes the architecture for integrating the waickoff_mcp server (119+ trading analysis tools) with the WADM API using Docker containers.
 
-### Situación Actual
-- **waickoff_mcp**: Servidor MCP completo con 119+ herramientas
-- **wadm/waickoff**: Nueva aplicación que necesita usar esas herramientas
-- **Pregunta**: ¿Cuál es la mejor forma de integrar?
-
-## 📊 Comparación de Arquitecturas
-
-### Opción 1: FastMCP 2.8.0 (MCP Client/Server) ⭐⭐⭐⭐⭐
+## Architecture Diagram
 ```
-waickoff_mcp (MCP Server) ←→ FastMCP Client ←→ FastAPI (wadm)
-```
-
-**Ventajas**:
-- ✅ Usa el protocolo MCP estándar
-- ✅ waickoff_mcp ya está listo y funcionando
-- ✅ FastMCP maneja toda la comunicación
-- ✅ Separation of concerns perfecta
-- ✅ Puedes conectar otros clientes MCP en el futuro
-
-**Implementación**:
-```python
-# En wadm/src/api/services/mcp_client.py
-from fastmcp import FastMCP
-
-class WyckoffMCPClient:
-    def __init__(self):
-        self.client = FastMCP("stdio://waickoff_mcp")
-    
-    async def analyze_wyckoff_phase(self, symbol: str):
-        return await self.client.call_tool(
-            "analyze_wyckoff_phase",
-            {"symbol": symbol}
-        )
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Frontend      │     │   WADM API      │     │   MCP Server    │
+│  (Future)       │────▶│  Container      │────▶│   Container     │
+│                 │HTTP │                 │HTTP │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                               │                         │
+                               ▼                         ▼
+                        ┌─────────────┐           ┌─────────────┐
+                        │   MongoDB    │           │ HTTP Wrapper │
+                        │  Container   │           │  (FastAPI)   │
+                        └─────────────┘           └─────────────┘
+                                                         │
+                                                         ▼
+                                                  ┌─────────────┐
+                                                  │ MCP Process  │
+                                                  │   (stdio)    │
+                                                  └─────────────┘
 ```
 
-### Opción 2: LangChain con Custom Tools ⭐⭐⭐
-```
-waickoff_mcp → Custom LangChain Tools → FastAPI (wadm)
-```
+## Components
 
-**Ventajas**:
-- ✅ Integración con LangChain ecosystem
-- ✅ Fácil agregar otros LLMs/tools
-- ✅ Buen soporte para agents
+### 1. MCP Server Container
+- **Image**: Custom multi-stage build
+- **Base**: Node.js 20 + Python 3.12
+- **Components**:
+  - waickoff_mcp server (TypeScript)
+  - HTTP wrapper (Python/FastAPI)
+- **Port**: 3000 (internal)
+- **Protocol**: HTTP externally, stdio internally
 
-**Desventajas**:
-- ❌ Necesitas wrappear cada herramienta MCP
-- ❌ Overhead adicional
-- ❌ Más complejidad sin beneficio claro
+### 2. WADM API Container
+- **Image**: Python 3.12
+- **Framework**: FastAPI
+- **MCP Client**: httpx-based
+- **Features**:
+  - Session management
+  - API key authentication
+  - Rate limiting
+  - Token tracking
 
-### Opción 3: FastAPI Endpoints Directos ⭐⭐
-```
-waickoff_mcp → HTTP Client → FastAPI (wadm)
-```
+### 3. Communication Flow
+1. Client sends request to WADM API
+2. API validates session/auth
+3. API calls MCP via HTTP
+4. HTTP wrapper translates to stdio
+5. MCP processes with 119+ tools
+6. Response flows back through chain
 
-**Ventajas**:
-- ✅ Simple HTTP calls
+## MCP Tools Categories
 
-**Desventajas**:
-- ❌ Necesitas exponer waickoff_mcp como HTTP
-- ❌ Pierde features del protocolo MCP
-- ❌ Más código boilerplate
+### Market Data (10+ tools)
+- `get_ticker` - Current price and stats
+- `get_orderbook` - Order book depth
+- `get_market_data` - Comprehensive data
+- `get_aggregated_ticker` - Multi-exchange
+- `get_composite_orderbook` - Unified orderbook
 
-## 🏆 Recomendación: FastMCP 2.8.0
+### Wyckoff Analysis (15+ tools)
+- `analyze_wyckoff_phase` - Current phase detection
+- `find_wyckoff_events` - Springs, upthrusts
+- `analyze_composite_man` - Institutional activity
+- `track_institutional_flow` - Money flow patterns
+- `analyze_multi_timeframe_wyckoff` - MTF analysis
 
-**FastMCP es la mejor opción** porque:
+### Smart Money Concepts (20+ tools)
+- `detect_order_blocks` - Institutional zones
+- `find_fair_value_gaps` - FVG imbalances
+- `detect_break_of_structure` - BOS/CHoCH
+- `analyze_smart_money_confluence` - Complete SMC
+- `validate_smc_setup` - Trade validation
 
-1. **Ya tienes un servidor MCP funcionando** - No reinventes la rueda
-2. **Protocolo estándar** - Compatible con Claude Desktop y otros clientes
-3. **Mínimo código** - FastMCP maneja toda la complejidad
-4. **Escalable** - Puedes agregar más servidores MCP después
+### Technical Analysis (20+ tools)
+- `perform_technical_analysis` - All indicators
+- `calculate_fibonacci_levels` - Fib retracements
+- `analyze_bollinger_bands` - BB with squeeze
+- `detect_elliott_waves` - Wave patterns
+- `find_technical_confluences` - Multi-indicator
 
-### Arquitectura Propuesta
+### Volume Analysis (10+ tools)
+- `analyze_volume` - VWAP and patterns
+- `analyze_volume_delta` - Buy/sell pressure
+- `identify_volume_anomalies` - Unusual activity
+- `analyze_wyckoff_volume` - Wyckoff context
 
-```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│  waickoff_mcp   │     │   WAIckoff API   │     │  Frontend App   │
-│  (MCP Server)   │◄───►│   (FastAPI)      │◄───►│  (React+Vite)   │
-│                 │     │                  │     │                 │
-│ 119+ Tools:     │     │ Services:        │     │ Chat Interface  │
-│ - Wyckoff       │     │ - MCPClient      │     │ Charts          │
-│ - SMC           │     │ - ClaudeService  │     │ Dashboard       │
-│ - Indicators    │     │ - SessionManager │     │                 │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-        ↑                        ↑
-        │                        │
-        └── FastMCP Protocol ────┘
-```
+### Context & Historical (15+ tools)
+- `get_master_context` - 3-month history
+- `analyze_with_historical_context` - Context-aware
+- `get_analysis_context` - Compressed history
+- `update_context_levels` - Level management
 
-### Implementación Paso a Paso
+### Risk & Liquidation (5+ tools)
+- `predict_liquidation_cascade` - Cascade risk
+- `detect_bull_trap` - False breakouts
+- `detect_bear_trap` - False breakdowns
+- `get_trap_statistics` - Historical accuracy
 
-#### 1. Instalar FastMCP en wadm
+### Trading Tools (10+ tools)
+- `suggest_grid_levels` - Grid trading
+- `analyze_volatility` - Volatility timing
+- `identify_support_resistance` - Dynamic S/R
+- `get_smc_trading_setup` - Entry/exit/risk
+
+## Configuration
+
+### Environment Variables
 ```bash
-pip install fastmcp==2.8.0
+# API Container
+MCP_SERVER_URL=http://mcp-server:3000
+MONGODB_URL=mongodb://mongodb:27017/wadm
+API_MASTER_KEY=wadm_dev_master_key_2025
+
+# MCP Container
+NODE_ENV=production
+MONGODB_URI=mongodb://mongodb:27017/wadm
 ```
 
-#### 2. Crear MCP Client Service
-```python
-# src/api/services/mcp_client.py
-import asyncio
-from fastmcp import FastMCP
-from typing import Dict, Any
-
-class WyckoffMCPClient:
-    def __init__(self):
-        self.client = None
-        
-    async def connect(self):
-        """Conectar al servidor MCP"""
-        self.client = FastMCP(
-            transport="stdio",
-            command=["node", "D:/projects/mcp/waickoff_mcp/build/index.js"]
-        )
-        await self.client.connect()
+### Docker Compose Services
+```yaml
+services:
+  mcp-server:
+    build: 
+      context: .
+      dockerfile: Dockerfile.mcp
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/wadm
     
-    async def analyze_wyckoff_phase(self, symbol: str) -> Dict[str, Any]:
-        """Analizar fase Wyckoff"""
-        return await self.client.call_tool(
-            "analyze_wyckoff_phase",
-            {"symbol": symbol}
-        )
-    
-    async def detect_order_blocks(self, symbol: str) -> Dict[str, Any]:
-        """Detectar order blocks"""
-        return await self.client.call_tool(
-            "detect_order_blocks",
-            {"symbol": symbol}
-        )
-    
-    async def get_complete_analysis(self, symbol: str) -> Dict[str, Any]:
-        """Análisis completo"""
-        return await self.client.call_tool(
-            "get_complete_analysis",
-            {"symbol": symbol}
-        )
-    
-    # ... más métodos para cada herramienta que necesites
+  wadm-api:
+    build: .
+    environment:
+      - MCP_SERVER_URL=http://mcp-server:3000
+    depends_on:
+      - mcp-server
 ```
 
-#### 3. Integrar en FastAPI
-```python
-# src/api/routers/wyckoff.py
-from fastapi import APIRouter, Depends
-from ..services.mcp_client import WyckoffMCPClient
+## API Endpoints
 
-router = APIRouter(prefix="/api/v1/wyckoff", tags=["wyckoff"])
+### MCP Integration Endpoints
+```
+POST   /api/v1/mcp/call              # Call any MCP tool
+GET    /api/v1/mcp/tools             # List all tools
+GET    /api/v1/mcp/health            # Check MCP health
 
-# Cliente MCP singleton
-mcp_client = WyckoffMCPClient()
-
-@router.on_event("startup")
-async def startup():
-    await mcp_client.connect()
-
-@router.get("/{symbol}/phase")
-async def get_wyckoff_phase(symbol: str):
-    """Obtener fase Wyckoff actual"""
-    result = await mcp_client.analyze_wyckoff_phase(symbol)
-    return result
-
-@router.get("/{symbol}/analysis")
-async def get_complete_analysis(symbol: str):
-    """Análisis completo con todas las herramientas"""
-    result = await mcp_client.get_complete_analysis(symbol)
-    return result
+# Convenience endpoints
+POST   /api/v1/mcp/analyze/wyckoff/{symbol}
+POST   /api/v1/mcp/analyze/smc/{symbol}
+POST   /api/v1/mcp/analyze/complete/{symbol}
+POST   /api/v1/mcp/analyze/technical/{symbol}
+GET    /api/v1/mcp/analyze/{symbol}/context
 ```
 
-#### 4. Chat Service con Context
-```python
-# src/api/services/chat_service.py
-class ChatService:
-    def __init__(self, mcp_client: WyckoffMCPClient, claude_client):
-        self.mcp = mcp_client
-        self.claude = claude_client
-    
-    async def process_message(self, session_id: str, message: str):
-        # Detectar símbolo en el mensaje
-        symbol = self.extract_symbol(message)
-        
-        # Obtener contexto del MCP
-        wyckoff_data = await self.mcp.analyze_wyckoff_phase(symbol)
-        order_blocks = await self.mcp.detect_order_blocks(symbol)
-        
-        # Construir contexto para Claude
-        context = self.build_context(wyckoff_data, order_blocks)
-        
-        # Obtener respuesta de Claude
-        response = await self.claude.complete(
-            context + "\n\nUsuario: " + message
-        )
-        
-        return response
+## Error Handling
+
+### API Level
+- HTTP status codes
+- Structured error responses
+- Retry logic for transient failures
+- Circuit breaker pattern (future)
+
+### MCP Level
+- JSON-RPC error codes
+- Tool-specific error messages
+- Timeout handling (60s default)
+- Process restart on crash
+
+## Performance Considerations
+
+### Caching (Future)
+- Redis for frequent queries
+- Context caching for historical data
+- Tool result caching with TTL
+
+### Connection Pooling
+- httpx persistent connections
+- Reuse TCP connections
+- Configure pool size based on load
+
+### Timeouts
+- Connect: 10 seconds
+- Read: 60 seconds (complex analysis)
+- Total: 90 seconds maximum
+
+## Security
+
+### API Authentication
+- API key required
+- Session validation
+- Rate limiting per key
+- Token usage tracking
+
+### Network Security
+- Internal Docker network
+- No external MCP exposure
+- TLS for production (future)
+
+### Data Security
+- MongoDB authentication (production)
+- Encrypted storage (future)
+- Audit logging
+
+## Monitoring & Logging
+
+### Health Checks
+- API: `/api/v1/system/health`
+- MCP: `/health` via wrapper
+- Docker health checks
+
+### Metrics (Future)
+- Request count by tool
+- Response times
+- Error rates
+- Token usage
+
+### Logging
+- Structured JSON logs
+- Log aggregation (future)
+- Error tracking
+
+## Deployment
+
+### Development
+```bash
+docker-compose up -d
 ```
 
-### Ventajas de esta arquitectura
+### Production (Future)
+- Kubernetes deployment
+- Horizontal scaling
+- Load balancing
+- Blue-green deployments
 
-1. **Reutilización total**: Usas waickoff_mcp tal como está
-2. **Protocolo estándar**: Compatible con el ecosistema MCP
-3. **Separación clara**: MCP server independiente del API
-4. **Fácil testing**: Puedes mockear el cliente MCP
-5. **Escalable**: Agregar más servidores MCP es trivial
+## Troubleshooting
 
-### Herramientas Clave del MCP para WAIckoff
+### Common Issues
 
-Las herramientas más valiosas para integrar primero:
+1. **MCP Not Building**
+   - Check TypeScript versions
+   - Use `--legacy-peer-deps`
+   - Clear node_modules
 
-1. **Wyckoff Core**
-   - `analyze_wyckoff_phase`
-   - `analyze_composite_man`
-   - `find_wyckoff_events`
+2. **Connection Refused**
+   - Verify container running
+   - Check Docker network
+   - Verify port mapping
 
-2. **SMC Analysis**
-   - `detect_order_blocks`
-   - `find_fair_value_gaps`
-   - `detect_break_of_structure`
+3. **Timeout Errors**
+   - Increase timeout values
+   - Check MCP performance
+   - Monitor memory usage
 
-3. **Complete Analysis**
-   - `get_complete_analysis`
-   - `get_smc_dashboard`
-   - `analyze_with_historical_context`
+4. **Auth Failures**
+   - Verify API key
+   - Check session status
+   - Review rate limits
 
-4. **Multi-Exchange**
-   - `get_aggregated_ticker`
-   - `detect_exchange_divergences`
+## Future Enhancements
 
-### No necesitas LangChain (por ahora)
+1. **Performance**
+   - Redis caching layer
+   - Connection pooling
+   - Async batch processing
 
-LangChain sería útil si quisieras:
-- Crear agents complejos con múltiples pasos
-- Integrar muchos LLMs diferentes
-- Usar chains/pipelines complejos
+2. **Reliability**
+   - Circuit breaker
+   - Retry with backoff
+   - Health monitoring
 
-Pero para WAIckoff v1, FastMCP + Claude API directo es más simple y efectivo.
+3. **Features**
+   - WebSocket streaming
+   - Batch tool calls
+   - Custom tool creation
 
-## 🎯 Siguiente Paso Inmediato
-
-1. Instala FastMCP en wadm: `pip install fastmcp==2.8.0`
-2. Crea el cliente MCP como mostré arriba
-3. Empieza con 3-5 herramientas básicas
-4. Expande gradualmente según necesites
-
-Esta arquitectura te da toda la potencia del MCP con mínima complejidad.
+4. **Infrastructure**
+   - Kubernetes migration
+   - Auto-scaling
+   - Multi-region deployment

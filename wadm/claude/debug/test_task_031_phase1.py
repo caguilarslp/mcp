@@ -12,7 +12,7 @@ async def test_indicators_phase1():
     """Test Phase 1 indicators endpoints"""
     
     base_url = "http://localhost:8000"
-    api_key = "wadm-master-key-2024"
+    api_key = "wadm_dev_master_key_2025"
     headers = {"X-API-Key": api_key}
     
     print("🧪 TASK-031 PHASE 1 TESTING")

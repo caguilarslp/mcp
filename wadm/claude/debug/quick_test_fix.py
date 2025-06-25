@@ -11,7 +11,7 @@ async def quick_test():
     """Quick test after fixing imports"""
     
     base_url = "http://localhost:8000"
-    api_key = "wadm-master-key-2024"
+    api_key = "wadm_dev_master_key_2025"
     headers = {"X-API-Key": api_key}
     
     print("🔧 QUICK TEST - Import Fix")

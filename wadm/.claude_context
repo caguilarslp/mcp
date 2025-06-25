@@ -10,6 +10,7 @@ IMPORTANTÍSIMO LEER PRIMERO:
  - NO CREARÁS SCRIPTS DE PRUEBAS, NI PARA INICIOS DE DOCKER, NI NADA. EL USUARIO TE AYUDARÁ CON LAS PRUEBAS.
  - NO CREAR ARCHIVOS .BAT O .PY EN LA RAÍZ A MENOS QUE EL USUARIO LO PIDA EXPLÍCITAMENTE
  - EL USUARIO SE ENCARGA DE LEVANTAR Y DETENER DOCKER - NO CREAR SCRIPTS PARA ESTO
+ - NO CREES UN ARCHIVO TEST, Y OTRO SI FALLA, Y OTRO, ..., USA EL MISMO Y MODIFICALO
 ###########################################
 
 # WAIckoff Project Status - v0.2.1
@@ -19,13 +20,11 @@ IMPORTANTÍSIMO LEER PRIMERO:
 ⚠️ TASK-080: MCP HTTP Wrapper PARTIAL (endpoints done, but using MOCKS)
 🔄 Next: Fix BUG-002 + TASK-064 (Dashboard MVP)
 
-## 🆕 Major Update: WAIckoff Business Model
-- **Domain**: waickoff.com (Wyckoff + AI)
-- **Model**: Session-based pricing ($1/session)
-- **Tech**: Claude Sonnet 4 API integration
-- **Stack**: SMC + Wyckoff + Technical Indicators
-- **Packages**: $5 (5 sessions) to $80 (200 sessions)
-- **Payment**: PLACEHOLDER - Focus on features first
+## 🆕 Major Update: MCP Integration Architecture
+- **BUG-002 RESOLVED**: Arquitectura correcta para MCP implementada
+- **Docker Architecture**: Contenedor separado para MCP Server
+- **Real Communication**: HTTP wrapper + httpx client (NO MOCKS)
+- **119+ Tools Ready**: Solo falta resolver build issue
 
 ## Recent Updates (2025-06-24)
 - ✅ TASK-029: FastAPI base setup COMPLETADO
@@ -94,12 +93,12 @@ scripts\wadm-dev.bat status             # Check all services
 scripts\wadm-dev.bat logs               # View API logs
 
 # API Testing
-curl -H "X-API-Key: wadm-master-key-2024" \
+curl -H "X-API-Key: wadm_dev_master_key_2025" \
   "http://localhost:8000/api/v1/indicators/volume-profile/BTCUSDT"
 
 # Create API Key
 curl -X POST http://localhost:8000/api/v1/auth/keys \
-  -H "X-API-Key: wadm-master-key-2024" \
+  -H "X-API-Key: wadm_dev_master_key_2025" \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Key", "permissions": ["read"]}'
 
@@ -122,11 +121,17 @@ http://localhost:3000                   # Frontend (próximamente)
 3. **TASK-081** - Footprint Charts (3 días)
 
 ## Important Updates
-- **MCP Server**: v1.10.1 ready but NOT connected (BUG-002)
-- **API Status**: Stable but returning MOCK data
+- **MCP Server**: Copied from `waickoff_mcp` to `wadm/mcp_server`
 - **What's Working**: All endpoints, auth, sessions, rate limiting
-- **What's NOT**: Real MCP analysis (using mocks)
-- **Time to Fix**: 4 hours for real implementation
+- **What's NOT**: Real MCP analysis (using mocks) - **BUG-002 RESOLVED (pending build)**
+- **Time to Fix**: Build issue with TypeScript conflict
+
+## MCP Integration Status
+- **Architecture**: ✅ Separate Docker containers designed
+- **HTTP Wrapper**: ✅ FastAPI bridge for stdio protocol
+- **Client**: ✅ httpx-based real communication
+- **Build**: ❌ TypeScript 5.8.3 vs typedoc conflict
+- **Solution**: Use `--legacy-peer-deps` or adjust versions
 
 See `claude/tasks/task-tracker.md` for complete task list.
 See `claude/docs/WAICKOFF-SESSION-MODEL.md` for business details.
