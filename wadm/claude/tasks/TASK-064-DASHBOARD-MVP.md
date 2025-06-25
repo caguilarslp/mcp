@@ -125,56 +125,92 @@ Sistema de autenticación completo con onboarding y 2FA funcional
 
 ---
 
-## 📋 FASE 3: Chat Intelligence + Análisis Profesional (Día 3)
+## 📋 FASE 3: Multi-LLM Chat Intelligence + Análisis Profesional (Día 3)
 
 ### 🎯 Objetivo
-Chat revolucionario con Claude Sonnet 4 que genere sesiones productivas de $2 con mega reportes profesionales
+Chat revolucionario con **Multi-LLM Architecture** (Anthropic, OpenAI, Google) + FastMCP 2.8.0 que genere sesiones productivas de $2 con mega reportes profesionales
+
+### 🏗️ **Arquitectura Técnica**
+```
+Frontend Chat → Multi-LLM Gateway → FastMCP 2.8.0 → 133 Tools → Analysis
+```
 
 ### ✅ Tareas Específicas
-- [ ] **Chat Interface Principal**
-  - Layout híbrido: Chat 70% + Sidebar tools 30%
-  - MessageList con historial de conversación
-  - MessageInput con sugerencias inteligentes
-  - Real-time typing indicators y loading states
-  - Session timer y token usage display
 
-- [ ] **Claude Sonnet 4 Integration**
-  - Anthropic API integration para análisis profundo
-  - Context-aware prompting para trading strategies
-  - Tool execution orchestration (133 MCP tools)
-  - Multi-step analysis workflows
-  - Response streaming para UX fluida
+#### **3A: Multi-LLM Service Layer (2-3 días)** 
+- [ ] **LLM Providers Setup**
+  - Anthropic SDK (@anthropic-ai/sdk) - Claude Sonnet 4
+  - OpenAI SDK (openai) - GPT-4, GPT-4-turbo
+  - Google SDK (@google/generative-ai) - Gemini Pro
+  - Provider abstraction interface común
 
-- [ ] **Mega Report Generator**
-  - Comprehensive trading analysis (no basic queries)
-  - Multi-timeframe Wyckoff + SMC analysis
-  - Cross-exchange validation y arbitrage opportunities
-  - Risk management strategies específicas
-  - Entry/exit points con probabilidades
+- [ ] **Provider Management**
+  - Factory pattern para switching providers
+  - Configuration management por provider
+  - Cost tracking y token usage per provider
+  - Fallback strategies (provider downtime)
 
-- [ ] **Professional Consultation Flow**
-  - Session-based conversations (24h/$2 value)
-  - Strategy clarification y doubt resolution
-  - Follow-up questions inteligentes
-  - Personalized trading plans
-  - Educational explanations (why, not just what)
+- [ ] **Chat Interface Base**
+  - Streaming responses con provider selection
+  - Real-time typing indicators per provider
+  - Provider-specific feature toggles
+  - Token usage display y cost tracking
 
-- [ ] **Smart Symbol Detection (NUEVO)**
+#### **3B: Smart Tool Orchestration (2-3 días)**
+- [ ] **LLM-Driven Tool Selection**
+  - Prompt engineering para tool planning
+  - Context-aware tool recommendation
+  - Multi-step workflow orchestration
+  - Tool result synthesis by LLM
+
+- [ ] **FastMCP Integration** ✅ (Ya operacional)
+  - HTTP wrapper ya funcionando
+  - 133 tools disponibles
+  - Real-time tool execution
+  - Results formatting y error handling
+
+#### **3C: Advanced Chat Features (2-3 días)**
+- [ ] **Smart Symbol Detection Engine**
   - NLP processing para detectar símbolos en chat natural
   - Context-aware suggestions basadas en perfil usuario
   - Eliminación completa del dropdown tradicional
   - Auto-detection: "Bitcoin" → BTCUSDT automáticamente
   - Multi-symbol analysis: "Compara ETH vs SOL"
 
-- [ ] **Smart Tool Orchestration**
-  - AI-driven tool selection based on query
-  - Background execution de multiple tools
-  - Results synthesis en format conversacional
-  - Chart generation con annotated insights
-  - Performance tracking y backtesting integration
+- [ ] **Mega Report Generator**
+  - **Multi-Provider Synthesis**: Diferentes LLMs para diferentes análisis
+  - **Comprehensive Analysis**: Multi-timeframe Wyckoff + SMC analysis
+  - **Cross-Exchange Validation**: Arbitrage opportunities detection
+  - **Risk Management**: Específicas strategies con probabilidades
+  - **Entry/Exit Points**: Con confidence scoring
+
+- [ ] **Professional Consultation Flow**
+  - **Session-based conversations**: 24h/$2 value proposition
+  - **Strategy clarification**: Follow-up questions inteligentes
+  - **Personalized trading plans**: Basado en user profile
+  - **Educational explanations**: Why, not just what
+  - **Provider optimization**: Best LLM for each query type
+
+### 🎯 **Multi-LLM Strategy**
+
+#### **Provider Specialization**
+- **Anthropic Claude**: Deep analysis, educational explanations
+- **OpenAI GPT-4**: Conversational, quick responses, general chat
+- **Google Gemini**: Experimental features, multimodal analysis
+
+#### **Cost Optimization**
+- **Cheap queries**: Gemini Pro ($0.001/1K tokens)
+- **Standard analysis**: GPT-4 ($0.03/1K tokens)  
+- **Deep analysis**: Claude Sonnet ($0.015/1K tokens)
+- **User choice**: Premium users select preferred provider
 
 ### 📦 Entregable
-Chat revolucionario que genere sesiones de consultoría de $2 con valor real
+**Multi-LLM Chat Intelligence Platform** que genere sesiones de consultoría de $2 con valor real:
+- 3 LLM providers con switching inteligente
+- FastMCP 2.8.0 integration con 133 tools
+- Smart symbol detection y tool orchestration
+- Mega reports con multi-provider synthesis
+- Professional consultation flow optimizado
 
 ---
 
@@ -233,24 +269,95 @@ Ecosystem completo que justifique $2/sesión con valor tangible y exportable
 
 ## 🚀 TASKS ESPECÍFICAS: Implementación Chat-First
 
-### 📋 TASK A: Symbol Detection Engine (Priority 1)
+### 📋 TASK A: Multi-LLM Service Layer (Priority 1)
 **Tiempo**: 2-3 días
 **Complejidad**: ⭐⭐⭐ Media
 
 #### Sub-tareas:
-1. **NLP Service Creation**
+1. **LLM Provider Abstraction**
    ```typescript
-   // app/src/services/symbolDetection.ts
+   // app/src/services/llm/providers/
+   interface LLMProvider {
+     name: 'anthropic' | 'openai' | 'google';
+     model: string;
+     createChatStream(messages: ChatMessage[]): AsyncIterable<string>;
+     supportsFunctionCalling: boolean;
+     contextWindow: number;
+     costPerToken: number;
+   }
+   ```
+
+2. **Provider Implementation**
+   ```typescript
+   // Anthropic SDK implementation
+   class AnthropicProvider implements LLMProvider {
+     constructor(apiKey: string) {}
+     async createChatStream(messages: ChatMessage[]) {}
+   }
+   
+   // OpenAI SDK implementation  
+   class OpenAIProvider implements LLMProvider {}
+   
+   // Google SDK implementation
+   class GoogleProvider implements LLMProvider {}
+   ```
+
+3. **Provider Factory**
+   ```typescript
+   class LLMProviderFactory {
+     static create(provider: string, config: any): LLMProvider
+     static getOptimalProvider(queryType: string): LLMProvider
+   }
+   ```
+
+### 📋 TASK B: Smart Tool Orchestration (Priority 2)
+**Tiempo**: 2-3 días
+**Complejidad**: ⭐⭐⭐⭐ Alta
+
+#### Sub-tareas:
+1. **Tool Orchestrator**
+   ```typescript
+   class ToolOrchestrator {
+     constructor(
+       private llmProvider: LLMProvider,
+       private mcpClient: MCPClient // Ya funciona ✅
+     ) {}
+     
+     async planAnalysis(query: string): Promise<ToolPlan>
+     async executeTools(toolPlan: ToolPlan): Promise<ToolResults>
+     async synthesizeResults(results: ToolResults): Promise<string>
+   }
+   ```
+
+2. **FastMCP Integration** ✅
+   - HTTP wrapper ya operacional
+   - 133 tools disponibles
+   - Real-time communication
+   - Error handling y retry logic
+
+3. **LLM-Driven Planning**
+   - Prompt engineering para tool selection
+   - Context-aware tool recommendations
+   - Multi-step workflow orchestration
+
+### 📋 TASK C: Smart Symbol Detection (Priority 3)
+**Tiempo**: 2-3 días
+**Complejidad**: ⭐⭐⭐ Media
+
+#### Sub-tareas:
+1. **NLP Symbol Detection**
+   ```typescript
    class SymbolDetectionService {
-     detectFromText(input: string): Symbol[]
-     extractTimeframes(input: string): Timeframe[]
-     suggestFromProfile(profile: UserProfile): Symbol[]
+     constructor(private llmProvider: LLMProvider) {}
+     
+     async detectFromText(input: string): Promise<Symbol[]>
+     async extractTimeframes(input: string): Promise<Timeframe[]>
+     async suggestFromProfile(profile: UserProfile): Promise<Symbol[]>
    }
    ```
 
 2. **Symbol Mapping Database**
    ```typescript
-   // Mapeo natural language → symbols
    const SYMBOL_ALIASES = {
      'bitcoin': 'BTCUSDT',
      'ethereum': 'ETHUSDT', 
@@ -260,44 +367,9 @@ Ecosystem completo que justifique $2/sesión con valor tangible y exportable
    ```
 
 3. **Chat Integration**
-   - Integrar detection en chat input
+   - Multi-symbol queries: "Compara BTC vs ETH"
    - Visual feedback: "Detectando BTCUSDT..."
-   - Multi-symbol queries support
-
-### 📋 TASK B: Market Intelligence Engine (Priority 2)  
-**Tiempo**: 3-4 días
-**Complejidad**: ⭐⭐⭐⭐ Alta
-
-#### Sub-tareas:
-1. **Momentum Detection**
-   - Real-time price change tracking
-   - Volume anomaly detection
-   - Breakout pattern recognition
-
-2. **Portfolio Context**
-   - User holdings tracking (mock)
-   - Correlation analysis automática
-   - Risk exposure warnings
-
-3. **Proactive Suggestions**
-   - Morning market briefings
-   - Event calendar integration
-   - Technical setup alerts
-
-### 📋 TASK C: Behavioral Learning (Priority 3)
-**Tiempo**: 4-5 días  
-**Complejidad**: ⭐⭐⭐⭐⭐ Muy Alta
-
-#### Sub-tareas:
-1. **Pattern Recognition**
-   - User interaction tracking
-   - Success rate analysis
-   - Preference learning
-
-2. **Predictive Modeling**
-   - Next symbol prediction
-   - Optimal timing suggestions
-   - Risk tolerance adaptation
+   - Context-aware suggestions
 
 ---
 
