@@ -13,7 +13,7 @@ import {
   Anchor,
 } from '@mantine/core';
 import { IconMail, IconInfoCircle, IconClock } from '@tabler/icons-react';
-import { useAppStore } from '../../store';
+import { useAuthStore } from '../../store';
 
 export function TwoFactorForm() {
   const [code, setCode] = useState('');
@@ -21,7 +21,7 @@ export function TwoFactorForm() {
   const [error, setError] = useState('');
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
   const [resendCount, setResendCount] = useState(0);
-  const { verify2FA, pendingEmail, logout } = useAppStore();
+  const { verify2FA, pendingEmail, logout } = useAuthStore();
 
   useEffect(() => {
     const timer = setInterval(() => {

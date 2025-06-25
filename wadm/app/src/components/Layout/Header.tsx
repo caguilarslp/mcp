@@ -6,7 +6,6 @@ import {
   Avatar,
   Text,
   Badge,
-  Select,
   ActionIcon,
   Burger,
   Box,
@@ -17,24 +16,20 @@ import {
   IconSettings,
   IconKey,
   IconBell,
-  IconMenu2,
+  IconSun,
+  IconMoon,
 } from '@tabler/icons-react';
-import { useAppStore } from '../../store';
-
-const SYMBOLS = [
-  'BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'ADAUSDT', 'DOTUSDT',
-  'LINKUSDT', 'AVAXUSDT', 'MATICUSDT', 'ATOMUSDT', 'ALGOUSDT'
-];
+import { useAuthStore } from '../../store';
 
 export function Header() {
   const { 
-    selectedSymbol, 
-    setSelectedSymbol, 
     logout, 
     currentSession,
     sidebarOpen,
-    setSidebarOpen
-  } = useAppStore();
+    setSidebarOpen,
+    theme,
+    toggleTheme
+  } = useAuthStore();
 
   return (
     <Group h="100%" px="md" justify="space-between">
@@ -50,23 +45,26 @@ export function Header() {
         <Badge variant="light" color="green">Live</Badge>
       </Group>
 
-      {/* Center */}
+      {/* Center - Chat-First: No symbol dropdown */}
       <Group>
-        <Select
-          value={selectedSymbol}
-          onChange={(value) => value && setSelectedSymbol(value)}
-          data={SYMBOLS}
-          placeholder="Select Symbol"
-          searchable
-          size="sm"
-          w={120}
-        />
+        <Text size="sm" c="dimmed" ta="center">
+          💬 Pregunta por cualquier símbolo en el chat
+        </Text>
       </Group>
 
       {/* Right side */}
       <Group>
         <ActionIcon variant="subtle" size="lg">
           <IconBell size="1.1rem" />
+        </ActionIcon>
+
+        <ActionIcon 
+          variant="subtle" 
+          size="lg"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+        >
+          {theme === 'dark' ? <IconSun size="1.1rem" /> : <IconMoon size="1.1rem" />}
         </ActionIcon>
 
         <Menu shadow="md" width={200}>

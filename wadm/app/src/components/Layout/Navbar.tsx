@@ -1,129 +1,127 @@
 import {
-  Box,
-  NavLink,
   Stack,
-  Group,
   Text,
-  Badge,
+  Box,
+  Group,
+  ThemeIcon,
+  UnstyledButton,
+  Divider,
   ScrollArea,
+  Badge,
 } from '@mantine/core';
 import {
-  IconDashboard,
   IconChartLine,
+  IconMessages,
   IconTools,
-  IconKey,
+  IconHistory,
   IconSettings,
-  IconDatabase,
-  IconAnalyze,
+  IconBook,
   IconTrendingUp,
-  IconVolume,
   IconExchange,
+  IconBrain,
+  IconTarget,
 } from '@tabler/icons-react';
-import { useAppStore } from '../../store';
+import { useAuthStore } from '../../store';
 
 const NAVIGATION_ITEMS = [
-  {
-    label: 'Dashboard',
-    icon: IconDashboard,
-    active: true,
-  },
-  {
-    label: 'Analysis',
-    icon: IconChartLine,
-    children: [
-      { label: 'Wyckoff Analysis', icon: IconAnalyze },
-      { label: 'SMC Analysis', icon: IconTrendingUp },
-      { label: 'Technical Indicators', icon: IconChartLine },
-      { label: 'Volume Analysis', icon: IconVolume },
-      { label: 'Multi-Exchange', icon: IconExchange },
-    ],
-  },
-  {
-    label: 'MCP Tools',
-    icon: IconTools,
-    badge: '133',
-    children: [
-      { label: 'Wyckoff Tools', icon: IconAnalyze, badge: '25' },
-      { label: 'SMC Tools', icon: IconTrendingUp, badge: '31' },
-      { label: 'Technical Tools', icon: IconChartLine, badge: '28' },
-      { label: 'Volume Tools', icon: IconVolume, badge: '22' },
-      { label: 'Multi-Exchange Tools', icon: IconExchange, badge: '27' },
-    ],
-  },
-  {
-    label: 'Data',
-    icon: IconDatabase,
-    children: [
-      { label: 'Market Data', icon: IconDatabase },
-      { label: 'Analysis History', icon: IconChartLine },
-      { label: 'Exports', icon: IconDatabase },
-    ],
-  },
-  {
-    label: 'Account',
-    icon: IconKey,
-    children: [
-      { label: 'API Keys', icon: IconKey },
-      { label: 'Sessions', icon: IconDatabase },
-      { label: 'Settings', icon: IconSettings },
-    ],
-  },
+  { id: 'chat', label: 'Chat Análisis', icon: IconMessages, color: 'blue' },
+  { id: 'tools', label: 'MCP Tools', icon: IconTools, color: 'green' },
+  { id: 'charts', label: 'Charts', icon: IconChartLine, color: 'orange' },
+  { id: 'history', label: 'Historial', icon: IconHistory, color: 'gray' },
 ];
 
+const MCP_CATEGORIES = [
+  { id: 'wyckoff', label: 'Wyckoff Analysis', icon: IconBrain, count: 12 },
+  { id: 'smc', label: 'Smart Money', icon: IconTarget, count: 15 },
+  { id: 'technical', label: 'Technical Analysis', icon: IconTrendingUp, count: 25 },
+  { id: 'multi-exchange', label: 'Multi-Exchange', icon: IconExchange, count: 8 },
+];
+
+interface NavItemProps {
+  icon: React.FC<any>;
+  label: string;
+  color: string;
+  rightSection?: React.ReactNode;
+  onClick?: () => void;
+}
+
+function NavItem({ icon: Icon, label, color, rightSection, onClick }: NavItemProps) {
+  return (
+    <UnstyledButton
+      p="sm"
+      style={{ borderRadius: 'var(--mantine-radius-sm)' }}
+      onClick={onClick}
+    >
+      <Group>
+        <ThemeIcon color={color} variant="light" size="sm">
+          <Icon size="1rem" />
+        </ThemeIcon>
+        <Text size="sm" fw={500}>
+          {label}
+        </Text>
+        {rightSection}
+      </Group>
+    </UnstyledButton>
+  );
+}
+
 export function Navbar() {
-  const { mcpTools } = useAppStore();
+  const { mcpTools } = useAuthStore();
 
   const renderNavItem = (item: any, level = 0) => (
-    <NavLink
-      key={item.label}
+    <NavItem
+      key={item.id}
+      icon={item.icon}
       label={item.label}
-      leftSection={<item.icon size="1rem" />}
+      color={item.color}
       rightSection={
-        item.badge ? (
-          <Badge size="xs" variant="filled" color="blue">
-            {item.badge}
-          </Badge>
-        ) : null
+        item.count ? <Badge size="xs" variant="light">{item.count}</Badge> : undefined
       }
-      active={item.active}
-      variant="subtle"
-      style={{ paddingLeft: level * 16 + 12 }}
-    >
-      {item.children?.map((child: any) => renderNavItem(child, level + 1))}
-    </NavLink>
+    />
   );
 
   return (
-    <Box p="md" h="100%">
-      <ScrollArea h="calc(100vh - 120px)">
+    <Box h="100%" p="md">
+      <ScrollArea h="100%">
         <Stack gap="xs">
-          <Group mb="md">
-            <Text size="sm" fw={500} c="dimmed">
-              NAVIGATION
+          {/* Main Navigation */}
+          <Box>
+            <Text size="xs" tt="uppercase" fw={700} c="dimmed" mb="sm">
+              Navegación
             </Text>
-          </Group>
+            <Stack gap={2}>
+              {NAVIGATION_ITEMS.map(renderNavItem)}
+            </Stack>
+          </Box>
 
-          {NAVIGATION_ITEMS.map((item) => renderNavItem(item))}
+          <Divider my="md" />
 
-          <Group mt="lg" mb="sm">
-            <Text size="sm" fw={500} c="dimmed">
-              QUICK STATS
-            </Text>
-          </Group>
-
-          <Box p="sm" style={{ backgroundColor: 'var(--mantine-color-gray-0)', borderRadius: 'var(--mantine-radius-sm)' }}>
-            <Group justify="space-between" mb="xs">
-              <Text size="xs" c="dimmed">Tools Available</Text>
+          {/* MCP Tools Categories */}
+          <Box>
+            <Group justify="space-between" mb="sm">
+              <Text size="xs" tt="uppercase" fw={700} c="dimmed">
+                Herramientas MCP
+              </Text>
               <Badge size="xs" variant="light">
                 {mcpTools.length}
               </Badge>
             </Group>
-            <Group justify="space-between">
-              <Text size="xs" c="dimmed">Connection</Text>
-              <Badge size="xs" color="green" variant="light">
-                Online
-              </Badge>
-            </Group>
+            <Stack gap={2}>
+              {MCP_CATEGORIES.map(renderNavItem)}
+            </Stack>
+          </Box>
+
+          <Divider my="md" />
+
+          {/* Settings */}
+          <Box>
+            <Text size="xs" tt="uppercase" fw={700} c="dimmed" mb="sm">
+              Configuración
+            </Text>
+            <Stack gap={2}>
+              <NavItem icon={IconSettings} label="Ajustes" color="gray" />
+              <NavItem icon={IconBook} label="Documentación" color="gray" />
+            </Stack>
           </Box>
         </Stack>
       </ScrollArea>

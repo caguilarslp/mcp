@@ -23,7 +23,7 @@ import {
   IconTools,
   IconDatabase,
 } from '@tabler/icons-react';
-import { useAppStore } from '../../store';
+import { useAuthStore } from '../../store';
 import { Navbar } from './Navbar';
 import { Header } from './Header';
 
@@ -32,11 +32,16 @@ export function Dashboard() {
     currentSession, 
     mcpTools, 
     selectedSymbol,
-    logout 
-  } = useAppStore();
+    logout,
+    currentUser
+  } = useAuthStore();
 
   return (
-    <>
+    <AppShell
+      header={{ height: 70 }}
+      navbar={{ width: 280, breakpoint: 'md' }}
+      padding="md"
+    >
       <AppShell.Header>
         <Header />
       </AppShell.Header>
@@ -124,6 +129,6 @@ export function Dashboard() {
           </Card>
         </Box>
       </AppShell.Main>
-    </>
+    </AppShell>
   );
 } 

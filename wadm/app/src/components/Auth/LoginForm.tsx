@@ -15,7 +15,7 @@ import {
   Anchor,
 } from '@mantine/core';
 import { IconKey, IconInfoCircle, IconMail } from '@tabler/icons-react';
-import { useAppStore } from '../../store';
+import { useAuthStore } from '../../store';
 
 export function LoginForm() {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ export function LoginForm() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { login, switchToSignUp } = useAppStore();
+  const { login, switchToSignUp } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

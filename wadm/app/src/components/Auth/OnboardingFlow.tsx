@@ -26,7 +26,7 @@ import {
   IconInfoCircle,
   IconTool,
 } from '@tabler/icons-react';
-import { useAppStore } from '../../store';
+import { useAuthStore } from '../../store';
 
 const ONBOARDING_STEPS = [
   {
@@ -52,7 +52,7 @@ export function OnboardingFlow() {
     cvv: '123',
     nameOnCard: 'John Doe',
   });
-  const { currentUser, switchToLogin } = useAppStore();
+  const { user, logout, onboardingData, setOnboardingStep, completeOnboarding } = useAuthStore();
 
   const handleNext = () => {
     if (currentStep < ONBOARDING_STEPS.length - 1) {

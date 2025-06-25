@@ -16,7 +16,7 @@ import {
   Anchor,
 } from '@mantine/core';
 import { IconMail, IconUser, IconBuilding, IconInfoCircle, IconCheck, IconX } from '@tabler/icons-react';
-import { useAppStore } from '../../store';
+import { useAuthStore } from '../../store';
 
 interface PasswordStrength {
   score: number;
@@ -34,7 +34,7 @@ export function SignUpForm() {
   const [passwordStrength, setPasswordStrength] = useState<PasswordStrength>({ score: 0, feedback: [] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { signUp, switchToLogin } = useAppStore();
+  const { signUp, switchToLogin } = useAuthStore();
 
   const validatePassword = (password: string): PasswordStrength => {
     const feedback: string[] = [];

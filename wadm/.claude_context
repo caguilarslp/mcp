@@ -13,165 +13,179 @@ IMPORTANTÍSIMO LEER PRIMERO:
  - NO CREES UN ARCHIVO TEST, Y OTRO SI FALLA, Y OTRO, ..., USA EL MISMO Y MODIFICALO
 ###########################################
 
-# WAIckoff Project Status - v0.2.1
+# WAIckoff - Revolutionary Trading Chat Platform
 
-## 🎯 Current Focus
-✅ TASK-031 Phase 3: API Key Management COMPLETED! 🔐
-✅ TASK-080: MCP HTTP Wrapper COMPLETED! (133 tools operational)
-✅ BUG-002: MCP Mock Implementation RESOLVED!
-✅ TASK-100: Collectors Data Flow COMPLETED 100%! 🎉
-✅ TASK-101: Bybit Investigation COMPLETED! (4/4 exchanges operational) 🏆
-🔄 Next: TASK-064 (Dashboard MVP - 4 Fases definidas) + TASK-090 (Premium AI)
+## 🎯 Proyecto Estado Actual (2025-06-24)
 
-## 🏆 HISTÓRICO: 100% Exchange Coverage Achieved! 
-- **WADM STATUS**: **PRODUCTION READY FOR BUSINESS** ✅
-- **Exchange Coverage**: 4/4 operacional (Bybit, Binance, Coinbase, Kraken) 🎉
-- **Data Flow**: 72,000+ trades en tiempo real ⚡
-- **Market Intelligence**: Institucional (US+EU) + Retail (Global+Crypto) ✅
-- **Smart Money Analysis**: Completamente operacional 💎
-- **Business Ready**: Monetización desbloqueada en todos los segmentos 🚀
+**Vision Revolucionaria**: Chat de consultoría profesional de trading que vale $2/sesión - No es un chat básico, es un analista experto AI con Claude Sonnet 4.
 
-## 🆕 Major Update: Collectors Significantly Improved! ✅
-- **TASK-100 PROGRESS**: From 50% to 75% completion 🎉
-- **Institutional Coverage**: 100% operational (Coinbase + Kraken) ✅
-- **Data Flow Restored**: 3 of 4 exchanges working (Binance, Coinbase, Kraken) ✅
-- **Critical Bug Fixed**: Symbol format double conversion resolved ✅
-- **Production Ready**: 50,058+ trades collected, real-time indicators ✅
-
-## 🆕 Major Update: MCP Integration FULLY OPERATIONAL! 🎉
-- **BUG-002 RESOLVED**: Real communication with MCP Server ✅
-- **Docker Architecture**: Contenedor separado para MCP Server ✅
-- **Real Communication**: HTTP wrapper + httpx client (NO MOCKS) ✅
-- **133 Tools READY**: Fully operational and tested ✅
-
-## Recent Updates (2025-06-24)
-- ✅ TASK-029: FastAPI base setup COMPLETADO
-- ✅ TASK-030: Market Data Endpoints COMPLETADO
-- ✅ TASK-048: Docker Infrastructure COMPLETADO 🐳
-- ✅ TASK-031: API Key Management COMPLETADO 🔐
-- ⚠️ TASK-080: MCP Integration PARCIAL (estructura lista, falta comunicación real)
-- 🔴 BUG-002: Mock implementation detectada - viola principio NO MOCKS
-- ✅ Project Cleanup: 24 archivos movidos a claude/debug/
-- ✅ API funcionando sin errores de importación
-- ✅ **TASK-064 FASE I**: Frontend base creado - Nomenclatura actualizada
-- ✅ **TASK-064 FASE II**: Sistema completo de autenticación + 2FA + onboarding COMPLETADO
-- 🔄 **TASK-064 FASE III**: Interfaz de 133 Herramientas MCP (Día 3)
-
-## 📁 Nomenclatura Actualizada (2025-06-24)
-- **API**: `src/` → `api/` (FastAPI backend - localhost:8000)
-- **Frontend**: `app/` (Vite + React + TypeScript - localhost:5173) - Dashboard privado
-- **MCP**: `mcp_server/` → `mcp/` (133 herramientas MCP)
-- **Landing**: `waickoff.com` (proyecto separado - página pública)
-
-## Architecture Decision
-**Monolith First Approach** (KISS principle):
-- Single API at api.waickoff.com handles everything
-- AI/Claude integration dentro de la API
-- Frontend at app.waickoff.com consume la API
-- No microservicios hasta que sea necesario (>10k users)
-
-## WAIckoff Vision
-🎯 Chat inteligente con Claude Sonnet 4
-📊 Análisis Wyckoff + SMC + Indicadores técnicos
-💰 Modelo de sesiones transparente ($1/sesión)
-🚀 119 herramientas del MCP integradas
-🌐 Multi-exchange validation (4 exchanges)
-
-## Active Development Phases
-
-### Phase 1: Wyckoff Foundation (Current)
-- TASK-060: Wyckoff MCP Integration Core
-- TASK-061: Composite Man Tracker
-- TASK-064: Dashboard MVP con Vite + Mantine
-
-### Phase 2: Complete Integration
-- TASK-065: Advanced Wyckoff MCP Tools
-- TASK-066: Technical Indicators Suite
-- TASK-067: Multi-Exchange Analysis
-
-### Phase 3: Intelligent Chat
-- TASK-069: Chat Interface Foundation
-- TASK-070: Claude Sonnet 4 Integration
-- TASK-071: Natural Language Commands
-
-## Current Technical Status
-- ✅ Volume Profile Service: Real-time calculations
-- ✅ Order Flow Service: Advanced analytics
-- ✅ 4 Exchanges: Bybit, Binance, Coinbase Pro, Kraken
-- ✅ SMC System: 85-90% accuracy con validación institucional
-- ✅ Docker Stack: Funcionando establemente
-- ✅ API Key System: Complete auth with sessions
-- ✅ Rate Limiting: Per-key configurable limits
-- ✅ MCP Integration: 133 tools fully operational
-- ✅ MCP Server: 133+ tools ready and connected
-- ✅ 3-Month Context: Operational in MCP
-
-## Tech Stack Decision
-- **Frontend**: localhost:3000 → app.waickoff.com (producción VPS)
-- **API**: localhost:8000 → api.waickoff.com (producción VPS)
-- **Current**: Docker local development (operacional ✅)
-- **Database**: MongoDB + Redis
-- **AI**: Claude Sonnet 4 API (dentro de la API)
-- **Environment**: app.env (primary) + .env (clone for compatibility)
-
-## Quick Commands
-```bash
-# Docker Development 🐳
-scripts\wadm-dev.bat start              # Start complete stack
-scripts\wadm-dev.bat status             # Check all services
-scripts\wadm-dev.bat logs               # View API logs
-
-# API Testing
-curl -H "X-API-Key: wadm_dev_master_key_2025" \
-  "http://localhost:8000/api/v1/indicators/volume-profile/BTCUSDT"
-
-# Create API Key
-curl -X POST http://localhost:8000/api/v1/auth/keys \
-  -H "X-API-Key: wadm_dev_master_key_2025" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Test Key", "permissions": ["read"]}'
-
-# URLs
-http://localhost:8000                   # API Base
-http://localhost:8000/api/docs          # Swagger UI
-http://localhost:3000                   # Frontend (próximamente)
+### 📁 Estructura de Nomenclatura
+```
+/d/projects/mcp/wadm/
+├── api/              # Backend FastAPI (antes src/)
+├── app/              # Frontend Dashboard Vite + React (ACTUAL)
+├── mcp/              # MCP Server con 133 tools (antes mcp_server/)
+└── waickoff.com/     # Landing page (proyecto separado)
 ```
 
-## Business Model Summary
-- **Pricing**: $1 per session (24h or 100k tokens)
-- **Packages**: $5-$80 (mejor valor en bulk)
-- **Margin**: 55% en precio base
-- **Target**: $15k MRR en mes 1
-- **Payment**: Deferred - Focus on MVP features
+## 🚀 Estado Operacional
 
-## Development Status
-- **Current**: Local Docker development (localhost:8000, localhost:3000)
-- **API Local**: Docker localhost:8000 operacional con 133 MCP tools ✅
-- **Production**: api.waickoff.com, app.waickoff.com (futuro VPS)
-- **Environment**: app.env (primary config) + .env (clone)
-- **Local domains**: api.waickoff.local, app.waickoff.local (opcional, via hosts)
+### ✅ Completamente Funcional
+- **API Backend**: localhost:8000 (Docker) - 133 MCP tools operacionales
+- **4 Exchanges**: Bybit, Binance, Coinbase, Kraken - datos reales
+- **133 Tools MCP**: Wyckoff, SMC, Volume, Multi-Exchange analysis
+- **Documentación**: Completa y actualizada
 
-## Next Immediate Actions
-1. **TASK-064** - Dashboard MVP (4 fases x 1 día) 🔥 PRIORITY
-   - FASE 1: Setup + Infraestructura Base (local domains)
-   - FASE 2: Gestión de Sesiones + API Keys  
-   - FASE 3: Interfaz de 133 Herramientas MCP
-   - FASE 4: Visualización + Charts
-2. **TASK-090** - Premium AI Integration (3 días) 🔥 HIGH
-3. **TASK-081** - Footprint Charts (3 días)
+### 🔄 En Desarrollo
+- **Dashboard Frontend**: localhost:5173 (app/) - TASK-064
+- **Estado**: FASE 2 COMPLETADA ✅, FASE 3 EN PROGRESO
 
-## Important Updates
-- **MCP Server**: Fully integrated and operational
-- **What's Working**: All endpoints, auth, sessions, rate limiting, 133 MCP tools
-- **What's NEW**: Real MCP analysis with 133 operational tools
-- **Status**: FULLY OPERATIONAL ✅
+## 📋 TASK-064: Dashboard MVP Revolucionario
 
-## MCP Integration Status
-- **Architecture**: ✅ Separate Docker containers operational
-- **HTTP Wrapper**: ✅ FastAPI bridge fully working
-- **Client**: ✅ httpx-based real communication
-- **Build**: ✅ All TypeScript conflicts resolved
-- **Tools**: ✅ 133 tools available and tested
+### ✅ FASE 1: Infraestructura (COMPLETADA)
+- Vite + React + TypeScript + Mantine + Zustand
+- Proxy configurado → localhost:8000
+- Layout base con tema oscuro para trading
 
-See `claude/tasks/task-tracker.md` for complete task list.
-See `claude/docs/WAICKOFF-SESSION-MODEL.md` for business details.
+### ✅ FASE 2: Autenticación Completa (COMPLETADA)
+**PIVOT**: Cambio de API keys a auth tradicional con 2FA
+- SignUpForm con validación en tiempo real
+- LoginForm con "Remember me"
+- TwoFactorForm con 6-digit PIN + timer
+- OnboardingFlow de 3 pasos con business model
+- Mock payment system (Stripe/PayPal UI)
+
+### 🔄 FASE 3: Chat Intelligence (EN PROGRESO)
+**REVOLUCIONARIA**: No chat básico, sino consultoría profesional
+- Claude Sonnet 4 integration
+- Layout híbrido: Chat 70% + Tools sidebar 30%
+- Mega report generator (15+ tools por consulta)
+- Educational explanations (why, not just what)
+- Professional consultation flow
+
+### 📋 FASE 4: Visualización + Export (PLANIFICADA)
+- Charts con AI annotations
+- PDF export de sesiones completas
+- Professional presentation mode
+- Trading plans exportables
+
+## 💡 Visión Revolucionaria
+
+### ❌ Lo que NO somos:
+- Chat básico: "¿Cómo está BTCUSDT?" → "Precio: $45,000"
+- Información gratuita disponible en cualquier parte
+- Tools sueltas sin cohesión
+
+### ✅ Lo que SÍ somos:
+- **Consultor experto AI** con 133 herramientas profesionales
+- **Estrategias completas** con análisis multi-dimensional
+- **Planes de trading accionables** con entry/exit específicos
+- **Educación contextual** que explica el "por qué"
+
+### 💰 Modelo de Valor: $2/Sesión
+- **Análisis multi-dimensional** (30+ data points)
+- **Estrategia específica** con entry/exit
+- **Plan de gestión de riesgo** personalizado
+- **Educación contextual** (aprender trading)
+- **Reporte exportable** para referencia
+- **Follow-up inteligente** (sesión completa 24h)
+
+## 🛠️ Tech Stack
+
+### Frontend (app/)
+- **Vite 5.x** + **React 18.x** + **TypeScript 5.x**
+- **Mantine 7.x** (UI components)
+- **Zustand 4.x** (state management)
+- **Axios** (API client)
+- **TradingView Lightweight Charts**
+- **React Router 6.x**
+
+### Backend (api/)
+- **FastAPI** + **Python**
+- **Docker Compose** (production ready)
+- **MongoDB** (storage)
+- **Redis** (caching)
+
+### MCP Tools (mcp/)
+- **133 tools** operacionales
+- **TypeScript/Node.js**
+- **4 exchanges** integration
+- **Storage system** con análisis históricos
+
+## 🔑 Comandos Clave
+
+### Desarrollo Frontend
+```bash
+cd app/
+npm run dev    # localhost:5173
+npm run build
+npm run preview
+```
+
+### Backend API
+```bash
+docker-compose up -d    # localhost:8000
+# Ya operacional - no necesita cambios
+```
+
+### MCP Server
+```bash
+cd mcp/
+npm start    # Ya integrado con API
+```
+
+## 📊 Competitive Differentiation
+
+### vs. TradingView Premium ($15/mes):
+- **WAIckoff**: AI-driven analysis + education
+- **TradingView**: Charts + indicators (usuario hace el trabajo)
+
+### vs. Human Analysts ($50-200/hora):
+- **WAIckoff**: 24/7 disponible, consistent quality, $2
+- **Humans**: Limited availability, variable quality, expensive
+
+### vs. Other AI Trading Bots:
+- **WAIckoff**: Educational + strategic (builds user skill)
+- **Bots**: Black box (users stay dependent)
+
+## 🎯 Success Metrics
+
+### User Value Delivered
+- **Analysis Depth**: 15+ tools ejecutadas por consulta
+- **Strategy Accuracy**: 70%+ win rate en backtesting
+- **Time Saved**: 2+ horas de análisis manual
+- **Learning Progress**: Measurable skill development
+
+### Business Metrics
+- **Session Value**: $2 justified by tangible output
+- **Retention**: 80%+ users return within 7 days
+- **Upgrade Rate**: 20% users try premium sessions ($5-10)
+- **NPS Score**: 9+ (users evangelizan el servicio)
+
+## 📚 Documentación Clave
+
+### Para Implementación:
+- `claude/tasks/TASK-064-DASHBOARD-MVP.md` - Plan completo
+- `claude/docs/CHAT-REVOLUTIONARY-VISION.md` - Visión detallada
+- `claude/docs/AUTHENTICATION-SYSTEM.md` - Sistema auth actual
+
+### Para Seguimiento:
+- `claude/tasks/task-tracker.md` - Estado de tareas
+- `claude/master-log.md` - Log de progreso
+- `claude/daily/2025-06-24.md` - Log diario actual
+
+## 🚀 Next Steps
+
+### Inmediato:
+1. Implementar chat interface con Claude Sonnet 4
+2. Sistema de tool orchestration inteligente
+3. Mega report generator
+4. Educational layer automática
+
+### Esta Semana:
+1. Charts con AI annotations
+2. PDF export system
+3. Professional presentation mode
+4. Testing y refinamiento
+
+**Objetivo**: Crear el primer chat de trading que valga realmente $2/sesión por la profundidad, educación y valor accionable que entrega. 🎯

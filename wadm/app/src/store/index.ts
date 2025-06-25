@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { ApiKey, Session, MCPTool, User, SignUpData, LoginData } from '../types';
+import type { ApiKey, Session, MCPTool, User, SignUpData, LoginData, TwoFactorData, UserProfile, OnboardingData } from '../types';
 import { apiService } from '../services/api';
 
 interface AppState {
@@ -24,6 +24,11 @@ interface AppState {
   selectedSymbol: string;
   theme: 'light' | 'dark';
   
+  // User Profile & Onboarding
+  twoFactorData: TwoFactorData | null;
+  userProfile: UserProfile | null;
+  onboardingData: OnboardingData;
+  
   // Actions
   login: (data: LoginData) => Promise<boolean>;
   signUp: (data: SignUpData) => Promise<boolean>;
@@ -37,9 +42,16 @@ interface AppState {
   setSidebarOpen: (open: boolean) => void;
   setSelectedSymbol: (symbol: string) => void;
   toggleTheme: () => void;
+  setTwoFactorData: (data: TwoFactorData | null) => void;
+  
+  // Profile Actions
+  updateUserProfile: (profile: Partial<UserProfile>) => void;
+  setOnboardingStep: (step: number) => void;
+  completeOnboarding: () => void;
+  resetOnboarding: () => void;
 }
 
-export const useAppStore = create<AppState>()(
+export const useAuthStore = create<AppState>()(
   persist(
     (set, get) => ({
       // Initial state
@@ -55,6 +67,16 @@ export const useAppStore = create<AppState>()(
       sidebarOpen: true,
       selectedSymbol: 'BTCUSDT',
       theme: 'dark',
+      
+      // User Profile & Onboarding
+      twoFactorData: null,
+      userProfile: null,
+      onboardingData: {
+        step: 1,
+        userProfile: {},
+        isComplete: false,
+        paymentSetup: false,
+      },
 
       // Actions
       login: async (data: LoginData) => {
@@ -213,6 +235,35 @@ export const useAppStore = create<AppState>()(
       toggleTheme: () => set((state) => ({ 
         theme: state.theme === 'light' ? 'dark' : 'light' 
       })),
+
+      setTwoFactorData: (data) => set({ twoFactorData: data }),
+      
+      // Profile Actions
+      updateUserProfile: (profile) => set((state) => ({
+        userProfile: state.userProfile ? { ...state.userProfile, ...profile } : profile as UserProfile,
+        onboardingData: {
+          ...state.onboardingData,
+          userProfile: { ...state.onboardingData.userProfile, ...profile }
+        }
+      })),
+      
+      setOnboardingStep: (step) => set((state) => ({
+        onboardingData: { ...state.onboardingData, step }
+      })),
+      
+      completeOnboarding: () => set((state) => ({
+        onboardingData: { ...state.onboardingData, isComplete: true },
+        userProfile: state.onboardingData.userProfile as UserProfile
+      })),
+      
+      resetOnboarding: () => set({
+        onboardingData: {
+          step: 1,
+          userProfile: {},
+          isComplete: false,
+          paymentSetup: false,
+        }
+      }),
     }),
     {
       name: 'wadm-dashboard',

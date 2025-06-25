@@ -125,74 +125,202 @@ Sistema de autenticación completo con onboarding y 2FA funcional
 
 ---
 
-## 📋 FASE 3: Interfaz de 133 Herramientas MCP (Día 3)
+## 📋 FASE 3: Chat Intelligence + Análisis Profesional (Día 3)
 
 ### 🎯 Objetivo
-Panel completo para usar todas las herramientas MCP disponibles
+Chat revolucionario con Claude Sonnet 4 que genere sesiones productivas de $2 con mega reportes profesionales
 
 ### ✅ Tareas Específicas
-- [ ] **Catálogo de Herramientas**
-  - Lista de 133 herramientas categorizadas
-  - Categorías: Wyckoff, SMC, Technical, Volume, Multi-Exchange
-  - Cards con descripción y parámetros
-  - Buscador con filtros avanzados
+- [ ] **Chat Interface Principal**
+  - Layout híbrido: Chat 70% + Sidebar tools 30%
+  - MessageList con historial de conversación
+  - MessageInput con sugerencias inteligentes
+  - Real-time typing indicators y loading states
+  - Session timer y token usage display
 
-- [ ] **Ejecutor de Herramientas**
-  - Formularios dinámicos para parámetros
-  - Validación de inputs en tiempo real
-  - Preview de request antes de ejecutar
-  - Loading states y progress indicators
+- [ ] **Claude Sonnet 4 Integration**
+  - Anthropic API integration para análisis profundo
+  - Context-aware prompting para trading strategies
+  - Tool execution orchestration (133 MCP tools)
+  - Multi-step analysis workflows
+  - Response streaming para UX fluida
 
-- [ ] **Resultados y Visualización**
-  - Display de resultados JSON formateado
-  - Visualizaciones específicas por tipo de herramienta
-  - Tablas responsivas para datos tabulares
-  - Gráficos inline para datos numéricos
+- [ ] **Mega Report Generator**
+  - Comprehensive trading analysis (no basic queries)
+  - Multi-timeframe Wyckoff + SMC analysis
+  - Cross-exchange validation y arbitrage opportunities
+  - Risk management strategies específicas
+  - Entry/exit points con probabilidades
 
-- [ ] **Gestión de Historial**
-  - Historial de herramientas ejecutadas
-  - Favoritos y herramientas más usadas
-  - Export de resultados (JSON, CSV)
-  - Reutilizar configuraciones guardadas
+- [ ] **Professional Consultation Flow**
+  - Session-based conversations (24h/$2 value)
+  - Strategy clarification y doubt resolution
+  - Follow-up questions inteligentes
+  - Personalized trading plans
+  - Educational explanations (why, not just what)
+
+- [ ] **Smart Symbol Detection (NUEVO)**
+  - NLP processing para detectar símbolos en chat natural
+  - Context-aware suggestions basadas en perfil usuario
+  - Eliminación completa del dropdown tradicional
+  - Auto-detection: "Bitcoin" → BTCUSDT automáticamente
+  - Multi-symbol analysis: "Compara ETH vs SOL"
+
+- [ ] **Smart Tool Orchestration**
+  - AI-driven tool selection based on query
+  - Background execution de multiple tools
+  - Results synthesis en format conversacional
+  - Chart generation con annotated insights
+  - Performance tracking y backtesting integration
 
 ### 📦 Entregable
-Interfaz completa para usar las 133 herramientas MCP
+Chat revolucionario que genere sesiones de consultoría de $2 con valor real
 
 ---
 
-## 📋 FASE 4: Visualización + Charts (Día 4)
+## 📋 FASE 4: Visualización Avanzada + Export Profesional (Día 4)
 
 ### 🎯 Objetivo
-Dashboard MVP completo con visualizaciones avanzadas
+Visualizaciones que complementen el chat con reportes exportables y charts anotados por IA
 
 ### ✅ Tareas Específicas
-- [ ] **TradingView Integration**
-  - Configurar Lightweight Charts
-  - Selector de símbolos con autocomplete
-  - Timeframes (1m, 5m, 15m, 1h, 4h, 1d)
-  - Candlestick charts con volume
+- [ ] **Charts con IA Annotations**
+  - TradingView Lightweight Charts integrado con chat
+  - AI-generated annotations en timeframes múltiples
+  - Wyckoff phases overlay con explicaciones
+  - SMC levels con reasoning automático
+  - Entry/exit zones con probability scoring
 
-- [ ] **Overlays de Análisis**
-  - Visualización de fases Wyckoff
-  - Niveles SMC (support/resistance)
-  - Order blocks y fair value gaps
-  - Volume profile overlay
+- [ ] **Market Intelligence Dashboard (NUEVO)**
+  - Proactive symbol suggestions basadas en momentum
+  - Portfolio context integration
+  - Morning briefings automáticos
+  - Event-driven alerts (FOMC, earnings, etc.)
+  - Cross-asset correlation warnings
 
-- [ ] **Panels de Datos**
-  - Panel de resumen de análisis actual
-  - Métricas en tiempo real
-  - Alertas visuales para eventos importantes
-  - Multi-exchange comparison
+- [ ] **Report Export System**
+  - PDF generation de sesiones completas
+  - Mega reportes con executive summary
+  - Chart screenshots con AI insights
+  - Trading plan exportable con risk management
+  - Session transcripts con key insights highlighted
 
-- [ ] **Performance y UX**
-  - Lazy loading para charts
-  - Caching de datos frecuentes
-  - Error boundaries y fallbacks
-  - Loading skeletons
-  - Export de charts (PNG/PDF)
+- [ ] **Advanced Analytics Dashboard**
+  - Performance tracking de strategies sugeridas
+  - Multi-exchange correlation matrix
+  - Portfolio impact analysis
+  - Risk assessment visualization
+  - Backtesting results integration
+
+- [ ] **Professional Presentation Mode**
+  - Clean layouts para client presentations
+  - White-label export options
+  - Custom branding para pro users
+  - Social sharing de insights (anonimizado)
+  - Collaboration features para teams
+
+- [ ] **Session Value Optimization**
+  - Session summary con value delivered
+  - User satisfaction tracking
+  - Learning path recommendations
+  - Advanced features unlock progression
+  - Premium session upgrades ($5-10 for complex analysis)
 
 ### 📦 Entregable
-Dashboard MVP completo con todas las visualizaciones
+Ecosystem completo que justifique $2/sesión con valor tangible y exportable
+
+---
+
+## 🚀 TASKS ESPECÍFICAS: Implementación Chat-First
+
+### 📋 TASK A: Symbol Detection Engine (Priority 1)
+**Tiempo**: 2-3 días
+**Complejidad**: ⭐⭐⭐ Media
+
+#### Sub-tareas:
+1. **NLP Service Creation**
+   ```typescript
+   // app/src/services/symbolDetection.ts
+   class SymbolDetectionService {
+     detectFromText(input: string): Symbol[]
+     extractTimeframes(input: string): Timeframe[]
+     suggestFromProfile(profile: UserProfile): Symbol[]
+   }
+   ```
+
+2. **Symbol Mapping Database**
+   ```typescript
+   // Mapeo natural language → symbols
+   const SYMBOL_ALIASES = {
+     'bitcoin': 'BTCUSDT',
+     'ethereum': 'ETHUSDT', 
+     'solana': 'SOLUSDT',
+     'eur/usd': 'EURUSD'
+   }
+   ```
+
+3. **Chat Integration**
+   - Integrar detection en chat input
+   - Visual feedback: "Detectando BTCUSDT..."
+   - Multi-symbol queries support
+
+### 📋 TASK B: Market Intelligence Engine (Priority 2)  
+**Tiempo**: 3-4 días
+**Complejidad**: ⭐⭐⭐⭐ Alta
+
+#### Sub-tareas:
+1. **Momentum Detection**
+   - Real-time price change tracking
+   - Volume anomaly detection
+   - Breakout pattern recognition
+
+2. **Portfolio Context**
+   - User holdings tracking (mock)
+   - Correlation analysis automática
+   - Risk exposure warnings
+
+3. **Proactive Suggestions**
+   - Morning market briefings
+   - Event calendar integration
+   - Technical setup alerts
+
+### 📋 TASK C: Behavioral Learning (Priority 3)
+**Tiempo**: 4-5 días  
+**Complejidad**: ⭐⭐⭐⭐⭐ Muy Alta
+
+#### Sub-tareas:
+1. **Pattern Recognition**
+   - User interaction tracking
+   - Success rate analysis
+   - Preference learning
+
+2. **Predictive Modeling**
+   - Next symbol prediction
+   - Optimal timing suggestions
+   - Risk tolerance adaptation
+
+---
+
+## 🎯 Success Metrics Actualizados
+
+### Chat-First UX
+- **Symbol Selection Time**: 0 clicks (vs 5 clicks tradicional)
+- **Query Success Rate**: 95%+ symbol detection accuracy
+- **Discovery Rate**: 80%+ más símbolos explorados por sesión
+
+### AI Intelligence
+- **Suggestion Relevance**: 85%+ user acceptance
+- **Proactive Value**: 70%+ suggestions resultan profitable
+- **Learning Speed**: 50% improvement en 10 sesiones
+
+### Business Impact
+- **Session Value**: $2 → $3 (más análisis por sesión)
+- **User Retention**: 90% vs 60% industry standard
+- **Viral Factor**: 40% users share insights externally
+
+---
+
+**Resultado**: Transformamos WAIckoff de un dashboard tradicional a una **AI trading companion** que entiende lenguaje natural y proactivamente sugiere oportunidades. 🎯
 
 ---
 
@@ -282,10 +410,11 @@ VITE_VERSION=1.0.0
 ## 🚀 Criterios de Éxito
 
 ### Funcionales
-- [ ] Usuario puede autenticarse con API key
-- [ ] Gestión completa de sesiones ($1/sesión)
-- [ ] Acceso a las 133 herramientas MCP
-- [ ] Visualizaciones de charts funcionando
+- [ ] Chat revolucionario con Claude Sonnet 4
+- [ ] Sesiones de consultoría profesional ($2/sesión)
+- [ ] Mega reportes con análisis multi-dimensional
+- [ ] Educación contextual (why, not just what)
+- [ ] Export profesional de reportes y trading plans
 - [ ] Responsive design (móvil + desktop)
 
 ### Técnicos
