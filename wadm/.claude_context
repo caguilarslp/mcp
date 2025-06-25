@@ -21,7 +21,7 @@ IMPORTANTÍSIMO LEER PRIMERO:
 ✅ BUG-002: MCP Mock Implementation RESOLVED!
 ✅ TASK-100: Collectors Data Flow COMPLETED 100%! 🎉
 ✅ TASK-101: Bybit Investigation COMPLETED! (4/4 exchanges operational) 🏆
-🔄 Next: TASK-064 (Dashboard MVP) + TASK-090 (Premium AI)
+🔄 Next: TASK-064 (Dashboard MVP - 4 Fases definidas) + TASK-090 (Premium AI)
 
 ## 🏆 HISTÓRICO: 100% Exchange Coverage Achieved! 
 - **WADM STATUS**: **PRODUCTION READY FOR BUSINESS** ✅
@@ -53,6 +53,15 @@ IMPORTANTÍSIMO LEER PRIMERO:
 - 🔴 BUG-002: Mock implementation detectada - viola principio NO MOCKS
 - ✅ Project Cleanup: 24 archivos movidos a claude/debug/
 - ✅ API funcionando sin errores de importación
+- ✅ **TASK-064 FASE I**: Frontend base creado - Nomenclatura actualizada
+- ✅ **TASK-064 FASE II**: Sistema completo de autenticación + 2FA + onboarding COMPLETADO
+- 🔄 **TASK-064 FASE III**: Interfaz de 133 Herramientas MCP (Día 3)
+
+## 📁 Nomenclatura Actualizada (2025-06-24)
+- **API**: `src/` → `api/` (FastAPI backend - localhost:8000)
+- **Frontend**: `app/` (Vite + React + TypeScript - localhost:5173) - Dashboard privado
+- **MCP**: `mcp_server/` → `mcp/` (133 herramientas MCP)
+- **Landing**: `waickoff.com` (proyecto separado - página pública)
 
 ## Architecture Decision
 **Monolith First Approach** (KISS principle):
@@ -98,10 +107,12 @@ IMPORTANTÍSIMO LEER PRIMERO:
 - ✅ 3-Month Context: Operational in MCP
 
 ## Tech Stack Decision
-- **Frontend**: app.waickoff.com (Vite + React + Mantine)
-- **API**: api.waickoff.com (FastAPI + Claude integration)
+- **Frontend**: localhost:3000 → app.waickoff.com (producción VPS)
+- **API**: localhost:8000 → api.waickoff.com (producción VPS)
+- **Current**: Docker local development (operacional ✅)
 - **Database**: MongoDB + Redis
 - **AI**: Claude Sonnet 4 API (dentro de la API)
+- **Environment**: app.env (primary) + .env (clone for compatibility)
 
 ## Quick Commands
 ```bash
@@ -133,8 +144,19 @@ http://localhost:3000                   # Frontend (próximamente)
 - **Target**: $15k MRR en mes 1
 - **Payment**: Deferred - Focus on MVP features
 
+## Development Status
+- **Current**: Local Docker development (localhost:8000, localhost:3000)
+- **API Local**: Docker localhost:8000 operacional con 133 MCP tools ✅
+- **Production**: api.waickoff.com, app.waickoff.com (futuro VPS)
+- **Environment**: app.env (primary config) + .env (clone)
+- **Local domains**: api.waickoff.local, app.waickoff.local (opcional, via hosts)
+
 ## Next Immediate Actions
-1. **TASK-064** - Dashboard MVP (4 días) 🔥 PRIORITY
+1. **TASK-064** - Dashboard MVP (4 fases x 1 día) 🔥 PRIORITY
+   - FASE 1: Setup + Infraestructura Base (local domains)
+   - FASE 2: Gestión de Sesiones + API Keys  
+   - FASE 3: Interfaz de 133 Herramientas MCP
+   - FASE 4: Visualización + Charts
 2. **TASK-090** - Premium AI Integration (3 días) 🔥 HIGH
 3. **TASK-081** - Footprint Charts (3 días)
 
