@@ -32,17 +32,16 @@ MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://mongodb:27017/wadm")
 # MongoDB settings for decimal storage
 MONGODB_DECIMAL128 = True  # Use Decimal128 for precise storage
 
-# Symbols to collect - Updated 2025-06-21
-# All exchanges track the same 19 symbols
-# Core Focus: ISO20022, RWA/Tokenization, AI - Reference: BTC, ETH, SOL
+# Symbols to collect - Updated 2025-06-22
+# CENTRALIZED CONFIGURATION: All symbols come from ALL_SYMBOLS environment variable
+# This eliminates duplication between docker-compose.yml, config.py, and app.env
+
+# Read base symbols from ALL_SYMBOLS environment variable (set in docker-compose.yml)
 BASE_SYMBOLS = os.getenv("ALL_SYMBOLS", 
-    "BTCUSDT,ETHUSDT,SOLUSDT,"  # Reference (3)
-    "XRPUSDT,XLMUSDT,ALGOUSDT,ADAUSDT,HBARUSDT,QNTUSDT,"  # ISO20022 (6)
-    "LINKUSDT,POLYXUSDT,ONDOUSDT,TRUUSDT,"  # RWA/Tokenization (4)
-    "FETUSDT,OCEANUSDT,AGIXUSDT,TAOUSDT,VIRTUALUSDT,ICPUSDT"  # AI (6)
+    "BTCUSDT,ETHUSDT,SOLUSDT,TRXUSDT,XRPUSDT,XLMUSDT,HBARUSDT,ADAUSDT"
 ).split(",")
 
-# Helper function to convert symbol formats
+# Helper function to convert symbol formats for different exchanges
 def convert_symbol_format(symbols: List[str], exchange: str) -> List[str]:
     """Convert symbols to exchange-specific format"""
     converted = []
@@ -63,9 +62,9 @@ def convert_symbol_format(symbols: List[str], exchange: str) -> List[str]:
             converted.append(symbol)
     return converted
 
-# Apply format conversions
-BYBIT_SYMBOLS = BASE_SYMBOLS  # Standard format
-BINANCE_SYMBOLS = BASE_SYMBOLS  # Standard format
+# Apply format conversions for each exchange
+BYBIT_SYMBOLS = BASE_SYMBOLS  # Standard USDT format
+BINANCE_SYMBOLS = BASE_SYMBOLS  # Standard USDT format
 COINBASE_SYMBOLS = convert_symbol_format(BASE_SYMBOLS, "coinbase")
 KRAKEN_SYMBOLS = convert_symbol_format(BASE_SYMBOLS, "kraken")
 
@@ -118,12 +117,12 @@ ELLIOTT_MIN_WAVE_SIZE = 0.01  # Minimum 1% move for Elliott Wave
 VWAP_ANCHORS = ["daily", "weekly", "monthly"]  # VWAP anchor points
 MULTI_TIMEFRAMES = ["1m", "5m", "15m", "1h", "4h", "1d"]  # For MTF analysis
 
-# Symbol categories for easy filtering
+# Symbol categories for easy filtering - UTILITY FOCUSED
 SYMBOL_CATEGORIES = {
-    "reference": ["BTCUSDT", "ETHUSDT", "SOLUSDT"],
-    "iso20022": ["XRPUSDT", "XLMUSDT", "ALGOUSDT", "ADAUSDT", "HBARUSDT", "QNTUSDT"],
-    "rwa": ["LINKUSDT", "POLYXUSDT", "ONDOUSDT", "TRUUSDT"],
-    "ai": ["FETUSDT", "OCEANUSDT", "AGIXUSDT", "TAOUSDT", "VIRTUALUSDT", "ICPUSDT"]
+    "reference": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "TRXUSDT"],  # Major reference cryptos
+    "iso20022": ["XRPUSDT", "XLMUSDT", "HBARUSDT", "ADAUSDT", "QNTUSDT", "ALGOUSDT"],  # ISO20022 standard
+    "rwa": ["ONDOUSDT", "LINKUSDT", "POLYXUSDT", "TRUUSDT", "RIOUSDT", "MANTRAUSDT"],  # Real World Assets
+    "ai": ["RENDERUSDT", "ICPUSDT", "FETUSDT", "OCEANUSDT", "AGIXUSDT", "TAOUSDT", "VIRTUALUSDT", "ARKMUSDT"]  # AI & Computing
 }
 
 
@@ -149,18 +148,18 @@ class Config:
     # Symbols - Create dict format from base symbols
     SYMBOLS = {symbol: symbol for symbol in BASE_SYMBOLS}
     
-    # Symbols
+    # Exchange-specific symbols (read from environment)
     BASE_SYMBOLS = BASE_SYMBOLS
     BYBIT_SYMBOLS = BYBIT_SYMBOLS
     BINANCE_SYMBOLS = BINANCE_SYMBOLS
     COINBASE_SYMBOLS = COINBASE_SYMBOLS
     KRAKEN_SYMBOLS = KRAKEN_SYMBOLS
     
-    # Reference to category lists
-    REFERENCE_SYMBOLS = ["BTC", "ETH", "SOL"]
-    ISO20022_SYMBOLS = ["XRP", "XLM", "ALGO", "ADA", "HBAR", "QNT"]
-    RWA_SYMBOLS = ["LINK", "POLYX", "ONDO", "TRU"]
-    AI_SYMBOLS = ["FET", "OCEAN", "AGIX", "TAO", "VIRTUAL", "ICP"]
+    # Symbol categories for utility-focused trading
+    REFERENCE_SYMBOLS = ["BTC", "ETH", "SOL", "TRX"]  # Major reference
+    ISO20022_SYMBOLS = ["XRP", "XLM", "HBAR", "ADA", "QNT", "ALGO"]  # ISO20022 standard
+    RWA_SYMBOLS = ["ONDO", "LINK", "POLYX", "TRU", "RIO", "MANTRA"]  # Real World Assets  
+    AI_SYMBOLS = ["RENDER", "ICP", "FET", "OCEAN", "AGIX", "TAO", "VIRTUAL", "ARKM"]  # AI & Computing
     
     # WebSocket URLs
     BYBIT_WS_URL = BYBIT_WS_URL

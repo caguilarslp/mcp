@@ -22,7 +22,7 @@ import uuid
 from ..logger import get_logger
 from .order_blocks import OrderBlockDetector, OrderBlock
 from .fvg_detector import FVGDetector, FairValueGap
-from .structure_analyzer import StructureAnalyzer, StructureBreak
+from .structure_analyzer import StructureAnalyzer, StructureBreak, TrendDirection
 from .liquidity_mapper import LiquidityMapper, LiquidityZone
 
 logger = get_logger(__name__)
@@ -302,7 +302,7 @@ class SMCDashboard:
                 confluence_score=confluence_data['confluence_score'],
                 order_blocks=order_blocks,
                 fair_value_gaps=fair_value_gaps,
-                structure_breaks=structure_analysis.recent_breaks if structure_analysis else [],
+                structure_breaks=structure_analysis.structure_breaks if structure_analysis else [],
                 liquidity_zones=liquidity_zones,
                 key_support_levels=key_levels['support'],
                 key_resistance_levels=key_levels['resistance'],
@@ -384,22 +384,25 @@ class SMCDashboard:
         
         # Structure analysis contribution
         if structure_analysis:
-            if structure_analysis.trend_direction == "bullish":
+            if structure_analysis.trend == TrendDirection.BULLISH:
                 bullish_score += 20
-            elif structure_analysis.trend_direction == "bearish":
+            elif structure_analysis.trend == TrendDirection.BEARISH:
                 bearish_score += 20
             
             # Recent BOS/CHoCH
-            recent_breaks = [b for b in structure_analysis.recent_breaks 
-                           if (datetime.now(timezone.utc) - b.timestamp).total_seconds() < 3600]
+            recent_breaks = [b for b in structure_analysis.structure_breaks 
+                           if (datetime.now(timezone.utc) - b.break_time).total_seconds() < 3600]
             for break_event in recent_breaks:
-                if break_event.type == "bos_bullish":
+                # Handle both enum types - check if it's a string or enum value
+                break_type = break_event.type.value if hasattr(break_event.type, 'value') else str(break_event.type)
+                
+                if "bos" in break_type and "bullish" in break_type:
                     bullish_score += 15
-                elif break_event.type == "bos_bearish":
+                elif "bos" in break_type and "bearish" in break_type:
                     bearish_score += 15
-                elif break_event.type == "choch_bullish":
+                elif "choch" in break_type and "bullish" in break_type:
                     bullish_score += 20
-                elif break_event.type == "choch_bearish":
+                elif "choch" in break_type and "bearish" in break_type:
                     bearish_score += 20
         
         # Liquidity zones contribution
@@ -559,7 +562,7 @@ class SMCDashboard:
         # Collect supporting elements
         supporting_obs = [ob.id for ob in order_blocks if ob.is_active][:3]
         supporting_fvgs = [fvg.id for fvg in fair_value_gaps if fvg.state == "unfilled"][:3]
-        supporting_structure = [sb.id for sb in structure_analysis.recent_breaks][:3] if structure_analysis else []
+        supporting_structure = [sb.id for sb in structure_analysis.structure_breaks][:3] if structure_analysis else []
         supporting_liquidity = [lz.id for lz in liquidity_zones if lz.is_active][:3]
         
         # Check institutional confirmation
@@ -759,9 +762,9 @@ class SMCDashboard:
                 insights.append(f"{len(unfilled_fvgs)} unfilled FVGs may act as price magnets")
         
         # Structure insight
-        if structure_analysis and structure_analysis.recent_breaks:
-            latest_break = structure_analysis.recent_breaks[0]
-            insights.append(f"Recent {latest_break.type} confirms {structure_analysis.trend_direction} momentum")
+        if structure_analysis and structure_analysis.structure_breaks:
+            latest_break = structure_analysis.structure_breaks[-1]  # Get the most recent break
+            insights.append(f"Recent {latest_break.type.value} confirms {structure_analysis.trend.value} momentum")
         
         # Liquidity insight
         if liquidity_zones:
