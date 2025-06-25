@@ -116,7 +116,10 @@ class RealMongoStorageService implements IStorageService {
 
   constructor(connectionString?: string) {
     this.logger = new Logger('RealMongoStorageService');
-    this.connectionString = connectionString || 'mongodb://localhost:27017';
+    this.connectionString = connectionString || 
+      process.env.MONGODB_URI || 
+      process.env.DATABASE_URL || 
+      'mongodb://mongo:27017';
   }
 
   async initialize(): Promise<void> {

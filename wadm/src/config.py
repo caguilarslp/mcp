@@ -26,8 +26,8 @@ QUANTITY_DECIMAL_PLACES = int(os.getenv("QUANTITY_DECIMAL_PLACES", "8"))  # 8 de
 USE_DECIMAL_PRECISION = os.getenv("USE_DECIMAL_PRECISION", "true").lower() == "true"
 
 # Database
-# Simple MongoDB connection for development (no auth)
-MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://mongodb:27017/wadm")
+# MongoDB connection - supports both DATABASE_URL and MONGODB_URL for compatibility
+MONGODB_URL = os.getenv("DATABASE_URL", os.getenv("MONGODB_URL", "mongodb://mongo:27017/wadm"))
 
 # MongoDB settings for decimal storage
 MONGODB_DECIMAL128 = True  # Use Decimal128 for precise storage

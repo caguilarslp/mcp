@@ -3,12 +3,10 @@ import {
   Title,
   Button,
   Menu,
-  Avatar,
   Text,
   Badge,
   ActionIcon,
   Burger,
-  Box,
 } from '@mantine/core';
 import {
   IconUser,

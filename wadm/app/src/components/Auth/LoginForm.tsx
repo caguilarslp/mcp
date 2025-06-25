@@ -14,7 +14,7 @@ import {
   Checkbox,
   Anchor,
 } from '@mantine/core';
-import { IconKey, IconInfoCircle, IconMail } from '@tabler/icons-react';
+import { IconInfoCircle, IconMail } from '@tabler/icons-react';
 import { useAuthStore } from '../../store';
 
 export function LoginForm() {

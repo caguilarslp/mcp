@@ -15,7 +15,7 @@ import {
   Progress,
   Anchor,
 } from '@mantine/core';
-import { IconMail, IconUser, IconBuilding, IconInfoCircle, IconCheck, IconX } from '@tabler/icons-react';
+import { IconMail, IconUser, IconBuilding, IconInfoCircle } from '@tabler/icons-react';
 import { useAuthStore } from '../../store';
 
 interface PasswordStrength {

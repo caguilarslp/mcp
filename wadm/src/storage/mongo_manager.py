@@ -34,8 +34,8 @@ class MongoManager:
                 from pymongo import MongoClient
                 import os
                 
-                # Use simple MongoDB URL for development
-                mongo_url = os.getenv("MONGODB_URL", "mongodb://mongodb:27017/wadm")
+                # Use MongoDB URL from environment (supports DATABASE_URL and MONGODB_URL)
+                mongo_url = os.getenv("DATABASE_URL", os.getenv("MONGODB_URL", "mongodb://mongo:27017/wadm"))
                 
                 # Quick connection test
                 test_client = MongoClient(mongo_url, serverSelectionTimeoutMS=5000)

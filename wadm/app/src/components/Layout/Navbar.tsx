@@ -68,7 +68,7 @@ function NavItem({ icon: Icon, label, color, rightSection, onClick }: NavItemPro
 export function Navbar() {
   const { mcpTools } = useAuthStore();
 
-  const renderNavItem = (item: any, level = 0) => (
+  const renderNavItem = (item: any, /* level = 0 */) => (
     <NavItem
       key={item.id}
       icon={item.icon}

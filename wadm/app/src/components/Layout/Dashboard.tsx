@@ -5,19 +5,14 @@ import {
   Title,
   Text,
   Button,
-  Menu,
-  Avatar,
+  // Menu,
+  // Avatar,
   Badge,
-  Stack,
   Card,
   SimpleGrid,
   Progress,
-  ActionIcon,
 } from '@mantine/core';
 import {
-  IconUser,
-  IconLogout,
-  IconSettings,
   IconKey,
   IconChartLine,
   IconTools,
@@ -26,14 +21,15 @@ import {
 import { useAuthStore } from '../../store';
 import { Navbar } from './Navbar';
 import { Header } from './Header';
+import { IndicatorChart, ChatChart } from '../Charts';
 
 export function Dashboard() {
   const { 
     currentSession, 
     mcpTools, 
     selectedSymbol,
-    logout,
-    currentUser
+    // logout,
+    // currentUser
   } = useAuthStore();
 
   return (
@@ -113,6 +109,81 @@ export function Dashboard() {
                 </div>
                 <IconKey size={32} color="var(--mantine-color-purple-6)" />
               </Group>
+            </Card>
+          </SimpleGrid>
+
+          {/* Live Market Analysis */}
+          <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="lg" mb="xl">
+            <Card withBorder>
+              <Group justify="space-between" mb="md">
+                <div>
+                  <Title order={3}>Live Chart Analysis</Title>
+                  <Text c="dimmed" size="sm">
+                    Real-time {selectedSymbol} with AI insights
+                  </Text>
+                </div>
+                <Badge color="green" variant="dot">Live</Badge>
+              </Group>
+              
+              <ChatChart
+                symbol={selectedSymbol || 'BTCUSDT'}
+                timeframe="60"
+                height={300}
+                showQuickStats={true}
+              />
+            </Card>
+
+            <Card withBorder>
+              <Title order={3} mb="md">Smart Money Concepts</Title>
+              <IndicatorChart
+                symbol={selectedSymbol || 'BTCUSDT'}
+                indicatorType="smc"
+                timeframe="60"
+                height={300}
+              />
+            </Card>
+          </SimpleGrid>
+
+          {/* Advanced Indicators */}
+          <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing="md" mb="xl">
+            <Card withBorder>
+              <Title order={4} mb="md">Volume Profile</Title>
+              <IndicatorChart
+                symbol={selectedSymbol || 'BTCUSDT'}
+                indicatorType="volume-profile"
+                timeframe="60"
+                height={200}
+              />
+            </Card>
+
+            <Card withBorder>
+              <Title order={4} mb="md">Order Flow</Title>
+              <IndicatorChart
+                symbol={selectedSymbol || 'BTCUSDT'}
+                indicatorType="order-flow"
+                timeframe="60"
+                height={200}
+              />
+            </Card>
+
+            <Card withBorder>
+              <Title order={4} mb="md">Wyckoff Analysis</Title>
+              <IndicatorChart
+                symbol={selectedSymbol || 'BTCUSDT'}
+                indicatorType="wyckoff"
+                timeframe="60"
+                height={200}
+              />
+            </Card>
+
+            <Card withBorder>
+              <Title order={4} mb="md">Bollinger Bands</Title>
+              <IndicatorChart
+                symbol={selectedSymbol || 'BTCUSDT'}
+                indicatorType="bollinger"
+                timeframe="60"
+                height={200}
+              />
             </Card>
           </SimpleGrid>
 

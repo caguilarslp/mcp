@@ -13,7 +13,7 @@ import {
   Badge,
   Grid,
   TextInput,
-  Select,
+
   Alert,
   Progress,
 } from '@mantine/core';
@@ -52,7 +52,7 @@ export function OnboardingFlow() {
     cvv: '123',
     nameOnCard: 'John Doe',
   });
-  const { user, logout, onboardingData, setOnboardingStep, completeOnboarding } = useAuthStore();
+  const { /* onboardingData, setOnboardingStep, completeOnboarding */ } = useAuthStore();
 
   const handleNext = () => {
     if (currentStep < ONBOARDING_STEPS.length - 1) {
@@ -294,7 +294,8 @@ export function OnboardingFlow() {
         <Group justify="space-between" mt="xl">
           <Button
             variant="subtle"
-            onClick={currentStep === 0 ? switchToLogin : handleBack}
+            onClick={handleBack}
+            disabled={currentStep === 0}
           >
             {currentStep === 0 ? 'Back to Login' : 'Back'}
           </Button>

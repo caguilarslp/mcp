@@ -1,5 +1,5 @@
 import { MantineProvider, createTheme } from '@mantine/core';
-import { useLocalStorage } from '@mantine/hooks';
+// import { useLocalStorage } from '@mantine/hooks';
 import { useAuthStore } from './store';
 import { LoginForm } from './components/Auth/LoginForm';
 import { SignUpForm } from './components/Auth/SignUpForm';
@@ -40,7 +40,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const { authStep, isAuthenticated, theme: appTheme, toggleTheme } = useAuthStore();
+  const { authStep, isAuthenticated, theme: appTheme } = useAuthStore();
 
   const renderAuthStep = () => {
     if (isAuthenticated) {

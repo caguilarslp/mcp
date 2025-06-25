@@ -151,4 +151,7 @@ export interface OnboardingData {
   userProfile: Partial<UserProfile>;
   isComplete: boolean;
   paymentSetup: boolean;
-} 
+}
+
+// Re-export LLM types for convenience
+export type * from './llm'; 
