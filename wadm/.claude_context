@@ -13,182 +13,118 @@ IMPORTANTÍSIMO LEER PRIMERO:
  - NO CREES UN ARCHIVO TEST, Y OTRO SI FALLA, Y OTRO, ..., USA EL MISMO Y MODIFICALO
 ###########################################
 
-# WAIckoff - Revolutionary Trading Chat Platform
+# WADM - wAIckoff Data Manager v0.1.0
 
-## 🎯 Proyecto Estado Actual (2025-06-24)
+## 🚨 ESTADO CRÍTICO (2025-06-25)
 
-**Vision Revolucionaria**: Chat de consultoría profesional de trading que vale $2/sesión - No es un chat básico, es un analista experto AI con Claude Sonnet 4.
+### ARQUITECTURA ACTUAL (3 componentes):
+1. **Backend API** (`:8000`) - FastAPI + Collectors + 2 indicadores
+2. **MCP Server** (`:8001`) - 133 herramientas de análisis
+3. **Frontend** (`:3000`) - React Dashboard (en desarrollo)
 
-### 📁 Estructura de Nomenclatura
-```
-/d/projects/mcp/wadm/
-├── api/              # Backend FastAPI (antes src/)
-├── app/              # Frontend Dashboard Vite + React (ACTUAL)
-├── mcp/              # MCP Server con 133 tools (antes mcp_server/)
-└── waickoff.com/     # Landing page (proyecto separado)
-```
+### PROBLEMA PRINCIPAL: **ARQUITECTURA DUPLICADA**
+- Backend calcula algunos indicadores (Volume Profile, Order Flow)
+- MCP Server tiene 133 herramientas más avanzadas
+- Dos sistemas MongoDB separados = datos fragmentados
+- Frontend debe consultar 2 endpoints diferentes
 
-## 🚀 Estado Operacional
+### SOLUCIÓN EN PROGRESO: **UNIFICACIÓN**
+Ver `/claude/architecture/` para detalles completos
 
-### ✅ Completamente Funcional
-- **API Backend**: localhost:8000 (Docker) - 133 MCP tools operacionales
-- **4 Exchanges**: Bybit, Binance, Coinbase, Kraken - datos reales
-- **133 Tools MCP**: Wyckoff, SMC, Volume, Multi-Exchange analysis
-- **Documentación**: Completa y actualizada
+## 📊 INDICADORES
 
-### 🔄 En Desarrollo
-- **Dashboard Frontend**: localhost:5173 (app/) - TASK-064
-- **Estado**: FASE 2 COMPLETADA ✅, FASE 3 EN PROGRESO
+### Actualmente en Backend (Python):
+1. **Volume Profile** - POC, VAH, VAL
+2. **Order Flow** - Delta, momentum, absorption
 
-## 📋 TASK-064: Dashboard MVP Revolucionario
+### Actualmente en MCP (TypeScript):
+- 133 herramientas incluyendo Wyckoff, SMC, Elliott, Fibonacci, etc.
 
-### ✅ FASE 1: Infraestructura (COMPLETADA)
-- Vite + React + TypeScript + Mantine + Zustand
-- Proxy configurado → localhost:8000
-- Layout base con tema oscuro para trading
+### FALTAN en Backend:
+1. **Footprint Charts** - Bid/Ask por nivel de precio
+2. **Market Profile** - TPO letters
+3. **Liquidation Levels** - Por leverage
+4. **Dark Pool Detection** - Trades institucionales
+5. **VWAP** - Con bandas
+6. **Bollinger Bands**
+7. **RSI**
+8. **MACD**
 
-### ✅ FASE 2: Autenticación Completa (COMPLETADA)
-**PIVOT**: Cambio de API keys a auth tradicional con 2FA
-- SignUpForm con validación en tiempo real
-- LoginForm con "Remember me"
-- TwoFactorForm con 6-digit PIN + timer
-- OnboardingFlow de 3 pasos con business model
-- Mock payment system (Stripe/PayPal UI)
+### PROBLEMA: Indicadores calculan cada N trades
+- **Actual**: Cada 50 trades (inconsistente)
+- **Propuesto**: Por tiempo fijo (1min, 5min, 15min)
 
-### 🔄 FASE 3: Multi-LLM Chat Intelligence (EN PROGRESO)
-**REVOLUCIONARIA**: No chat básico, sino consultoría profesional
-- **Multi-LLM Architecture**: Anthropic, OpenAI, Google Gemini (SDKs directos)
-- **FastMCP 2.8.0**: 133 tools ya operacionales ✅
-- **Smart Tool Orchestration**: LLM + MCP integration
-- Layout híbrido: Chat 70% + Tools sidebar 30%
-- Mega report generator (15+ tools por consulta)
-- Educational explanations (why, not just what)
-- Professional consultation flow
+## 🎯 PLAN INMEDIATO
 
-### 📋 FASE 4: Visualización + Export (PLANIFICADA)
-- Charts con AI annotations
-- PDF export de sesiones completas
-- Professional presentation mode
-- Trading plans exportables
+### Hoy:
+1. Cambiar cálculo de indicadores a tiempo fijo
+2. Unificar MongoDB (mismo connection string)
 
-## 💡 Visión Revolucionaria
+### Esta semana:
+1. Implementar indicadores faltantes
+2. Migrar MCP engine al backend
+3. Eliminar arquitectura duplicada
 
-### ❌ Lo que NO somos:
-- Chat básico: "¿Cómo está BTCUSDT?" → "Precio: $45,000"
-- Información gratuita disponible en cualquier parte
-- Tools sueltas sin cohesión
+### Resultado final:
+- Un solo backend con todo
+- Un solo MongoDB
+- Un solo endpoint para frontend
+- Mejor performance y mantenimiento
 
-### ✅ Lo que SÍ somos:
-- **Consultor experto AI** con 133 herramientas profesionales
-- **Estrategias completas** con análisis multi-dimensional
-- **Planes de trading accionables** con entry/exit específicos
-- **Educación contextual** que explica el "por qué"
+## 🛠️ COMANDOS CLAVE
 
-### 💰 Modelo de Valor: $2/Sesión
-- **Análisis multi-dimensional** (30+ data points)
-- **Estrategia específica** con entry/exit
-- **Plan de gestión de riesgo** personalizado
-- **Educación contextual** (aprender trading)
-- **Reporte exportable** para referencia
-- **Follow-up inteligente** (sesión completa 24h)
-
-## 🛠️ Tech Stack
-
-### Frontend (app/)
-- **Vite 5.x** + **React 18.x** + **TypeScript 5.x**
-- **Mantine 7.x** (UI components)
-- **Zustand 4.x** (state management)
-- **Axios** (API client)
-- **TradingView Lightweight Charts**
-- **React Router 6.x**
-
-### Backend (api/)
-- **FastAPI** + **Python**
-- **Docker Compose** (production ready)
-- **MongoDB** (storage)
-- **Redis** (caching)
-
-### MCP Tools (mcp/)
-- **133 tools** operacionales
-- **TypeScript/Node.js**
-- **4 exchanges** integration
-- **Storage system** con análisis históricos
-
-## 🔑 Comandos Clave
-
-### Desarrollo Frontend
 ```bash
-cd app/
-npm run dev    # localhost:5173
-npm run build
-npm run preview
+# Desarrollo actual
+docker-compose up -d          # Levanta todo
+docker-compose logs -f backend  # Ver logs
+
+# Verificar MongoDB
+docker exec -it wadm-mongo-1 mongosh -u wadm -p wadm_secure_2024
+> use wadm
+> show collections
+> db.volume_profile.countDocuments()
+
+# Frontend desarrollo
+cd app && npm run dev
 ```
 
-### Backend API
-```bash
-docker-compose up -d    # localhost:8000
-# Ya operacional - no necesita cambios
+## 📁 ESTRUCTURA IMPORTANTE
+
+```
+wadm/
+├── src/
+│   ├── api/          # FastAPI routes
+│   ├── collectors/   # WebSocket exchanges
+│   ├── indicators/   # Solo 2 actualmente
+│   ├── storage/      # MongoDB manager
+│   └── manager.py    # Coordinador principal
+├── mcp_server/       # 133 herramientas (a migrar)
+├── app/              # Frontend React
+└── claude/
+    ├── architecture/ # NUEVA ARQUITECTURA
+    └── daily/        # Logs diarios
 ```
 
-### MCP Server
-```bash
-cd mcp/
-npm start    # Ya integrado con API
-```
+## 🔧 CONFIGURACIÓN
 
-## 📊 Competitive Differentiation
+- **MongoDB**: `mongodb://wadm:wadm_secure_2024@mongo:27017/wadm?authSource=admin`
+- **Symbols**: BTCUSDT, ETHUSDT, SOLUSDT, TRXUSDT, XRPUSDT, XLMUSDT, HBARUSDT, ADAUSDT
+- **Exchanges**: Bybit, Binance, Coinbase, Kraken
 
-### vs. TradingView Premium ($15/mes):
-- **WAIckoff**: AI-driven analysis + education
-- **TradingView**: Charts + indicators (usuario hace el trabajo)
+## ⚠️ NOTAS CRÍTICAS
 
-### vs. Human Analysts ($50-200/hora):
-- **WAIckoff**: 24/7 disponible, consistent quality, $2
-- **Humans**: Limited availability, variable quality, expensive
+1. **NO usar artefactos** - Todo directo al filesystem
+2. **Python 3.12 strict** - Type hints obligatorios
+3. **Async by default** - Todo I/O asíncrono
+4. **Dashboard puede esperar** - Primero unificar backend
 
-### vs. Other AI Trading Bots:
-- **WAIckoff**: Educational + strategic (builds user skill)
-- **Bots**: Black box (users stay dependent)
+## 📈 MÉTRICAS ACTUALES
 
-## 🎯 Success Metrics
+- Trades procesados: 1400+/minuto
+- Indicadores calculados: Variable (problema)
+- Latencia API→MCP: ~50ms (eliminar)
+- Storage: MongoDB 7.0
 
-### User Value Delivered
-- **Analysis Depth**: 15+ tools ejecutadas por consulta
-- **Strategy Accuracy**: 70%+ win rate en backtesting
-- **Time Saved**: 2+ horas de análisis manual
-- **Learning Progress**: Measurable skill development
+---
 
-### Business Metrics
-- **Session Value**: $2 justified by tangible output
-- **Retention**: 80%+ users return within 7 days
-- **Upgrade Rate**: 20% users try premium sessions ($5-10)
-- **NPS Score**: 9+ (users evangelizan el servicio)
-
-## 📚 Documentación Clave
-
-### Para Implementación:
-- `claude/tasks/TASK-064-DASHBOARD-MVP.md` - Plan completo
-- `claude/docs/CHAT-REVOLUTIONARY-VISION.md` - Visión detallada
-- `claude/docs/AUTHENTICATION-SYSTEM.md` - Sistema auth actual
-
-### Para Seguimiento:
-- `claude/tasks/task-tracker.md` - Estado de tareas
-- `claude/master-log.md` - Log de progreso
-- `claude/daily/2025-06-24.md` - Log diario actual
-
-## 🚀 Next Steps
-
-### Inmediato:
-1. **Multi-LLM Service Layer**: Anthropic + OpenAI + Google SDKs
-2. **Smart Tool Orchestration**: LLM decision-making + FastMCP execution
-3. **Chat Intelligence Interface**: Streaming + provider selection
-4. **Mega Report Generator**: Multi-provider synthesis
-5. **Symbol Detection Engine**: NLP-powered symbol extraction
-
-### Esta Semana:
-1. Charts con AI annotations
-2. PDF export system
-3. Professional presentation mode
-4. Testing y refinamiento
-
-**Objetivo**: Crear el primer chat de trading que valga realmente $2/sesión por la profundidad, educación y valor accionable que entrega. 🎯
+**SIGUIENTE PASO**: Implementar cálculo de indicadores por tiempo fijo en `src/manager.py`
