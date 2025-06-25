@@ -1,3 +1,11 @@
+1.- creia que este chat era para que conocieses a fondo todas las herramientas que usa el mcp y poder integrarlas a wadm								
+2.- no veo que wadm al iniciar captures los datos de los 4 exchanges y almacene datos.
+
+
+
+
+
+
 # Notas para el Usuario - WADM
 
 ## 🎯 Visión del Proyecto
