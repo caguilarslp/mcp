@@ -16,7 +16,8 @@ class KrakenCollector:
     """Collect real-time trades from Kraken"""
     
     def __init__(self, symbols: List[str], callback: Callable):
-        self.symbols = self._format_symbols(symbols)
+        # Symbols already come formatted from config.py - no need to reformat
+        self.symbols = symbols
         self.callback = callback
         self.ws_url = "wss://ws.kraken.com"
         self.ws = None
@@ -30,28 +31,6 @@ class KrakenCollector:
         self.subscription_id = None
         
         logger.info(f"Kraken collector initialized for {self.symbols}")
-    
-    def _format_symbols(self, symbols: List[str]) -> List[str]:
-        """Convert symbols to Kraken format"""
-        # Convert BTCUSDT -> XBT/USD, etc.
-        formatted = []
-        for symbol in symbols:
-            if symbol == "BTCUSDT":
-                formatted.append("XBT/USD")  # Kraken uses XBT for Bitcoin
-            elif symbol == "ETHUSDT":
-                formatted.append("ETH/USD")
-            elif symbol == "XRPUSDT":
-                formatted.append("XRP/USD")
-            elif symbol == "HBARUSDT":
-                # Kraken might not have HBAR
-                logger.warning(f"Symbol {symbol} may not be available on Kraken")
-                continue
-            else:
-                # Generic conversion
-                base = symbol.replace("USDT", "")
-                formatted.append(f"{base}/USD")
-        
-        return formatted
     
     async def _connect(self):
         """Connect to Kraken WebSocket"""

@@ -48,15 +48,18 @@ def convert_symbol_format(symbols: List[str], exchange: str) -> List[str]:
     converted = []
     for symbol in symbols:
         if exchange == "coinbase":
-            # Coinbase uses BTC-USDT format
-            converted.append(symbol.replace("USDT", "-USDT"))
+            # Coinbase uses BTC-USD format (convert BTCUSDT -> BTC-USD)
+            base = symbol.replace("USDT", "")
+            converted.append(f"{base}-USD")
         elif exchange == "kraken":
-            # Kraken uses XBT for Bitcoin
+            # Kraken uses XBT for Bitcoin and / separator
             if symbol == "BTCUSDT":
-                converted.append("XBTUSDT")
+                converted.append("XBT/USD")
             else:
-                converted.append(symbol)
+                base = symbol.replace("USDT", "")
+                converted.append(f"{base}/USD")
         else:
+            # For other exchanges (Binance, Bybit), keep original format
             converted.append(symbol)
     return converted
 

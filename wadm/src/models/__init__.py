@@ -146,7 +146,7 @@ class VolumeProfile:
             "vah": float(self.vah),
             "val": float(self.val),
             "volume_distribution": {
-                float(k): float(v) for k, v in self.volume_distribution.items()
+                str(float(k)): float(v) for k, v in self.volume_distribution.items()
             },
             "total_volume": float(self.total_volume)
         }

@@ -64,6 +64,46 @@ services:
     # Optional: Override command for debugging
     # command: ["sh", "-c", "./diagnose.sh && python http_wrapper.py"]
 
+  # WADM Collectors - Data Collection from 4 Exchanges
+  wadm-collectors:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wadm-collectors
+    restart: unless-stopped
+    environment:
+      # Database Configuration (No Auth for Development)
+      MONGODB_URL: mongodb://mongodb:27017/wadm
+      REDIS_URL: redis://redis:6379/0
+      
+      # Exchange Configuration
+      BYBIT_WS_URL: wss://stream.bybit.com/v5/public/spot
+      BINANCE_WS_URL: wss://stream.binance.com:9443/ws
+      COINBASE_WS_URL: wss://ws-feed.exchange.coinbase.com
+      KRAKEN_WS_URL: wss://ws.kraken.com
+      
+      # Application Configuration
+      LOG_LEVEL: INFO
+      ENVIRONMENT: development
+    volumes:
+      # Development: mount source code for hot reload
+      - .:/app
+      - wadm_logs:/app/logs
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - wadm-network
+    command: ["python", "main.py"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import pymongo; pymongo.MongoClient('mongodb://mongodb:27017/wadm').admin.command('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
   # WADM Application - Main API Server
   wadm-api:
     build:

@@ -148,7 +148,7 @@ class OrderFlowCalculator:
         
         # Velocity contribution (10%)
         time_span = trades[-1]["timestamp"] - trades[0]["timestamp"]
-        if time_span > 0:
+        if time_span.total_seconds() > 0:
             velocity = len(trades) / time_span.total_seconds()
             velocity_score = min(velocity * 10, 10)
             score += velocity_score

@@ -16,7 +16,8 @@ class CoinbaseCollector:
     """Collect real-time trades from Coinbase Pro"""
     
     def __init__(self, symbols: List[str], callback: Callable):
-        self.symbols = self._format_symbols(symbols)
+        # Symbols already come formatted from config.py - no need to reformat
+        self.symbols = symbols
         self.callback = callback
         self.ws_url = "wss://ws-feed.exchange.coinbase.com"
         self.ws = None
@@ -27,28 +28,6 @@ class CoinbaseCollector:
         self.ping_interval = 30
         
         logger.info(f"Coinbase Pro collector initialized for {self.symbols}")
-    
-    def _format_symbols(self, symbols: List[str]) -> List[str]:
-        """Convert symbols to Coinbase Pro format"""
-        # Convert BTCUSDT -> BTC-USD, etc.
-        formatted = []
-        for symbol in symbols:
-            if symbol == "BTCUSDT":
-                formatted.append("BTC-USD")
-            elif symbol == "ETHUSDT":
-                formatted.append("ETH-USD")
-            elif symbol == "XRPUSDT":
-                formatted.append("XRP-USD")
-            elif symbol == "HBARUSDT":
-                # Coinbase Pro might not have HBAR, skip or use alternative
-                logger.warning(f"Symbol {symbol} may not be available on Coinbase Pro")
-                continue
-            else:
-                # Generic conversion: remove USDT, add -USD
-                base = symbol.replace("USDT", "")
-                formatted.append(f"{base}-USD")
-        
-        return formatted
     
     async def _connect(self):
         """Connect to Coinbase Pro WebSocket"""
