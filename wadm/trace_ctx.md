@@ -84,7 +84,14 @@ Ver `/trdocs/tasks/TASK-103-WYCKOFF-SMC-NATIVE-INDICATORS.md` para plan completo
 3. ✅ **Confirmación indicadores existentes** - **5 FUNCIONALES**
 4. ✅ **Arquitectura unificada** - **OBJETIVO ALCANZADO**
 
-### 🔄 PRÓXIMO (Fase 1.6): **DATA BOOTSTRAP + SMART CACHING** (6 días)
+### 🚨 CRÍTICO (Fase 1.5): **LLM SECURITY MIGRATION** (4 días) - URGENTE
+1. **Remove API Keys from Frontend** - Eliminar todas las keys expuestas
+2. **Backend LLM Service** - Migrar providers al servidor
+3. **Rate Limiting & Security** - Control de costos por usuario
+4. **Secure API Endpoints** - /chat/analyze, /chat/stream
+5. **Frontend Security Cleanup** - Remover `dangerouslyAllowBrowser`
+
+### 🔄 DESPUÉS (Fase 1.6): **DATA BOOTSTRAP + SMART CACHING** (6 días)
 1. **Historical Bootstrap Service** - One-time fetch desde inception dates
 2. **Smart Cache Manager** - Redis (hot) + MongoDB (warm) + Real-time
 3. **Real-time Candle Builder** - WebSocket trades → OHLCV aggregation
@@ -165,5 +172,6 @@ wadm/
 **✅ FASE 0 COMPLETADA**: Sistema timeframes dinámico funcionando en producción
 **✅ FASE 1 COMPLETADA**: MCP Server eliminado - Arquitectura unificada  
 **✅ CONFIRMADO**: 5 indicadores avanzados YA implementados y funcionales
-**🔄 SIGUIENTE PASO**: Fase 1.6 - Data Bootstrap + Smart Caching (foundational)
-**📋 TAREAS CREADAS**: TASK-102 (CoinMarketCap), TASK-103 (Wyckoff + SMC), TASK-104 (Data Bootstrap)
+**🚨 CRÍTICO IDENTIFICADO**: LLM Security Issue - API keys expuestas en frontend
+**🔄 SIGUIENTE PASO**: TASK-105 - LLM Security Migration (URGENTE)
+**📋 TAREAS CREADAS**: TASK-102, TASK-103, TASK-104, TASK-105 (Security Critical)
