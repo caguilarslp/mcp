@@ -32,13 +32,32 @@ class LLMService:
     
     def _initialize_providers(self):
         """Initialize available LLM providers"""
-        # Placeholder for provider initialization
-        # Will be implemented in FASE 2
+        from .providers import AnthropicProvider, OpenAIProvider, GoogleProvider, ProviderError
+        
         available = self.config.get_available_providers()
         logger.info(f"Available LLM providers: {available}")
         
-        if not available:
+        # Initialize each available provider
+        for provider_name in available:
+            try:
+                if provider_name == "anthropic" and self.config.ANTHROPIC_API_KEY:
+                    self.providers[provider_name] = AnthropicProvider(self.config.ANTHROPIC_API_KEY)
+                elif provider_name == "openai" and self.config.OPENAI_API_KEY:
+                    self.providers[provider_name] = OpenAIProvider(self.config.OPENAI_API_KEY)
+                elif provider_name == "google" and self.config.GOOGLE_API_KEY:
+                    self.providers[provider_name] = GoogleProvider(self.config.GOOGLE_API_KEY)
+                    
+                logger.info(f"✅ {provider_name.title()} provider initialized")
+                
+            except ProviderError as e:
+                logger.warning(f"❌ Failed to initialize {provider_name}: {e.message}")
+            except Exception as e:
+                logger.error(f"❌ Unexpected error initializing {provider_name}: {str(e)}")
+        
+        if not self.providers:
             logger.warning("No LLM providers configured - service will not function")
+        else:
+            logger.info(f"✅ Initialized {len(self.providers)} LLM providers: {list(self.providers.keys())}")
     
     async def analyze_market(
         self, 
@@ -170,18 +189,19 @@ class LLMService:
         context: Dict[str, Any], 
         provider: LLMProvider
     ) -> Dict[str, Any]:
-        """Execute LLM analysis - placeholder for FASE 2"""
-        # Placeholder implementation
+        """Execute LLM analysis using real provider"""
         logger.info(f"Executing analysis with {provider.value} provider")
         
-        # Simulate processing
-        await asyncio.sleep(0.1)
+        # Get the initialized provider
+        if provider.value not in self.providers:
+            raise Exception(f"Provider {provider.value} not available")
         
-        return {
-            "response": f"Market analysis for {request.symbol}: {request.message}",
-            "tokens_used": 100,  # Placeholder
-            "cost_usd": 0.01    # Placeholder
-        }
+        provider_instance = self.providers[provider.value]
+        
+        # Execute analysis using the provider
+        result = await provider_instance.analyze(request, context)
+        
+        return result
     
     async def _log_usage(
         self, 

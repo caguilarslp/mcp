@@ -23,6 +23,11 @@ httpx
 # Logging
 python-json-logger
 
+# LLM Providers (for TASK-105 Security Migration)
+anthropic
+openai
+google-generativeai
+
 # Development tools
 pytest
 pytest-asyncio

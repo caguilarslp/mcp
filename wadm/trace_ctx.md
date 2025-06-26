@@ -84,12 +84,13 @@ Ver `/trdocs/tasks/TASK-103-WYCKOFF-SMC-NATIVE-INDICATORS.md` para plan completo
 3. ✅ **Confirmación indicadores existentes** - **5 FUNCIONALES**
 4. ✅ **Arquitectura unificada** - **OBJETIVO ALCANZADO**
 
-### 🚨 CRÍTICO (Fase 1.5): **LLM SECURITY MIGRATION** (4 días) - URGENTE
-1. **Remove API Keys from Frontend** - Eliminar todas las keys expuestas
-2. **Backend LLM Service** - Migrar providers al servidor
-3. **Rate Limiting & Security** - Control de costos por usuario
-4. **Secure API Endpoints** - /chat/analyze, /chat/stream
-5. **Frontend Security Cleanup** - Remover `dangerouslyAllowBrowser`
+### 🚨 CRÍTICO (Fase 1.5): **LLM SECURITY MIGRATION** (4 días) - EN PROGRESO
+✅ **FASE 1 COMPLETADA**: Backend LLM Foundation (6 horas)
+✅ **FASE 2 COMPLETADA**: LLM Providers Integration (8 horas)
+🔄 **FASE 3 EN CURSO**: Security & Rate Limiting (4 horas)
+⏳ **FASE 4 PENDIENTE**: Secure API Endpoints (6 horas)
+⏳ **FASE 5 PENDIENTE**: Frontend Security Cleanup (6 horas)
+⏳ **FASE 6 PENDIENTE**: Testing & Monitoring (4 horas)
 
 ### 🔄 DESPUÉS (Fase 1.6): **DATA BOOTSTRAP + SMART CACHING** (6 días)
 1. **Historical Bootstrap Service** - One-time fetch desde inception dates
@@ -173,5 +174,5 @@ wadm/
 **✅ FASE 1 COMPLETADA**: MCP Server eliminado - Arquitectura unificada  
 **✅ CONFIRMADO**: 5 indicadores avanzados YA implementados y funcionales
 **🚨 CRÍTICO IDENTIFICADO**: LLM Security Issue - API keys expuestas en frontend
-**🔄 SIGUIENTE PASO**: TASK-105 - LLM Security Migration (URGENTE)
+**🔄 SIGUIENTE PASO**: TASK-105 FASE 3 - Security & Rate Limiting (EN PROGRESO)
 **📋 TAREAS CREADAS**: TASK-102, TASK-103, TASK-104, TASK-105 (Security Critical)
