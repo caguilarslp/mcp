@@ -13,7 +13,7 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from src.api.routers import auth, market_data, system, indicators, sessions, mcp
+from src.api.routers import auth, market_data, system, indicators, sessions, mcp, testing
 from src.api.middleware import LoggingMiddleware
 from src.api.middleware.rate_limit import EnhancedRateLimitMiddleware
 from src.api.config import APIConfig
@@ -79,7 +79,7 @@ def create_app() -> FastAPI:
     app.add_middleware(LoggingMiddleware)
     app.add_middleware(EnhancedRateLimitMiddleware, 
                       default_calls_per_minute=config.RATE_LIMIT_CALLS,
-                      default_calls_per_hour=config.RATE_LIMIT_CALLS * 60)
+                                              default_calls_per_hour=config.RATE_LIMIT_CALLS * 60)
     
     # Exception handlers
     @app.exception_handler(StarletteHTTPException)
@@ -128,6 +128,7 @@ def create_app() -> FastAPI:
     app.include_router(indicators.router, tags=["Indicators"])
     app.include_router(mcp.router, prefix="/api/v1", tags=["MCP Analysis"])
     app.include_router(system.router, prefix="/api/v1/system", tags=["System"])
+    app.include_router(testing.router, prefix="/api/v1/testing", tags=["Testing"])
     
     # Root endpoint
     @app.get("/")
@@ -149,7 +150,8 @@ def create_app() -> FastAPI:
                 "market": "/api/v1/market",
                 "indicators": "/api/v1/indicators",
                 "mcp": "/api/v1/mcp",
-                "system": "/api/v1/system"
+                "system": "/api/v1/system",
+                "testing": "/api/v1/testing"
             }
         }
     

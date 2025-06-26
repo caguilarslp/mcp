@@ -10,5 +10,6 @@ from . import smc
 from . import system
 from . import sessions
 from . import mcp
+from . import testing
 
-__all__ = ['auth', 'market_data', 'indicators', 'smc', 'system', 'sessions', 'mcp']
+__all__ = ['auth', 'market_data', 'indicators', 'smc', 'system', 'sessions', 'mcp', 'testing']

@@ -1,18 +1,20 @@
 """
-LLM Service Models
-Pydantic models for request/response validation
+Pydantic models for LLM service
+Request/response models and data structures
 """
 
-from pydantic import BaseModel, Field
-from typing import Optional, Dict, Any, List
+from datetime import datetime
+from typing import Optional, List, Dict, Any
+from decimal import Decimal
 from enum import Enum
+from pydantic import BaseModel, Field
 
 
-class LLMProvider(str, Enum):
+class LLMProvider(Enum):
     """Available LLM providers"""
-    ANTHROPIC = "anthropic"
-    OPENAI = "openai"
-    GOOGLE = "google"
+    anthropic = "anthropic"
+    openai = "openai"
+    google = "google"
 
 
 class ChatRequest(BaseModel):

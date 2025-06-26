@@ -25,7 +25,25 @@ class LLMService:
         """Initialize LLM service"""
         self.config = LLMConfig()
         self.providers = {}
-        self.usage_tracker = {}  # Simple in-memory tracker (can be moved to Redis later)
+        
+        # Initialize security components (FASE 3)
+        try:
+            from .security.rate_limiter import RedisRateLimiter
+            from .security.audit import AuditLogger
+            from .security.sanitizer import DataSanitizer
+            
+            self.rate_limiter = RedisRateLimiter()
+            self.audit_logger = AuditLogger()
+            self.sanitizer = DataSanitizer()
+            
+            logger.info("✅ FASE 3 security components initialized successfully")
+        except Exception as e:
+            logger.warning(f"FASE 3 security components failed, using fallback: {str(e)}")
+            self.usage_tracker = {}  # Fallback to in-memory
+            self.rate_limiter = None
+            self.audit_logger = None
+            self.sanitizer = None
+        
         self._initialize_providers()
         
         logger.info(f"LLMService initialized with providers: {self.config.get_available_providers()}")
@@ -76,40 +94,107 @@ class LLMService:
         """
         start_time = datetime.now()
         
+        # Sanitize request data (FASE 3)
+        sanitized_request = request
+        if self.sanitizer:
+            try:
+                request_dict = {
+                    "message": request.message,
+                    "symbol": request.symbol,
+                    "provider": request.provider.value if request.provider else None,
+                    "include_indicators": request.include_indicators,
+                    "include_market_data": request.include_market_data
+                }
+                
+                sanitized_dict = self.sanitizer.sanitize_request_data(request_dict)
+                
+                # Validate sanitization
+                validation = self.sanitizer.validate_clean_data(request.message, sanitized_dict["message"])
+                if not validation["is_valid"]:
+                    logger.warning(f"Sanitization validation failed: {validation}")
+                
+                # Create sanitized request
+                from .models import LLMProvider
+                sanitized_request = ChatRequest(
+                    message=sanitized_dict["message"],
+                    symbol=sanitized_dict["symbol"],
+                    provider=LLMProvider(sanitized_dict["provider"]) if sanitized_dict["provider"] else None,
+                    include_indicators=sanitized_dict["include_indicators"],
+                    include_market_data=sanitized_dict["include_market_data"]
+                )
+                
+            except Exception as e:
+                logger.error(f"Error sanitizing request: {str(e)}")
+                # Continue with original request if sanitization fails
+        
+        # Start audit logging (FASE 3)
+        audit_id = ""
+        if self.audit_logger:
+            audit_id = self.audit_logger.log_request(user_id, sanitized_request)
+        
         try:
-            # Rate limiting check
-            await self._check_rate_limits(user_id)
+            # Rate limiting check (Redis-based for FASE 3)
+            if self.rate_limiter:
+                is_allowed, limits_info = self.rate_limiter.check_limits(user_id)
+                if not is_allowed:
+                    # Log rate limit exceeded
+                    if self.audit_logger:
+                        self.audit_logger.log_rate_limit_exceeded(user_id, "request_limit", limits_info)
+                    raise Exception(f"Rate limit exceeded: {limits_info}")
+            else:
+                # Fallback to in-memory rate limiting
+                await self._check_rate_limits(user_id)
             
             # Build market context (placeholder for now)
-            context = await self._build_market_context(request.symbol)
+            context = await self._build_market_context(sanitized_request.symbol)
             
             # Select provider
-            provider = self._select_provider(request.provider)
+            provider = self._select_provider(sanitized_request.provider)
             
             # Execute analysis (placeholder)
-            result = await self._execute_analysis(request, context, provider)
+            result = await self._execute_analysis(sanitized_request, context, provider)
             
             # Calculate metrics
             processing_time = int((datetime.now() - start_time).total_seconds() * 1000)
             
-            # Log usage
-            await self._log_usage(user_id, request, result, processing_time, True)
+            # Update rate limiter usage (Redis-based for FASE 3)
+            if self.rate_limiter:
+                self.rate_limiter.increment_usage(
+                    user_id,
+                    result.get("tokens_used", 0),
+                    result.get("cost_usd", 0.0),
+                    provider.value
+                )
             
-            return ChatResponse(
+            # Create response
+            response = ChatResponse(
                 response=result.get("response", "Analysis completed"),
                 provider_used=provider,
                 tokens_used=result.get("tokens_used", 0),
                 cost_usd=result.get("cost_usd", 0.0),
                 processing_time_ms=processing_time,
-                context_symbols=[request.symbol]
+                context_symbols=[sanitized_request.symbol]
             )
+            
+            # Log successful response (FASE 3)
+            if self.audit_logger:
+                self.audit_logger.log_response(audit_id, user_id, response, True)
+            
+            # Log usage (legacy)
+            await self._log_usage(user_id, sanitized_request, result, processing_time, True)
+            
+            return response
             
         except Exception as e:
             processing_time = int((datetime.now() - start_time).total_seconds() * 1000)
             logger.error(f"LLM analysis failed for user {user_id}: {str(e)}")
             
-            # Log failed usage
-            await self._log_usage(user_id, request, {}, processing_time, False, str(e))
+            # Log failed response (FASE 3)
+            if self.audit_logger:
+                self.audit_logger.log_response(audit_id, user_id, None, False, str(e))
+            
+            # Log failed usage (legacy)
+            await self._log_usage(user_id, sanitized_request, {}, processing_time, False, str(e))
             
             raise e
     
